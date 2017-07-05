@@ -1,0 +1,13 @@
+{
+  "mandates": {
+    "scheme": "bacs",
+    "metadata": {
+      "internal_account_ref": "customer_xyz",
+      "salesforceId": "000123",
+      "12": "34"
+    },
+    "links": {
+      "customer_bank_account": "BA000123"
+    }
+  }
+}

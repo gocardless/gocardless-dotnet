@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "string_field": "foo",
+      "int_field": 123
+    },
+    {
+      "string_field": "bar",
+      "int_field": 456
+    }
+  ],
+  "meta": {
+    "cursors": {
+      "after": "ID123",
+      "before": "ID456"
+    },
+    "limit": 50
+  }
+}

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>GoCardless</PackageId>
+    <PackageVersion>2.0.0</PackageVersion>
+    <Authors>GoCardless Ltd</Authors>
+    <Description>Client for the GoCardless API for the collection of recurring bank-to-bank payments</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/gocardless-dotnet</PackageProjectUrl>
+    <Copyright>GoCardless Ltd</Copyright>
+    <PackageTags>gocardless payments api</PackageTags>
+    <PackageLicenseUrl>https://github.com/gocardless/gocardless-dotnet/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <TargetFrameworks>netcoreapp1.1;net452</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="System.Net.Http" Version="4.3.2" />
+  </ItemGroup>
+
+</Project>

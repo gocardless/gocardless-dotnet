@@ -1,0 +1,26 @@
+﻿{
+  "error": {
+    "message": "Validation failed",
+    "errors": [
+      {
+        "field": "scheme",
+        "message": "must be one of bacs, sepa_core, autogiro",
+        "request_pointer": "/mandates/scheme"
+      },
+      {
+        "field": "reference",
+        "message": "can't be blank",
+        "request_pointer": "/mandates/reference"
+      },
+      {
+        "field": "customer_bank_account",
+        "message": "can't be blank",
+        "request_pointer": "/mandates/customer_bank_account"
+      }
+    ],
+    "documentation_url": "https://developer.gocardless.com/api-reference#validation_failed",
+    "type": "validation_failed",
+    "request_id": "2f33a336-abcd-4aeb-85c0-101286065dfd",
+    "code": 422
+  }
+}

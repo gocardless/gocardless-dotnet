@@ -1,0 +1,12 @@
+{
+  "redirect_flows": {
+    "description": "Wine boxes",
+    "session_token": "SESS_wSs0uGYMISxzqOBq",
+    "success_redirect_url": "https://example.com/pay/confirm",
+    "prefilled_customer": {
+      "given_name": "Frank",
+      "family_name": "Osborne",
+      "email": "frank.osborne@acmeplc.com"
+    }
+  }
+}

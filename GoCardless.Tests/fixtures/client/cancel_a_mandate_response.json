@@ -1,0 +1,15 @@
+{
+    "mandates": {
+        "created_at": "2015-03-26T12:45:21.778Z",
+        "id": "MD00001P1KTRNY",
+        "links": {
+            "creditor": "CR000035EME9H5",
+            "customer_bank_account": "BA00001NWCGKRB"
+        },
+        "metadata": {},
+        "next_possible_charge_date": null,
+        "reference": "DQG8AF9",
+        "scheme": "bacs",
+        "status": "cancelled"
+    }
+}

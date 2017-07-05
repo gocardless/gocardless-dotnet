@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "string_field": "baz",
+      "int_field": 333
+    }
+  ],
+  "meta": {
+    "cursors": {
+      "before": "ID456"
+    },
+    "limit": 2
+  }
+}
