@@ -11,6 +11,7 @@
     <PackageTags>gocardless payments api</PackageTags>
     <PackageLicenseUrl>https://github.com/gocardless/gocardless-dotnet/blob/master/LICENSE.txt</PackageLicenseUrl>
     <TargetFrameworks>netcoreapp1.1;net452</TargetFrameworks>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
