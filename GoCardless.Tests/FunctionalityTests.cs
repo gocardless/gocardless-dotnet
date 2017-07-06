@@ -50,6 +50,7 @@ namespace GoCardless.Tests
             {
                 Assert.AreEqual("Bearer access-token", req.Item1.Headers.GetValues("Authorization").Single());
                 Assert.AreEqual("2015-07-06", req.Item1.Headers.GetValues("GoCardless-Version").Single());
+                Assert.AreEqual("gocardless-dotnet", req.Item1.Headers.GetValues("GoCardless-Client-Library").Single());
             });
         }
 
