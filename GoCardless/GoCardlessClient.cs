@@ -127,7 +127,7 @@ namespace GoCardless
                     when (ex.Errors.FirstOrDefault()?.Reason == "idempotent_creation_conflict" &&
                           ex.Errors.First().Links?.ContainsKey("conflicting_resource_id") == true)
                 {
-                    var conflictingResourceId = ex.Errors.First().Links.FirstOrDefault().Key;
+                    var conflictingResourceId = ex.Errors.First().Links.FirstOrDefault().Value;
                     return await fetchById(conflictingResourceId)
                         .ConfigureAwait(false);
                 }
