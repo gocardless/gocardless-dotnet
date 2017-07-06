@@ -7,6 +7,7 @@
     <Description>Client for the GoCardless API - a powerful, simple solution for the collection of recurring bank-to-bank payments</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/gocardless-dotnet</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/gocardless/gocardless-dotnet/blob/master/nuget_package_icon.png</PackageIconUrl>
     <Copyright>GoCardless Ltd</Copyright>
     <PackageTags>gocardless payments rest api direct debit</PackageTags>
     <PackageLicenseUrl>https://github.com/gocardless/gocardless-dotnet/blob/master/LICENSE.txt</PackageLicenseUrl>
