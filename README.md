@@ -47,7 +47,7 @@ There are two ways to list resources. You can either make single requests for li
 ```cs
 var customerRequest = new GoCardless.Services.CustomerListRequest()
 {
-    Limit = 1000
+    Limit = 100
 };
 
 var customerListResponse = await gocardless.Customers.ListAsync(customerRequest);
@@ -65,7 +65,7 @@ or use the lazy pagination offered by `All`:
 ```cs
 var customerRequest = new GoCardless.Services.CustomerListRequest()
 {
-    Limit = 1000
+    Limit = 100
 };
 
 var customerListResponse = gocardless.Customers.All(customerRequest);
