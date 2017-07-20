@@ -287,8 +287,8 @@ namespace GoCardless.Resources
 
         [EnumMember(Value = "bacs")]
         Bacs,
-        [EnumMember(Value = "sepa_core")]
-        SepaCore,
+        [EnumMember(Value = "sepa")]
+        Sepa,
         [EnumMember(Value = "autogiro")]
         Autogiro,
     }
