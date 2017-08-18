@@ -99,6 +99,8 @@ namespace GoCardless.Resources
         /// GoCardless automatically</li>
         /// <li>`api`: this event was
         /// triggered by an API endpoint</li>
+        /// <li>`customer`: this
+        /// event was triggered by a Customer</li>
         /// </ul>
         /// </summary>
         [JsonProperty("origin")]
@@ -134,6 +136,8 @@ namespace GoCardless.Resources
         /// performed by GoCardless automatically</li>
         /// <li>`api`: this event was
         /// triggered by an API endpoint</li>
+        /// <li>`customer`: this event was triggered
+        /// by a Customer</li>
         /// </ul>
         /// </summary>
 
@@ -143,6 +147,8 @@ namespace GoCardless.Resources
         Api,
         [EnumMember(Value = "gocardless")]
         Gocardless,
+        [EnumMember(Value = "customer")]
+        Customer,
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
