@@ -44,7 +44,39 @@ namespace GoCardless.Tests
             Assert.AreEqual("MD00001P57AN84", mandates[1].Id);
             Assert.AreEqual("CR000035EME9H5", mandates[1].Links.Creditor);
             mockHttp.AssertRequestMade("GET",
-                "/mandates?created_at[gt]=2017-05-02T11:12:13.0000000-05:00&customer=CU00003068FG73");
+                "/mandates?created_at%5Bgt%5D=2017-05-02T11%3A12%3A13.0000000-05%3A00&customer=CU00003068FG73");
+        }
+
+        [Test]
+        public async Task ShouldListMandatesForAUtcDateTimeFilter()
+        {
+            var responseFixture = "fixtures/client/list_mandates_for_a_customer.json";
+            mockHttp.EnqueueResponse(200, responseFixture);
+            var mandateListRequest = new MandateListRequest()
+            {
+                CreatedAt = new MandateListRequest.CreatedAtParam
+                {
+                    LessThan = DateTime.SpecifyKind(new DateTime(2017, 8, 23, 11, 09, 07), DateTimeKind.Utc)
+                }
+            };
+            var listResponse = await client.Mandates.ListAsync(mandateListRequest);
+            mockHttp.AssertRequestMade("GET", "/mandates?created_at%5Blt%5D=2017-08-23T11%3A09%3A07.0000000%2B00%3A00");
+        }
+
+        [Test]
+        public async Task ShouldListMandatesForADateTimeFilterWithPositiveOffset()
+        {
+            var responseFixture = "fixtures/client/list_mandates_for_a_customer.json";
+            mockHttp.EnqueueResponse(200, responseFixture);
+            var mandateListRequest = new MandateListRequest()
+            {
+                CreatedAt = new MandateListRequest.CreatedAtParam
+                {
+                    LessThan = new DateTimeOffset(2017, 8, 23, 11, 09, 07, TimeSpan.FromHours(1))
+                }
+            };
+            var listResponse = await client.Mandates.ListAsync(mandateListRequest);
+            mockHttp.AssertRequestMade("GET", "/mandates?created_at%5Blt%5D=2017-08-23T11%3A09%3A07.0000000%2B01%3A00");
         }
 
         [Test]
@@ -64,9 +96,8 @@ namespace GoCardless.Tests
 
             Assert.AreEqual(mandates.Count, 1);
             Assert.AreEqual(mandates[0].Id, "MD00001PEYCSQF");
-            mockHttp.AssertRequestMade("GET", "/mandates?customer=CU00003068FG73&status=active,failed");
+            mockHttp.AssertRequestMade("GET", "/mandates?customer=CU00003068FG73&status=active%2Cfailed");
         }
-
 
         [Test]
         public void ShouldPageThroughMandates()
@@ -150,7 +181,5 @@ namespace GoCardless.Tests
             var mandate = mandateResponse.Mandate;
             mockHttp.AssertRequestMade("POST", "/mandates", "fixtures/client/create_a_mandate_request.json");
         }
-
-
     }
 }

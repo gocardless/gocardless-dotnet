@@ -203,10 +203,7 @@ namespace GoCardless
                     var requestArguments = Helpers.ExtractQueryStringValuesFromObject(requestParams);
                     if (requestArguments.Count > 0)
                     {
-                        var queryString = String.Join("&",
-                            requestArguments.Select(a => a.Key + "=" + Helpers.Stringify(a.Value))
-                        );
-
+                        var queryString = String.Join("&", requestArguments.Select(Helpers.QueryStringArgument));
                         path += "?" + queryString;
                     }
                 }
@@ -321,6 +318,12 @@ namespace GoCardless
                 return args;
             }
 
+            internal static string QueryStringArgument(KeyValuePair<string, object> argument)
+            {
+                var urlEncodedValue = WebUtility.UrlEncode(Helpers.Stringify(argument.Value));
+                var urlEncodedKey = WebUtility.UrlEncode(argument.Key);
+                return $"{urlEncodedKey}={urlEncodedValue}";
+            }
         }
     }
 }
