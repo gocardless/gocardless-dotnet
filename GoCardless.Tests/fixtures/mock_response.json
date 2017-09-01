@@ -1,0 +1,9 @@
+﻿{
+    "foo": {
+        "direct": "debit",
+        "amount": 1,
+        "dotnet": true,
+        "request_id": "abc-123",
+        "code": 200
+    }
+}

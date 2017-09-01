@@ -172,6 +172,14 @@ namespace GoCardless.Tests
 
         }
 
-
+        [Test]
+        public async Task BooleansAreDowncasedInQueryString()
+        {
+            var responseFixture = "fixtures/mock_response.json";
+            http.EnqueueResponse(200, responseFixture);
+            var listRequest = new CustomerBankAccountListRequest(){ Enabled = true };
+            var listResponse = await client.CustomerBankAccounts.ListAsync(listRequest);
+            http.AssertRequestMade("GET", "/customer_bank_accounts?enabled=true");
+        }
     }
 }
