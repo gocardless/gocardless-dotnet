@@ -234,29 +234,28 @@ namespace GoCardless.Services
     {
 
         /// <summary>
-        /// Amount in pence or cents.
+        /// Amount in pence (GBP), cents (EUR), or öre (SEK).
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
 
         /// <summary>
         /// The amount to be deducted from the payment as the OAuth app's fee,
-        /// in pence or cents.
+        /// in pence (GBP), cents (EUR), or öre (SEK).
         /// </summary>
         [JsonProperty("app_fee")]
         public int? AppFee { get; set; }
 
         /// <summary>
-        /// An alternative way to set `end_date`. The total number of payments
-        /// that should be taken by this subscription. This will set `end_date`
-        /// automatically.
+        /// The total number of payments that should be taken by this
+        /// subscription.
         /// </summary>
         [JsonProperty("count")]
         public int? Count { get; set; }
 
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code.
-        /// Currently only `GBP` and `EUR` are supported.
+        /// Currently only `GBP`, `EUR`, and `SEK` are supported.
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
