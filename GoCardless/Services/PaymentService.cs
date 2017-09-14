@@ -290,9 +290,11 @@ namespace GoCardless.Services
         /// bank statement. For Bacs payments this can be up to 10 characters,
         /// for SEPA payments the limit is 140 characters, and for Autogiro
         /// payments the limit is 11 characters. <p
-        /// class='restricted-notice'><strong>Restricted</strong>: You need your
-        /// own Service User Number to specify a payment reference for Bacs
-        /// payments.</p>
+        /// class='restricted-notice'><strong>Restricted</strong>: You can only
+        /// specify a payment reference for Bacs payments (that is, when
+        /// collecting from the UK) if you're on the <a
+        /// href='https://gocardless.com/pricing'>GoCardless Plus or Pro
+        /// packages</a>.</p>
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
