@@ -38,17 +38,33 @@ namespace GoCardless.Resources
     /// or [payment](#core-endpoints-payments) at this point.
     /// 
     ///
-    /// It is recommended that you link the redirect flow to your user object as
-    /// soon as it is created, and attach the created resources to that user in
-    /// the complete step.
+    /// Once you have [completed](#redirect-flows-complete-a-redirect-flow) the
+    /// redirect flow via the API, you should display a confirmation page to
+    /// your customer, confirming that their Direct Debit has been set up. You
+    /// can build your own page, or redirect to the one we provide in the
+    /// `confirmation_url` attribute of the redirect flow.
     /// 
-    /// Redirect flows expire 30 minutes
-    /// after they are first created. You cannot complete an expired redirect
-    /// flow.
+    ///
+    /// Redirect flows expire 30 minutes after they are first created. You
+    /// cannot complete an expired redirect flow.
     /// </summary>
     
     public class RedirectFlow
     {
+        /// <summary>
+        /// The URL of a confirmation page, which you may optionally redirect
+        /// the customer to rather than use your own page, that confirms in
+        /// their chosen language that their Direct Debit has been set up
+        /// successfully. Only returned once the customer has set up their
+        /// mandate via the payment pages and the redirect flow has been
+        /// [completed](#redirect-flows-complete-a-redirect-flow), and only
+        /// available for 15 minutes from when you complete the redirect flow.
+        /// The structure of this URL may change at any time, so you should read
+        /// it directly from the API response.
+        /// </summary>
+        [JsonProperty("confirmation_url")]
+        public string ConfirmationUrl { get; set; }
+
         /// <summary>
         /// Fixed [timestamp](#api-usage-time-zones--dates), recording when this
         /// resource was created.

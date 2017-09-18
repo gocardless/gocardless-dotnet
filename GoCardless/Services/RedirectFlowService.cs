@@ -44,13 +44,15 @@ namespace GoCardless.Services
     /// or [payment](#core-endpoints-payments) at this point.
     /// 
     ///
-    /// It is recommended that you link the redirect flow to your user object as
-    /// soon as it is created, and attach the created resources to that user in
-    /// the complete step.
+    /// Once you have [completed](#redirect-flows-complete-a-redirect-flow) the
+    /// redirect flow via the API, you should display a confirmation page to
+    /// your customer, confirming that their Direct Debit has been set up. You
+    /// can build your own page, or redirect to the one we provide in the
+    /// `confirmation_url` attribute of the redirect flow.
     /// 
-    /// Redirect flows expire 30 minutes
-    /// after they are first created. You cannot complete an expired redirect
-    /// flow.
+    ///
+    /// Redirect flows expire 30 minutes after they are first created. You
+    /// cannot complete an expired redirect flow.
     /// </summary>
 
     public class RedirectFlowService
