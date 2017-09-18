@@ -213,9 +213,9 @@ namespace GoCardless
             var httpMethod = new HttpMethod(method);
 
             var requestMessage = new HttpRequestMessage(httpMethod, new Uri(_baseUrl, path));
-            requestMessage.Headers.Add("User-Agent", "gocardless-dotnet/2.0.6");
+            requestMessage.Headers.Add("User-Agent", "gocardless-dotnet/2.1.0");
             requestMessage.Headers.Add("GoCardless-Version", "2015-07-06");
-            requestMessage.Headers.Add("GoCardless-Client-Version", "2.0.6");
+            requestMessage.Headers.Add("GoCardless-Client-Version", "2.1.0");
             requestMessage.Headers.Add("GoCardless-Client-Library", "gocardless-dotnet");
             requestMessage.Headers.Authorization =
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
