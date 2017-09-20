@@ -21,11 +21,10 @@ namespace GoCardless.Services
     /// [customer](#core-endpoints-customers), and may be linked to several
     /// Direct Debit [mandates](#core-endpoints-mandates).
     /// 
-    /// Note
-    /// that customer bank accounts must be unique, and so you will encounter a
-    /// `bank_account_exists` error if you try to create a duplicate bank
-    /// account. You may wish to handle this by updating the existing record
-    /// instead, the ID of which will be provided as
+    /// Note that customer bank accounts must be unique, and so you will
+    /// encounter a `bank_account_exists` error if you try to create a duplicate
+    /// bank account. You may wish to handle this by updating the existing
+    /// record instead, the ID of which will be provided as
     /// `links[customer_bank_account]` in the error response.
     /// </summary>
 
@@ -45,23 +44,17 @@ namespace GoCardless.Services
         /// <summary>
         /// Creates a new customer bank account object.
         /// 
-        ///
         /// There are three different ways to supply bank account details:
-     
-        ///   /// 
+        /// 
         /// - [Local details](#appendix-local-bank-details)
- 
-        ///       /// 
+        /// 
         /// - IBAN
         /// 
-        /// - [Customer
-        /// Bank Account
+        /// - [Customer Bank Account
         /// Tokens](#javascript-flow-create-a-customer-bank-account-token)
-     
-        ///   /// 
-        /// For more information on the different fields
-        /// required in each country, see [local bank
-        /// details](#appendix-local-bank-details).
+        /// 
+        /// For more information on the different fields required in each
+        /// country, see [local bank details](#appendix-local-bank-details).
         /// </summary>
         /// <returns>A single customer bank account resource</returns>
         public Task<CustomerBankAccountResponse> CreateAsync(CustomerBankAccountCreateRequest request = null, RequestSettings customiseRequestMessage = null)
@@ -168,13 +161,11 @@ namespace GoCardless.Services
         /// Immediately cancels all associated mandates and cancellable
         /// payments.
         /// 
-        /// This will return a
-        /// `disable_failed` error if the bank account has already been
-        /// disabled.
+        /// This will return a `disable_failed` error if the bank account has
+        /// already been disabled.
         /// 
-        /// A disabled bank account can be
-        /// re-enabled by creating a new bank account resource with the same
-        /// details.
+        /// A disabled bank account can be re-enabled by creating a new bank
+        /// account resource with the same details.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "BA".</param>
         /// <returns>A single customer bank account resource</returns>

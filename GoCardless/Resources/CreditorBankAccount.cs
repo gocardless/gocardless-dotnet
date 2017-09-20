@@ -14,8 +14,7 @@ namespace GoCardless.Resources
     /// [creditor](#core-endpoints-creditors). These are the bank accounts which
     /// your [payouts](#core-endpoints-payouts) will be sent to.
     /// 
-   
-    /// /// Note that creditor bank accounts must be unique, and so you will
+    /// Note that creditor bank accounts must be unique, and so you will
     /// encounter a `bank_account_exists` error if you try to create a duplicate
     /// bank account. You may wish to handle this by updating the existing
     /// record instead, the ID of which will be provided as

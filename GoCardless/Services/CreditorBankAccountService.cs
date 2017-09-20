@@ -20,8 +20,7 @@ namespace GoCardless.Services
     /// [creditor](#core-endpoints-creditors). These are the bank accounts which
     /// your [payouts](#core-endpoints-payouts) will be sent to.
     /// 
-   
-    /// /// Note that creditor bank accounts must be unique, and so you will
+    /// Note that creditor bank accounts must be unique, and so you will
     /// encounter a `bank_account_exists` error if you try to create a duplicate
     /// bank account. You may wish to handle this by updating the existing
     /// record instead, the ID of which will be provided as
@@ -130,13 +129,11 @@ namespace GoCardless.Services
         /// Immediately disables the bank account, no money can be paid out to a
         /// disabled account.
         /// 
-        /// This will return a
-        /// `disable_failed` error if the bank account has already been
-        /// disabled.
+        /// This will return a `disable_failed` error if the bank account has
+        /// already been disabled.
         /// 
-        /// A disabled bank account can be
-        /// re-enabled by creating a new bank account resource with the same
-        /// details.
+        /// A disabled bank account can be re-enabled by creating a new bank
+        /// account resource with the same details.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "BA".</param>
         /// <returns>A single creditor bank account resource</returns>

@@ -21,9 +21,8 @@ namespace GoCardless.Services
     /// [creditor](#core-endpoints-creditors), taken against a Direct Debit
     /// [mandate](#core-endpoints-mandates).
     /// 
-    /// GoCardless will
-    /// notify you via a [webhook](#appendix-webhooks) whenever the state of a
-    /// payment changes.
+    /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
+    /// the state of a payment changes.
     /// </summary>
 
     public class PaymentService
@@ -41,11 +40,10 @@ namespace GoCardless.Services
 
         /// <summary>
         /// <a name="mandate_is_inactive"></a>Creates a new payment object.
-    
-        ///    /// 
-        /// This fails with a `mandate_is_inactive` error if
-        /// the linked [mandate](#core-endpoints-mandates) is cancelled or has
-        /// failed. Payments can be created against mandates with status of:
+        /// 
+        /// This fails with a `mandate_is_inactive` error if the linked
+        /// [mandate](#core-endpoints-mandates) is cancelled or has failed.
+        /// Payments can be created against mandates with status of:
         /// `pending_customer_approval`, `pending_submission`, `submitted`, and
         /// `active`.
         /// </summary>
@@ -154,9 +152,8 @@ namespace GoCardless.Services
         /// banks. Any metadata supplied to this endpoint will be stored on the
         /// payment cancellation event it causes.
         /// 
-        /// This
-        /// will fail with a `cancellation_failed` error unless the payment's
-        /// status is `pending_submission`.
+        /// This will fail with a `cancellation_failed` error unless the
+        /// payment's status is `pending_submission`.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "PM".</param>
         /// <returns>A single payment resource</returns>
@@ -182,12 +179,10 @@ namespace GoCardless.Services
         /// `failed` event. Any metadata supplied to this endpoint will be
         /// stored against the payment submission event it causes.
         /// 
-
-        ///        /// This will return a `retry_failed` error if the payment
-        /// has not failed.
+        /// This will return a `retry_failed` error if the payment has not
+        /// failed.
         /// 
-        /// Payments can be retried up
-        /// to 3 times.
+        /// Payments can be retried up to 3 times.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "PM".</param>
         /// <returns>A single payment resource</returns>
@@ -393,29 +388,21 @@ namespace GoCardless.Services
         /// <summary>
         /// One of:
         /// <ul>
-        ///
         /// <li>`pending_customer_approval`: we're waiting for the customer to
         /// approve this payment</li>
-        /// <li>`pending_submission`: the
-        /// payment has been created, but not yet submitted to the banks</li>
-  
-        ///      /// <li>`submitted`: the payment has been submitted to the
-        /// banks</li>
-        /// <li>`confirmed`: the payment has been
-        /// confirmed as collected</li>
-        /// <li>`paid_out`:  the payment
-        /// has been included in a [payout](#core-endpoints-payouts)</li>
-      
-        ///  /// <li>`cancelled`: the payment has been cancelled</li>
-       
-        /// /// <li>`customer_approval_denied`: the customer has denied approval
-        /// for the payment. You should contact the customer directly</li>
-     
-        ///   /// <li>`failed`: the payment failed to be processed. Note that
-        /// payments can fail after being confirmed if the failure message is
-        /// sent late by the banks.</li>
-        /// <li>`charged_back`: the
-        /// payment has been charged back</li>
+        /// <li>`pending_submission`: the payment has been created, but not yet
+        /// submitted to the banks</li>
+        /// <li>`submitted`: the payment has been submitted to the banks</li>
+        /// <li>`confirmed`: the payment has been confirmed as collected</li>
+        /// <li>`paid_out`:  the payment has been included in a
+        /// [payout](#core-endpoints-payouts)</li>
+        /// <li>`cancelled`: the payment has been cancelled</li>
+        /// <li>`customer_approval_denied`: the customer has denied approval for
+        /// the payment. You should contact the customer directly</li>
+        /// <li>`failed`: the payment failed to be processed. Note that payments
+        /// can fail after being confirmed if the failure message is sent late
+        /// by the banks.</li>
+        /// <li>`charged_back`: the payment has been charged back</li>
         /// </ul>
         /// </summary>
         [JsonProperty("status")]
@@ -427,31 +414,23 @@ namespace GoCardless.Services
             /// <summary>
             /// One of:
             /// <ul>
-            ///
             /// <li>`pending_customer_approval`: we're waiting for the customer
             /// to approve this payment</li>
-            ///
             /// <li>`pending_submission`: the payment has been created, but not
             /// yet submitted to the banks</li>
-            /// <li>`submitted`:
-            /// the payment has been submitted to the banks</li>
-            ///
+            /// <li>`submitted`: the payment has been submitted to the
+            /// banks</li>
             /// <li>`confirmed`: the payment has been confirmed as
             /// collected</li>
-            /// <li>`paid_out`:  the payment has
-            /// been included in a [payout](#core-endpoints-payouts)</li>
-      
-            ///      /// <li>`cancelled`: the payment has been cancelled</li>
-  
-            ///          /// <li>`customer_approval_denied`: the customer has
-            /// denied approval for the payment. You should contact the customer
-            /// directly</li>
-            /// <li>`failed`: the payment failed
-            /// to be processed. Note that payments can fail after being
-            /// confirmed if the failure message is sent late by the
-            /// banks.</li>
-            /// <li>`charged_back`: the payment has
-            /// been charged back</li>
+            /// <li>`paid_out`:  the payment has been included in a
+            /// [payout](#core-endpoints-payouts)</li>
+            /// <li>`cancelled`: the payment has been cancelled</li>
+            /// <li>`customer_approval_denied`: the customer has denied approval
+            /// for the payment. You should contact the customer directly</li>
+            /// <li>`failed`: the payment failed to be processed. Note that
+            /// payments can fail after being confirmed if the failure message
+            /// is sent late by the banks.</li>
+            /// <li>`charged_back`: the payment has been charged back</li>
             /// </ul>
             /// </summary>
     

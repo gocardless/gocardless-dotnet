@@ -211,11 +211,9 @@ namespace GoCardless.Services
         /// <summary>
         /// One of:
         /// <ul>
-        /// <li>`pending`: the payout has
-        /// been created, but not yet sent to the banks</li>
-        ///
+        /// <li>`pending`: the payout has been created, but not yet sent to the
+        /// banks</li>
         /// <li>`paid`: the payout has been sent to the banks</li>
-        ///
         /// </ul>
         /// </summary>
         [JsonProperty("status")]
@@ -227,11 +225,9 @@ namespace GoCardless.Services
             /// <summary>
             /// One of:
             /// <ul>
-            /// <li>`pending`: the
-            /// payout has been created, but not yet sent to the banks</li>
-    
-            ///        /// <li>`paid`: the payout has been sent to the
-            /// banks</li>
+            /// <li>`pending`: the payout has been created, but not yet sent to
+            /// the banks</li>
+            /// <li>`paid`: the payout has been sent to the banks</li>
             /// </ul>
             /// </summary>
     

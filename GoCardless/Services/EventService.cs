@@ -152,16 +152,12 @@ namespace GoCardless.Services
         /// <summary>
         /// Includes linked resources in the response. Must be used with the
         /// `resource_type` parameter specified. The include should be one of:
- 
-        ///       /// <ul>
+        /// <ul>
         /// <li>`payment`</li>
-        ///
         /// <li>`mandate`</li>
         /// <li>`payout`</li>
-        ///
         /// <li>`refund`</li>
         /// <li>`subscription`</li>
-        ///
         /// </ul>
         /// </summary>
         [JsonProperty("include")]
@@ -176,12 +172,9 @@ namespace GoCardless.Services
             /// of:
             /// <ul>
             /// <li>`payment`</li>
-    
-            ///        /// <li>`mandate`</li>
+            /// <li>`mandate`</li>
             /// <li>`payout`</li>
-
-            ///            /// <li>`refund`</li>
-            ///
+            /// <li>`refund`</li>
             /// <li>`subscription`</li>
             /// </ul>
             /// </summary>
@@ -243,16 +236,12 @@ namespace GoCardless.Services
         /// Type of resource that you'd like to get all events for. Cannot be
         /// used together with the `payment`, `mandate`, `subscription`,
         /// `refund` or `payout` parameter. The type can be one of:
-        ///
         /// <ul>
         /// <li>`payments`</li>
-        ///
         /// <li>`mandates`</li>
         /// <li>`payouts`</li>
-        ///
         /// <li>`subscriptions`</li>
         /// <li>`refunds`</li>
-        ///
         /// </ul>
         /// </summary>
         [JsonProperty("resource_type")]
@@ -265,15 +254,11 @@ namespace GoCardless.Services
             /// Type of resource that you'd like to get all events for. Cannot
             /// be used together with the `payment`, `mandate`, `subscription`,
             /// `refund` or `payout` parameter. The type can be one of:
-        
-            ///    /// <ul>
+            /// <ul>
             /// <li>`payments`</li>
-            ///
             /// <li>`mandates`</li>
             /// <li>`payouts`</li>
-         
-            ///   /// <li>`subscriptions`</li>
-            ///
+            /// <li>`subscriptions`</li>
             /// <li>`refunds`</li>
             /// </ul>
             /// </summary>

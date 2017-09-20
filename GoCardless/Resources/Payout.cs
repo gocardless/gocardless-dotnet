@@ -27,15 +27,12 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Date the payout is due to arrive in the creditor's bank account.
-   
-        ///     /// One of:
+        /// One of:
         /// <ul>
-        ///   <li>`yyyy-mm-dd`: the
-        /// payout has been paid and is due to arrive in the creditor's bank
-   
-        ///     ///   account on this day</li>
-        ///   <li>`null`: the
-        /// payout hasn't been paid yet</li>
+        ///   <li>`yyyy-mm-dd`: the payout has been paid and is due to arrive in
+        /// the creditor's bank
+        ///   account on this day</li>
+        ///   <li>`null`: the payout hasn't been paid yet</li>
         /// </ul>
         /// 
         /// </summary>
@@ -60,15 +57,13 @@ namespace GoCardless.Resources
         /// Fees that have already been deducted from the payout amount in pence
         /// or cents.
         /// 
-        /// For each `late_failure_settled`
-        /// or `chargeback_settled` action, we refund the transaction fees in a
-        /// payout. This means that a payout can have a negative
-        /// `deducted_fees`. This field is calculated as `GoCardless fees + app
-        /// fees - refunded fees`
+        /// For each `late_failure_settled` or `chargeback_settled` action, we
+        /// refund the transaction fees in a payout. This means that a payout
+        /// can have a negative `deducted_fees`. This field is calculated as
+        /// `GoCardless fees + app fees - refunded fees`
         /// 
-        /// If the merchant is
-        /// invoiced for fees separately from the payout, then `deducted_fees`
-        /// will be 0.
+        /// If the merchant is invoiced for fees separately from the payout,
+        /// then `deducted_fees` will be 0.
         /// </summary>
         [JsonProperty("deducted_fees")]
         public int? DeductedFees { get; set; }
@@ -100,11 +95,9 @@ namespace GoCardless.Resources
         /// <summary>
         /// One of:
         /// <ul>
-        /// <li>`pending`: the payout has
-        /// been created, but not yet sent to the banks</li>
-        ///
+        /// <li>`pending`: the payout has been created, but not yet sent to the
+        /// banks</li>
         /// <li>`paid`: the payout has been sent to the banks</li>
-        ///
         /// </ul>
         /// </summary>
         [JsonProperty("status")]
@@ -160,10 +153,8 @@ namespace GoCardless.Resources
         /// <summary>
         /// One of:
         /// <ul>
-        /// <li>`pending`: the payout has been created, but not
-        /// yet sent to the banks</li>
-        /// <li>`paid`: the payout has been sent to the
-        /// banks</li>
+        /// <li>`pending`: the payout has been created, but not yet sent to the banks</li>
+        /// <li>`paid`: the payout has been sent to the banks</li>
         /// </ul>
         /// </summary>
 

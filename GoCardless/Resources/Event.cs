@@ -59,13 +59,10 @@ namespace GoCardless.Resources
         /// <summary>
         /// The resource type for this event. One of:
         /// <ul>
-       
-        /// /// <li>`payments`</li>
+        /// <li>`payments`</li>
         /// <li>`mandates`</li>
-        ///
         /// <li>`payouts`</li>
         /// <li>`refunds`</li>
-        ///
         /// <li>`subscriptions`</li>
         /// </ul>
         /// </summary>
@@ -92,15 +89,11 @@ namespace GoCardless.Resources
         /// <summary>
         /// Who initiated the event. One of:
         /// <ul>
-        ///
-        /// <li>`bank`: this event was triggered by a report from the
-        /// banks</li>
-        /// <li>`gocardless`: this event was performed by
-        /// GoCardless automatically</li>
-        /// <li>`api`: this event was
-        /// triggered by an API endpoint</li>
-        /// <li>`customer`: this
-        /// event was triggered by a Customer</li>
+        /// <li>`bank`: this event was triggered by a report from the banks</li>
+        /// <li>`gocardless`: this event was performed by GoCardless
+        /// automatically</li>
+        /// <li>`api`: this event was triggered by an API endpoint</li>
+        /// <li>`customer`: this event was triggered by a Customer</li>
         /// </ul>
         /// </summary>
         [JsonProperty("origin")]
@@ -130,14 +123,10 @@ namespace GoCardless.Resources
         /// <summary>
         /// Who initiated the event. One of:
         /// <ul>
-        /// <li>`bank`: this event was
-        /// triggered by a report from the banks</li>
-        /// <li>`gocardless`: this event was
-        /// performed by GoCardless automatically</li>
-        /// <li>`api`: this event was
-        /// triggered by an API endpoint</li>
-        /// <li>`customer`: this event was triggered
-        /// by a Customer</li>
+        /// <li>`bank`: this event was triggered by a report from the banks</li>
+        /// <li>`gocardless`: this event was performed by GoCardless automatically</li>
+        /// <li>`api`: this event was triggered by an API endpoint</li>
+        /// <li>`customer`: this event was triggered by a Customer</li>
         /// </ul>
         /// </summary>
 
@@ -255,12 +244,10 @@ namespace GoCardless.Resources
         /// <summary>
         /// The resource type for this event. One of:
         /// <ul>
-        ///
         /// <li>`payments`</li>
         /// <li>`mandates`</li>
         /// <li>`payouts`</li>
-     
-        ///   /// <li>`refunds`</li>
+        /// <li>`refunds`</li>
         /// <li>`subscriptions`</li>
         /// </ul>
         /// </summary>

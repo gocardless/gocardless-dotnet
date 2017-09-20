@@ -15,9 +15,8 @@ namespace GoCardless.Resources
     /// [creditor](#core-endpoints-creditors), taken against a Direct Debit
     /// [mandate](#core-endpoints-mandates).
     /// 
-    /// GoCardless will
-    /// notify you via a [webhook](#appendix-webhooks) whenever the state of a
-    /// payment changes.
+    /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
+    /// the state of a payment changes.
     /// </summary>
     
     public class Payment
@@ -103,29 +102,21 @@ namespace GoCardless.Resources
         /// <summary>
         /// One of:
         /// <ul>
-        ///
         /// <li>`pending_customer_approval`: we're waiting for the customer to
         /// approve this payment</li>
-        /// <li>`pending_submission`: the
-        /// payment has been created, but not yet submitted to the banks</li>
-  
-        ///      /// <li>`submitted`: the payment has been submitted to the
-        /// banks</li>
-        /// <li>`confirmed`: the payment has been
-        /// confirmed as collected</li>
-        /// <li>`paid_out`:  the payment
-        /// has been included in a [payout](#core-endpoints-payouts)</li>
-      
-        ///  /// <li>`cancelled`: the payment has been cancelled</li>
-       
-        /// /// <li>`customer_approval_denied`: the customer has denied approval
-        /// for the payment. You should contact the customer directly</li>
-     
-        ///   /// <li>`failed`: the payment failed to be processed. Note that
-        /// payments can fail after being confirmed if the failure message is
-        /// sent late by the banks.</li>
-        /// <li>`charged_back`: the
-        /// payment has been charged back</li>
+        /// <li>`pending_submission`: the payment has been created, but not yet
+        /// submitted to the banks</li>
+        /// <li>`submitted`: the payment has been submitted to the banks</li>
+        /// <li>`confirmed`: the payment has been confirmed as collected</li>
+        /// <li>`paid_out`:  the payment has been included in a
+        /// [payout](#core-endpoints-payouts)</li>
+        /// <li>`cancelled`: the payment has been cancelled</li>
+        /// <li>`customer_approval_denied`: the customer has denied approval for
+        /// the payment. You should contact the customer directly</li>
+        /// <li>`failed`: the payment failed to be processed. Note that payments
+        /// can fail after being confirmed if the failure message is sent late
+        /// by the banks.</li>
+        /// <li>`charged_back`: the payment has been charged back</li>
         /// </ul>
         /// </summary>
         [JsonProperty("status")]
@@ -185,25 +176,19 @@ namespace GoCardless.Resources
         /// <summary>
         /// One of:
         /// <ul>
-        /// <li>`pending_customer_approval`: we're waiting for
-        /// the customer to approve this payment</li>
-        /// <li>`pending_submission`: the
-        /// payment has been created, but not yet submitted to the banks</li>
-        ///
+        /// <li>`pending_customer_approval`: we're waiting for the customer to approve this
+        /// payment</li>
+        /// <li>`pending_submission`: the payment has been created, but not yet submitted to the
+        /// banks</li>
         /// <li>`submitted`: the payment has been submitted to the banks</li>
-        ///
         /// <li>`confirmed`: the payment has been confirmed as collected</li>
-        ///
         /// <li>`paid_out`:  the payment has been included in a
         /// [payout](#core-endpoints-payouts)</li>
-        /// <li>`cancelled`: the payment has been
-        /// cancelled</li>
-        /// <li>`customer_approval_denied`: the customer has denied
-        /// approval for the payment. You should contact the customer directly</li>
-        ///
+        /// <li>`cancelled`: the payment has been cancelled</li>
+        /// <li>`customer_approval_denied`: the customer has denied approval for the payment. You
+        /// should contact the customer directly</li>
         /// <li>`failed`: the payment failed to be processed. Note that payments can fail after
         /// being confirmed if the failure message is sent late by the banks.</li>
-        ///
         /// <li>`charged_back`: the payment has been charged back</li>
         /// </ul>
         /// </summary>

@@ -24,33 +24,28 @@ namespace GoCardless.Services
     /// 
     /// The overall flow is:
     /// 
-    /// 1.
-    /// You [create](#redirect-flows-create-a-redirect-flow) a redirect flow for
-    /// your customer, and redirect them to the returned redirect url, e.g.
+    /// 1. You [create](#redirect-flows-create-a-redirect-flow) a redirect flow
+    /// for your customer, and redirect them to the returned redirect url, e.g.
     /// `https://pay.gocardless.com/flow/RE123`.
     /// 
-    /// 2. Your
-    /// customer supplies their name, email, address, and bank account details,
-    /// and submits the form. This securely stores their details, and redirects
-    /// them back to your `success_redirect_url` with `redirect_flow_id=RE123`
-    /// in the querystring.
+    /// 2. Your customer supplies their name, email, address, and bank account
+    /// details, and submits the form. This securely stores their details, and
+    /// redirects them back to your `success_redirect_url` with
+    /// `redirect_flow_id=RE123` in the querystring.
     /// 
-    /// 3. You
-    /// [complete](#redirect-flows-complete-a-redirect-flow) the redirect flow,
-    /// which creates a [customer](#core-endpoints-customers), [customer bank
-    /// account](#core-endpoints-customer-bank-accounts), and
+    /// 3. You [complete](#redirect-flows-complete-a-redirect-flow) the redirect
+    /// flow, which creates a [customer](#core-endpoints-customers), [customer
+    /// bank account](#core-endpoints-customer-bank-accounts), and
     /// [mandate](#core-endpoints-mandates), and returns the ID of the mandate.
     /// You may wish to create a [subscription](#core-endpoints-subscriptions)
     /// or [payment](#core-endpoints-payments) at this point.
     /// 
-    ///
     /// Once you have [completed](#redirect-flows-complete-a-redirect-flow) the
     /// redirect flow via the API, you should display a confirmation page to
     /// your customer, confirming that their Direct Debit has been set up. You
     /// can build your own page, or redirect to the one we provide in the
     /// `confirmation_url` attribute of the redirect flow.
     /// 
-    ///
     /// Redirect flows expire 30 minutes after they are first created. You
     /// cannot complete an expired redirect flow.
     /// </summary>
@@ -106,10 +101,9 @@ namespace GoCardless.Services
         /// account](#core-endpoints-customer-bank-accounts), and
         /// [mandate](#core-endpoints-mandates) using the details supplied by
         /// your customer and returns the ID of the created mandate.
-        ///
         /// 
-        /// This will return a `redirect_flow_incomplete` error if
-        /// your customer has not yet been redirected back to your site, and a
+        /// This will return a `redirect_flow_incomplete` error if your customer
+        /// has not yet been redirected back to your site, and a
         /// `redirect_flow_already_completed` error if your integration has
         /// already completed this flow. It will return a `bad_request` error if
         /// the `session_token` differs to the one supplied when the redirect

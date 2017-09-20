@@ -19,9 +19,8 @@ namespace GoCardless.Services
     /// Mandates represent the Direct Debit mandate with a
     /// [customer](#core-endpoints-customers).
     /// 
-    /// GoCardless will
-    /// notify you via a [webhook](#appendix-webhooks) whenever the status of a
-    /// mandate changes.
+    /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
+    /// the status of a mandate changes.
     /// </summary>
 
     public class MandateService
@@ -145,7 +144,6 @@ namespace GoCardless.Services
         /// payments. Any metadata supplied to this endpoint will be stored on
         /// the mandate cancellation event it causes.
         /// 
-        ///
         /// This will fail with a `cancellation_failed` error if the mandate is
         /// already cancelled.
         /// </summary>
@@ -172,13 +170,11 @@ namespace GoCardless.Services
         /// webhook, followed by a `reinstated` or `failed` webhook up to two
         /// working days later. Any metadata supplied to this endpoint will be
         /// stored on the `resubmission_requested` event it causes.
-        ///
         /// 
-        /// This will fail with a `mandate_not_inactive` error if
-        /// the mandate is already being submitted, or is active.
+        /// This will fail with a `mandate_not_inactive` error if the mandate is
+        /// already being submitted, or is active.
         /// 
- 
-        ///       /// Mandates can be resubmitted up to 3 times.
+        /// Mandates can be resubmitted up to 3 times.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "MD".</param>
         /// <returns>A single mandate resource</returns>
@@ -338,24 +334,17 @@ namespace GoCardless.Services
             /// <summary>
             /// One of:
             /// <ul>
-            ///
             /// <li>`pending_customer_approval`: the mandate has not yet been
             /// signed by the second customer</li>
-            ///
             /// <li>`pending_submission`: the mandate has not yet been submitted
             /// to the customer's bank</li>
-            /// <li>`submitted`: the
-            /// mandate has been submitted to the customer's bank but has not
-            /// been processed yet</li>
-            /// <li>`active`: the
-            /// mandate has been successfully set up by the customer's
-            /// bank</li>
-            /// <li>`failed`: the mandate could not be
-            /// created</li>
-            /// <li>`cancelled`: the mandate has
-            /// been cancelled</li>
-            /// <li>`expired`: the mandate
-            /// has expired due to dormancy</li>
+            /// <li>`submitted`: the mandate has been submitted to the
+            /// customer's bank but has not been processed yet</li>
+            /// <li>`active`: the mandate has been successfully set up by the
+            /// customer's bank</li>
+            /// <li>`failed`: the mandate could not be created</li>
+            /// <li>`cancelled`: the mandate has been cancelled</li>
+            /// <li>`expired`: the mandate has expired due to dormancy</li>
             /// </ul>
             /// </summary>
     

@@ -13,9 +13,8 @@ namespace GoCardless.Resources
     /// Mandates represent the Direct Debit mandate with a
     /// [customer](#core-endpoints-customers).
     /// 
-    /// GoCardless will
-    /// notify you via a [webhook](#appendix-webhooks) whenever the status of a
-    /// mandate changes.
+    /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
+    /// the status of a mandate changes.
     /// </summary>
     
     public class Mandate
@@ -82,23 +81,17 @@ namespace GoCardless.Resources
         /// <summary>
         /// One of:
         /// <ul>
-        ///
         /// <li>`pending_customer_approval`: the mandate has not yet been signed
         /// by the second customer</li>
-        /// <li>`pending_submission`:
-        /// the mandate has not yet been submitted to the customer's bank</li>
- 
-        ///       /// <li>`submitted`: the mandate has been submitted to the
-        /// customer's bank but has not been processed yet</li>
-        ///
+        /// <li>`pending_submission`: the mandate has not yet been submitted to
+        /// the customer's bank</li>
+        /// <li>`submitted`: the mandate has been submitted to the customer's
+        /// bank but has not been processed yet</li>
         /// <li>`active`: the mandate has been successfully set up by the
         /// customer's bank</li>
-        /// <li>`failed`: the mandate could not
-        /// be created</li>
-        /// <li>`cancelled`: the mandate has been
-        /// cancelled</li>
-        /// <li>`expired`: the mandate has expired
-        /// due to dormancy</li>
+        /// <li>`failed`: the mandate could not be created</li>
+        /// <li>`cancelled`: the mandate has been cancelled</li>
+        /// <li>`expired`: the mandate has expired due to dormancy</li>
         /// </ul>
         /// </summary>
         [JsonProperty("status")]
@@ -139,20 +132,16 @@ namespace GoCardless.Resources
         /// <summary>
         /// One of:
         /// <ul>
-        /// <li>`pending_customer_approval`: the mandate has
-        /// not yet been signed by the second customer</li>
-        /// <li>`pending_submission`:
-        /// the mandate has not yet been submitted to the customer's bank</li>
-        ///
+        /// <li>`pending_customer_approval`: the mandate has not yet been signed by the second
+        /// customer</li>
+        /// <li>`pending_submission`: the mandate has not yet been submitted to the customer's
+        /// bank</li>
         /// <li>`submitted`: the mandate has been submitted to the customer's bank but has not been
         /// processed yet</li>
-        /// <li>`active`: the mandate has been successfully set up by
-        /// the customer's bank</li>
-        /// <li>`failed`: the mandate could not be
-        /// created</li>
+        /// <li>`active`: the mandate has been successfully set up by the customer's bank</li>
+        /// <li>`failed`: the mandate could not be created</li>
         /// <li>`cancelled`: the mandate has been cancelled</li>
-       
-        /// /// <li>`expired`: the mandate has expired due to dormancy</li>
+        /// <li>`expired`: the mandate has expired due to dormancy</li>
         /// </ul>
         /// </summary>
 
