@@ -227,10 +227,10 @@ namespace GoCardless.Services
         public enum PayoutPayoutType
         {
     
-            /// <summary>`payoutType` with a value of "merchant"</summary>
+            /// <summary>`payout_type` with a value of "merchant"</summary>
             [EnumMember(Value = "merchant")]
             Merchant,
-            /// <summary>`payoutType` with a value of "partner"</summary>
+            /// <summary>`payout_type` with a value of "partner"</summary>
             [EnumMember(Value = "partner")]
             Partner,
         }

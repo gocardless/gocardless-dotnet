@@ -205,13 +205,13 @@ namespace GoCardless.Resources
     [JsonConverter(typeof(StringEnumConverter))]
     public enum SubscriptionIntervalUnit {
 
-        /// <summary>`intervalUnit` with a value of "weekly"</summary>
+        /// <summary>`interval_unit` with a value of "weekly"</summary>
         [EnumMember(Value = "weekly")]
         Weekly,
-        /// <summary>`intervalUnit` with a value of "monthly"</summary>
+        /// <summary>`interval_unit` with a value of "monthly"</summary>
         [EnumMember(Value = "monthly")]
         Monthly,
-        /// <summary>`intervalUnit` with a value of "yearly"</summary>
+        /// <summary>`interval_unit` with a value of "yearly"</summary>
         [EnumMember(Value = "yearly")]
         Yearly,
     }

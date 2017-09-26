@@ -290,19 +290,19 @@ namespace GoCardless.Services
         public enum EventResourceType
         {
     
-            /// <summary>`resourceType` with a value of "payments"</summary>
+            /// <summary>`resource_type` with a value of "payments"</summary>
             [EnumMember(Value = "payments")]
             Payments,
-            /// <summary>`resourceType` with a value of "mandates"</summary>
+            /// <summary>`resource_type` with a value of "mandates"</summary>
             [EnumMember(Value = "mandates")]
             Mandates,
-            /// <summary>`resourceType` with a value of "payouts"</summary>
+            /// <summary>`resource_type` with a value of "payouts"</summary>
             [EnumMember(Value = "payouts")]
             Payouts,
-            /// <summary>`resourceType` with a value of "refunds"</summary>
+            /// <summary>`resource_type` with a value of "refunds"</summary>
             [EnumMember(Value = "refunds")]
             Refunds,
-            /// <summary>`resourceType` with a value of "subscriptions"</summary>
+            /// <summary>`resource_type` with a value of "subscriptions"</summary>
             [EnumMember(Value = "subscriptions")]
             Subscriptions,
         }

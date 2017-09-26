@@ -323,13 +323,13 @@ namespace GoCardless.Resources
     [JsonConverter(typeof(StringEnumConverter))]
     public enum CreditorVerificationStatus {
 
-        /// <summary>`verificationStatus` with a value of "successful"</summary>
+        /// <summary>`verification_status` with a value of "successful"</summary>
         [EnumMember(Value = "successful")]
         Successful,
-        /// <summary>`verificationStatus` with a value of "in_review"</summary>
+        /// <summary>`verification_status` with a value of "in_review"</summary>
         [EnumMember(Value = "in_review")]
         InReview,
-        /// <summary>`verificationStatus` with a value of "action_required"</summary>
+        /// <summary>`verification_status` with a value of "action_required"</summary>
         [EnumMember(Value = "action_required")]
         ActionRequired,
     }

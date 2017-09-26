@@ -41,13 +41,13 @@ namespace GoCardless.Resources
     [JsonConverter(typeof(StringEnumConverter))]
     public enum BankDetailsLookupAvailableDebitScheme {
 
-        /// <summary>`availableDebitScheme` with a value of "autogiro"</summary>
+        /// <summary>`available_debit_scheme` with a value of "autogiro"</summary>
         [EnumMember(Value = "autogiro")]
         Autogiro,
-        /// <summary>`availableDebitScheme` with a value of "bacs"</summary>
+        /// <summary>`available_debit_scheme` with a value of "bacs"</summary>
         [EnumMember(Value = "bacs")]
         Bacs,
-        /// <summary>`availableDebitScheme` with a value of "sepa_core"</summary>
+        /// <summary>`available_debit_scheme` with a value of "sepa_core"</summary>
         [EnumMember(Value = "sepa_core")]
         SepaCore,
     }
