@@ -43,7 +43,6 @@ namespace GoCardless.Resources
     /// Redirect flows expire 30 minutes after they are first created. You
     /// cannot complete an expired redirect flow.
     /// </summary>
-    
     public class RedirectFlow
     {
         /// <summary>
@@ -81,7 +80,7 @@ namespace GoCardless.Resources
         public string Id { get; set; }
 
         /// <summary>
-        /// 
+        /// Resources linked to this RedirectFlow.
         /// </summary>
         [JsonProperty("links")]
         public RedirectFlowLinks Links { get; set; }
@@ -119,6 +118,9 @@ namespace GoCardless.Resources
         public string SuccessRedirectUrl { get; set; }
     }
     
+    /// <summary>
+    /// Resources linked to this RedirectFlow
+    /// </summary>
     public class RedirectFlowLinks
     {
         /// <summary>
@@ -155,18 +157,21 @@ namespace GoCardless.Resources
         public string Mandate { get; set; }
     }
     
+    /// <summary>
+    /// The Direct Debit scheme of the mandate. If specified, the payment pages will only allow the
+    /// set-up of a mandate for the specified scheme. It is recommended that you leave this blank so
+    /// the most appropriate scheme is picked based on the customer's bank account.
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum RedirectFlowScheme {
-        /// <summary>
-        /// The Direct Debit scheme of the mandate. If specified, the payment pages will only allow
-        /// the set-up of a mandate for the specified scheme. It is recommended that you leave this
-        /// blank so the most appropriate scheme is picked based on the customer's bank account.
-        /// </summary>
 
+        /// <summary>`scheme` with a value of "autogiro"</summary>
         [EnumMember(Value = "autogiro")]
         Autogiro,
+        /// <summary>`scheme` with a value of "bacs"</summary>
         [EnumMember(Value = "bacs")]
         Bacs,
+        /// <summary>`scheme` with a value of "sepa_core"</summary>
         [EnumMember(Value = "sepa_core")]
         SepaCore,
     }

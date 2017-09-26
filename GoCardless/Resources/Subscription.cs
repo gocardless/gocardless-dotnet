@@ -65,7 +65,6 @@ namespace GoCardless.Resources
     /// business day.
     /// 
     /// </summary>
-    
     public class Subscription
     {
         /// <summary>
@@ -127,7 +126,7 @@ namespace GoCardless.Resources
         public SubscriptionIntervalUnit? IntervalUnit { get; set; }
 
         /// <summary>
-        /// 
+        /// Resources linked to this Subscription.
         /// </summary>
         [JsonProperty("links")]
         public SubscriptionLinks Links { get; set; }
@@ -200,20 +199,26 @@ namespace GoCardless.Resources
         public List<SubscriptionUpcomingPayment> UpcomingPayments { get; set; }
     }
     
+    /// <summary>
+    /// The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum SubscriptionIntervalUnit {
-        /// <summary>
-        /// The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
-        /// </summary>
 
+        /// <summary>`intervalUnit` with a value of "weekly"</summary>
         [EnumMember(Value = "weekly")]
         Weekly,
+        /// <summary>`intervalUnit` with a value of "monthly"</summary>
         [EnumMember(Value = "monthly")]
         Monthly,
+        /// <summary>`intervalUnit` with a value of "yearly"</summary>
         [EnumMember(Value = "yearly")]
         Yearly,
     }
 
+    /// <summary>
+    /// Resources linked to this Subscription
+    /// </summary>
     public class SubscriptionLinks
     {
         /// <summary>
@@ -224,67 +229,86 @@ namespace GoCardless.Resources
         public string Mandate { get; set; }
     }
     
+    /// <summary>
+    /// Name of the month on which to charge a customer. Must be lowercase.
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum SubscriptionMonth {
-        /// <summary>
-        /// Name of the month on which to charge a customer. Must be lowercase.
-        /// </summary>
 
+        /// <summary>`month` with a value of "january"</summary>
         [EnumMember(Value = "january")]
         January,
+        /// <summary>`month` with a value of "february"</summary>
         [EnumMember(Value = "february")]
         February,
+        /// <summary>`month` with a value of "march"</summary>
         [EnumMember(Value = "march")]
         March,
+        /// <summary>`month` with a value of "april"</summary>
         [EnumMember(Value = "april")]
         April,
+        /// <summary>`month` with a value of "may"</summary>
         [EnumMember(Value = "may")]
         May,
+        /// <summary>`month` with a value of "june"</summary>
         [EnumMember(Value = "june")]
         June,
+        /// <summary>`month` with a value of "july"</summary>
         [EnumMember(Value = "july")]
         July,
+        /// <summary>`month` with a value of "august"</summary>
         [EnumMember(Value = "august")]
         August,
+        /// <summary>`month` with a value of "september"</summary>
         [EnumMember(Value = "september")]
         September,
+        /// <summary>`month` with a value of "october"</summary>
         [EnumMember(Value = "october")]
         October,
+        /// <summary>`month` with a value of "november"</summary>
         [EnumMember(Value = "november")]
         November,
+        /// <summary>`month` with a value of "december"</summary>
         [EnumMember(Value = "december")]
         December,
     }
 
+    /// <summary>
+    /// One of:
+    /// <ul>
+    /// <li>`pending_customer_approval`: the subscription is waiting for customer approval before
+    /// becoming active</li>
+    /// <li>`customer_approval_denied`: the customer did not approve the subscription</li>
+    /// <li>`active`: the subscription is currently active and will continue to create payments</li>
+    /// <li>`finished`: all of the payments scheduled for creation under this subscription have been
+    /// created</li>
+    /// <li>`cancelled`: the subscription has been cancelled and will no longer create payments</li>
+    /// </ul>
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum SubscriptionStatus {
-        /// <summary>
-        /// One of:
-        /// <ul>
-        /// <li>`pending_customer_approval`: the subscription is waiting for customer approval
-        /// before becoming active</li>
-        /// <li>`customer_approval_denied`: the customer did not approve the subscription</li>
-        /// <li>`active`: the subscription is currently active and will continue to create
-        /// payments</li>
-        /// <li>`finished`: all of the payments scheduled for creation under this subscription have
-        /// been created</li>
-        /// <li>`cancelled`: the subscription has been cancelled and will no longer create
-        /// payments</li>
-        /// </ul>
-        /// </summary>
 
+        /// <summary>`status` with a value of "pending_customer_approval"</summary>
         [EnumMember(Value = "pending_customer_approval")]
         PendingCustomerApproval,
+        /// <summary>`status` with a value of "customer_approval_denied"</summary>
         [EnumMember(Value = "customer_approval_denied")]
         CustomerApprovalDenied,
+        /// <summary>`status` with a value of "active"</summary>
         [EnumMember(Value = "active")]
         Active,
+        /// <summary>`status` with a value of "finished"</summary>
         [EnumMember(Value = "finished")]
         Finished,
+        /// <summary>`status` with a value of "cancelled"</summary>
         [EnumMember(Value = "cancelled")]
         Cancelled,
     }
 
+    /// <summary>
+    /// Up to 10 upcoming payments with the amount, in pence, and charge date
+    /// for each.
+    /// </summary>
     public class SubscriptionUpcomingPayment
     {
         /// <summary>

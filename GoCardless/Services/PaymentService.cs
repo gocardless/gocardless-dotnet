@@ -47,6 +47,8 @@ namespace GoCardless.Services
         /// `pending_customer_approval`, `pending_submission`, `submitted`, and
         /// `active`.
         /// </summary>
+        /// <param name="request">An optional `PaymentCreateRequest` representing the body for this create request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment resource</returns>
         public Task<PaymentResponse> CreateAsync(PaymentCreateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -62,6 +64,8 @@ namespace GoCardless.Services
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// your payments.
         /// </summary>
+        /// <param name="request">An optional `PaymentListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of payment resources</returns>
         public Task<PaymentListResponse> ListAsync(PaymentListRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -115,6 +119,8 @@ namespace GoCardless.Services
         /// Retrieves the details of a single existing payment.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "PM".</param>
+        /// <param name="request">An optional `PaymentGetRequest` representing the query parameters for this get request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment resource</returns>
         public Task<PaymentResponse> GetAsync(string identity, PaymentGetRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -133,6 +139,8 @@ namespace GoCardless.Services
         /// Updates a payment object. This accepts only the metadata parameter.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "PM".</param>
+        /// <param name="request">An optional `PaymentUpdateRequest` representing the body for this update request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment resource</returns>
         public Task<PaymentResponse> UpdateAsync(string identity, PaymentUpdateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -156,6 +164,8 @@ namespace GoCardless.Services
         /// payment's status is `pending_submission`.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "PM".</param>
+        /// <param name="request">An optional `PaymentCancelRequest` representing the body for this cancel request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment resource</returns>
         public Task<PaymentResponse> CancelAsync(string identity, PaymentCancelRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -185,6 +195,8 @@ namespace GoCardless.Services
         /// Payments can be retried up to 3 times.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "PM".</param>
+        /// <param name="request">An optional `PaymentRetryRequest` representing the body for this retry request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment resource</returns>
         public Task<PaymentResponse> RetryAsync(string identity, PaymentRetryRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -201,6 +213,15 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// <a name="mandate_is_inactive"></a>Creates a new payment object.
+    /// 
+    /// This fails with a `mandate_is_inactive` error if the linked
+    /// [mandate](#core-endpoints-mandates) is cancelled or has failed. Payments
+    /// can be created against mandates with status of:
+    /// `pending_customer_approval`, `pending_submission`, `submitted`, and
+    /// `active`.
+    /// </summary>
     public class PaymentCreateRequest : IHasIdempotencyKey
     {
 
@@ -234,19 +255,21 @@ namespace GoCardless.Services
         [JsonProperty("currency")]
         public PaymentCurrency? Currency { get; set; }
             
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently only "GBP", "EUR", and "SEK" are supported.
+        /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentCurrency
         {
-            /// <summary>
-            /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-            /// currency code. Currently only "GBP", "EUR", and "SEK" are
-            /// supported.
-            /// </summary>
     
+            /// <summary>`currency` with a value of "GBP"</summary>
             [EnumMember(Value = "GBP")]
             GBP,
+            /// <summary>`currency` with a value of "EUR"</summary>
             [EnumMember(Value = "EUR")]
             EUR,
+            /// <summary>`currency` with a value of "SEK"</summary>
             [EnumMember(Value = "SEK")]
             SEK,
         }
@@ -260,8 +283,14 @@ namespace GoCardless.Services
         [JsonProperty("description")]
         public string Description { get; set; }
 
+        /// <summary>
+        /// Linked resources.
+        /// </summary>
         [JsonProperty("links")]
         public PaymentLinks Links { get; set; }
+        /// <summary>
+        /// Linked resources for a Payment.
+        /// </summary>
         public class PaymentLinks
         {
 
@@ -294,11 +323,20 @@ namespace GoCardless.Services
         [JsonProperty("reference")]
         public string Reference { get; set; }
 
+        /// <summary>
+        /// A unique key to ensure that this request only succeeds once, allowing you to safely retry request errors such as network failures.
+        /// Any requests, where supported, to create a resource with a key that has previously been used will not succeed.
+        /// See: https://developer.gocardless.com/api-reference/#making-requests-idempotency-keys
+        /// </summary>
         [JsonIgnore]
         public string IdempotencyKey { get; set; }
     }
 
         
+    /// <summary>
+    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    /// payments.
+    /// </summary>
     public class PaymentListRequest
     {
 
@@ -314,23 +352,38 @@ namespace GoCardless.Services
         [JsonProperty("before")]
         public string Before { get; set; }
 
+        /// <summary>
+        /// Limit to records created within certain times.
+        /// </summary>
         [JsonProperty("created_at")]
         public CreatedAtParam CreatedAt { get; set; }
 
+        /// <summary>
+        /// Specify filters to limit records by creation time.
+        /// </summary>
         public class CreatedAtParam
         {
             /// <summary>
-            /// Limit to records created within certain times
+            /// Limit to records created after the specified date-time.
             /// </summary>
             [JsonProperty("gt")]
             public DateTimeOffset? GreaterThan { get; set; }
 
+            /// <summary>
+            /// Limit to records created on or after the specified date-time.
+            /// </summary>
             [JsonProperty("gte")]
             public DateTimeOffset? GreaterThanOrEqual { get; set; }
 
+            /// <summary>
+            /// Limit to records created before the specified date-time.
+            /// </summary>
             [JsonProperty("lt")]
             public DateTimeOffset? LessThan { get; set; }
 
+            /// <summary>
+            ///Limit to records created on or before the specified date-time.
+            /// </summary>
             [JsonProperty("lte")]
             public DateTimeOffset? LessThanOrEqual { get; set; }
         }
@@ -349,19 +402,21 @@ namespace GoCardless.Services
         [JsonProperty("currency")]
         public PaymentCurrency? Currency { get; set; }
             
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently only "GBP", "EUR", and "SEK" are supported.
+        /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentCurrency
         {
-            /// <summary>
-            /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-            /// currency code. Currently only "GBP", "EUR", and "SEK" are
-            /// supported.
-            /// </summary>
     
+            /// <summary>`currency` with a value of "GBP"</summary>
             [EnumMember(Value = "GBP")]
             GBP,
+            /// <summary>`currency` with a value of "EUR"</summary>
             [EnumMember(Value = "EUR")]
             EUR,
+            /// <summary>`currency` with a value of "SEK"</summary>
             [EnumMember(Value = "SEK")]
             SEK,
         }
@@ -408,48 +463,55 @@ namespace GoCardless.Services
         [JsonProperty("status")]
         public PaymentStatus? Status { get; set; }
             
+        /// <summary>
+        /// One of:
+        /// <ul>
+        /// <li>`pending_customer_approval`: we're waiting for the customer to
+        /// approve this payment</li>
+        /// <li>`pending_submission`: the payment has been created, but not yet
+        /// submitted to the banks</li>
+        /// <li>`submitted`: the payment has been submitted to the banks</li>
+        /// <li>`confirmed`: the payment has been confirmed as collected</li>
+        /// <li>`paid_out`:  the payment has been included in a
+        /// [payout](#core-endpoints-payouts)</li>
+        /// <li>`cancelled`: the payment has been cancelled</li>
+        /// <li>`customer_approval_denied`: the customer has denied approval for
+        /// the payment. You should contact the customer directly</li>
+        /// <li>`failed`: the payment failed to be processed. Note that payments
+        /// can fail after being confirmed if the failure message is sent late
+        /// by the banks.</li>
+        /// <li>`charged_back`: the payment has been charged back</li>
+        /// </ul>
+        /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentStatus
         {
-            /// <summary>
-            /// One of:
-            /// <ul>
-            /// <li>`pending_customer_approval`: we're waiting for the customer
-            /// to approve this payment</li>
-            /// <li>`pending_submission`: the payment has been created, but not
-            /// yet submitted to the banks</li>
-            /// <li>`submitted`: the payment has been submitted to the
-            /// banks</li>
-            /// <li>`confirmed`: the payment has been confirmed as
-            /// collected</li>
-            /// <li>`paid_out`:  the payment has been included in a
-            /// [payout](#core-endpoints-payouts)</li>
-            /// <li>`cancelled`: the payment has been cancelled</li>
-            /// <li>`customer_approval_denied`: the customer has denied approval
-            /// for the payment. You should contact the customer directly</li>
-            /// <li>`failed`: the payment failed to be processed. Note that
-            /// payments can fail after being confirmed if the failure message
-            /// is sent late by the banks.</li>
-            /// <li>`charged_back`: the payment has been charged back</li>
-            /// </ul>
-            /// </summary>
     
+            /// <summary>`status` with a value of "pending_customer_approval"</summary>
             [EnumMember(Value = "pending_customer_approval")]
             PendingCustomerApproval,
+            /// <summary>`status` with a value of "pending_submission"</summary>
             [EnumMember(Value = "pending_submission")]
             PendingSubmission,
+            /// <summary>`status` with a value of "submitted"</summary>
             [EnumMember(Value = "submitted")]
             Submitted,
+            /// <summary>`status` with a value of "confirmed"</summary>
             [EnumMember(Value = "confirmed")]
             Confirmed,
+            /// <summary>`status` with a value of "paid_out"</summary>
             [EnumMember(Value = "paid_out")]
             PaidOut,
+            /// <summary>`status` with a value of "cancelled"</summary>
             [EnumMember(Value = "cancelled")]
             Cancelled,
+            /// <summary>`status` with a value of "customer_approval_denied"</summary>
             [EnumMember(Value = "customer_approval_denied")]
             CustomerApprovalDenied,
+            /// <summary>`status` with a value of "failed"</summary>
             [EnumMember(Value = "failed")]
             Failed,
+            /// <summary>`status` with a value of "charged_back"</summary>
             [EnumMember(Value = "charged_back")]
             ChargedBack,
         }
@@ -462,11 +524,17 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Retrieves the details of a single existing payment.
+    /// </summary>
     public class PaymentGetRequest
     {
     }
 
         
+    /// <summary>
+    /// Updates a payment object. This accepts only the metadata parameter.
+    /// </summary>
     public class PaymentUpdateRequest
     {
 
@@ -479,6 +547,14 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Cancels the payment if it has not already been submitted to the banks.
+    /// Any metadata supplied to this endpoint will be stored on the payment
+    /// cancellation event it causes.
+    /// 
+    /// This will fail with a `cancellation_failed` error unless the payment's
+    /// status is `pending_submission`.
+    /// </summary>
     public class PaymentCancelRequest
     {
 
@@ -491,6 +567,18 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// <a name="retry_failed"></a>Retries a failed payment if the underlying
+    /// mandate is active. You will receive a `resubmission_requested` webhook,
+    /// but after that retrying the payment follows the same process as its
+    /// initial creation, so you will receive a `submitted` webhook, followed by
+    /// a `confirmed` or `failed` event. Any metadata supplied to this endpoint
+    /// will be stored against the payment submission event it causes.
+    /// 
+    /// This will return a `retry_failed` error if the payment has not failed.
+    /// 
+    /// Payments can be retried up to 3 times.
+    /// </summary>
     public class PaymentRetryRequest
     {
 
@@ -502,15 +590,31 @@ namespace GoCardless.Services
         public IDictionary<String, String> Metadata { get; set; }
     }
 
+    /// <summary>
+    /// An API response for a request returning a single payment.
+    /// </summary>
     public class PaymentResponse : ApiResponse
     {
+        /// <summary>
+        /// The payment from the response.
+        /// </summary>
         [JsonProperty("payments")]
         public Payment Payment { get; private set; }
     }
 
+    /// <summary>
+    /// An API response for a request returning a list of payments.
+    /// </summary>
     public class PaymentListResponse : ApiResponse
     {
+        /// <summary>
+        /// The list of payments from the response.
+        /// </summary>
         public IReadOnlyList<Payment> Payments { get; private set; }
+
+        /// <summary>
+        /// Response metadata (e.g. pagination cursors)
+        /// </summary>
         public Meta Meta { get; private set; }
     }
 }

@@ -16,7 +16,6 @@ namespace GoCardless.Resources
     /// are created automatically after a payment has been successfully
     /// collected.
     /// </summary>
-    
     public class Payout
     {
         /// <summary>
@@ -75,7 +74,7 @@ namespace GoCardless.Resources
         public string Id { get; set; }
 
         /// <summary>
-        /// 
+        /// Resources linked to this Payout.
         /// </summary>
         [JsonProperty("links")]
         public PayoutLinks Links { get; set; }
@@ -104,21 +103,27 @@ namespace GoCardless.Resources
         public PayoutStatus? Status { get; set; }
     }
     
+    /// <summary>
+    /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently only
+    /// "GBP", "EUR", and "SEK" are supported.
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum PayoutCurrency {
-        /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-        /// only "GBP", "EUR", and "SEK" are supported.
-        /// </summary>
 
+        /// <summary>`currency` with a value of "GBP"</summary>
         [EnumMember(Value = "GBP")]
         GBP,
+        /// <summary>`currency` with a value of "EUR"</summary>
         [EnumMember(Value = "EUR")]
         EUR,
+        /// <summary>`currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
     }
 
+    /// <summary>
+    /// Resources linked to this Payout
+    /// </summary>
     public class PayoutLinks
     {
         /// <summary>
@@ -136,30 +141,34 @@ namespace GoCardless.Resources
         public string CreditorBankAccount { get; set; }
     }
     
+    /// <summary>
+    /// Whether a payout contains merchant revenue or partner fees.
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum PayoutPayoutType {
-        /// <summary>
-        /// Whether a payout contains merchant revenue or partner fees.
-        /// </summary>
 
+        /// <summary>`payoutType` with a value of "merchant"</summary>
         [EnumMember(Value = "merchant")]
         Merchant,
+        /// <summary>`payoutType` with a value of "partner"</summary>
         [EnumMember(Value = "partner")]
         Partner,
     }
 
+    /// <summary>
+    /// One of:
+    /// <ul>
+    /// <li>`pending`: the payout has been created, but not yet sent to the banks</li>
+    /// <li>`paid`: the payout has been sent to the banks</li>
+    /// </ul>
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum PayoutStatus {
-        /// <summary>
-        /// One of:
-        /// <ul>
-        /// <li>`pending`: the payout has been created, but not yet sent to the banks</li>
-        /// <li>`paid`: the payout has been sent to the banks</li>
-        /// </ul>
-        /// </summary>
 
+        /// <summary>`status` with a value of "pending"</summary>
         [EnumMember(Value = "pending")]
         Pending,
+        /// <summary>`status` with a value of "paid"</summary>
         [EnumMember(Value = "paid")]
         Paid,
     }

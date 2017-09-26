@@ -47,6 +47,8 @@ namespace GoCardless.Services
         /// language code. Supported languages are Dutch, English, French,
         /// German, Italian, Portuguese, Spanish and Swedish.
         /// </summary>
+        /// <param name="request">An optional `MandatePdfCreateRequest` representing the body for this create request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate pdf resource</returns>
         public Task<MandatePdfResponse> CreateAsync(MandatePdfCreateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -60,6 +62,19 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Generates a PDF mandate and returns its temporary URL.
+    /// 
+    /// Customer and bank account details can be left blank (for a blank
+    /// mandate), provided manually, or inferred from the ID of an existing
+    /// [mandate](#core-endpoints-mandates).
+    /// 
+    /// To generate a PDF mandate in a foreign language, set your
+    /// `Accept-Language` header to the relevant [ISO
+    /// 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table)
+    /// language code. Supported languages are Dutch, English, French, German,
+    /// Italian, Portuguese, Spanish and Swedish.
+    /// </summary>
     public class MandatePdfCreateRequest
     {
 
@@ -116,8 +131,14 @@ namespace GoCardless.Services
         [JsonProperty("iban")]
         public string Iban { get; set; }
 
+        /// <summary>
+        /// Linked resources.
+        /// </summary>
         [JsonProperty("links")]
         public MandatePdfLinks Links { get; set; }
+        /// <summary>
+        /// Linked resources for a MandatePdf.
+        /// </summary>
         public class MandatePdfLinks
         {
 
@@ -163,8 +184,14 @@ namespace GoCardless.Services
         public string SwedishIdentityNumber { get; set; }
     }
 
+    /// <summary>
+    /// An API response for a request returning a single mandate pdf.
+    /// </summary>
     public class MandatePdfResponse : ApiResponse
     {
+        /// <summary>
+        /// The mandate pdf from the response.
+        /// </summary>
         [JsonProperty("mandate_pdfs")]
         public MandatePdf MandatePdf { get; private set; }
     }

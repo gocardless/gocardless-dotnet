@@ -42,6 +42,8 @@ namespace GoCardless.Services
         /// <summary>
         /// Creates a new creditor.
         /// </summary>
+        /// <param name="request">An optional `CreditorCreateRequest` representing the body for this create request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor resource</returns>
         public Task<CreditorResponse> CreateAsync(CreditorCreateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -57,6 +59,8 @@ namespace GoCardless.Services
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// your creditors.
         /// </summary>
+        /// <param name="request">An optional `CreditorListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of creditor resources</returns>
         public Task<CreditorListResponse> ListAsync(CreditorListRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -110,6 +114,8 @@ namespace GoCardless.Services
         /// Retrieves the details of an existing creditor.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "CR".</param>
+        /// <param name="request">An optional `CreditorGetRequest` representing the query parameters for this get request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor resource</returns>
         public Task<CreditorResponse> GetAsync(string identity, CreditorGetRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -129,6 +135,8 @@ namespace GoCardless.Services
         /// creating a creditor.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "CR".</param>
+        /// <param name="request">An optional `CreditorUpdateRequest` representing the body for this update request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor resource</returns>
         public Task<CreditorResponse> UpdateAsync(string identity, CreditorUpdateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -145,6 +153,9 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Creates a new creditor.
+    /// </summary>
     public class CreditorCreateRequest : IHasIdempotencyKey
     {
 
@@ -180,6 +191,9 @@ namespace GoCardless.Services
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
 
+        /// <summary>
+        /// Linked resources.
+        /// </summary>
         [JsonProperty("links")]
         public IDictionary<String, String> Links { get; set; }
 
@@ -201,11 +215,20 @@ namespace GoCardless.Services
         [JsonProperty("region")]
         public string Region { get; set; }
 
+        /// <summary>
+        /// A unique key to ensure that this request only succeeds once, allowing you to safely retry request errors such as network failures.
+        /// Any requests, where supported, to create a resource with a key that has previously been used will not succeed.
+        /// See: https://developer.gocardless.com/api-reference/#making-requests-idempotency-keys
+        /// </summary>
         [JsonIgnore]
         public string IdempotencyKey { get; set; }
     }
 
         
+    /// <summary>
+    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    /// creditors.
+    /// </summary>
     public class CreditorListRequest
     {
 
@@ -221,23 +244,38 @@ namespace GoCardless.Services
         [JsonProperty("before")]
         public string Before { get; set; }
 
+        /// <summary>
+        /// Limit to records created within certain times.
+        /// </summary>
         [JsonProperty("created_at")]
         public CreatedAtParam CreatedAt { get; set; }
 
+        /// <summary>
+        /// Specify filters to limit records by creation time.
+        /// </summary>
         public class CreatedAtParam
         {
             /// <summary>
-            /// Limit to records created within certain times
+            /// Limit to records created after the specified date-time.
             /// </summary>
             [JsonProperty("gt")]
             public DateTimeOffset? GreaterThan { get; set; }
 
+            /// <summary>
+            /// Limit to records created on or after the specified date-time.
+            /// </summary>
             [JsonProperty("gte")]
             public DateTimeOffset? GreaterThanOrEqual { get; set; }
 
+            /// <summary>
+            /// Limit to records created before the specified date-time.
+            /// </summary>
             [JsonProperty("lt")]
             public DateTimeOffset? LessThan { get; set; }
 
+            /// <summary>
+            ///Limit to records created on or before the specified date-time.
+            /// </summary>
             [JsonProperty("lte")]
             public DateTimeOffset? LessThanOrEqual { get; set; }
         }
@@ -250,11 +288,18 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Retrieves the details of an existing creditor.
+    /// </summary>
     public class CreditorGetRequest
     {
     }
 
         
+    /// <summary>
+    /// Updates a creditor object. Supports all of the fields supported when
+    /// creating a creditor.
+    /// </summary>
     public class CreditorUpdateRequest
     {
 
@@ -290,8 +335,14 @@ namespace GoCardless.Services
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
 
+        /// <summary>
+        /// Linked resources.
+        /// </summary>
         [JsonProperty("links")]
         public CreditorLinks Links { get; set; }
+        /// <summary>
+        /// Linked resources for a Creditor.
+        /// </summary>
         public class CreditorLinks
         {
 
@@ -336,15 +387,31 @@ namespace GoCardless.Services
         public string Region { get; set; }
     }
 
+    /// <summary>
+    /// An API response for a request returning a single creditor.
+    /// </summary>
     public class CreditorResponse : ApiResponse
     {
+        /// <summary>
+        /// The creditor from the response.
+        /// </summary>
         [JsonProperty("creditors")]
         public Creditor Creditor { get; private set; }
     }
 
+    /// <summary>
+    /// An API response for a request returning a list of creditors.
+    /// </summary>
     public class CreditorListResponse : ApiResponse
     {
+        /// <summary>
+        /// The list of creditors from the response.
+        /// </summary>
         public IReadOnlyList<Creditor> Creditors { get; private set; }
+
+        /// <summary>
+        /// Response metadata (e.g. pagination cursors)
+        /// </summary>
         public Meta Meta { get; private set; }
     }
 }

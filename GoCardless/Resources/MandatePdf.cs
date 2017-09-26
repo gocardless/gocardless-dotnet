@@ -14,7 +14,6 @@ namespace GoCardless.Resources
     /// compliant](#appendix-compliance-requirements) Direct Debit mandates to
     /// your customers.
     /// </summary>
-    
     public class MandatePdf
     {
         /// <summary>

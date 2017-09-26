@@ -56,6 +56,8 @@ namespace GoCardless.Services
         /// For more information on the different fields required in each
         /// country, see [local bank details](#appendix-local-bank-details).
         /// </summary>
+        /// <param name="request">An optional `CustomerBankAccountCreateRequest` representing the body for this create request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer bank account resource</returns>
         public Task<CustomerBankAccountResponse> CreateAsync(CustomerBankAccountCreateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -71,6 +73,8 @@ namespace GoCardless.Services
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// your bank accounts.
         /// </summary>
+        /// <param name="request">An optional `CustomerBankAccountListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of customer bank account resources</returns>
         public Task<CustomerBankAccountListResponse> ListAsync(CustomerBankAccountListRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -124,6 +128,8 @@ namespace GoCardless.Services
         /// Retrieves the details of an existing bank account.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "BA".</param>
+        /// <param name="request">An optional `CustomerBankAccountGetRequest` representing the query parameters for this get request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer bank account resource</returns>
         public Task<CustomerBankAccountResponse> GetAsync(string identity, CustomerBankAccountGetRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -143,6 +149,8 @@ namespace GoCardless.Services
         /// is allowed.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "BA".</param>
+        /// <param name="request">An optional `CustomerBankAccountUpdateRequest` representing the body for this update request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer bank account resource</returns>
         public Task<CustomerBankAccountResponse> UpdateAsync(string identity, CustomerBankAccountUpdateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -168,6 +176,8 @@ namespace GoCardless.Services
         /// account resource with the same details.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "BA".</param>
+        /// <param name="request">An optional `CustomerBankAccountDisableRequest` representing the body for this disable request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer bank account resource</returns>
         public Task<CustomerBankAccountResponse> DisableAsync(string identity, CustomerBankAccountDisableRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -184,6 +194,21 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Creates a new customer bank account object.
+    /// 
+    /// There are three different ways to supply bank account details:
+    /// 
+    /// - [Local details](#appendix-local-bank-details)
+    /// 
+    /// - IBAN
+    /// 
+    /// - [Customer Bank Account
+    /// Tokens](#javascript-flow-create-a-customer-bank-account-token)
+    /// 
+    /// For more information on the different fields required in each country,
+    /// see [local bank details](#appendix-local-bank-details).
+    /// </summary>
     public class CustomerBankAccountCreateRequest : IHasIdempotencyKey
     {
 
@@ -243,8 +268,14 @@ namespace GoCardless.Services
         [JsonProperty("iban")]
         public string Iban { get; set; }
 
+        /// <summary>
+        /// Linked resources.
+        /// </summary>
         [JsonProperty("links")]
         public CustomerBankAccountLinks Links { get; set; }
+        /// <summary>
+        /// Linked resources for a CustomerBankAccount.
+        /// </summary>
         public class CustomerBankAccountLinks
         {
 
@@ -271,11 +302,20 @@ namespace GoCardless.Services
         [JsonProperty("metadata")]
         public IDictionary<String, String> Metadata { get; set; }
 
+        /// <summary>
+        /// A unique key to ensure that this request only succeeds once, allowing you to safely retry request errors such as network failures.
+        /// Any requests, where supported, to create a resource with a key that has previously been used will not succeed.
+        /// See: https://developer.gocardless.com/api-reference/#making-requests-idempotency-keys
+        /// </summary>
         [JsonIgnore]
         public string IdempotencyKey { get; set; }
     }
 
         
+    /// <summary>
+    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    /// bank accounts.
+    /// </summary>
     public class CustomerBankAccountListRequest
     {
 
@@ -291,23 +331,38 @@ namespace GoCardless.Services
         [JsonProperty("before")]
         public string Before { get; set; }
 
+        /// <summary>
+        /// Limit to records created within certain times.
+        /// </summary>
         [JsonProperty("created_at")]
         public CreatedAtParam CreatedAt { get; set; }
 
+        /// <summary>
+        /// Specify filters to limit records by creation time.
+        /// </summary>
         public class CreatedAtParam
         {
             /// <summary>
-            /// Limit to records created within certain times
+            /// Limit to records created after the specified date-time.
             /// </summary>
             [JsonProperty("gt")]
             public DateTimeOffset? GreaterThan { get; set; }
 
+            /// <summary>
+            /// Limit to records created on or after the specified date-time.
+            /// </summary>
             [JsonProperty("gte")]
             public DateTimeOffset? GreaterThanOrEqual { get; set; }
 
+            /// <summary>
+            /// Limit to records created before the specified date-time.
+            /// </summary>
             [JsonProperty("lt")]
             public DateTimeOffset? LessThan { get; set; }
 
+            /// <summary>
+            ///Limit to records created on or before the specified date-time.
+            /// </summary>
             [JsonProperty("lte")]
             public DateTimeOffset? LessThanOrEqual { get; set; }
         }
@@ -324,15 +379,17 @@ namespace GoCardless.Services
         [JsonProperty("enabled")]
         public bool? Enabled { get; set; }
             
+        /// <summary>
+        /// Get enabled or disabled customer bank accounts.
+        /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CustomerBankAccountEnabled
         {
-            /// <summary>
-            /// Get enabled or disabled customer bank accounts.
-            /// </summary>
     
+            /// <summary>`enabled` with a value of "true"</summary>
             [EnumMember(Value = "true")]
             True,
+            /// <summary>`enabled` with a value of "false"</summary>
             [EnumMember(Value = "false")]
             False,
         }
@@ -345,11 +402,18 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Retrieves the details of an existing bank account.
+    /// </summary>
     public class CustomerBankAccountGetRequest
     {
     }
 
         
+    /// <summary>
+    /// Updates a customer bank account object. Only the metadata parameter is
+    /// allowed.
+    /// </summary>
     public class CustomerBankAccountUpdateRequest
     {
 
@@ -362,19 +426,44 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Immediately cancels all associated mandates and cancellable payments.
+    /// 
+    /// This will return a `disable_failed` error if the bank account has
+    /// already been disabled.
+    /// 
+    /// A disabled bank account can be re-enabled by creating a new bank account
+    /// resource with the same details.
+    /// </summary>
     public class CustomerBankAccountDisableRequest
     {
     }
 
+    /// <summary>
+    /// An API response for a request returning a single customer bank account.
+    /// </summary>
     public class CustomerBankAccountResponse : ApiResponse
     {
+        /// <summary>
+        /// The customer bank account from the response.
+        /// </summary>
         [JsonProperty("customer_bank_accounts")]
         public CustomerBankAccount CustomerBankAccount { get; private set; }
     }
 
+    /// <summary>
+    /// An API response for a request returning a list of customer bank accounts.
+    /// </summary>
     public class CustomerBankAccountListResponse : ApiResponse
     {
+        /// <summary>
+        /// The list of customer bank accounts from the response.
+        /// </summary>
         public IReadOnlyList<CustomerBankAccount> CustomerBankAccounts { get; private set; }
+
+        /// <summary>
+        /// Response metadata (e.g. pagination cursors)
+        /// </summary>
         public Meta Meta { get; private set; }
     }
 }

@@ -14,7 +14,6 @@ namespace GoCardless.Resources
     /// has been updated, for example a payment which has been collected, or a
     /// mandate which has been transferred.
     /// </summary>
-    
     public class Event
     {
         /// <summary>
@@ -43,7 +42,7 @@ namespace GoCardless.Resources
         public string Id { get; set; }
 
         /// <summary>
-        /// 
+        /// Resources linked to this Event.
         /// </summary>
         [JsonProperty("links")]
         public EventLinks Links { get; set; }
@@ -118,44 +117,55 @@ namespace GoCardless.Resources
         public EventDetailsScheme? Scheme { get; set; }
     }
     
+    /// <summary>
+    /// Who initiated the event. One of:
+    /// <ul>
+    /// <li>`bank`: this event was triggered by a report from the banks</li>
+    /// <li>`gocardless`: this event was performed by GoCardless automatically</li>
+    /// <li>`api`: this event was triggered by an API endpoint</li>
+    /// <li>`customer`: this event was triggered by a Customer</li>
+    /// </ul>
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum EventDetailsOrigin {
-        /// <summary>
-        /// Who initiated the event. One of:
-        /// <ul>
-        /// <li>`bank`: this event was triggered by a report from the banks</li>
-        /// <li>`gocardless`: this event was performed by GoCardless automatically</li>
-        /// <li>`api`: this event was triggered by an API endpoint</li>
-        /// <li>`customer`: this event was triggered by a Customer</li>
-        /// </ul>
-        /// </summary>
 
+        /// <summary>`origin` with a value of "bank"</summary>
         [EnumMember(Value = "bank")]
         Bank,
+        /// <summary>`origin` with a value of "api"</summary>
         [EnumMember(Value = "api")]
         Api,
+        /// <summary>`origin` with a value of "gocardless"</summary>
         [EnumMember(Value = "gocardless")]
         Gocardless,
+        /// <summary>`origin` with a value of "customer"</summary>
         [EnumMember(Value = "customer")]
         Customer,
     }
 
+    /// <summary>
+    /// Set when a bank is the origin of the event.
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum EventDetailsScheme {
-        /// <summary>
-        /// Set when a bank is the origin of the event.
-        /// </summary>
 
+        /// <summary>`scheme` with a value of "autogiro"</summary>
         [EnumMember(Value = "autogiro")]
         Autogiro,
+        /// <summary>`scheme` with a value of "bacs"</summary>
         [EnumMember(Value = "bacs")]
         Bacs,
+        /// <summary>`scheme` with a value of "sepa_core"</summary>
         [EnumMember(Value = "sepa_core")]
         SepaCore,
+        /// <summary>`scheme` with a value of "sepa_cor1"</summary>
         [EnumMember(Value = "sepa_cor1")]
         SepaCor1,
     }
 
+    /// <summary>
+    /// Resources linked to this Event
+    /// </summary>
     public class EventLinks
     {
         /// <summary>
@@ -239,27 +249,32 @@ namespace GoCardless.Resources
         public string Subscription { get; set; }
     }
     
+    /// <summary>
+    /// The resource type for this event. One of:
+    /// <ul>
+    /// <li>`payments`</li>
+    /// <li>`mandates`</li>
+    /// <li>`payouts`</li>
+    /// <li>`refunds`</li>
+    /// <li>`subscriptions`</li>
+    /// </ul>
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum EventResourceType {
-        /// <summary>
-        /// The resource type for this event. One of:
-        /// <ul>
-        /// <li>`payments`</li>
-        /// <li>`mandates`</li>
-        /// <li>`payouts`</li>
-        /// <li>`refunds`</li>
-        /// <li>`subscriptions`</li>
-        /// </ul>
-        /// </summary>
 
+        /// <summary>`resourceType` with a value of "payments"</summary>
         [EnumMember(Value = "payments")]
         Payments,
+        /// <summary>`resourceType` with a value of "mandates"</summary>
         [EnumMember(Value = "mandates")]
         Mandates,
+        /// <summary>`resourceType` with a value of "payouts"</summary>
         [EnumMember(Value = "payouts")]
         Payouts,
+        /// <summary>`resourceType` with a value of "refunds"</summary>
         [EnumMember(Value = "refunds")]
         Refunds,
+        /// <summary>`resourceType` with a value of "subscriptions"</summary>
         [EnumMember(Value = "subscriptions")]
         Subscriptions,
     }

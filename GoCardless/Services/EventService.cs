@@ -38,6 +38,8 @@ namespace GoCardless.Services
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// your events.
         /// </summary>
+        /// <param name="request">An optional `EventListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of event resources</returns>
         public Task<EventListResponse> ListAsync(EventListRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -91,6 +93,8 @@ namespace GoCardless.Services
         /// Retrieves the details of a single event.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "EV".</param>
+        /// <param name="request">An optional `EventGetRequest` representing the query parameters for this get request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single event resource</returns>
         public Task<EventResponse> GetAsync(string identity, EventGetRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -107,6 +111,10 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    /// events.
+    /// </summary>
     public class EventListRequest
     {
 
@@ -128,23 +136,38 @@ namespace GoCardless.Services
         [JsonProperty("before")]
         public string Before { get; set; }
 
+        /// <summary>
+        /// Limit to records created within certain times.
+        /// </summary>
         [JsonProperty("created_at")]
         public CreatedAtParam CreatedAt { get; set; }
 
+        /// <summary>
+        /// Specify filters to limit records by creation time.
+        /// </summary>
         public class CreatedAtParam
         {
             /// <summary>
-            /// Limit to records created within certain times
+            /// Limit to records created after the specified date-time.
             /// </summary>
             [JsonProperty("gt")]
             public DateTimeOffset? GreaterThan { get; set; }
 
+            /// <summary>
+            /// Limit to records created on or after the specified date-time.
+            /// </summary>
             [JsonProperty("gte")]
             public DateTimeOffset? GreaterThanOrEqual { get; set; }
 
+            /// <summary>
+            /// Limit to records created before the specified date-time.
+            /// </summary>
             [JsonProperty("lt")]
             public DateTimeOffset? LessThan { get; set; }
 
+            /// <summary>
+            ///Limit to records created on or before the specified date-time.
+            /// </summary>
             [JsonProperty("lte")]
             public DateTimeOffset? LessThanOrEqual { get; set; }
         }
@@ -163,30 +186,34 @@ namespace GoCardless.Services
         [JsonProperty("include")]
         public EventInclude? Include { get; set; }
             
+        /// <summary>
+        /// Includes linked resources in the response. Must be used with the
+        /// `resource_type` parameter specified. The include should be one of:
+        /// <ul>
+        /// <li>`payment`</li>
+        /// <li>`mandate`</li>
+        /// <li>`payout`</li>
+        /// <li>`refund`</li>
+        /// <li>`subscription`</li>
+        /// </ul>
+        /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum EventInclude
         {
-            /// <summary>
-            /// Includes linked resources in the response. Must be used with the
-            /// `resource_type` parameter specified. The include should be one
-            /// of:
-            /// <ul>
-            /// <li>`payment`</li>
-            /// <li>`mandate`</li>
-            /// <li>`payout`</li>
-            /// <li>`refund`</li>
-            /// <li>`subscription`</li>
-            /// </ul>
-            /// </summary>
     
+            /// <summary>`include` with a value of "payment"</summary>
             [EnumMember(Value = "payment")]
             Payment,
+            /// <summary>`include` with a value of "mandate"</summary>
             [EnumMember(Value = "mandate")]
             Mandate,
+            /// <summary>`include` with a value of "payout"</summary>
             [EnumMember(Value = "payout")]
             Payout,
+            /// <summary>`include` with a value of "refund"</summary>
             [EnumMember(Value = "refund")]
             Refund,
+            /// <summary>`include` with a value of "subscription"</summary>
             [EnumMember(Value = "subscription")]
             Subscription,
         }
@@ -247,30 +274,35 @@ namespace GoCardless.Services
         [JsonProperty("resource_type")]
         public EventResourceType? ResourceType { get; set; }
             
+        /// <summary>
+        /// Type of resource that you'd like to get all events for. Cannot be
+        /// used together with the `payment`, `mandate`, `subscription`,
+        /// `refund` or `payout` parameter. The type can be one of:
+        /// <ul>
+        /// <li>`payments`</li>
+        /// <li>`mandates`</li>
+        /// <li>`payouts`</li>
+        /// <li>`subscriptions`</li>
+        /// <li>`refunds`</li>
+        /// </ul>
+        /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum EventResourceType
         {
-            /// <summary>
-            /// Type of resource that you'd like to get all events for. Cannot
-            /// be used together with the `payment`, `mandate`, `subscription`,
-            /// `refund` or `payout` parameter. The type can be one of:
-            /// <ul>
-            /// <li>`payments`</li>
-            /// <li>`mandates`</li>
-            /// <li>`payouts`</li>
-            /// <li>`subscriptions`</li>
-            /// <li>`refunds`</li>
-            /// </ul>
-            /// </summary>
     
+            /// <summary>`resourceType` with a value of "payments"</summary>
             [EnumMember(Value = "payments")]
             Payments,
+            /// <summary>`resourceType` with a value of "mandates"</summary>
             [EnumMember(Value = "mandates")]
             Mandates,
+            /// <summary>`resourceType` with a value of "payouts"</summary>
             [EnumMember(Value = "payouts")]
             Payouts,
+            /// <summary>`resourceType` with a value of "refunds"</summary>
             [EnumMember(Value = "refunds")]
             Refunds,
+            /// <summary>`resourceType` with a value of "subscriptions"</summary>
             [EnumMember(Value = "subscriptions")]
             Subscriptions,
         }
@@ -284,19 +316,38 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Retrieves the details of a single event.
+    /// </summary>
     public class EventGetRequest
     {
     }
 
+    /// <summary>
+    /// An API response for a request returning a single event.
+    /// </summary>
     public class EventResponse : ApiResponse
     {
+        /// <summary>
+        /// The event from the response.
+        /// </summary>
         [JsonProperty("events")]
         public Event Event { get; private set; }
     }
 
+    /// <summary>
+    /// An API response for a request returning a list of events.
+    /// </summary>
     public class EventListResponse : ApiResponse
     {
+        /// <summary>
+        /// The list of events from the response.
+        /// </summary>
         public IReadOnlyList<Event> Events { get; private set; }
+
+        /// <summary>
+        /// Response metadata (e.g. pagination cursors)
+        /// </summary>
         public Meta Meta { get; private set; }
     }
 }

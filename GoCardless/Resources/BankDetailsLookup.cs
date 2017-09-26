@@ -12,7 +12,6 @@ namespace GoCardless.Resources
     ///
     /// Look up the name and reachability of a bank.
     /// </summary>
-    
     public class BankDetailsLookup
     {
         /// <summary>
@@ -36,16 +35,19 @@ namespace GoCardless.Resources
         public string Bic { get; set; }
     }
     
+    /// <summary>
+    /// A Direct Debit scheme for this bank account.
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum BankDetailsLookupAvailableDebitScheme {
-        /// <summary>
-        /// A Direct Debit scheme for this bank account.
-        /// </summary>
 
+        /// <summary>`availableDebitScheme` with a value of "autogiro"</summary>
         [EnumMember(Value = "autogiro")]
         Autogiro,
+        /// <summary>`availableDebitScheme` with a value of "bacs"</summary>
         [EnumMember(Value = "bacs")]
         Bacs,
+        /// <summary>`availableDebitScheme` with a value of "sepa_core"</summary>
         [EnumMember(Value = "sepa_core")]
         SepaCore,
     }

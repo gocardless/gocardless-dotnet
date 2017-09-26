@@ -39,6 +39,8 @@ namespace GoCardless.Services
         /// <summary>
         /// Creates a new mandate object.
         /// </summary>
+        /// <param name="request">An optional `MandateCreateRequest` representing the body for this create request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
         public Task<MandateResponse> CreateAsync(MandateCreateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -54,6 +56,8 @@ namespace GoCardless.Services
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// your mandates.
         /// </summary>
+        /// <param name="request">An optional `MandateListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of mandate resources</returns>
         public Task<MandateListResponse> ListAsync(MandateListRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -107,6 +111,8 @@ namespace GoCardless.Services
         /// Retrieves the details of an existing mandate.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "MD".</param>
+        /// <param name="request">An optional `MandateGetRequest` representing the query parameters for this get request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
         public Task<MandateResponse> GetAsync(string identity, MandateGetRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -125,6 +131,8 @@ namespace GoCardless.Services
         /// Updates a mandate object. This accepts only the metadata parameter.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "MD".</param>
+        /// <param name="request">An optional `MandateUpdateRequest` representing the body for this update request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
         public Task<MandateResponse> UpdateAsync(string identity, MandateUpdateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -148,6 +156,8 @@ namespace GoCardless.Services
         /// already cancelled.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "MD".</param>
+        /// <param name="request">An optional `MandateCancelRequest` representing the body for this cancel request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
         public Task<MandateResponse> CancelAsync(string identity, MandateCancelRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -177,6 +187,8 @@ namespace GoCardless.Services
         /// Mandates can be resubmitted up to 3 times.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "MD".</param>
+        /// <param name="request">An optional `MandateReinstateRequest` representing the body for this reinstate request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
         public Task<MandateResponse> ReinstateAsync(string identity, MandateReinstateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -193,11 +205,20 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Creates a new mandate object.
+    /// </summary>
     public class MandateCreateRequest : IHasIdempotencyKey
     {
 
+        /// <summary>
+        /// Linked resources.
+        /// </summary>
         [JsonProperty("links")]
         public MandateLinks Links { get; set; }
+        /// <summary>
+        /// Linked resources for a Mandate.
+        /// </summary>
         public class MandateLinks
         {
 
@@ -242,11 +263,20 @@ namespace GoCardless.Services
         [JsonProperty("scheme")]
         public string Scheme { get; set; }
 
+        /// <summary>
+        /// A unique key to ensure that this request only succeeds once, allowing you to safely retry request errors such as network failures.
+        /// Any requests, where supported, to create a resource with a key that has previously been used will not succeed.
+        /// See: https://developer.gocardless.com/api-reference/#making-requests-idempotency-keys
+        /// </summary>
         [JsonIgnore]
         public string IdempotencyKey { get; set; }
     }
 
         
+    /// <summary>
+    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    /// mandates.
+    /// </summary>
     public class MandateListRequest
     {
 
@@ -262,23 +292,38 @@ namespace GoCardless.Services
         [JsonProperty("before")]
         public string Before { get; set; }
 
+        /// <summary>
+        /// Limit to records created within certain times.
+        /// </summary>
         [JsonProperty("created_at")]
         public CreatedAtParam CreatedAt { get; set; }
 
+        /// <summary>
+        /// Specify filters to limit records by creation time.
+        /// </summary>
         public class CreatedAtParam
         {
             /// <summary>
-            /// Limit to records created within certain times
+            /// Limit to records created after the specified date-time.
             /// </summary>
             [JsonProperty("gt")]
             public DateTimeOffset? GreaterThan { get; set; }
 
+            /// <summary>
+            /// Limit to records created on or after the specified date-time.
+            /// </summary>
             [JsonProperty("gte")]
             public DateTimeOffset? GreaterThanOrEqual { get; set; }
 
+            /// <summary>
+            /// Limit to records created before the specified date-time.
+            /// </summary>
             [JsonProperty("lt")]
             public DateTimeOffset? LessThan { get; set; }
 
+            /// <summary>
+            ///Limit to records created on or before the specified date-time.
+            /// </summary>
             [JsonProperty("lte")]
             public DateTimeOffset? LessThanOrEqual { get; set; }
         }
@@ -328,49 +373,62 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("status")]
         public MandateStatus[] Status { get; set; }
+        /// <summary>
+        /// One of:
+        /// <ul>
+        /// <li>`pending_customer_approval`: the mandate has not yet been signed
+        /// by the second customer</li>
+        /// <li>`pending_submission`: the mandate has not yet been submitted to
+        /// the customer's bank</li>
+        /// <li>`submitted`: the mandate has been submitted to the customer's
+        /// bank but has not been processed yet</li>
+        /// <li>`active`: the mandate has been successfully set up by the
+        /// customer's bank</li>
+        /// <li>`failed`: the mandate could not be created</li>
+        /// <li>`cancelled`: the mandate has been cancelled</li>
+        /// <li>`expired`: the mandate has expired due to dormancy</li>
+        /// </ul>
+        /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum MandateStatus
         {
-            /// <summary>
-            /// One of:
-            /// <ul>
-            /// <li>`pending_customer_approval`: the mandate has not yet been
-            /// signed by the second customer</li>
-            /// <li>`pending_submission`: the mandate has not yet been submitted
-            /// to the customer's bank</li>
-            /// <li>`submitted`: the mandate has been submitted to the
-            /// customer's bank but has not been processed yet</li>
-            /// <li>`active`: the mandate has been successfully set up by the
-            /// customer's bank</li>
-            /// <li>`failed`: the mandate could not be created</li>
-            /// <li>`cancelled`: the mandate has been cancelled</li>
-            /// <li>`expired`: the mandate has expired due to dormancy</li>
-            /// </ul>
-            /// </summary>
     
+            /// <summary>`status` with a value of "pending_customer_approval"</summary>
             [EnumMember(Value = "pending_customer_approval")]
             PendingCustomerApproval,
+            /// <summary>`status` with a value of "pending_submission"</summary>
             [EnumMember(Value = "pending_submission")]
             PendingSubmission,
+            /// <summary>`status` with a value of "submitted"</summary>
             [EnumMember(Value = "submitted")]
             Submitted,
+            /// <summary>`status` with a value of "active"</summary>
             [EnumMember(Value = "active")]
             Active,
+            /// <summary>`status` with a value of "failed"</summary>
             [EnumMember(Value = "failed")]
             Failed,
+            /// <summary>`status` with a value of "cancelled"</summary>
             [EnumMember(Value = "cancelled")]
             Cancelled,
+            /// <summary>`status` with a value of "expired"</summary>
             [EnumMember(Value = "expired")]
             Expired,
         }
     }
 
         
+    /// <summary>
+    /// Retrieves the details of an existing mandate.
+    /// </summary>
     public class MandateGetRequest
     {
     }
 
         
+    /// <summary>
+    /// Updates a mandate object. This accepts only the metadata parameter.
+    /// </summary>
     public class MandateUpdateRequest
     {
 
@@ -383,6 +441,14 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Immediately cancels a mandate and all associated cancellable payments.
+    /// Any metadata supplied to this endpoint will be stored on the mandate
+    /// cancellation event it causes.
+    /// 
+    /// This will fail with a `cancellation_failed` error if the mandate is
+    /// already cancelled.
+    /// </summary>
     public class MandateCancelRequest
     {
 
@@ -395,6 +461,20 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// <a name="mandate_not_inactive"></a>Reinstates a cancelled or expired
+    /// mandate to the banks. You will receive a `resubmission_requested`
+    /// webhook, but after that reinstating the mandate follows the same process
+    /// as its initial creation, so you will receive a `submitted` webhook,
+    /// followed by a `reinstated` or `failed` webhook up to two working days
+    /// later. Any metadata supplied to this endpoint will be stored on the
+    /// `resubmission_requested` event it causes.
+    /// 
+    /// This will fail with a `mandate_not_inactive` error if the mandate is
+    /// already being submitted, or is active.
+    /// 
+    /// Mandates can be resubmitted up to 3 times.
+    /// </summary>
     public class MandateReinstateRequest
     {
 
@@ -406,15 +486,31 @@ namespace GoCardless.Services
         public IDictionary<String, String> Metadata { get; set; }
     }
 
+    /// <summary>
+    /// An API response for a request returning a single mandate.
+    /// </summary>
     public class MandateResponse : ApiResponse
     {
+        /// <summary>
+        /// The mandate from the response.
+        /// </summary>
         [JsonProperty("mandates")]
         public Mandate Mandate { get; private set; }
     }
 
+    /// <summary>
+    /// An API response for a request returning a list of mandates.
+    /// </summary>
     public class MandateListResponse : ApiResponse
     {
+        /// <summary>
+        /// The list of mandates from the response.
+        /// </summary>
         public IReadOnlyList<Mandate> Mandates { get; private set; }
+
+        /// <summary>
+        /// Response metadata (e.g. pagination cursors)
+        /// </summary>
         public Meta Meta { get; private set; }
     }
 }

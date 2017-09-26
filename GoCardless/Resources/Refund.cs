@@ -18,7 +18,6 @@ namespace GoCardless.Resources
     /// a refund is created, and will update the `amount_refunded` property of
     /// the payment.
     /// </summary>
-    
     public class Refund
     {
         /// <summary>
@@ -49,7 +48,7 @@ namespace GoCardless.Resources
         public string Id { get; set; }
 
         /// <summary>
-        /// 
+        /// Resources linked to this Refund.
         /// </summary>
         [JsonProperty("links")]
         public RefundLinks Links { get; set; }
@@ -71,6 +70,9 @@ namespace GoCardless.Resources
         public string Reference { get; set; }
     }
     
+    /// <summary>
+    /// Resources linked to this Refund
+    /// </summary>
     public class RefundLinks
     {
         /// <summary>

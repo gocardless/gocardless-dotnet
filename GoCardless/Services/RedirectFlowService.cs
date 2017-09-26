@@ -67,6 +67,8 @@ namespace GoCardless.Services
         /// Creates a redirect flow object which can then be used to redirect
         /// your customer to the GoCardless hosted payment pages.
         /// </summary>
+        /// <param name="request">An optional `RedirectFlowCreateRequest` representing the body for this create request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single redirect flow resource</returns>
         public Task<RedirectFlowResponse> CreateAsync(RedirectFlowCreateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -82,6 +84,8 @@ namespace GoCardless.Services
         /// Returns all details about a single redirect flow
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "RE".</param>
+        /// <param name="request">An optional `RedirectFlowGetRequest` representing the query parameters for this get request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single redirect flow resource</returns>
         public Task<RedirectFlowResponse> GetAsync(string identity, RedirectFlowGetRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -110,6 +114,8 @@ namespace GoCardless.Services
         /// flow was created.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "RE".</param>
+        /// <param name="request">An optional `RedirectFlowCompleteRequest` representing the body for this complete request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single redirect flow resource</returns>
         public Task<RedirectFlowResponse> CompleteAsync(string identity, RedirectFlowCompleteRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -126,6 +132,10 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Creates a redirect flow object which can then be used to redirect your
+    /// customer to the GoCardless hosted payment pages.
+    /// </summary>
     public class RedirectFlowCreateRequest : IHasIdempotencyKey
     {
 
@@ -136,8 +146,14 @@ namespace GoCardless.Services
         [JsonProperty("description")]
         public string Description { get; set; }
 
+        /// <summary>
+        /// Linked resources.
+        /// </summary>
         [JsonProperty("links")]
         public RedirectFlowLinks Links { get; set; }
+        /// <summary>
+        /// Linked resources for a RedirectFlow.
+        /// </summary>
         public class RedirectFlowLinks
         {
 
@@ -159,6 +175,12 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("prefilled_customer")]
         public RedirectFlowPrefilledCustomer PrefilledCustomer { get; set; }
+        /// <summary>
+        /// Information used to prefill the payment page so your customer
+        /// doesn't have to re-type details you already hold about them. It will
+        /// be stored unvalidated and the customer will be able to review and
+        /// amend it before completing the form.
+        /// </summary>
         public class RedirectFlowPrefilledCustomer
         {
 
@@ -256,21 +278,23 @@ namespace GoCardless.Services
         [JsonProperty("scheme")]
         public RedirectFlowScheme? Scheme { get; set; }
             
+        /// <summary>
+        /// The Direct Debit scheme of the mandate. If specified, the payment
+        /// pages will only allow the set-up of a mandate for the specified
+        /// scheme. It is recommended that you leave this blank so the most
+        /// appropriate scheme is picked based on the customer's bank account.
+        /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum RedirectFlowScheme
         {
-            /// <summary>
-            /// The Direct Debit scheme of the mandate. If specified, the
-            /// payment pages will only allow the set-up of a mandate for the
-            /// specified scheme. It is recommended that you leave this blank so
-            /// the most appropriate scheme is picked based on the customer's
-            /// bank account.
-            /// </summary>
     
+            /// <summary>`scheme` with a value of "autogiro"</summary>
             [EnumMember(Value = "autogiro")]
             Autogiro,
+            /// <summary>`scheme` with a value of "bacs"</summary>
             [EnumMember(Value = "bacs")]
             Bacs,
+            /// <summary>`scheme` with a value of "sepa_core"</summary>
             [EnumMember(Value = "sepa_core")]
             SepaCore,
         }
@@ -291,16 +315,37 @@ namespace GoCardless.Services
         [JsonProperty("success_redirect_url")]
         public string SuccessRedirectUrl { get; set; }
 
+        /// <summary>
+        /// A unique key to ensure that this request only succeeds once, allowing you to safely retry request errors such as network failures.
+        /// Any requests, where supported, to create a resource with a key that has previously been used will not succeed.
+        /// See: https://developer.gocardless.com/api-reference/#making-requests-idempotency-keys
+        /// </summary>
         [JsonIgnore]
         public string IdempotencyKey { get; set; }
     }
 
         
+    /// <summary>
+    /// Returns all details about a single redirect flow
+    /// </summary>
     public class RedirectFlowGetRequest
     {
     }
 
         
+    /// <summary>
+    /// This creates a [customer](#core-endpoints-customers), [customer bank
+    /// account](#core-endpoints-customer-bank-accounts), and
+    /// [mandate](#core-endpoints-mandates) using the details supplied by your
+    /// customer and returns the ID of the created mandate.
+    /// 
+    /// This will return a `redirect_flow_incomplete` error if your customer has
+    /// not yet been redirected back to your site, and a
+    /// `redirect_flow_already_completed` error if your integration has already
+    /// completed this flow. It will return a `bad_request` error if the
+    /// `session_token` differs to the one supplied when the redirect flow was
+    /// created.
+    /// </summary>
     public class RedirectFlowCompleteRequest
     {
 
@@ -314,8 +359,14 @@ namespace GoCardless.Services
         public string SessionToken { get; set; }
     }
 
+    /// <summary>
+    /// An API response for a request returning a single redirect flow.
+    /// </summary>
     public class RedirectFlowResponse : ApiResponse
     {
+        /// <summary>
+        /// The redirect flow from the response.
+        /// </summary>
         [JsonProperty("redirect_flows")]
         public RedirectFlow RedirectFlow { get; private set; }
     }

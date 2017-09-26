@@ -19,7 +19,6 @@ namespace GoCardless.Resources
     /// Anti Money Laundering reasons, any creditors you add must be directly
     /// related to your organisation.
     /// </summary>
-    
     public class Creditor
     {
         /// <summary>
@@ -68,7 +67,7 @@ namespace GoCardless.Resources
         public string Id { get; set; }
 
         /// <summary>
-        /// 
+        /// Resources linked to this Creditor.
         /// </summary>
         [JsonProperty("links")]
         public CreditorLinks Links { get; set; }
@@ -135,6 +134,9 @@ namespace GoCardless.Resources
         public CreditorVerificationStatus? VerificationStatus { get; set; }
     }
     
+    /// <summary>
+    /// Resources linked to this Creditor
+    /// </summary>
     public class CreditorLinks
     {
         /// <summary>
@@ -159,6 +161,15 @@ namespace GoCardless.Resources
         public string DefaultSekPayoutAccount { get; set; }
     }
     
+    /// <summary>
+    /// An array of the scheme identifiers this creditor can create mandates
+    /// against.
+    /// 
+    /// The support address, `phone_number` and `email` fields are for customers
+    /// to contact the merchant for support purposes. They must be displayed on
+    /// the payment page, please see our [compliance
+    /// requirements](#appendix-compliance-requirements) for more details.
+    /// </summary>
     public class CreditorSchemeIdentifier
     {
         /// <summary>
@@ -260,58 +271,65 @@ namespace GoCardless.Resources
         public CreditorSchemeIdentifierScheme? Scheme { get; set; }
     }
     
+    /// <summary>
+    /// The currency of the scheme identifier.
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum CreditorSchemeIdentifierCurrency {
-        /// <summary>
-        /// The currency of the scheme identifier.
-        /// </summary>
 
+        /// <summary>`currency` with a value of "GBP"</summary>
         [EnumMember(Value = "GBP")]
         GBP,
+        /// <summary>`currency` with a value of "EUR"</summary>
         [EnumMember(Value = "EUR")]
         EUR,
+        /// <summary>`currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
     }
 
+    /// <summary>
+    /// The scheme which this scheme identifier applies to.
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum CreditorSchemeIdentifierScheme {
-        /// <summary>
-        /// The scheme which this scheme identifier applies to.
-        /// </summary>
 
+        /// <summary>`scheme` with a value of "bacs"</summary>
         [EnumMember(Value = "bacs")]
         Bacs,
+        /// <summary>`scheme` with a value of "sepa"</summary>
         [EnumMember(Value = "sepa")]
         Sepa,
+        /// <summary>`scheme` with a value of "autogiro"</summary>
         [EnumMember(Value = "autogiro")]
         Autogiro,
     }
 
+    /// <summary>
+    /// The creditor's verification status, indicating whether they can yet receive payouts. For
+    /// more details on handling verification as a partner, see our ["Helping your users get
+    /// verified" guide](/getting-started/partners/helping-your-users-get-verified/). One of:
+    /// <ul>
+    /// <li>`successful`: The creditor's account is fully verified, and they can receive payouts.
+    /// Once a creditor has been successfully verified, they may in the future require further
+    /// verification - for example, if they change their payout bank account, we will have to check
+    /// that they own the new bank account before they can receive payouts again.</li>
+    /// <li>`in_review`: The creditor has provided all of the information currently requested, and
+    /// it is awaiting review by GoCardless before they can be verified and receive payouts.</li>
+    /// <li>`action_required`: The creditor needs to provide further information to verify their
+    /// account so they can receive payouts, and should visit the verification flow.</li>
+    /// </ul>
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum CreditorVerificationStatus {
-        /// <summary>
-        /// The creditor's verification status, indicating whether they can yet receive payouts. For
-        /// more details on handling verification as a partner, see our ["Helping your users get
-        /// verified" guide](/getting-started/partners/helping-your-users-get-verified/). One of:
-        /// <ul>
-        /// <li>`successful`: The creditor's account is fully verified, and they can receive
-        /// payouts. Once a creditor has been successfully verified, they may in the future require
-        /// further verification - for example, if they change their payout bank account, we will
-        /// have to check that they own the new bank account before they can receive payouts
-        /// again.</li>
-        /// <li>`in_review`: The creditor has provided all of the information currently requested,
-        /// and it is awaiting review by GoCardless before they can be verified and receive
-        /// payouts.</li>
-        /// <li>`action_required`: The creditor needs to provide further information to verify their
-        /// account so they can receive payouts, and should visit the verification flow.</li>
-        /// </ul>
-        /// </summary>
 
+        /// <summary>`verificationStatus` with a value of "successful"</summary>
         [EnumMember(Value = "successful")]
         Successful,
+        /// <summary>`verificationStatus` with a value of "in_review"</summary>
         [EnumMember(Value = "in_review")]
         InReview,
+        /// <summary>`verificationStatus` with a value of "action_required"</summary>
         [EnumMember(Value = "action_required")]
         ActionRequired,
     }

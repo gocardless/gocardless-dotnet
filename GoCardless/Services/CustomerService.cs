@@ -42,6 +42,8 @@ namespace GoCardless.Services
         /// <summary>
         /// Creates a new customer object.
         /// </summary>
+        /// <param name="request">An optional `CustomerCreateRequest` representing the body for this create request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer resource</returns>
         public Task<CustomerResponse> CreateAsync(CustomerCreateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -57,6 +59,8 @@ namespace GoCardless.Services
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// your customers.
         /// </summary>
+        /// <param name="request">An optional `CustomerListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of customer resources</returns>
         public Task<CustomerListResponse> ListAsync(CustomerListRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -110,6 +114,8 @@ namespace GoCardless.Services
         /// Retrieves the details of an existing customer.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "CU".</param>
+        /// <param name="request">An optional `CustomerGetRequest` representing the query parameters for this get request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer resource</returns>
         public Task<CustomerResponse> GetAsync(string identity, CustomerGetRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -129,6 +135,8 @@ namespace GoCardless.Services
         /// creating a customer.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "CU".</param>
+        /// <param name="request">An optional `CustomerUpdateRequest` representing the body for this update request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer resource</returns>
         public Task<CustomerResponse> UpdateAsync(string identity, CustomerUpdateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -145,6 +153,9 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Creates a new customer object.
+    /// </summary>
     public class CustomerCreateRequest : IHasIdempotencyKey
     {
 
@@ -245,11 +256,20 @@ namespace GoCardless.Services
         [JsonProperty("swedish_identity_number")]
         public string SwedishIdentityNumber { get; set; }
 
+        /// <summary>
+        /// A unique key to ensure that this request only succeeds once, allowing you to safely retry request errors such as network failures.
+        /// Any requests, where supported, to create a resource with a key that has previously been used will not succeed.
+        /// See: https://developer.gocardless.com/api-reference/#making-requests-idempotency-keys
+        /// </summary>
         [JsonIgnore]
         public string IdempotencyKey { get; set; }
     }
 
         
+    /// <summary>
+    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    /// customers.
+    /// </summary>
     public class CustomerListRequest
     {
 
@@ -265,23 +285,38 @@ namespace GoCardless.Services
         [JsonProperty("before")]
         public string Before { get; set; }
 
+        /// <summary>
+        /// Limit to records created within certain times.
+        /// </summary>
         [JsonProperty("created_at")]
         public CreatedAtParam CreatedAt { get; set; }
 
+        /// <summary>
+        /// Specify filters to limit records by creation time.
+        /// </summary>
         public class CreatedAtParam
         {
             /// <summary>
-            /// Limit to records created within certain times
+            /// Limit to records created after the specified date-time.
             /// </summary>
             [JsonProperty("gt")]
             public DateTimeOffset? GreaterThan { get; set; }
 
+            /// <summary>
+            /// Limit to records created on or after the specified date-time.
+            /// </summary>
             [JsonProperty("gte")]
             public DateTimeOffset? GreaterThanOrEqual { get; set; }
 
+            /// <summary>
+            /// Limit to records created before the specified date-time.
+            /// </summary>
             [JsonProperty("lt")]
             public DateTimeOffset? LessThan { get; set; }
 
+            /// <summary>
+            ///Limit to records created on or before the specified date-time.
+            /// </summary>
             [JsonProperty("lte")]
             public DateTimeOffset? LessThanOrEqual { get; set; }
         }
@@ -294,11 +329,18 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Retrieves the details of an existing customer.
+    /// </summary>
     public class CustomerGetRequest
     {
     }
 
         
+    /// <summary>
+    /// Updates a customer object. Supports all of the fields supported when
+    /// creating a customer.
+    /// </summary>
     public class CustomerUpdateRequest
     {
 
@@ -400,15 +442,31 @@ namespace GoCardless.Services
         public string SwedishIdentityNumber { get; set; }
     }
 
+    /// <summary>
+    /// An API response for a request returning a single customer.
+    /// </summary>
     public class CustomerResponse : ApiResponse
     {
+        /// <summary>
+        /// The customer from the response.
+        /// </summary>
         [JsonProperty("customers")]
         public Customer Customer { get; private set; }
     }
 
+    /// <summary>
+    /// An API response for a request returning a list of customers.
+    /// </summary>
     public class CustomerListResponse : ApiResponse
     {
+        /// <summary>
+        /// The list of customers from the response.
+        /// </summary>
         public IReadOnlyList<Customer> Customers { get; private set; }
+
+        /// <summary>
+        /// Response metadata (e.g. pagination cursors)
+        /// </summary>
         public Meta Meta { get; private set; }
     }
 }

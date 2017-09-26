@@ -18,7 +18,6 @@ namespace GoCardless.Resources
     /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
     /// the state of a payment changes.
     /// </summary>
-    
     public class Payment
     {
         /// <summary>
@@ -73,7 +72,7 @@ namespace GoCardless.Resources
         public string Id { get; set; }
 
         /// <summary>
-        /// 
+        /// Resources linked to this Payment.
         /// </summary>
         [JsonProperty("links")]
         public PaymentLinks Links { get; set; }
@@ -123,21 +122,27 @@ namespace GoCardless.Resources
         public PaymentStatus? Status { get; set; }
     }
     
+    /// <summary>
+    /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently only
+    /// "GBP", "EUR", and "SEK" are supported.
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum PaymentCurrency {
-        /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-        /// only "GBP", "EUR", and "SEK" are supported.
-        /// </summary>
 
+        /// <summary>`currency` with a value of "GBP"</summary>
         [EnumMember(Value = "GBP")]
         GBP,
+        /// <summary>`currency` with a value of "EUR"</summary>
         [EnumMember(Value = "EUR")]
         EUR,
+        /// <summary>`currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
     }
 
+    /// <summary>
+    /// Resources linked to this Payment
+    /// </summary>
     public class PaymentLinks
     {
         /// <summary>
@@ -171,44 +176,51 @@ namespace GoCardless.Resources
         public string Subscription { get; set; }
     }
     
+    /// <summary>
+    /// One of:
+    /// <ul>
+    /// <li>`pending_customer_approval`: we're waiting for the customer to approve this payment</li>
+    /// <li>`pending_submission`: the payment has been created, but not yet submitted to the
+    /// banks</li>
+    /// <li>`submitted`: the payment has been submitted to the banks</li>
+    /// <li>`confirmed`: the payment has been confirmed as collected</li>
+    /// <li>`paid_out`:  the payment has been included in a [payout](#core-endpoints-payouts)</li>
+    /// <li>`cancelled`: the payment has been cancelled</li>
+    /// <li>`customer_approval_denied`: the customer has denied approval for the payment. You should
+    /// contact the customer directly</li>
+    /// <li>`failed`: the payment failed to be processed. Note that payments can fail after being
+    /// confirmed if the failure message is sent late by the banks.</li>
+    /// <li>`charged_back`: the payment has been charged back</li>
+    /// </ul>
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum PaymentStatus {
-        /// <summary>
-        /// One of:
-        /// <ul>
-        /// <li>`pending_customer_approval`: we're waiting for the customer to approve this
-        /// payment</li>
-        /// <li>`pending_submission`: the payment has been created, but not yet submitted to the
-        /// banks</li>
-        /// <li>`submitted`: the payment has been submitted to the banks</li>
-        /// <li>`confirmed`: the payment has been confirmed as collected</li>
-        /// <li>`paid_out`:  the payment has been included in a
-        /// [payout](#core-endpoints-payouts)</li>
-        /// <li>`cancelled`: the payment has been cancelled</li>
-        /// <li>`customer_approval_denied`: the customer has denied approval for the payment. You
-        /// should contact the customer directly</li>
-        /// <li>`failed`: the payment failed to be processed. Note that payments can fail after
-        /// being confirmed if the failure message is sent late by the banks.</li>
-        /// <li>`charged_back`: the payment has been charged back</li>
-        /// </ul>
-        /// </summary>
 
+        /// <summary>`status` with a value of "pending_customer_approval"</summary>
         [EnumMember(Value = "pending_customer_approval")]
         PendingCustomerApproval,
+        /// <summary>`status` with a value of "pending_submission"</summary>
         [EnumMember(Value = "pending_submission")]
         PendingSubmission,
+        /// <summary>`status` with a value of "submitted"</summary>
         [EnumMember(Value = "submitted")]
         Submitted,
+        /// <summary>`status` with a value of "confirmed"</summary>
         [EnumMember(Value = "confirmed")]
         Confirmed,
+        /// <summary>`status` with a value of "paid_out"</summary>
         [EnumMember(Value = "paid_out")]
         PaidOut,
+        /// <summary>`status` with a value of "cancelled"</summary>
         [EnumMember(Value = "cancelled")]
         Cancelled,
+        /// <summary>`status` with a value of "customer_approval_denied"</summary>
         [EnumMember(Value = "customer_approval_denied")]
         CustomerApprovalDenied,
+        /// <summary>`status` with a value of "failed"</summary>
         [EnumMember(Value = "failed")]
         Failed,
+        /// <summary>`status` with a value of "charged_back"</summary>
         [EnumMember(Value = "charged_back")]
         ChargedBack,
     }

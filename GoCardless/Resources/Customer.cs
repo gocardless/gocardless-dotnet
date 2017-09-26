@@ -19,7 +19,6 @@ namespace GoCardless.Resources
     /// Swedish customers, and must be supplied if you intend to set up an
     /// Autogiro mandate with the customer.
     /// </summary>
-    
     public class Customer
     {
         /// <summary>

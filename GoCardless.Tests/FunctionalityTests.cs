@@ -113,7 +113,6 @@ namespace GoCardless.Tests
             }
             http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json");
             string firstIdempotencyKey = null;
-            bool testSucceeded = false;
             try
             {
                 //When the service method is called
@@ -163,7 +162,7 @@ namespace GoCardless.Tests
                 });
                 wasSuccessful = respose.ResponseMessage.IsSuccessStatusCode;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

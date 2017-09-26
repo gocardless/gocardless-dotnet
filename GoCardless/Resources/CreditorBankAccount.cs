@@ -20,7 +20,6 @@ namespace GoCardless.Resources
     /// record instead, the ID of which will be provided as
     /// `links[creditor_bank_account]` in the error response.
     /// </summary>
-    
     public class CreditorBankAccount
     {
         /// <summary>
@@ -81,7 +80,7 @@ namespace GoCardless.Resources
         public string Id { get; set; }
 
         /// <summary>
-        /// 
+        /// Resources linked to this CreditorBankAccount.
         /// </summary>
         [JsonProperty("links")]
         public CreditorBankAccountLinks Links { get; set; }
@@ -94,6 +93,9 @@ namespace GoCardless.Resources
         public IDictionary<String, String> Metadata { get; set; }
     }
     
+    /// <summary>
+    /// Resources linked to this CreditorBankAccount
+    /// </summary>
     public class CreditorBankAccountLinks
     {
         /// <summary>

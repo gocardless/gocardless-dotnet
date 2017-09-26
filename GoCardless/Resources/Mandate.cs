@@ -16,7 +16,6 @@ namespace GoCardless.Resources
     /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
     /// the status of a mandate changes.
     /// </summary>
-    
     public class Mandate
     {
         /// <summary>
@@ -33,7 +32,7 @@ namespace GoCardless.Resources
         public string Id { get; set; }
 
         /// <summary>
-        /// 
+        /// Resources linked to this Mandate.
         /// </summary>
         [JsonProperty("links")]
         public MandateLinks Links { get; set; }
@@ -98,6 +97,9 @@ namespace GoCardless.Resources
         public MandateStatus? Status { get; set; }
     }
     
+    /// <summary>
+    /// Resources linked to this Mandate
+    /// </summary>
     public class MandateLinks
     {
         /// <summary>
@@ -127,36 +129,42 @@ namespace GoCardless.Resources
         public string NewMandate { get; set; }
     }
     
+    /// <summary>
+    /// One of:
+    /// <ul>
+    /// <li>`pending_customer_approval`: the mandate has not yet been signed by the second
+    /// customer</li>
+    /// <li>`pending_submission`: the mandate has not yet been submitted to the customer's bank</li>
+    /// <li>`submitted`: the mandate has been submitted to the customer's bank but has not been
+    /// processed yet</li>
+    /// <li>`active`: the mandate has been successfully set up by the customer's bank</li>
+    /// <li>`failed`: the mandate could not be created</li>
+    /// <li>`cancelled`: the mandate has been cancelled</li>
+    /// <li>`expired`: the mandate has expired due to dormancy</li>
+    /// </ul>
+    /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum MandateStatus {
-        /// <summary>
-        /// One of:
-        /// <ul>
-        /// <li>`pending_customer_approval`: the mandate has not yet been signed by the second
-        /// customer</li>
-        /// <li>`pending_submission`: the mandate has not yet been submitted to the customer's
-        /// bank</li>
-        /// <li>`submitted`: the mandate has been submitted to the customer's bank but has not been
-        /// processed yet</li>
-        /// <li>`active`: the mandate has been successfully set up by the customer's bank</li>
-        /// <li>`failed`: the mandate could not be created</li>
-        /// <li>`cancelled`: the mandate has been cancelled</li>
-        /// <li>`expired`: the mandate has expired due to dormancy</li>
-        /// </ul>
-        /// </summary>
 
+        /// <summary>`status` with a value of "pending_customer_approval"</summary>
         [EnumMember(Value = "pending_customer_approval")]
         PendingCustomerApproval,
+        /// <summary>`status` with a value of "pending_submission"</summary>
         [EnumMember(Value = "pending_submission")]
         PendingSubmission,
+        /// <summary>`status` with a value of "submitted"</summary>
         [EnumMember(Value = "submitted")]
         Submitted,
+        /// <summary>`status` with a value of "active"</summary>
         [EnumMember(Value = "active")]
         Active,
+        /// <summary>`status` with a value of "failed"</summary>
         [EnumMember(Value = "failed")]
         Failed,
+        /// <summary>`status` with a value of "cancelled"</summary>
         [EnumMember(Value = "cancelled")]
         Cancelled,
+        /// <summary>`status` with a value of "expired"</summary>
         [EnumMember(Value = "expired")]
         Expired,
     }

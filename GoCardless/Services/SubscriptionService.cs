@@ -88,6 +88,8 @@ namespace GoCardless.Services
         /// <summary>
         /// Creates a new subscription object
         /// </summary>
+        /// <param name="request">An optional `SubscriptionCreateRequest` representing the body for this create request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
         public Task<SubscriptionResponse> CreateAsync(SubscriptionCreateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -103,6 +105,8 @@ namespace GoCardless.Services
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// your subscriptions.
         /// </summary>
+        /// <param name="request">An optional `SubscriptionListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of subscription resources</returns>
         public Task<SubscriptionListResponse> ListAsync(SubscriptionListRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -156,6 +160,8 @@ namespace GoCardless.Services
         /// Retrieves the details of a single subscription.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "SB".</param>
+        /// <param name="request">An optional `SubscriptionGetRequest` representing the query parameters for this get request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
         public Task<SubscriptionResponse> GetAsync(string identity, SubscriptionGetRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -174,6 +180,8 @@ namespace GoCardless.Services
         /// Updates a subscription object.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "SB".</param>
+        /// <param name="request">An optional `SubscriptionUpdateRequest` representing the body for this update request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
         public Task<SubscriptionResponse> UpdateAsync(string identity, SubscriptionUpdateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -197,6 +205,8 @@ namespace GoCardless.Services
         /// is already cancelled or finished.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "SB".</param>
+        /// <param name="request">An optional `SubscriptionCancelRequest` representing the body for this cancel request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
         public Task<SubscriptionResponse> CancelAsync(string identity, SubscriptionCancelRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -213,6 +223,9 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Creates a new subscription object
+    /// </summary>
     public class SubscriptionCreateRequest : IHasIdempotencyKey
     {
 
@@ -275,24 +288,33 @@ namespace GoCardless.Services
         [JsonProperty("interval_unit")]
         public SubscriptionIntervalUnit? IntervalUnit { get; set; }
             
+        /// <summary>
+        /// The unit of time between customer charge dates. One of `weekly`,
+        /// `monthly` or `yearly`.
+        /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum SubscriptionIntervalUnit
         {
-            /// <summary>
-            /// The unit of time between customer charge dates. One of `weekly`,
-            /// `monthly` or `yearly`.
-            /// </summary>
     
+            /// <summary>`intervalUnit` with a value of "weekly"</summary>
             [EnumMember(Value = "weekly")]
             Weekly,
+            /// <summary>`intervalUnit` with a value of "monthly"</summary>
             [EnumMember(Value = "monthly")]
             Monthly,
+            /// <summary>`intervalUnit` with a value of "yearly"</summary>
             [EnumMember(Value = "yearly")]
             Yearly,
         }
 
+        /// <summary>
+        /// Linked resources.
+        /// </summary>
         [JsonProperty("links")]
         public SubscriptionLinks Links { get; set; }
+        /// <summary>
+        /// Linked resources for a Subscription.
+        /// </summary>
         public class SubscriptionLinks
         {
 
@@ -317,36 +339,47 @@ namespace GoCardless.Services
         [JsonProperty("month")]
         public SubscriptionMonth? Month { get; set; }
             
+        /// <summary>
+        /// Name of the month on which to charge a customer. Must be lowercase.
+        /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum SubscriptionMonth
         {
-            /// <summary>
-            /// Name of the month on which to charge a customer. Must be
-            /// lowercase.
-            /// </summary>
     
+            /// <summary>`month` with a value of "january"</summary>
             [EnumMember(Value = "january")]
             January,
+            /// <summary>`month` with a value of "february"</summary>
             [EnumMember(Value = "february")]
             February,
+            /// <summary>`month` with a value of "march"</summary>
             [EnumMember(Value = "march")]
             March,
+            /// <summary>`month` with a value of "april"</summary>
             [EnumMember(Value = "april")]
             April,
+            /// <summary>`month` with a value of "may"</summary>
             [EnumMember(Value = "may")]
             May,
+            /// <summary>`month` with a value of "june"</summary>
             [EnumMember(Value = "june")]
             June,
+            /// <summary>`month` with a value of "july"</summary>
             [EnumMember(Value = "july")]
             July,
+            /// <summary>`month` with a value of "august"</summary>
             [EnumMember(Value = "august")]
             August,
+            /// <summary>`month` with a value of "september"</summary>
             [EnumMember(Value = "september")]
             September,
+            /// <summary>`month` with a value of "october"</summary>
             [EnumMember(Value = "october")]
             October,
+            /// <summary>`month` with a value of "november"</summary>
             [EnumMember(Value = "november")]
             November,
+            /// <summary>`month` with a value of "december"</summary>
             [EnumMember(Value = "december")]
             December,
         }
@@ -380,11 +413,20 @@ namespace GoCardless.Services
         [JsonProperty("start_date")]
         public string StartDate { get; set; }
 
+        /// <summary>
+        /// A unique key to ensure that this request only succeeds once, allowing you to safely retry request errors such as network failures.
+        /// Any requests, where supported, to create a resource with a key that has previously been used will not succeed.
+        /// See: https://developer.gocardless.com/api-reference/#making-requests-idempotency-keys
+        /// </summary>
         [JsonIgnore]
         public string IdempotencyKey { get; set; }
     }
 
         
+    /// <summary>
+    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    /// subscriptions.
+    /// </summary>
     public class SubscriptionListRequest
     {
 
@@ -400,23 +442,38 @@ namespace GoCardless.Services
         [JsonProperty("before")]
         public string Before { get; set; }
 
+        /// <summary>
+        /// Limit to records created within certain times.
+        /// </summary>
         [JsonProperty("created_at")]
         public CreatedAtParam CreatedAt { get; set; }
 
+        /// <summary>
+        /// Specify filters to limit records by creation time.
+        /// </summary>
         public class CreatedAtParam
         {
             /// <summary>
-            /// Limit to records created within certain times
+            /// Limit to records created after the specified date-time.
             /// </summary>
             [JsonProperty("gt")]
             public DateTimeOffset? GreaterThan { get; set; }
 
+            /// <summary>
+            /// Limit to records created on or after the specified date-time.
+            /// </summary>
             [JsonProperty("gte")]
             public DateTimeOffset? GreaterThanOrEqual { get; set; }
 
+            /// <summary>
+            /// Limit to records created before the specified date-time.
+            /// </summary>
             [JsonProperty("lt")]
             public DateTimeOffset? LessThan { get; set; }
 
+            /// <summary>
+            ///Limit to records created on or before the specified date-time.
+            /// </summary>
             [JsonProperty("lte")]
             public DateTimeOffset? LessThanOrEqual { get; set; }
         }
@@ -441,11 +498,17 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Retrieves the details of a single subscription.
+    /// </summary>
     public class SubscriptionGetRequest
     {
     }
 
         
+    /// <summary>
+    /// Updates a subscription object.
+    /// </summary>
     public class SubscriptionUpdateRequest
     {
 
@@ -477,6 +540,14 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Immediately cancels a subscription; no more payments will be created
+    /// under it. Any metadata supplied to this endpoint will be stored on the
+    /// payment cancellation event it causes.
+    /// 
+    /// This will fail with a cancellation_failed error if the subscription is
+    /// already cancelled or finished.
+    /// </summary>
     public class SubscriptionCancelRequest
     {
 
@@ -488,15 +559,31 @@ namespace GoCardless.Services
         public IDictionary<String, String> Metadata { get; set; }
     }
 
+    /// <summary>
+    /// An API response for a request returning a single subscription.
+    /// </summary>
     public class SubscriptionResponse : ApiResponse
     {
+        /// <summary>
+        /// The subscription from the response.
+        /// </summary>
         [JsonProperty("subscriptions")]
         public Subscription Subscription { get; private set; }
     }
 
+    /// <summary>
+    /// An API response for a request returning a list of subscriptions.
+    /// </summary>
     public class SubscriptionListResponse : ApiResponse
     {
+        /// <summary>
+        /// The list of subscriptions from the response.
+        /// </summary>
         public IReadOnlyList<Subscription> Subscriptions { get; private set; }
+
+        /// <summary>
+        /// Response metadata (e.g. pagination cursors)
+        /// </summary>
         public Meta Meta { get; private set; }
     }
 }

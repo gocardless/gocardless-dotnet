@@ -46,6 +46,8 @@ namespace GoCardless.Services
         /// modulus or reachability checking but not for payment collection,
         /// please get in touch.
         /// </summary>
+        /// <param name="request">An optional `BankDetailsLookupCreateRequest` representing the body for this create request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single bank details lookup resource</returns>
         public Task<BankDetailsLookupResponse> CreateAsync(BankDetailsLookupCreateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
@@ -59,6 +61,20 @@ namespace GoCardless.Services
     }
 
         
+    /// <summary>
+    /// Performs a bank details lookup.
+    /// 
+    /// As part of the lookup a modulus check and reachability check are
+    /// performed.
+    /// 
+    /// Bank account details may be supplied using [local
+    /// details](#appendix-local-bank-details) or an IBAN.
+    /// 
+    /// _Note:_ Usage of this endpoint is monitored. If your organisation relies
+    /// on GoCardless for
+    /// modulus or reachability checking but not for payment collection, please
+    /// get in touch.
+    /// </summary>
     public class BankDetailsLookupCreateRequest
     {
 
@@ -100,8 +116,14 @@ namespace GoCardless.Services
         public string Iban { get; set; }
     }
 
+    /// <summary>
+    /// An API response for a request returning a single bank details lookup.
+    /// </summary>
     public class BankDetailsLookupResponse : ApiResponse
     {
+        /// <summary>
+        /// The bank details lookup from the response.
+        /// </summary>
         [JsonProperty("bank_details_lookups")]
         public BankDetailsLookup BankDetailsLookup { get; private set; }
     }
