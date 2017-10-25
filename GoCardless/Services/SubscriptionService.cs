@@ -178,6 +178,21 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Updates a subscription object.
+        /// 
+        /// This fails with:
+        /// 
+        /// - `subscription_not_active` if the subscription is no longer active.
+        /// 
+        /// - `subscription_already_ended` if the subscription has taken all
+        /// payments.
+        /// 
+        /// - `mandate_payments_require_approval` if the amount is being changed
+        /// and the mandate requires approval.
+        /// 
+        /// - `exceeded_max_amendments` error if the amount is being changed and
+        /// the
+        ///   subscription amount has already been changed 10 times.
+        /// 
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "SB".</param>
         /// <param name="request">An optional `SubscriptionUpdateRequest` representing the body for this update request.</param>
@@ -508,9 +523,29 @@ namespace GoCardless.Services
         
     /// <summary>
     /// Updates a subscription object.
+    /// 
+    /// This fails with:
+    /// 
+    /// - `subscription_not_active` if the subscription is no longer active.
+    /// 
+    /// - `subscription_already_ended` if the subscription has taken all
+    /// payments.
+    /// 
+    /// - `mandate_payments_require_approval` if the amount is being changed and
+    /// the mandate requires approval.
+    /// 
+    /// - `exceeded_max_amendments` error if the amount is being changed and the
+    ///   subscription amount has already been changed 10 times.
+    /// 
     /// </summary>
     public class SubscriptionUpdateRequest
     {
+
+        /// <summary>
+        /// Amount in pence (GBP), cents (EUR), or öre (SEK).
+        /// </summary>
+        [JsonProperty("amount")]
+        public int? Amount { get; set; }
 
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
