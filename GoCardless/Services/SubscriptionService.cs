@@ -181,6 +181,9 @@ namespace GoCardless.Services
         /// 
         /// This fails with:
         /// 
+        /// - `validation_failed` if invalid data is provided when attempting to
+        /// update a subscription.
+        /// 
         /// - `subscription_not_active` if the subscription is no longer active.
         /// 
         /// - `subscription_already_ended` if the subscription has taken all
@@ -526,6 +529,9 @@ namespace GoCardless.Services
     /// 
     /// This fails with:
     /// 
+    /// - `validation_failed` if invalid data is provided when attempting to
+    /// update a subscription.
+    /// 
     /// - `subscription_not_active` if the subscription is no longer active.
     /// 
     /// - `subscription_already_ended` if the subscription has taken all
@@ -546,6 +552,13 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
+
+        /// <summary>
+        /// The amount to be deducted from the payment as the OAuth app's fee,
+        /// in pence (GBP), cents (EUR), or öre (SEK).
+        /// </summary>
+        [JsonProperty("app_fee")]
+        public int? AppFee { get; set; }
 
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
