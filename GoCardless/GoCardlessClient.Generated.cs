@@ -59,6 +59,11 @@ namespace GoCardless
         public PayoutService Payouts => new PayoutService(this);
 
         /// <summary>
+        ///A service for working with payout item resources.
+        /// </summary>
+        public PayoutItemService PayoutItems => new PayoutItemService(this);
+
+        /// <summary>
         ///A service for working with redirect flow resources.
         /// </summary>
         public RedirectFlowService RedirectFlows => new RedirectFlowService(this);
