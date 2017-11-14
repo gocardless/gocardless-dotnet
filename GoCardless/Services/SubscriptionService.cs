@@ -513,6 +513,47 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("mandate")]
         public string Mandate { get; set; }
+
+        /// <summary>
+        /// At most four valid status values
+        /// </summary>
+        [JsonProperty("status")]
+        public SubscriptionStatus[] Status { get; set; }
+        /// <summary>
+        /// One of:
+        /// <ul>
+        /// <li>`pending_customer_approval`: the subscription is waiting for
+        /// customer approval before becoming active</li>
+        /// <li>`customer_approval_denied`: the customer did not approve the
+        /// subscription</li>
+        /// <li>`active`: the subscription is currently active and will continue
+        /// to create payments</li>
+        /// <li>`finished`: all of the payments scheduled for creation under
+        /// this subscription have been created</li>
+        /// <li>`cancelled`: the subscription has been cancelled and will no
+        /// longer create payments</li>
+        /// </ul>
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum SubscriptionStatus
+        {
+    
+            /// <summary>`status` with a value of "pending_customer_approval"</summary>
+            [EnumMember(Value = "pending_customer_approval")]
+            PendingCustomerApproval,
+            /// <summary>`status` with a value of "customer_approval_denied"</summary>
+            [EnumMember(Value = "customer_approval_denied")]
+            CustomerApprovalDenied,
+            /// <summary>`status` with a value of "active"</summary>
+            [EnumMember(Value = "active")]
+            Active,
+            /// <summary>`status` with a value of "finished"</summary>
+            [EnumMember(Value = "finished")]
+            Finished,
+            /// <summary>`status` with a value of "cancelled"</summary>
+            [EnumMember(Value = "cancelled")]
+            Cancelled,
+        }
     }
 
         

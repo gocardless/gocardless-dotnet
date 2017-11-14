@@ -369,7 +369,7 @@ namespace GoCardless.Services
         public string Reference { get; set; }
 
         /// <summary>
-        /// At most three valid status values
+        /// At most four valid status values
         /// </summary>
         [JsonProperty("status")]
         public MandateStatus[] Status { get; set; }
