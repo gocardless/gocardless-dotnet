@@ -236,6 +236,12 @@ namespace GoCardless.Services
         }
 
         /// <summary>
+        /// Reference which appears on the creditor's bank statement.
+        /// </summary>
+        [JsonProperty("reference")]
+        public string Reference { get; set; }
+
+        /// <summary>
         /// One of:
         /// <ul>
         /// <li>`pending`: the payout has been created, but not yet sent to the
