@@ -68,7 +68,7 @@ namespace GoCardless.Resources
     public class Subscription
     {
         /// <summary>
-        /// Amount in pence (GBP), cents (EUR), or öre (SEK).
+        /// Amount in pence (GBP), cents (EUR), öre (SEK), or øre (DKK).
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
@@ -82,7 +82,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code.
-        /// Currently only `GBP`, `EUR`, and `SEK` are supported.
+        /// Currently `GBP`, `EUR`, `SEK`, and `DKK` are supported.
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }

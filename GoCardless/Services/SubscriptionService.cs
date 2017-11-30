@@ -248,14 +248,14 @@ namespace GoCardless.Services
     {
 
         /// <summary>
-        /// Amount in pence (GBP), cents (EUR), or öre (SEK).
+        /// Amount in pence (GBP), cents (EUR), öre (SEK), or øre (DKK).
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
 
         /// <summary>
         /// The amount to be deducted from the payment as the OAuth app's fee,
-        /// in pence (GBP), cents (EUR), or öre (SEK).
+        /// in pence (GBP), cents (EUR), öre (SEK), or øre (DKK).
         /// </summary>
         [JsonProperty("app_fee")]
         public int? AppFee { get; set; }
@@ -269,7 +269,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code.
-        /// Currently only `GBP`, `EUR`, and `SEK` are supported.
+        /// Currently `GBP`, `EUR`, `SEK`, and `DKK` are supported.
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
@@ -589,14 +589,14 @@ namespace GoCardless.Services
     {
 
         /// <summary>
-        /// Amount in pence (GBP), cents (EUR), or öre (SEK).
+        /// Amount in pence (GBP), cents (EUR), öre (SEK), or øre (DKK).
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
 
         /// <summary>
         /// The amount to be deducted from the payment as the OAuth app's fee,
-        /// in pence (GBP), cents (EUR), or öre (SEK).
+        /// in pence (GBP), cents (EUR), öre (SEK), or øre (DKK).
         /// </summary>
         [JsonProperty("app_fee")]
         public int? AppFee { get; set; }
