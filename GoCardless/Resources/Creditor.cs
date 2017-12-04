@@ -40,6 +40,13 @@ namespace GoCardless.Resources
         public string AddressLine3 { get; set; }
 
         /// <summary>
+        /// Boolean indicating whether the creditor is permitted to create
+        /// refunds
+        /// </summary>
+        [JsonProperty("can_create_refunds")]
+        public bool? CanCreateRefunds { get; set; }
+
+        /// <summary>
         /// The city of the creditor's address.
         /// </summary>
         [JsonProperty("city")]
