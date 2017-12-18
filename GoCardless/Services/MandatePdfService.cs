@@ -124,6 +124,15 @@ namespace GoCardless.Services
         public string CountryCode { get; set; }
 
         /// <summary>
+        /// For Danish customers only. The civic/company number (CPR or CVR) of
+        /// the customer. Must be supplied if the customer's bank account is
+        /// denominated in Danish krone (DKK). Can only be supplied for
+        /// Betalingsservice mandates.
+        /// </summary>
+        [JsonProperty("danish_identity_number")]
+        public string DanishIdentityNumber { get; set; }
+
+        /// <summary>
         /// International Bank Account Number. Alternatively you can provide
         /// [local details](#appendix-local-bank-details). IBANs cannot be
         /// provided for Autogiro mandates.

@@ -223,6 +223,13 @@ namespace GoCardless.Services
             public string CountryCode { get; set; }
 
             /// <summary>
+            /// For Danish customers only. The civic/company number (CPR or CVR)
+            /// of the customer.
+            /// </summary>
+            [JsonProperty("danish_identity_number")]
+            public string DanishIdentityNumber { get; set; }
+
+            /// <summary>
             /// Customer's email address.
             /// </summary>
             [JsonProperty("email")]
@@ -294,6 +301,9 @@ namespace GoCardless.Services
             /// <summary>`scheme` with a value of "bacs"</summary>
             [EnumMember(Value = "bacs")]
             Bacs,
+            /// <summary>`scheme` with a value of "betalingsservice"</summary>
+            [EnumMember(Value = "betalingsservice")]
+            Betalingsservice,
             /// <summary>`scheme` with a value of "sepa_core"</summary>
             [EnumMember(Value = "sepa_core")]
             SepaCore,

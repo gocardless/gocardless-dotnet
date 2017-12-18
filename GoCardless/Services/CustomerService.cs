@@ -21,9 +21,13 @@ namespace GoCardless.Services
     /// accounts](#core-endpoints-customer-bank-accounts), which in turn can
     /// have several Direct Debit [mandates](#core-endpoints-mandates).
     /// 
-    /// Note: the `swedish_identity_number` field may only be supplied for
-    /// Swedish customers, and must be supplied if you intend to set up an
-    /// Autogiro mandate with the customer.
+    /// Notes:
+    /// - the `swedish_identity_number` field may only be supplied for Swedish
+    /// customers, and must be supplied if you intend to set up an Autogiro
+    /// mandate with the customer.
+    /// - the `danish_identity_number` field may only be supplied for Danish
+    /// customers, and must be supplied if you intend to set up a
+    /// Betalingsservice mandate with the customer.
     /// </summary>
 
     public class CustomerService
@@ -197,6 +201,14 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
+
+        /// <summary>
+        /// For Danish customers only. The civic/company number (CPR or CVR) of
+        /// the customer. Must be supplied if the customer's bank account is
+        /// denominated in Danish krone (DKK).
+        /// </summary>
+        [JsonProperty("danish_identity_number")]
+        public string DanishIdentityNumber { get; set; }
 
         /// <summary>
         /// Customer's email address.
@@ -382,6 +394,14 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
+
+        /// <summary>
+        /// For Danish customers only. The civic/company number (CPR or CVR) of
+        /// the customer. Must be supplied if the customer's bank account is
+        /// denominated in Danish krone (DKK).
+        /// </summary>
+        [JsonProperty("danish_identity_number")]
+        public string DanishIdentityNumber { get; set; }
 
         /// <summary>
         /// Customer's email address.
