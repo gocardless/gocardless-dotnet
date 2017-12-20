@@ -72,7 +72,8 @@ namespace GoCardless.Resources
         /// <a name="mandates_scheme"></a>Direct Debit scheme to which this
         /// mandate and associated payments are submitted. Can be supplied or
         /// automatically detected from the customer's bank account. Currently
-        /// only "autogiro", "bacs", and "sepa_core" are supported.
+        /// "autogiro", "bacs", "betalingsservice", and "sepa_core" are
+        /// supported.
         /// </summary>
         [JsonProperty("scheme")]
         public string Scheme { get; set; }
