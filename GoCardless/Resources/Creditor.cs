@@ -284,12 +284,15 @@ namespace GoCardless.Resources
     [JsonConverter(typeof(StringEnumConverter))]
     public enum CreditorSchemeIdentifierCurrency {
 
-        /// <summary>`currency` with a value of "GBP"</summary>
-        [EnumMember(Value = "GBP")]
-        GBP,
+        /// <summary>`currency` with a value of "DKK"</summary>
+        [EnumMember(Value = "DKK")]
+        DKK,
         /// <summary>`currency` with a value of "EUR"</summary>
         [EnumMember(Value = "EUR")]
         EUR,
+        /// <summary>`currency` with a value of "GBP"</summary>
+        [EnumMember(Value = "GBP")]
+        GBP,
         /// <summary>`currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
@@ -304,6 +307,9 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "bacs"</summary>
         [EnumMember(Value = "bacs")]
         Bacs,
+        /// <summary>`scheme` with a value of "betalingsservice"</summary>
+        [EnumMember(Value = "betalingsservice")]
+        Betalingsservice,
         /// <summary>`scheme` with a value of "sepa"</summary>
         [EnumMember(Value = "sepa")]
         Sepa,

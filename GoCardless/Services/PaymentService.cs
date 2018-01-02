@@ -265,18 +265,18 @@ namespace GoCardless.Services
         public enum PaymentCurrency
         {
     
-            /// <summary>`currency` with a value of "GBP"</summary>
-            [EnumMember(Value = "GBP")]
-            GBP,
-            /// <summary>`currency` with a value of "EUR"</summary>
-            [EnumMember(Value = "EUR")]
-            EUR,
-            /// <summary>`currency` with a value of "SEK"</summary>
-            [EnumMember(Value = "SEK")]
-            SEK,
             /// <summary>`currency` with a value of "DKK"</summary>
             [EnumMember(Value = "DKK")]
             DKK,
+            /// <summary>`currency` with a value of "EUR"</summary>
+            [EnumMember(Value = "EUR")]
+            EUR,
+            /// <summary>`currency` with a value of "GBP"</summary>
+            [EnumMember(Value = "GBP")]
+            GBP,
+            /// <summary>`currency` with a value of "SEK"</summary>
+            [EnumMember(Value = "SEK")]
+            SEK,
         }
 
         /// <summary>
@@ -418,18 +418,18 @@ namespace GoCardless.Services
         public enum PaymentCurrency
         {
     
-            /// <summary>`currency` with a value of "GBP"</summary>
-            [EnumMember(Value = "GBP")]
-            GBP,
-            /// <summary>`currency` with a value of "EUR"</summary>
-            [EnumMember(Value = "EUR")]
-            EUR,
-            /// <summary>`currency` with a value of "SEK"</summary>
-            [EnumMember(Value = "SEK")]
-            SEK,
             /// <summary>`currency` with a value of "DKK"</summary>
             [EnumMember(Value = "DKK")]
             DKK,
+            /// <summary>`currency` with a value of "EUR"</summary>
+            [EnumMember(Value = "EUR")]
+            EUR,
+            /// <summary>`currency` with a value of "GBP"</summary>
+            [EnumMember(Value = "GBP")]
+            GBP,
+            /// <summary>`currency` with a value of "SEK"</summary>
+            [EnumMember(Value = "SEK")]
+            SEK,
         }
 
         /// <summary>
