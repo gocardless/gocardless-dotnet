@@ -195,6 +195,15 @@ namespace GoCardless.Services
         /// - `number_of_subscription_amendments_exceeded` error if the
         /// subscription amount has already been changed 10 times.
         /// 
+        /// - `forbidden` if the amount is being changed, and the subscription
+        /// was created by an app and you are not authenticated as that app, or
+        /// if the subscription was not created by an app and you are
+        /// authenticated as an app
+        /// 
+        /// - `resource_created_by_another_app` if the app fee is being changed,
+        /// and the subscription was created by an app other than the app you
+        /// are authenticated as
+        /// 
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "SB".</param>
         /// <param name="request">An optional `SubscriptionUpdateRequest` representing the body for this update request.</param>
@@ -582,6 +591,15 @@ namespace GoCardless.Services
     /// 
     /// - `number_of_subscription_amendments_exceeded` error if the subscription
     /// amount has already been changed 10 times.
+    /// 
+    /// - `forbidden` if the amount is being changed, and the subscription was
+    /// created by an app and you are not authenticated as that app, or if the
+    /// subscription was not created by an app and you are authenticated as an
+    /// app
+    /// 
+    /// - `resource_created_by_another_app` if the app fee is being changed, and
+    /// the subscription was created by an app other than the app you are
+    /// authenticated as
     /// 
     /// </summary>
     public class SubscriptionUpdateRequest
