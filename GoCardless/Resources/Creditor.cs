@@ -148,6 +148,13 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+        /// which is set up to receive payouts in DKK.
+        /// </summary>
+        [JsonProperty("default_dkk_payout_account")]
+        public string DefaultDkkPayoutAccount { get; set; }
+
+        /// <summary>
+        /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
         /// which is set up to receive payouts in EUR.
         /// </summary>
         [JsonProperty("default_eur_payout_account")]
