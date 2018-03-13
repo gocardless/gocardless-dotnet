@@ -184,25 +184,30 @@ namespace GoCardless.Services
 
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently only "GBP", "EUR", and "SEK" are supported.
+        /// currency code. Currently "GBP", "EUR", "SEK" and "DKK" are
+        /// supported.
         /// </summary>
         [JsonProperty("currency")]
         public PayoutCurrency? Currency { get; set; }
             
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently only "GBP", "EUR", and "SEK" are supported.
+        /// currency code. Currently "GBP", "EUR", "SEK" and "DKK" are
+        /// supported.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PayoutCurrency
         {
     
-            /// <summary>`currency` with a value of "GBP"</summary>
-            [EnumMember(Value = "GBP")]
-            GBP,
+            /// <summary>`currency` with a value of "DKK"</summary>
+            [EnumMember(Value = "DKK")]
+            DKK,
             /// <summary>`currency` with a value of "EUR"</summary>
             [EnumMember(Value = "EUR")]
             EUR,
+            /// <summary>`currency` with a value of "GBP"</summary>
+            [EnumMember(Value = "GBP")]
+            GBP,
             /// <summary>`currency` with a value of "SEK"</summary>
             [EnumMember(Value = "SEK")]
             SEK,
