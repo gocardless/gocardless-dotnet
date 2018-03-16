@@ -311,6 +311,9 @@ namespace GoCardless.Resources
     [JsonConverter(typeof(StringEnumConverter))]
     public enum CreditorSchemeIdentifierScheme {
 
+        /// <summary>`scheme` with a value of "autogiro"</summary>
+        [EnumMember(Value = "autogiro")]
+        Autogiro,
         /// <summary>`scheme` with a value of "bacs"</summary>
         [EnumMember(Value = "bacs")]
         Bacs,
@@ -320,9 +323,6 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "sepa"</summary>
         [EnumMember(Value = "sepa")]
         Sepa,
-        /// <summary>`scheme` with a value of "autogiro"</summary>
-        [EnumMember(Value = "autogiro")]
-        Autogiro,
     }
 
     /// <summary>

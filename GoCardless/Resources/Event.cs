@@ -111,7 +111,7 @@ namespace GoCardless.Resources
         public string ReasonCode { get; set; }
 
         /// <summary>
-        /// Set when a bank is the origin of the event.
+        /// A Direct Debit scheme. Set when a bank is the origin of the event.
         /// </summary>
         [JsonProperty("scheme")]
         public EventDetailsScheme? Scheme { get; set; }
@@ -144,7 +144,7 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Set when a bank is the origin of the event.
+    /// A Direct Debit scheme. Set when a bank is the origin of the event.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum EventDetailsScheme {
@@ -155,6 +155,9 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "bacs"</summary>
         [EnumMember(Value = "bacs")]
         Bacs,
+        /// <summary>`scheme` with a value of "betalingsservice"</summary>
+        [EnumMember(Value = "betalingsservice")]
+        Betalingsservice,
         /// <summary>`scheme` with a value of "sepa_core"</summary>
         [EnumMember(Value = "sepa_core")]
         SepaCore,
