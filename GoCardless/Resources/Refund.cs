@@ -76,6 +76,13 @@ namespace GoCardless.Resources
     public class RefundLinks
     {
         /// <summary>
+        /// ID of the [mandate](#core-endpoints-mandates) against which the
+        /// refund is being made.
+        /// </summary>
+        [JsonProperty("mandate")]
+        public string Mandate { get; set; }
+
+        /// <summary>
         /// ID of the [payment](#core-endpoints-payments) against which the
         /// refund is being made.
         /// </summary>
