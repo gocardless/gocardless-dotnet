@@ -209,6 +209,14 @@ namespace GoCardless.Services
         {
 
             /// <summary>
+            /// <em>private beta</em> ID of the
+            /// [mandate](#core-endpoints-mandates) against which the refund is
+            /// being made.
+            /// </summary>
+            [JsonProperty("mandate")]
+            public IDictionary<String, String> Mandate { get; set; }
+
+            /// <summary>
             /// ID of the [payment](#core-endpoints-payments) against which the
             /// refund is being made.
             /// </summary>
@@ -234,9 +242,13 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Total expected refunded amount in pence/cents/öre. If there are
-        /// other partial refunds against this payment, this value should be the
-        /// sum of the existing refunds plus the amount of the refund being
-        /// created.
+        /// other
+        /// partial refunds against this payment, this value should be the sum
+        /// of the existing
+        /// refunds plus the amount of the refund being created.
+        /// 
+        /// Must be supplied if `links[payment]` is present.
+        /// 
         /// </summary>
         [JsonProperty("total_amount_confirmation")]
         public int? TotalAmountConfirmation { get; set; }
