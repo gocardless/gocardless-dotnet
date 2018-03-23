@@ -325,10 +325,47 @@ namespace GoCardless.Services
         public int? Limit { get; set; }
 
         /// <summary>
+        /// Unique identifier, beginning with "MD".
+        /// </summary>
+        [JsonProperty("mandate")]
+        public string Mandate { get; set; }
+
+        /// <summary>
         /// Unique identifier, beginning with "PM".
         /// </summary>
         [JsonProperty("payment")]
         public string Payment { get; set; }
+
+        /// <summary>
+        /// Whether a refund was issued against a mandate or a payment. One of:
+        /// <ul>
+        ///   <li>`payment`: <em>default</em> returns refunds created against
+        /// payments only</li>
+        ///   <li>`mandate`: returns refunds created against mandates only</li>
+        /// </ul>
+        /// </summary>
+        [JsonProperty("refund_type")]
+        public RefundRefundType? RefundType { get; set; }
+            
+        /// <summary>
+        /// Whether a refund was issued against a mandate or a payment. One of:
+        /// <ul>
+        ///   <li>`payment`: <em>default</em> returns refunds created against
+        /// payments only</li>
+        ///   <li>`mandate`: returns refunds created against mandates only</li>
+        /// </ul>
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum RefundRefundType
+        {
+    
+            /// <summary>`refund_type` with a value of "mandate"</summary>
+            [EnumMember(Value = "mandate")]
+            Mandate,
+            /// <summary>`refund_type` with a value of "payment"</summary>
+            [EnumMember(Value = "payment")]
+            Payment,
+        }
     }
 
         
