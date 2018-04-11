@@ -250,7 +250,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "GBP", "EUR", "SEK" and "DKK" are
+        /// currency code. Currently "AUD", "DKK", GBP", "EUR", and "SEK" are
         /// supported.
         /// </summary>
         [JsonProperty("currency")]
@@ -258,13 +258,16 @@ namespace GoCardless.Services
             
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "GBP", "EUR", "SEK" and "DKK" are
+        /// currency code. Currently "AUD", "DKK", GBP", "EUR", and "SEK" are
         /// supported.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentCurrency
         {
     
+            /// <summary>`currency` with a value of "AUD"</summary>
+            [EnumMember(Value = "AUD")]
+            AUD,
             /// <summary>`currency` with a value of "DKK"</summary>
             [EnumMember(Value = "DKK")]
             DKK,
@@ -403,7 +406,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "GBP", "EUR", "SEK" and "DKK" are
+        /// currency code. Currently "AUD", "DKK", GBP", "EUR", and "SEK" are
         /// supported.
         /// </summary>
         [JsonProperty("currency")]
@@ -411,13 +414,16 @@ namespace GoCardless.Services
             
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "GBP", "EUR", "SEK" and "DKK" are
+        /// currency code. Currently "AUD", "DKK", GBP", "EUR", and "SEK" are
         /// supported.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentCurrency
         {
     
+            /// <summary>`currency` with a value of "AUD"</summary>
+            [EnumMember(Value = "AUD")]
+            AUD,
             /// <summary>`currency` with a value of "DKK"</summary>
             [EnumMember(Value = "DKK")]
             DKK,
