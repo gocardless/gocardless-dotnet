@@ -43,7 +43,8 @@ namespace GoCardless.Resources
         /// <summary>
         /// The positive (credit) or negative (debit) value of the item, in
         /// fractional currency;
-        /// either pence (GBP), cents (EUR), or öre (SEK), to one decimal place.
+        /// either pence (GBP), cents (AUD/EUR), or öre (SEK), to one decimal
+        /// place.
         /// <p class="notice">For accuracy, we store some of our fees to greater
         /// precision than
         /// we can actually pay out (for example, a GoCardless fee we record

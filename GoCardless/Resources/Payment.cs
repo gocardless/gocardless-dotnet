@@ -21,7 +21,7 @@ namespace GoCardless.Resources
     public class Payment
     {
         /// <summary>
-        /// Amount in pence (GBP), cents (EUR), öre (SEK), or øre (DKK).
+        /// Amount in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
