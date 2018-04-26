@@ -44,6 +44,16 @@ namespace GoCardless
         public MandateService Mandates => new MandateService(this);
 
         /// <summary>
+        ///A service for working with mandate import resources.
+        /// </summary>
+        public MandateImportService MandateImports => new MandateImportService(this);
+
+        /// <summary>
+        ///A service for working with mandate import entry resources.
+        /// </summary>
+        public MandateImportEntryService MandateImportEntries => new MandateImportEntryService(this);
+
+        /// <summary>
         ///A service for working with mandate pdf resources.
         /// </summary>
         public MandatePdfService MandatePdfs => new MandatePdfService(this);
