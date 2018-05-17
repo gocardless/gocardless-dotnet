@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 
 namespace GoCardless.Internals
@@ -23,5 +24,10 @@ namespace GoCardless.Internals
         /// 0.5 seconds but can be changed
         /// </summary>
         public TimeSpan? WaitBetweenRetries { get; set; }
+
+        // <summary>
+        // A dictionary of custom headers to set on requests
+        // </summary>
+        public Dictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
     }
 }

@@ -99,6 +99,34 @@ namespace GoCardless.Tests
         }
 
         [Test]
+        public async Task ClientCanSetCustomHeaders()
+        {
+            var requestSettings = new RequestSettings
+            {
+                Headers = new Dictionary<string, string>()
+                {
+                    {"Accept-Language", "fr"},
+                    {"User-Agent", "Skynet"}
+                }
+            };
+
+            //When the request is made using the customisation
+            http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json", resp => resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative));
+
+            await client.Mandates.CreateAsync(new MandateCreateRequest(), requestSettings);
+
+            http.AssertRequestMade("POST", "/mandates", null, req =>
+            {
+                //The brand new header we've set should be there
+                Assert.AreEqual(req.Item1.Headers.GetValues("Accept-Language").Single(), "fr");
+                //We should still get the default headers set by the client
+                Assert.NotNull(req.Item1.Headers.GetValues("Authorization").Single());
+                //Headers we set should override the client's default headers
+                Assert.AreEqual(req.Item1.Headers.GetValues("User-Agent").Single(), "Skynet");
+            });
+        }
+
+        [Test]
         [TestCase(0, true)]
         [TestCase(1, true)]
         [TestCase(2, true)]

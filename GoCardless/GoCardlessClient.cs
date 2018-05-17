@@ -220,7 +220,6 @@ namespace GoCardless
             requestMessage.Headers.Authorization =
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
 
-
             {
                 //add request body for non-GETs
                 if (method != "GET")
@@ -256,6 +255,17 @@ namespace GoCardless
             {
                 hasIdempotencyKey.IdempotencyKey = hasIdempotencyKey.IdempotencyKey ?? Guid.NewGuid().ToString();
                 requestMessage.Headers.TryAddWithoutValidation("Idempotency-Key", hasIdempotencyKey.IdempotencyKey);
+            }
+
+            if (requestSettings != null) {
+                foreach (var header in requestSettings.Headers)
+                {
+                    if (requestMessage.Headers.Contains(header.Key)) {
+                        requestMessage.Headers.Remove(header.Key);
+                    }
+
+                    requestMessage.Headers.Add(header.Key, header.Value);
+                }
             }
 
             requestSettings?.CustomiseRequestMessage?.Invoke(requestMessage);
