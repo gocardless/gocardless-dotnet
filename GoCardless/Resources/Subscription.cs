@@ -74,6 +74,14 @@ namespace GoCardless.Resources
         public int? Amount { get; set; }
 
         /// <summary>
+        /// The amount to be deducted from each payment as an app fee, to be
+        /// paid to the partner integration which created the subscription, in
+        /// pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
+        /// </summary>
+        [JsonProperty("app_fee")]
+        public int? AppFee { get; set; }
+
+        /// <summary>
         /// Fixed [timestamp](#api-usage-time-zones--dates), recording when this
         /// resource was created.
         /// </summary>
