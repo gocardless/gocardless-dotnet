@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using GoCardless.Errors;
 using GoCardless.Exceptions;
@@ -115,12 +116,15 @@ namespace GoCardless
         {
             var numberOfRetries = requestSettings?.NumberOfRetriesOnTimeout ?? DefaultNumberOfRetriesOnTimeout;
             var waitBetweenRetries = requestSettings?.WaitBetweenRetries ?? DefaultWaitBetweenRetries;
+
+            var cancellationTokenSource = new CancellationTokenSource();
+
             Func<Task<T>> execute = async () =>
             {
                 try
                 {
                     return await ExecuteAsyncInner<T>(method, path, urlParams, requestParams, payloadKey,
-                            requestSettings)
+                            requestSettings, cancellationTokenSource)
                         .ConfigureAwait(false);
                 }
                 catch (InvalidStateException ex)
@@ -138,8 +142,18 @@ namespace GoCardless
                 {
                     return await execute().ConfigureAwait(false);
                 }
-                catch (TimeoutException)
+                catch (TaskCanceledException exception)
+                    when (!cancellationTokenSource.Token.IsCancellationRequested)
                 {
+                    // This case represents a timeout, which we want to retry - see
+                    // https://stackoverflow.com/questions/10547895/how-can-i-tell-when-httpclient-has-timed-out/32230327
+                    await Task.Delay(waitBetweenRetries);
+                }
+                catch (HttpRequestException exception)
+                {
+                    // An HttpRequestException is raised when "[t]he request failed due to
+                    // an underlying issue such as network connectivity, DNS failure,
+                    // server certificate validation or timeout"
                     await Task.Delay(waitBetweenRetries);
                 }
             }
@@ -148,11 +162,12 @@ namespace GoCardless
         }
 
         private async Task<T> ExecuteAsyncInner<T>(string method, string path, List<KeyValuePair<string, object>> urlParams, object requestParams,
-            string payloadKey, RequestSettings requestSettings) where T : ApiResponse
+            string payloadKey, RequestSettings requestSettings, CancellationTokenSource cancellationTokenSource) where T : ApiResponse
         {
             var requestMessage = BuildHttpRequestMessage<T>(method, path, urlParams, requestParams, payloadKey, requestSettings);
 
-            var responseMessage = await _httpClient.SendAsync(requestMessage).ConfigureAwait(false);
+
+            var responseMessage = await _httpClient.SendAsync(requestMessage, cancellationTokenSource.Token).ConfigureAwait(false);
             try
             {
                 if (responseMessage.IsSuccessStatusCode)

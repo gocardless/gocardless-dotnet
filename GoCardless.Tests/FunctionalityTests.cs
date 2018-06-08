@@ -131,20 +131,20 @@ namespace GoCardless.Tests
         [TestCase(1, true)]
         [TestCase(2, true)]
         [TestCase(3, false)]
-        public async Task RequestRetriesUpToThreeTimes(int numberOfFailures, bool requestShouldSucceed)
+        public async Task RequestRetriesUpToThreeTimesOnTimeout(int numberOfFailures, bool requestShouldSucceed)
         {
             //Given a request is going to time out {numberOfFailures} times before succeeding
             for (var i = 0; i < numberOfFailures; i++)
             {
                 http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json",
-                    resp => throw new TimeoutException());
+                    resp => throw new TaskCanceledException());
             }
             http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json");
             string firstIdempotencyKey = null;
             try
             {
                 //When the service method is called
-                var respose = await client.Mandates.CreateAsync(new MandateCreateRequest(), new RequestSettings()
+                var response = await client.Mandates.CreateAsync(new MandateCreateRequest(), new RequestSettings()
                 {
                     CustomiseRequestMessage = req =>
                     {
@@ -152,14 +152,53 @@ namespace GoCardless.Tests
                         var newIdempotencyKey = req.Headers.GetValues("Idempotency-Key").Single();
                         firstIdempotencyKey = firstIdempotencyKey ?? newIdempotencyKey;
                         Assert.NotNull(newIdempotencyKey);
-                        Assert.AreEqual(firstIdempotencyKey, newIdempotencyKey,
-                            "Idempotency keys must match on retried requests");
+                        Assert.AreEqual(firstIdempotencyKey, newIdempotencyKey, "Idempotency keys must match on retried requests");
                     }
                 });
                 //And if there were enough retries to handle the failures the call should succeed
-                Assert.True(respose.ResponseMessage.IsSuccessStatusCode);
+                Assert.True(response.ResponseMessage.IsSuccessStatusCode);
             }
-            catch (TimeoutException)
+            catch (TaskCanceledException)
+            {
+                //And if not the call should have timed out
+                Assert.False(requestShouldSucceed);
+            }
+
+        }
+
+        [Test]
+        [TestCase(0, true)]
+        [TestCase(1, true)]
+        [TestCase(2, true)]
+        [TestCase(3, false)]
+        public async Task RequestRetriesUpToThreeTimesOnConnectionFailure(int numberOfFailures, bool requestShouldSucceed)
+        {
+        //Given a request is going to time out {numberOfFailures} times before succeeding
+            for (var i = 0; i < numberOfFailures; i++)
+            {
+                http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json",
+                    resp => throw new HttpRequestException());
+            }
+            http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json");
+            string firstIdempotencyKey = null;
+            try
+            {
+                //When the service method is called
+                var response = await client.Mandates.CreateAsync(new MandateCreateRequest(), new RequestSettings()
+                {
+                    CustomiseRequestMessage = req =>
+                    {
+                        // Then the idempotency keys should stay the same on successive retries
+                        var newIdempotencyKey = req.Headers.GetValues("Idempotency-Key").Single();
+                        firstIdempotencyKey = firstIdempotencyKey ?? newIdempotencyKey;
+                        Assert.NotNull(newIdempotencyKey);
+                        Assert.AreEqual(firstIdempotencyKey, newIdempotencyKey, "Idempotency keys must match on retried requests");
+                    }
+                });
+                //And if there were enough retries to handle the failures the call should succeed
+                Assert.True(response.ResponseMessage.IsSuccessStatusCode);
+            }
+            catch (HttpRequestException)
             {
                 //And if not the call should have timed out
                 Assert.False(requestShouldSucceed);
@@ -177,18 +216,18 @@ namespace GoCardless.Tests
             for (var i = 0; i < numberOfFailures; i++)
             {
                 http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json",
-                    resp => throw new TimeoutException());
+                    resp => throw new TaskCanceledException());
             }
             http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json");
             bool wasSuccessful = false;
             try
             {
-                var respose = await client.Mandates.CreateAsync(new MandateCreateRequest(), new RequestSettings()
+                var response = await client.Mandates.CreateAsync(new MandateCreateRequest(), new RequestSettings()
                 {
                     WaitBetweenRetries = TimeSpan.FromSeconds(0.25),
                     NumberOfRetriesOnTimeout = 1
                 });
-                wasSuccessful = respose.ResponseMessage.IsSuccessStatusCode;
+                wasSuccessful = response.ResponseMessage.IsSuccessStatusCode;
             }
             catch (Exception)
             {
