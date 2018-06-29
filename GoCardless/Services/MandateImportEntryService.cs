@@ -362,7 +362,7 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Related resources
+        /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
         public MandateImportEntryLinks Links { get; set; }
@@ -373,32 +373,7 @@ namespace GoCardless.Services
         {
 
             /// <summary>
-            /// The ID of the customer which was created when the mandate import
-            /// was processed.
-            /// </summary>
-            [JsonProperty("customer")]
-            public string Customer { get; set; }
-
-            /// <summary>
-            /// The ID of the customer bank account which was created when the
-            /// mandate import
-            /// was processed.
-            /// </summary>
-            [JsonProperty("customer_bank_account")]
-            public string CustomerBankAccount { get; set; }
-
-            /// <summary>
-            /// The ID of the mandate which was created when the mandate import
-            /// was processed.
-            /// </summary>
-            [JsonProperty("mandate")]
-            public string Mandate { get; set; }
-
-            /// <summary>
-            /// The ID of the mandate import. This is returned when you
-            /// [create a Mandate
-            /// Import](#mandate-imports-create-a-new-mandate-import).
-            /// 
+            /// Unique identifier, beginning with "IM".
             /// </summary>
             [JsonProperty("mandate_import")]
             public string MandateImport { get; set; }
