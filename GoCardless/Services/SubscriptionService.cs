@@ -302,8 +302,9 @@ namespace GoCardless.Services
         public string EndDate { get; set; }
 
         /// <summary>
-        /// Number of `interval_units` between customer charge dates. Must
-        /// result in at least one charge date per year. Defaults to `1`.
+        /// Number of `interval_units` between customer charge dates. Must be
+        /// greater than or equal to `1`. Must result in at least one charge
+        /// date per year. Defaults to `1`.
         /// </summary>
         [JsonProperty("interval")]
         public int? Interval { get; set; }
