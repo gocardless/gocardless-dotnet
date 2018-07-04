@@ -25,6 +25,10 @@ namespace GoCardless.Services
     /// bank account. You may wish to handle this by updating the existing
     /// record instead, the ID of which will be provided as
     /// `links[creditor_bank_account]` in the error response.
+    /// 
+    /// <p class="restricted-notice"><strong>Restricted</strong>: This API is
+    /// not available for
+    /// partner integrations.</p>
     /// </summary>
 
     public class CreditorBankAccountService
