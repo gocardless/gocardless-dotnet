@@ -186,7 +186,7 @@ namespace GoCardless
                     throw result.ToException();
                 }
             }
-            catch (JsonSerializationException)
+            catch (JsonException)
             {
                 throw new ApiException(new ApiErrorResponse()
                 {

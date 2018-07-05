@@ -53,6 +53,9 @@
     <None Update="fixtures\client\list_mandates_page_2.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="fixtures\error_page.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="fixtures\idempotent_creation_conflict.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

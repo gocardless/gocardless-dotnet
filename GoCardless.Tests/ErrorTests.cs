@@ -102,6 +102,26 @@ namespace GoCardless.Tests
         }
 
         [Test]
+        public async Task HtmlErrorPage()
+        {
+            var responseFixture = "fixtures/error_page.html";
+            mockHttp.EnqueueResponse(502, responseFixture);
+            try
+            {
+                await MakeSomeRequest();
+            }
+            catch (ApiException ex)
+            {
+                Assert.AreEqual(502, ex.Code);
+                Assert.AreEqual(ApiErrorType.GOCARDLESS, ex.Type);
+                Assert.AreEqual("Something went wrong with this request. Please check the ResponseMessage property.", ex.Message);
+                Assert.AreEqual("<!DOCTYPE html>\n<html>\n  <head>\n    <title>This is an HTML error page, like one returned by Cloudflare</title>\n  </head>\n</html>\n", ex.ResponseMessage.Content.ReadAsStringAsync().Result);
+                return;
+            }
+            Assert.Fail("Exception was not thrown");
+        }
+
+        [Test]
         public async Task IdempotencyConflictsAreHandledAutomatically()
         {
             //Given a mandate has already been created using the idempotency key
