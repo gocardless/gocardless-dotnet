@@ -142,6 +142,24 @@ namespace GoCardless.Services
         public string AccountNumber { get; set; }
 
         /// <summary>
+        /// The first line of the customer's address.
+        /// </summary>
+        [JsonProperty("address_line1")]
+        public string AddressLine1 { get; set; }
+
+        /// <summary>
+        /// The second line of the customer's address.
+        /// </summary>
+        [JsonProperty("address_line2")]
+        public string AddressLine2 { get; set; }
+
+        /// <summary>
+        /// The third line of the customer's address.
+        /// </summary>
+        [JsonProperty("address_line3")]
+        public string AddressLine3 { get; set; }
+
+        /// <summary>
         /// Bank code - see [local details](#appendix-local-bank-details) for
         /// more information. Alternatively you can provide an `iban`.
         /// </summary>
@@ -161,6 +179,12 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("branch_code")]
         public string BranchCode { get; set; }
+
+        /// <summary>
+        /// The city of the customer's address.
+        /// </summary>
+        [JsonProperty("city")]
+        public string City { get; set; }
 
         /// <summary>
         /// [ISO
@@ -214,6 +238,18 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("mandate_reference")]
         public string MandateReference { get; set; }
+
+        /// <summary>
+        /// The customer's postal code.
+        /// </summary>
+        [JsonProperty("postal_code")]
+        public string PostalCode { get; set; }
+
+        /// <summary>
+        /// The customer's address region, county or department.
+        /// </summary>
+        [JsonProperty("region")]
+        public string Region { get; set; }
 
         /// <summary>
         /// Direct Debit scheme. Can be supplied or automatically detected from
