@@ -100,6 +100,28 @@ namespace GoCardless.Tests
         }
 
         [Test]
+        public void ShouldNotDoubleEncodeUrlParameters()
+        {
+            var responseFixture = "fixtures/client/list_mandates_by_customer_and_status.json";
+            mockHttp.EnqueueResponse(200, responseFixture);
+            var mandateListResponse = client.Mandates.ListAsync(new MandateListRequest()
+            {
+                Customer = "CU00003068FG73",
+                Status = new[] {MandateListRequest.MandateStatus.Active, MandateListRequest.MandateStatus.Failed},
+                After = "id:MD123"
+            }).Result;
+            TestHelpers.AssertResponseCanSerializeBackToFixture(mandateListResponse, responseFixture);
+
+            var mandates =
+                mandateListResponse.Mandates;
+
+            Assert.AreEqual(mandates.Count, 1);
+            Assert.AreEqual(mandates[0].Id, "MD00001PEYCSQF");
+            mockHttp.AssertRequestMade("GET", "/mandates?after=id%3AMD123&customer=CU00003068FG73&status=active%2Cfailed");
+        }
+
+
+        [Test]
         public void ShouldPageThroughMandates()
         {
             mockHttp.EnqueueResponse(200, "fixtures/client/list_mandates_page_1.json");

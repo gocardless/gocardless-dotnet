@@ -294,11 +294,11 @@ namespace GoCardless
                 if (value is bool)
                     return value.ToString().ToLower();
                 if (value is DateTimeOffset)
-                    return ((DateTimeOffset?) value).Value.ToString("o");
+                    return WebUtility.UrlEncode(((DateTimeOffset?) value).Value.ToString("o"));
                 var typeInfo = value.GetType().GetTypeInfo();
                 if (typeInfo.IsArray)
                 {
-                    return string.Join(",", ((IEnumerable) value).Cast<object>().Select(Stringify));
+                    return string.Join(WebUtility.UrlEncode(","), ((IEnumerable) value).Cast<object>().Select(Stringify));
                 }
                 if (typeInfo.IsEnum)
                 {
@@ -347,7 +347,7 @@ namespace GoCardless
 
             internal static string QueryStringArgument(KeyValuePair<string, object> argument)
             {
-                var urlEncodedValue = WebUtility.UrlEncode(Helpers.Stringify(argument.Value));
+                var urlEncodedValue = Helpers.Stringify(argument.Value);
                 var urlEncodedKey = WebUtility.UrlEncode(argument.Key);
                 return $"{urlEncodedKey}={urlEncodedValue}";
             }
