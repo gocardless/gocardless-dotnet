@@ -34,6 +34,11 @@ namespace GoCardless
         public CustomerBankAccountService CustomerBankAccounts => new CustomerBankAccountService(this);
 
         /// <summary>
+        ///A service for working with customer notification resources.
+        /// </summary>
+        public CustomerNotificationService CustomerNotifications => new CustomerNotificationService(this);
+
+        /// <summary>
         ///A service for working with event resources.
         /// </summary>
         public EventService Events => new EventService(this);

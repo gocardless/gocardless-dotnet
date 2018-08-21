@@ -30,6 +30,17 @@ namespace GoCardless.Resources
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
+        /// Present only in webhooks when an integrator is authorised to send
+        /// their own
+        /// notifications. See
+        /// [here](/getting-started/api/handling-customer-notifications/)
+        /// for further information.
+        /// 
+        /// </summary>
+        [JsonProperty("customer_notifications")]
+        public List<EventCustomerNotification> CustomerNotifications { get; set; }
+
+        /// <summary>
         /// 
         /// </summary>
         [JsonProperty("details")]
@@ -69,6 +80,55 @@ namespace GoCardless.Resources
         public EventResourceType? ResourceType { get; set; }
     }
     
+    /// <summary>
+    /// Present only in webhooks when an integrator is authorised to send their
+    /// own
+    /// notifications. See
+    /// [here](/getting-started/api/handling-customer-notifications/)
+    /// for further information.
+    /// 
+    /// </summary>
+    public class EventCustomerNotification
+    {
+        /// <summary>
+        /// Time after which GoCardless will send the notification by email.
+        /// </summary>
+        [JsonProperty("deadline")]
+        public string Deadline { get; set; }
+
+        /// <summary>
+        /// The id of the notification.
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        /// <summary>
+        /// Whether or not the notification must be sent.
+        /// </summary>
+        [JsonProperty("mandatory")]
+        public bool? Mandatory { get; set; }
+
+        /// <summary>
+        /// The type of notification the customer shall receive.
+        /// </summary>
+        [JsonProperty("type")]
+        public string Type { get; set; }
+    }
+    
+    /// <summary>
+    /// The type of notification the customer shall receive.
+    /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum EventCustomerNotificationType {
+
+        /// <summary>`type` with a value of "payment_created"</summary>
+        [EnumMember(Value = "payment_created")]
+        PaymentCreated,
+        /// <summary>`type` with a value of "mandate_created"</summary>
+        [EnumMember(Value = "mandate_created")]
+        MandateCreated,
+    }
+
     public class EventDetails
     {
         /// <summary>

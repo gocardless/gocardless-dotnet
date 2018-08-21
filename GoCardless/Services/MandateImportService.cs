@@ -123,6 +123,14 @@ namespace GoCardless.Services
         /// GoCardless team. Once the import has been submitted, it can no
         /// longer have entries
         /// added to it.
+        /// 
+        /// In our sandbox environment, to aid development, we automatically
+        /// process mandate
+        /// imports approximately 10 seconds after they are submitted. This will
+        /// allow you to
+        /// test both the "submitted" response and wait for the webhook to
+        /// confirm the
+        /// processing has begun.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "IM".</param>
         /// <param name="request">An optional `MandateImportSubmitRequest` representing the body for this submit request.</param>
@@ -147,8 +155,8 @@ namespace GoCardless.Services
         /// being set up in GoCardless. Once the import has been cancelled, it
         /// can no longer have
         /// entries added to it. Mandate imports which have already been
-        /// submitted cannot be
-        /// cancelled.
+        /// submitted or processed
+        /// cannot be cancelled.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "IM".</param>
         /// <param name="request">An optional `MandateImportCancelRequest` representing the body for this cancel request.</param>
@@ -236,6 +244,14 @@ namespace GoCardless.Services
     /// GoCardless team. Once the import has been submitted, it can no longer
     /// have entries
     /// added to it.
+    /// 
+    /// In our sandbox environment, to aid development, we automatically process
+    /// mandate
+    /// imports approximately 10 seconds after they are submitted. This will
+    /// allow you to
+    /// test both the "submitted" response and wait for the webhook to confirm
+    /// the
+    /// processing has begun.
     /// </summary>
     public class MandateImportSubmitRequest
     {
@@ -248,8 +264,8 @@ namespace GoCardless.Services
     /// being set up in GoCardless. Once the import has been cancelled, it can
     /// no longer have
     /// entries added to it. Mandate imports which have already been submitted
-    /// cannot be
-    /// cancelled.
+    /// or processed
+    /// cannot be cancelled.
     /// </summary>
     public class MandateImportCancelRequest
     {
