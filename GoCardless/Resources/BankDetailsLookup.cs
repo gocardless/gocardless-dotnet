@@ -54,6 +54,9 @@ namespace GoCardless.Resources
         /// <summary>`available_debit_scheme` with a value of "becs"</summary>
         [EnumMember(Value = "becs")]
         Becs,
+        /// <summary>`available_debit_scheme` with a value of "becs_nz"</summary>
+        [EnumMember(Value = "becs_nz")]
+        BecsNz,
         /// <summary>`available_debit_scheme` with a value of "betalingsservice"</summary>
         [EnumMember(Value = "betalingsservice")]
         Betalingsservice,
