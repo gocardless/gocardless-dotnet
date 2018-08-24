@@ -20,19 +20,15 @@ namespace GoCardless.Resources
     /// actioned in some
     /// way, it is no longer visible using this API.
     /// 
-    /// <p class="restricted-notice"><strong>Restricted</strong>: This API is
-    /// currently
-    /// only available for approved integrators - please <a
-    /// href="mailto:help@gocardless.com">get
-    /// in touch</a> if you would like to use this API.</p>
-    /// 
     /// </summary>
     public class CustomerNotification
     {
         /// <summary>
-        /// The action that was taken on the notification. Currently this can
-        /// only be `handled`,
-        /// which means the integrator sent the notification themselves.
+        /// The action that was taken on the notification:
+        /// <ul>
+        ///   <li>`handled` means the integrator sent the notification
+        /// themselves</li>
+        /// </ul>
         /// 
         /// </summary>
         [JsonProperty("action_taken")]
@@ -72,8 +68,10 @@ namespace GoCardless.Resources
     }
     
     /// <summary>
-    /// The action that was taken on the notification. Currently this can only be `handled`,
-    /// which means the integrator sent the notification themselves.
+    /// The action that was taken on the notification:
+    /// <ul>
+    ///   <li>`handled` means the integrator sent the notification themselves</li>
+    /// </ul>
     /// 
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]

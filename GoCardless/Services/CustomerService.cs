@@ -211,8 +211,7 @@ namespace GoCardless.Services
         public string DanishIdentityNumber { get; set; }
 
         /// <summary>
-        /// Customer's email address. Required in most cases, as this allows
-        /// GoCardless to send notifications to this customer.
+        /// Customer's email address.
         /// </summary>
         [JsonProperty("email")]
         public string Email { get; set; }
@@ -406,8 +405,7 @@ namespace GoCardless.Services
         public string DanishIdentityNumber { get; set; }
 
         /// <summary>
-        /// Customer's email address. Required in most cases, as this allows
-        /// GoCardless to send notifications to this customer.
+        /// Customer's email address.
         /// </summary>
         [JsonProperty("email")]
         public string Email { get; set; }

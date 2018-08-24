@@ -310,9 +310,6 @@ namespace GoCardless.Resources
         /// <summary>`currency` with a value of "GBP"</summary>
         [EnumMember(Value = "GBP")]
         GBP,
-        /// <summary>`currency` with a value of "NZD"</summary>
-        [EnumMember(Value = "NZD")]
-        NZD,
         /// <summary>`currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
@@ -333,9 +330,6 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "becs"</summary>
         [EnumMember(Value = "becs")]
         Becs,
-        /// <summary>`scheme` with a value of "becs_nz"</summary>
-        [EnumMember(Value = "becs_nz")]
-        BecsNz,
         /// <summary>`scheme` with a value of "betalingsservice"</summary>
         [EnumMember(Value = "betalingsservice")]
         Betalingsservice,
