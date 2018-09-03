@@ -214,7 +214,7 @@ namespace GoCardless.Services
             /// being made.
             /// </summary>
             [JsonProperty("mandate")]
-            public IDictionary<String, String> Mandate { get; set; }
+            public string Mandate { get; set; }
 
             /// <summary>
             /// ID of the [payment](#core-endpoints-payments) against which the
