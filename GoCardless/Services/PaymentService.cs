@@ -226,14 +226,16 @@ namespace GoCardless.Services
     {
 
         /// <summary>
-        /// Amount in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
+        /// Amount, in the lowest denomination for the currency (e.g. pence in
+        /// GBP, cents in EUR).
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
 
         /// <summary>
         /// The amount to be deducted from the payment as the OAuth app's fee,
-        /// in pence/cents/öre/øre.
+        /// in the lowest denomination for the currency (e.g. pence in GBP,
+        /// cents in EUR).
         /// </summary>
         [JsonProperty("app_fee")]
         public int? AppFee { get; set; }

@@ -240,6 +240,13 @@ namespace GoCardless.Services
         public string MandateReference { get; set; }
 
         /// <summary>
+        /// Required for New Zealand customers only. Must be supplied if the
+        /// customer's bank account is denominated in New Zealand Dollars (NZD).
+        /// </summary>
+        [JsonProperty("phone_number")]
+        public string PhoneNumber { get; set; }
+
+        /// <summary>
         /// The customer's postal code.
         /// </summary>
         [JsonProperty("postal_code")]
