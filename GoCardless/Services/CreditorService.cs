@@ -428,6 +428,7 @@ namespace GoCardless.Services
         /// <summary>
         /// The list of creditors from the response.
         /// </summary>
+        [JsonProperty("creditors")]
         public IReadOnlyList<Creditor> Creditors { get; private set; }
 
         /// <summary>

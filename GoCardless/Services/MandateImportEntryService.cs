@@ -467,6 +467,7 @@ namespace GoCardless.Services
         /// <summary>
         /// The list of mandate import entries from the response.
         /// </summary>
+        [JsonProperty("mandate_import_entries")]
         public IReadOnlyList<MandateImportEntry> MandateImportEntries { get; private set; }
 
         /// <summary>

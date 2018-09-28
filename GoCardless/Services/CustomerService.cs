@@ -503,6 +503,7 @@ namespace GoCardless.Services
         /// <summary>
         /// The list of customers from the response.
         /// </summary>
+        [JsonProperty("customers")]
         public IReadOnlyList<Customer> Customers { get; private set; }
 
         /// <summary>

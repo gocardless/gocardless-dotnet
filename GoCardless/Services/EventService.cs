@@ -343,6 +343,7 @@ namespace GoCardless.Services
         /// <summary>
         /// The list of events from the response.
         /// </summary>
+        [JsonProperty("events")]
         public IReadOnlyList<Event> Events { get; private set; }
 
         /// <summary>

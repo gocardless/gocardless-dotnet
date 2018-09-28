@@ -411,6 +411,7 @@ namespace GoCardless.Services
         /// <summary>
         /// The list of refunds from the response.
         /// </summary>
+        [JsonProperty("refunds")]
         public IReadOnlyList<Refund> Refunds { get; private set; }
 
         /// <summary>

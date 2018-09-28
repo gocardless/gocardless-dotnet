@@ -507,6 +507,7 @@ namespace GoCardless.Services
         /// <summary>
         /// The list of mandates from the response.
         /// </summary>
+        [JsonProperty("mandates")]
         public IReadOnlyList<Mandate> Mandates { get; private set; }
 
         /// <summary>
