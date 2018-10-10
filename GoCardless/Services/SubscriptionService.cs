@@ -688,6 +688,7 @@ namespace GoCardless.Services
         /// <summary>
         /// The list of subscriptions from the response.
         /// </summary>
+        [JsonProperty("subscriptions")]
         public IReadOnlyList<Subscription> Subscriptions { get; private set; }
 
         /// <summary>

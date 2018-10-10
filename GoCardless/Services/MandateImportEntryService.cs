@@ -346,6 +346,14 @@ namespace GoCardless.Services
             public string Language { get; set; }
 
             /// <summary>
+            /// Required for New Zealand customers only. Must be supplied if the
+            /// customer's bank account is denominated in New Zealand Dollars
+            /// (NZD).
+            /// </summary>
+            [JsonProperty("phone_number")]
+            public string PhoneNumber { get; set; }
+
+            /// <summary>
             /// The customer's postal code. Required if mandate import scheme is
             /// `bacs`.
             /// 
@@ -459,6 +467,7 @@ namespace GoCardless.Services
         /// <summary>
         /// The list of mandate import entries from the response.
         /// </summary>
+        [JsonProperty("mandate_import_entries")]
         public IReadOnlyList<MandateImportEntry> MandateImportEntries { get; private set; }
 
         /// <summary>

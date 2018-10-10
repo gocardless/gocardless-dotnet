@@ -376,6 +376,13 @@ namespace GoCardless.Services
 
             /// <summary>
             /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// which is set up to receive payouts in NZD.
+            /// </summary>
+            [JsonProperty("default_nzd_payout_account")]
+            public string DefaultNzdPayoutAccount { get; set; }
+
+            /// <summary>
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in SEK.
             /// </summary>
             [JsonProperty("default_sek_payout_account")]
@@ -421,6 +428,7 @@ namespace GoCardless.Services
         /// <summary>
         /// The list of creditors from the response.
         /// </summary>
+        [JsonProperty("creditors")]
         public IReadOnlyList<Creditor> Creditors { get; private set; }
 
         /// <summary>

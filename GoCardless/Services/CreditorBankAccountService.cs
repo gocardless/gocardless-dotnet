@@ -404,6 +404,7 @@ namespace GoCardless.Services
         /// <summary>
         /// The list of creditor bank accounts from the response.
         /// </summary>
+        [JsonProperty("creditor_bank_accounts")]
         public IReadOnlyList<CreditorBankAccount> CreditorBankAccounts { get; private set; }
 
         /// <summary>

@@ -22,6 +22,9 @@ namespace GoCardless.Services
     /// have several Direct Debit [mandates](#core-endpoints-mandates).
     /// 
     /// Notes:
+    /// - the `phone_number` field may only be supplied for New Zealand
+    /// customers, and must be supplied if you intend to set up an BECS NZ
+    /// mandate with the customer.
     /// - the `swedish_identity_number` field may only be supplied for Swedish
     /// customers, and must be supplied if you intend to set up an Autogiro
     /// mandate with the customer.
@@ -250,6 +253,13 @@ namespace GoCardless.Services
         public IDictionary<String, String> Metadata { get; set; }
 
         /// <summary>
+        /// Required for New Zealand customers only. Must be supplied if the
+        /// customer's bank account is denominated in New Zealand Dollars (NZD).
+        /// </summary>
+        [JsonProperty("phone_number")]
+        public string PhoneNumber { get; set; }
+
+        /// <summary>
         /// The customer's postal code.
         /// </summary>
         [JsonProperty("postal_code")]
@@ -445,6 +455,13 @@ namespace GoCardless.Services
         public IDictionary<String, String> Metadata { get; set; }
 
         /// <summary>
+        /// Required for New Zealand customers only. Must be supplied if the
+        /// customer's bank account is denominated in New Zealand Dollars (NZD).
+        /// </summary>
+        [JsonProperty("phone_number")]
+        public string PhoneNumber { get; set; }
+
+        /// <summary>
         /// The customer's postal code.
         /// </summary>
         [JsonProperty("postal_code")]
@@ -486,6 +503,7 @@ namespace GoCardless.Services
         /// <summary>
         /// The list of customers from the response.
         /// </summary>
+        [JsonProperty("customers")]
         public IReadOnlyList<Customer> Customers { get; private set; }
 
         /// <summary>
