@@ -289,7 +289,11 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Customer's company name. Required unless a `given_name` and
-            /// `family_name` are provided.
+            /// `family_name` are provided. For Canadian customers, the use of a
+            /// `company_name` value will mean that any mandate created from
+            /// this customer will be considered to be a "Business PAD"
+            /// (otherwise, any mandate will be considered to be a "Personal
+            /// PAD").
             /// </summary>
             [JsonProperty("company_name")]
             public string CompanyName { get; set; }

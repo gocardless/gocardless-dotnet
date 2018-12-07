@@ -53,8 +53,8 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "DKK", "EUR", "GBP", "NZD" and "SEK"
-        /// are supported.
+        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD"
+        /// and "SEK" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public PaymentCurrency? Currency { get; set; }
@@ -90,9 +90,10 @@ namespace GoCardless.Resources
         /// <summary>
         /// An optional payment reference that will appear on your customer's
         /// bank statement. For Bacs payments this can be up to 10 characters,
-        /// for SEPA payments the limit is 140 characters, for Betalingsservice
-        /// or BECS payments the limit is 30 characters and for Autogiro
-        /// payments the limit is 11 characters. <p
+        /// for SEPA payments the limit is 140 characters, for Autogiro payments
+        /// the limit is 11 characters, for Betalingsservice or BECS payments
+        /// the limit is 30 characters and for BECS NZ or PAD the limit is 12
+        /// characters. <p
         /// class='restricted-notice'><strong>Restricted</strong>: You can only
         /// specify a payment reference for Bacs payments (that is, when
         /// collecting from the UK) if you're on the <a
@@ -128,7 +129,7 @@ namespace GoCardless.Resources
     
     /// <summary>
     /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-    /// "AUD", "DKK", "EUR", "GBP", "NZD" and "SEK" are supported.
+    /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD" and "SEK" are supported.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum PaymentCurrency {
@@ -136,6 +137,9 @@ namespace GoCardless.Resources
         /// <summary>`currency` with a value of "AUD"</summary>
         [EnumMember(Value = "AUD")]
         AUD,
+        /// <summary>`currency` with a value of "CAD"</summary>
+        [EnumMember(Value = "CAD")]
+        CAD,
         /// <summary>`currency` with a value of "DKK"</summary>
         [EnumMember(Value = "DKK")]
         DKK,

@@ -68,7 +68,8 @@ namespace GoCardless.Resources
     public class Subscription
     {
         /// <summary>
-        /// Amount in pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
+        /// Amount in the lowest denomination for the currency (e.g. pence in
+        /// GBP, cents in EUR).
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
@@ -76,7 +77,8 @@ namespace GoCardless.Resources
         /// <summary>
         /// The amount to be deducted from each payment as an app fee, to be
         /// paid to the partner integration which created the subscription, in
-        /// pence (GBP), cents (AUD/EUR), öre (SEK), or øre (DKK).
+        /// the lowest denomination for the currency (e.g. pence in GBP, cents
+        /// in EUR).
         /// </summary>
         [JsonProperty("app_fee")]
         public int? AppFee { get; set; }
