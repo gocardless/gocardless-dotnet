@@ -19,8 +19,8 @@ namespace GoCardless.Services
     /// Redirect flows enable you to use GoCardless' [hosted payment
     /// pages](https://pay-sandbox.gocardless.com/AL000000AKFPFF) to set up
     /// mandates with your customers. These pages are fully compliant and have
-    /// been translated into Dutch, French, German, Italian, Portuguese, Spanish
-    /// and Swedish.
+    /// been translated into Danish, Dutch, French, German, Italian, Norwegian,
+    /// Portuguese, Slovak, Spanish and Swedish.
     /// 
     /// The overall flow is:
     /// 
@@ -256,9 +256,7 @@ namespace GoCardless.Services
             public string Language { get; set; }
 
             /// <summary>
-            /// Required for New Zealand customers only. Must be supplied if the
-            /// customer's bank account is denominated in New Zealand Dollars
-            /// (NZD).
+            /// For New Zealand customers only.
             /// </summary>
             [JsonProperty("phone_number")]
             public string PhoneNumber { get; set; }
@@ -318,6 +316,9 @@ namespace GoCardless.Services
             /// <summary>`scheme` with a value of "betalingsservice"</summary>
             [EnumMember(Value = "betalingsservice")]
             Betalingsservice,
+            /// <summary>`scheme` with a value of "pad"</summary>
+            [EnumMember(Value = "pad")]
+            Pad,
             /// <summary>`scheme` with a value of "sepa_core"</summary>
             [EnumMember(Value = "sepa_core")]
             SepaCore,

@@ -47,8 +47,8 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "DKK", "EUR", "GBP", "NZD" and "SEK"
-        /// are supported.
+        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD"
+        /// and "SEK" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public PayoutCurrency? Currency { get; set; }
@@ -106,7 +106,7 @@ namespace GoCardless.Resources
     
     /// <summary>
     /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-    /// "AUD", "DKK", "EUR", "GBP", "NZD" and "SEK" are supported.
+    /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD" and "SEK" are supported.
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum PayoutCurrency {
@@ -114,6 +114,9 @@ namespace GoCardless.Resources
         /// <summary>`currency` with a value of "AUD"</summary>
         [EnumMember(Value = "AUD")]
         AUD,
+        /// <summary>`currency` with a value of "CAD"</summary>
+        [EnumMember(Value = "CAD")]
+        CAD,
         /// <summary>`currency` with a value of "DKK"</summary>
         [EnumMember(Value = "DKK")]
         DKK,

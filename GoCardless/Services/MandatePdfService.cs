@@ -61,10 +61,16 @@ namespace GoCardless.Services
         /// | Bacs             | English (`en`)                                 
         ///                                                                     
         ///                         |
-        /// | Becs             | English (`en`)                                 
+        /// | BECS             | English (`en`)                                 
+        ///                                                                     
+        ///                         |
+        /// | BECS NZ          | English (`en`)                                 
         ///                                                                     
         ///                         |
         /// | Betalingsservice | Danish (`da`), English (`en`)                  
+        ///                                                                     
+        ///                         |
+        /// | PAD              | English (`en`)                                 
         ///                                                                     
         ///                         |
         /// | SEPA Core        | Danish (`da`), Dutch (`nl`), English (`en`),
@@ -112,10 +118,16 @@ namespace GoCardless.Services
     /// | Bacs             | English (`en`)                                     
     ///                                                                         
     ///                 |
-    /// | Becs             | English (`en`)                                     
+    /// | BECS             | English (`en`)                                     
+    ///                                                                         
+    ///                 |
+    /// | BECS NZ          | English (`en`)                                     
     ///                                                                         
     ///                 |
     /// | Betalingsservice | Danish (`da`), English (`en`)                      
+    ///                                                                         
+    ///                 |
+    /// | PAD              | English (`en`)                                     
     ///                                                                         
     ///                 |
     /// | SEPA Core        | Danish (`da`), Dutch (`nl`), English (`en`), French
