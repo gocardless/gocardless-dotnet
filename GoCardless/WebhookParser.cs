@@ -20,8 +20,6 @@ namespace GoCardless
             _body = body;
             _webhookSecret = webhookSecret;
             _signatureHeader = signatureHeader;
-
-            verifySignature();
         }
 
         public static IReadOnlyList<Event> Parse(string body, string webhookSecret, string signatureHeader)
@@ -33,21 +31,25 @@ namespace GoCardless
 
         public IReadOnlyList<Event> Parse()
         {
+            VerifySignature();
+
             var response = JsonConvert
                 .DeserializeObject<EventListResponse>(_body, new JsonSerializerSettings());
 
             return response.Events;
         }
 
-        private void verifySignature()
+        private void VerifySignature()
         {
-            var hmac256 = new HMACSHA256(Encoding.UTF8.GetBytes(_webhookSecret));
-            var computedSignature = hmac256.ComputeHash(Encoding.UTF8.GetBytes(_body));
-            var result = BitConverter.ToString(computedSignature).Replace("-", "").ToLower();
-
-            if (result != _signatureHeader)
+            using (var hmac256 = new HMACSHA256(Encoding.UTF8.GetBytes(_webhookSecret)))
             {
-                throw new InvalidSignatureException();
+                var computedSignature = hmac256.ComputeHash(Encoding.UTF8.GetBytes(_body));
+                var result = BitConverter.ToString(computedSignature).Replace("-", "").ToLower();
+
+                if (result != _signatureHeader)
+                {
+                    throw new InvalidSignatureException();
+                }
             }
         }
     }

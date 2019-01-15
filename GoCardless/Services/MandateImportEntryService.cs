@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace GoCardless.Services
     /// Mandate Import Entries are added to a [Mandate
     /// Import](#core-endpoints-mandate-imports).
     /// Each entry corresponds to one mandate to be imported into GoCardless.
-    /// 
+    ///
     /// To import a mandate you will need:
     /// <ol>
     ///   <li>Identifying information about the customer (name/company and
@@ -29,7 +30,7 @@ namespace GoCardless.Services
     /// details</a></li>
     ///   <li>Amendment details (SEPA only)</li>
     /// </ol>
-    /// 
+    ///
     /// We suggest you provide a `record_identifier` (which is unique within the
     /// context of a
     /// single mandate import) to help you to identify mandates that have been
@@ -41,13 +42,13 @@ namespace GoCardless.Services
     /// the `links`
     /// fields to find the mandate, customer and customer bank account that have
     /// been imported.
-    /// 
+    ///
     /// <p class="restricted-notice"><strong>Restricted</strong>: This API is
     /// currently
     /// only available for approved integrators - please <a
     /// href="mailto:help@gocardless.com">get
     /// in touch</a> if you would like to use this API.</p>
-    /// 
+    ///
     /// </summary>
 
     public class MandateImportEntryService
@@ -67,7 +68,7 @@ namespace GoCardless.Services
         /// For an existing [mandate import](#core-endpoints-mandate-imports),
         /// this endpoint can
         /// be used to add individual mandates to be imported into GoCardless.
-        /// 
+        ///
         /// You can add no more than 30,000 rows to a single mandate import.
         /// If you attempt to go over this limit, the API will return a
         /// `record_limit_exceeded` error.
@@ -82,19 +83,19 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<MandateImportEntryResponse>("POST", "/mandate_import_entries", urlParams, request, null, "mandate_import_entries", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<MandateImportEntryResponse>(HttpMethod.Post, "/mandate_import_entries", urlParams, request, null, "mandate_import_entries", customiseRequestMessage);
         }
 
         /// <summary>
         /// For an existing mandate import, this endpoint lists all of the
         /// entries attached.
-        /// 
+        ///
         /// After a mandate import has been submitted, you can use this endpoint
         /// to associate records
         /// in your system (using the `record_identifier` that you provided when
         /// creating the
         /// mandate import).
-        /// 
+        ///
         /// </summary>
         /// <param name="request">An optional `MandateImportEntryListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -106,7 +107,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<MandateImportEntryListResponse>("GET", "/mandate_import_entries", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<MandateImportEntryListResponse>(HttpMethod.Get, "/mandate_import_entries", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -148,12 +149,12 @@ namespace GoCardless.Services
         }
     }
 
-        
+
     /// <summary>
     /// For an existing [mandate import](#core-endpoints-mandate-imports), this
     /// endpoint can
     /// be used to add individual mandates to be imported into GoCardless.
-    /// 
+    ///
     /// You can add no more than 30,000 rows to a single mandate import.
     /// If you attempt to go over this limit, the API will return a
     /// `record_limit_exceeded` error.
@@ -164,7 +165,7 @@ namespace GoCardless.Services
         [JsonProperty("amendment")]
         public MandateImportEntryAmendment Amendment { get; set; }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public class MandateImportEntryAmendment
         {
@@ -173,14 +174,14 @@ namespace GoCardless.Services
             /// The creditor identifier of the direct debit originator. Required
             /// if mandate
             /// import scheme is `sepa`.
-            /// 
+            ///
             /// </summary>
             [JsonProperty("original_creditor_id")]
             public string OriginalCreditorId { get; set; }
 
             /// <summary>
             /// Data about the original mandate to be moved or modified.
-            /// 
+            ///
             /// </summary>
             [JsonProperty("original_creditor_name")]
             public string OriginalCreditorName { get; set; }
@@ -189,7 +190,7 @@ namespace GoCardless.Services
             /// The unique SEPA reference for the mandate being amended.
             /// Required if mandate
             /// import scheme is `sepa`.
-            /// 
+            ///
             /// </summary>
             [JsonProperty("original_mandate_reference")]
             public string OriginalMandateReference { get; set; }
@@ -198,7 +199,7 @@ namespace GoCardless.Services
         [JsonProperty("bank_account")]
         public MandateImportEntryBankAccount BankAccount { get; set; }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public class MandateImportEntryBankAccount
         {
@@ -256,7 +257,7 @@ namespace GoCardless.Services
         [JsonProperty("customer")]
         public MandateImportEntryCustomer Customer { get; set; }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public class MandateImportEntryCustomer
         {
@@ -264,7 +265,7 @@ namespace GoCardless.Services
             /// <summary>
             /// The first line of the customer's address. Required if mandate
             /// import scheme is `bacs`.
-            /// 
+            ///
             /// </summary>
             [JsonProperty("address_line1")]
             public string AddressLine1 { get; set; }
@@ -360,7 +361,7 @@ namespace GoCardless.Services
             /// <summary>
             /// The customer's postal code. Required if mandate import scheme is
             /// `bacs`.
-            /// 
+            ///
             /// </summary>
             [JsonProperty("postal_code")]
             public string PostalCode { get; set; }
@@ -405,23 +406,23 @@ namespace GoCardless.Services
         /// import has been
         /// processed by GoCardless) to identify the records that have been
         /// created.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("record_identifier")]
         public string RecordIdentifier { get; set; }
     }
 
-        
+
     /// <summary>
     /// For an existing mandate import, this endpoint lists all of the entries
     /// attached.
-    /// 
+    ///
     /// After a mandate import has been submitted, you can use this endpoint to
     /// associate records
     /// in your system (using the `record_identifier` that you provided when
     /// creating the
     /// mandate import).
-    /// 
+    ///
     /// </summary>
     public class MandateImportEntryListRequest
     {

@@ -13,7 +13,7 @@ namespace GoCardless.Resources
     /// Refund objects represent (partial) refunds of a
     /// [payment](#core-endpoints-payments) back to the
     /// [customer](#core-endpoints-customers).
-    /// 
+    ///
     /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
     /// a refund is created, and will update the `amount_refunded` property of
     /// the payment.
@@ -58,7 +58,7 @@ namespace GoCardless.Resources
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// An optional refund reference, displayed on your customer's bank
@@ -69,7 +69,7 @@ namespace GoCardless.Resources
         [JsonProperty("reference")]
         public string Reference { get; set; }
     }
-    
+
     /// <summary>
     /// Resources linked to this Refund
     /// </summary>
@@ -89,5 +89,5 @@ namespace GoCardless.Resources
         [JsonProperty("payment")]
         public string Payment { get; set; }
     }
-    
+
 }

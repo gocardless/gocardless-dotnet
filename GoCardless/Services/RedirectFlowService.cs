@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -77,7 +78,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<RedirectFlowResponse>("POST", "/redirect_flows", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "redirect_flows", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<RedirectFlowResponse>(HttpMethod.Post, "/redirect_flows", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "redirect_flows", customiseRequestMessage);
         }
 
         /// <summary>
@@ -97,7 +98,7 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<RedirectFlowResponse>("GET", "/redirect_flows/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<RedirectFlowResponse>(HttpMethod.Get, "/redirect_flows/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -127,7 +128,7 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<RedirectFlowResponse>("POST", "/redirect_flows/:identity/actions/complete", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<RedirectFlowResponse>(HttpMethod.Post, "/redirect_flows/:identity/actions/complete", urlParams, request, null, "data", customiseRequestMessage);
         }
     }
 

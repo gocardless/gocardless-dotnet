@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -94,7 +95,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<MandateImportResponse>("POST", "/mandate_imports", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "mandate_imports", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<MandateImportResponse>(HttpMethod.Post, "/mandate_imports", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "mandate_imports", customiseRequestMessage);
         }
 
         /// <summary>
@@ -114,7 +115,7 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<MandateImportResponse>("GET", "/mandate_imports/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<MandateImportResponse>(HttpMethod.Get, "/mandate_imports/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -146,7 +147,7 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<MandateImportResponse>("POST", "/mandate_imports/:identity/actions/submit", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<MandateImportResponse>(HttpMethod.Post, "/mandate_imports/:identity/actions/submit", urlParams, request, null, "data", customiseRequestMessage);
         }
 
         /// <summary>
@@ -172,7 +173,7 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<MandateImportResponse>("POST", "/mandate_imports/:identity/actions/cancel", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<MandateImportResponse>(HttpMethod.Post, "/mandate_imports/:identity/actions/cancel", urlParams, request, null, "data", customiseRequestMessage);
         }
     }
 

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
@@ -14,7 +15,6 @@ using GoCardless.Errors;
 using GoCardless.Exceptions;
 using GoCardless.Internals;
 using GoCardless.Resources;
-using GoCardless.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using JsonSerializerSettings = GoCardless.Internals.JsonSerializerSettings;
@@ -42,7 +42,7 @@ namespace GoCardless
 
         private GoCardlessClient(string accessToken, string baseUrl, HttpClient httpClient)
         {
-            this._httpClient = httpClient ?? DefaultHttpClient;
+            _httpClient = httpClient ?? DefaultHttpClient;
             _accessToken = accessToken;
             _baseUrl = new Uri(baseUrl, UriKind.Absolute);
         }
@@ -70,7 +70,7 @@ namespace GoCardless
         ///
         ///@param accessToken the access token
         /// </summary>
-        public static GoCardlessClient Create(String accessToken)
+        public static GoCardlessClient Create(string accessToken)
         {
             return Create(accessToken, Environment.LIVE);
         }
@@ -81,7 +81,7 @@ namespace GoCardless
         ///@param accessToken the access token
         ///@param environment the environment
         /// </summary>
-        public static GoCardlessClient Create(String accessToken, Environment environment, HttpClient httpClient = null)
+        public static GoCardlessClient Create(string accessToken, Environment environment, HttpClient httpClient = null)
         {
             return Create(accessToken, GetBaseUrl(environment), httpClient);
         }
@@ -97,7 +97,7 @@ namespace GoCardless
             return new GoCardlessClient(accessToken, baseUrl, client);
         }
 
-        private static String GetBaseUrl(Environment env)
+        private static string GetBaseUrl(Environment env)
         {
             switch (env)
             {
@@ -109,7 +109,7 @@ namespace GoCardless
             throw new ArgumentException("Unknown environment:" + env);
         }
 
-        internal async Task<T> ExecuteAsync<T>(string method, string path, List<KeyValuePair<string, object>> urlParams,
+        internal async Task<T> ExecuteAsync<T>(HttpMethod method, string path, IReadOnlyList<KeyValuePair<string, object>> urlParams,
             object requestParams, Func<string, Task<T>> fetchById, string payloadKey,
             RequestSettings requestSettings)
             where T : ApiResponse
@@ -142,14 +142,14 @@ namespace GoCardless
                 {
                     return await execute().ConfigureAwait(false);
                 }
-                catch (TaskCanceledException exception)
+                catch (TaskCanceledException)
                     when (!cancellationTokenSource.Token.IsCancellationRequested)
                 {
                     // This case represents a timeout, which we want to retry - see
                     // https://stackoverflow.com/questions/10547895/how-can-i-tell-when-httpclient-has-timed-out/32230327
                     await Task.Delay(waitBetweenRetries);
                 }
-                catch (HttpRequestException exception)
+                catch (HttpRequestException)
                 {
                     // An HttpRequestException is raised when "[t]he request failed due to
                     // an underlying issue such as network connectivity, DNS failure,
@@ -157,51 +157,53 @@ namespace GoCardless
                     await Task.Delay(waitBetweenRetries);
                 }
             }
-            return await execute().ConfigureAwait(false);
 
+            return await execute().ConfigureAwait(false);
         }
 
-        private async Task<T> ExecuteAsyncInner<T>(string method, string path, List<KeyValuePair<string, object>> urlParams, object requestParams,
+        private async Task<T> ExecuteAsyncInner<T>(HttpMethod method, string path, IReadOnlyList<KeyValuePair<string, object>> urlParams, object requestParams,
             string payloadKey, RequestSettings requestSettings, CancellationTokenSource cancellationTokenSource) where T : ApiResponse
         {
-            var requestMessage = BuildHttpRequestMessage<T>(method, path, urlParams, requestParams, payloadKey, requestSettings);
-
-
-            var responseMessage = await _httpClient.SendAsync(requestMessage, cancellationTokenSource.Token).ConfigureAwait(false);
-            try
+            using (var requestMessage = BuildHttpRequestMessage<T>(method, path, urlParams, requestParams, payloadKey, requestSettings))
             {
-                if (responseMessage.IsSuccessStatusCode)
-                {
-                    var json = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var result = JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings());
-                    result.ResponseMessage = responseMessage;
-                    return result;
-                }
-                else
-                {
-                    var json = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var result = JsonConvert.DeserializeObject<ApiErrorResponse>(json, new JsonSerializerSettings());
-                    result.ResponseMessage = responseMessage;
+                var responseMessage = await _httpClient.SendAsync(requestMessage, cancellationTokenSource.Token).ConfigureAwait(false);
 
-                    throw result.ToException();
-                }
-            }
-            catch (JsonException)
-            {
-                throw new ApiException(new ApiErrorResponse()
+                try
                 {
-                    ResponseMessage = responseMessage,
-                    Error = new ApiError()
+                    if (responseMessage.IsSuccessStatusCode)
                     {
-                        Code = (int) responseMessage.StatusCode,
-                        Type = ApiErrorType.GOCARDLESS,
-                        Message = "Something went wrong with this request. Please check the ResponseMessage property."
+                        var json = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var result = JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings());
+                        result.ResponseMessage = responseMessage;
+
+                        return result;
                     }
-                });
+                    else
+                    {
+                        var json = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        var result = JsonConvert.DeserializeObject<ApiErrorResponse>(json, new JsonSerializerSettings());
+                        result.ResponseMessage = responseMessage;
+
+                        throw result.ToException();
+                    }
+                }
+                catch (JsonException)
+                {
+                    throw new ApiException(new ApiErrorResponse
+                    {
+                        ResponseMessage = responseMessage,
+                        Error = new ApiError
+                        {
+                            Code = (int)responseMessage.StatusCode,
+                            Type = ApiErrorType.GOCARDLESS,
+                            Message = "Something went wrong with this request. Please check the ResponseMessage property."
+                        }
+                    });
+                }
             }
         }
 
-        private HttpRequestMessage BuildHttpRequestMessage<T>(string method, string path, List<KeyValuePair<string, object>> urlParams, object requestParams, string payloadKey, RequestSettings requestSettings) where T : ApiResponse
+        private HttpRequestMessage BuildHttpRequestMessage<T>(HttpMethod method, string path, IReadOnlyList<KeyValuePair<string, object>> urlParams, object requestParams, string payloadKey, RequestSettings requestSettings) where T : ApiResponse
         {
             {
                 //insert url arguments into template
@@ -213,31 +215,27 @@ namespace GoCardless
             {
                 //add querystring for GET requests
 
-                if (method == "GET")
+                if (method == HttpMethod.Get)
                 {
                     var requestArguments = Helpers.ExtractQueryStringValuesFromObject(requestParams);
                     if (requestArguments.Count > 0)
                     {
-                        var queryString = String.Join("&", requestArguments.Select(Helpers.QueryStringArgument));
+                        var queryString = string.Join("&", requestArguments.Select(Helpers.QueryStringArgument));
                         path += "?" + queryString;
                     }
                 }
             }
 
-
-            var httpMethod = new HttpMethod(method);
-
-            var requestMessage = new HttpRequestMessage(httpMethod, new Uri(_baseUrl, path));
-            requestMessage.Headers.Add("User-Agent", "gocardless-dotnet/2.12.1");
+            var requestMessage = new HttpRequestMessage(method, new Uri(_baseUrl, path));
+            requestMessage.Headers.Add("User-Agent", "gocardless-dotnet/2.13.0");
             requestMessage.Headers.Add("GoCardless-Version", "2015-07-06");
-            requestMessage.Headers.Add("GoCardless-Client-Version", "2.12.1");
+            requestMessage.Headers.Add("GoCardless-Client-Version", "2.13.0");
             requestMessage.Headers.Add("GoCardless-Client-Library", "gocardless-dotnet");
-            requestMessage.Headers.Authorization =
-                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
 
             {
                 //add request body for non-GETs
-                if (method != "GET")
+                if (method != HttpMethod.Get)
                 {
                     if (requestParams != null)
                     {
@@ -248,7 +246,7 @@ namespace GoCardless
                         };
                         var serializer = JsonSerializer.Create(settings);
 
-                        StringBuilder sb = new StringBuilder();
+                        var sb = new StringBuilder();
                         using (var sw = new StringWriter(sb))
                         {
                             var jo = new JObject();
@@ -257,25 +255,24 @@ namespace GoCardless
                                 serializer.Serialize(jsonTextWriter, requestParams);
                                 jo[payloadKey] = JToken.Parse(sb.ToString());
                             }
-                            requestMessage.Content = new StringContent(jo.ToString(Formatting.Indented), Encoding.UTF8,
-                                "application/json");
+
+                            requestMessage.Content = new StringContent(jo.ToString(Formatting.Indented), Encoding.UTF8, "application/json");
                         }
                     }
                 }
             }
 
-            var hasIdempotencyKey = requestParams as IHasIdempotencyKey;
-
-            if (hasIdempotencyKey != null)
+            if (requestParams is IHasIdempotencyKey idempotency)
             {
-                hasIdempotencyKey.IdempotencyKey = hasIdempotencyKey.IdempotencyKey ?? Guid.NewGuid().ToString();
-                requestMessage.Headers.TryAddWithoutValidation("Idempotency-Key", hasIdempotencyKey.IdempotencyKey);
+                requestMessage.Headers.TryAddWithoutValidation("Idempotency-Key", idempotency.IdempotencyKey ?? Guid.NewGuid().ToString());
             }
 
-            if (requestSettings != null) {
+            if (requestSettings != null)
+            {
                 foreach (var header in requestSettings.Headers)
                 {
-                    if (requestMessage.Headers.Contains(header.Key)) {
+                    if (requestMessage.Headers.Contains(header.Key))
+                    {
                         requestMessage.Headers.Remove(header.Key);
                     }
 
@@ -284,6 +281,7 @@ namespace GoCardless
             }
 
             requestSettings?.CustomiseRequestMessage?.Invoke(requestMessage);
+
             return requestMessage;
         }
 
@@ -294,11 +292,11 @@ namespace GoCardless
                 if (value is bool)
                     return value.ToString().ToLower();
                 if (value is DateTimeOffset)
-                    return WebUtility.UrlEncode(((DateTimeOffset?) value).Value.ToString("o"));
+                    return WebUtility.UrlEncode(((DateTimeOffset?)value).Value.ToString("o"));
                 var typeInfo = value.GetType().GetTypeInfo();
                 if (typeInfo.IsArray)
                 {
-                    return string.Join(WebUtility.UrlEncode(","), ((IEnumerable) value).Cast<object>().Select(Stringify));
+                    return string.Join(WebUtility.UrlEncode(","), ((IEnumerable)value).Cast<object>().Select(Stringify));
                 }
                 if (typeInfo.IsEnum)
                 {
@@ -312,7 +310,7 @@ namespace GoCardless
 
             internal static List<KeyValuePair<string, object>> ExtractQueryStringValuesFromObject(object obj)
             {
-                if (obj == null) return Enumerable.Empty<KeyValuePair<string, object>>().ToList();
+                if (obj == null) return new List<KeyValuePair<string, object>>(0);
 
                 var args = new List<KeyValuePair<string, object>>();
                 var propertyInfos = obj.GetType().GetTypeInfo().GetProperties();
@@ -342,13 +340,15 @@ namespace GoCardless
                         }
                     }
                 }
+
                 return args;
             }
 
             internal static string QueryStringArgument(KeyValuePair<string, object> argument)
             {
-                var urlEncodedValue = Helpers.Stringify(argument.Value);
+                var urlEncodedValue = Stringify(argument.Value);
                 var urlEncodedKey = WebUtility.UrlEncode(argument.Key);
+
                 return $"{urlEncodedKey}={urlEncodedValue}";
             }
         }

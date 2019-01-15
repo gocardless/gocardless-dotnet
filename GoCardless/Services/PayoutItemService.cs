@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,18 +24,18 @@ namespace GoCardless.Services
     /// we take any positive balance in your GoCardless account, and pay it out
     /// to your
     /// nominated bank account.
-    /// 
+    ///
     /// Other actions in your GoCardless account can also affect your balance.
     /// For example,
     /// if a customer charges back a payment, we'll deduct the payment's amount
     /// from your
     /// balance, but add any fees you paid for that payment back to your
     /// balance.
-    /// 
+    ///
     /// The Payout Items API allows you to view, on a per-payout basis, the
     /// credit and debit
     /// items that make up that payout's amount.
-    /// 
+    ///
     /// </summary>
 
     public class PayoutItemService
@@ -53,7 +54,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// items in the payout.
-        /// 
+        ///
         /// </summary>
         /// <param name="request">An optional `PayoutItemListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -65,7 +66,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<PayoutItemListResponse>("GET", "/payout_items", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<PayoutItemListResponse>(HttpMethod.Get, "/payout_items", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -107,11 +108,11 @@ namespace GoCardless.Services
         }
     }
 
-        
+
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of items
     /// in the payout.
-    /// 
+    ///
     /// </summary>
     public class PayoutItemListRequest
     {

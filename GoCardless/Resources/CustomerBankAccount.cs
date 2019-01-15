@@ -14,7 +14,7 @@ namespace GoCardless.Resources
     /// [customer](#core-endpoints-customers). They always belong to a
     /// [customer](#core-endpoints-customers), and may be linked to several
     /// Direct Debit [mandates](#core-endpoints-mandates).
-    /// 
+    ///
     /// Note that customer bank accounts must be unique, and so you will
     /// encounter a `bank_account_exists` error if you try to create a duplicate
     /// bank account. You may wish to handle this by updating the existing
@@ -91,9 +91,9 @@ namespace GoCardless.Resources
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
     }
-    
+
     /// <summary>
     /// Resources linked to this CustomerBankAccount
     /// </summary>
@@ -106,5 +106,5 @@ namespace GoCardless.Resources
         [JsonProperty("customer")]
         public string Customer { get; set; }
     }
-    
+
 }

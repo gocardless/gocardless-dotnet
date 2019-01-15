@@ -14,7 +14,7 @@ namespace GoCardless.Resources
     /// [customer](#core-endpoints-customers) to a
     /// [creditor](#core-endpoints-creditors), taken against a Direct Debit
     /// [mandate](#core-endpoints-mandates).
-    /// 
+    ///
     /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
     /// the state of a payment changes.
     /// </summary>
@@ -85,7 +85,7 @@ namespace GoCardless.Resources
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// An optional payment reference that will appear on your customer's
@@ -126,7 +126,7 @@ namespace GoCardless.Resources
         [JsonProperty("status")]
         public PaymentStatus? Status { get; set; }
     }
-    
+
     /// <summary>
     /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
     /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD" and "SEK" are supported.
@@ -192,7 +192,7 @@ namespace GoCardless.Resources
         [JsonProperty("subscription")]
         public string Subscription { get; set; }
     }
-    
+
     /// <summary>
     /// One of:
     /// <ul>

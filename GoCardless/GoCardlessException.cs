@@ -7,7 +7,7 @@ namespace GoCardless
     /// </summary>
     public abstract class GoCardlessException : Exception
     {
-        protected GoCardlessException(String message) : base(message)
+        protected GoCardlessException(string message) : base(message)
         {
         }
 

@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -63,7 +64,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<BankDetailsLookupResponse>("POST", "/bank_details_lookups", urlParams, request, null, "bank_details_lookups", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BankDetailsLookupResponse>(HttpMethod.Post, "/bank_details_lookups", urlParams, request, null, "bank_details_lookups", customiseRequestMessage);
         }
     }
 

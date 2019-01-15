@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -48,7 +49,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<EventListResponse>("GET", "/events", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<EventListResponse>(HttpMethod.Get, "/events", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -106,11 +107,11 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<EventResponse>("GET", "/events/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<EventResponse>(HttpMethod.Get, "/events/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
     }
 
-        
+
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// events.
@@ -185,7 +186,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("include")]
         public EventInclude? Include { get; set; }
-            
+
         /// <summary>
         /// Includes linked resources in the response. Must be used with the
         /// `resource_type` parameter specified. The include should be one of:
@@ -200,7 +201,7 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum EventInclude
         {
-    
+
             /// <summary>`include` with a value of "payment"</summary>
             [EnumMember(Value = "payment")]
             Payment,
@@ -273,7 +274,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("resource_type")]
         public EventResourceType? ResourceType { get; set; }
-            
+
         /// <summary>
         /// Type of resource that you'd like to get all events for. Cannot be
         /// used together with the `payment`, `mandate`, `subscription`,
@@ -289,7 +290,7 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum EventResourceType
         {
-    
+
             /// <summary>`resource_type` with a value of "payments"</summary>
             [EnumMember(Value = "payments")]
             Payments,
@@ -315,7 +316,7 @@ namespace GoCardless.Services
         public string Subscription { get; set; }
     }
 
-        
+
     /// <summary>
     /// Retrieves the details of a single event.
     /// </summary>

@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace GoCardless.Services
     /// Refund objects represent (partial) refunds of a
     /// [payment](#core-endpoints-payments) back to the
     /// [customer](#core-endpoints-customers).
-    /// 
+    ///
     /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
     /// a refund is created, and will update the `amount_refunded` property of
     /// the payment.
@@ -40,18 +41,18 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Creates a new refund object.
-        /// 
+        ///
         /// This fails with:<a name="total_amount_confirmation_invalid"></a><a
         /// name="number_of_refunds_exceeded"></a>
-        /// 
+        ///
         /// - `total_amount_confirmation_invalid` if the confirmation amount
         /// doesn't match the total amount refunded for the payment. This
         /// safeguard is there to prevent two processes from creating refunds
         /// without awareness of each other.
-        /// 
+        ///
         /// - `number_of_refunds_exceeded` if five or more refunds have already
         /// been created against the payment.
-        /// 
+        ///
         /// </summary>
         /// <param name="request">An optional `RefundCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -63,7 +64,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<RefundResponse>("POST", "/refunds", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "refunds", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<RefundResponse>(HttpMethod.Post, "/refunds", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "refunds", customiseRequestMessage);
         }
 
         /// <summary>
@@ -80,7 +81,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<RefundListResponse>("GET", "/refunds", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<RefundListResponse>(HttpMethod.Get, "/refunds", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -138,7 +139,7 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<RefundResponse>("GET", "/refunds/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<RefundResponse>(HttpMethod.Get, "/refunds/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -158,25 +159,25 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<RefundResponse>("PUT", "/refunds/:identity", urlParams, request, null, "refunds", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<RefundResponse>(HttpMethod.Put, "/refunds/:identity", urlParams, request, null, "refunds", customiseRequestMessage);
         }
     }
 
-        
+
     /// <summary>
     /// Creates a new refund object.
-    /// 
+    ///
     /// This fails with:<a name="total_amount_confirmation_invalid"></a><a
     /// name="number_of_refunds_exceeded"></a>
-    /// 
+    ///
     /// - `total_amount_confirmation_invalid` if the confirmation amount doesn't
     /// match the total amount refunded for the payment. This safeguard is there
     /// to prevent two processes from creating refunds without awareness of each
     /// other.
-    /// 
+    ///
     /// - `number_of_refunds_exceeded` if five or more refunds have already been
     /// created against the payment.
-    /// 
+    ///
     /// </summary>
     public class RefundCreateRequest : IHasIdempotencyKey
     {
@@ -219,7 +220,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// An optional refund reference, displayed on your customer's bank
@@ -236,9 +237,9 @@ namespace GoCardless.Services
         /// partial refunds against this payment, this value should be the sum
         /// of the existing
         /// refunds plus the amount of the refund being created.
-        /// 
+        ///
         /// Must be supplied if `links[payment]` is present.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("total_amount_confirmation")]
         public int? TotalAmountConfirmation { get; set; }
@@ -252,7 +253,7 @@ namespace GoCardless.Services
         public string IdempotencyKey { get; set; }
     }
 
-        
+
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// refunds.
@@ -336,7 +337,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("refund_type")]
         public RefundRefundType? RefundType { get; set; }
-            
+
         /// <summary>
         /// Whether a refund was issued against a mandate or a payment. One of:
         /// <ul>
@@ -348,7 +349,7 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum RefundRefundType
         {
-    
+
             /// <summary>`refund_type` with a value of "mandate"</summary>
             [EnumMember(Value = "mandate")]
             Mandate,
@@ -358,7 +359,7 @@ namespace GoCardless.Services
         }
     }
 
-        
+
     /// <summary>
     /// Retrieves all details for a single refund
     /// </summary>
@@ -366,7 +367,7 @@ namespace GoCardless.Services
     {
     }
 
-        
+
     /// <summary>
     /// Updates a refund object.
     /// </summary>
@@ -378,7 +379,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
     }
 
     /// <summary>

@@ -14,7 +14,7 @@ namespace GoCardless.Resources
     /// have several [customer bank
     /// accounts](#core-endpoints-customer-bank-accounts), which in turn can
     /// have several Direct Debit [mandates](#core-endpoints-mandates).
-    /// 
+    ///
     /// Notes:
     /// - the `phone_number` field may only be supplied for New Zealand
     /// customers, and must be supplied if you intend to set up an BECS NZ
@@ -128,7 +128,7 @@ namespace GoCardless.Resources
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// Required for New Zealand customers only. Must be supplied if the
@@ -158,5 +158,5 @@ namespace GoCardless.Resources
         [JsonProperty("swedish_identity_number")]
         public string SwedishIdentityNumber { get; set; }
     }
-    
+
 }

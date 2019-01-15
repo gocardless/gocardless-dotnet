@@ -12,17 +12,17 @@ namespace GoCardless.Resources
     ///
     /// Subscriptions create [payments](#core-endpoints-payments) according to a
     /// schedule.
-    /// 
+    ///
     /// ### Recurrence Rules
-    /// 
+    ///
     /// The following rules apply when specifying recurrence:
-    /// 
+    ///
     /// - The first payment must be charged within 1 year.
     /// - When neither `month` nor `day_of_month` are present, the subscription
     /// will recur from the `start_date` based on the `interval_unit`.
     /// - If `month` or `day_of_month` are present, the recurrence rules will be
     /// applied from the `start_date`, and the following validations apply:
-    /// 
+    ///
     /// | interval_unit   | month                                          |
     /// day_of_month                            |
     /// | :-------------- | :--------------------------------------------- |
@@ -33,37 +33,37 @@ namespace GoCardless.Resources
     /// required                                |
     /// | weekly          | invalid                                        |
     /// invalid                                 |
-    /// 
+    ///
     /// Examples:
-    /// 
-    /// | interval_unit   | interval   | month   | day_of_month   | valid?      
+    ///
+    /// | interval_unit   | interval   | month   | day_of_month   | valid?
     ///                                       |
     /// | :-------------- | :--------- | :------ | :------------- |
     /// :------------------------------------------------- |
-    /// | yearly          | 1          | january | -1             | valid       
+    /// | yearly          | 1          | january | -1             | valid
     ///                                       |
     /// | yearly          | 1          | march   |                | invalid -
     /// missing `day_of_month`                   |
-    /// | monthly         | 6          |         | 12             | valid       
+    /// | monthly         | 6          |         | 12             | valid
     ///                                       |
     /// | monthly         | 6          | august  | 12             | invalid -
     /// `month` must be blank                    |
-    /// | weekly          | 2          |         |                | valid       
+    /// | weekly          | 2          |         |                | valid
     ///                                       |
     /// | weekly          | 2          | october | 10             | invalid -
     /// `month` and `day_of_month` must be blank |
-    /// 
+    ///
     /// ### Rolling dates
-    /// 
+    ///
     /// When a charge date falls on a non-business day, one of two things will
     /// happen:
-    /// 
+    ///
     /// - if the recurrence rule specified `-1` as the `day_of_month`, the
     /// charge date will be rolled __backwards__ to the previous business day
     /// (i.e., the last working day of the month).
     /// - otherwise the charge date will be rolled __forwards__ to the next
     /// business day.
-    /// 
+    ///
     /// </summary>
     public class Subscription
     {
@@ -147,7 +147,7 @@ namespace GoCardless.Resources
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// Name of the month on which to charge a customer. Must be lowercase.
@@ -209,7 +209,7 @@ namespace GoCardless.Resources
         [JsonProperty("upcoming_payments")]
         public List<SubscriptionUpcomingPayment> UpcomingPayments { get; set; }
     }
-    
+
     /// <summary>
     /// The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
     /// </summary>
@@ -239,7 +239,7 @@ namespace GoCardless.Resources
         [JsonProperty("mandate")]
         public string Mandate { get; set; }
     }
-    
+
     /// <summary>
     /// Name of the month on which to charge a customer. Must be lowercase.
     /// </summary>
@@ -334,5 +334,5 @@ namespace GoCardless.Resources
         [JsonProperty("charge_date")]
         public string ChargeDate { get; set; }
     }
-    
+
 }

@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -36,42 +37,42 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Generates a PDF mandate and returns its temporary URL.
-        /// 
+        ///
         /// Customer and bank account details can be left blank (for a blank
         /// mandate), provided manually, or inferred from the ID of an existing
         /// [mandate](#core-endpoints-mandates).
-        /// 
+        ///
         /// By default, we'll generate PDF mandates in English.
-        /// 
+        ///
         /// To generate a PDF mandate in another language, set the
         /// `Accept-Language` header when creating the PDF mandate to the
         /// relevant [ISO
         /// 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
         /// language code supported for the scheme.
-        /// 
-        /// | Scheme           | Supported languages                            
-        ///                                                                     
+        ///
+        /// | Scheme           | Supported languages
+        ///
         ///                         |
         /// | :--------------- |
         /// :-------------------------------------------------------------------------------------------------------------------------------------------
         /// |
-        /// | Autogiro         | English (`en`), Swedish (`sv`)                 
-        ///                                                                     
+        /// | Autogiro         | English (`en`), Swedish (`sv`)
+        ///
         ///                         |
-        /// | Bacs             | English (`en`)                                 
-        ///                                                                     
+        /// | Bacs             | English (`en`)
+        ///
         ///                         |
-        /// | BECS             | English (`en`)                                 
-        ///                                                                     
+        /// | BECS             | English (`en`)
+        ///
         ///                         |
-        /// | BECS NZ          | English (`en`)                                 
-        ///                                                                     
+        /// | BECS NZ          | English (`en`)
+        ///
         ///                         |
-        /// | Betalingsservice | Danish (`da`), English (`en`)                  
-        ///                                                                     
+        /// | Betalingsservice | Danish (`da`), English (`en`)
+        ///
         ///                         |
-        /// | PAD              | English (`en`)                                 
-        ///                                                                     
+        /// | PAD              | English (`en`)
+        ///
         ///                         |
         /// | SEPA Core        | Danish (`da`), Dutch (`nl`), English (`en`),
         /// French (`fr`), German (`de`), Italian (`it`), Portuguese (`pt`),
@@ -87,48 +88,48 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<MandatePdfResponse>("POST", "/mandate_pdfs", urlParams, request, null, "mandate_pdfs", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<MandatePdfResponse>(HttpMethod.Post, "/mandate_pdfs", urlParams, request, null, "mandate_pdfs", customiseRequestMessage);
         }
     }
 
-        
+
     /// <summary>
     /// Generates a PDF mandate and returns its temporary URL.
-    /// 
+    ///
     /// Customer and bank account details can be left blank (for a blank
     /// mandate), provided manually, or inferred from the ID of an existing
     /// [mandate](#core-endpoints-mandates).
-    /// 
+    ///
     /// By default, we'll generate PDF mandates in English.
-    /// 
+    ///
     /// To generate a PDF mandate in another language, set the `Accept-Language`
     /// header when creating the PDF mandate to the relevant [ISO
     /// 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language
     /// code supported for the scheme.
-    /// 
-    /// | Scheme           | Supported languages                                
-    ///                                                                         
+    ///
+    /// | Scheme           | Supported languages
+    ///
     ///                 |
     /// | :--------------- |
     /// :-------------------------------------------------------------------------------------------------------------------------------------------
     /// |
-    /// | Autogiro         | English (`en`), Swedish (`sv`)                     
-    ///                                                                         
+    /// | Autogiro         | English (`en`), Swedish (`sv`)
+    ///
     ///                 |
-    /// | Bacs             | English (`en`)                                     
-    ///                                                                         
+    /// | Bacs             | English (`en`)
+    ///
     ///                 |
-    /// | BECS             | English (`en`)                                     
-    ///                                                                         
+    /// | BECS             | English (`en`)
+    ///
     ///                 |
-    /// | BECS NZ          | English (`en`)                                     
-    ///                                                                         
+    /// | BECS NZ          | English (`en`)
+    ///
     ///                 |
-    /// | Betalingsservice | Danish (`da`), English (`en`)                      
-    ///                                                                         
+    /// | Betalingsservice | Danish (`da`), English (`en`)
+    ///
     ///                 |
-    /// | PAD              | English (`en`)                                     
-    ///                                                                         
+    /// | PAD              | English (`en`)
+    ///
     ///                 |
     /// | SEPA Core        | Danish (`da`), Dutch (`nl`), English (`en`), French
     /// (`fr`), German (`de`), Italian (`it`), Portuguese (`pt`), Spanish

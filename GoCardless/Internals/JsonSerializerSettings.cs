@@ -8,7 +8,7 @@ namespace GoCardless.Internals
     {
         public JsonSerializerSettings()
         {
-            this.ContractResolver = new GoCardlessDefaultContractResolver();
+            ContractResolver = new GoCardlessDefaultContractResolver();
             NullValueHandling = NullValueHandling.Ignore;
             DateFormatHandling = DateFormatHandling.IsoDateFormat;
             DateParseHandling = DateParseHandling.DateTimeOffset;
@@ -19,7 +19,7 @@ namespace GoCardless.Internals
         {
             public GoCardlessDefaultContractResolver()
             {
-                this.NamingStrategy = new SnakeCaseNamingStrategy();
+                NamingStrategy = new SnakeCaseNamingStrategy();
             }
 
             protected override JsonProperty CreateProperty(
@@ -30,8 +30,7 @@ namespace GoCardless.Internals
 
                 if (!prop.Writable)
                 {
-                    var property = member as PropertyInfo;
-                    if (property != null)
+                    if (member is PropertyInfo property)
                     {
                         var hasPrivateSetter = property.GetSetMethod(true) != null;
                         prop.Writable = hasPrivateSetter;

@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -50,7 +51,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<PayoutListResponse>("GET", "/payouts", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<PayoutListResponse>(HttpMethod.Get, "/payouts", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -110,11 +111,11 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<PayoutResponse>("GET", "/payouts/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<PayoutResponse>(HttpMethod.Get, "/payouts/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
     }
 
-        
+
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// payouts.
@@ -189,7 +190,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("currency")]
         public PayoutCurrency? Currency { get; set; }
-            
+
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD"
@@ -198,7 +199,7 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PayoutCurrency
         {
-    
+
             /// <summary>`currency` with a value of "AUD"</summary>
             [EnumMember(Value = "AUD")]
             AUD,
@@ -233,14 +234,14 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("payout_type")]
         public PayoutPayoutType? PayoutType { get; set; }
-            
+
         /// <summary>
         /// Whether a payout contains merchant revenue or partner fees.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PayoutPayoutType
         {
-    
+
             /// <summary>`payout_type` with a value of "merchant"</summary>
             [EnumMember(Value = "merchant")]
             Merchant,
@@ -265,7 +266,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("status")]
         public PayoutStatus? Status { get; set; }
-            
+
         /// <summary>
         /// One of:
         /// <ul>
@@ -277,7 +278,7 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PayoutStatus
         {
-    
+
             /// <summary>`status` with a value of "pending"</summary>
             [EnumMember(Value = "pending")]
             Pending,
@@ -287,7 +288,7 @@ namespace GoCardless.Services
         }
     }
 
-        
+
     /// <summary>
     /// Retrieves the details of a single payout. For an example of how to
     /// reconcile the transactions in a payout, see [this

@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace GoCardless.Services
     /// [customer](#core-endpoints-customers) to a
     /// [creditor](#core-endpoints-creditors), taken against a Direct Debit
     /// [mandate](#core-endpoints-mandates).
-    /// 
+    ///
     /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
     /// the state of a payment changes.
     /// </summary>
@@ -40,7 +41,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// <a name="mandate_is_inactive"></a>Creates a new payment object.
-        /// 
+        ///
         /// This fails with a `mandate_is_inactive` error if the linked
         /// [mandate](#core-endpoints-mandates) is cancelled or has failed.
         /// Payments can be created against mandates with status of:
@@ -57,7 +58,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<PaymentResponse>("POST", "/payments", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "payments", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<PaymentResponse>(HttpMethod.Post, "/payments", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "payments", customiseRequestMessage);
         }
 
         /// <summary>
@@ -74,7 +75,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<PaymentListResponse>("GET", "/payments", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<PaymentListResponse>(HttpMethod.Get, "/payments", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -132,7 +133,7 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<PaymentResponse>("GET", "/payments/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<PaymentResponse>(HttpMethod.Get, "/payments/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -152,14 +153,14 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<PaymentResponse>("PUT", "/payments/:identity", urlParams, request, null, "payments", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<PaymentResponse>(HttpMethod.Put, "/payments/:identity", urlParams, request, null, "payments", customiseRequestMessage);
         }
 
         /// <summary>
         /// Cancels the payment if it has not already been submitted to the
         /// banks. Any metadata supplied to this endpoint will be stored on the
         /// payment cancellation event it causes.
-        /// 
+        ///
         /// This will fail with a `cancellation_failed` error unless the
         /// payment's status is `pending_submission`.
         /// </summary>
@@ -177,7 +178,7 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<PaymentResponse>("POST", "/payments/:identity/actions/cancel", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<PaymentResponse>(HttpMethod.Post, "/payments/:identity/actions/cancel", urlParams, request, null, "data", customiseRequestMessage);
         }
 
         /// <summary>
@@ -188,10 +189,10 @@ namespace GoCardless.Services
         /// will receive a `submitted` webhook, followed by a `confirmed` or
         /// `failed` event. Any metadata supplied to this endpoint will be
         /// stored against the payment submission event it causes.
-        /// 
+        ///
         /// This will return a `retry_failed` error if the payment has not
         /// failed.
-        /// 
+        ///
         /// Payments can be retried up to 3 times.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "PM".</param>
@@ -208,14 +209,14 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<PaymentResponse>("POST", "/payments/:identity/actions/retry", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<PaymentResponse>(HttpMethod.Post, "/payments/:identity/actions/retry", urlParams, request, null, "data", customiseRequestMessage);
         }
     }
 
-        
+
     /// <summary>
     /// <a name="mandate_is_inactive"></a>Creates a new payment object.
-    /// 
+    ///
     /// This fails with a `mandate_is_inactive` error if the linked
     /// [mandate](#core-endpoints-mandates) is cancelled or has failed. Payments
     /// can be created against mandates with status of:
@@ -257,7 +258,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("currency")]
         public PaymentCurrency? Currency { get; set; }
-            
+
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD"
@@ -266,7 +267,7 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentCurrency
         {
-    
+
             /// <summary>`currency` with a value of "AUD"</summary>
             [EnumMember(Value = "AUD")]
             AUD,
@@ -323,7 +324,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// An optional payment reference that will appear on your customer's
@@ -350,7 +351,7 @@ namespace GoCardless.Services
         public string IdempotencyKey { get; set; }
     }
 
-        
+
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// payments.
@@ -420,7 +421,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("currency")]
         public PaymentCurrency? Currency { get; set; }
-            
+
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD"
@@ -429,7 +430,7 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentCurrency
         {
-    
+
             /// <summary>`currency` with a value of "AUD"</summary>
             [EnumMember(Value = "AUD")]
             AUD,
@@ -494,7 +495,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("status")]
         public PaymentStatus? Status { get; set; }
-            
+
         /// <summary>
         /// One of:
         /// <ul>
@@ -518,7 +519,7 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentStatus
         {
-    
+
             /// <summary>`status` with a value of "pending_customer_approval"</summary>
             [EnumMember(Value = "pending_customer_approval")]
             PendingCustomerApproval,
@@ -555,7 +556,7 @@ namespace GoCardless.Services
         public string Subscription { get; set; }
     }
 
-        
+
     /// <summary>
     /// Retrieves the details of a single existing payment.
     /// </summary>
@@ -563,7 +564,7 @@ namespace GoCardless.Services
     {
     }
 
-        
+
     /// <summary>
     /// Updates a payment object. This accepts only the metadata parameter.
     /// </summary>
@@ -575,15 +576,15 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
     }
 
-        
+
     /// <summary>
     /// Cancels the payment if it has not already been submitted to the banks.
     /// Any metadata supplied to this endpoint will be stored on the payment
     /// cancellation event it causes.
-    /// 
+    ///
     /// This will fail with a `cancellation_failed` error unless the payment's
     /// status is `pending_submission`.
     /// </summary>
@@ -595,10 +596,10 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
     }
 
-        
+
     /// <summary>
     /// <a name="retry_failed"></a>Retries a failed payment if the underlying
     /// mandate is active. You will receive a `resubmission_requested` webhook,
@@ -606,9 +607,9 @@ namespace GoCardless.Services
     /// initial creation, so you will receive a `submitted` webhook, followed by
     /// a `confirmed` or `failed` event. Any metadata supplied to this endpoint
     /// will be stored against the payment submission event it causes.
-    /// 
+    ///
     /// This will return a `retry_failed` error if the payment has not failed.
-    /// 
+    ///
     /// Payments can be retried up to 3 times.
     /// </summary>
     public class PaymentRetryRequest
@@ -619,7 +620,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
     }
 
     /// <summary>

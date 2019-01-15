@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace GoCardless.Services
     /// have several [customer bank
     /// accounts](#core-endpoints-customer-bank-accounts), which in turn can
     /// have several Direct Debit [mandates](#core-endpoints-mandates).
-    /// 
+    ///
     /// Notes:
     /// - the `phone_number` field may only be supplied for New Zealand
     /// customers, and must be supplied if you intend to set up an BECS NZ
@@ -59,7 +60,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<CustomerResponse>("POST", "/customers", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "customers", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerResponse>(HttpMethod.Post, "/customers", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "customers", customiseRequestMessage);
         }
 
         /// <summary>
@@ -76,7 +77,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<CustomerListResponse>("GET", "/customers", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerListResponse>(HttpMethod.Get, "/customers", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -134,7 +135,7 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CustomerResponse>("GET", "/customers/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerResponse>(HttpMethod.Get, "/customers/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -155,11 +156,11 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CustomerResponse>("PUT", "/customers/:identity", urlParams, request, null, "customers", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerResponse>(HttpMethod.Put, "/customers/:identity", urlParams, request, null, "customers", customiseRequestMessage);
         }
     }
 
-        
+
     /// <summary>
     /// Creates a new customer object.
     /// </summary>
@@ -253,7 +254,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// Required for New Zealand customers only. Must be supplied if the
@@ -292,7 +293,7 @@ namespace GoCardless.Services
         public string IdempotencyKey { get; set; }
     }
 
-        
+
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// customers.
@@ -355,7 +356,7 @@ namespace GoCardless.Services
         public int? Limit { get; set; }
     }
 
-        
+
     /// <summary>
     /// Retrieves the details of an existing customer.
     /// </summary>
@@ -363,7 +364,7 @@ namespace GoCardless.Services
     {
     }
 
-        
+
     /// <summary>
     /// Updates a customer object. Supports all of the fields supported when
     /// creating a customer.
@@ -458,7 +459,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// Required for New Zealand customers only. Must be supplied if the

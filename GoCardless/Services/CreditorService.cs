@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace GoCardless.Services
     /// to a "creditor", to whom the payment is then paid out. In most cases
     /// your organisation will have a single "creditor", but the API also
     /// supports collecting payments on behalf of others.
-    /// 
+    ///
     /// Please get in touch if you wish to use this endpoint. Currently, for
     /// Anti Money Laundering reasons, any creditors you add must be directly
     /// related to your organisation.
@@ -52,7 +53,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<CreditorResponse>("POST", "/creditors", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "creditors", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CreditorResponse>(HttpMethod.Post, "/creditors", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "creditors", customiseRequestMessage);
         }
 
         /// <summary>
@@ -69,7 +70,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<CreditorListResponse>("GET", "/creditors", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CreditorListResponse>(HttpMethod.Get, "/creditors", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -127,7 +128,7 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CreditorResponse>("GET", "/creditors/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CreditorResponse>(HttpMethod.Get, "/creditors/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -148,11 +149,11 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CreditorResponse>("PUT", "/creditors/:identity", urlParams, request, null, "creditors", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CreditorResponse>(HttpMethod.Put, "/creditors/:identity", urlParams, request, null, "creditors", customiseRequestMessage);
         }
     }
 
-        
+
     /// <summary>
     /// Creates a new creditor.
     /// </summary>
@@ -195,7 +196,7 @@ namespace GoCardless.Services
         /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
-        public IDictionary<String, String> Links { get; set; }
+        public IDictionary<string, string> Links { get; set; }
 
         /// <summary>
         /// The creditor's name.
@@ -224,7 +225,7 @@ namespace GoCardless.Services
         public string IdempotencyKey { get; set; }
     }
 
-        
+
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// creditors.
@@ -287,7 +288,7 @@ namespace GoCardless.Services
         public int? Limit { get; set; }
     }
 
-        
+
     /// <summary>
     /// Retrieves the details of an existing creditor.
     /// </summary>
@@ -295,7 +296,7 @@ namespace GoCardless.Services
     {
     }
 
-        
+
     /// <summary>
     /// Updates a creditor object. Supports all of the fields supported when
     /// creating a creditor.

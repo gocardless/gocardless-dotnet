@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace GoCardless.Services
     ///
     /// Mandates represent the Direct Debit mandate with a
     /// [customer](#core-endpoints-customers).
-    /// 
+    ///
     /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
     /// the status of a mandate changes.
     /// </summary>
@@ -49,7 +50,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<MandateResponse>("POST", "/mandates", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "mandates", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<MandateResponse>(HttpMethod.Post, "/mandates", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "mandates", customiseRequestMessage);
         }
 
         /// <summary>
@@ -66,7 +67,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<MandateListResponse>("GET", "/mandates", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<MandateListResponse>(HttpMethod.Get, "/mandates", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -124,7 +125,7 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<MandateResponse>("GET", "/mandates/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<MandateResponse>(HttpMethod.Get, "/mandates/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -144,14 +145,14 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<MandateResponse>("PUT", "/mandates/:identity", urlParams, request, null, "mandates", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<MandateResponse>(HttpMethod.Put, "/mandates/:identity", urlParams, request, null, "mandates", customiseRequestMessage);
         }
 
         /// <summary>
         /// Immediately cancels a mandate and all associated cancellable
         /// payments. Any metadata supplied to this endpoint will be stored on
         /// the mandate cancellation event it causes.
-        /// 
+        ///
         /// This will fail with a `cancellation_failed` error if the mandate is
         /// already cancelled.
         /// </summary>
@@ -169,7 +170,7 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<MandateResponse>("POST", "/mandates/:identity/actions/cancel", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<MandateResponse>(HttpMethod.Post, "/mandates/:identity/actions/cancel", urlParams, request, null, "data", customiseRequestMessage);
         }
 
         /// <summary>
@@ -180,10 +181,10 @@ namespace GoCardless.Services
         /// webhook, followed by a `reinstated` or `failed` webhook up to two
         /// working days later. Any metadata supplied to this endpoint will be
         /// stored on the `resubmission_requested` event it causes.
-        /// 
+        ///
         /// This will fail with a `mandate_not_inactive` error if the mandate is
         /// already being submitted, or is active.
-        /// 
+        ///
         /// Mandates can be resubmitted up to 3 times.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "MD".</param>
@@ -200,11 +201,11 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<MandateResponse>("POST", "/mandates/:identity/actions/reinstate", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<MandateResponse>(HttpMethod.Post, "/mandates/:identity/actions/reinstate", urlParams, request, null, "data", customiseRequestMessage);
         }
     }
 
-        
+
     /// <summary>
     /// Creates a new mandate object.
     /// </summary>
@@ -243,7 +244,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// Unique reference. Different schemes have different length and
@@ -271,7 +272,7 @@ namespace GoCardless.Services
         public string IdempotencyKey { get; set; }
     }
 
-        
+
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// mandates.
@@ -391,7 +392,7 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum MandateStatus
         {
-    
+
             /// <summary>`status` with a value of "pending_customer_approval"</summary>
             [EnumMember(Value = "pending_customer_approval")]
             PendingCustomerApproval,
@@ -416,7 +417,7 @@ namespace GoCardless.Services
         }
     }
 
-        
+
     /// <summary>
     /// Retrieves the details of an existing mandate.
     /// </summary>
@@ -424,7 +425,7 @@ namespace GoCardless.Services
     {
     }
 
-        
+
     /// <summary>
     /// Updates a mandate object. This accepts only the metadata parameter.
     /// </summary>
@@ -436,15 +437,15 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
     }
 
-        
+
     /// <summary>
     /// Immediately cancels a mandate and all associated cancellable payments.
     /// Any metadata supplied to this endpoint will be stored on the mandate
     /// cancellation event it causes.
-    /// 
+    ///
     /// This will fail with a `cancellation_failed` error if the mandate is
     /// already cancelled.
     /// </summary>
@@ -456,10 +457,10 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
     }
 
-        
+
     /// <summary>
     /// <a name="mandate_not_inactive"></a>Reinstates a cancelled or expired
     /// mandate to the banks. You will receive a `resubmission_requested`
@@ -468,10 +469,10 @@ namespace GoCardless.Services
     /// followed by a `reinstated` or `failed` webhook up to two working days
     /// later. Any metadata supplied to this endpoint will be stored on the
     /// `resubmission_requested` event it causes.
-    /// 
+    ///
     /// This will fail with a `mandate_not_inactive` error if the mandate is
     /// already being submitted, or is active.
-    /// 
+    ///
     /// Mandates can be resubmitted up to 3 times.
     /// </summary>
     public class MandateReinstateRequest
@@ -482,7 +483,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
     }
 
     /// <summary>

@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace GoCardless.Services
     /// [customer](#core-endpoints-customers). They always belong to a
     /// [customer](#core-endpoints-customers), and may be linked to several
     /// Direct Debit [mandates](#core-endpoints-mandates).
-    /// 
+    ///
     /// Note that customer bank accounts must be unique, and so you will
     /// encounter a `bank_account_exists` error if you try to create a duplicate
     /// bank account. You may wish to handle this by updating the existing
@@ -43,16 +44,16 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Creates a new customer bank account object.
-        /// 
+        ///
         /// There are three different ways to supply bank account details:
-        /// 
+        ///
         /// - [Local details](#appendix-local-bank-details)
-        /// 
+        ///
         /// - IBAN
-        /// 
+        ///
         /// - [Customer Bank Account
         /// Tokens](#javascript-flow-create-a-customer-bank-account-token)
-        /// 
+        ///
         /// For more information on the different fields required in each
         /// country, see [local bank details](#appendix-local-bank-details).
         /// </summary>
@@ -66,7 +67,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<CustomerBankAccountResponse>("POST", "/customer_bank_accounts", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "customer_bank_accounts", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerBankAccountResponse>(HttpMethod.Post, "/customer_bank_accounts", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "customer_bank_accounts", customiseRequestMessage);
         }
 
         /// <summary>
@@ -83,7 +84,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<CustomerBankAccountListResponse>("GET", "/customer_bank_accounts", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerBankAccountListResponse>(HttpMethod.Get, "/customer_bank_accounts", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -141,7 +142,7 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CustomerBankAccountResponse>("GET", "/customer_bank_accounts/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerBankAccountResponse>(HttpMethod.Get, "/customer_bank_accounts/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -162,16 +163,16 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CustomerBankAccountResponse>("PUT", "/customer_bank_accounts/:identity", urlParams, request, null, "customer_bank_accounts", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerBankAccountResponse>(HttpMethod.Put, "/customer_bank_accounts/:identity", urlParams, request, null, "customer_bank_accounts", customiseRequestMessage);
         }
 
         /// <summary>
         /// Immediately cancels all associated mandates and cancellable
         /// payments.
-        /// 
+        ///
         /// This will return a `disable_failed` error if the bank account has
         /// already been disabled.
-        /// 
+        ///
         /// A disabled bank account can be re-enabled by creating a new bank
         /// account resource with the same details.
         /// </summary>
@@ -189,23 +190,23 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CustomerBankAccountResponse>("POST", "/customer_bank_accounts/:identity/actions/disable", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerBankAccountResponse>(HttpMethod.Post, "/customer_bank_accounts/:identity/actions/disable", urlParams, request, null, "data", customiseRequestMessage);
         }
     }
 
-        
+
     /// <summary>
     /// Creates a new customer bank account object.
-    /// 
+    ///
     /// There are three different ways to supply bank account details:
-    /// 
+    ///
     /// - [Local details](#appendix-local-bank-details)
-    /// 
+    ///
     /// - IBAN
-    /// 
+    ///
     /// - [Customer Bank Account
     /// Tokens](#javascript-flow-create-a-customer-bank-account-token)
-    /// 
+    ///
     /// For more information on the different fields required in each country,
     /// see [local bank details](#appendix-local-bank-details).
     /// </summary>
@@ -300,7 +301,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// A unique key to ensure that this request only succeeds once, allowing you to safely retry request errors such as network failures.
@@ -311,7 +312,7 @@ namespace GoCardless.Services
         public string IdempotencyKey { get; set; }
     }
 
-        
+
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// bank accounts.
@@ -378,14 +379,14 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("enabled")]
         public bool? Enabled { get; set; }
-            
+
         /// <summary>
         /// Get enabled or disabled customer bank accounts.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CustomerBankAccountEnabled
         {
-    
+
             /// <summary>`enabled` with a value of "true"</summary>
             [EnumMember(Value = "true")]
             True,
@@ -401,7 +402,7 @@ namespace GoCardless.Services
         public int? Limit { get; set; }
     }
 
-        
+
     /// <summary>
     /// Retrieves the details of an existing bank account.
     /// </summary>
@@ -409,7 +410,7 @@ namespace GoCardless.Services
     {
     }
 
-        
+
     /// <summary>
     /// Updates a customer bank account object. Only the metadata parameter is
     /// allowed.
@@ -422,16 +423,16 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
     }
 
-        
+
     /// <summary>
     /// Immediately cancels all associated mandates and cancellable payments.
-    /// 
+    ///
     /// This will return a `disable_failed` error if the bank account has
     /// already been disabled.
-    /// 
+    ///
     /// A disabled bank account can be re-enabled by creating a new bank account
     /// resource with the same details.
     /// </summary>

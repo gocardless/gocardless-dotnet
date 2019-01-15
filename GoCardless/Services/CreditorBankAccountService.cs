@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,13 +20,13 @@ namespace GoCardless.Services
     /// Creditor Bank Accounts hold the bank details of a
     /// [creditor](#core-endpoints-creditors). These are the bank accounts which
     /// your [payouts](#core-endpoints-payouts) will be sent to.
-    /// 
+    ///
     /// Note that creditor bank accounts must be unique, and so you will
     /// encounter a `bank_account_exists` error if you try to create a duplicate
     /// bank account. You may wish to handle this by updating the existing
     /// record instead, the ID of which will be provided as
     /// `links[creditor_bank_account]` in the error response.
-    /// 
+    ///
     /// <p class="restricted-notice"><strong>Restricted</strong>: This API is
     /// not available for
     /// partner integrations.</p>
@@ -57,7 +58,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<CreditorBankAccountResponse>("POST", "/creditor_bank_accounts", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "creditor_bank_accounts", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CreditorBankAccountResponse>(HttpMethod.Post, "/creditor_bank_accounts", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "creditor_bank_accounts", customiseRequestMessage);
         }
 
         /// <summary>
@@ -74,7 +75,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<CreditorBankAccountListResponse>("GET", "/creditor_bank_accounts", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CreditorBankAccountListResponse>(HttpMethod.Get, "/creditor_bank_accounts", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -132,16 +133,16 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CreditorBankAccountResponse>("GET", "/creditor_bank_accounts/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CreditorBankAccountResponse>(HttpMethod.Get, "/creditor_bank_accounts/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
         /// Immediately disables the bank account, no money can be paid out to a
         /// disabled account.
-        /// 
+        ///
         /// This will return a `disable_failed` error if the bank account has
         /// already been disabled.
-        /// 
+        ///
         /// A disabled bank account can be re-enabled by creating a new bank
         /// account resource with the same details.
         /// </summary>
@@ -159,11 +160,11 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CreditorBankAccountResponse>("POST", "/creditor_bank_accounts/:identity/actions/disable", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CreditorBankAccountResponse>(HttpMethod.Post, "/creditor_bank_accounts/:identity/actions/disable", urlParams, request, null, "data", customiseRequestMessage);
         }
     }
 
-        
+
     /// <summary>
     /// Creates a new creditor bank account object.
     /// </summary>
@@ -250,7 +251,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// Defaults to `false`. When this is set to `true`, it will cause this
@@ -269,7 +270,7 @@ namespace GoCardless.Services
         public string IdempotencyKey { get; set; }
     }
 
-        
+
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// creditor bank accounts.
@@ -337,7 +338,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("enabled")]
         public bool? Enabled { get; set; }
-            
+
         /// <summary>
         /// Boolean value showing whether the bank account is enabled or
         /// disabled
@@ -345,7 +346,7 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CreditorBankAccountEnabled
         {
-    
+
             /// <summary>`enabled` with a value of "true"</summary>
             [EnumMember(Value = "true")]
             True,
@@ -361,7 +362,7 @@ namespace GoCardless.Services
         public int? Limit { get; set; }
     }
 
-        
+
     /// <summary>
     /// Retrieves the details of an existing creditor bank account.
     /// </summary>
@@ -369,14 +370,14 @@ namespace GoCardless.Services
     {
     }
 
-        
+
     /// <summary>
     /// Immediately disables the bank account, no money can be paid out to a
     /// disabled account.
-    /// 
+    ///
     /// This will return a `disable_failed` error if the bank account has
     /// already been disabled.
-    /// 
+    ///
     /// A disabled bank account can be re-enabled by creating a new bank account
     /// resource with the same details.
     /// </summary>

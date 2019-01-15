@@ -12,7 +12,7 @@ namespace GoCardless.Resources
     ///
     /// Mandates represent the Direct Debit mandate with a
     /// [customer](#core-endpoints-customers).
-    /// 
+    ///
     /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
     /// the status of a mandate changes.
     /// </summary>
@@ -42,7 +42,7 @@ namespace GoCardless.Resources
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// The earliest date a newly created payment for this mandate could be
@@ -95,7 +95,7 @@ namespace GoCardless.Resources
         [JsonProperty("status")]
         public MandateStatus? Status { get; set; }
     }
-    
+
     /// <summary>
     /// Resources linked to this Mandate
     /// </summary>
@@ -127,7 +127,7 @@ namespace GoCardless.Resources
         [JsonProperty("new_mandate")]
         public string NewMandate { get; set; }
     }
-    
+
     /// <summary>
     /// One of:
     /// <ul>

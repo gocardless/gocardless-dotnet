@@ -35,13 +35,13 @@ namespace GoCardless.Resources
         /// notifications. See
         /// [here](/getting-started/api/handling-customer-notifications/)
         /// for further information.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("customer_notifications")]
         public List<EventCustomerNotification> CustomerNotifications { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [JsonProperty("details")]
         public EventDetails Details { get; set; }
@@ -64,7 +64,7 @@ namespace GoCardless.Resources
         /// an empty object.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// The resource type for this event. One of:
@@ -79,14 +79,14 @@ namespace GoCardless.Resources
         [JsonProperty("resource_type")]
         public EventResourceType? ResourceType { get; set; }
     }
-    
+
     /// <summary>
     /// Present only in webhooks when an integrator is authorised to send their
     /// own
     /// notifications. See
     /// [here](/getting-started/api/handling-customer-notifications/)
     /// for further information.
-    /// 
+    ///
     /// </summary>
     public class EventCustomerNotification
     {
@@ -114,7 +114,7 @@ namespace GoCardless.Resources
         [JsonProperty("type")]
         public string Type { get; set; }
     }
-    
+
     /// <summary>
     /// The type of notification the customer shall receive.
     /// </summary>
@@ -176,7 +176,7 @@ namespace GoCardless.Resources
         [JsonProperty("scheme")]
         public EventDetailsScheme? Scheme { get; set; }
     }
-    
+
     /// <summary>
     /// Who initiated the event. One of:
     /// <ul>
@@ -320,7 +320,7 @@ namespace GoCardless.Resources
         [JsonProperty("subscription")]
         public string Subscription { get; set; }
     }
-    
+
     /// <summary>
     /// The resource type for this event. One of:
     /// <ul>

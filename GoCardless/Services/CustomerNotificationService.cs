@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,17 +22,17 @@ namespace GoCardless.Services
     /// after an event has happened. The event, the resource and the customer to
     /// be notified
     /// are all identified in the `links` property.
-    /// 
+    ///
     /// Note that these are ephemeral records - once the notification has been
     /// actioned in some
     /// way, it is no longer visible using this API.
-    /// 
+    ///
     /// <p class="restricted-notice"><strong>Restricted</strong>: This API is
     /// currently
     /// only available for approved integrators - please <a
     /// href="mailto:help@gocardless.com">get
     /// in touch</a> if you would like to use this API.</p>
-    /// 
+    ///
     /// </summary>
 
     public class CustomerNotificationService
@@ -56,7 +57,7 @@ namespace GoCardless.Services
         /// this endpoint will return an `already_actioned` error and you should
         /// not take
         /// further action.
-        /// 
+        ///
         /// </summary>
         /// <param name="identity">The id of the notification.</param>
         /// <param name="request">An optional `CustomerNotificationHandleRequest` representing the body for this handle request.</param>
@@ -72,11 +73,11 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CustomerNotificationResponse>("POST", "/customer_notifications/:identity/actions/handle", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerNotificationResponse>(HttpMethod.Post, "/customer_notifications/:identity/actions/handle", urlParams, request, null, "data", customiseRequestMessage);
         }
     }
 
-        
+
     /// <summary>
     /// "Handling" a notification means that you have sent the notification
     /// yourself (and
@@ -86,7 +87,7 @@ namespace GoCardless.Services
     /// this endpoint will return an `already_actioned` error and you should not
     /// take
     /// further action.
-    /// 
+    ///
     /// </summary>
     public class CustomerNotificationHandleRequest
     {
