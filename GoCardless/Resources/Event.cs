@@ -64,7 +64,7 @@ namespace GoCardless.Resources
         /// an empty object.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// The resource type for this event. One of:

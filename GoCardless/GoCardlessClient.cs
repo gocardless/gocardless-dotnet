@@ -70,7 +70,7 @@ namespace GoCardless
         ///
         ///@param accessToken the access token
         /// </summary>
-        public static GoCardlessClient Create(String accessToken)
+        public static GoCardlessClient Create(string accessToken)
         {
             return Create(accessToken, Environment.LIVE);
         }
@@ -81,7 +81,7 @@ namespace GoCardless
         ///@param accessToken the access token
         ///@param environment the environment
         /// </summary>
-        public static GoCardlessClient Create(String accessToken, Environment environment, HttpClient httpClient = null)
+        public static GoCardlessClient Create(string accessToken, Environment environment, HttpClient httpClient = null)
         {
             return Create(accessToken, GetBaseUrl(environment), httpClient);
         }
@@ -97,7 +97,7 @@ namespace GoCardless
             return new GoCardlessClient(accessToken, baseUrl, client);
         }
 
-        private static String GetBaseUrl(Environment env)
+        private static string GetBaseUrl(Environment env)
         {
             switch (env)
             {
@@ -298,7 +298,7 @@ namespace GoCardless
                 var typeInfo = value.GetType().GetTypeInfo();
                 if (typeInfo.IsArray)
                 {
-                    return string.Join(WebUtility.UrlEncode(","), ((IEnumerable) value).Cast<object>().Select(Stringify));
+                    return String.Join(WebUtility.UrlEncode(","), ((IEnumerable) value).Cast<object>().Select(Stringify));
                 }
                 if (typeInfo.IsEnum)
                 {

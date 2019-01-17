@@ -12,7 +12,7 @@
     <PackageTags>gocardless payments rest api direct debit</PackageTags>
     <PackageLicenseUrl>https://github.com/gocardless/gocardless-dotnet/blob/master/LICENSE.txt</PackageLicenseUrl>
     <PackageReleaseNotes>https://github.com/gocardless/gocardless-dotnet/releases/tag/v2.12.1</PackageReleaseNotes>
-    <TargetFrameworks>netcoreapp1.1;net452</TargetFrameworks>
+    <TargetFrameworks>netstandard1.6;netstandard2.0;net452</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\GoCardless.xml</DocumentationFile>
@@ -26,8 +26,8 @@
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="System.Net.Http" Version="4.3.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
 
 </Project>

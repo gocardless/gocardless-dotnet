@@ -28,13 +28,13 @@ namespace GoCardless.Exceptions
         /// <summary>
         ///Returns the URL to the documentation describing the error.
         /// </summary>
-        public String DocumentationUrl => ApiErrorResponse.Error.DocumentationUrl;
+        public string DocumentationUrl => ApiErrorResponse.Error.DocumentationUrl;
 
         /// <summary>
         ///Returns the ID of the request.  This can be used to help the support
         ///team find your error quickly.
         /// </summary>
-        public String RequestId => ApiErrorResponse.Error.RequestId;
+        public string RequestId => ApiErrorResponse.Error.RequestId;
 
         /// <summary>
         ///Returns the HTTP status code.
