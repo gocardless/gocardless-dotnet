@@ -70,7 +70,7 @@ namespace GoCardless
         ///
         ///@param accessToken the access token
         /// </summary>
-        public static GoCardlessClient Create(String accessToken)
+        public static GoCardlessClient Create(string accessToken)
         {
             return Create(accessToken, Environment.LIVE);
         }
@@ -81,7 +81,7 @@ namespace GoCardless
         ///@param accessToken the access token
         ///@param environment the environment
         /// </summary>
-        public static GoCardlessClient Create(String accessToken, Environment environment, HttpClient httpClient = null)
+        public static GoCardlessClient Create(string accessToken, Environment environment, HttpClient httpClient = null)
         {
             return Create(accessToken, GetBaseUrl(environment), httpClient);
         }
@@ -97,7 +97,7 @@ namespace GoCardless
             return new GoCardlessClient(accessToken, baseUrl, client);
         }
 
-        private static String GetBaseUrl(Environment env)
+        private static string GetBaseUrl(Environment env)
         {
             switch (env)
             {
@@ -228,9 +228,9 @@ namespace GoCardless
             var httpMethod = new HttpMethod(method);
 
             var requestMessage = new HttpRequestMessage(httpMethod, new Uri(_baseUrl, path));
-            requestMessage.Headers.Add("User-Agent", "gocardless-dotnet/2.12.1");
+            requestMessage.Headers.Add("User-Agent", "gocardless-dotnet/2.13.0");
             requestMessage.Headers.Add("GoCardless-Version", "2015-07-06");
-            requestMessage.Headers.Add("GoCardless-Client-Version", "2.12.1");
+            requestMessage.Headers.Add("GoCardless-Client-Version", "2.13.0");
             requestMessage.Headers.Add("GoCardless-Client-Library", "gocardless-dotnet");
             requestMessage.Headers.Authorization =
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
@@ -298,7 +298,7 @@ namespace GoCardless
                 var typeInfo = value.GetType().GetTypeInfo();
                 if (typeInfo.IsArray)
                 {
-                    return string.Join(WebUtility.UrlEncode(","), ((IEnumerable) value).Cast<object>().Select(Stringify));
+                    return String.Join(WebUtility.UrlEncode(","), ((IEnumerable) value).Cast<object>().Select(Stringify));
                 }
                 if (typeInfo.IsEnum)
                 {

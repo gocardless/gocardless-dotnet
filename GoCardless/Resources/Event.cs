@@ -64,7 +64,7 @@ namespace GoCardless.Resources
         /// an empty object.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// The resource type for this event. One of:
@@ -127,6 +127,9 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "mandate_created"</summary>
         [EnumMember(Value = "mandate_created")]
         MandateCreated,
+        /// <summary>`type` with a value of "subscription_created"</summary>
+        [EnumMember(Value = "subscription_created")]
+        SubscriptionCreated,
     }
 
     public class EventDetails

@@ -13,7 +13,7 @@ For full details of the GoCardless API, see the [API docs](https://developer.goc
 
 To install `GoCardless`, run the following command in the [Package Manager Console](https://docs.microsoft.com/en-us/nuget/tools/package-manager-console)
 
-`Install-Package GoCardless -Version 2.12.1`
+`Install-Package GoCardless -Version 2.13.0`
 
 
 ## Usage
@@ -25,8 +25,8 @@ To install `GoCardless`, run the following command in the [Package Manager Conso
 The client is initialised with an access token and an environment.
 
 ```cs
-String accessToken = "your_access_token";
-GoCardlessClient gocardless = GoCardlessClient.Create(accessToken, Environment.SANDBOX);
+var accessToken = "your_access_token";
+var gocardless = GoCardlessClient.Create(accessToken, Environment.SANDBOX);
 ```
 
 ### GET requests
@@ -37,7 +37,7 @@ You can retrieve individual resources by ID using that resource's `GetAsync` met
 
 ```cs
 var customerResponse = await gocardless.Customers.GetAsync("CU0123");
-GoCardless.Resources.Customer customer = customerResponse.Customer;
+var customer = customerResponse.Customer;
 ```
 
 #### Lists of resources
@@ -52,7 +52,7 @@ var customerRequest = new GoCardless.Services.CustomerListRequest()
 
 var customerListResponse = await gocardless.Customers.ListAsync(customerRequest);
 
-foreach (GoCardless.Resources.Customer customer in customerListResponse.Customers)
+foreach (var customer in customerListResponse.Customers)
 {
     Console.WriteLine(customer.GivenName);
 }
@@ -69,7 +69,7 @@ var customerRequest = new GoCardless.Services.CustomerListRequest()
 };
 
 var customerListResponse = gocardless.Customers.All(customerRequest);
-foreach (GoCardless.Resources.Customer customer in customerListResponse)
+foreach (var customer in customerListResponse)
 {
     Console.WriteLine(customer.GivenName);
 }
@@ -103,7 +103,7 @@ var customerRequest = new GoCardless.Services.CustomerCreateRequest()
 };
 
 var customerResponse = await gocardless.Customers.CreateAsync(customerRequest);
-GoCardless.Resources.Customer customer = customerResponse.Customer;
+var customer = customerResponse.Customer;
 ```
 
 *Updating a customer*
@@ -196,9 +196,9 @@ These errors are fully documented in the [API documentation](https://developer.g
 
 The exceptions have the following properties to facilitate access to information in the API response:
 
-- `String Type`
-- `String DocumentationUrl`
-- `String RequestId`
+- `string Type`
+- `string DocumentationUrl`
+- `string RequestId`
 - `int Code`
 - `IReadOnlyList<GoCardless.Errors.Error> Errors`
 
