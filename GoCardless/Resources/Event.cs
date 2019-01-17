@@ -127,6 +127,9 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "mandate_created"</summary>
         [EnumMember(Value = "mandate_created")]
         MandateCreated,
+        /// <summary>`type` with a value of "subscription_created"</summary>
+        [EnumMember(Value = "subscription_created")]
+        SubscriptionCreated,
     }
 
     public class EventDetails
