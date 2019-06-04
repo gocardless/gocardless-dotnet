@@ -39,6 +39,14 @@ namespace GoCardless.Resources
         public string AccountNumberEnding { get; set; }
 
         /// <summary>
+        /// Bank account type. Only required for USD denominated bank accounts -
+        /// see [local details](#local-bank-details-united-states) for more
+        /// information.
+        /// </summary>
+        [JsonProperty("account_type")]
+        public string AccountType { get; set; }
+
+        /// <summary>
         /// Name of bank, taken from the bank details.
         /// </summary>
         [JsonProperty("bank_name")]
@@ -94,6 +102,21 @@ namespace GoCardless.Resources
         public IDictionary<string, string> Metadata { get; set; }
     }
     
+    /// <summary>
+    /// Bank account type. Only required for USD denominated bank accounts - see [local
+    /// details](#local-bank-details-united-states) for more information.
+    /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum CustomerBankAccountAccountType {
+
+        /// <summary>`account_type` with a value of "savings"</summary>
+        [EnumMember(Value = "savings")]
+        Savings,
+        /// <summary>`account_type` with a value of "checking"</summary>
+        [EnumMember(Value = "checking")]
+        Checking,
+    }
+
     /// <summary>
     /// Resources linked to this CustomerBankAccount
     /// </summary>

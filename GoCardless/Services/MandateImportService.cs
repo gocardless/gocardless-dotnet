@@ -189,20 +189,23 @@ namespace GoCardless.Services
     {
 
         /// <summary>
-        /// A Direct Debit scheme. Currently "autogiro", "bacs", "becs",
+        /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs",
         /// "becs_nz", "betalingsservice", "pad" and "sepa_core" are supported.
         /// </summary>
         [JsonProperty("scheme")]
         public MandateImportScheme? Scheme { get; set; }
             
         /// <summary>
-        /// A Direct Debit scheme. Currently "autogiro", "bacs", "becs",
+        /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs",
         /// "becs_nz", "betalingsservice", "pad" and "sepa_core" are supported.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum MandateImportScheme
         {
     
+            /// <summary>`scheme` with a value of "ach"</summary>
+            [EnumMember(Value = "ach")]
+            Ach,
             /// <summary>`scheme` with a value of "autogiro"</summary>
             [EnumMember(Value = "autogiro")]
             Autogiro,

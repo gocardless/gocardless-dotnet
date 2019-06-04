@@ -155,6 +155,13 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+        /// which is set up to receive payouts in CAD.
+        /// </summary>
+        [JsonProperty("default_cad_payout_account")]
+        public string DefaultCadPayoutAccount { get; set; }
+
+        /// <summary>
+        /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
         /// which is set up to receive payouts in DKK.
         /// </summary>
         [JsonProperty("default_dkk_payout_account")]
@@ -326,6 +333,9 @@ namespace GoCardless.Resources
         /// <summary>`currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
+        /// <summary>`currency` with a value of "USD"</summary>
+        [EnumMember(Value = "USD")]
+        USD,
     }
 
     /// <summary>
@@ -334,6 +344,9 @@ namespace GoCardless.Resources
     [JsonConverter(typeof(StringEnumConverter))]
     public enum CreditorSchemeIdentifierScheme {
 
+        /// <summary>`scheme` with a value of "ach"</summary>
+        [EnumMember(Value = "ach")]
+        Ach,
         /// <summary>`scheme` with a value of "autogiro"</summary>
         [EnumMember(Value = "autogiro")]
         Autogiro,

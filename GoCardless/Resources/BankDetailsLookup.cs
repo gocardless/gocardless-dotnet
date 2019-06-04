@@ -45,6 +45,9 @@ namespace GoCardless.Resources
     [JsonConverter(typeof(StringEnumConverter))]
     public enum BankDetailsLookupAvailableDebitScheme {
 
+        /// <summary>`available_debit_scheme` with a value of "ach"</summary>
+        [EnumMember(Value = "ach")]
+        Ach,
         /// <summary>`available_debit_scheme` with a value of "autogiro"</summary>
         [EnumMember(Value = "autogiro")]
         Autogiro,
