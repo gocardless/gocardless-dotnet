@@ -165,6 +165,9 @@ namespace GoCardless.Resources
     [JsonConverter(typeof(StringEnumConverter))]
     public enum RedirectFlowScheme {
 
+        /// <summary>`scheme` with a value of "ach"</summary>
+        [EnumMember(Value = "ach")]
+        Ach,
         /// <summary>`scheme` with a value of "autogiro"</summary>
         [EnumMember(Value = "autogiro")]
         Autogiro,

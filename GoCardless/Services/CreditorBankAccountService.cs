@@ -188,6 +188,31 @@ namespace GoCardless.Services
         public string AccountNumber { get; set; }
 
         /// <summary>
+        /// Bank account type. Only required for USD denominated bank accounts -
+        /// see [local details](#local-bank-details-united-states) for more
+        /// information.
+        /// </summary>
+        [JsonProperty("account_type")]
+        public string AccountType { get; set; }
+            
+        /// <summary>
+        /// Bank account type. Only required for USD denominated bank accounts -
+        /// see [local details](#local-bank-details-united-states) for more
+        /// information.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum CreditorBankAccountAccountType
+        {
+    
+            /// <summary>`account_type` with a value of "savings"</summary>
+            [EnumMember(Value = "savings")]
+            Savings,
+            /// <summary>`account_type` with a value of "checking"</summary>
+            [EnumMember(Value = "checking")]
+            Checking,
+        }
+
+        /// <summary>
         /// Bank code - see [local details](#appendix-local-bank-details) for
         /// more information. Alternatively you can provide an `iban`.
         /// </summary>

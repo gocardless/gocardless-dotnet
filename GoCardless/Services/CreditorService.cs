@@ -355,6 +355,13 @@ namespace GoCardless.Services
 
             /// <summary>
             /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// which is set up to receive payouts in CAD.
+            /// </summary>
+            [JsonProperty("default_cad_payout_account")]
+            public string DefaultCadPayoutAccount { get; set; }
+
+            /// <summary>
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in DKK.
             /// </summary>
             [JsonProperty("default_dkk_payout_account")]

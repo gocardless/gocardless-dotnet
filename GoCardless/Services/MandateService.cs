@@ -246,6 +246,15 @@ namespace GoCardless.Services
         public IDictionary<String, String> Metadata { get; set; }
 
         /// <summary>
+        /// For ACH customers only. Required for ACH customers. A string
+        /// containing the IP address of the payer to whom the mandate belongs
+        /// (i.e. as a result of their completion of a mandate setup flow in
+        /// their browser).
+        /// </summary>
+        [JsonProperty("payer_ip_address")]
+        public string PayerIpAddress { get; set; }
+
+        /// <summary>
         /// Unique reference. Different schemes have different length and
         /// [character set](#appendix-character-sets) requirements. GoCardless
         /// will generate a unique reference satisfying the different scheme
