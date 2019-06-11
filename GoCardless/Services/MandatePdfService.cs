@@ -55,6 +55,9 @@ namespace GoCardless.Services
         /// | :--------------- |
         /// :-------------------------------------------------------------------------------------------------------------------------------------------
         /// |
+        /// | ACH              | English (`en`)                                 
+        ///                                                                     
+        ///                         |
         /// | Autogiro         | English (`en`), Swedish (`sv`)                 
         ///                                                                     
         ///                         |
@@ -112,6 +115,9 @@ namespace GoCardless.Services
     /// | :--------------- |
     /// :-------------------------------------------------------------------------------------------------------------------------------------------
     /// |
+    /// | ACH              | English (`en`)                                     
+    ///                                                                         
+    ///                 |
     /// | Autogiro         | English (`en`), Swedish (`sv`)                     
     ///                                                                         
     ///                 |
@@ -152,6 +158,31 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("account_number")]
         public string AccountNumber { get; set; }
+
+        /// <summary>
+        /// Bank account type. Only required for USD denominated bank accounts -
+        /// see [local details](#local-bank-details-united-states) for more
+        /// information.
+        /// </summary>
+        [JsonProperty("account_type")]
+        public string AccountType { get; set; }
+            
+        /// <summary>
+        /// Bank account type. Only required for USD denominated bank accounts -
+        /// see [local details](#local-bank-details-united-states) for more
+        /// information.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum MandatePdfAccountType
+        {
+    
+            /// <summary>`account_type` with a value of "savings"</summary>
+            [EnumMember(Value = "savings")]
+            Savings,
+            /// <summary>`account_type` with a value of "checking"</summary>
+            [EnumMember(Value = "checking")]
+            Checking,
+        }
 
         /// <summary>
         /// The first line of the customer's address.
@@ -252,6 +283,14 @@ namespace GoCardless.Services
         public string MandateReference { get; set; }
 
         /// <summary>
+        /// For American customers only. IP address of the computer used by the
+        /// customer to set up the mandate. This is required in order to create
+        /// compliant Mandate PDFs according to the ACH scheme rules.
+        /// </summary>
+        [JsonProperty("payer_ip_address")]
+        public string PayerIpAddress { get; set; }
+
+        /// <summary>
         /// [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone
         /// number, including country code. Required for New Zealand customers
         /// only. Must be supplied if the customer's bank account is denominated
@@ -287,6 +326,42 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("signature_date")]
         public string SignatureDate { get; set; }
+
+        /// <summary>
+        /// For American customers only. Subscription amount being authorised by
+        /// the mandate. In the lowest denomination for the currency (cents in
+        /// USD). Is required if `subscription_frequency` has been provided.
+        /// </summary>
+        [JsonProperty("subscription_amount")]
+        public int? SubscriptionAmount { get; set; }
+
+        /// <summary>
+        /// For American customers only. Frequency of the subscription being
+        /// authorised by the mandate. One of `weekly`, `monthly` or `yearly`.
+        /// Is required if `subscription_amount` has been provided.
+        /// </summary>
+        [JsonProperty("subscription_frequency")]
+        public string SubscriptionFrequency { get; set; }
+            
+        /// <summary>
+        /// For American customers only. Frequency of the subscription being
+        /// authorised by the mandate. One of `weekly`, `monthly` or `yearly`.
+        /// Is required if `subscription_amount` has been provided.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum MandatePdfSubscriptionFrequency
+        {
+    
+            /// <summary>`subscription_frequency` with a value of "weekly"</summary>
+            [EnumMember(Value = "weekly")]
+            Weekly,
+            /// <summary>`subscription_frequency` with a value of "monthly"</summary>
+            [EnumMember(Value = "monthly")]
+            Monthly,
+            /// <summary>`subscription_frequency` with a value of "yearly"</summary>
+            [EnumMember(Value = "yearly")]
+            Yearly,
+        }
 
         /// <summary>
         /// For Swedish customers only. The civic/company number (personnummer,
