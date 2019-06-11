@@ -26,7 +26,8 @@ namespace GoCardless.Resources
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        /// Unique identifier, beginning with "MD".
+        /// Unique identifier, beginning with "MD". Note that this prefix may
+        /// not apply to mandates created before 2016.
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }

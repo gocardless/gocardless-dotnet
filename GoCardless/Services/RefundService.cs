@@ -315,7 +315,8 @@ namespace GoCardless.Services
         public int? Limit { get; set; }
 
         /// <summary>
-        /// Unique identifier, beginning with "MD".
+        /// Unique identifier, beginning with "MD". Note that this prefix may
+        /// not apply to mandates created before 2016.
         /// </summary>
         [JsonProperty("mandate")]
         public string Mandate { get; set; }

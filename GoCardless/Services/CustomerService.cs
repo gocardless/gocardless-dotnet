@@ -146,6 +146,34 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<CustomerResponse>("PUT", "/customers/:identity", urlParams, request, null, "customers", customiseRequestMessage);
         }
+
+        /// <summary>
+        /// Removed customers will not appear in search results or lists of
+        /// customers (in our API
+        /// or exports), and it will not be possible to load an individually
+        /// removed customer by
+        /// ID.
+        /// 
+        /// <p class="restricted-notice"><strong>The action of removing a
+        /// customer cannot be
+        /// reversed, so please use with care.</strong></p>
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "CU".</param>
+        /// <param name="request">An optional `CustomerRemoveRequest` representing the body for this remove request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single customer resource</returns>
+        public Task<CustomerResponse> RemoveAsync(string identity, CustomerRemoveRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new CustomerRemoveRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<CustomerResponse>("DELETE", "/customers/:identity", urlParams, request, null, null, customiseRequestMessage);
+        }
     }
 
         
@@ -480,6 +508,22 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("swedish_identity_number")]
         public string SwedishIdentityNumber { get; set; }
+    }
+
+        
+    /// <summary>
+    /// Removed customers will not appear in search results or lists of
+    /// customers (in our API
+    /// or exports), and it will not be possible to load an individually removed
+    /// customer by
+    /// ID.
+    /// 
+    /// <p class="restricted-notice"><strong>The action of removing a customer
+    /// cannot be
+    /// reversed, so please use with care.</strong></p>
+    /// </summary>
+    public class CustomerRemoveRequest
+    {
     }
 
     /// <summary>

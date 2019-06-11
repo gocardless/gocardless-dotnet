@@ -55,7 +55,7 @@ namespace GoCardless.Services
         /// notify has passed,
         /// this endpoint will return an `already_actioned` error and you should
         /// not take
-        /// further action.
+        /// further action. This endpoint takes no additional parameters.
         /// 
         /// </summary>
         /// <param name="identity">The id of the notification.</param>
@@ -85,7 +85,7 @@ namespace GoCardless.Services
     /// has passed,
     /// this endpoint will return an `already_actioned` error and you should not
     /// take
-    /// further action.
+    /// further action. This endpoint takes no additional parameters.
     /// 
     /// </summary>
     public class CustomerNotificationHandleRequest
