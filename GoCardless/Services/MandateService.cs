@@ -110,7 +110,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of an existing mandate.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "MD".</param>
+        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.</param>
         /// <param name="request">An optional `MandateGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
@@ -130,7 +130,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Updates a mandate object. This accepts only the metadata parameter.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "MD".</param>
+        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.</param>
         /// <param name="request">An optional `MandateUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
@@ -155,7 +155,7 @@ namespace GoCardless.Services
         /// This will fail with a `cancellation_failed` error if the mandate is
         /// already cancelled.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "MD".</param>
+        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.</param>
         /// <param name="request">An optional `MandateCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
@@ -186,7 +186,7 @@ namespace GoCardless.Services
         /// 
         /// Mandates can be resubmitted up to 3 times.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "MD".</param>
+        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.</param>
         /// <param name="request">An optional `MandateReinstateRequest` representing the body for this reinstate request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>

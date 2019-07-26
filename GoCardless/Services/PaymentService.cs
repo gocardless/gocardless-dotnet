@@ -373,6 +373,43 @@ namespace GoCardless.Services
         [JsonProperty("before")]
         public string Before { get; set; }
 
+        [JsonProperty("charge_date")]
+        public PaymentChargeDate ChargeDate { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public class PaymentChargeDate
+        {
+
+            /// <summary>
+            /// Limit to records where the payment was or will be collected from
+            /// the customer's bank account after the specified date.
+            /// </summary>
+            [JsonProperty("gt")]
+            public string Gt { get; set; }
+
+            /// <summary>
+            /// Limit to records where the payment was or will be collected from
+            /// the customer's bank account on or after the specified date.
+            /// </summary>
+            [JsonProperty("gte")]
+            public string Gte { get; set; }
+
+            /// <summary>
+            /// Limit to records where the payment was or will be collected from
+            /// the customer's bank account before the specified date.
+            /// </summary>
+            [JsonProperty("lt")]
+            public string Lt { get; set; }
+
+            /// <summary>
+            /// Limit to records where the payment was or will be collected from
+            /// the customer's bank account on or before the specified date.
+            /// </summary>
+            [JsonProperty("lte")]
+            public string Lte { get; set; }
+        }
+
         /// <summary>
         /// Limit to records created within certain times.
         /// </summary>
@@ -473,7 +510,8 @@ namespace GoCardless.Services
         public int? Limit { get; set; }
 
         /// <summary>
-        /// Unique identifier, beginning with "MD".
+        /// Unique identifier, beginning with "MD". Note that this prefix may
+        /// not apply to mandates created before 2016.
         /// </summary>
         [JsonProperty("mandate")]
         public string Mandate { get; set; }
