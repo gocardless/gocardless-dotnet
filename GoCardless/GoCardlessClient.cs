@@ -174,6 +174,10 @@ namespace GoCardless
                 {
                     var json = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var result = JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings());
+
+                    if (result == null)
+                        result = (T)Activator.CreateInstance(typeof(T));
+
                     result.ResponseMessage = responseMessage;
                     return result;
                 }
@@ -235,33 +239,27 @@ namespace GoCardless
             requestMessage.Headers.Authorization =
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
 
+            //add request body for non-GETs if there is a payload
+            if (method != "GET" && requestParams != null && !string.IsNullOrEmpty(payloadKey))
             {
-                //add request body for non-GETs
-                if (method != "GET")
+                var settings = new Newtonsoft.Json.JsonSerializerSettings
                 {
-                    if (requestParams != null)
-                    {
-                        var settings = new Newtonsoft.Json.JsonSerializerSettings
-                        {
-                            Formatting = Formatting.Indented,
-                            NullValueHandling = NullValueHandling.Ignore
-                        };
-                        var serializer = JsonSerializer.Create(settings);
+                    Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore
+                };
+                var serializer = JsonSerializer.Create(settings);
+                var sb = new StringBuilder();
+                var jo = new JObject();
 
-                        StringBuilder sb = new StringBuilder();
-                        using (var sw = new StringWriter(sb))
-                        {
-                            var jo = new JObject();
-                            using (var jsonTextWriter = new LinuxLineEndingJsonTextWriter(sw))
-                            {
-                                serializer.Serialize(jsonTextWriter, requestParams);
-                                jo[payloadKey] = JToken.Parse(sb.ToString());
-                            }
-                            requestMessage.Content = new StringContent(jo.ToString(Formatting.Indented), Encoding.UTF8,
-                                "application/json");
-                        }
-                    }
+                using (var sw = new StringWriter(sb))
+                using (var jsonTextWriter = new LinuxLineEndingJsonTextWriter(sw))
+                {
+                    serializer.Serialize(jsonTextWriter, requestParams);
+                    jo[payloadKey] = JToken.Parse(sb.ToString());
                 }
+
+                requestMessage.Content = new StringContent(jo.ToString(Formatting.Indented), Encoding.UTF8,
+                    "application/json");
             }
 
             var hasIdempotencyKey = requestParams as IHasIdempotencyKey;
