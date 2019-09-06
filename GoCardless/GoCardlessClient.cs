@@ -174,6 +174,12 @@ namespace GoCardless
                 {
                     var json = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var result = JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings());
+
+                    if (result == null)
+                    {
+                        result = (T)Activator.CreateInstance(typeof(T));
+                    }
+
                     result.ResponseMessage = responseMessage;
                     return result;
                 }
@@ -203,64 +209,54 @@ namespace GoCardless
 
         private HttpRequestMessage BuildHttpRequestMessage<T>(string method, string path, List<KeyValuePair<string, object>> urlParams, object requestParams, string payloadKey, RequestSettings requestSettings) where T : ApiResponse
         {
+            //insert url arguments into template
+            foreach (var arg in urlParams)
             {
-                //insert url arguments into template
-                foreach (var arg in urlParams)
-                {
-                    path = path.Replace(":" + arg.Key, Helpers.Stringify(arg.Value));
-                }
-            }
-            {
-                //add querystring for GET requests
-
-                if (method == "GET")
-                {
-                    var requestArguments = Helpers.ExtractQueryStringValuesFromObject(requestParams);
-                    if (requestArguments.Count > 0)
-                    {
-                        var queryString = String.Join("&", requestArguments.Select(Helpers.QueryStringArgument));
-                        path += "?" + queryString;
-                    }
-                }
+                path = path.Replace(":" + arg.Key, Helpers.Stringify(arg.Value));
             }
 
+            //add querystring for GET requests
+            if (method == "GET")
+            {
+                var requestArguments = Helpers.ExtractQueryStringValuesFromObject(requestParams);
+                if (requestArguments.Count > 0)
+                {
+                    var queryString = String.Join("&", requestArguments.Select(Helpers.QueryStringArgument));
+                    path += "?" + queryString;
+                }
+            }
 
             var httpMethod = new HttpMethod(method);
 
             var requestMessage = new HttpRequestMessage(httpMethod, new Uri(_baseUrl, path));
-            requestMessage.Headers.Add("User-Agent", "gocardless-dotnet/2.15.0");
+            requestMessage.Headers.Add("User-Agent", "gocardless-dotnet/2.16.0");
             requestMessage.Headers.Add("GoCardless-Version", "2015-07-06");
-            requestMessage.Headers.Add("GoCardless-Client-Version", "2.15.0");
+            requestMessage.Headers.Add("GoCardless-Client-Version", "2.16.0");
             requestMessage.Headers.Add("GoCardless-Client-Library", "gocardless-dotnet");
             requestMessage.Headers.Authorization =
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
 
+            //add request body for non-GETs
+            if (method != "GET" && requestParams != null && !String.IsNullOrWhiteSpace(payloadKey))
             {
-                //add request body for non-GETs
-                if (method != "GET")
+                var settings = new Newtonsoft.Json.JsonSerializerSettings
                 {
-                    if (requestParams != null)
-                    {
-                        var settings = new Newtonsoft.Json.JsonSerializerSettings
-                        {
-                            Formatting = Formatting.Indented,
-                            NullValueHandling = NullValueHandling.Ignore
-                        };
-                        var serializer = JsonSerializer.Create(settings);
+                    Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore
+                };
+                var serializer = JsonSerializer.Create(settings);
 
-                        StringBuilder sb = new StringBuilder();
-                        using (var sw = new StringWriter(sb))
-                        {
-                            var jo = new JObject();
-                            using (var jsonTextWriter = new LinuxLineEndingJsonTextWriter(sw))
-                            {
-                                serializer.Serialize(jsonTextWriter, requestParams);
-                                jo[payloadKey] = JToken.Parse(sb.ToString());
-                            }
-                            requestMessage.Content = new StringContent(jo.ToString(Formatting.Indented), Encoding.UTF8,
-                                "application/json");
-                        }
+                StringBuilder sb = new StringBuilder();
+                using (var sw = new StringWriter(sb))
+                {
+                    var jo = new JObject();
+                    using (var jsonTextWriter = new LinuxLineEndingJsonTextWriter(sw))
+                    {
+                        serializer.Serialize(jsonTextWriter, requestParams);
+                        jo[payloadKey] = JToken.Parse(sb.ToString());
                     }
+                    requestMessage.Content = new StringContent(jo.ToString(Formatting.Indented), Encoding.UTF8,
+                        "application/json");
                 }
             }
 
