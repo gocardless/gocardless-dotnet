@@ -53,9 +53,8 @@ namespace GoCardless.Resources
         public string City { get; set; }
 
         /// <summary>
-        /// [ISO
-        /// 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-        /// alpha-2 code.
+        /// [ISO 3166-1 alpha-2
+        /// code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
@@ -66,6 +65,16 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
+
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code
+        /// for the currency in which amounts will be paid out (after foreign
+        /// exchange). Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK"
+        /// and "USD" are supported. Present only if payouts will be (or were)
+        /// made via foreign exchange.
+        /// </summary>
+        [JsonProperty("fx_payout_currency")]
+        public CreditorFxPayoutCurrency? FxPayoutCurrency { get; set; }
 
         /// <summary>
         /// Unique identifier, beginning with "CR".
@@ -141,6 +150,41 @@ namespace GoCardless.Resources
         public CreditorVerificationStatus? VerificationStatus { get; set; }
     }
     
+    /// <summary>
+    /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in
+    /// which amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK",
+    /// "EUR", "GBP", "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or
+    /// were) made via foreign exchange.
+    /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum CreditorFxPayoutCurrency {
+
+        /// <summary>`fx_payout_currency` with a value of "AUD"</summary>
+        [EnumMember(Value = "AUD")]
+        AUD,
+        /// <summary>`fx_payout_currency` with a value of "CAD"</summary>
+        [EnumMember(Value = "CAD")]
+        CAD,
+        /// <summary>`fx_payout_currency` with a value of "DKK"</summary>
+        [EnumMember(Value = "DKK")]
+        DKK,
+        /// <summary>`fx_payout_currency` with a value of "EUR"</summary>
+        [EnumMember(Value = "EUR")]
+        EUR,
+        /// <summary>`fx_payout_currency` with a value of "GBP"</summary>
+        [EnumMember(Value = "GBP")]
+        GBP,
+        /// <summary>`fx_payout_currency` with a value of "NZD"</summary>
+        [EnumMember(Value = "NZD")]
+        NZD,
+        /// <summary>`fx_payout_currency` with a value of "SEK"</summary>
+        [EnumMember(Value = "SEK")]
+        SEK,
+        /// <summary>`fx_payout_currency` with a value of "USD"</summary>
+        [EnumMember(Value = "USD")]
+        USD,
+    }
+
     /// <summary>
     /// Resources linked to this Creditor
     /// </summary>
@@ -239,8 +283,8 @@ namespace GoCardless.Resources
         public string City { get; set; }
 
         /// <summary>
-        /// The support [ISO 3166-1 country
-        /// code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+        /// [ISO 3166-1 alpha-2
+        /// code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }

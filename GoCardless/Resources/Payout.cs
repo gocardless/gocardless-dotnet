@@ -19,7 +19,7 @@ namespace GoCardless.Resources
     public class Payout
     {
         /// <summary>
-        /// Amount in pence or cents.
+        /// Amount in minor unit (e.g. pence in GBP, cents in EUR).
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
@@ -54,8 +54,8 @@ namespace GoCardless.Resources
         public PayoutCurrency? Currency { get; set; }
 
         /// <summary>
-        /// Fees that have already been deducted from the payout amount in pence
-        /// or cents.
+        /// Fees that have already been deducted from the payout amount in minor
+        /// unit (e.g. pence in GBP, cents in EUR).
         /// 
         /// For each `late_failure_settled` or `chargeback_settled` action, we
         /// refund the transaction fees in a payout. This means that a payout
@@ -67,6 +67,12 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("deducted_fees")]
         public int? DeductedFees { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("fx")]
+        public PayoutFx Fx { get; set; }
 
         /// <summary>
         /// Unique identifier, beginning with "PO".
@@ -133,6 +139,80 @@ namespace GoCardless.Resources
         [EnumMember(Value = "SEK")]
         SEK,
         /// <summary>`currency` with a value of "USD"</summary>
+        [EnumMember(Value = "USD")]
+        USD,
+    }
+
+    public class PayoutFx
+    {
+        /// <summary>
+        /// Estimated rate that will be used in the foreign exchange of the
+        /// `amount` into the `fx_currency`.
+        /// This will vary based on the prevailing market rate until the moment
+        /// that it is paid out.
+        /// Present only before a resource is paid out.
+        /// </summary>
+        [JsonProperty("estimated_exchange_rate")]
+        public decimal? EstimatedExchangeRate { get; set; }
+
+        /// <summary>
+        /// Rate used in the foreign exchange of the `amount` into the
+        /// `fx_currency`.
+        /// Present only after a resource is paid out.
+        /// </summary>
+        [JsonProperty("exchange_rate")]
+        public decimal? ExchangeRate { get; set; }
+
+        /// <summary>
+        /// Amount that was paid out in the `fx_currency` after foreign
+        /// exchange.
+        /// Present only after the resource has been paid out.
+        /// </summary>
+        [JsonProperty("fx_amount")]
+        public int? FxAmount { get; set; }
+
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code
+        /// for the currency in which amounts will be paid out (after foreign
+        /// exchange). Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK"
+        /// and "USD" are supported. Present only if payouts will be (or were)
+        /// made via foreign exchange.
+        /// </summary>
+        [JsonProperty("fx_currency")]
+        public PayoutFxFxCurrency? FxCurrency { get; set; }
+    }
+    
+    /// <summary>
+    /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in
+    /// which amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK",
+    /// "EUR", "GBP", "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or
+    /// were) made via foreign exchange.
+    /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum PayoutFxFxCurrency {
+
+        /// <summary>`fx_currency` with a value of "AUD"</summary>
+        [EnumMember(Value = "AUD")]
+        AUD,
+        /// <summary>`fx_currency` with a value of "CAD"</summary>
+        [EnumMember(Value = "CAD")]
+        CAD,
+        /// <summary>`fx_currency` with a value of "DKK"</summary>
+        [EnumMember(Value = "DKK")]
+        DKK,
+        /// <summary>`fx_currency` with a value of "EUR"</summary>
+        [EnumMember(Value = "EUR")]
+        EUR,
+        /// <summary>`fx_currency` with a value of "GBP"</summary>
+        [EnumMember(Value = "GBP")]
+        GBP,
+        /// <summary>`fx_currency` with a value of "NZD"</summary>
+        [EnumMember(Value = "NZD")]
+        NZD,
+        /// <summary>`fx_currency` with a value of "SEK"</summary>
+        [EnumMember(Value = "SEK")]
+        SEK,
+        /// <summary>`fx_currency` with a value of "USD"</summary>
         [EnumMember(Value = "USD")]
         USD,
     }

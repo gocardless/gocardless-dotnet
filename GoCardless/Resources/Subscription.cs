@@ -152,6 +152,9 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Name of the month on which to charge a customer. Must be lowercase.
+        /// Only applies
+        /// when the interval_unit is `yearly`.
+        /// 
         /// </summary>
         [JsonProperty("month")]
         public SubscriptionMonth? Month { get; set; }
@@ -203,8 +206,7 @@ namespace GoCardless.Resources
         public string Status { get; set; }
 
         /// <summary>
-        /// Up to 10 upcoming payments with the amount, in pence, and charge
-        /// date for each.
+        /// Up to 10 upcoming payments with their amounts and charge dates.
         /// </summary>
         [JsonProperty("upcoming_payments")]
         public List<SubscriptionUpcomingPayment> UpcomingPayments { get; set; }
@@ -241,7 +243,9 @@ namespace GoCardless.Resources
     }
     
     /// <summary>
-    /// Name of the month on which to charge a customer. Must be lowercase.
+    /// Name of the month on which to charge a customer. Must be lowercase. Only applies
+    /// when the interval_unit is `yearly`.
+    /// 
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum SubscriptionMonth {
@@ -317,13 +321,13 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Up to 10 upcoming payments with the amount, in pence, and charge date
-    /// for each.
+    /// Up to 10 upcoming payments with their amounts and charge dates.
     /// </summary>
     public class SubscriptionUpcomingPayment
     {
         /// <summary>
-        /// The amount of this payment, in pence.
+        /// The amount of this payment, in minor unit (e.g. pence in GBP, cents
+        /// in EUR).
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }

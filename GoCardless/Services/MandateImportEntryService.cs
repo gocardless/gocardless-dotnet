@@ -205,8 +205,8 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Name of the account holder, as known by the bank. Usually this
-            /// matches the name of the linked
-            /// [customer](#core-endpoints-customers). This field will be
+            /// is the same as the name stored with the linked
+            /// [creditor](#core-endpoints-creditors). This field will be
             /// transliterated, upcased and truncated to 18 characters.
             /// </summary>
             [JsonProperty("account_holder_name")]
@@ -222,7 +222,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Bank code - see [local details](#appendix-local-bank-details)
-            /// for more information.  Alternatively you can provide an `iban`.
+            /// for more information. Alternatively you can provide an `iban`.
             /// </summary>
             [JsonProperty("bank_code")]
             public string BankCode { get; set; }
@@ -235,10 +235,10 @@ namespace GoCardless.Services
             public string BranchCode { get; set; }
 
             /// <summary>
-            /// [ISO
-            /// 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-            /// alpha-2 code. Defaults to the country code of the `iban` if
-            /// supplied, otherwise is required.
+            /// [ISO 3166-1 alpha-2
+            /// code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+            /// Defaults to the country code of the `iban` if supplied,
+            /// otherwise is required.
             /// </summary>
             [JsonProperty("country_code")]
             public string CountryCode { get; set; }
@@ -299,9 +299,8 @@ namespace GoCardless.Services
             public string CompanyName { get; set; }
 
             /// <summary>
-            /// [ISO
-            /// 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-            /// alpha-2 code.
+            /// [ISO 3166-1 alpha-2
+            /// code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
             /// </summary>
             [JsonProperty("country_code")]
             public string CountryCode { get; set; }
