@@ -93,18 +93,20 @@ namespace GoCardless.Resources
         /// `amount` into the `fx_currency`.
         /// This will vary based on the prevailing market rate until the moment
         /// that it is paid out.
-        /// Present only before a resource is paid out.
+        /// Present only before a resource is paid out. Has upto 10 decimal
+        /// places.
         /// </summary>
         [JsonProperty("estimated_exchange_rate")]
-        public decimal? EstimatedExchangeRate { get; set; }
+        public string EstimatedExchangeRate { get; set; }
 
         /// <summary>
         /// Rate used in the foreign exchange of the `amount` into the
         /// `fx_currency`.
-        /// Present only after a resource is paid out.
+        /// Present only after a resource is paid out. Has upto 10 decimal
+        /// places.
         /// </summary>
         [JsonProperty("exchange_rate")]
-        public decimal? ExchangeRate { get; set; }
+        public string ExchangeRate { get; set; }
 
         /// <summary>
         /// Amount that was paid out in the `fx_currency` after foreign
