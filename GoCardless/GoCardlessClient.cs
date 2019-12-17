@@ -43,6 +43,10 @@ namespace GoCardless
         private GoCardlessClient(string accessToken, string baseUrl, HttpClient httpClient)
         {
             this._httpClient = httpClient ?? DefaultHttpClient;
+            // Disable ExpectContinue when using the Default Http Client
+            if (httpClient == null) {
+                this._httpClient.DefaultRequestHeaders.ExpectContinue = false;
+            }
             _accessToken = accessToken;
             _baseUrl = new Uri(baseUrl, UriKind.Absolute);
         }
@@ -229,9 +233,9 @@ namespace GoCardless
             var httpMethod = new HttpMethod(method);
 
             var requestMessage = new HttpRequestMessage(httpMethod, new Uri(_baseUrl, path));
-            requestMessage.Headers.Add("User-Agent", "gocardless-dotnet/3.0.0");
+            requestMessage.Headers.Add("User-Agent", "gocardless-dotnet/3.0.1");
             requestMessage.Headers.Add("GoCardless-Version", "2015-07-06");
-            requestMessage.Headers.Add("GoCardless-Client-Version", "3.0.0");
+            requestMessage.Headers.Add("GoCardless-Client-Version", "3.0.1");
             requestMessage.Headers.Add("GoCardless-Client-Library", "gocardless-dotnet");
             requestMessage.Headers.Authorization =
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
