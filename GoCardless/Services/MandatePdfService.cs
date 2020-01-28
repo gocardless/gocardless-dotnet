@@ -292,9 +292,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone
-        /// number, including country code. Required for New Zealand customers
-        /// only. Must be supplied if the customer's bank account is denominated
-        /// in New Zealand Dollars (NZD).
+        /// number, including country code.
         /// </summary>
         [JsonProperty("phone_number")]
         public string PhoneNumber { get; set; }
@@ -306,7 +304,10 @@ namespace GoCardless.Services
         public string PostalCode { get; set; }
 
         /// <summary>
-        /// The customer's address region, county or department.
+        /// The customer's address region, county or department. For US
+        /// customers a 2 letter state code ([ISO
+        /// 3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) e.g CA) is
+        /// required.
         /// </summary>
         [JsonProperty("region")]
         public string Region { get; set; }

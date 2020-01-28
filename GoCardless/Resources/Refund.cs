@@ -79,11 +79,28 @@ namespace GoCardless.Resources
         /// class='restricted-notice'><strong>Restricted</strong>: You can only
         /// specify a payment reference for Bacs payments (that is, when
         /// collecting from the UK) if you're on the <a
-        /// href='https://gocardless.com/pricing'>GoCardless Plus or Pro
-        /// packages</a>.</p>
+        /// href='https://gocardless.com/pricing'>GoCardless Plus, Pro or
+        /// Enterprise packages</a>.</p>
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
+
+        /// <summary>
+        /// One of:
+        /// <ul>
+        /// <li>`created`: the refund has been created</li>
+        /// <li>`pending_submission`: the refund has been created, but not yet
+        /// submitted to the banks</li>
+        /// <li>`submitted`: the refund has been submitted to the banks</li>
+        /// <li>`paid`:  the refund has been included in a
+        /// [payout](#core-endpoints-payouts)</li>
+        /// <li>`cancelled`: the refund has been cancelled</li>
+        /// <li>`bounced`: the refund has failed to be paid</li>
+        /// <li>`funds_returned`: the refund has had its funds returned</li>
+        /// </ul>
+        /// </summary>
+        [JsonProperty("status")]
+        public RefundStatus? Status { get; set; }
     }
     
     public class RefundFx
@@ -93,7 +110,7 @@ namespace GoCardless.Resources
         /// `amount` into the `fx_currency`.
         /// This will vary based on the prevailing market rate until the moment
         /// that it is paid out.
-        /// Present only before a resource is paid out. Has upto 10 decimal
+        /// Present only before a resource is paid out. Has up to 10 decimal
         /// places.
         /// </summary>
         [JsonProperty("estimated_exchange_rate")]
@@ -102,7 +119,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// Rate used in the foreign exchange of the `amount` into the
         /// `fx_currency`.
-        /// Present only after a resource is paid out. Has upto 10 decimal
+        /// Present only after a resource is paid out. Has up to 10 decimal
         /// places.
         /// </summary>
         [JsonProperty("exchange_rate")]
@@ -182,4 +199,43 @@ namespace GoCardless.Resources
         public string Payment { get; set; }
     }
     
+    /// <summary>
+    /// One of:
+    /// <ul>
+    /// <li>`created`: the refund has been created</li>
+    /// <li>`pending_submission`: the refund has been created, but not yet submitted to the
+    /// banks</li>
+    /// <li>`submitted`: the refund has been submitted to the banks</li>
+    /// <li>`paid`:  the refund has been included in a [payout](#core-endpoints-payouts)</li>
+    /// <li>`cancelled`: the refund has been cancelled</li>
+    /// <li>`bounced`: the refund has failed to be paid</li>
+    /// <li>`funds_returned`: the refund has had its funds returned</li>
+    /// </ul>
+    /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum RefundStatus {
+
+        /// <summary>`status` with a value of "created"</summary>
+        [EnumMember(Value = "created")]
+        Created,
+        /// <summary>`status` with a value of "pending_submission"</summary>
+        [EnumMember(Value = "pending_submission")]
+        PendingSubmission,
+        /// <summary>`status` with a value of "submitted"</summary>
+        [EnumMember(Value = "submitted")]
+        Submitted,
+        /// <summary>`status` with a value of "paid"</summary>
+        [EnumMember(Value = "paid")]
+        Paid,
+        /// <summary>`status` with a value of "cancelled"</summary>
+        [EnumMember(Value = "cancelled")]
+        Cancelled,
+        /// <summary>`status` with a value of "bounced"</summary>
+        [EnumMember(Value = "bounced")]
+        Bounced,
+        /// <summary>`status` with a value of "funds_returned"</summary>
+        [EnumMember(Value = "funds_returned")]
+        FundsReturned,
+    }
+
 }

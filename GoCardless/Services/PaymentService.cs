@@ -341,8 +341,8 @@ namespace GoCardless.Services
         /// class='restricted-notice'><strong>Restricted</strong>: You can only
         /// specify a payment reference for Bacs payments (that is, when
         /// collecting from the UK) if you're on the <a
-        /// href='https://gocardless.com/pricing'>GoCardless Plus or Pro
-        /// packages</a>.</p>
+        /// href='https://gocardless.com/pricing'>GoCardless Plus, Pro or
+        /// Enterprise packages</a>.</p>
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }

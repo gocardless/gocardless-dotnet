@@ -18,8 +18,9 @@ namespace GoCardless.Services
     ///
     /// Payouts represent transfers from GoCardless to a
     /// [creditor](#core-endpoints-creditors). Each payout contains the funds
-    /// collected from one or many [payments](#core-endpoints-payments). Payouts
-    /// are created automatically after a payment has been successfully
+    /// collected from one or many [payments](#core-endpoints-payments). All the
+    /// payments in a payout will have been collected in the same currency.
+    /// Payouts are created automatically after a payment has been successfully
     /// collected.
     /// </summary>
 
@@ -264,6 +265,8 @@ namespace GoCardless.Services
         /// <li>`pending`: the payout has been created, but not yet sent to the
         /// banks</li>
         /// <li>`paid`: the payout has been sent to the banks</li>
+        /// <li>`bounced`: the payout bounced when sent, the payout can be
+        /// retried.</li>
         /// </ul>
         /// </summary>
         [JsonProperty("status")]
@@ -275,6 +278,8 @@ namespace GoCardless.Services
         /// <li>`pending`: the payout has been created, but not yet sent to the
         /// banks</li>
         /// <li>`paid`: the payout has been sent to the banks</li>
+        /// <li>`bounced`: the payout bounced when sent, the payout can be
+        /// retried.</li>
         /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -287,6 +292,9 @@ namespace GoCardless.Services
             /// <summary>`status` with a value of "paid"</summary>
             [EnumMember(Value = "paid")]
             Paid,
+            /// <summary>`status` with a value of "bounced"</summary>
+            [EnumMember(Value = "bounced")]
+            Bounced,
         }
     }
 

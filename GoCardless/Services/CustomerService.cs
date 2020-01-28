@@ -273,9 +273,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone
-        /// number, including country code. Required for New Zealand customers
-        /// only. Must be supplied if the customer's bank account is denominated
-        /// in New Zealand Dollars (NZD).
+        /// number, including country code.
         /// </summary>
         [JsonProperty("phone_number")]
         public string PhoneNumber { get; set; }
@@ -287,7 +285,10 @@ namespace GoCardless.Services
         public string PostalCode { get; set; }
 
         /// <summary>
-        /// The customer's address region, county or department.
+        /// The customer's address region, county or department. For US
+        /// customers a 2 letter state code ([ISO
+        /// 3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) e.g CA) is
+        /// required.
         /// </summary>
         [JsonProperty("region")]
         public string Region { get; set; }
@@ -364,6 +365,49 @@ namespace GoCardless.Services
             /// </summary>
             [JsonProperty("lte")]
             public DateTimeOffset? LessThanOrEqual { get; set; }
+        }
+
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        /// "SEK" and "USD" are supported.
+        /// </summary>
+        [JsonProperty("currency")]
+        public CustomerCurrency? Currency { get; set; }
+            
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        /// "SEK" and "USD" are supported.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum CustomerCurrency
+        {
+    
+            /// <summary>`currency` with a value of "AUD"</summary>
+            [EnumMember(Value = "AUD")]
+            AUD,
+            /// <summary>`currency` with a value of "CAD"</summary>
+            [EnumMember(Value = "CAD")]
+            CAD,
+            /// <summary>`currency` with a value of "DKK"</summary>
+            [EnumMember(Value = "DKK")]
+            DKK,
+            /// <summary>`currency` with a value of "EUR"</summary>
+            [EnumMember(Value = "EUR")]
+            EUR,
+            /// <summary>`currency` with a value of "GBP"</summary>
+            [EnumMember(Value = "GBP")]
+            GBP,
+            /// <summary>`currency` with a value of "NZD"</summary>
+            [EnumMember(Value = "NZD")]
+            NZD,
+            /// <summary>`currency` with a value of "SEK"</summary>
+            [EnumMember(Value = "SEK")]
+            SEK,
+            /// <summary>`currency` with a value of "USD"</summary>
+            [EnumMember(Value = "USD")]
+            USD,
         }
 
         /// <summary>
@@ -479,9 +523,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone
-        /// number, including country code. Required for New Zealand customers
-        /// only. Must be supplied if the customer's bank account is denominated
-        /// in New Zealand Dollars (NZD).
+        /// number, including country code.
         /// </summary>
         [JsonProperty("phone_number")]
         public string PhoneNumber { get; set; }
@@ -493,7 +535,10 @@ namespace GoCardless.Services
         public string PostalCode { get; set; }
 
         /// <summary>
-        /// The customer's address region, county or department.
+        /// The customer's address region, county or department. For US
+        /// customers a 2 letter state code ([ISO
+        /// 3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) e.g CA) is
+        /// required.
         /// </summary>
         [JsonProperty("region")]
         public string Region { get; set; }

@@ -83,6 +83,9 @@ namespace GoCardless.Resources
         /// their users take payments. Only shown in partner payouts. In the
         /// case of a payment failure or chargeback, these will appear as
         /// credits.</li>
+        /// <li>`surcharge_fee` (credit/debit): GoCardless deducted a surcharge
+        /// fee as the payment failed or was charged back, or refunded a
+        /// surcharge fee as the bank or customer cancelled the chargeback.</li>
         /// </ul>
         /// 
         /// </summary>
@@ -127,6 +130,9 @@ namespace GoCardless.Resources
     /// <li>`revenue_share` (credit/debit): A share of the fees that GoCardless collected which some
     /// partner integrations receive when their users take payments. Only shown in partner payouts.
     /// In the case of a payment failure or chargeback, these will appear as credits.</li>
+    /// <li>`surcharge_fee` (credit/debit): GoCardless deducted a surcharge fee as the payment
+    /// failed or was charged back, or refunded a surcharge fee as the bank or customer cancelled
+    /// the chargeback.</li>
     /// </ul>
     /// 
     /// </summary>
@@ -157,6 +163,9 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "revenue_share"</summary>
         [EnumMember(Value = "revenue_share")]
         RevenueShare,
+        /// <summary>`type` with a value of "surcharge_fee"</summary>
+        [EnumMember(Value = "surcharge_fee")]
+        SurchargeFee,
     }
 
 }

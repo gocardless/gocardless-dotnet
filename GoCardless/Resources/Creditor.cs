@@ -238,6 +238,13 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("default_sek_payout_account")]
         public string DefaultSekPayoutAccount { get; set; }
+
+        /// <summary>
+        /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+        /// which is set up to receive payouts in USD.
+        /// </summary>
+        [JsonProperty("default_usd_payout_account")]
+        public string DefaultUsdPayoutAccount { get; set; }
     }
     
     /// <summary>

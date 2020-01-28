@@ -74,6 +74,7 @@ namespace GoCardless.Resources
         /// <li>`payouts`</li>
         /// <li>`refunds`</li>
         /// <li>`subscriptions`</li>
+        /// <li>`instalment_schedules`</li>
         /// </ul>
         /// </summary>
         [JsonProperty("resource_type")]
@@ -130,6 +131,12 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "subscription_created"</summary>
         [EnumMember(Value = "subscription_created")]
         SubscriptionCreated,
+        /// <summary>`type` with a value of "instalment_schedule_created"</summary>
+        [EnumMember(Value = "instalment_schedule_created")]
+        InstalmentScheduleCreated,
+        /// <summary>`type` with a value of "instalment_schedule_cancelled"</summary>
+        [EnumMember(Value = "instalment_schedule_cancelled")]
+        InstalmentScheduleCancelled,
     }
 
     public class EventDetails
@@ -247,6 +254,14 @@ namespace GoCardless.Resources
     public class EventLinks
     {
         /// <summary>
+        /// If `resource_type` is `instalment_schedule`, this is the ID of the
+        /// [instalment schedule](#core-endpoints-instalment-schedules) which
+        /// has been updated.
+        /// </summary>
+        [JsonProperty("instalment_schedule")]
+        public string InstalmentSchedule { get; set; }
+
+        /// <summary>
         /// If `resource_type` is `mandates`, this is the ID of the
         /// [mandate](#core-endpoints-mandates) which has been updated.
         /// </summary>
@@ -335,6 +350,7 @@ namespace GoCardless.Resources
     /// <li>`payouts`</li>
     /// <li>`refunds`</li>
     /// <li>`subscriptions`</li>
+    /// <li>`instalment_schedules`</li>
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
@@ -355,6 +371,9 @@ namespace GoCardless.Resources
         /// <summary>`resource_type` with a value of "subscriptions"</summary>
         [EnumMember(Value = "subscriptions")]
         Subscriptions,
+        /// <summary>`resource_type` with a value of "instalment_schedules"</summary>
+        [EnumMember(Value = "instalment_schedules")]
+        InstalmentSchedules,
     }
 
 }
