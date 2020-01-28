@@ -12,8 +12,9 @@ namespace GoCardless.Resources
     ///
     /// Payouts represent transfers from GoCardless to a
     /// [creditor](#core-endpoints-creditors). Each payout contains the funds
-    /// collected from one or many [payments](#core-endpoints-payments). Payouts
-    /// are created automatically after a payment has been successfully
+    /// collected from one or many [payments](#core-endpoints-payments). All the
+    /// payments in a payout will have been collected in the same currency.
+    /// Payouts are created automatically after a payment has been successfully
     /// collected.
     /// </summary>
     public class Payout
@@ -59,8 +60,10 @@ namespace GoCardless.Resources
         /// 
         /// For each `late_failure_settled` or `chargeback_settled` action, we
         /// refund the transaction fees in a payout. This means that a payout
-        /// can have a negative `deducted_fees`. This field is calculated as
-        /// `GoCardless fees + app fees - refunded fees`
+        /// can have a negative `deducted_fees` value.
+        /// 
+        /// This field is calculated as `(GoCardless fees + app fees + surcharge
+        /// fees) - (refunded fees)`
         /// 
         /// If the merchant is invoiced for fees separately from the payout,
         /// then `deducted_fees` will be 0.
@@ -104,6 +107,8 @@ namespace GoCardless.Resources
         /// <li>`pending`: the payout has been created, but not yet sent to the
         /// banks</li>
         /// <li>`paid`: the payout has been sent to the banks</li>
+        /// <li>`bounced`: the payout bounced when sent, the payout can be
+        /// retried.</li>
         /// </ul>
         /// </summary>
         [JsonProperty("status")]
@@ -150,7 +155,7 @@ namespace GoCardless.Resources
         /// `amount` into the `fx_currency`.
         /// This will vary based on the prevailing market rate until the moment
         /// that it is paid out.
-        /// Present only before a resource is paid out. Has upto 10 decimal
+        /// Present only before a resource is paid out. Has up to 10 decimal
         /// places.
         /// </summary>
         [JsonProperty("estimated_exchange_rate")]
@@ -159,7 +164,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// Rate used in the foreign exchange of the `amount` into the
         /// `fx_currency`.
-        /// Present only after a resource is paid out. Has upto 10 decimal
+        /// Present only after a resource is paid out. Has up to 10 decimal
         /// places.
         /// </summary>
         [JsonProperty("exchange_rate")]
@@ -258,6 +263,7 @@ namespace GoCardless.Resources
     /// <ul>
     /// <li>`pending`: the payout has been created, but not yet sent to the banks</li>
     /// <li>`paid`: the payout has been sent to the banks</li>
+    /// <li>`bounced`: the payout bounced when sent, the payout can be retried.</li>
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
@@ -269,6 +275,9 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "paid"</summary>
         [EnumMember(Value = "paid")]
         Paid,
+        /// <summary>`status` with a value of "bounced"</summary>
+        [EnumMember(Value = "bounced")]
+        Bounced,
     }
 
 }

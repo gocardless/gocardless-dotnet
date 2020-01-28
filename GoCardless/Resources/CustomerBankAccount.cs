@@ -33,7 +33,8 @@ namespace GoCardless.Resources
         public string AccountHolderName { get; set; }
 
         /// <summary>
-        /// Last two digits of account number.
+        /// The last few digits of the account number. Currently 4 digits for
+        /// NZD bank accounts and 2 digits for other currencies.
         /// </summary>
         [JsonProperty("account_number_ending")]
         public string AccountNumberEnding { get; set; }

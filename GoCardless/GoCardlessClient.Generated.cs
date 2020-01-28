@@ -44,6 +44,11 @@ namespace GoCardless
         public EventService Events => new EventService(this);
 
         /// <summary>
+        ///A service for working with instalment schedule resources.
+        /// </summary>
+        public InstalmentScheduleService InstalmentSchedules => new InstalmentScheduleService(this);
+
+        /// <summary>
         ///A service for working with mandate resources.
         /// </summary>
         public MandateService Mandates => new MandateService(this);

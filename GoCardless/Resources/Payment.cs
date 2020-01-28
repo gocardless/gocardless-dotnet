@@ -106,8 +106,8 @@ namespace GoCardless.Resources
         /// class='restricted-notice'><strong>Restricted</strong>: You can only
         /// specify a payment reference for Bacs payments (that is, when
         /// collecting from the UK) if you're on the <a
-        /// href='https://gocardless.com/pricing'>GoCardless Plus or Pro
-        /// packages</a>.</p>
+        /// href='https://gocardless.com/pricing'>GoCardless Plus, Pro or
+        /// Enterprise packages</a>.</p>
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
@@ -176,7 +176,7 @@ namespace GoCardless.Resources
         /// `amount` into the `fx_currency`.
         /// This will vary based on the prevailing market rate until the moment
         /// that it is paid out.
-        /// Present only before a resource is paid out. Has upto 10 decimal
+        /// Present only before a resource is paid out. Has up to 10 decimal
         /// places.
         /// </summary>
         [JsonProperty("estimated_exchange_rate")]
@@ -185,7 +185,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// Rate used in the foreign exchange of the `amount` into the
         /// `fx_currency`.
-        /// Present only after a resource is paid out. Has upto 10 decimal
+        /// Present only after a resource is paid out. Has up to 10 decimal
         /// places.
         /// </summary>
         [JsonProperty("exchange_rate")]
@@ -256,6 +256,15 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
+
+        /// <summary>
+        /// ID of [instalment_schedule](#core-endpoints-instalment-schedules)
+        /// from which this payment was created.<br/>**Note**: this property
+        /// will only be present if this payment is part of an instalment
+        /// schedule.
+        /// </summary>
+        [JsonProperty("instalment_schedule")]
+        public string InstalmentSchedule { get; set; }
 
         /// <summary>
         /// ID of the [mandate](#core-endpoints-mandates) against which this
