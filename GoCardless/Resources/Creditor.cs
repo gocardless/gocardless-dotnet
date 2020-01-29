@@ -67,6 +67,14 @@ namespace GoCardless.Resources
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
+        /// Boolean value indicating whether creditor has the [Custom Payment
+        /// Pages](https://support.gocardless.com/hc/en-gb/articles/115003734705-Custom-payment-pages)
+        /// functionality enabled.
+        /// </summary>
+        [JsonProperty("custom_payment_pages_enabled")]
+        public bool? CustomPaymentPagesEnabled { get; set; }
+
+        /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code
         /// for the currency in which amounts will be paid out (after foreign
         /// exchange). Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK"
@@ -94,6 +102,24 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("logo_url")]
         public string LogoUrl { get; set; }
+
+        /// <summary>
+        /// Boolean value indicating whether creditor has the [Mandate
+        /// Imports](#core-endpoints-mandate-imports) functionality enabled.
+        /// </summary>
+        [JsonProperty("mandate_imports_enabled")]
+        public bool? MandateImportsEnabled { get; set; }
+
+        /// <summary>
+        /// Boolean value indicating whether the organisation is responsible for
+        /// sending all customer notifications (note this is separate from the
+        /// functionality described
+        /// [here](https://developer.gocardless.com/getting-started/api/handling-customer-notifications/).
+        /// If you are a partner app, and this value is true, you should not
+        /// send notifications on behalf of this organisation.
+        /// </summary>
+        [JsonProperty("merchant_responsible_for_notifications")]
+        public bool? MerchantResponsibleForNotifications { get; set; }
 
         /// <summary>
         /// The creditor's name.
