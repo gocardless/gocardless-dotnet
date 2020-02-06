@@ -316,6 +316,14 @@ namespace GoCardless.Services
         public string PaymentReference { get; set; }
 
         /// <summary>
+        /// On failure, automatically retry payments using [Optimise Smart
+        /// Payment Retries](#optimise-smart-payment-retries). Default is
+        /// `false`.
+        /// </summary>
+        [JsonProperty("retry_if_possible")]
+        public bool? RetryIfPossible { get; set; }
+
+        /// <summary>
         /// The total amount of the instalment schedule, defined as the sum of
         /// all individual
         /// payments. If the requested payment amounts do not sum up correctly,

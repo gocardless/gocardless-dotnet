@@ -441,6 +441,14 @@ namespace GoCardless.Services
         public string PaymentReference { get; set; }
 
         /// <summary>
+        /// On failure, automatically retry payments using [Optimise Smart
+        /// Payment Retries](#optimise-smart-payment-retries). Default is
+        /// `false`.
+        /// </summary>
+        [JsonProperty("retry_if_possible")]
+        public bool? RetryIfPossible { get; set; }
+
+        /// <summary>
         /// The date on which the first payment should be charged. Must be on or
         /// after the [mandate](#core-endpoints-mandates)'s
         /// `next_possible_charge_date`. When blank, this will be set as the

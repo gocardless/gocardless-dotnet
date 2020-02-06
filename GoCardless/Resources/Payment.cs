@@ -113,6 +113,14 @@ namespace GoCardless.Resources
         public string Reference { get; set; }
 
         /// <summary>
+        /// On failure, automatically retry the payment using [Optimise Smart
+        /// Payment Retries](#optimise-smart-payment-retries). Default is
+        /// `false`.
+        /// </summary>
+        [JsonProperty("retry_if_possible")]
+        public bool? RetryIfPossible { get; set; }
+
+        /// <summary>
         /// One of:
         /// <ul>
         /// <li>`pending_customer_approval`: we're waiting for the customer to
