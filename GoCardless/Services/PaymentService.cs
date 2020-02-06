@@ -348,6 +348,14 @@ namespace GoCardless.Services
         public string Reference { get; set; }
 
         /// <summary>
+        /// On failure, automatically retry the payment using [Optimise Smart
+        /// Payment Retries](#optimise-smart-payment-retries). Default is
+        /// `false`.
+        /// </summary>
+        [JsonProperty("retry_if_possible")]
+        public bool? RetryIfPossible { get; set; }
+
+        /// <summary>
         /// A unique key to ensure that this request only succeeds once, allowing you to safely retry request errors such as network failures.
         /// Any requests, where supported, to create a resource with a key that has previously been used will not succeed.
         /// See: https://developer.gocardless.com/api-reference/#making-requests-idempotency-keys
@@ -623,6 +631,14 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<String, String> Metadata { get; set; }
+
+        /// <summary>
+        /// On failure, automatically retry the payment using [Optimise Smart
+        /// Payment Retries](#optimise-smart-payment-retries). Default is
+        /// `false`.
+        /// </summary>
+        [JsonProperty("retry_if_possible")]
+        public bool? RetryIfPossible { get; set; }
     }
 
         
