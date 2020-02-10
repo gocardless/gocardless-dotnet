@@ -185,6 +185,13 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("scheme")]
         public EventDetailsScheme? Scheme { get; set; }
+
+        /// <summary>
+        /// Whether the payment will be retried automatically. Set on a payment
+        /// failed event.
+        /// </summary>
+        [JsonProperty("will_attempt_retry")]
+        public bool? WillAttemptRetry { get; set; }
     }
     
     /// <summary>
