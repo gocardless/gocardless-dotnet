@@ -182,6 +182,7 @@ namespace GoCardless.Services
         /// <li>`refund`</li>
         /// <li>`subscription`</li>
         /// <li>`instalment_schedule`</li>
+        /// <li>`creditor`</li>
         /// </ul>
         /// </summary>
         [JsonProperty("include")]
@@ -197,6 +198,7 @@ namespace GoCardless.Services
         /// <li>`refund`</li>
         /// <li>`subscription`</li>
         /// <li>`instalment_schedule`</li>
+        /// <li>`creditor`</li>
         /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -221,6 +223,9 @@ namespace GoCardless.Services
             /// <summary>`include` with a value of "instalment_schedule"</summary>
             [EnumMember(Value = "instalment_schedule")]
             InstalmentSchedule,
+            /// <summary>`include` with a value of "creditor"</summary>
+            [EnumMember(Value = "creditor")]
+            Creditor,
         }
 
         /// <summary>
@@ -267,14 +272,15 @@ namespace GoCardless.Services
         /// <summary>
         /// Type of resource that you'd like to get all events for. Cannot be
         /// used together with the `payment`, `mandate`, `subscription`,
-        /// `instalment_schedule`, `refund` or `payout` parameter. The type can
-        /// be one of:
+        /// `instalment_schedule`, `creditor`, `refund` or `payout` parameter.
+        /// The type can be one of:
         /// <ul>
         /// <li>`payments`</li>
         /// <li>`mandates`</li>
         /// <li>`payouts`</li>
         /// <li>`subscriptions`</li>
         /// <li>`instalment_schedules`</li>
+        /// <li>`creditors`</li>
         /// <li>`refunds`</li>
         /// </ul>
         /// </summary>
@@ -284,14 +290,15 @@ namespace GoCardless.Services
         /// <summary>
         /// Type of resource that you'd like to get all events for. Cannot be
         /// used together with the `payment`, `mandate`, `subscription`,
-        /// `instalment_schedule`, `refund` or `payout` parameter. The type can
-        /// be one of:
+        /// `instalment_schedule`, `creditor`, `refund` or `payout` parameter.
+        /// The type can be one of:
         /// <ul>
         /// <li>`payments`</li>
         /// <li>`mandates`</li>
         /// <li>`payouts`</li>
         /// <li>`subscriptions`</li>
         /// <li>`instalment_schedules`</li>
+        /// <li>`creditors`</li>
         /// <li>`refunds`</li>
         /// </ul>
         /// </summary>
@@ -317,6 +324,9 @@ namespace GoCardless.Services
             /// <summary>`resource_type` with a value of "instalment_schedules"</summary>
             [EnumMember(Value = "instalment_schedules")]
             InstalmentSchedules,
+            /// <summary>`resource_type` with a value of "creditors"</summary>
+            [EnumMember(Value = "creditors")]
+            Creditors,
         }
 
         /// <summary>
