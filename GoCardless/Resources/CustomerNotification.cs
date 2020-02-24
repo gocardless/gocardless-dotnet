@@ -135,12 +135,18 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "payment_created"</summary>
         [EnumMember(Value = "payment_created")]
         PaymentCreated,
+        /// <summary>`type` with a value of "payment_cancelled"</summary>
+        [EnumMember(Value = "payment_cancelled")]
+        PaymentCancelled,
         /// <summary>`type` with a value of "mandate_created"</summary>
         [EnumMember(Value = "mandate_created")]
         MandateCreated,
         /// <summary>`type` with a value of "subscription_created"</summary>
         [EnumMember(Value = "subscription_created")]
         SubscriptionCreated,
+        /// <summary>`type` with a value of "subscription_cancelled"</summary>
+        [EnumMember(Value = "subscription_cancelled")]
+        SubscriptionCancelled,
         /// <summary>`type` with a value of "instalment_schedule_created"</summary>
         [EnumMember(Value = "instalment_schedule_created")]
         InstalmentScheduleCreated,

@@ -75,6 +75,7 @@ namespace GoCardless.Resources
         /// <li>`refunds`</li>
         /// <li>`subscriptions`</li>
         /// <li>`instalment_schedules`</li>
+        /// <li>`creditors`</li>
         /// </ul>
         /// </summary>
         [JsonProperty("resource_type")]
@@ -125,12 +126,18 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "payment_created"</summary>
         [EnumMember(Value = "payment_created")]
         PaymentCreated,
+        /// <summary>`type` with a value of "payment_cancelled"</summary>
+        [EnumMember(Value = "payment_cancelled")]
+        PaymentCancelled,
         /// <summary>`type` with a value of "mandate_created"</summary>
         [EnumMember(Value = "mandate_created")]
         MandateCreated,
         /// <summary>`type` with a value of "subscription_created"</summary>
         [EnumMember(Value = "subscription_created")]
         SubscriptionCreated,
+        /// <summary>`type` with a value of "subscription_cancelled"</summary>
+        [EnumMember(Value = "subscription_cancelled")]
+        SubscriptionCancelled,
         /// <summary>`type` with a value of "instalment_schedule_created"</summary>
         [EnumMember(Value = "instalment_schedule_created")]
         InstalmentScheduleCreated,
@@ -261,6 +268,13 @@ namespace GoCardless.Resources
     public class EventLinks
     {
         /// <summary>
+        /// If `resource_type` is `creditor`, this is the ID of the
+        /// [creditor](#core-endpoints-creditors) which has been updated.
+        /// </summary>
+        [JsonProperty("creditor")]
+        public string Creditor { get; set; }
+
+        /// <summary>
         /// If `resource_type` is `instalment_schedule`, this is the ID of the
         /// [instalment schedule](#core-endpoints-instalment-schedules) which
         /// has been updated.
@@ -358,6 +372,7 @@ namespace GoCardless.Resources
     /// <li>`refunds`</li>
     /// <li>`subscriptions`</li>
     /// <li>`instalment_schedules`</li>
+    /// <li>`creditors`</li>
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
@@ -381,6 +396,9 @@ namespace GoCardless.Resources
         /// <summary>`resource_type` with a value of "instalment_schedules"</summary>
         [EnumMember(Value = "instalment_schedules")]
         InstalmentSchedules,
+        /// <summary>`resource_type` with a value of "creditors"</summary>
+        [EnumMember(Value = "creditors")]
+        Creditors,
     }
 
 }
