@@ -242,7 +242,7 @@ namespace GoCardless.Services
         public string Mandate { get; set; }
 
         /// <summary>
-        /// ID of an event. If specified, this endpint will return all events
+        /// ID of an event. If specified, this endpoint will return all events
         /// whose parent_event is the given event ID.
         /// </summary>
         [JsonProperty("parent_event")]

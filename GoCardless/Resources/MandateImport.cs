@@ -77,7 +77,7 @@ namespace GoCardless.Resources
         /// import must be for the same scheme.
         /// </summary>
         [JsonProperty("scheme")]
-        public string Scheme { get; set; }
+        public MandateImportScheme? Scheme { get; set; }
 
         /// <summary>
         /// The status of the mandate import.
@@ -102,6 +102,39 @@ namespace GoCardless.Resources
         public MandateImportStatus? Status { get; set; }
     }
     
+    /// <summary>
+    /// The scheme of the mandates to be imported.<br>All mandates in a single mandate
+    /// import must be for the same scheme.
+    /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum MandateImportScheme {
+
+        /// <summary>`scheme` with a value of "ach"</summary>
+        [EnumMember(Value = "ach")]
+        Ach,
+        /// <summary>`scheme` with a value of "autogiro"</summary>
+        [EnumMember(Value = "autogiro")]
+        Autogiro,
+        /// <summary>`scheme` with a value of "bacs"</summary>
+        [EnumMember(Value = "bacs")]
+        Bacs,
+        /// <summary>`scheme` with a value of "becs"</summary>
+        [EnumMember(Value = "becs")]
+        Becs,
+        /// <summary>`scheme` with a value of "becs_nz"</summary>
+        [EnumMember(Value = "becs_nz")]
+        BecsNz,
+        /// <summary>`scheme` with a value of "betalingsservice"</summary>
+        [EnumMember(Value = "betalingsservice")]
+        Betalingsservice,
+        /// <summary>`scheme` with a value of "pad"</summary>
+        [EnumMember(Value = "pad")]
+        Pad,
+        /// <summary>`scheme` with a value of "sepa_core"</summary>
+        [EnumMember(Value = "sepa_core")]
+        SepaCore,
+    }
+
     /// <summary>
     /// The status of the mandate import.
     /// <ul>

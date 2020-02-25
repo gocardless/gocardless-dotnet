@@ -24,6 +24,11 @@ namespace GoCardless
         public CreditorBankAccountService CreditorBankAccounts => new CreditorBankAccountService(this);
 
         /// <summary>
+        ///A service for working with currency exchange rate resources.
+        /// </summary>
+        public CurrencyExchangeRateService CurrencyExchangeRates => new CurrencyExchangeRateService(this);
+
+        /// <summary>
         ///A service for working with customer resources.
         /// </summary>
         public CustomerService Customers => new CustomerService(this);
