@@ -239,9 +239,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// For Danish customers only. The civic/company number (CPR or CVR) of
-        /// the customer. Must be supplied if the customer's bank account is
-        /// denominated in Danish krone (DKK). Can only be supplied for
-        /// Betalingsservice mandates.
+        /// the customer. Should only be supplied for Betalingsservice mandates.
         /// </summary>
         [JsonProperty("danish_identity_number")]
         public string DanishIdentityNumber { get; set; }
@@ -291,8 +289,8 @@ namespace GoCardless.Services
         public string PayerIpAddress { get; set; }
 
         /// <summary>
-        /// [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone
-        /// number, including country code.
+        /// The customer phone number. Should only be provided for BECS NZ
+        /// mandates.
         /// </summary>
         [JsonProperty("phone_number")]
         public string PhoneNumber { get; set; }
@@ -366,8 +364,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// For Swedish customers only. The civic/company number (personnummer,
-        /// samordningsnummer, or organisationsnummer) of the customer. Can only
-        /// be supplied for Autogiro mandates.
+        /// samordningsnummer, or organisationsnummer) of the customer. Should
+        /// only be supplied for Autogiro mandates.
         /// </summary>
         [JsonProperty("swedish_identity_number")]
         public string SwedishIdentityNumber { get; set; }
