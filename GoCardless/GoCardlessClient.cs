@@ -39,8 +39,9 @@ namespace GoCardless
         private readonly HttpClient _httpClient;
         private readonly string _accessToken;
         private readonly Uri _baseUrl;
+        private readonly bool _errorOnIdempotencyConflict;
 
-        private GoCardlessClient(string accessToken, string baseUrl, HttpClient httpClient)
+        private GoCardlessClient(string accessToken, string baseUrl, HttpClient httpClient, bool errorOnIdempotencyConflict)
         {
             this._httpClient = httpClient ?? DefaultHttpClient;
             // Disable ExpectContinue when using the Default Http Client
@@ -49,6 +50,7 @@ namespace GoCardless
             }
             _accessToken = accessToken;
             _baseUrl = new Uri(baseUrl, UriKind.Absolute);
+            _errorOnIdempotencyConflict = errorOnIdempotencyConflict;
         }
 
 
@@ -87,7 +89,7 @@ namespace GoCardless
         /// </summary>
         public static GoCardlessClient Create(string accessToken, Environment environment, HttpClient httpClient = null)
         {
-            return Create(accessToken, GetBaseUrl(environment), httpClient);
+            return Create(accessToken, GetBaseUrl(environment), httpClient, false);
         }
 
         /// <summary>
@@ -98,7 +100,19 @@ namespace GoCardless
         /// </summary>
         public static GoCardlessClient Create(string accessToken, string baseUrl, HttpClient client = null)
         {
-            return new GoCardlessClient(accessToken, baseUrl, client);
+            return Create(accessToken, baseUrl, client, false);
+        }
+
+        /// <summary>
+        ///Creates an instance of the client.
+        ///
+        ///@param accessToken the access token
+        ///@param baseUrl the base URL of the API
+        ///@param errorOnIdempotencyConflict the behaviour for Idemptency Key conflicts
+        /// </summary>
+        public static GoCardlessClient Create(string accessToken, string baseUrl, HttpClient client = null, bool errorOnIdempotencyConflict = false)
+        {
+            return new GoCardlessClient(accessToken, baseUrl, client, errorOnIdempotencyConflict);
         }
 
         private static string GetBaseUrl(Environment env)
@@ -135,6 +149,11 @@ namespace GoCardless
                     when (ex.Errors.FirstOrDefault()?.Reason == "idempotent_creation_conflict" &&
                           ex.Errors.First().Links?.ContainsKey("conflicting_resource_id") == true)
                 {
+                    if (_errorOnIdempotencyConflict)
+                    {
+                        throw;
+                    }
+
                     var conflictingResourceId = ex.Errors.First().Links.FirstOrDefault().Value;
                     return await fetchById(conflictingResourceId)
                         .ConfigureAwait(false);
@@ -233,9 +252,9 @@ namespace GoCardless
             var httpMethod = new HttpMethod(method);
 
             var requestMessage = new HttpRequestMessage(httpMethod, new Uri(_baseUrl, path));
-            requestMessage.Headers.Add("User-Agent", "gocardless-dotnet/3.3.1");
+            requestMessage.Headers.Add("User-Agent", "gocardless-dotnet/3.4.1");
             requestMessage.Headers.Add("GoCardless-Version", "2015-07-06");
-            requestMessage.Headers.Add("GoCardless-Client-Version", "3.3.1");
+            requestMessage.Headers.Add("GoCardless-Client-Version", "3.4.1");
             requestMessage.Headers.Add("GoCardless-Client-Library", "gocardless-dotnet");
             requestMessage.Headers.Authorization =
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
