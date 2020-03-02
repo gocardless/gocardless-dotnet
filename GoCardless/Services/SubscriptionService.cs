@@ -545,7 +545,7 @@ namespace GoCardless.Services
         /// At most four valid status values
         /// </summary>
         [JsonProperty("status")]
-        public SubscriptionStatus[] Status { get; set; }
+        public string[] Status { get; set; }
         /// <summary>
         /// One of:
         /// <ul>

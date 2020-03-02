@@ -186,47 +186,7 @@ namespace GoCardless.Services
         /// </ul>
         /// </summary>
         [JsonProperty("include")]
-        public EventInclude? Include { get; set; }
-            
-        /// <summary>
-        /// Includes linked resources in the response. Must be used with the
-        /// `resource_type` parameter specified. The include should be one of:
-        /// <ul>
-        /// <li>`payment`</li>
-        /// <li>`mandate`</li>
-        /// <li>`payout`</li>
-        /// <li>`refund`</li>
-        /// <li>`subscription`</li>
-        /// <li>`instalment_schedule`</li>
-        /// <li>`creditor`</li>
-        /// </ul>
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum EventInclude
-        {
-    
-            /// <summary>`include` with a value of "payment"</summary>
-            [EnumMember(Value = "payment")]
-            Payment,
-            /// <summary>`include` with a value of "mandate"</summary>
-            [EnumMember(Value = "mandate")]
-            Mandate,
-            /// <summary>`include` with a value of "payout"</summary>
-            [EnumMember(Value = "payout")]
-            Payout,
-            /// <summary>`include` with a value of "refund"</summary>
-            [EnumMember(Value = "refund")]
-            Refund,
-            /// <summary>`include` with a value of "subscription"</summary>
-            [EnumMember(Value = "subscription")]
-            Subscription,
-            /// <summary>`include` with a value of "instalment_schedule"</summary>
-            [EnumMember(Value = "instalment_schedule")]
-            InstalmentSchedule,
-            /// <summary>`include` with a value of "creditor"</summary>
-            [EnumMember(Value = "creditor")]
-            Creditor,
-        }
+        public IDictionary<String, String> Include { get; set; }
 
         /// <summary>
         /// Number of records to return.

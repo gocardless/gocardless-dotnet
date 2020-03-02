@@ -114,9 +114,9 @@ namespace GoCardless.Resources
         /// Boolean value indicating whether the organisation is responsible for
         /// sending all customer notifications (note this is separate from the
         /// functionality described
-        /// [here](https://developer.gocardless.com/getting-started/api/handling-customer-notifications/).
-        /// If you are a partner app, and this value is true, you should not
-        /// send notifications on behalf of this organisation.
+        /// [here](/getting-started/api/handling-customer-notifications/)). If
+        /// you are a partner app, and this value is true, you should not send
+        /// notifications on behalf of this organisation.
         /// </summary>
         [JsonProperty("merchant_responsible_for_notifications")]
         public bool? MerchantResponsibleForNotifications { get; set; }
