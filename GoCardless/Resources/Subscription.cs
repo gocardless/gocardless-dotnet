@@ -84,6 +84,13 @@ namespace GoCardless.Resources
         public int? AppFee { get; set; }
 
         /// <summary>
+        /// The total number of payments that should be taken by this
+        /// subscription.
+        /// </summary>
+        [JsonProperty("count")]
+        public int? Count { get; set; }
+
+        /// <summary>
         /// Fixed [timestamp](#api-usage-time-zones--dates), recording when this
         /// resource was created.
         /// </summary>
