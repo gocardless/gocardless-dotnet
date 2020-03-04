@@ -80,7 +80,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<InstalmentScheduleResponse>("POST", "/instalment_schedules", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<InstalmentScheduleResponse>("POST", "/instalment_schedules", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "instalment_schedules", customiseRequestMessage);
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<InstalmentScheduleResponse>("POST", "/instalment_schedules", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<InstalmentScheduleResponse>("POST", "/instalment_schedules", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "instalment_schedules", customiseRequestMessage);
         }
 
         /// <summary>
@@ -237,7 +237,7 @@ namespace GoCardless.Services
     /// about the
     /// failures.
     /// </summary>
-    public class InstalmentScheduleCreateWithDatesRequest
+    public class InstalmentScheduleCreateWithDatesRequest : IHasIdempotencyKey
     {
 
         /// <summary>
@@ -406,6 +406,14 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("total_amount")]
         public int? TotalAmount { get; set; }
+
+        /// <summary>
+        /// A unique key to ensure that this request only succeeds once, allowing you to safely retry request errors such as network failures.
+        /// Any requests, where supported, to create a resource with a key that has previously been used will not succeed.
+        /// See: https://developer.gocardless.com/api-reference/#making-requests-idempotency-keys
+        /// </summary>
+        [JsonIgnore]
+        public string IdempotencyKey { get; set; }
     }
 
         
@@ -427,7 +435,7 @@ namespace GoCardless.Services
     /// about the
     /// failures.
     /// </summary>
-    public class InstalmentScheduleCreateWithScheduleRequest
+    public class InstalmentScheduleCreateWithScheduleRequest : IHasIdempotencyKey
     {
 
         /// <summary>
@@ -627,6 +635,14 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("total_amount")]
         public int? TotalAmount { get; set; }
+
+        /// <summary>
+        /// A unique key to ensure that this request only succeeds once, allowing you to safely retry request errors such as network failures.
+        /// Any requests, where supported, to create a resource with a key that has previously been used will not succeed.
+        /// See: https://developer.gocardless.com/api-reference/#making-requests-idempotency-keys
+        /// </summary>
+        [JsonIgnore]
+        public string IdempotencyKey { get; set; }
     }
 
         
