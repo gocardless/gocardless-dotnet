@@ -378,12 +378,18 @@ namespace GoCardless.Resources
     [JsonConverter(typeof(StringEnumConverter))]
     public enum EventResourceType {
 
-        /// <summary>`resource_type` with a value of "payments"</summary>
-        [EnumMember(Value = "payments")]
-        Payments,
+        /// <summary>`resource_type` with a value of "creditors"</summary>
+        [EnumMember(Value = "creditors")]
+        Creditors,
+        /// <summary>`resource_type` with a value of "instalment_schedules"</summary>
+        [EnumMember(Value = "instalment_schedules")]
+        InstalmentSchedules,
         /// <summary>`resource_type` with a value of "mandates"</summary>
         [EnumMember(Value = "mandates")]
         Mandates,
+        /// <summary>`resource_type` with a value of "payments"</summary>
+        [EnumMember(Value = "payments")]
+        Payments,
         /// <summary>`resource_type` with a value of "payouts"</summary>
         [EnumMember(Value = "payouts")]
         Payouts,
@@ -393,12 +399,6 @@ namespace GoCardless.Resources
         /// <summary>`resource_type` with a value of "subscriptions"</summary>
         [EnumMember(Value = "subscriptions")]
         Subscriptions,
-        /// <summary>`resource_type` with a value of "instalment_schedules"</summary>
-        [EnumMember(Value = "instalment_schedules")]
-        InstalmentSchedules,
-        /// <summary>`resource_type` with a value of "creditors"</summary>
-        [EnumMember(Value = "creditors")]
-        Creditors,
     }
 
 }
