@@ -12,7 +12,8 @@ namespace GoCardless.Resources
     ///
     /// Events are stored for all webhooks. An event refers to a resource which
     /// has been updated, for example a payment which has been collected, or a
-    /// mandate which has been transferred.
+    /// mandate which has been transferred. See [here](#event-actions) for a
+    /// complete list of event types.
     /// </summary>
     public class Event
     {
