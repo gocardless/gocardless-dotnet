@@ -400,6 +400,9 @@ namespace GoCardless.Resources
         /// <summary>`resource_type` with a value of "subscriptions"</summary>
         [EnumMember(Value = "subscriptions")]
         Subscriptions,
+        /// <summary>`resource_type` with a value of "organisations"</summary>
+        [EnumMember(Value = "organisations")]
+        Organisations,
     }
 
 }
