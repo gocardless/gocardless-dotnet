@@ -69,7 +69,6 @@ namespace GoCardless.Resources
         /// also be
         /// copied to the payments of the instalment schedule if you use
         /// schedule-based creation.
-        /// 
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -104,10 +103,11 @@ namespace GoCardless.Resources
         /// <summary>
         /// The total amount of the instalment schedule, defined as the sum of
         /// all individual
-        /// payments. If the requested payment amounts do not sum up correctly,
-        /// a validation
-        /// error will be returned.
-        /// 
+        /// payments, in the lowest denomination for the currency (e.g. pence in
+        /// GBP, cents in
+        /// EUR). If the requested payment amounts do not sum up correctly, a
+        /// validation error
+        /// will be returned.
         /// </summary>
         [JsonProperty("total_amount")]
         public int? TotalAmount { get; set; }

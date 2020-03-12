@@ -50,13 +50,46 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Creates a new instalment schedule object, along with the associated
-        /// payments.
+        /// payments. This
+        /// API is recommended if you know the specific dates you wish to
+        /// charge. Otherwise,
+        /// please check out the [scheduling
+        /// version](#instalment-schedules-create-with-schedule).
         /// 
-        /// The `instalments` property can either be an array of payment
-        /// properties (`amount`
-        /// and `charge_date`) or a schedule object with `interval`,
-        /// `interval_unit` and
-        /// `amounts`.
+        /// The `instalments` property is an array of payment properties
+        /// (`amount` and
+        /// `charge_date`).
+        /// 
+        /// It can take quite a while to create the associated payments, so the
+        /// API will return
+        /// the status as `pending` initially. When processing has completed, a
+        /// subsequent GET
+        /// request for the instalment schedule will either have the status
+        /// `success` and link
+        /// to the created payments, or the status `error` and detailed
+        /// information about the
+        /// failures.
+        /// </summary>
+        /// <param name="request">An optional `InstalmentScheduleCreateWithDatesRequest` representing the body for this create_with_dates request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single instalment schedule resource</returns>
+        public Task<InstalmentScheduleResponse> CreateWithDatesAsync(InstalmentScheduleCreateWithDatesRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new InstalmentScheduleCreateWithDatesRequest();
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {};
+
+            return _goCardlessClient.ExecuteAsync<InstalmentScheduleResponse>("POST", "/instalment_schedules", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "instalment_schedules", customiseRequestMessage);
+        }
+
+        /// <summary>
+        /// Creates a new instalment schedule object, along with the associated
+        /// payments. This
+        /// API is recommended if you wish to use the GoCardless scheduling
+        /// logic. For finer
+        /// control over the individual dates, please check out the [alternative
+        /// version](#instalment-schedules-create-with-dates).
         /// 
         /// It can take quite a while to create the associated payments, so the
         /// API will return
@@ -68,12 +101,12 @@ namespace GoCardless.Services
         /// about the
         /// failures.
         /// </summary>
-        /// <param name="request">An optional `InstalmentScheduleCreateRequest` representing the body for this create request.</param>
+        /// <param name="request">An optional `InstalmentScheduleCreateWithScheduleRequest` representing the body for this create_with_schedule request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single instalment schedule resource</returns>
-        public Task<InstalmentScheduleResponse> CreateAsync(InstalmentScheduleCreateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<InstalmentScheduleResponse> CreateWithScheduleAsync(InstalmentScheduleCreateWithScheduleRequest request = null, RequestSettings customiseRequestMessage = null)
         {
-            request = request ?? new InstalmentScheduleCreateRequest();
+            request = request ?? new InstalmentScheduleCreateWithScheduleRequest();
 
             var urlParams = new List<KeyValuePair<string, object>>
             {};
@@ -184,25 +217,27 @@ namespace GoCardless.Services
         
     /// <summary>
     /// Creates a new instalment schedule object, along with the associated
-    /// payments.
+    /// payments. This
+    /// API is recommended if you know the specific dates you wish to charge.
+    /// Otherwise,
+    /// please check out the [scheduling
+    /// version](#instalment-schedules-create-with-schedule).
     /// 
-    /// The `instalments` property can either be an array of payment properties
-    /// (`amount`
-    /// and `charge_date`) or a schedule object with `interval`, `interval_unit`
+    /// The `instalments` property is an array of payment properties (`amount`
     /// and
-    /// `amounts`.
+    /// `charge_date`).
     /// 
     /// It can take quite a while to create the associated payments, so the API
     /// will return
     /// the status as `pending` initially. When processing has completed, a
-    /// subsequent
-    /// GET request for the instalment schedule will either have the status
-    /// `success` and link to
-    /// the created payments, or the status `error` and detailed information
+    /// subsequent GET
+    /// request for the instalment schedule will either have the status
+    /// `success` and link
+    /// to the created payments, or the status `error` and detailed information
     /// about the
     /// failures.
     /// </summary>
-    public class InstalmentScheduleCreateRequest : IHasIdempotencyKey
+    public class InstalmentScheduleCreateWithDatesRequest : IHasIdempotencyKey
     {
 
         /// <summary>
@@ -257,8 +292,46 @@ namespace GoCardless.Services
             USD,
         }
 
+        /// <summary>
+        /// An explicit array of instalment payments, each specifying at least
+        /// an `amount` and `charge_date`.
+        /// </summary>
         [JsonProperty("instalments")]
-        public IDictionary<String, String> Instalments { get; set; }
+        public InstalmentScheduleInstalments[] Instalments { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public class InstalmentScheduleInstalments
+        {
+
+            /// <summary>
+            /// Amount, in the lowest denomination for the currency (e.g. pence
+            /// in GBP, cents in EUR).
+            /// </summary>
+            [JsonProperty("amount")]
+            public int? Amount { get; set; }
+
+            /// <summary>
+            /// A future date on which the payment should be collected. If the
+            /// date
+            /// is before the next_possible_charge_date on the
+            /// [mandate](#core-endpoints-mandates), it will be automatically
+            /// rolled
+            /// forwards to that date.
+            /// </summary>
+            [JsonProperty("charge_date")]
+            public string ChargeDate { get; set; }
+
+            /// <summary>
+            /// A human-readable description of the payment. This will be
+            /// included in the notification email GoCardless sends to your
+            /// customer if your organisation does not send its own
+            /// notifications (see [compliance
+            /// requirements](#appendix-compliance-requirements)).
+            /// </summary>
+            [JsonProperty("description")]
+            public string Description { get; set; }
+        }
 
         /// <summary>
         /// Linked resources.
@@ -291,7 +364,6 @@ namespace GoCardless.Services
         /// also be
         /// copied to the payments of the instalment schedule if you use
         /// schedule-based creation.
-        /// 
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -317,8 +389,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// On failure, automatically retry payments using [Optimise Smart
-        /// Payment Retries](#optimise-smart-payment-retries). Default is
-        /// `false`.
+        /// Payment
+        /// Retries](#optimise-smart-payment-retries). Default is `false`.
         /// </summary>
         [JsonProperty("retry_if_possible")]
         public bool? RetryIfPossible { get; set; }
@@ -326,10 +398,240 @@ namespace GoCardless.Services
         /// <summary>
         /// The total amount of the instalment schedule, defined as the sum of
         /// all individual
-        /// payments. If the requested payment amounts do not sum up correctly,
-        /// a validation
-        /// error will be returned.
+        /// payments, in the lowest denomination for the currency (e.g. pence in
+        /// GBP, cents in
+        /// EUR). If the requested payment amounts do not sum up correctly, a
+        /// validation error
+        /// will be returned.
+        /// </summary>
+        [JsonProperty("total_amount")]
+        public int? TotalAmount { get; set; }
+
+        /// <summary>
+        /// A unique key to ensure that this request only succeeds once, allowing you to safely retry request errors such as network failures.
+        /// Any requests, where supported, to create a resource with a key that has previously been used will not succeed.
+        /// See: https://developer.gocardless.com/api-reference/#making-requests-idempotency-keys
+        /// </summary>
+        [JsonIgnore]
+        public string IdempotencyKey { get; set; }
+    }
+
+        
+    /// <summary>
+    /// Creates a new instalment schedule object, along with the associated
+    /// payments. This
+    /// API is recommended if you wish to use the GoCardless scheduling logic.
+    /// For finer
+    /// control over the individual dates, please check out the [alternative
+    /// version](#instalment-schedules-create-with-dates).
+    /// 
+    /// It can take quite a while to create the associated payments, so the API
+    /// will return
+    /// the status as `pending` initially. When processing has completed, a
+    /// subsequent
+    /// GET request for the instalment schedule will either have the status
+    /// `success` and link to
+    /// the created payments, or the status `error` and detailed information
+    /// about the
+    /// failures.
+    /// </summary>
+    public class InstalmentScheduleCreateWithScheduleRequest : IHasIdempotencyKey
+    {
+
+        /// <summary>
+        /// The amount to be deducted from each payment as an app fee, to be
+        /// paid to the partner integration which created the subscription, in
+        /// the lowest denomination for the currency (e.g. pence in GBP, cents
+        /// in EUR).
+        /// </summary>
+        [JsonProperty("app_fee")]
+        public int? AppFee { get; set; }
+
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        /// "SEK" and "USD" are supported.
+        /// </summary>
+        [JsonProperty("currency")]
+        public InstalmentScheduleCurrency? Currency { get; set; }
+            
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        /// "SEK" and "USD" are supported.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum InstalmentScheduleCurrency
+        {
+    
+            /// <summary>`currency` with a value of "AUD"</summary>
+            [EnumMember(Value = "AUD")]
+            AUD,
+            /// <summary>`currency` with a value of "CAD"</summary>
+            [EnumMember(Value = "CAD")]
+            CAD,
+            /// <summary>`currency` with a value of "DKK"</summary>
+            [EnumMember(Value = "DKK")]
+            DKK,
+            /// <summary>`currency` with a value of "EUR"</summary>
+            [EnumMember(Value = "EUR")]
+            EUR,
+            /// <summary>`currency` with a value of "GBP"</summary>
+            [EnumMember(Value = "GBP")]
+            GBP,
+            /// <summary>`currency` with a value of "NZD"</summary>
+            [EnumMember(Value = "NZD")]
+            NZD,
+            /// <summary>`currency` with a value of "SEK"</summary>
+            [EnumMember(Value = "SEK")]
+            SEK,
+            /// <summary>`currency` with a value of "USD"</summary>
+            [EnumMember(Value = "USD")]
+            USD,
+        }
+
+        /// <summary>
+        /// Frequency of the payments you want to create, together with an array
+        /// of payment
+        /// amounts to be collected, with a specified start date for the first
+        /// payment.
         /// 
+        /// </summary>
+        [JsonProperty("instalments")]
+        public InstalmentScheduleInstalments Instalments { get; set; }
+        /// <summary>
+        /// Frequency of the payments you want to create, together with an array
+        /// of payment
+        /// amounts to be collected, with a specified start date for the first
+        /// payment.
+        /// 
+        /// </summary>
+        public class InstalmentScheduleInstalments
+        {
+
+            /// <summary>
+            /// List of amounts of each instalment, in the lowest denomination
+            /// for the
+            /// currency (e.g. pence in GBP, cents in EUR).
+            /// 
+            /// </summary>
+            [JsonProperty("amounts")]
+            public int?[] Amounts { get; set; }
+
+            /// <summary>
+            /// Number of `interval_units` between charge dates. Must be greater
+            /// than or
+            /// equal to `1`.
+            /// 
+            /// </summary>
+            [JsonProperty("interval")]
+            public int? Interval { get; set; }
+
+            /// <summary>
+            /// The unit of time between customer charge dates. One of `weekly`,
+            /// `monthly` or `yearly`.
+            /// </summary>
+            [JsonProperty("interval_unit")]
+            public InstalmentScheduleIntervalUnit? IntervalUnit { get; set; }
+        /// <summary>
+        /// The unit of time between customer charge dates. One of `weekly`,
+        /// `monthly` or `yearly`.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum InstalmentScheduleIntervalUnit
+        {
+    
+            /// <summary>`interval_unit` with a value of "weekly"</summary>
+            [EnumMember(Value = "weekly")]
+            Weekly,
+            /// <summary>`interval_unit` with a value of "monthly"</summary>
+            [EnumMember(Value = "monthly")]
+            Monthly,
+            /// <summary>`interval_unit` with a value of "yearly"</summary>
+            [EnumMember(Value = "yearly")]
+            Yearly,
+        }
+
+            /// <summary>
+            /// The date on which the first payment should be charged. Must be
+            /// on or after the [mandate](#core-endpoints-mandates)'s
+            /// `next_possible_charge_date`. When blank, this will be set as the
+            /// mandate's `next_possible_charge_date`.
+            /// </summary>
+            [JsonProperty("start_date")]
+            public string StartDate { get; set; }
+        }
+
+        /// <summary>
+        /// Linked resources.
+        /// </summary>
+        [JsonProperty("links")]
+        public InstalmentScheduleLinks Links { get; set; }
+        /// <summary>
+        /// Linked resources for a InstalmentSchedule.
+        /// </summary>
+        public class InstalmentScheduleLinks
+        {
+
+            /// <summary>
+            /// ID of the associated [mandate](#core-endpoints-mandates) which
+            /// the instalment schedule will create payments against.
+            /// </summary>
+            [JsonProperty("mandate")]
+            public string Mandate { get; set; }
+        }
+
+        /// <summary>
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<String, String> Metadata { get; set; }
+
+        /// <summary>
+        /// Name of the instalment schedule, up to 100 chars. This name will
+        /// also be
+        /// copied to the payments of the instalment schedule if you use
+        /// schedule-based creation.
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// An optional reference that will appear on your customer's bank
+        /// statement. The character limit for this reference is dependent on
+        /// the scheme.<br /> <strong>ACH</strong> - 10 characters<br />
+        /// <strong>Autogiro</strong> - 11 characters<br />
+        /// <strong>Bacs</strong> - 10 characters<br /> <strong>BECS</strong> -
+        /// 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
+        /// <strong>Betalingsservice</strong> - 30 characters<br />
+        /// <strong>PAD</strong> - 12 characters<br /> <strong>SEPA</strong> -
+        /// 140 characters <p
+        /// class='restricted-notice'><strong>Restricted</strong>: You can only
+        /// specify a payment reference for Bacs payments (that is, when
+        /// collecting from the UK) if you're on the <a
+        /// href='https://gocardless.com/pricing'>GoCardless Plus, Pro or
+        /// Enterprise packages</a>.</p>
+        /// </summary>
+        [JsonProperty("payment_reference")]
+        public string PaymentReference { get; set; }
+
+        /// <summary>
+        /// On failure, automatically retry payments using [Optimise Smart
+        /// Payment
+        /// Retries](#optimise-smart-payment-retries). Default is `false`.
+        /// </summary>
+        [JsonProperty("retry_if_possible")]
+        public bool? RetryIfPossible { get; set; }
+
+        /// <summary>
+        /// The total amount of the instalment schedule, defined as the sum of
+        /// all individual
+        /// payments, in the lowest denomination for the currency (e.g. pence in
+        /// GBP, cents in
+        /// EUR). If the requested payment amounts do not sum up correctly, a
+        /// validation error
+        /// will be returned.
         /// </summary>
         [JsonProperty("total_amount")]
         public int? TotalAmount { get; set; }

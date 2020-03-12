@@ -18,7 +18,8 @@ namespace GoCardless.Services
     ///
     /// Events are stored for all webhooks. An event refers to a resource which
     /// has been updated, for example a payment which has been collected, or a
-    /// mandate which has been transferred.
+    /// mandate which has been transferred. See [here](#event-actions) for a
+    /// complete list of event types.
     /// </summary>
 
     public class EventService
@@ -306,12 +307,18 @@ namespace GoCardless.Services
         public enum EventResourceType
         {
     
-            /// <summary>`resource_type` with a value of "payments"</summary>
-            [EnumMember(Value = "payments")]
-            Payments,
+            /// <summary>`resource_type` with a value of "creditors"</summary>
+            [EnumMember(Value = "creditors")]
+            Creditors,
+            /// <summary>`resource_type` with a value of "instalment_schedules"</summary>
+            [EnumMember(Value = "instalment_schedules")]
+            InstalmentSchedules,
             /// <summary>`resource_type` with a value of "mandates"</summary>
             [EnumMember(Value = "mandates")]
             Mandates,
+            /// <summary>`resource_type` with a value of "payments"</summary>
+            [EnumMember(Value = "payments")]
+            Payments,
             /// <summary>`resource_type` with a value of "payouts"</summary>
             [EnumMember(Value = "payouts")]
             Payouts,
@@ -321,12 +328,9 @@ namespace GoCardless.Services
             /// <summary>`resource_type` with a value of "subscriptions"</summary>
             [EnumMember(Value = "subscriptions")]
             Subscriptions,
-            /// <summary>`resource_type` with a value of "instalment_schedules"</summary>
-            [EnumMember(Value = "instalment_schedules")]
-            InstalmentSchedules,
-            /// <summary>`resource_type` with a value of "creditors"</summary>
-            [EnumMember(Value = "creditors")]
-            Creditors,
+            /// <summary>`resource_type` with a value of "organisations"</summary>
+            [EnumMember(Value = "organisations")]
+            Organisations,
         }
 
         /// <summary>
