@@ -155,8 +155,7 @@ namespace GoCardless.Services
         /// ID.
         /// 
         /// <p class="restricted-notice"><strong>The action of removing a
-        /// customer cannot be
-        /// reversed, so please use with care.</strong></p>
+        /// customer cannot be reversed, so please use with care.</strong></p>
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "CU".</param>
         /// <param name="request">An optional `CustomerRemoveRequest` representing the body for this remove request.</param>
@@ -562,8 +561,7 @@ namespace GoCardless.Services
     /// ID.
     /// 
     /// <p class="restricted-notice"><strong>The action of removing a customer
-    /// cannot be
-    /// reversed, so please use with care.</strong></p>
+    /// cannot be reversed, so please use with care.</strong></p>
     /// </summary>
     public class CustomerRemoveRequest
     {

@@ -29,10 +29,11 @@ namespace GoCardless.Resources
         public string BankName { get; set; }
 
         /// <summary>
-        /// ISO 9362 SWIFT BIC of the bank with which the account is held. <p
-        /// class="notice">Even if no BIC is returned for an account, GoCardless
-        /// may still be able to collect payments from it - you should refer to
-        /// the `available_debit_schemes` attribute to determine
+        /// ISO 9362 SWIFT BIC of the bank with which the account is held.
+        /// 
+        /// <p class="notice">Even if no BIC is returned for an account,
+        /// GoCardless may still be able to collect payments from it - you
+        /// should refer to the `available_debit_schemes` attribute to determine
         /// reachability.</p>
         /// </summary>
         [JsonProperty("bic")]

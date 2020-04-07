@@ -184,7 +184,7 @@ namespace GoCardless.Services
         /// This will fail with a `mandate_not_inactive` error if the mandate is
         /// already being submitted, or is active.
         /// 
-        /// Mandates can be resubmitted up to 3 times.
+        /// Mandates can be resubmitted up to 10 times.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.</param>
         /// <param name="request">An optional `MandateReinstateRequest` representing the body for this reinstate request.</param>
@@ -481,7 +481,7 @@ namespace GoCardless.Services
     /// This will fail with a `mandate_not_inactive` error if the mandate is
     /// already being submitted, or is active.
     /// 
-    /// Mandates can be resubmitted up to 3 times.
+    /// Mandates can be resubmitted up to 10 times.
     /// </summary>
     public class MandateReinstateRequest
     {
