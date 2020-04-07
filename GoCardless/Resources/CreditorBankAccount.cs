@@ -21,8 +21,7 @@ namespace GoCardless.Resources
     /// `links[creditor_bank_account]` in the error response.
     /// 
     /// <p class="restricted-notice"><strong>Restricted</strong>: This API is
-    /// not available for
-    /// partner integrations.</p>
+    /// not available for partner integrations.</p>
     /// </summary>
     public class CreditorBankAccount
     {

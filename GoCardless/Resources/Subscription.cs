@@ -18,40 +18,46 @@ namespace GoCardless.Resources
     /// The following rules apply when specifying recurrence:
     /// 
     /// - The first payment must be charged within 1 year.
-    /// - When neither `month` nor `day_of_month` are present, the subscription
-    /// will recur from the `start_date` based on the `interval_unit`.
-    /// - If `month` or `day_of_month` are present, the recurrence rules will be
-    /// applied from the `start_date`, and the following validations apply:
+    /// - If `day_of_month` and `start_date` are not provided `start_date` will
+    /// be the [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`
+    /// and the subscription will then recur based on the `interval` &
+    /// `interval_unit`
+    /// - If `month` or `day_of_month` are present the following validations
+    /// apply:
     /// 
-    /// | interval_unit   | month                                          |
-    /// day_of_month                            |
-    /// | :-------------- | :--------------------------------------------- |
-    /// :-------------------------------------- |
-    /// | yearly          | optional (required if `day_of_month` provided) |
-    /// optional (required if `month` provided) |
-    /// | monthly         | invalid                                        |
-    /// required                                |
-    /// | weekly          | invalid                                        |
-    /// invalid                                 |
+    /// | __interval_unit__ | __month__                                      |
+    /// __day_of_month__                           |
+    /// | :---------------- | :--------------------------------------------- |
+    /// :----------------------------------------- |
+    /// | yearly            | optional (required if `day_of_month` provided) |
+    /// optional (invalid if `month` not provided) |
+    /// | monthly           | invalid                                        |
+    /// optional                                   |
+    /// | weekly            | invalid                                        |
+    /// invalid                                    |
     /// 
     /// Examples:
     /// 
-    /// | interval_unit   | interval   | month   | day_of_month   | valid?      
-    ///                                       |
-    /// | :-------------- | :--------- | :------ | :------------- |
+    /// | __interval_unit__ | __interval__ | __month__ | __day_of_month__ |
+    /// valid?                                             |
+    /// | :---------------- | :----------- | :-------- | :--------------- |
     /// :------------------------------------------------- |
-    /// | yearly          | 1          | january | -1             | valid       
-    ///                                       |
-    /// | yearly          | 1          | march   |                | invalid -
-    /// missing `day_of_month`                   |
-    /// | monthly         | 6          |         | 12             | valid       
-    ///                                       |
-    /// | monthly         | 6          | august  | 12             | invalid -
-    /// `month` must be blank                    |
-    /// | weekly          | 2          |         |                | valid       
-    ///                                       |
-    /// | weekly          | 2          | october | 10             | invalid -
-    /// `month` and `day_of_month` must be blank |
+    /// | yearly            | 1            | january   | -1               |
+    /// valid                                              |
+    /// | monthly           | 6            |           |                  |
+    /// valid                                              |
+    /// | monthly           | 6            |           | 12               |
+    /// valid                                              |
+    /// | weekly            | 2            |           |                  |
+    /// valid                                              |
+    /// | yearly            | 1            | march     |                  |
+    /// invalid - missing `day_of_month`                   |
+    /// | yearly            | 1            |           | 2                |
+    /// invalid - missing `month`                          |
+    /// | monthly           | 6            | august    | 12               |
+    /// invalid - `month` must be blank                    |
+    /// | weekly            | 2            | october   | 10               |
+    /// invalid - `month` and `day_of_month` must be blank |
     /// 
     /// ### Rolling dates
     /// 
@@ -175,11 +181,14 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// An optional payment reference. This will be set as the reference on
-        /// each payment created and will appear on your customer's bank
-        /// statement. See the documentation for the [create payment
-        /// endpoint](#payments-create-a-payment) for more details. <p
-        /// class='restricted-notice'><strong>Restricted</strong>: You need your
-        /// own Service User Number to specify a payment reference for Bacs
+        /// each payment
+        /// created and will appear on your customer's bank statement. See the
+        /// documentation for
+        /// the [create payment endpoint](#payments-create-a-payment) for more
+        /// details.
+        /// 
+        /// <p class="restricted-notice"><strong>Restricted</strong>: You need
+        /// your own Service User Number to specify a payment reference for Bacs
         /// payments.</p>
         /// </summary>
         [JsonProperty("payment_reference")]
@@ -215,6 +224,8 @@ namespace GoCardless.Resources
         /// this subscription have been created</li>
         /// <li>`cancelled`: the subscription has been cancelled and will no
         /// longer create payments</li>
+        /// <li>`paused`: the subscription has been paused and will not create
+        /// payments</li>
         /// </ul>
         /// </summary>
         [JsonProperty("status")]
@@ -313,6 +324,7 @@ namespace GoCardless.Resources
     /// <li>`finished`: all of the payments scheduled for creation under this subscription have been
     /// created</li>
     /// <li>`cancelled`: the subscription has been cancelled and will no longer create payments</li>
+    /// <li>`paused`: the subscription has been paused and will not create payments</li>
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
