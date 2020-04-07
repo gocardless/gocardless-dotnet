@@ -24,40 +24,46 @@ namespace GoCardless.Services
     /// The following rules apply when specifying recurrence:
     /// 
     /// - The first payment must be charged within 1 year.
-    /// - When neither `month` nor `day_of_month` are present, the subscription
-    /// will recur from the `start_date` based on the `interval_unit`.
-    /// - If `month` or `day_of_month` are present, the recurrence rules will be
-    /// applied from the `start_date`, and the following validations apply:
+    /// - If `day_of_month` and `start_date` are not provided `start_date` will
+    /// be the [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`
+    /// and the subscription will then recur based on the `interval` &
+    /// `interval_unit`
+    /// - If `month` or `day_of_month` are present the following validations
+    /// apply:
     /// 
-    /// | interval_unit   | month                                          |
-    /// day_of_month                            |
-    /// | :-------------- | :--------------------------------------------- |
-    /// :-------------------------------------- |
-    /// | yearly          | optional (required if `day_of_month` provided) |
-    /// optional (required if `month` provided) |
-    /// | monthly         | invalid                                        |
-    /// required                                |
-    /// | weekly          | invalid                                        |
-    /// invalid                                 |
+    /// | __interval_unit__ | __month__                                      |
+    /// __day_of_month__                           |
+    /// | :---------------- | :--------------------------------------------- |
+    /// :----------------------------------------- |
+    /// | yearly            | optional (required if `day_of_month` provided) |
+    /// optional (invalid if `month` not provided) |
+    /// | monthly           | invalid                                        |
+    /// optional                                   |
+    /// | weekly            | invalid                                        |
+    /// invalid                                    |
     /// 
     /// Examples:
     /// 
-    /// | interval_unit   | interval   | month   | day_of_month   | valid?      
-    ///                                       |
-    /// | :-------------- | :--------- | :------ | :------------- |
+    /// | __interval_unit__ | __interval__ | __month__ | __day_of_month__ |
+    /// valid?                                             |
+    /// | :---------------- | :----------- | :-------- | :--------------- |
     /// :------------------------------------------------- |
-    /// | yearly          | 1          | january | -1             | valid       
-    ///                                       |
-    /// | yearly          | 1          | march   |                | invalid -
-    /// missing `day_of_month`                   |
-    /// | monthly         | 6          |         | 12             | valid       
-    ///                                       |
-    /// | monthly         | 6          | august  | 12             | invalid -
-    /// `month` must be blank                    |
-    /// | weekly          | 2          |         |                | valid       
-    ///                                       |
-    /// | weekly          | 2          | october | 10             | invalid -
-    /// `month` and `day_of_month` must be blank |
+    /// | yearly            | 1            | january   | -1               |
+    /// valid                                              |
+    /// | monthly           | 6            |           |                  |
+    /// valid                                              |
+    /// | monthly           | 6            |           | 12               |
+    /// valid                                              |
+    /// | weekly            | 2            |           |                  |
+    /// valid                                              |
+    /// | yearly            | 1            | march     |                  |
+    /// invalid - missing `day_of_month`                   |
+    /// | yearly            | 1            |           | 2                |
+    /// invalid - missing `month`                          |
+    /// | monthly           | 6            | august    | 12               |
+    /// invalid - `month` must be blank                    |
+    /// | weekly            | 2            | october   | 10               |
+    /// invalid - `month` and `day_of_month` must be blank |
     /// 
     /// ### Rolling dates
     /// 
@@ -223,6 +229,100 @@ namespace GoCardless.Services
         }
 
         /// <summary>
+        /// Pause a subscription object.
+        /// No payments will be created until it is resumed.
+        /// 
+        /// This can only be used when a subscription collecting a fixed number
+        /// of payments (created using `count`)
+        /// or when they continue forever (created without `count` or
+        /// `end_date`)
+        /// 
+        /// When `pause_cycles` is omitted the subscription is paused until the
+        /// [resume endpoint](#subscriptions-resume-a-subscription) is called.
+        /// If the subscription is collecting a fixed number of payments,
+        /// `end_date` will be set to `nil`.
+        /// When paused indefinitely, `upcoming_payments` will be empty.
+        /// 
+        /// When `pause_cycles` is provided the subscription will be paused for
+        /// the number of cycles requested.
+        /// If the subscription is collecting a fixed number of payments,
+        /// `end_date` will be set to a new value.
+        /// When paused for a number of cycles, `upcoming_payments` will still
+        /// contain the upcoming charge dates.
+        /// 
+        /// This fails with:
+        /// 
+        /// - `forbidden` if the subscription was created by an app and you are
+        /// not authenticated as that app, or if the subscription was not
+        /// created by an app and you are authenticated as an app
+        /// 
+        /// - `validation_failed` if invalid data is provided when attempting to
+        /// pause a subscription.
+        /// 
+        /// - `subscription_not_active` if the subscription is no longer active.
+        /// 
+        /// - `subscription_already_ended` if the subscription has taken all
+        /// payments.
+        /// 
+        /// - `pause_cycles_must_be_greater_than_or_equal_to` if the provided
+        /// value for `pause_cycles` cannot be satisfied.
+        /// 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "SB".</param>
+        /// <param name="request">An optional `SubscriptionPauseRequest` representing the body for this pause request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single subscription resource</returns>
+        public Task<SubscriptionResponse> PauseAsync(string identity, SubscriptionPauseRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new SubscriptionPauseRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<SubscriptionResponse>("POST", "/subscriptions/:identity/actions/pause", urlParams, request, null, "data", customiseRequestMessage);
+        }
+
+        /// <summary>
+        /// Resume a subscription object.
+        /// Payments will start to be created again based on the subscriptions
+        /// recurrence rules.
+        /// 
+        /// This fails with:
+        /// 
+        /// - `forbidden` if the subscription was created by an app and you are
+        /// not authenticated as that app, or if the subscription was not
+        /// created by an app and you are authenticated as an app
+        /// 
+        /// - `validation_failed` if invalid data is provided when attempting to
+        /// resume a subscription.
+        /// 
+        /// - `subscription_not_paused` if the subscription is not paused.
+        /// 
+        /// - `subscription_already_scheduled_to_resume` if a subscription
+        /// already has a scheduled resume date.
+        /// 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "SB".</param>
+        /// <param name="request">An optional `SubscriptionResumeRequest` representing the body for this resume request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single subscription resource</returns>
+        public Task<SubscriptionResponse> ResumeAsync(string identity, SubscriptionResumeRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new SubscriptionResumeRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<SubscriptionResponse>("POST", "/subscriptions/:identity/actions/resume", urlParams, request, null, "data", customiseRequestMessage);
+        }
+
+        /// <summary>
         /// Immediately cancels a subscription; no more payments will be created
         /// under it. Any metadata supplied to this endpoint will be stored on
         /// the payment cancellation event it causes.
@@ -294,12 +394,14 @@ namespace GoCardless.Services
         public int? DayOfMonth { get; set; }
 
         /// <summary>
-        /// Date on or after which no further payments should be created. If
-        /// this field is blank and `count` is not specified, the subscription
-        /// will continue forever. <p
-        /// class='deprecated-notice'><strong>Deprecated</strong>: This field
+        /// Date on or after which no further payments should be created.
+        /// 
+        /// If this field is blank and `count` is not specified, the
+        /// subscription will continue forever.
+        /// 
+        /// <p class="deprecated-notice"><strong>Deprecated</strong>: This field
         /// will be removed in a future API version. Use `count` to specify a
-        /// number of payments instead. </p>
+        /// number of payments instead.</p>
         /// </summary>
         [JsonProperty("end_date")]
         public string EndDate { get; set; }
@@ -430,11 +532,14 @@ namespace GoCardless.Services
 
         /// <summary>
         /// An optional payment reference. This will be set as the reference on
-        /// each payment created and will appear on your customer's bank
-        /// statement. See the documentation for the [create payment
-        /// endpoint](#payments-create-a-payment) for more details. <p
-        /// class='restricted-notice'><strong>Restricted</strong>: You need your
-        /// own Service User Number to specify a payment reference for Bacs
+        /// each payment
+        /// created and will appear on your customer's bank statement. See the
+        /// documentation for
+        /// the [create payment endpoint](#payments-create-a-payment) for more
+        /// details.
+        /// 
+        /// <p class="restricted-notice"><strong>Restricted</strong>: You need
+        /// your own Service User Number to specify a payment reference for Bacs
         /// payments.</p>
         /// </summary>
         [JsonProperty("payment_reference")]
@@ -559,6 +664,8 @@ namespace GoCardless.Services
         /// this subscription have been created</li>
         /// <li>`cancelled`: the subscription has been cancelled and will no
         /// longer create payments</li>
+        /// <li>`paused`: the subscription has been paused and will not create
+        /// payments</li>
         /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -580,6 +687,9 @@ namespace GoCardless.Services
             /// <summary>`status` with a value of "cancelled"</summary>
             [EnumMember(Value = "cancelled")]
             Cancelled,
+            /// <summary>`status` with a value of "paused"</summary>
+            [EnumMember(Value = "paused")]
+            Paused,
         }
     }
 
@@ -656,15 +766,108 @@ namespace GoCardless.Services
 
         /// <summary>
         /// An optional payment reference. This will be set as the reference on
-        /// each payment created and will appear on your customer's bank
-        /// statement. See the documentation for the [create payment
-        /// endpoint](#payments-create-a-payment) for more details. <p
-        /// class='restricted-notice'><strong>Restricted</strong>: You need your
-        /// own Service User Number to specify a payment reference for Bacs
+        /// each payment
+        /// created and will appear on your customer's bank statement. See the
+        /// documentation for
+        /// the [create payment endpoint](#payments-create-a-payment) for more
+        /// details.
+        /// 
+        /// <p class="restricted-notice"><strong>Restricted</strong>: You need
+        /// your own Service User Number to specify a payment reference for Bacs
         /// payments.</p>
         /// </summary>
         [JsonProperty("payment_reference")]
         public string PaymentReference { get; set; }
+    }
+
+        
+    /// <summary>
+    /// Pause a subscription object.
+    /// No payments will be created until it is resumed.
+    /// 
+    /// This can only be used when a subscription collecting a fixed number of
+    /// payments (created using `count`)
+    /// or when they continue forever (created without `count` or `end_date`)
+    /// 
+    /// When `pause_cycles` is omitted the subscription is paused until the
+    /// [resume endpoint](#subscriptions-resume-a-subscription) is called.
+    /// If the subscription is collecting a fixed number of payments, `end_date`
+    /// will be set to `nil`.
+    /// When paused indefinitely, `upcoming_payments` will be empty.
+    /// 
+    /// When `pause_cycles` is provided the subscription will be paused for the
+    /// number of cycles requested.
+    /// If the subscription is collecting a fixed number of payments, `end_date`
+    /// will be set to a new value.
+    /// When paused for a number of cycles, `upcoming_payments` will still
+    /// contain the upcoming charge dates.
+    /// 
+    /// This fails with:
+    /// 
+    /// - `forbidden` if the subscription was created by an app and you are not
+    /// authenticated as that app, or if the subscription was not created by an
+    /// app and you are authenticated as an app
+    /// 
+    /// - `validation_failed` if invalid data is provided when attempting to
+    /// pause a subscription.
+    /// 
+    /// - `subscription_not_active` if the subscription is no longer active.
+    /// 
+    /// - `subscription_already_ended` if the subscription has taken all
+    /// payments.
+    /// 
+    /// - `pause_cycles_must_be_greater_than_or_equal_to` if the provided value
+    /// for `pause_cycles` cannot be satisfied.
+    /// 
+    /// </summary>
+    public class SubscriptionPauseRequest
+    {
+
+        /// <summary>
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<String, String> Metadata { get; set; }
+
+        /// <summary>
+        /// The number of cycles to pause a subscription for. A cycle is one
+        /// duration of `interval` and `interval_unit`.
+        /// </summary>
+        [JsonProperty("pause_cycles")]
+        public int? PauseCycles { get; set; }
+    }
+
+        
+    /// <summary>
+    /// Resume a subscription object.
+    /// Payments will start to be created again based on the subscriptions
+    /// recurrence rules.
+    /// 
+    /// This fails with:
+    /// 
+    /// - `forbidden` if the subscription was created by an app and you are not
+    /// authenticated as that app, or if the subscription was not created by an
+    /// app and you are authenticated as an app
+    /// 
+    /// - `validation_failed` if invalid data is provided when attempting to
+    /// resume a subscription.
+    /// 
+    /// - `subscription_not_paused` if the subscription is not paused.
+    /// 
+    /// - `subscription_already_scheduled_to_resume` if a subscription already
+    /// has a scheduled resume date.
+    /// 
+    /// </summary>
+    public class SubscriptionResumeRequest
+    {
+
+        /// <summary>
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<String, String> Metadata { get; set; }
     }
 
         

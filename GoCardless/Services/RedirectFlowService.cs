@@ -168,6 +168,13 @@ namespace GoCardless.Services
         }
 
         /// <summary>
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<String, String> Metadata { get; set; }
+
+        /// <summary>
         /// Information used to prefill the payment page so your customer
         /// doesn't have to re-type details you already hold about them. It will
         /// be stored unvalidated and the customer will be able to review and

@@ -119,12 +119,23 @@ namespace GoCardless.Resources
         public int? DayOfMonth { get; set; }
 
         /// <summary>
-        /// Date on or after which no further payments should be created. If
-        /// this field is blank and `count` is not specified, the subscription
-        /// will continue forever. <p
-        /// class='deprecated-notice'><strong>Deprecated</strong>: This field
+        /// The earliest date that will be used as a `charge_date` on payments
+        /// created for this subscription if it is resumed. Only present for
+        /// `paused` subscriptions.
+        /// This value will change over time.
+        /// </summary>
+        [JsonProperty("earliest_charge_date_after_resume")]
+        public string EarliestChargeDateAfterResume { get; set; }
+
+        /// <summary>
+        /// Date on or after which no further payments should be created.
+        /// 
+        /// If this field is blank and `count` is not specified, the
+        /// subscription will continue forever.
+        /// 
+        /// <p class="deprecated-notice"><strong>Deprecated</strong>: This field
         /// will be removed in a future API version. Use `count` to specify a
-        /// number of payments instead. </p>
+        /// number of payments instead.</p>
         /// </summary>
         [JsonProperty("end_date")]
         public string EndDate { get; set; }
@@ -345,6 +356,9 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "cancelled"</summary>
         [EnumMember(Value = "cancelled")]
         Cancelled,
+        /// <summary>`status` with a value of "paused"</summary>
+        [EnumMember(Value = "paused")]
+        Paused,
     }
 
     /// <summary>
