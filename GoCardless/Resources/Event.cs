@@ -150,11 +150,25 @@ namespace GoCardless.Resources
     public class EventDetails
     {
         /// <summary>
+        /// When we send a creditor `new_payout_currency_added` webhook, we also
+        /// send the bank account id of the new account
+        /// </summary>
+        [JsonProperty("bank_account_id")]
+        public string BankAccountId { get; set; }
+
+        /// <summary>
         /// What triggered the event. _Note:_ `cause` is our simplified and
         /// predictable key indicating what triggered the event.
         /// </summary>
         [JsonProperty("cause")]
         public string Cause { get; set; }
+
+        /// <summary>
+        /// When we send a creditor `new_payout_currency_added` webhook, we also
+        /// send the currency of the new account
+        /// </summary>
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
 
         /// <summary>
         /// Human readable description of the cause. _Note:_ Changes to event
@@ -175,6 +189,13 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("origin")]
         public EventDetailsOrigin? Origin { get; set; }
+
+        /// <summary>
+        /// When we send a creditor `creditor_updated` webhook, this tells you
+        /// which property on the creditor has been updated
+        /// </summary>
+        [JsonProperty("property")]
+        public string Property { get; set; }
 
         /// <summary>
         /// Set when a `bank` is the origin of the event. This is the reason
