@@ -289,6 +289,8 @@ namespace GoCardless.Services
         /// Resume a subscription object.
         /// Payments will start to be created again based on the subscriptions
         /// recurrence rules.
+        /// The `charge_date` on the next payment will be the same as the
+        /// subscriptions `earliest_charge_date_after_resume`
         /// 
         /// This fails with:
         /// 
@@ -300,9 +302,6 @@ namespace GoCardless.Services
         /// resume a subscription.
         /// 
         /// - `subscription_not_paused` if the subscription is not paused.
-        /// 
-        /// - `subscription_already_scheduled_to_resume` if a subscription
-        /// already has a scheduled resume date.
         /// 
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "SB".</param>
@@ -842,6 +841,8 @@ namespace GoCardless.Services
     /// Resume a subscription object.
     /// Payments will start to be created again based on the subscriptions
     /// recurrence rules.
+    /// The `charge_date` on the next payment will be the same as the
+    /// subscriptions `earliest_charge_date_after_resume`
     /// 
     /// This fails with:
     /// 
@@ -853,9 +854,6 @@ namespace GoCardless.Services
     /// resume a subscription.
     /// 
     /// - `subscription_not_paused` if the subscription is not paused.
-    /// 
-    /// - `subscription_already_scheduled_to_resume` if a subscription already
-    /// has a scheduled resume date.
     /// 
     /// </summary>
     public class SubscriptionResumeRequest
