@@ -388,9 +388,8 @@ namespace GoCardless.Services
         public string PaymentReference { get; set; }
 
         /// <summary>
-        /// On failure, automatically retry payments using [Optimise Smart
-        /// Payment
-        /// Retries](#optimise-smart-payment-retries). Default is `false`.
+        /// On failure, automatically retry payments using [intelligent
+        /// retries](#success-intelligent-retries). Default is `false`.
         /// </summary>
         [JsonProperty("retry_if_possible")]
         public bool? RetryIfPossible { get; set; }
@@ -617,9 +616,8 @@ namespace GoCardless.Services
         public string PaymentReference { get; set; }
 
         /// <summary>
-        /// On failure, automatically retry payments using [Optimise Smart
-        /// Payment
-        /// Retries](#optimise-smart-payment-retries). Default is `false`.
+        /// On failure, automatically retry payments using [intelligent
+        /// retries](#success-intelligent-retries). Default is `false`.
         /// </summary>
         [JsonProperty("retry_if_possible")]
         public bool? RetryIfPossible { get; set; }
