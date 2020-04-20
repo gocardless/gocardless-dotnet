@@ -90,6 +90,13 @@ namespace GoCardless.Resources
         public PayoutLinks Links { get; set; }
 
         /// <summary>
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<string, string> Metadata { get; set; }
+
+        /// <summary>
         /// Whether a payout contains merchant revenue or partner fees.
         /// </summary>
         [JsonProperty("payout_type")]
