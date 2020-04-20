@@ -113,6 +113,26 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<PayoutResponse>("GET", "/payouts/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
+
+        /// <summary>
+        /// Updates a payout object. This accepts only the metadata parameter.
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "PO".</param>
+        /// <param name="request">An optional `PayoutUpdateRequest` representing the body for this update request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single payout resource</returns>
+        public Task<PayoutResponse> UpdateAsync(string identity, PayoutUpdateRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new PayoutUpdateRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<PayoutResponse>("PUT", "/payouts/:identity", urlParams, request, null, "payouts", customiseRequestMessage);
+        }
     }
 
         
@@ -233,6 +253,13 @@ namespace GoCardless.Services
         public int? Limit { get; set; }
 
         /// <summary>
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<String, String> Metadata { get; set; }
+
+        /// <summary>
         /// Whether a payout contains merchant revenue or partner fees.
         /// </summary>
         [JsonProperty("payout_type")]
@@ -306,6 +333,21 @@ namespace GoCardless.Services
     /// </summary>
     public class PayoutGetRequest
     {
+    }
+
+        
+    /// <summary>
+    /// Updates a payout object. This accepts only the metadata parameter.
+    /// </summary>
+    public class PayoutUpdateRequest
+    {
+
+        /// <summary>
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<String, String> Metadata { get; set; }
     }
 
     /// <summary>
