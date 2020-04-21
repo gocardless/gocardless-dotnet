@@ -175,18 +175,61 @@ namespace GoCardless.Services
         public IDictionary<String, String> Metadata { get; set; }
 
         /// <summary>
-        /// Information used to prefill the payment page so your customer
-        /// doesn't have to re-type details you already hold about them. It will
-        /// be stored unvalidated and the customer will be able to review and
-        /// amend it before completing the form.
+        /// Bank account information used to prefill the payment page so your
+        /// customer doesn't have to re-type details you already hold about
+        /// them. It will be stored unvalidated and the customer will be able to
+        /// review and amend it before completing the form.
+        /// </summary>
+        [JsonProperty("prefilled_bank_account")]
+        public RedirectFlowPrefilledBankAccount PrefilledBankAccount { get; set; }
+        /// <summary>
+        /// Bank account information used to prefill the payment page so your
+        /// customer doesn't have to re-type details you already hold about
+        /// them. It will be stored unvalidated and the customer will be able to
+        /// review and amend it before completing the form.
+        /// </summary>
+        public class RedirectFlowPrefilledBankAccount
+        {
+
+            /// <summary>
+            /// Bank account type. Required for USD-denominated bank accounts.
+            /// Must not be provided for bank accounts in other currencies. See
+            /// [local details](#local-bank-details-united-states) for more
+            /// information.
+            /// </summary>
+            [JsonProperty("account_type")]
+            public string AccountType { get; set; }
+        /// <summary>
+        /// Bank account type. Required for USD-denominated bank accounts. Must
+        /// not be provided for bank accounts in other currencies. See [local
+        /// details](#local-bank-details-united-states) for more information.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum RedirectFlowAccountType
+        {
+    
+            /// <summary>`account_type` with a value of "savings"</summary>
+            [EnumMember(Value = "savings")]
+            Savings,
+            /// <summary>`account_type` with a value of "checking"</summary>
+            [EnumMember(Value = "checking")]
+            Checking,
+        }
+        }
+
+        /// <summary>
+        /// Customer information used to prefill the payment page so your
+        /// customer doesn't have to re-type details you already hold about
+        /// them. It will be stored unvalidated and the customer will be able to
+        /// review and amend it before completing the form.
         /// </summary>
         [JsonProperty("prefilled_customer")]
         public RedirectFlowPrefilledCustomer PrefilledCustomer { get; set; }
         /// <summary>
-        /// Information used to prefill the payment page so your customer
-        /// doesn't have to re-type details you already hold about them. It will
-        /// be stored unvalidated and the customer will be able to review and
-        /// amend it before completing the form.
+        /// Customer information used to prefill the payment page so your
+        /// customer doesn't have to re-type details you already hold about
+        /// them. It will be stored unvalidated and the customer will be able to
+        /// review and amend it before completing the form.
         /// </summary>
         public class RedirectFlowPrefilledCustomer
         {
@@ -216,7 +259,8 @@ namespace GoCardless.Services
             public string City { get; set; }
 
             /// <summary>
-            /// Customer's company name.
+            /// Customer's company name. Company name should only be provided if
+            /// `given_name` and `family_name` are null.
             /// </summary>
             [JsonProperty("company_name")]
             public string CompanyName { get; set; }
