@@ -4,21 +4,17 @@ orbs:
   win: circleci/windows@2.2.0
 
 jobs:
-  restore:
-    steps:
-      - checkout
-      - run: dotnet restore
   build:
+    executor:
+      name: win/default
     steps:
-      - run: dotnet build
-  test:
-    steps:
-      - run: dotnet test
-
-workflows:
-  version: 2
-  build_and_publish:
-    jobs:
-      - restore
-      - build
-      - test
+      # default shell is Powershell
+      - run:
+          command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
+          shell: powershell.exe
+      - run:
+          command: echo hello && echo world
+          shell: bash.exe
+      - run:
+          command: echo hello & echo world
+          shell: cmd.exe
