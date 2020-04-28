@@ -115,7 +115,7 @@ namespace GoCardless.Tests
                 Assert.AreEqual(502, ex.Code);
                 Assert.AreEqual(ApiErrorType.GOCARDLESS, ex.Type);
                 Assert.AreEqual("Something went wrong with this request. Please check the ResponseMessage property.", ex.Message);
-                Assert.AreEqual("<!DOCTYPE html>\n<html>\n  <head>\n    <title>This is an HTML error page, like one returned by Cloudflare</title>\n  </head>\n</html>\n", ex.ResponseMessage.Content.ReadAsStringAsync().Result);
+                Assert.AreEqual("<!DOCTYPE html>\n<html>\n  <head>\n    <title>This is an HTML error page, like one returned by Cloudflare</title>\n  </head>\n</html>\n", ex.ResponseMessage.Content.ReadAsStringAsync().Result.Replace("\r\n", "\n"));
                 return;
             }
             Assert.Fail("Exception was not thrown");
