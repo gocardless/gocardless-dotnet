@@ -3,7 +3,7 @@
 For full details of the GoCardless API, see the [API docs](https://developer.gocardless.com/).
 
 [![NuGet](https://img.shields.io/nuget/v/GoCardless.svg)](https://www.nuget.org/packages/GoCardless/)
-[![AppVeyor](https://img.shields.io/appveyor/ci/gocardless/gocardless-dotnet.svg)](https://ci.appveyor.com/project/gocardless/gocardless-dotnet)
+[![<GoCardless>](https://circleci.com/gh/gocardless/gocardless-dotnet.svg?style=svg)](https://circleci.com/gh/gocardless/gocardless-dotnet)
 
 - ["Getting started" guide](https://developer.gocardless.com/getting-started/api/introduction/)
 - [API Reference](https://developer.gocardless.com/api-reference)
@@ -13,7 +13,7 @@ For full details of the GoCardless API, see the [API docs](https://developer.goc
 
 To install `GoCardless`, run the following command in the [Package Manager Console](https://docs.microsoft.com/en-us/nuget/tools/package-manager-console)
 
-`Install-Package GoCardless -Version 3.6.0`
+`Install-Package GoCardless -Version 3.7.0`
 
 
 ## Usage
