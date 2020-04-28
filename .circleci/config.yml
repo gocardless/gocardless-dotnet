@@ -3,18 +3,54 @@ version: 2.1
 orbs:
   win: circleci/windows@2.2.0
 
+references:
+  build_directory: &build_directory
+    '/GoCardless/bin/Release'
+
 jobs:
-  build:
+  build_and_test:
     executor:
       name: win/default
     steps:
-      # default shell is Powershell
+      - checkout
       - run:
-          command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
-          shell: powershell.exe
+          name: Restore
+          command: dotnet restore
       - run:
-          command: echo hello && echo world
-          shell: bash.exe
+          name: Build
+          command: msbuild "GoCardless.sln" /property:Configuration=Release
       - run:
-          command: echo hello & echo world
+          name: Run Tests
+          command: dotnet test
+      - persist_to_workspace:
+          root: *build_directory
+          paths:
+            - "*.nupkg"
+    environment:
+      OUT_DIR: *build_directory
+
+  publish:
+    executor:
+      name: win/default
+    steps:
+      - attach_workspace:
+          at: *build_directory
+      - run:
+          name: Publish the library
+          command: dotnet nuget push **\*.nupkg -s https://api.nuget.org/v3/index.json -k %NUGET_API_KEY% -n --skip-duplicate
           shell: cmd.exe
+    environment:
+      OUT_DIR: *build_directory
+
+workflows:
+  version: 2
+  build_and_publish:
+    jobs:
+      - build_and_test
+      - publish:
+          requires:
+            - build_and_test
+          filters:
+            branches:
+              only:
+                - master
