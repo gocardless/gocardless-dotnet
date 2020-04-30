@@ -198,7 +198,7 @@ namespace GoCardless.Services
             /// information.
             /// </summary>
             [JsonProperty("account_type")]
-            public string AccountType { get; set; }
+            public RedirectFlowAccountType? AccountType { get; set; }
         /// <summary>
         /// Bank account type. Required for USD-denominated bank accounts. Must
         /// not be provided for bank accounts in other currencies. See [local
