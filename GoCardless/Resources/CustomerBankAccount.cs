@@ -45,7 +45,7 @@ namespace GoCardless.Resources
         /// details](#local-bank-details-united-states) for more information.
         /// </summary>
         [JsonProperty("account_type")]
-        public string AccountType { get; set; }
+        public CustomerBankAccountAccountType? AccountType { get; set; }
 
         /// <summary>
         /// Name of bank, taken from the bank details.

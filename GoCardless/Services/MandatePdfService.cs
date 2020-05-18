@@ -165,7 +165,7 @@ namespace GoCardless.Services
         /// details](#local-bank-details-united-states) for more information.
         /// </summary>
         [JsonProperty("account_type")]
-        public string AccountType { get; set; }
+        public MandatePdfAccountType? AccountType { get; set; }
             
         /// <summary>
         /// Bank account type. Required for USD-denominated bank accounts. Must
@@ -303,9 +303,9 @@ namespace GoCardless.Services
 
         /// <summary>
         /// The customer's address region, county or department. For US
-        /// customers a 2 letter state code ([ISO
-        /// 3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) e.g CA) is
-        /// required.
+        /// customers a 2 letter
+        /// [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state
+        /// code is required (e.g. `CA` for California).
         /// </summary>
         [JsonProperty("region")]
         public string Region { get; set; }

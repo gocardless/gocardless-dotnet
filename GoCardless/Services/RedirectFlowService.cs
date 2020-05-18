@@ -192,16 +192,16 @@ namespace GoCardless.Services
         {
 
             /// <summary>
-            /// Bank account type. Required for USD-denominated bank accounts.
-            /// Must not be provided for bank accounts in other currencies. See
-            /// [local details](#local-bank-details-united-states) for more
+            /// Bank account type for USD-denominated bank accounts. Must not be
+            /// provided for bank accounts in other currencies. See [local
+            /// details](#local-bank-details-united-states) for more
             /// information.
             /// </summary>
             [JsonProperty("account_type")]
-            public string AccountType { get; set; }
+            public RedirectFlowAccountType? AccountType { get; set; }
         /// <summary>
-        /// Bank account type. Required for USD-denominated bank accounts. Must
-        /// not be provided for bank accounts in other currencies. See [local
+        /// Bank account type for USD-denominated bank accounts. Must not be
+        /// provided for bank accounts in other currencies. See [local
         /// details](#local-bank-details-united-states) for more information.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]

@@ -190,6 +190,27 @@ namespace GoCardless.Services
         }
 
         /// <summary>
+        /// Updates an instalment schedule. This accepts only the metadata
+        /// parameter.
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "IS".</param>
+        /// <param name="request">An optional `InstalmentScheduleUpdateRequest` representing the body for this update request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single instalment schedule resource</returns>
+        public Task<InstalmentScheduleResponse> UpdateAsync(string identity, InstalmentScheduleUpdateRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new InstalmentScheduleUpdateRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<InstalmentScheduleResponse>("PUT", "/instalment_schedules/:identity", urlParams, request, null, "instalment_schedules", customiseRequestMessage);
+        }
+
+        /// <summary>
         /// Immediately cancels an instalment schedule; no further payments will
         /// be collected for it.
         /// 
@@ -767,6 +788,22 @@ namespace GoCardless.Services
     /// </summary>
     public class InstalmentScheduleGetRequest
     {
+    }
+
+        
+    /// <summary>
+    /// Updates an instalment schedule. This accepts only the metadata
+    /// parameter.
+    /// </summary>
+    public class InstalmentScheduleUpdateRequest
+    {
+
+        /// <summary>
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<String, String> Metadata { get; set; }
     }
 
         
