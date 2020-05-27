@@ -178,6 +178,21 @@ namespace GoCardless.Resources
         public string Description { get; set; }
 
         /// <summary>
+        /// When will_attempt_retry is set to false, this field will contain
+        /// the reason the payment was not retried. This can be one of:
+        /// <ul>
+        /// <li>`failure_filter_applied`: The payment won't be intelligently
+        /// retried as
+        ///   there is a high likelihood of failure on retry.</li>
+        /// <li>`other`: The payment won't be intelligently retried due to any
+        /// other
+        ///   reason.</li>
+        /// </ul>
+        /// </summary>
+        [JsonProperty("not_retried_reason")]
+        public string NotRetriedReason { get; set; }
+
+        /// <summary>
         /// Who initiated the event. One of:
         /// <ul>
         /// <li>`bank`: this event was triggered by a report from the banks</li>
