@@ -776,6 +776,13 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("payment_reference")]
         public string PaymentReference { get; set; }
+
+        /// <summary>
+        /// On failure, automatically retry payments using [intelligent
+        /// retries](#success-intelligent-retries). Default is `false`.
+        /// </summary>
+        [JsonProperty("retry_if_possible")]
+        public bool? RetryIfPossible { get; set; }
     }
 
         
