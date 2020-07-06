@@ -13,7 +13,7 @@ For full details of the GoCardless API, see the [API docs](https://developer.goc
 
 To install `GoCardless`, run the following command in the [Package Manager Console](https://docs.microsoft.com/en-us/nuget/tools/package-manager-console)
 
-`Install-Package GoCardless -Version 4.2.0`
+`Install-Package GoCardless -Version 4.3.0`
 
 
 ## Usage

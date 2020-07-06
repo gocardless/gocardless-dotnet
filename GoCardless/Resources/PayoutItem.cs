@@ -54,8 +54,19 @@ namespace GoCardless.Resources
         public PayoutItemLinks Links { get; set; }
 
         /// <summary>
+        /// An array of tax items <em>beta</em>
+        /// 
+        /// Note: VAT applies to transaction and surcharge fees for merchants
+        /// operating in the <a
+        /// href="https://gocardless.com/legal/vat-faqs">UK</a> and <a
+        /// href="https://gocardless.com/fr-fr/legal/faq-tva">France</a>.
+        /// </summary>
+        [JsonProperty("taxes")]
+        public List<PayoutItemTaxis> Taxes { get; set; }
+
+        /// <summary>
         /// The type of the credit (positive) or debit (negative) item in the
-        /// payout. One of:
+        /// payout (inclusive of VAT if applicable). One of:
         /// <ul>
         /// <li>`payment_paid_out` (credit)</li>
         /// <li>`payment_failed` (debit): The payment failed to be
@@ -70,7 +81,8 @@ namespace GoCardless.Resources
         /// to the customer, and the funds have been returned to you.</li>
         /// <li>`gocardless_fee` (credit/debit): The fees that GoCardless
         /// charged for a payment. In the case of a payment failure or
-        /// chargeback, these will appear as credits.</li>
+        /// chargeback, these will appear as credits. Will include taxes if
+        /// applicable for merchants.</li>
         /// <li>`app_fee` (credit/debit): The optional fees that a partner may
         /// have taken for a payment. In the case of a payment failure or
         /// chargeback, these will appear as credits.</li>
@@ -81,7 +93,8 @@ namespace GoCardless.Resources
         /// credits.</li>
         /// <li>`surcharge_fee` (credit/debit): GoCardless deducted a surcharge
         /// fee as the payment failed or was charged back, or refunded a
-        /// surcharge fee as the bank or customer cancelled the chargeback.</li>
+        /// surcharge fee as the bank or customer cancelled the chargeback. Will
+        /// include taxes if applicable for merchants.</li>
         /// </ul>
         /// 
         /// </summary>
@@ -109,7 +122,109 @@ namespace GoCardless.Resources
     }
     
     /// <summary>
-    /// The type of the credit (positive) or debit (negative) item in the payout. One of:
+    /// An array of tax items <em>beta</em>
+    /// 
+    /// Note: VAT applies to transaction and surcharge fees for merchants
+    /// operating in the <a href="https://gocardless.com/legal/vat-faqs">UK</a>
+    /// and <a href="https://gocardless.com/fr-fr/legal/faq-tva">France</a>.
+    /// </summary>
+    public class PayoutItemTaxis
+    {
+        /// <summary>
+        /// The amount of tax applied to a fee in fractional currency; the
+        /// lowest denomination for the currency (e.g. pence in GBP, cents in
+        /// EUR), to one decimal place.
+        /// </summary>
+        [JsonProperty("amount")]
+        public string Amount { get; set; }
+
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        /// "SEK" and "USD" are supported.
+        /// </summary>
+        [JsonProperty("currency")]
+        public PayoutItemTaxisCurrency? Currency { get; set; }
+
+        /// <summary>
+        /// The amount of tax to be paid out to the tax authorities in
+        /// fractional currency; the lowest denomination for the currency (e.g.
+        /// pence in GBP, cents in EUR), to one decimal place.
+        /// 
+        /// When `currency` and `destination_currency` don't match this will be
+        /// `null` until the `exchange_rate` has been finalised.
+        /// </summary>
+        [JsonProperty("destination_amount")]
+        public string DestinationAmount { get; set; }
+
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code
+        /// for the currency in which tax is paid out to the tax authorities of
+        /// your tax jurisdiction. Currently “EUR” for French merchants and
+        /// “GBP” for British merchants.
+        /// </summary>
+        [JsonProperty("destination_currency")]
+        public string DestinationCurrency { get; set; }
+
+        /// <summary>
+        /// The exchange rate for the tax from the currency into the destination
+        /// currency.
+        /// 
+        /// Present only if the currency and the destination currency don't
+        /// match and the exchange rate has been finalised.
+        /// 
+        /// You can listen for the payout's [`tax_exchange_rates_confirmed`
+        /// webhook](https://developer.gocardless.com/api-reference/#event-actions-payout)
+        /// to know when the exchange rate has been finalised for all fees in
+        /// the payout.
+        /// </summary>
+        [JsonProperty("exchange_rate")]
+        public string ExchangeRate { get; set; }
+
+        /// <summary>
+        /// The unique identifier created by the jurisdiction, tax type and
+        /// version
+        /// </summary>
+        [JsonProperty("tax_rate_id")]
+        public string TaxRateId { get; set; }
+    }
+    
+    /// <summary>
+    /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+    /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+    /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum PayoutItemTaxisCurrency {
+
+        /// <summary>`currency` with a value of "AUD"</summary>
+        [EnumMember(Value = "AUD")]
+        AUD,
+        /// <summary>`currency` with a value of "CAD"</summary>
+        [EnumMember(Value = "CAD")]
+        CAD,
+        /// <summary>`currency` with a value of "DKK"</summary>
+        [EnumMember(Value = "DKK")]
+        DKK,
+        /// <summary>`currency` with a value of "EUR"</summary>
+        [EnumMember(Value = "EUR")]
+        EUR,
+        /// <summary>`currency` with a value of "GBP"</summary>
+        [EnumMember(Value = "GBP")]
+        GBP,
+        /// <summary>`currency` with a value of "NZD"</summary>
+        [EnumMember(Value = "NZD")]
+        NZD,
+        /// <summary>`currency` with a value of "SEK"</summary>
+        [EnumMember(Value = "SEK")]
+        SEK,
+        /// <summary>`currency` with a value of "USD"</summary>
+        [EnumMember(Value = "USD")]
+        USD,
+    }
+
+    /// <summary>
+    /// The type of the credit (positive) or debit (negative) item in the payout (inclusive of VAT
+    /// if applicable). One of:
     /// <ul>
     /// <li>`payment_paid_out` (credit)</li>
     /// <li>`payment_failed` (debit): The payment failed to be processed.</li>
@@ -120,7 +235,8 @@ namespace GoCardless.Resources
     /// <li>`refund_funds_returned` (credit): The refund could not be sent to the customer, and the
     /// funds have been returned to you.</li>
     /// <li>`gocardless_fee` (credit/debit): The fees that GoCardless charged for a payment. In the
-    /// case of a payment failure or chargeback, these will appear as credits.</li>
+    /// case of a payment failure or chargeback, these will appear as credits. Will include taxes if
+    /// applicable for merchants.</li>
     /// <li>`app_fee` (credit/debit): The optional fees that a partner may have taken for a payment.
     /// In the case of a payment failure or chargeback, these will appear as credits.</li>
     /// <li>`revenue_share` (credit/debit): A share of the fees that GoCardless collected which some
@@ -128,7 +244,7 @@ namespace GoCardless.Resources
     /// In the case of a payment failure or chargeback, these will appear as credits.</li>
     /// <li>`surcharge_fee` (credit/debit): GoCardless deducted a surcharge fee as the payment
     /// failed or was charged back, or refunded a surcharge fee as the bank or customer cancelled
-    /// the chargeback.</li>
+    /// the chargeback. Will include taxes if applicable for merchants.</li>
     /// </ul>
     /// 
     /// </summary>
