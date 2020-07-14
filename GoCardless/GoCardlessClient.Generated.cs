@@ -103,5 +103,10 @@ namespace GoCardless
         /// </summary>
         public SubscriptionService Subscriptions => new SubscriptionService(this);
 
+        /// <summary>
+        ///A service for working with tax rate resources.
+        /// </summary>
+        public TaxRateService TaxRates => new TaxRateService(this);
+
     }
 }
