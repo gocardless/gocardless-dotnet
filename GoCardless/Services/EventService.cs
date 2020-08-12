@@ -179,6 +179,7 @@ namespace GoCardless.Services
         /// <ul>
         /// <li>`payment`</li>
         /// <li>`mandate`</li>
+        /// <li>`payer_authorisation`</li>
         /// <li>`payout`</li>
         /// <li>`refund`</li>
         /// <li>`subscription`</li>
@@ -195,6 +196,7 @@ namespace GoCardless.Services
         /// <ul>
         /// <li>`payment`</li>
         /// <li>`mandate`</li>
+        /// <li>`payer_authorisation`</li>
         /// <li>`payout`</li>
         /// <li>`refund`</li>
         /// <li>`subscription`</li>
@@ -227,6 +229,9 @@ namespace GoCardless.Services
             /// <summary>`include` with a value of "creditor"</summary>
             [EnumMember(Value = "creditor")]
             Creditor,
+            /// <summary>`include` with a value of "payer_authorisation"</summary>
+            [EnumMember(Value = "payer_authorisation")]
+            PayerAuthorisation,
         }
 
         /// <summary>
@@ -248,6 +253,12 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("parent_event")]
         public string ParentEvent { get; set; }
+
+        /// <summary>
+        /// ID of a Payer Authorisation.
+        /// </summary>
+        [JsonProperty("payer_authorisation")]
+        public string PayerAuthorisation { get; set; }
 
         /// <summary>
         /// ID of a [payment](#core-endpoints-payments). If specified, this
@@ -272,12 +283,13 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Type of resource that you'd like to get all events for. Cannot be
-        /// used together with the `payment`, `mandate`, `subscription`,
-        /// `instalment_schedule`, `creditor`, `refund` or `payout` parameter.
-        /// The type can be one of:
+        /// used together with the `payment`,    `payer_authorisation`,
+        /// `mandate`, `subscription`, `instalment_schedule`, `creditor`,
+        /// `refund` or `payout` parameter. The type can be one of:
         /// <ul>
         /// <li>`payments`</li>
         /// <li>`mandates`</li>
+        /// <li>`payer_authorisations`</li>
         /// <li>`payouts`</li>
         /// <li>`subscriptions`</li>
         /// <li>`instalment_schedules`</li>
@@ -290,12 +302,13 @@ namespace GoCardless.Services
             
         /// <summary>
         /// Type of resource that you'd like to get all events for. Cannot be
-        /// used together with the `payment`, `mandate`, `subscription`,
-        /// `instalment_schedule`, `creditor`, `refund` or `payout` parameter.
-        /// The type can be one of:
+        /// used together with the `payment`,    `payer_authorisation`,
+        /// `mandate`, `subscription`, `instalment_schedule`, `creditor`,
+        /// `refund` or `payout` parameter. The type can be one of:
         /// <ul>
         /// <li>`payments`</li>
         /// <li>`mandates`</li>
+        /// <li>`payer_authorisations`</li>
         /// <li>`payouts`</li>
         /// <li>`subscriptions`</li>
         /// <li>`instalment_schedules`</li>
@@ -316,6 +329,9 @@ namespace GoCardless.Services
             /// <summary>`resource_type` with a value of "mandates"</summary>
             [EnumMember(Value = "mandates")]
             Mandates,
+            /// <summary>`resource_type` with a value of "payer_authorisations"</summary>
+            [EnumMember(Value = "payer_authorisations")]
+            PayerAuthorisations,
             /// <summary>`resource_type` with a value of "payments"</summary>
             [EnumMember(Value = "payments")]
             Payments,

@@ -72,6 +72,7 @@ namespace GoCardless.Resources
         /// <ul>
         /// <li>`payments`</li>
         /// <li>`mandates`</li>
+        /// <li>`payer_authorisations`</li
         /// <li>`payouts`</li>
         /// <li>`refunds`</li>
         /// <li>`subscriptions`</li>
@@ -312,6 +313,19 @@ namespace GoCardless.Resources
         public string Creditor { get; set; }
 
         /// <summary>
+        /// ID of a [customer](#core-endpoints-customers).
+        /// </summary>
+        [JsonProperty("customer")]
+        public string Customer { get; set; }
+
+        /// <summary>
+        /// ID of a [customer bank
+        /// account](#core-endpoints-customer-bank-accounts).
+        /// </summary>
+        [JsonProperty("customer_bank_account")]
+        public string CustomerBankAccount { get; set; }
+
+        /// <summary>
         /// If `resource_type` is `instalment_schedule`, this is the ID of the
         /// [instalment schedule](#core-endpoints-instalment-schedules) which
         /// has been updated.
@@ -362,6 +376,12 @@ namespace GoCardless.Resources
         public string ParentEvent { get; set; }
 
         /// <summary>
+        /// ID of a Payer Authorisation.
+        /// </summary>
+        [JsonProperty("payer_authorisation")]
+        public string PayerAuthorisation { get; set; }
+
+        /// <summary>
         /// If `resource_type` is `payments`, this is the ID of the
         /// [payment](#core-endpoints-payments) which has been updated.
         /// </summary>
@@ -405,6 +425,7 @@ namespace GoCardless.Resources
     /// <ul>
     /// <li>`payments`</li>
     /// <li>`mandates`</li>
+    /// <li>`payer_authorisations`</li
     /// <li>`payouts`</li>
     /// <li>`refunds`</li>
     /// <li>`subscriptions`</li>
@@ -424,6 +445,9 @@ namespace GoCardless.Resources
         /// <summary>`resource_type` with a value of "mandates"</summary>
         [EnumMember(Value = "mandates")]
         Mandates,
+        /// <summary>`resource_type` with a value of "payer_authorisations"</summary>
+        [EnumMember(Value = "payer_authorisations")]
+        PayerAuthorisations,
         /// <summary>`resource_type` with a value of "payments"</summary>
         [EnumMember(Value = "payments")]
         Payments,
