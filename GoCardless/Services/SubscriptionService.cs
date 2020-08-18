@@ -240,7 +240,7 @@ namespace GoCardless.Services
         /// When `pause_cycles` is omitted the subscription is paused until the
         /// [resume endpoint](#subscriptions-resume-a-subscription) is called.
         /// If the subscription is collecting a fixed number of payments,
-        /// `end_date` will be set to `nil`.
+        /// `end_date` will be set to `null`.
         /// When paused indefinitely, `upcoming_payments` will be empty.
         /// 
         /// When `pause_cycles` is provided the subscription will be paused for
@@ -378,9 +378,9 @@ namespace GoCardless.Services
         public int? Count { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code.
-        /// Currently `GBP`, `EUR`, `SEK`, `DKK`, `AUD`, `NZD` and `CAD` are
-        /// supported.
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        /// "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
@@ -797,7 +797,7 @@ namespace GoCardless.Services
     /// When `pause_cycles` is omitted the subscription is paused until the
     /// [resume endpoint](#subscriptions-resume-a-subscription) is called.
     /// If the subscription is collecting a fixed number of payments, `end_date`
-    /// will be set to `nil`.
+    /// will be set to `null`.
     /// When paused indefinitely, `upcoming_payments` will be empty.
     /// 
     /// When `pause_cycles` is provided the subscription will be paused for the

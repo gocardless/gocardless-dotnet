@@ -17,6 +17,9 @@ namespace GoCardless.Services
     /// Service class for working with tax rate resources.
     ///
     /// Tax rates from tax authority.
+    /// 
+    /// We also maintain a [static list of the tax rates for each
+    /// jurisdiction](#appendix-tax-rates).
     /// </summary>
 
     public class TaxRateService
