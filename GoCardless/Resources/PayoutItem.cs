@@ -119,6 +119,12 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("payment")]
         public string Payment { get; set; }
+
+        /// <summary>
+        /// Unique identifier, beginning with "RF".
+        /// </summary>
+        [JsonProperty("refund")]
+        public string Refund { get; set; }
     }
     
     /// <summary>
