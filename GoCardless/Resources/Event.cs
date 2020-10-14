@@ -72,7 +72,7 @@ namespace GoCardless.Resources
         /// <ul>
         /// <li>`payments`</li>
         /// <li>`mandates`</li>
-        /// <li>`payer_authorisations`</li
+        /// <li>`payer_authorisations`</li>
         /// <li>`payouts`</li>
         /// <li>`refunds`</li>
         /// <li>`subscriptions`</li>
@@ -425,7 +425,7 @@ namespace GoCardless.Resources
     /// <ul>
     /// <li>`payments`</li>
     /// <li>`mandates`</li>
-    /// <li>`payer_authorisations`</li
+    /// <li>`payer_authorisations`</li>
     /// <li>`payouts`</li>
     /// <li>`refunds`</li>
     /// <li>`subscriptions`</li>

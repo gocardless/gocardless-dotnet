@@ -263,7 +263,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// The first line of the customer's address. Required if mandate
-            /// import scheme is `bacs`.
+            /// import scheme is either `bacs` or `sepa`.
             /// 
             /// </summary>
             [JsonProperty("address_line1")]
@@ -357,7 +357,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// The customer's postal code. Required if mandate import scheme is
-            /// `bacs`.
+            /// either `bacs` or `sepa`.
             /// 
             /// </summary>
             [JsonProperty("postal_code")]
