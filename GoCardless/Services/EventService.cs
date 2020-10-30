@@ -255,7 +255,7 @@ namespace GoCardless.Services
         public string ParentEvent { get; set; }
 
         /// <summary>
-        /// ID of a Payer Authorisation.
+        /// ID of a [payer authorisation](#core-endpoints-payer-authorisations).
         /// </summary>
         [JsonProperty("payer_authorisation")]
         public string PayerAuthorisation { get; set; }
