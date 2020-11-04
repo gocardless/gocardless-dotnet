@@ -74,6 +74,11 @@ namespace GoCardless
         public MandatePdfService MandatePdfs => new MandatePdfService(this);
 
         /// <summary>
+        ///A service for working with payer authorisation resources.
+        /// </summary>
+        public PayerAuthorisationService PayerAuthorisations => new PayerAuthorisationService(this);
+
+        /// <summary>
         ///A service for working with payment resources.
         /// </summary>
         public PaymentService Payments => new PaymentService(this);
