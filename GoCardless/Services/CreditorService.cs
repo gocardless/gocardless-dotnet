@@ -21,9 +21,8 @@ namespace GoCardless.Services
     /// your organisation will have a single "creditor", but the API also
     /// supports collecting payments on behalf of others.
     /// 
-    /// Please get in touch if you wish to use this endpoint. Currently, for
-    /// Anti Money Laundering reasons, any creditors you add must be directly
-    /// related to your organisation.
+    /// Currently, for Anti Money Laundering reasons, any creditors you add must
+    /// be directly related to your organisation.
     /// </summary>
 
     public class CreditorService
