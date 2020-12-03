@@ -129,6 +129,29 @@ namespace GoCardless.Services
         public string Before { get; set; }
 
         /// <summary>
+        /// Boolean value indicating whether the API should return tax data for
+        /// the cutover period of April to August 2020. Defaults to false.
+        /// </summary>
+        [JsonProperty("include_2020_tax_cutover")]
+        public PayoutItemInclude2020TaxCutover? Include2020TaxCutover { get; set; }
+            
+        /// <summary>
+        /// Boolean value indicating whether the API should return tax data for
+        /// the cutover period of April to August 2020. Defaults to false.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum PayoutItemInclude2020TaxCutover
+        {
+    
+            /// <summary>`include2020_tax_cutover` with a value of "true"</summary>
+            [EnumMember(Value = "true")]
+            True,
+            /// <summary>`include2020_tax_cutover` with a value of "false"</summary>
+            [EnumMember(Value = "false")]
+            False,
+        }
+
+        /// <summary>
         /// Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
