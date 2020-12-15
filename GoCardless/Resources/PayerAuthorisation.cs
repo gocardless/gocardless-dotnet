@@ -150,6 +150,13 @@ namespace GoCardless.Resources
         public string AccountNumber { get; set; }
 
         /// <summary>
+        /// The last few digits of the account number. Currently 4 digits for
+        /// NZD bank accounts and 2 digits for other currencies.
+        /// </summary>
+        [JsonProperty("account_number_ending")]
+        public string AccountNumberEnding { get; set; }
+
+        /// <summary>
         /// Account number suffix (only for bank accounts denominated in NZD) -
         /// see [local details](#local-bank-details-new-zealand) for more
         /// information.
