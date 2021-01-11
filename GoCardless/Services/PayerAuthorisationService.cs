@@ -57,6 +57,9 @@ namespace GoCardless.Services
     /// Authorisation is still saved if incomplete data is provided.
     ///   We return the list of incomplete data in the `incomplete_fields` along
     /// with the resources in the body of the response.
+    ///   The bank account details(account_number, bank_code & branch_code) must
+    /// be sent together rather than splitting across different request for both
+    /// `create` and `update` endpoints.
     ///   <br><br>
     ///   The API is designed to be flexible and allows you to collect
     /// information in multiple steps without storing any sensitive data in the
@@ -122,8 +125,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Updates a Payer Authorisation. Updates the Payer Authorisation with
-        /// the request data.Can be invoked as many times as needed. Only fields
-        /// present in the request will be modified. An empty array of
+        /// the request data. Can be invoked as many times as needed. Only
+        /// fields present in the request will be modified. An empty array of
         /// incomplete_fields means that the resource is valid. This endpoint
         /// has been designed this way so you do not need to save any payer data
         /// on your servers or the browser while still being able to implement a
@@ -151,7 +154,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Submits all the data previously pushed to this PayerAuthorisation
-        /// for verification.This time, a 200 HTTP status is returned if the
+        /// for verification. This time, a 200 HTTP status is returned if the
         /// resource is valid and a 422 error response in case of validation
         /// errors. After it is successfully submitted, the Payer Authorisation
         /// can no longer be edited.
@@ -184,7 +187,7 @@ namespace GoCardless.Services
         /// acknowledge the end of the setup process. 
         ///   They might want to make the payers go through some other steps
         /// after they go through our flow or make them go through the necessary
-        /// verification mechanism(upcomming feature). 
+        /// verification mechanism (upcoming feature).
         /// </p>
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "PA".</param>
@@ -257,6 +260,13 @@ namespace GoCardless.Services
             /// </summary>
             [JsonProperty("account_number")]
             public string AccountNumber { get; set; }
+
+            /// <summary>
+            /// The last few digits of the account number. Currently 4 digits
+            /// for NZD bank accounts and 2 digits for other currencies.
+            /// </summary>
+            [JsonProperty("account_number_ending")]
+            public string AccountNumberEnding { get; set; }
 
             /// <summary>
             /// Account number suffix (only for bank accounts denominated in
@@ -557,14 +567,14 @@ namespace GoCardless.Services
         
     /// <summary>
     /// Updates a Payer Authorisation. Updates the Payer Authorisation with the
-    /// request data.Can be invoked as many times as needed. Only fields present
-    /// in the request will be modified. An empty array of incomplete_fields
-    /// means that the resource is valid. This endpoint has been designed this
-    /// way so you do not need to save any payer data on your servers or the
-    /// browser while still being able to implement a progressive solution, such
-    /// a multi-step form. <p class="notice"> Note that in order to update the
-    /// `metadata` attribute values it must be sent completely as it overrides
-    /// the previously existing values. </p>
+    /// request data. Can be invoked as many times as needed. Only fields
+    /// present in the request will be modified. An empty array of
+    /// incomplete_fields means that the resource is valid. This endpoint has
+    /// been designed this way so you do not need to save any payer data on your
+    /// servers or the browser while still being able to implement a progressive
+    /// solution, such a multi-step form. <p class="notice"> Note that in order
+    /// to update the `metadata` attribute values it must be sent completely as
+    /// it overrides the previously existing values. </p>
     /// </summary>
     public class PayerAuthorisationUpdateRequest
     {
@@ -600,6 +610,13 @@ namespace GoCardless.Services
             /// </summary>
             [JsonProperty("account_number")]
             public string AccountNumber { get; set; }
+
+            /// <summary>
+            /// The last few digits of the account number. Currently 4 digits
+            /// for NZD bank accounts and 2 digits for other currencies.
+            /// </summary>
+            [JsonProperty("account_number_ending")]
+            public string AccountNumberEnding { get; set; }
 
             /// <summary>
             /// Account number suffix (only for bank accounts denominated in
@@ -892,9 +909,10 @@ namespace GoCardless.Services
         
     /// <summary>
     /// Submits all the data previously pushed to this PayerAuthorisation for
-    /// verification.This time, a 200 HTTP status is returned if the resource is
-    /// valid and a 422 error response in case of validation errors. After it is
-    /// successfully submitted, the Payer Authorisation can no longer be edited.
+    /// verification. This time, a 200 HTTP status is returned if the resource
+    /// is valid and a 422 error response in case of validation errors. After it
+    /// is successfully submitted, the Payer Authorisation can no longer be
+    /// edited.
     /// </summary>
     public class PayerAuthorisationSubmitRequest
     {
@@ -912,7 +930,7 @@ namespace GoCardless.Services
     /// acknowledge the end of the setup process. 
     ///   They might want to make the payers go through some other steps after
     /// they go through our flow or make them go through the necessary
-    /// verification mechanism(upcomming feature). 
+    /// verification mechanism (upcoming feature).
     /// </p>
     /// </summary>
     public class PayerAuthorisationConfirmRequest
