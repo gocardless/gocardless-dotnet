@@ -377,6 +377,12 @@ namespace GoCardless.Services
         public string Reference { get; set; }
 
         /// <summary>
+        /// Scheme you'd like to retrieve mandates for
+        /// </summary>
+        [JsonProperty("scheme")]
+        public string[] Scheme { get; set; }
+
+        /// <summary>
         /// At most four valid status values
         /// </summary>
         [JsonProperty("status")]

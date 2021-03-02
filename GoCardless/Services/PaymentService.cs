@@ -528,6 +528,48 @@ namespace GoCardless.Services
         public string Mandate { get; set; }
 
         /// <summary>
+        /// The direction to sort in.
+        /// </summary>
+        [JsonProperty("sort_direction")]
+        public PaymentSortDirection? SortDirection { get; set; }
+            
+        /// <summary>
+        /// The direction to sort in.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum PaymentSortDirection
+        {
+    
+            /// <summary>`sort_direction` with a value of "asc"</summary>
+            [EnumMember(Value = "asc")]
+            Asc,
+            /// <summary>`sort_direction` with a value of "desc"</summary>
+            [EnumMember(Value = "desc")]
+            Desc,
+        }
+
+        /// <summary>
+        /// Field by which to sort records.
+        /// </summary>
+        [JsonProperty("sort_field")]
+        public PaymentSortField? SortField { get; set; }
+            
+        /// <summary>
+        /// Field by which to sort records.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum PaymentSortField
+        {
+    
+            /// <summary>`sort_field` with a value of "charge_date"</summary>
+            [EnumMember(Value = "charge_date")]
+            ChargeDate,
+            /// <summary>`sort_field` with a value of "amount"</summary>
+            [EnumMember(Value = "amount")]
+            Amount,
+        }
+
+        /// <summary>
         /// One of:
         /// <ul>
         /// <li>`pending_customer_approval`: we're waiting for the customer to

@@ -414,6 +414,51 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
+
+        /// <summary>
+        /// The direction to sort in.
+        /// </summary>
+        [JsonProperty("sort_direction")]
+        public CustomerSortDirection? SortDirection { get; set; }
+            
+        /// <summary>
+        /// The direction to sort in.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum CustomerSortDirection
+        {
+    
+            /// <summary>`sort_direction` with a value of "asc"</summary>
+            [EnumMember(Value = "asc")]
+            Asc,
+            /// <summary>`sort_direction` with a value of "desc"</summary>
+            [EnumMember(Value = "desc")]
+            Desc,
+        }
+
+        /// <summary>
+        /// Field by which to sort records.
+        /// </summary>
+        [JsonProperty("sort_field")]
+        public CustomerSortField? SortField { get; set; }
+            
+        /// <summary>
+        /// Field by which to sort records.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum CustomerSortField
+        {
+    
+            /// <summary>`sort_field` with a value of "name"</summary>
+            [EnumMember(Value = "name")]
+            Name,
+            /// <summary>`sort_field` with a value of "company_name"</summary>
+            [EnumMember(Value = "company_name")]
+            CompanyName,
+            /// <summary>`sort_field` with a value of "created_at"</summary>
+            [EnumMember(Value = "created_at")]
+            CreatedAt,
+        }
     }
 
         
