@@ -401,6 +401,9 @@ namespace GoCardless.Services
         /// <li>`failed`: the mandate could not be created</li>
         /// <li>`cancelled`: the mandate has been cancelled</li>
         /// <li>`expired`: the mandate has expired due to dormancy</li>
+        /// <li>`consumed`: the mandate has been consumed and cannot be reused
+        /// (note that this only applies to schemes that are per-payment
+        /// authorised)</li>
         /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -428,6 +431,9 @@ namespace GoCardless.Services
             /// <summary>`status` with a value of "expired"</summary>
             [EnumMember(Value = "expired")]
             Expired,
+            /// <summary>`status` with a value of "consumed"</summary>
+            [EnumMember(Value = "consumed")]
+            Consumed,
         }
     }
 
