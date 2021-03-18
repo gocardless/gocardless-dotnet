@@ -45,7 +45,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Creates a new creditor bank account object.
-        /// </summary> 
+        /// </summary>
         /// <param name="request">An optional `CreditorBankAccountCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor bank account resource</returns>
@@ -62,7 +62,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// your creditor bank accounts.
-        /// </summary> 
+        /// </summary>
         /// <param name="request">An optional `CreditorBankAccountListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of creditor bank account resources</returns>
@@ -116,9 +116,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of an existing creditor bank account.
-        /// </summary>   
-        /// <param name="identity">Unique identifier, beginning with
-        /// "BA".</param> 
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BA".</param> 
         /// <param name="request">An optional `CreditorBankAccountGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor bank account resource</returns>
@@ -144,9 +143,8 @@ namespace GoCardless.Services
         /// 
         /// A disabled bank account can be re-enabled by creating a new bank
         /// account resource with the same details.
-        /// </summary>   
-        /// <param name="identity">Unique identifier, beginning with
-        /// "BA".</param> 
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BA".</param> 
         /// <param name="request">An optional `CreditorBankAccountDisableRequest` representing the body for this disable request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor bank account resource</returns>

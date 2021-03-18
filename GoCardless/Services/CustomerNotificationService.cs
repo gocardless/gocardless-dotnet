@@ -55,7 +55,7 @@ namespace GoCardless.Services
         /// not take
         /// further action. This endpoint takes no additional parameters.
         /// 
-        /// </summary>   
+        /// </summary>  
         /// <param name="identity">The id of the notification.</param> 
         /// <param name="request">An optional `CustomerNotificationHandleRequest` representing the body for this handle request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>

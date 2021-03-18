@@ -80,7 +80,7 @@ namespace GoCardless.Services
         /// you've finished
         /// adding entries to an import, you should
         /// [submit](#mandate-imports-submit-a-mandate-import) it.
-        /// </summary> 
+        /// </summary>
         /// <param name="request">An optional `MandateImportCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate import resource</returns>
@@ -96,9 +96,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a single mandate import.
-        /// </summary>   
-        /// <param name="identity">Unique identifier, beginning with
-        /// "IM".</param> 
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "IM".</param> 
         /// <param name="request">An optional `MandateImportGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate import resource</returns>
@@ -129,9 +128,8 @@ namespace GoCardless.Services
         /// test both the "submitted" response and wait for the webhook to
         /// confirm the
         /// processing has begun.
-        /// </summary>   
-        /// <param name="identity">Unique identifier, beginning with
-        /// "IM".</param> 
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "IM".</param> 
         /// <param name="request">An optional `MandateImportSubmitRequest` representing the body for this submit request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate import resource</returns>
@@ -156,9 +154,8 @@ namespace GoCardless.Services
         /// entries added to it. Mandate imports which have already been
         /// submitted or processed
         /// cannot be cancelled.
-        /// </summary>   
-        /// <param name="identity">Unique identifier, beginning with
-        /// "IM".</param> 
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "IM".</param> 
         /// <param name="request">An optional `MandateImportCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate import resource</returns>

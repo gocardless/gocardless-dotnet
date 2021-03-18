@@ -38,9 +38,9 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Runs the specific scenario simulator against the specific resource
-        /// </summary>   
-        /// <param name="identity">The unique identifier of the simulator, used
-        /// to initiate simulations. One of:
+        /// </summary>  
+        /// <param name="identity">The unique identifier of the simulator, used to initiate
+        /// simulations. One of:
         /// <ul>
         /// <li>`creditor_verification_status_action_required`</li>
         /// <li>`creditor_verification_status_in_review`</li>

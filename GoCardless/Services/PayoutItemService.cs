@@ -54,7 +54,7 @@ namespace GoCardless.Services
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// items in the payout.
         /// 
-        /// </summary> 
+        /// </summary>
         /// <param name="request">An optional `PayoutItemListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of payout item resources</returns>

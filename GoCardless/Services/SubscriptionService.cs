@@ -93,7 +93,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Creates a new subscription object
-        /// </summary> 
+        /// </summary>
         /// <param name="request">An optional `SubscriptionCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
@@ -110,7 +110,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// your subscriptions.
-        /// </summary> 
+        /// </summary>
         /// <param name="request">An optional `SubscriptionListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of subscription resources</returns>
@@ -164,9 +164,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of a single subscription.
-        /// </summary>   
-        /// <param name="identity">Unique identifier, beginning with
-        /// "SB".</param> 
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "SB".</param> 
         /// <param name="request">An optional `SubscriptionGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
@@ -211,9 +210,8 @@ namespace GoCardless.Services
         /// and the subscription was created by an app other than the app you
         /// are authenticated as
         /// 
-        /// </summary>   
-        /// <param name="identity">Unique identifier, beginning with
-        /// "SB".</param> 
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "SB".</param> 
         /// <param name="request">An optional `SubscriptionUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
@@ -275,9 +273,8 @@ namespace GoCardless.Services
         /// - `pause_cycles_must_be_greater_than_or_equal_to` if the provided
         /// value for `pause_cycles` cannot be satisfied.
         /// 
-        /// </summary>   
-        /// <param name="identity">Unique identifier, beginning with
-        /// "SB".</param> 
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "SB".</param> 
         /// <param name="request">An optional `SubscriptionPauseRequest` representing the body for this pause request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
@@ -312,9 +309,8 @@ namespace GoCardless.Services
         /// 
         /// - `subscription_not_paused` if the subscription is not paused.
         /// 
-        /// </summary>   
-        /// <param name="identity">Unique identifier, beginning with
-        /// "SB".</param> 
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "SB".</param> 
         /// <param name="request">An optional `SubscriptionResumeRequest` representing the body for this resume request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
@@ -338,9 +334,8 @@ namespace GoCardless.Services
         /// 
         /// This will fail with a cancellation_failed error if the subscription
         /// is already cancelled or finished.
-        /// </summary>   
-        /// <param name="identity">Unique identifier, beginning with
-        /// "SB".</param> 
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "SB".</param> 
         /// <param name="request">An optional `SubscriptionCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>

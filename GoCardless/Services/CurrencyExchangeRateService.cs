@@ -35,7 +35,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// all exchange rates.
-        /// </summary> 
+        /// </summary>
         /// <param name="request">An optional `CurrencyExchangeRateListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of currency exchange rate resources</returns>

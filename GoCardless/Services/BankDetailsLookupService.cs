@@ -52,7 +52,7 @@ namespace GoCardless.Services
         /// relies on GoCardless for
         /// modulus or reachability checking but not for payment collection,
         /// please get in touch.
-        /// </summary> 
+        /// </summary>
         /// <param name="request">An optional `BankDetailsLookupCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single bank details lookup resource</returns>

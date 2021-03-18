@@ -69,7 +69,7 @@ namespace GoCardless.Services
         /// You can add no more than 30,000 rows to a single mandate import.
         /// If you attempt to go over this limit, the API will return a
         /// `record_limit_exceeded` error.
-        /// </summary> 
+        /// </summary>
         /// <param name="request">An optional `MandateImportEntryCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate import entry resource</returns>
@@ -93,7 +93,7 @@ namespace GoCardless.Services
         /// creating the
         /// mandate import).
         /// 
-        /// </summary> 
+        /// </summary>
         /// <param name="request">An optional `MandateImportEntryListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of mandate import entry resources</returns>

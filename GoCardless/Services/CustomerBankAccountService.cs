@@ -55,7 +55,7 @@ namespace GoCardless.Services
         /// 
         /// For more information on the different fields required in each
         /// country, see [local bank details](#appendix-local-bank-details).
-        /// </summary> 
+        /// </summary>
         /// <param name="request">An optional `CustomerBankAccountCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer bank account resource</returns>
@@ -72,7 +72,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// your bank accounts.
-        /// </summary> 
+        /// </summary>
         /// <param name="request">An optional `CustomerBankAccountListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of customer bank account resources</returns>
@@ -126,9 +126,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of an existing bank account.
-        /// </summary>   
-        /// <param name="identity">Unique identifier, beginning with
-        /// "BA".</param> 
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BA".</param> 
         /// <param name="request">An optional `CustomerBankAccountGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer bank account resource</returns>
@@ -148,9 +147,8 @@ namespace GoCardless.Services
         /// <summary>
         /// Updates a customer bank account object. Only the metadata parameter
         /// is allowed.
-        /// </summary>   
-        /// <param name="identity">Unique identifier, beginning with
-        /// "BA".</param> 
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BA".</param> 
         /// <param name="request">An optional `CustomerBankAccountUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer bank account resource</returns>
@@ -176,9 +174,8 @@ namespace GoCardless.Services
         /// 
         /// A disabled bank account can be re-enabled by creating a new bank
         /// account resource with the same details.
-        /// </summary>   
-        /// <param name="identity">Unique identifier, beginning with
-        /// "BA".</param> 
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BA".</param> 
         /// <param name="request">An optional `CustomerBankAccountDisableRequest` representing the body for this disable request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer bank account resource</returns>
