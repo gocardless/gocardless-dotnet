@@ -35,7 +35,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// your webhooks.
-        /// </summary>
+        /// </summary> 
         /// <param name="request">An optional `WebhookListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of webhook resources</returns>
@@ -89,8 +89,9 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of an existing webhook.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "WB".</param>
+        /// </summary>   
+        /// <param name="identity">Unique identifier, beginning with
+        /// "WB".</param> 
         /// <param name="request">An optional `WebhookGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single webhook resource</returns>
@@ -109,8 +110,9 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Requests for a previous webhook to be sent again
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "WB".</param>
+        /// </summary>   
+        /// <param name="identity">Unique identifier, beginning with
+        /// "WB".</param> 
         /// <param name="request">An optional `WebhookRetryRequest` representing the body for this retry request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single webhook resource</returns>

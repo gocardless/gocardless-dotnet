@@ -40,7 +40,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// your payouts.
-        /// </summary>
+        /// </summary> 
         /// <param name="request">An optional `PayoutListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of payout resources</returns>
@@ -96,8 +96,9 @@ namespace GoCardless.Services
         /// Retrieves the details of a single payout. For an example of how to
         /// reconcile the transactions in a payout, see [this
         /// guide](#events-reconciling-payouts-with-events).
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PO".</param>
+        /// </summary>   
+        /// <param name="identity">Unique identifier, beginning with
+        /// "PO".</param> 
         /// <param name="request">An optional `PayoutGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payout resource</returns>
@@ -116,8 +117,9 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Updates a payout object. This accepts only the metadata parameter.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PO".</param>
+        /// </summary>   
+        /// <param name="identity">Unique identifier, beginning with
+        /// "PO".</param> 
         /// <param name="request">An optional `PayoutUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payout resource</returns>

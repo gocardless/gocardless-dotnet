@@ -69,7 +69,7 @@ namespace GoCardless.Services
         /// to the created payments, or the status `error` and detailed
         /// information about the
         /// failures.
-        /// </summary>
+        /// </summary> 
         /// <param name="request">An optional `InstalmentScheduleCreateWithDatesRequest` representing the body for this create_with_dates request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single instalment schedule resource</returns>
@@ -100,7 +100,7 @@ namespace GoCardless.Services
         /// the created payments, or the status `error` and detailed information
         /// about the
         /// failures.
-        /// </summary>
+        /// </summary> 
         /// <param name="request">An optional `InstalmentScheduleCreateWithScheduleRequest` representing the body for this create_with_schedule request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single instalment schedule resource</returns>
@@ -117,7 +117,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// your instalment schedules.
-        /// </summary>
+        /// </summary> 
         /// <param name="request">An optional `InstalmentScheduleListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of instalment schedule resources</returns>
@@ -171,8 +171,9 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of an existing instalment schedule.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "IS".</param>
+        /// </summary>   
+        /// <param name="identity">Unique identifier, beginning with
+        /// "IS".</param> 
         /// <param name="request">An optional `InstalmentScheduleGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single instalment schedule resource</returns>
@@ -192,8 +193,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Updates an instalment schedule. This accepts only the metadata
         /// parameter.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "IS".</param>
+        /// </summary>   
+        /// <param name="identity">Unique identifier, beginning with
+        /// "IS".</param> 
         /// <param name="request">An optional `InstalmentScheduleUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single instalment schedule resource</returns>
@@ -216,8 +218,9 @@ namespace GoCardless.Services
         /// 
         /// This will fail with a `cancellation_failed` error if the instalment
         /// schedule is already cancelled or has completed.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "IS".</param>
+        /// </summary>   
+        /// <param name="identity">Unique identifier, beginning with
+        /// "IS".</param> 
         /// <param name="request">An optional `InstalmentScheduleCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single instalment schedule resource</returns>

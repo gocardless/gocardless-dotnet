@@ -104,6 +104,11 @@ namespace GoCardless
         public RefundService Refunds => new RefundService(this);
 
         /// <summary>
+        ///A service for working with scenario simulator resources.
+        /// </summary>
+        public ScenarioSimulatorService ScenarioSimulators => new ScenarioSimulatorService(this);
+
+        /// <summary>
         ///A service for working with subscription resources.
         /// </summary>
         public SubscriptionService Subscriptions => new SubscriptionService(this);

@@ -57,7 +57,7 @@ namespace GoCardless.Services
         /// have sufficient balance for refunds available to cover the cost of
         /// the requested refund.
         /// 
-        /// </summary>
+        /// </summary> 
         /// <param name="request">An optional `RefundCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single refund resource</returns>
@@ -74,7 +74,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// your refunds.
-        /// </summary>
+        /// </summary> 
         /// <param name="request">An optional `RefundListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of refund resources</returns>
@@ -128,8 +128,9 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves all details for a single refund
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "RF".</param>
+        /// </summary>   
+        /// <param name="identity">Unique identifier, beginning with
+        /// "RF".</param> 
         /// <param name="request">An optional `RefundGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single refund resource</returns>
@@ -148,8 +149,9 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Updates a refund object.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "RF".</param>
+        /// </summary>   
+        /// <param name="identity">Unique identifier, beginning with
+        /// "RF".</param> 
         /// <param name="request">An optional `RefundUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single refund resource</returns>

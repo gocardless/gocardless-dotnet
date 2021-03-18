@@ -79,7 +79,7 @@ namespace GoCardless.Services
         /// | SEPA Core        | Danish (`da`), Dutch (`nl`), English (`en`),
         /// French (`fr`), German (`de`), Italian (`it`), Portuguese (`pt`),
         /// Spanish (`es`), Swedish (`sv`) |
-        /// </summary>
+        /// </summary> 
         /// <param name="request">An optional `MandatePdfCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate pdf resource</returns>

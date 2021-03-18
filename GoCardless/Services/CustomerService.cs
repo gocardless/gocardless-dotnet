@@ -37,7 +37,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Creates a new customer object.
-        /// </summary>
+        /// </summary> 
         /// <param name="request">An optional `CustomerCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer resource</returns>
@@ -54,7 +54,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// your customers.
-        /// </summary>
+        /// </summary> 
         /// <param name="request">An optional `CustomerListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of customer resources</returns>
@@ -108,8 +108,9 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of an existing customer.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "CU".</param>
+        /// </summary>   
+        /// <param name="identity">Unique identifier, beginning with
+        /// "CU".</param> 
         /// <param name="request">An optional `CustomerGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer resource</returns>
@@ -129,8 +130,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Updates a customer object. Supports all of the fields supported when
         /// creating a customer.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "CU".</param>
+        /// </summary>   
+        /// <param name="identity">Unique identifier, beginning with
+        /// "CU".</param> 
         /// <param name="request">An optional `CustomerUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer resource</returns>
@@ -156,8 +158,9 @@ namespace GoCardless.Services
         /// 
         /// <p class="restricted-notice"><strong>The action of removing a
         /// customer cannot be reversed, so please use with care.</strong></p>
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "CU".</param>
+        /// </summary>   
+        /// <param name="identity">Unique identifier, beginning with
+        /// "CU".</param> 
         /// <param name="request">An optional `CustomerRemoveRequest` representing the body for this remove request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer resource</returns>
