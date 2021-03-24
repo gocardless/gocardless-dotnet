@@ -438,6 +438,9 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "betalingsservice"</summary>
         [EnumMember(Value = "betalingsservice")]
         Betalingsservice,
+        /// <summary>`scheme` with a value of "faster_payments"</summary>
+        [EnumMember(Value = "faster_payments")]
+        FasterPayments,
         /// <summary>`scheme` with a value of "pad"</summary>
         [EnumMember(Value = "pad")]
         Pad,
