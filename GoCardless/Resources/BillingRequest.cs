@@ -134,12 +134,9 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "collect_bank_account_details"</summary>
         [EnumMember(Value = "collect_bank_account_details")]
         CollectBankAccountDetails,
-        /// <summary>`type` with a value of "payment_bank_authorisation"</summary>
-        [EnumMember(Value = "payment_bank_authorisation")]
-        PaymentBankAuthorisation,
-        /// <summary>`type` with a value of "mandate_bank_authorisation"</summary>
-        [EnumMember(Value = "mandate_bank_authorisation")]
-        MandateBankAuthorisation,
+        /// <summary>`type` with a value of "bank_authorisation"</summary>
+        [EnumMember(Value = "bank_authorisation")]
+        BankAuthorisation,
     }
 
     /// <summary>
@@ -147,6 +144,14 @@ namespace GoCardless.Resources
     /// </summary>
     public class BillingRequestLinks
     {
+        /// <summary>
+        /// (Optional) ID of the [bank
+        /// authorisation](#billing-requests-bank-authorisations) that was used
+        /// to verify this request.
+        /// </summary>
+        [JsonProperty("bank_authorisation")]
+        public string BankAuthorisation { get; set; }
+
         /// <summary>
         /// ID of the [customer](#core-endpoints-customers) that will be used
         /// for this request
@@ -167,22 +172,6 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("customer_billing_detail")]
         public string CustomerBillingDetail { get; set; }
-
-        /// <summary>
-        /// (Optional) ID of the [mandate bank
-        /// authorisation](#billing-requests-bank-authorisations) that was used
-        /// to verify this request.
-        /// </summary>
-        [JsonProperty("mandate_bank_authorisation")]
-        public string MandateBankAuthorisation { get; set; }
-
-        /// <summary>
-        /// (Optional) ID of the [payment bank
-        /// authorisation](#billing-requests-bank-authorisations) that was used
-        /// to verify this request.
-        /// </summary>
-        [JsonProperty("payment_bank_authorisation")]
-        public string PaymentBankAuthorisation { get; set; }
     }
     
     /// <summary>
