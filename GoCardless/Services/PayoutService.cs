@@ -96,8 +96,8 @@ namespace GoCardless.Services
         /// Retrieves the details of a single payout. For an example of how to
         /// reconcile the transactions in a payout, see [this
         /// guide](#events-reconciling-payouts-with-events).
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PO".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "PO".</param> 
         /// <param name="request">An optional `PayoutGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payout resource</returns>
@@ -116,8 +116,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Updates a payout object. This accepts only the metadata parameter.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PO".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "PO".</param> 
         /// <param name="request">An optional `PayoutUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payout resource</returns>
@@ -289,9 +289,12 @@ namespace GoCardless.Services
         /// <summary>
         /// One of:
         /// <ul>
-        /// <li>`pending`: the payout has been created, but not yet sent to the
-        /// banks</li>
-        /// <li>`paid`: the payout has been sent to the banks</li>
+        /// <li>`pending`: the payout has been created, but not yet sent to your
+        /// bank or it is in the process of being exchanged through our FX
+        /// provider.</li>
+        /// <li>`paid`: the payout has been sent to the your bank. FX payouts
+        /// will become `paid` after we emit the `fx_rate_confirmed`
+        /// webhook.</li>
         /// <li>`bounced`: the payout bounced when sent, the payout can be
         /// retried.</li>
         /// </ul>
@@ -302,9 +305,12 @@ namespace GoCardless.Services
         /// <summary>
         /// One of:
         /// <ul>
-        /// <li>`pending`: the payout has been created, but not yet sent to the
-        /// banks</li>
-        /// <li>`paid`: the payout has been sent to the banks</li>
+        /// <li>`pending`: the payout has been created, but not yet sent to your
+        /// bank or it is in the process of being exchanged through our FX
+        /// provider.</li>
+        /// <li>`paid`: the payout has been sent to the your bank. FX payouts
+        /// will become `paid` after we emit the `fx_rate_confirmed`
+        /// webhook.</li>
         /// <li>`bounced`: the payout bounced when sent, the payout can be
         /// retried.</li>
         /// </ul>
@@ -372,7 +378,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("payouts")]
         public IReadOnlyList<Payout> Payouts { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>

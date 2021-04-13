@@ -111,15 +111,17 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// One of:
-        /// - `created`: The PayerAuthorisation has been created, and not been
-        /// confirmed yet
-        /// - `submitted`: The payer information has been submitted
-        /// - `confirmed`: PayerAuthorisation is confirmed and resources are
-        /// ready to be created
-        /// - `completed`: The PayerAuthorisation has been completed and
-        /// customer, bank_account and mandate has been created
-        /// - `failed`: The PayerAuthorisation has failed and customer,
-        /// bank_account and mandate is not created
+        /// <ul>
+        /// <li>`created`: The PayerAuthorisation has been created, and not been
+        /// confirmed yet</li>
+        /// <li>`submitted`: The payer information has been submitted</li>
+        /// <li>`confirmed`: PayerAuthorisation is confirmed and resources are
+        /// ready to be created</li>
+        /// <li>`completed`: The PayerAuthorisation has been completed and
+        /// customer, bank_account and mandate has been created</li>
+        /// <li>`failed`: The PayerAuthorisation has failed and customer,
+        /// bank_account and mandate is not created</li>
+        /// </ul>
         /// </summary>
         [JsonProperty("status")]
         public PayerAuthorisationStatus? Status { get; set; }
@@ -485,13 +487,15 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// One of:
-    /// - `created`: The PayerAuthorisation has been created, and not been confirmed yet
-    /// - `submitted`: The payer information has been submitted
-    /// - `confirmed`: PayerAuthorisation is confirmed and resources are ready to be created
-    /// - `completed`: The PayerAuthorisation has been completed and customer, bank_account and
-    /// mandate has been created
-    /// - `failed`: The PayerAuthorisation has failed and customer, bank_account and mandate is not
-    /// created
+    /// <ul>
+    /// <li>`created`: The PayerAuthorisation has been created, and not been confirmed yet</li>
+    /// <li>`submitted`: The payer information has been submitted</li>
+    /// <li>`confirmed`: PayerAuthorisation is confirmed and resources are ready to be created</li>
+    /// <li>`completed`: The PayerAuthorisation has been completed and customer, bank_account and
+    /// mandate has been created</li>
+    /// <li>`failed`: The PayerAuthorisation has failed and customer, bank_account and mandate is
+    /// not created</li>
+    /// </ul>
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum PayerAuthorisationStatus {

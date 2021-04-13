@@ -82,8 +82,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns all details about a single redirect flow
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "RE".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "RE".</param> 
         /// <param name="request">An optional `RedirectFlowGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single redirect flow resource</returns>
@@ -112,8 +112,8 @@ namespace GoCardless.Services
         /// already completed this flow. It will return a `bad_request` error if
         /// the `session_token` differs to the one supplied when the redirect
         /// flow was created.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "RE".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "RE".</param> 
         /// <param name="request">An optional `RedirectFlowCompleteRequest` representing the body for this complete request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single redirect flow resource</returns>

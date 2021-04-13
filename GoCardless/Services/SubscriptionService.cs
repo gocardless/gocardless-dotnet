@@ -164,8 +164,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of a single subscription.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "SB".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "SB".</param> 
         /// <param name="request">An optional `SubscriptionGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
@@ -210,8 +210,8 @@ namespace GoCardless.Services
         /// and the subscription was created by an app other than the app you
         /// are authenticated as
         /// 
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "SB".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "SB".</param> 
         /// <param name="request">An optional `SubscriptionUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
@@ -233,9 +233,10 @@ namespace GoCardless.Services
         /// No payments will be created until it is resumed.
         /// 
         /// This can only be used when a subscription collecting a fixed number
-        /// of payments (created using `count`)
-        /// or when they continue forever (created without `count` or
-        /// `end_date`)
+        /// of payments (created using `count`),
+        /// when they continue forever (created without `count` or `end_date`)
+        /// or
+        /// the subscription is paused for a number of cycles.
         /// 
         /// When `pause_cycles` is omitted the subscription is paused until the
         /// [resume endpoint](#subscriptions-resume-a-subscription) is called.
@@ -259,7 +260,12 @@ namespace GoCardless.Services
         /// - `validation_failed` if invalid data is provided when attempting to
         /// pause a subscription.
         /// 
-        /// - `subscription_not_active` if the subscription is no longer active.
+        /// - `subscription_paused_cannot_update_cycles` if the subscription is
+        /// already paused for a number of cycles and the request provides a
+        /// value for `pause_cycle`.
+        /// 
+        /// - `subscription_cannot_be_paused` if the subscription cannot be
+        /// paused.
         /// 
         /// - `subscription_already_ended` if the subscription has taken all
         /// payments.
@@ -267,8 +273,8 @@ namespace GoCardless.Services
         /// - `pause_cycles_must_be_greater_than_or_equal_to` if the provided
         /// value for `pause_cycles` cannot be satisfied.
         /// 
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "SB".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "SB".</param> 
         /// <param name="request">An optional `SubscriptionPauseRequest` representing the body for this pause request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
@@ -303,8 +309,8 @@ namespace GoCardless.Services
         /// 
         /// - `subscription_not_paused` if the subscription is not paused.
         /// 
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "SB".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "SB".</param> 
         /// <param name="request">An optional `SubscriptionResumeRequest` representing the body for this resume request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
@@ -328,8 +334,8 @@ namespace GoCardless.Services
         /// 
         /// This will fail with a cancellation_failed error if the subscription
         /// is already cancelled or finished.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "SB".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "SB".</param> 
         /// <param name="request">An optional `SubscriptionCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
@@ -394,10 +400,10 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Date on or after which no further payments should be created.
-        /// 
+        /// <br />
         /// If this field is blank and `count` is not specified, the
         /// subscription will continue forever.
-        /// 
+        /// <br />
         /// <p class="deprecated-notice"><strong>Deprecated</strong>: This field
         /// will be removed in a future API version. Use `count` to specify a
         /// number of payments instead.</p>
@@ -645,7 +651,16 @@ namespace GoCardless.Services
         public string Mandate { get; set; }
 
         /// <summary>
-        /// At most four valid status values
+        /// Upto 5 of:
+        /// <ul>
+        /// <li>`pending_customer_approval`</li>
+        /// <li>`customer_approval_denied`</li>
+        /// <li>`active`</li>
+        /// <li>`finished`</li>
+        /// <li>`cancelled`</li>
+        /// <li>`paused`</li>
+        /// </ul>
+        /// Omit entirely to include subscriptions in all states.
         /// </summary>
         [JsonProperty("status")]
         public string[] Status { get; set; }
@@ -791,8 +806,9 @@ namespace GoCardless.Services
     /// No payments will be created until it is resumed.
     /// 
     /// This can only be used when a subscription collecting a fixed number of
-    /// payments (created using `count`)
-    /// or when they continue forever (created without `count` or `end_date`)
+    /// payments (created using `count`),
+    /// when they continue forever (created without `count` or `end_date`) or
+    /// the subscription is paused for a number of cycles.
     /// 
     /// When `pause_cycles` is omitted the subscription is paused until the
     /// [resume endpoint](#subscriptions-resume-a-subscription) is called.
@@ -816,7 +832,11 @@ namespace GoCardless.Services
     /// - `validation_failed` if invalid data is provided when attempting to
     /// pause a subscription.
     /// 
-    /// - `subscription_not_active` if the subscription is no longer active.
+    /// - `subscription_paused_cannot_update_cycles` if the subscription is
+    /// already paused for a number of cycles and the request provides a value
+    /// for `pause_cycle`.
+    /// 
+    /// - `subscription_cannot_be_paused` if the subscription cannot be paused.
     /// 
     /// - `subscription_already_ended` if the subscription has taken all
     /// payments.
@@ -916,7 +936,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("subscriptions")]
         public IReadOnlyList<Subscription> Subscriptions { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>

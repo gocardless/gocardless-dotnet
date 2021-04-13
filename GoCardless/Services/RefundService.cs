@@ -128,8 +128,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves all details for a single refund
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "RF".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "RF".</param> 
         /// <param name="request">An optional `RefundGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single refund resource</returns>
@@ -148,8 +148,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Updates a refund object.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "RF".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "RF".</param> 
         /// <param name="request">An optional `RefundUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single refund resource</returns>
@@ -209,9 +209,11 @@ namespace GoCardless.Services
         {
 
             /// <summary>
-            /// <em>private beta</em> ID of the
-            /// [mandate](#core-endpoints-mandates) against which the refund is
-            /// being made.
+            ///  ID of the [mandate](#core-endpoints-mandates) against which the
+            /// refund is being made. <br /> <p
+            /// class="restricted-notice"><strong>Restricted</strong>: You must
+            /// request access to Mandate Refunds by contacting <a
+            /// href="mailto:support@gocardless.com">our support team</a>.</p>
             /// </summary>
             [JsonProperty("mandate")]
             public string Mandate { get; set; }
@@ -257,9 +259,8 @@ namespace GoCardless.Services
         /// other partial refunds against this payment, this value should be the
         /// sum of the
         /// existing refunds plus the amount of the refund being created.
-        /// 
+        /// <br />
         /// Must be supplied if `links[payment]` is present.
-        /// 
         /// </summary>
         [JsonProperty("total_amount_confirmation")]
         public int? TotalAmountConfirmation { get; set; }
@@ -425,7 +426,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("refunds")]
         public IReadOnlyList<Refund> Refunds { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>

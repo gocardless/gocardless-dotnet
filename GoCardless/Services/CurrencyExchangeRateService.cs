@@ -185,7 +185,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("currency_exchange_rates")]
         public IReadOnlyList<CurrencyExchangeRate> CurrencyExchangeRates { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>

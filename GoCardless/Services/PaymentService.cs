@@ -117,8 +117,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of a single existing payment.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PM".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "PM".</param> 
         /// <param name="request">An optional `PaymentGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment resource</returns>
@@ -137,8 +137,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Updates a payment object. This accepts only the metadata parameter.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PM".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "PM".</param> 
         /// <param name="request">An optional `PaymentUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment resource</returns>
@@ -162,8 +162,8 @@ namespace GoCardless.Services
         /// 
         /// This will fail with a `cancellation_failed` error unless the
         /// payment's status is `pending_submission`.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PM".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "PM".</param> 
         /// <param name="request">An optional `PaymentCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment resource</returns>
@@ -193,8 +193,8 @@ namespace GoCardless.Services
         /// failed.
         /// 
         /// Payments can be retried up to 3 times.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PM".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "PM".</param> 
         /// <param name="request">An optional `PaymentRetryRequest` representing the body for this retry request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment resource</returns>
@@ -758,7 +758,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("payments")]
         public IReadOnlyList<Payment> Payments { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>

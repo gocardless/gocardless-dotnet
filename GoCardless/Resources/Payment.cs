@@ -283,7 +283,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of [payout](#core-endpoints-payouts) which contains the funds
-        /// from this payment.<br/>**Note**: this property will not be present
+        /// from this payment.<br/>_Note_: this property will not be present
         /// until the payment has been successfully collected.
         /// </summary>
         [JsonProperty("payout")]
@@ -291,8 +291,8 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of [subscription](#core-endpoints-subscriptions) from which this
-        /// payment was created.<br/>**Note**: this property will only be
-        /// present if this payment is part of a subscription.
+        /// payment was created.<br/>_Note_: this property will only be present
+        /// if this payment is part of a subscription.
         /// </summary>
         [JsonProperty("subscription")]
         public string Subscription { get; set; }

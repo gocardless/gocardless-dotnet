@@ -92,8 +92,9 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of a tax rate.
-        /// </summary>
-        /// <param name="identity">The unique identifier created by the jurisdiction, tax type and version</param>
+        /// </summary>  
+        /// <param name="identity">The unique identifier created by the jurisdiction, tax type and
+        /// version</param> 
         /// <param name="request">An optional `TaxRateGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single tax rate resource</returns>
@@ -168,7 +169,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("tax_rates")]
         public IReadOnlyList<TaxRate> TaxRates { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>

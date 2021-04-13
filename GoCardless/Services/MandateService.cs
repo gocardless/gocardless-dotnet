@@ -109,8 +109,9 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of an existing mandate.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may
+        /// not apply to mandates created before 2016.</param> 
         /// <param name="request">An optional `MandateGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
@@ -129,8 +130,9 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Updates a mandate object. This accepts only the metadata parameter.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may
+        /// not apply to mandates created before 2016.</param> 
         /// <param name="request">An optional `MandateUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
@@ -154,8 +156,9 @@ namespace GoCardless.Services
         /// 
         /// This will fail with a `cancellation_failed` error if the mandate is
         /// already cancelled.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may
+        /// not apply to mandates created before 2016.</param> 
         /// <param name="request">An optional `MandateCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
@@ -185,8 +188,9 @@ namespace GoCardless.Services
         /// already being submitted, or is active.
         /// 
         /// Mandates can be resubmitted up to 10 times.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates created before 2016.</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may
+        /// not apply to mandates created before 2016.</param> 
         /// <param name="request">An optional `MandateReinstateRequest` representing the body for this reinstate request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
@@ -401,6 +405,9 @@ namespace GoCardless.Services
         /// <li>`failed`: the mandate could not be created</li>
         /// <li>`cancelled`: the mandate has been cancelled</li>
         /// <li>`expired`: the mandate has expired due to dormancy</li>
+        /// <li>`consumed`: the mandate has been consumed and cannot be reused
+        /// (note that this only applies to schemes that are per-payment
+        /// authorised)</li>
         /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -428,6 +435,9 @@ namespace GoCardless.Services
             /// <summary>`status` with a value of "expired"</summary>
             [EnumMember(Value = "expired")]
             Expired,
+            /// <summary>`status` with a value of "consumed"</summary>
+            [EnumMember(Value = "consumed")]
+            Consumed,
         }
     }
 
@@ -522,7 +532,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("mandates")]
         public IReadOnlyList<Mandate> Mandates { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>

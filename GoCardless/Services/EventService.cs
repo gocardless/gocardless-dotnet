@@ -92,8 +92,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of a single event.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "EV".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "EV".</param> 
         /// <param name="request">An optional `EventGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single event resource</returns>
@@ -387,7 +387,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("events")]
         public IReadOnlyList<Event> Events { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>

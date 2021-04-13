@@ -171,8 +171,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of an existing instalment schedule.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "IS".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "IS".</param> 
         /// <param name="request">An optional `InstalmentScheduleGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single instalment schedule resource</returns>
@@ -192,8 +192,8 @@ namespace GoCardless.Services
         /// <summary>
         /// Updates an instalment schedule. This accepts only the metadata
         /// parameter.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "IS".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "IS".</param> 
         /// <param name="request">An optional `InstalmentScheduleUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single instalment schedule resource</returns>
@@ -216,8 +216,8 @@ namespace GoCardless.Services
         /// 
         /// This will fail with a `cancellation_failed` error if the instalment
         /// schedule is already cancelled or has completed.
-        /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "IS".</param>
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "IS".</param> 
         /// <param name="request">An optional `InstalmentScheduleCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single instalment schedule resource</returns>
@@ -842,7 +842,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("instalment_schedules")]
         public IReadOnlyList<InstalmentSchedule> InstalmentSchedules { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
