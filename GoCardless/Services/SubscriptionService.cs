@@ -400,10 +400,10 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Date on or after which no further payments should be created.
-        /// 
+        /// <br />
         /// If this field is blank and `count` is not specified, the
         /// subscription will continue forever.
-        /// 
+        /// <br />
         /// <p class="deprecated-notice"><strong>Deprecated</strong>: This field
         /// will be removed in a future API version. Use `count` to specify a
         /// number of payments instead.</p>
@@ -651,7 +651,16 @@ namespace GoCardless.Services
         public string Mandate { get; set; }
 
         /// <summary>
-        /// At most four valid status values
+        /// Upto 5 of:
+        /// <ul>
+        /// <li>`pending_customer_approval`</li>
+        /// <li>`customer_approval_denied`</li>
+        /// <li>`active`</li>
+        /// <li>`finished`</li>
+        /// <li>`cancelled`</li>
+        /// <li>`paused`</li>
+        /// </ul>
+        /// Omit entirely to include subscriptions in all states.
         /// </summary>
         [JsonProperty("status")]
         public string[] Status { get; set; }
@@ -927,7 +936,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("subscriptions")]
         public IReadOnlyList<Subscription> Subscriptions { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>

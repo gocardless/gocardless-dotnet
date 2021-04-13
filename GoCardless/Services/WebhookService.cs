@@ -271,7 +271,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("webhooks")]
         public IReadOnlyList<Webhook> Webhooks { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>

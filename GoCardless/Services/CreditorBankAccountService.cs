@@ -431,7 +431,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("creditor_bank_accounts")]
         public IReadOnlyList<CreditorBankAccount> CreditorBankAccounts { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>

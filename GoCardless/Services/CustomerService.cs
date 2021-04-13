@@ -634,7 +634,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("customers")]
         public IReadOnlyList<Customer> Customers { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>

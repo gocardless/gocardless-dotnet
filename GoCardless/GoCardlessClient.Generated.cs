@@ -9,9 +9,24 @@ namespace GoCardless
     {
 
         /// <summary>
+        ///A service for working with bank authorisation resources.
+        /// </summary>
+        public BankAuthorisationService BankAuthorisations => new BankAuthorisationService(this);
+
+        /// <summary>
         ///A service for working with bank details lookup resources.
         /// </summary>
         public BankDetailsLookupService BankDetailsLookups => new BankDetailsLookupService(this);
+
+        /// <summary>
+        ///A service for working with billing request resources.
+        /// </summary>
+        public BillingRequestService BillingRequests => new BillingRequestService(this);
+
+        /// <summary>
+        ///A service for working with billing request flow resources.
+        /// </summary>
+        public BillingRequestFlowService BillingRequestFlows => new BillingRequestFlowService(this);
 
         /// <summary>
         ///A service for working with creditor resources.
@@ -52,6 +67,11 @@ namespace GoCardless
         ///A service for working with instalment schedule resources.
         /// </summary>
         public InstalmentScheduleService InstalmentSchedules => new InstalmentScheduleService(this);
+
+        /// <summary>
+        ///A service for working with institution resources.
+        /// </summary>
+        public InstitutionService Institutions => new InstitutionService(this);
 
         /// <summary>
         ///A service for working with mandate resources.

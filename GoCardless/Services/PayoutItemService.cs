@@ -186,7 +186,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("payout_items")]
         public IReadOnlyList<PayoutItem> PayoutItems { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>

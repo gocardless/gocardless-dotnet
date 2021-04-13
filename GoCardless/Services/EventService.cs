@@ -387,7 +387,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("events")]
         public IReadOnlyList<Event> Events { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>

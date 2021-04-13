@@ -758,7 +758,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("payments")]
         public IReadOnlyList<Payment> Payments { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>

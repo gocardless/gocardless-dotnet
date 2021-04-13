@@ -169,7 +169,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("tax_rates")]
         public IReadOnlyList<TaxRate> TaxRates { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>

@@ -81,6 +81,18 @@ namespace GoCardless.Services
         /// submitted to the banks and set up successfully. It must start in the
         /// `pending_submission` state. Not compatible with ACH, BECS, BECS_NZ and SEPA mandates,
         /// which are submitted and activated with their first payment.</li>
+        /// <li>`mandate_customer_approval_granted`: Transitions a mandate through to
+        /// `pending_submission`, as if the customer approved the mandate creation. It must start in
+        /// the `pending_customer_approval` state. Compatible only with Bacs and SEPA mandates,
+        /// which support customer signatures on the mandate. All payments associated with the
+        /// mandate will be transitioned to `pending_submission`. All subscriptions associated with
+        /// the mandate will become `active`.</li>
+        /// <li>`mandate_customer_approval_skipped`: Transitions a mandate through to
+        /// `pending_submission`, as if the customer skipped the mandate approval during the mandate
+        /// creation process. It must start in the `pending_customer_approval` state. Compatible
+        /// only with Bacs and SEPA mandates, which support customer signatures on the mandate. All
+        /// payments associated with the mandate will be transitioned to `pending_submission`. All
+        /// subscriptions associated with the mandate will become `active`.</li>
         /// <li>`mandate_failed`: Transitions a mandate through to `failed`, having been submitted
         /// to the banks but found to be invalid (for example due to invalid bank details). It must
         /// start in the `pending_submission` or `submitted` states. Not compatible with ACH, BECS,
@@ -106,6 +118,10 @@ namespace GoCardless.Services
         /// `pending_submission`, `submitted`, or `paid` state.</li>
         /// <li>`payout_bounced`: Transitions a payout to `bounced`. It must start in the `paid`
         /// state.</li>
+        /// <li>`payout_create`: Creates a payout containing payments in `confirmed`, `failed` &
+        /// `charged_back` states; refunds in `submitted` & `bounced`; and all related fees. Can
+        /// only be used with a positive total payout balance and when some eligible items
+        /// exist.</li>
         /// </ul></param> 
         /// <param name="request">An optional `ScenarioSimulatorRunRequest` representing the body for this run request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -190,9 +206,11 @@ namespace GoCardless.Services
         {
 
             /// <summary>
-            /// ID of the resource to run the simulation against. This should be
-            /// of the type returned for this simulator in the `GET
-            /// /scenario_simulators` API.
+            /// ID of the resource to run the simulation against.
+            /// Must be same type of resource as the simulator that is being
+            /// run.
+            /// eg. Payment ID for `payment_failed`, Mandate ID for
+            /// `mandate_activated` etc
             /// </summary>
             [JsonProperty("resource")]
             public string Resource { get; set; }

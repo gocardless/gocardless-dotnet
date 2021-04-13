@@ -532,7 +532,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("mandates")]
         public IReadOnlyList<Mandate> Mandates { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>

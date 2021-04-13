@@ -842,7 +842,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("instalment_schedules")]
         public IReadOnlyList<InstalmentSchedule> InstalmentSchedules { get; private set; }
-
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
