@@ -128,15 +128,15 @@ namespace GoCardless.Services
         /// <li>`billing_request_fulfilled`: Authorises the billing request, fulfils it, and moves
         /// the associated payment to `failed`. The billing request must be in the `pending` state,
         /// with all actions completed except for `bank_authorisation`. Only billing requests with a
-        /// `payment_request` are supported.<li>
+        /// `payment_request` are supported.</li>
         /// <li>`billing_request_fulfilled_and_payment_failed`: Authorises the billing request,
         /// fulfils it, and moves the associated payment to `failed`. The billing request must be in
         /// the `pending` state, with all actions completed except for `bank_authorisation`. Only
-        /// billing requests with a `payment_request` are supported.<li>
+        /// billing requests with a `payment_request` are supported.</li>
         /// <li>`billing_request_fulfilled_and_payment_paid_out`: Authorises the billing request,
         /// fulfils it, and moves the associated payment to `paid_out`. The billing request must be
         /// in the `pending` state, with all actions completed except for `bank_authorisation`. Only
-        /// billing requests with a `payment_request` are supported.<li>
+        /// billing requests with a `payment_request` are supported.</li>
         /// </ul></param> 
         /// <param name="request">An optional `ScenarioSimulatorRunRequest` representing the body for this run request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>

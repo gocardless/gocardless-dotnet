@@ -132,17 +132,17 @@ namespace GoCardless.Resources
         /// fulfils it, and moves the associated payment to `failed`. The
         /// billing request must be in the `pending` state, with all actions
         /// completed except for `bank_authorisation`. Only billing requests
-        /// with a `payment_request` are supported.<li>
+        /// with a `payment_request` are supported.</li>
         /// <li>`billing_request_fulfilled_and_payment_failed`: Authorises the
         /// billing request, fulfils it, and moves the associated payment to
         /// `failed`. The billing request must be in the `pending` state, with
         /// all actions completed except for `bank_authorisation`. Only billing
-        /// requests with a `payment_request` are supported.<li>
+        /// requests with a `payment_request` are supported.</li>
         /// <li>`billing_request_fulfilled_and_payment_paid_out`: Authorises the
         /// billing request, fulfils it, and moves the associated payment to
         /// `paid_out`. The billing request must be in the `pending` state, with
         /// all actions completed except for `bank_authorisation`. Only billing
-        /// requests with a `payment_request` are supported.<li>
+        /// requests with a `payment_request` are supported.</li>
         /// </ul>
         /// </summary>
         [JsonProperty("id")]
