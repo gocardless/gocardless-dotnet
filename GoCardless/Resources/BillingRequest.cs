@@ -35,7 +35,7 @@ namespace GoCardless.Resources
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        /// Unique identifier, beginning with "PY".
+        /// Unique identifier, beginning with "BRQ".
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }

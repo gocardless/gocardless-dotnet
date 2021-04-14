@@ -106,7 +106,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Fetches a billing request
         /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "PY".</param> 
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
         /// <param name="request">An optional `BillingRequestGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -139,7 +139,7 @@ namespace GoCardless.Services
         /// customer, and will take effect immediately after the request is
         /// successful.
         /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "PY".</param> 
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
         /// <param name="request">An optional `BillingRequestCollectCustomerDetailsRequest` representing the body for this collect_customer_details request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -168,7 +168,7 @@ namespace GoCardless.Services
         /// creating
         /// and attaching it.
         /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "PY".</param> 
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
         /// <param name="request">An optional `BillingRequestCollectBankAccountDetailsRequest` representing the body for this collect_bank_account_details request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -190,7 +190,7 @@ namespace GoCardless.Services
         /// cause
         /// it to fulfil, executing the payment.
         /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "PY".</param> 
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
         /// <param name="request">An optional `BillingRequestFulfilRequest` representing the body for this fulfil request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -212,7 +212,7 @@ namespace GoCardless.Services
         /// flows
         /// to expire.
         /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "PY".</param> 
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
         /// <param name="request">An optional `BillingRequestCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -234,7 +234,7 @@ namespace GoCardless.Services
         /// authorise it.
         /// Currently, the customer can only be notified by email.
         /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "PY".</param> 
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
         /// <param name="request">An optional `BillingRequestNotifyRequest` representing the body for this notify request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
