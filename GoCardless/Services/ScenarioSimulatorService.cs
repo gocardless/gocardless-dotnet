@@ -121,10 +121,6 @@ namespace GoCardless.Services
         /// `pending_submission`, `submitted`, or `paid` state.</li>
         /// <li>`payout_bounced`: Transitions a payout to `bounced`. It must start in the `paid`
         /// state.</li>
-        /// <li>`payout_create`: Creates a payout containing payments in `confirmed`, `failed` &
-        /// `charged_back` states; refunds in `submitted` & `bounced`; and all related fees. Can
-        /// only be used with a positive total payout balance and when some eligible items
-        /// exist.</li>
         /// <li>`billing_request_fulfilled`: Authorises the billing request, fulfils it, and moves
         /// the associated payment to `failed`. The billing request must be in the `pending` state,
         /// with all actions completed except for `bank_authorisation`. Only billing requests with a
@@ -161,53 +157,6 @@ namespace GoCardless.Services
     /// </summary>
     public class ScenarioSimulatorRunRequest
     {
-
-        /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code.
-        /// Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD"
-        /// are supported.
-        /// Only required when simulating `payout_create`
-        /// </summary>
-        [JsonProperty("currency")]
-        public ScenarioSimulatorCurrency? Currency { get; set; }
-            
-        /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code.
-        /// Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD"
-        /// are supported.
-        /// Only required when simulating `payout_create`
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum ScenarioSimulatorCurrency
-        {
-    
-            /// <summary>`currency` with a value of "AUD"</summary>
-            [EnumMember(Value = "AUD")]
-            AUD,
-            /// <summary>`currency` with a value of "CAD"</summary>
-            [EnumMember(Value = "CAD")]
-            CAD,
-            /// <summary>`currency` with a value of "DKK"</summary>
-            [EnumMember(Value = "DKK")]
-            DKK,
-            /// <summary>`currency` with a value of "EUR"</summary>
-            [EnumMember(Value = "EUR")]
-            EUR,
-            /// <summary>`currency` with a value of "GBP"</summary>
-            [EnumMember(Value = "GBP")]
-            GBP,
-            /// <summary>`currency` with a value of "NZD"</summary>
-            [EnumMember(Value = "NZD")]
-            NZD,
-            /// <summary>`currency` with a value of "SEK"</summary>
-            [EnumMember(Value = "SEK")]
-            SEK,
-            /// <summary>`currency` with a value of "USD"</summary>
-            [EnumMember(Value = "USD")]
-            USD,
-        }
 
         /// <summary>
         /// Linked resources.
