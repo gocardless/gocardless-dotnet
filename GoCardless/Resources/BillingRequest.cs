@@ -114,12 +114,32 @@ namespace GoCardless.Resources
         public List<string> RequiresActions { get; set; }
 
         /// <summary>
+        /// Status of the action
+        /// </summary>
+        [JsonProperty("status")]
+        public string Status { get; set; }
+
+        /// <summary>
         /// Unique identifier for the action.
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; }
     }
     
+    /// <summary>
+    /// Status of the action
+    /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum BillingRequestActionStatus {
+
+        /// <summary>`status` with a value of "pending"</summary>
+        [EnumMember(Value = "pending")]
+        Pending,
+        /// <summary>`status` with a value of "completed"</summary>
+        [EnumMember(Value = "completed")]
+        Completed,
+    }
+
     /// <summary>
     /// Unique identifier for the action.
     /// </summary>
