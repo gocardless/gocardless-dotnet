@@ -37,6 +37,12 @@ namespace GoCardless.Resources
         public string ExpiresAt { get; set; }
 
         /// <summary>
+        /// Unique identifier, beginning with "BRF".
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        /// <summary>
         /// Resources linked to this BillingRequestFlow.
         /// </summary>
         [JsonProperty("links")]
@@ -48,6 +54,12 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("redirect_uri")]
         public string RedirectUri { get; set; }
+
+        /// <summary>
+        /// Session token populated in response from the exchange token action
+        /// </summary>
+        [JsonProperty("session_token")]
+        public string SessionToken { get; set; }
     }
     
     /// <summary>
