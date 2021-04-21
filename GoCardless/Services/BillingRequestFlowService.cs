@@ -81,6 +81,13 @@ namespace GoCardless.Services
     {
 
         /// <summary>
+        /// Fulfil the Billing Request on completion of the flow (true by
+        /// default)
+        /// </summary>
+        [JsonProperty("auto_fulfil")]
+        public bool? AutoFulfil { get; set; }
+
+        /// <summary>
         /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
@@ -100,11 +107,18 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// If true, the payer will not be able to edit their existing details
-        /// (e.g. customer and bank account) within the billing request flow.
+        /// If true, the payer will not be able to change their bank account
+        /// within the flow
         /// </summary>
-        [JsonProperty("lock_existing_details")]
-        public bool? LockExistingDetails { get; set; }
+        [JsonProperty("lock_bank_account_details")]
+        public bool? LockBankAccountDetails { get; set; }
+
+        /// <summary>
+        /// If true, the payer will not be able to edit their customer details
+        /// within the flow
+        /// </summary>
+        [JsonProperty("lock_customer_details")]
+        public bool? LockCustomerDetails { get; set; }
 
         /// <summary>
         /// URL that the payer can be redirected to after completing the request
