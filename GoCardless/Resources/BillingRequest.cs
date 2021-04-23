@@ -145,9 +145,9 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "collect_customer_details"</summary>
         [EnumMember(Value = "collect_customer_details")]
         CollectCustomerDetails,
-        /// <summary>`type` with a value of "collect_bank_account_details"</summary>
-        [EnumMember(Value = "collect_bank_account_details")]
-        CollectBankAccountDetails,
+        /// <summary>`type` with a value of "collect_bank_account"</summary>
+        [EnumMember(Value = "collect_bank_account")]
+        CollectBankAccount,
         /// <summary>`type` with a value of "bank_authorisation"</summary>
         [EnumMember(Value = "bank_authorisation")]
         BankAuthorisation,

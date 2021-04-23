@@ -158,8 +158,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// If the billing request has a pending
-        /// <code>collect_bank_account_details</code> action, this endpoint can
-        /// be
+        /// <code>collect_bank_account</code> action, this endpoint can be
         /// used to collect the details in order to complete it.
         /// 
         /// The endpoint takes the same payload as Customer Bank Accounts, but
@@ -169,12 +168,12 @@ namespace GoCardless.Services
         /// and attaching it.
         /// </summary>  
         /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
-        /// <param name="request">An optional `BillingRequestCollectBankAccountDetailsRequest` representing the body for this collect_bank_account_details request.</param>
+        /// <param name="request">An optional `BillingRequestCollectBankAccountRequest` representing the body for this collect_bank_account request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
-        public Task<BillingRequestResponse> CollectBankAccountDetailsAsync(string identity, BillingRequestCollectBankAccountDetailsRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<BillingRequestResponse> CollectBankAccountAsync(string identity, BillingRequestCollectBankAccountRequest request = null, RequestSettings customiseRequestMessage = null)
         {
-            request = request ?? new BillingRequestCollectBankAccountDetailsRequest();
+            request = request ?? new BillingRequestCollectBankAccountRequest();
             if (identity == null) throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -182,7 +181,7 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/collect_bank_account_details", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/collect_bank_account", urlParams, request, null, "data", customiseRequestMessage);
         }
 
         /// <summary>
@@ -644,14 +643,14 @@ namespace GoCardless.Services
         
     /// <summary>
     /// If the billing request has a pending
-    /// <code>collect_bank_account_details</code> action, this endpoint can be
+    /// <code>collect_bank_account</code> action, this endpoint can be
     /// used to collect the details in order to complete it.
     /// 
     /// The endpoint takes the same payload as Customer Bank Accounts, but check
     /// the bank account is valid for the billing request scheme before creating
     /// and attaching it.
     /// </summary>
-    public class BillingRequestCollectBankAccountDetailsRequest
+    public class BillingRequestCollectBankAccountRequest
     {
 
         /// <summary>
