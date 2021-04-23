@@ -374,13 +374,6 @@ namespace GoCardless.Services
     {
 
         /// <summary>
-        /// Should the billing request be fulfilled as soon as it's ready (true
-        /// by default)
-        /// </summary>
-        [JsonProperty("auto_fulfil")]
-        public bool? AutoFulfil { get; set; }
-
-        /// <summary>
         /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
