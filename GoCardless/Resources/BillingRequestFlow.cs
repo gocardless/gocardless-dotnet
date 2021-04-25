@@ -59,8 +59,8 @@ namespace GoCardless.Resources
         /// If true, the payer will not be able to change their bank account
         /// within the flow
         /// </summary>
-        [JsonProperty("lock_bank_account_details")]
-        public bool? LockBankAccountDetails { get; set; }
+        [JsonProperty("lock_bank_account")]
+        public bool? LockBankAccount { get; set; }
 
         /// <summary>
         /// If true, the payer will not be able to edit their customer details
