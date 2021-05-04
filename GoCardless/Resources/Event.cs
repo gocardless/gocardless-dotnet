@@ -71,14 +71,15 @@ namespace GoCardless.Resources
         /// <summary>
         /// The resource type for this event. One of:
         /// <ul>
-        /// <li>`payments`</li>
+        /// <li>`billing_requests`</li>
+        /// <li>`creditors`</li>
+        /// <li>`instalment_schedules`</li>
         /// <li>`mandates`</li>
         /// <li>`payer_authorisations`</li>
+        /// <li>`payments`</li>
         /// <li>`payouts`</li>
         /// <li>`refunds`</li>
         /// <li>`subscriptions`</li>
-        /// <li>`instalment_schedules`</li>
-        /// <li>`creditors`</li>
         /// </ul>
         /// </summary>
         [JsonProperty("resource_type")]
@@ -444,19 +445,23 @@ namespace GoCardless.Resources
     /// <summary>
     /// The resource type for this event. One of:
     /// <ul>
-    /// <li>`payments`</li>
+    /// <li>`billing_requests`</li>
+    /// <li>`creditors`</li>
+    /// <li>`instalment_schedules`</li>
     /// <li>`mandates`</li>
     /// <li>`payer_authorisations`</li>
+    /// <li>`payments`</li>
     /// <li>`payouts`</li>
     /// <li>`refunds`</li>
     /// <li>`subscriptions`</li>
-    /// <li>`instalment_schedules`</li>
-    /// <li>`creditors`</li>
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum EventResourceType {
 
+        /// <summary>`resource_type` with a value of "billing_requests"</summary>
+        [EnumMember(Value = "billing_requests")]
+        BillingRequests,
         /// <summary>`resource_type` with a value of "creditors"</summary>
         [EnumMember(Value = "creditors")]
         Creditors,
@@ -466,6 +471,9 @@ namespace GoCardless.Resources
         /// <summary>`resource_type` with a value of "mandates"</summary>
         [EnumMember(Value = "mandates")]
         Mandates,
+        /// <summary>`resource_type` with a value of "organisations"</summary>
+        [EnumMember(Value = "organisations")]
+        Organisations,
         /// <summary>`resource_type` with a value of "payer_authorisations"</summary>
         [EnumMember(Value = "payer_authorisations")]
         PayerAuthorisations,
@@ -481,9 +489,6 @@ namespace GoCardless.Resources
         /// <summary>`resource_type` with a value of "subscriptions"</summary>
         [EnumMember(Value = "subscriptions")]
         Subscriptions,
-        /// <summary>`resource_type` with a value of "organisations"</summary>
-        [EnumMember(Value = "organisations")]
-        Organisations,
     }
 
 }

@@ -138,6 +138,14 @@ namespace GoCardless.Services
         public string Before { get; set; }
 
         /// <summary>
+        /// ID of a [billing request](#billing-requests-billing-requests). If
+        /// specified, this endpoint will return all events for the given
+        /// billing request.
+        /// </summary>
+        [JsonProperty("billing_request")]
+        public string BillingRequest { get; set; }
+
+        /// <summary>
         /// Limit to records created within certain times.
         /// </summary>
         [JsonProperty("created_at")]
@@ -287,14 +295,15 @@ namespace GoCardless.Services
         /// `mandate`, `subscription`, `instalment_schedule`, `creditor`,
         /// `refund` or `payout` parameter. The type can be one of:
         /// <ul>
-        /// <li>`payments`</li>
+        /// <li>`billing_requests`</li>
+        /// <li>`creditors`</li>
+        /// <li>`instalment_schedules`</li>
         /// <li>`mandates`</li>
         /// <li>`payer_authorisations`</li>
+        /// <li>`payments`</li>
         /// <li>`payouts`</li>
-        /// <li>`subscriptions`</li>
-        /// <li>`instalment_schedules`</li>
-        /// <li>`creditors`</li>
         /// <li>`refunds`</li>
+        /// <li>`subscriptions`</li>
         /// </ul>
         /// </summary>
         [JsonProperty("resource_type")]
@@ -306,20 +315,24 @@ namespace GoCardless.Services
         /// `mandate`, `subscription`, `instalment_schedule`, `creditor`,
         /// `refund` or `payout` parameter. The type can be one of:
         /// <ul>
-        /// <li>`payments`</li>
+        /// <li>`billing_requests`</li>
+        /// <li>`creditors`</li>
+        /// <li>`instalment_schedules`</li>
         /// <li>`mandates`</li>
         /// <li>`payer_authorisations`</li>
+        /// <li>`payments`</li>
         /// <li>`payouts`</li>
-        /// <li>`subscriptions`</li>
-        /// <li>`instalment_schedules`</li>
-        /// <li>`creditors`</li>
         /// <li>`refunds`</li>
+        /// <li>`subscriptions`</li>
         /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum EventResourceType
         {
     
+            /// <summary>`resource_type` with a value of "billing_requests"</summary>
+            [EnumMember(Value = "billing_requests")]
+            BillingRequests,
             /// <summary>`resource_type` with a value of "creditors"</summary>
             [EnumMember(Value = "creditors")]
             Creditors,
@@ -329,6 +342,9 @@ namespace GoCardless.Services
             /// <summary>`resource_type` with a value of "mandates"</summary>
             [EnumMember(Value = "mandates")]
             Mandates,
+            /// <summary>`resource_type` with a value of "organisations"</summary>
+            [EnumMember(Value = "organisations")]
+            Organisations,
             /// <summary>`resource_type` with a value of "payer_authorisations"</summary>
             [EnumMember(Value = "payer_authorisations")]
             PayerAuthorisations,
@@ -344,9 +360,6 @@ namespace GoCardless.Services
             /// <summary>`resource_type` with a value of "subscriptions"</summary>
             [EnumMember(Value = "subscriptions")]
             Subscriptions,
-            /// <summary>`resource_type` with a value of "organisations"</summary>
-            [EnumMember(Value = "organisations")]
-            Organisations,
         }
 
         /// <summary>
