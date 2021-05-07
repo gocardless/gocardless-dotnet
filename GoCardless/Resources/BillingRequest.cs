@@ -174,6 +174,12 @@ namespace GoCardless.Resources
         public string BankAuthorisation { get; set; }
 
         /// <summary>
+        /// ID of the associated [creditor](#core-endpoints-creditors).
+        /// </summary>
+        [JsonProperty("creditor")]
+        public string Creditor { get; set; }
+
+        /// <summary>
         /// ID of the [customer](#core-endpoints-customers) that will be used
         /// for this request
         /// </summary>

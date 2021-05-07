@@ -384,6 +384,13 @@ namespace GoCardless.Services
         {
 
             /// <summary>
+            /// ID of the associated [creditor](#core-endpoints-creditors). Only
+            /// required if your account manages multiple creditors.
+            /// </summary>
+            [JsonProperty("creditor")]
+            public string Creditor { get; set; }
+
+            /// <summary>
             /// ID of the [customer](#core-endpoints-customers) against which
             /// this request should be made.
             /// </summary>
