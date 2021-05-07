@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
@@ -122,8 +123,11 @@ namespace GoCardless.Resources
     /// <summary>
     /// Status of the action
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestActionStatus {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`status` with a value of "pending"</summary>
         [EnumMember(Value = "pending")]
@@ -136,8 +140,11 @@ namespace GoCardless.Resources
     /// <summary>
     /// Unique identifier for the action.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestActionType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`type` with a value of "choose_currency"</summary>
         [EnumMember(Value = "choose_currency")]
@@ -480,8 +487,11 @@ namespace GoCardless.Resources
     /// accounts in other currencies. See [local details](#local-bank-details-united-states) for
     /// more information.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestResourcesCustomerBankAccountAccountType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`account_type` with a value of "savings"</summary>
         [EnumMember(Value = "savings")]
@@ -603,8 +613,11 @@ namespace GoCardless.Resources
     /// <li>`cancelled`: the billing_request has been cancelled and cannot be used</li>
     /// </ul>
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestStatus {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`status` with a value of "pending"</summary>
         [EnumMember(Value = "pending")]

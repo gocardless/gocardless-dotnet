@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
@@ -84,8 +85,11 @@ namespace GoCardless.Resources
     /// which means the integrator sent the notification themselves.
     /// 
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum CustomerNotificationActionTaken {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`action_taken` with a value of "handled"</summary>
         [EnumMember(Value = "handled")]
@@ -147,8 +151,11 @@ namespace GoCardless.Resources
     /// <li>`instalment_schedule_cancelled`</li>
     /// </ul>
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum CustomerNotificationType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`type` with a value of "payment_created"</summary>
         [EnumMember(Value = "payment_created")]

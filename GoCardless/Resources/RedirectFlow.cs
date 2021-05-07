@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
@@ -169,8 +170,11 @@ namespace GoCardless.Resources
     /// set-up of a mandate for the specified scheme. It is recommended that you leave this blank so
     /// the most appropriate scheme is picked based on the customer's bank account.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum RedirectFlowScheme {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`scheme` with a value of "ach"</summary>
         [EnumMember(Value = "ach")]

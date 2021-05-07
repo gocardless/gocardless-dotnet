@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
@@ -101,8 +102,11 @@ namespace GoCardless.Resources
     /// The scheme of the mandates to be imported.<br>All mandates in a single mandate
     /// import must be for the same scheme.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum MandateImportScheme {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`scheme` with a value of "ach"</summary>
         [EnumMember(Value = "ach")]
@@ -143,8 +147,11 @@ namespace GoCardless.Resources
     /// <li>`processed`: When all mandates have been imported successfully.</li>
     /// </ul>
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum MandateImportStatus {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`status` with a value of "created"</summary>
         [EnumMember(Value = "created")]

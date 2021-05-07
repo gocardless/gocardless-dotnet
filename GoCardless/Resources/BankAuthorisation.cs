@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
@@ -89,8 +90,11 @@ namespace GoCardless.Resources
     /// <summary>
     /// Type of authorisation, can be either 'mandate' or 'payment'.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BankAuthorisationAuthorisationType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`authorisation_type` with a value of "mandate"</summary>
         [EnumMember(Value = "mandate")]

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
@@ -144,8 +145,11 @@ namespace GoCardless.Resources
     /// <li>`instalment_schedule_cancelled`</li>
     /// </ul>
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum EventCustomerNotificationType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`type` with a value of "payment_created"</summary>
         [EnumMember(Value = "payment_created")]
@@ -270,8 +274,11 @@ namespace GoCardless.Resources
     /// <li>`customer`: this event was triggered by a Customer</li>
     /// </ul>
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum EventDetailsOrigin {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`origin` with a value of "bank"</summary>
         [EnumMember(Value = "bank")]
@@ -290,8 +297,11 @@ namespace GoCardless.Resources
     /// <summary>
     /// A Direct Debit scheme. Set when a bank is the origin of the event.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum EventDetailsScheme {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`scheme` with a value of "ach"</summary>
         [EnumMember(Value = "ach")]
@@ -456,8 +466,11 @@ namespace GoCardless.Resources
     /// <li>`subscriptions`</li>
     /// </ul>
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum EventResourceType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`resource_type` with a value of "billing_requests"</summary>
         [EnumMember(Value = "billing_requests")]
