@@ -73,13 +73,6 @@ namespace GoCardless.Resources
         public string RedirectUri { get; set; }
 
         /// <summary>
-        /// Short URL that redirects via GoCardless to the original URL, more
-        /// suitable for encoding in a QR code
-        /// </summary>
-        [JsonProperty("short_url")]
-        public string ShortUrl { get; set; }
-
-        /// <summary>
         /// URL for an oauth flow that will allow the user to authorise the
         /// payment
         /// </summary>
