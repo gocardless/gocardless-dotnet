@@ -232,11 +232,11 @@ namespace GoCardless.Services
         /// Pause a subscription object.
         /// No payments will be created until it is resumed.
         /// 
-        /// This can only be used when a subscription collecting a fixed number
-        /// of payments (created using `count`),
+        /// This can only be used when a subscription is collecting a fixed
+        /// number of payments (created using `count`),
         /// when they continue forever (created without `count` or `end_date`)
         /// or
-        /// the subscription is paused for a number of cycles.
+        /// the subscription is already paused for a number of cycles.
         /// 
         /// When `pause_cycles` is omitted the subscription is paused until the
         /// [resume endpoint](#subscriptions-resume-a-subscription) is called.
@@ -542,7 +542,7 @@ namespace GoCardless.Services
         /// documentation for
         /// the [create payment endpoint](#payments-create-a-payment) for more
         /// details.
-        /// 
+        /// <br />
         /// <p class="restricted-notice"><strong>Restricted</strong>: You need
         /// your own Service User Number to specify a payment reference for Bacs
         /// payments.</p>
@@ -560,8 +560,10 @@ namespace GoCardless.Services
         /// <summary>
         /// The date on which the first payment should be charged. Must be on or
         /// after the [mandate](#core-endpoints-mandates)'s
-        /// `next_possible_charge_date`. When blank, this will be set as the
-        /// mandate's `next_possible_charge_date`.
+        /// `next_possible_charge_date`. When left blank and `month` or
+        /// `day_of_month` are provided, this will be set to the date of the
+        /// first payment. If created without `month` or `day_of_month` this
+        /// will be set as the mandate's `next_possible_charge_date`
         /// </summary>
         [JsonProperty("start_date")]
         public string StartDate { get; set; }
@@ -784,7 +786,7 @@ namespace GoCardless.Services
         /// documentation for
         /// the [create payment endpoint](#payments-create-a-payment) for more
         /// details.
-        /// 
+        /// <br />
         /// <p class="restricted-notice"><strong>Restricted</strong>: You need
         /// your own Service User Number to specify a payment reference for Bacs
         /// payments.</p>
@@ -805,10 +807,10 @@ namespace GoCardless.Services
     /// Pause a subscription object.
     /// No payments will be created until it is resumed.
     /// 
-    /// This can only be used when a subscription collecting a fixed number of
-    /// payments (created using `count`),
+    /// This can only be used when a subscription is collecting a fixed number
+    /// of payments (created using `count`),
     /// when they continue forever (created without `count` or `end_date`) or
-    /// the subscription is paused for a number of cycles.
+    /// the subscription is already paused for a number of cycles.
     /// 
     /// When `pause_cycles` is omitted the subscription is paused until the
     /// [resume endpoint](#subscriptions-resume-a-subscription) is called.

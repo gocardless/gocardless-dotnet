@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
@@ -18,7 +19,8 @@ namespace GoCardless.Resources
     public class Event
     {
         /// <summary>
-        /// What has happened to the resource.
+        /// What has happened to the resource. See [Event
+        /// Actions](#event-actions) for the possible actions.
         /// </summary>
         [JsonProperty("action")]
         public string Action { get; set; }
@@ -70,14 +72,15 @@ namespace GoCardless.Resources
         /// <summary>
         /// The resource type for this event. One of:
         /// <ul>
-        /// <li>`payments`</li>
+        /// <li>`billing_requests`</li>
+        /// <li>`creditors`</li>
+        /// <li>`instalment_schedules`</li>
         /// <li>`mandates`</li>
         /// <li>`payer_authorisations`</li>
+        /// <li>`payments`</li>
         /// <li>`payouts`</li>
         /// <li>`refunds`</li>
         /// <li>`subscriptions`</li>
-        /// <li>`instalment_schedules`</li>
-        /// <li>`creditors`</li>
         /// </ul>
         /// </summary>
         [JsonProperty("resource_type")]
@@ -114,6 +117,16 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// The type of notification the customer shall receive.
+        /// One of:
+        /// <ul>
+        /// <li>`payment_created`</li>
+        /// <li>`payment_cancelled`</li>
+        /// <li>`mandate_created`</li>
+        /// <li>`subscription_created`</li>
+        /// <li>`subscription_cancelled`</li>
+        /// <li>`instalment_schedule_created`</li>
+        /// <li>`instalment_schedule_cancelled`</li>
+        /// </ul>
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; }
@@ -121,9 +134,22 @@ namespace GoCardless.Resources
     
     /// <summary>
     /// The type of notification the customer shall receive.
+    /// One of:
+    /// <ul>
+    /// <li>`payment_created`</li>
+    /// <li>`payment_cancelled`</li>
+    /// <li>`mandate_created`</li>
+    /// <li>`subscription_created`</li>
+    /// <li>`subscription_cancelled`</li>
+    /// <li>`instalment_schedule_created`</li>
+    /// <li>`instalment_schedule_cancelled`</li>
+    /// </ul>
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum EventCustomerNotificationType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`type` with a value of "payment_created"</summary>
         [EnumMember(Value = "payment_created")]
@@ -248,8 +274,11 @@ namespace GoCardless.Resources
     /// <li>`customer`: this event was triggered by a Customer</li>
     /// </ul>
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum EventDetailsOrigin {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`origin` with a value of "bank"</summary>
         [EnumMember(Value = "bank")]
@@ -268,8 +297,11 @@ namespace GoCardless.Resources
     /// <summary>
     /// A Direct Debit scheme. Set when a bank is the origin of the event.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum EventDetailsScheme {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`scheme` with a value of "ach"</summary>
         [EnumMember(Value = "ach")]
@@ -423,19 +455,26 @@ namespace GoCardless.Resources
     /// <summary>
     /// The resource type for this event. One of:
     /// <ul>
-    /// <li>`payments`</li>
+    /// <li>`billing_requests`</li>
+    /// <li>`creditors`</li>
+    /// <li>`instalment_schedules`</li>
     /// <li>`mandates`</li>
     /// <li>`payer_authorisations`</li>
+    /// <li>`payments`</li>
     /// <li>`payouts`</li>
     /// <li>`refunds`</li>
     /// <li>`subscriptions`</li>
-    /// <li>`instalment_schedules`</li>
-    /// <li>`creditors`</li>
     /// </ul>
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum EventResourceType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
+        /// <summary>`resource_type` with a value of "billing_requests"</summary>
+        [EnumMember(Value = "billing_requests")]
+        BillingRequests,
         /// <summary>`resource_type` with a value of "creditors"</summary>
         [EnumMember(Value = "creditors")]
         Creditors,
@@ -445,6 +484,9 @@ namespace GoCardless.Resources
         /// <summary>`resource_type` with a value of "mandates"</summary>
         [EnumMember(Value = "mandates")]
         Mandates,
+        /// <summary>`resource_type` with a value of "organisations"</summary>
+        [EnumMember(Value = "organisations")]
+        Organisations,
         /// <summary>`resource_type` with a value of "payer_authorisations"</summary>
         [EnumMember(Value = "payer_authorisations")]
         PayerAuthorisations,
@@ -460,9 +502,6 @@ namespace GoCardless.Resources
         /// <summary>`resource_type` with a value of "subscriptions"</summary>
         [EnumMember(Value = "subscriptions")]
         Subscriptions,
-        /// <summary>`resource_type` with a value of "organisations"</summary>
-        [EnumMember(Value = "organisations")]
-        Organisations,
     }
 
 }

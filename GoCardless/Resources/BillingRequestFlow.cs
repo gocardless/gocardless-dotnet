@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
@@ -24,6 +25,13 @@ namespace GoCardless.Resources
         public string AuthorisationUrl { get; set; }
 
         /// <summary>
+        /// Fulfil the Billing Request on completion of the flow (true by
+        /// default)
+        /// </summary>
+        [JsonProperty("auto_fulfil")]
+        public bool? AutoFulfil { get; set; }
+
+        /// <summary>
         /// Timestamp when the flow was created
         /// </summary>
         [JsonProperty("created_at")]
@@ -37,10 +45,30 @@ namespace GoCardless.Resources
         public string ExpiresAt { get; set; }
 
         /// <summary>
+        /// Unique identifier, beginning with "BRF".
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        /// <summary>
         /// Resources linked to this BillingRequestFlow.
         /// </summary>
         [JsonProperty("links")]
         public BillingRequestFlowLinks Links { get; set; }
+
+        /// <summary>
+        /// If true, the payer will not be able to change their bank account
+        /// within the flow
+        /// </summary>
+        [JsonProperty("lock_bank_account")]
+        public bool? LockBankAccount { get; set; }
+
+        /// <summary>
+        /// If true, the payer will not be able to edit their customer details
+        /// within the flow
+        /// </summary>
+        [JsonProperty("lock_customer_details")]
+        public bool? LockCustomerDetails { get; set; }
 
         /// <summary>
         /// URL that the payer can be redirected to after completing the request
@@ -48,6 +76,12 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("redirect_uri")]
         public string RedirectUri { get; set; }
+
+        /// <summary>
+        /// Session token populated when responding to the initalise action
+        /// </summary>
+        [JsonProperty("session_token")]
+        public string SessionToken { get; set; }
     }
     
     /// <summary>

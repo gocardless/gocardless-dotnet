@@ -49,6 +49,28 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<BillingRequestFlowResponse>("POST", "/billing_request_flows", urlParams, request, null, "billing_request_flows", customiseRequestMessage);
         }
+
+        /// <summary>
+        /// Returns the flow having generated a fresh session token which can be
+        /// used to power
+        /// integrations that manipulate the flow.
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="request">An optional `BillingRequestFlowInitialiseRequest` representing the body for this initialise request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single billing request flow resource</returns>
+        public Task<BillingRequestFlowResponse> InitialiseAsync(string identity, BillingRequestFlowInitialiseRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new BillingRequestFlowInitialiseRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<BillingRequestFlowResponse>("POST", "/billing_request_flows/:identity/actions/initialise", urlParams, request, null, "data", customiseRequestMessage);
+        }
     }
 
         
@@ -57,6 +79,13 @@ namespace GoCardless.Services
     /// </summary>
     public class BillingRequestFlowCreateRequest
     {
+
+        /// <summary>
+        /// Fulfil the Billing Request on completion of the flow (true by
+        /// default)
+        /// </summary>
+        [JsonProperty("auto_fulfil")]
+        public bool? AutoFulfil { get; set; }
 
         /// <summary>
         /// Linked resources.
@@ -78,11 +107,18 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// If true, the payer will not be able to edit their existing details
-        /// (e.g. customer and bank account) within the billing request flow.
+        /// If true, the payer will not be able to change their bank account
+        /// within the flow
         /// </summary>
-        [JsonProperty("lock_existing_details")]
-        public bool? LockExistingDetails { get; set; }
+        [JsonProperty("lock_bank_account")]
+        public bool? LockBankAccount { get; set; }
+
+        /// <summary>
+        /// If true, the payer will not be able to edit their customer details
+        /// within the flow
+        /// </summary>
+        [JsonProperty("lock_customer_details")]
+        public bool? LockCustomerDetails { get; set; }
 
         /// <summary>
         /// URL that the payer can be redirected to after completing the request
@@ -90,6 +126,16 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("redirect_uri")]
         public string RedirectUri { get; set; }
+    }
+
+        
+    /// <summary>
+    /// Returns the flow having generated a fresh session token which can be
+    /// used to power
+    /// integrations that manipulate the flow.
+    /// </summary>
+    public class BillingRequestFlowInitialiseRequest
+    {
     }
 
     /// <summary>

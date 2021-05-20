@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
@@ -111,8 +112,11 @@ namespace GoCardless.Resources
     /// accounts in other currencies. See [local details](#local-bank-details-united-states) for
     /// more information.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum CustomerBankAccountAccountType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`account_type` with a value of "savings"</summary>
         [EnumMember(Value = "savings")]

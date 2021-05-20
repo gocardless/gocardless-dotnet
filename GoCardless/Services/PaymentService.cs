@@ -529,12 +529,22 @@ namespace GoCardless.Services
 
         /// <summary>
         /// The direction to sort in.
+        /// One of:
+        /// <ul>
+        /// <li>`asc`</li>
+        /// <li>`desc`</li>
+        /// </ul>
         /// </summary>
         [JsonProperty("sort_direction")]
         public PaymentSortDirection? SortDirection { get; set; }
             
         /// <summary>
         /// The direction to sort in.
+        /// One of:
+        /// <ul>
+        /// <li>`asc`</li>
+        /// <li>`desc`</li>
+        /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentSortDirection
@@ -550,12 +560,22 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Field by which to sort records.
+        /// One of:
+        /// <ul>
+        /// <li>`charge_date`</li>
+        /// <li>`amount`</li>
+        /// </ul>
         /// </summary>
         [JsonProperty("sort_field")]
         public PaymentSortField? SortField { get; set; }
             
         /// <summary>
         /// Field by which to sort records.
+        /// One of:
+        /// <ul>
+        /// <li>`charge_date`</li>
+        /// <li>`amount`</li>
+        /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentSortField

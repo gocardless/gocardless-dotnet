@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
@@ -148,8 +149,11 @@ namespace GoCardless.Resources
     /// applies to schemes that are per-payment authorised)</li>
     /// </ul>
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum MandateStatus {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`status` with a value of "pending_customer_approval"</summary>
         [EnumMember(Value = "pending_customer_approval")]

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
@@ -151,8 +152,11 @@ namespace GoCardless.Resources
     /// "EUR", "GBP", "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or
     /// were) made via foreign exchange.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum RefundFxFxCurrency {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`fx_currency` with a value of "AUD"</summary>
         [EnumMember(Value = "AUD")]
@@ -213,8 +217,11 @@ namespace GoCardless.Resources
     /// <li>`funds_returned`: the refund has had its funds returned</li>
     /// </ul>
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum RefundStatus {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`status` with a value of "created"</summary>
         [EnumMember(Value = "created")]

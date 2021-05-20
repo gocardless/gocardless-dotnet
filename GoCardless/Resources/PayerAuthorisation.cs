@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
@@ -10,6 +11,15 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a payer authorisation resource.
     ///
+    /// <p class="warning">
+    ///   Payer Authorisations is deprecated in favour of
+    ///   <a
+    /// href="https://developer.gocardless.com/getting-started/billing-requests/overview/">
+    ///   Billing Requests</a>. Please consider using Billing Requests to build
+    /// any
+    ///   future integrations.
+    /// </p>
+    /// 
     /// Payer Authorisation resource acts as a wrapper for creating customer,
     /// bank account and mandate details in a single request.
     /// PayerAuthorisation API enables the integrators to build their own custom
@@ -230,8 +240,11 @@ namespace GoCardless.Resources
     /// accounts in other currencies. See [local details](#local-bank-details-united-states) for
     /// more information.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum PayerAuthorisationBankAccountAccountType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`account_type` with a value of "savings"</summary>
         [EnumMember(Value = "savings")]
@@ -456,8 +469,11 @@ namespace GoCardless.Resources
     /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
     /// "betalingsservice", "pad" and "sepa_core" are supported.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum PayerAuthorisationMandateScheme {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`scheme` with a value of "ach"</summary>
         [EnumMember(Value = "ach")]
@@ -497,8 +513,11 @@ namespace GoCardless.Resources
     /// not created</li>
     /// </ul>
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum PayerAuthorisationStatus {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`status` with a value of "created"</summary>
         [EnumMember(Value = "created")]

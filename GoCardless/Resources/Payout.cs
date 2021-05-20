@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
@@ -58,14 +59,14 @@ namespace GoCardless.Resources
         /// Fees that have already been deducted from the payout amount in minor
         /// unit (e.g. pence in GBP, cents in EUR), inclusive of tax if
         /// applicable.
-        /// 
+        /// <br />
         /// For each `late_failure_settled` or `chargeback_settled` action, we
         /// refund the transaction fees in a payout. This means that a payout
         /// can have a negative `deducted_fees` value.
-        /// 
+        /// <br />
         /// This field is calculated as `(GoCardless fees + app fees + surcharge
         /// fees) - (refunded fees)`
-        /// 
+        /// <br />
         /// If the merchant is invoiced for fees separately from the payout,
         /// then `deducted_fees` will be 0.
         /// </summary>
@@ -140,8 +141,11 @@ namespace GoCardless.Resources
     /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
     /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum PayoutCurrency {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`currency` with a value of "AUD"</summary>
         [EnumMember(Value = "AUD")]
@@ -216,8 +220,11 @@ namespace GoCardless.Resources
     /// "EUR", "GBP", "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or
     /// were) made via foreign exchange.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum PayoutFxFxCurrency {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`fx_currency` with a value of "AUD"</summary>
         [EnumMember(Value = "AUD")]
@@ -268,8 +275,11 @@ namespace GoCardless.Resources
     /// <summary>
     /// Whether a payout contains merchant revenue or partner fees.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum PayoutPayoutType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`payout_type` with a value of "merchant"</summary>
         [EnumMember(Value = "merchant")]
@@ -289,8 +299,11 @@ namespace GoCardless.Resources
     /// <li>`bounced`: the payout bounced when sent, the payout can be retried.</li>
     /// </ul>
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum PayoutStatus {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`status` with a value of "pending"</summary>
         [EnumMember(Value = "pending")]

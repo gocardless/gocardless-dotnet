@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
@@ -64,6 +65,16 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// The type of notification the customer shall receive.
+        /// One of:
+        /// <ul>
+        /// <li>`payment_created`</li>
+        /// <li>`payment_cancelled`</li>
+        /// <li>`mandate_created`</li>
+        /// <li>`subscription_created`</li>
+        /// <li>`subscription_cancelled`</li>
+        /// <li>`instalment_schedule_created`</li>
+        /// <li>`instalment_schedule_cancelled`</li>
+        /// </ul>
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; }
@@ -74,8 +85,11 @@ namespace GoCardless.Resources
     /// which means the integrator sent the notification themselves.
     /// 
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum CustomerNotificationActionTaken {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`action_taken` with a value of "handled"</summary>
         [EnumMember(Value = "handled")]
@@ -126,9 +140,22 @@ namespace GoCardless.Resources
     
     /// <summary>
     /// The type of notification the customer shall receive.
+    /// One of:
+    /// <ul>
+    /// <li>`payment_created`</li>
+    /// <li>`payment_cancelled`</li>
+    /// <li>`mandate_created`</li>
+    /// <li>`subscription_created`</li>
+    /// <li>`subscription_cancelled`</li>
+    /// <li>`instalment_schedule_created`</li>
+    /// <li>`instalment_schedule_cancelled`</li>
+    /// </ul>
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum CustomerNotificationType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`type` with a value of "payment_created"</summary>
         [EnumMember(Value = "payment_created")]

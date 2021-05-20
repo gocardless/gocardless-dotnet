@@ -51,6 +51,10 @@ namespace GoCardless.Services
         /// <li>`creditor_verification_status_successful`: Sets a creditor's `verification status`
         /// to `successful`, meaning that the creditor is fully verified and can receive
         /// payouts.</li>
+        /// <li>`payment_confirmed`: Transitions a payment through to `confirmed`. It must start in
+        /// the `pending_submission` state, and its mandate must be in the `activated` state (unless
+        /// it is a payment for ACH, BECS, BECS_NZ or SEPA, in which cases the mandate may be
+        /// `pending_submission`, since their mandates are submitted with their first payment).</li>
         /// <li>`payment_paid_out`: Transitions a payment through to `paid_out`, having been
         /// collected successfully and paid out to you. It must start in the `pending_submission`
         /// state, and its mandate must be in the `activated` state (unless it is a payment for ACH,
@@ -95,8 +99,8 @@ namespace GoCardless.Services
         /// subscriptions associated with the mandate will become `active`.</li>
         /// <li>`mandate_failed`: Transitions a mandate through to `failed`, having been submitted
         /// to the banks but found to be invalid (for example due to invalid bank details). It must
-        /// start in the `pending_submission` or `submitted` states. Not compatible with ACH, BECS,
-        /// BECS_NZ and SEPA mandates, which are submitted with their first payment.</li>
+        /// start in the `pending_submission` or `submitted` states. Not compatible with SEPA
+        /// mandates, which are submitted with their first payment.</li>
         /// <li>`mandate_expired`: Transitions a mandate through to `expired`, having been submitted
         /// to the banks, set up successfully and then expired because no collection attempts were
         /// made against it for longer than the scheme's dormancy period (13 months for Bacs, 3
@@ -114,14 +118,27 @@ namespace GoCardless.Services
         /// Autogiro mandates.</li>
         /// <li>`refund_paid`: Transitions a refund to `paid`. It must start in either the
         /// `pending_submission` or `submitted` state.</li>
+        /// <li>`refund_settled`: Transitions a refund to `paid`, if it's not already, then
+        /// generates a payout that includes the refund, thereby settling the funds. It must start
+        /// in one of `pending_submission`, `submitted` or `paid` states.</li>
         /// <li>`refund_bounced`: Transitions a refund to `bounced`. It must start in either the
         /// `pending_submission`, `submitted`, or `paid` state.</li>
+        /// <li>`refund_returned`: Transitions a refund to `refund_returned`. The refund must start
+        /// in `pending_submission`.</li>
         /// <li>`payout_bounced`: Transitions a payout to `bounced`. It must start in the `paid`
         /// state.</li>
-        /// <li>`payout_create`: Creates a payout containing payments in `confirmed`, `failed` &
-        /// `charged_back` states; refunds in `submitted` & `bounced`; and all related fees. Can
-        /// only be used with a positive total payout balance and when some eligible items
-        /// exist.</li>
+        /// <li>`billing_request_fulfilled`: Authorises the billing request, fulfils it, and moves
+        /// the associated payment to `failed`. The billing request must be in the `pending` state,
+        /// with all actions completed except for `bank_authorisation`. Only billing requests with a
+        /// `payment_request` are supported.</li>
+        /// <li>`billing_request_fulfilled_and_payment_failed`: Authorises the billing request,
+        /// fulfils it, and moves the associated payment to `failed`. The billing request must be in
+        /// the `pending` state, with all actions completed except for `bank_authorisation`. Only
+        /// billing requests with a `payment_request` are supported.</li>
+        /// <li>`billing_request_fulfilled_and_payment_paid_out`: Authorises the billing request,
+        /// fulfils it, and moves the associated payment to `paid_out`. The billing request must be
+        /// in the `pending` state, with all actions completed except for `bank_authorisation`. Only
+        /// billing requests with a `payment_request` are supported.</li>
         /// </ul></param> 
         /// <param name="request">An optional `ScenarioSimulatorRunRequest` representing the body for this run request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -146,53 +163,6 @@ namespace GoCardless.Services
     /// </summary>
     public class ScenarioSimulatorRunRequest
     {
-
-        /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code.
-        /// Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD"
-        /// are supported.
-        /// Only required when simulating `payout_create`
-        /// </summary>
-        [JsonProperty("currency")]
-        public ScenarioSimulatorCurrency? Currency { get; set; }
-            
-        /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code.
-        /// Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD"
-        /// are supported.
-        /// Only required when simulating `payout_create`
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum ScenarioSimulatorCurrency
-        {
-    
-            /// <summary>`currency` with a value of "AUD"</summary>
-            [EnumMember(Value = "AUD")]
-            AUD,
-            /// <summary>`currency` with a value of "CAD"</summary>
-            [EnumMember(Value = "CAD")]
-            CAD,
-            /// <summary>`currency` with a value of "DKK"</summary>
-            [EnumMember(Value = "DKK")]
-            DKK,
-            /// <summary>`currency` with a value of "EUR"</summary>
-            [EnumMember(Value = "EUR")]
-            EUR,
-            /// <summary>`currency` with a value of "GBP"</summary>
-            [EnumMember(Value = "GBP")]
-            GBP,
-            /// <summary>`currency` with a value of "NZD"</summary>
-            [EnumMember(Value = "NZD")]
-            NZD,
-            /// <summary>`currency` with a value of "SEK"</summary>
-            [EnumMember(Value = "SEK")]
-            SEK,
-            /// <summary>`currency` with a value of "USD"</summary>
-            [EnumMember(Value = "USD")]
-            USD,
-        }
 
         /// <summary>
         /// Linked resources.

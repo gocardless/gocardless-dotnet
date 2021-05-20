@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
@@ -72,13 +73,6 @@ namespace GoCardless.Resources
         public string RedirectUri { get; set; }
 
         /// <summary>
-        /// Short URL that redirects via GoCardless to the original URL, more
-        /// suitable for encoding in a QR code
-        /// </summary>
-        [JsonProperty("short_url")]
-        public string ShortUrl { get; set; }
-
-        /// <summary>
         /// URL for an oauth flow that will allow the user to authorise the
         /// payment
         /// </summary>
@@ -89,8 +83,11 @@ namespace GoCardless.Resources
     /// <summary>
     /// Type of authorisation, can be either 'mandate' or 'payment'.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BankAuthorisationAuthorisationType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`authorisation_type` with a value of "mandate"</summary>
         [EnumMember(Value = "mandate")]

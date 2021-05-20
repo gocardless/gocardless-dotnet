@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
@@ -22,12 +23,6 @@ namespace GoCardless.Resources
         public List<BillingRequestAction> Actions { get; set; }
 
         /// <summary>
-        /// Should the billing request be fulfilled as soon as it's ready
-        /// </summary>
-        [JsonProperty("auto_fulfil")]
-        public bool? AutoFulfil { get; set; }
-
-        /// <summary>
         /// Fixed [timestamp](#api-usage-time-zones--dates), recording when this
         /// resource was created.
         /// </summary>
@@ -35,7 +30,7 @@ namespace GoCardless.Resources
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        /// Unique identifier, beginning with "PY".
+        /// Unique identifier, beginning with "BRQ".
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -113,6 +108,12 @@ namespace GoCardless.Resources
         public List<string> RequiresActions { get; set; }
 
         /// <summary>
+        /// Status of the action
+        /// </summary>
+        [JsonProperty("status")]
+        public string Status { get; set; }
+
+        /// <summary>
         /// Unique identifier for the action.
         /// </summary>
         [JsonProperty("type")]
@@ -120,10 +121,30 @@ namespace GoCardless.Resources
     }
     
     /// <summary>
+    /// Status of the action
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestActionStatus {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`status` with a value of "pending"</summary>
+        [EnumMember(Value = "pending")]
+        Pending,
+        /// <summary>`status` with a value of "completed"</summary>
+        [EnumMember(Value = "completed")]
+        Completed,
+    }
+
+    /// <summary>
     /// Unique identifier for the action.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestActionType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`type` with a value of "choose_currency"</summary>
         [EnumMember(Value = "choose_currency")]
@@ -131,15 +152,12 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "collect_customer_details"</summary>
         [EnumMember(Value = "collect_customer_details")]
         CollectCustomerDetails,
-        /// <summary>`type` with a value of "collect_bank_account_details"</summary>
-        [EnumMember(Value = "collect_bank_account_details")]
-        CollectBankAccountDetails,
-        /// <summary>`type` with a value of "payment_bank_authorisation"</summary>
-        [EnumMember(Value = "payment_bank_authorisation")]
-        PaymentBankAuthorisation,
-        /// <summary>`type` with a value of "mandate_bank_authorisation"</summary>
-        [EnumMember(Value = "mandate_bank_authorisation")]
-        MandateBankAuthorisation,
+        /// <summary>`type` with a value of "collect_bank_account"</summary>
+        [EnumMember(Value = "collect_bank_account")]
+        CollectBankAccount,
+        /// <summary>`type` with a value of "bank_authorisation"</summary>
+        [EnumMember(Value = "bank_authorisation")]
+        BankAuthorisation,
     }
 
     /// <summary>
@@ -147,6 +165,20 @@ namespace GoCardless.Resources
     /// </summary>
     public class BillingRequestLinks
     {
+        /// <summary>
+        /// (Optional) ID of the [bank
+        /// authorisation](#billing-requests-bank-authorisations) that was used
+        /// to verify this request.
+        /// </summary>
+        [JsonProperty("bank_authorisation")]
+        public string BankAuthorisation { get; set; }
+
+        /// <summary>
+        /// ID of the associated [creditor](#core-endpoints-creditors).
+        /// </summary>
+        [JsonProperty("creditor")]
+        public string Creditor { get; set; }
+
         /// <summary>
         /// ID of the [customer](#core-endpoints-customers) that will be used
         /// for this request
@@ -167,22 +199,6 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("customer_billing_detail")]
         public string CustomerBillingDetail { get; set; }
-
-        /// <summary>
-        /// (Optional) ID of the [mandate bank
-        /// authorisation](#billing-requests-bank-authorisations) that was used
-        /// to verify this request.
-        /// </summary>
-        [JsonProperty("mandate_bank_authorisation")]
-        public string MandateBankAuthorisation { get; set; }
-
-        /// <summary>
-        /// (Optional) ID of the [payment bank
-        /// authorisation](#billing-requests-bank-authorisations) that was used
-        /// to verify this request.
-        /// </summary>
-        [JsonProperty("payment_bank_authorisation")]
-        public string PaymentBankAuthorisation { get; set; }
     }
     
     /// <summary>
@@ -477,8 +493,11 @@ namespace GoCardless.Resources
     /// accounts in other currencies. See [local details](#local-bank-details-united-states) for
     /// more information.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestResourcesCustomerBankAccountAccountType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`account_type` with a value of "savings"</summary>
         [EnumMember(Value = "savings")]
@@ -600,8 +619,11 @@ namespace GoCardless.Resources
     /// <li>`cancelled`: the billing_request has been cancelled and cannot be used</li>
     /// </ul>
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestStatus {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`status` with a value of "pending"</summary>
         [EnumMember(Value = "pending")]

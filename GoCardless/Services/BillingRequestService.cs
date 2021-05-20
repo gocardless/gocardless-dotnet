@@ -106,7 +106,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Fetches a billing request
         /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "PY".</param> 
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
         /// <param name="request">An optional `BillingRequestGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -139,7 +139,7 @@ namespace GoCardless.Services
         /// customer, and will take effect immediately after the request is
         /// successful.
         /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "PY".</param> 
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
         /// <param name="request">An optional `BillingRequestCollectCustomerDetailsRequest` representing the body for this collect_customer_details request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -158,8 +158,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// If the billing request has a pending
-        /// <code>collect_bank_account_details</code> action, this endpoint can
-        /// be
+        /// <code>collect_bank_account</code> action, this endpoint can be
         /// used to collect the details in order to complete it.
         /// 
         /// The endpoint takes the same payload as Customer Bank Accounts, but
@@ -168,13 +167,13 @@ namespace GoCardless.Services
         /// creating
         /// and attaching it.
         /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "PY".</param> 
-        /// <param name="request">An optional `BillingRequestCollectBankAccountDetailsRequest` representing the body for this collect_bank_account_details request.</param>
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="request">An optional `BillingRequestCollectBankAccountRequest` representing the body for this collect_bank_account request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
-        public Task<BillingRequestResponse> CollectBankAccountDetailsAsync(string identity, BillingRequestCollectBankAccountDetailsRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<BillingRequestResponse> CollectBankAccountAsync(string identity, BillingRequestCollectBankAccountRequest request = null, RequestSettings customiseRequestMessage = null)
         {
-            request = request ?? new BillingRequestCollectBankAccountDetailsRequest();
+            request = request ?? new BillingRequestCollectBankAccountRequest();
             if (identity == null) throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -182,7 +181,7 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/collect_bank_account_details", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/collect_bank_account", urlParams, request, null, "data", customiseRequestMessage);
         }
 
         /// <summary>
@@ -190,7 +189,7 @@ namespace GoCardless.Services
         /// cause
         /// it to fulfil, executing the payment.
         /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "PY".</param> 
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
         /// <param name="request">An optional `BillingRequestFulfilRequest` representing the body for this fulfil request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -212,7 +211,7 @@ namespace GoCardless.Services
         /// flows
         /// to expire.
         /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "PY".</param> 
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
         /// <param name="request">An optional `BillingRequestCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -234,7 +233,7 @@ namespace GoCardless.Services
         /// authorise it.
         /// Currently, the customer can only be notified by email.
         /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "PY".</param> 
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
         /// <param name="request">An optional `BillingRequestNotifyRequest` representing the body for this notify request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -374,12 +373,6 @@ namespace GoCardless.Services
     {
 
         /// <summary>
-        /// Should the billing request be fulfilled as soon as it's ready
-        /// </summary>
-        [JsonProperty("auto_fulfil")]
-        public bool? AutoFulfil { get; set; }
-
-        /// <summary>
         /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
@@ -389,6 +382,13 @@ namespace GoCardless.Services
         /// </summary>
         public class BillingRequestLinks
         {
+
+            /// <summary>
+            /// ID of the associated [creditor](#core-endpoints-creditors). Only
+            /// required if your account manages multiple creditors.
+            /// </summary>
+            [JsonProperty("creditor")]
+            public string Creditor { get; set; }
 
             /// <summary>
             /// ID of the [customer](#core-endpoints-customers) against which
@@ -650,14 +650,14 @@ namespace GoCardless.Services
         
     /// <summary>
     /// If the billing request has a pending
-    /// <code>collect_bank_account_details</code> action, this endpoint can be
+    /// <code>collect_bank_account</code> action, this endpoint can be
     /// used to collect the details in order to complete it.
     /// 
     /// The endpoint takes the same payload as Customer Bank Accounts, but check
     /// the bank account is valid for the billing request scheme before creating
     /// and attaching it.
     /// </summary>
-    public class BillingRequestCollectBankAccountDetailsRequest
+    public class BillingRequestCollectBankAccountRequest
     {
 
         /// <summary>

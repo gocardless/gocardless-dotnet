@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
@@ -197,7 +198,7 @@ namespace GoCardless.Resources
         /// documentation for
         /// the [create payment endpoint](#payments-create-a-payment) for more
         /// details.
-        /// 
+        /// <br />
         /// <p class="restricted-notice"><strong>Restricted</strong>: You need
         /// your own Service User Number to specify a payment reference for Bacs
         /// payments.</p>
@@ -215,8 +216,10 @@ namespace GoCardless.Resources
         /// <summary>
         /// The date on which the first payment should be charged. Must be on or
         /// after the [mandate](#core-endpoints-mandates)'s
-        /// `next_possible_charge_date`. When blank, this will be set as the
-        /// mandate's `next_possible_charge_date`.
+        /// `next_possible_charge_date`. When left blank and `month` or
+        /// `day_of_month` are provided, this will be set to the date of the
+        /// first payment. If created without `month` or `day_of_month` this
+        /// will be set as the mandate's `next_possible_charge_date`
         /// </summary>
         [JsonProperty("start_date")]
         public string StartDate { get; set; }
@@ -251,8 +254,11 @@ namespace GoCardless.Resources
     /// <summary>
     /// The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum SubscriptionIntervalUnit {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`interval_unit` with a value of "weekly"</summary>
         [EnumMember(Value = "weekly")]
@@ -283,8 +289,11 @@ namespace GoCardless.Resources
     /// when the interval_unit is `yearly`.
     /// 
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum SubscriptionMonth {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`month` with a value of "january"</summary>
         [EnumMember(Value = "january")]
@@ -337,8 +346,11 @@ namespace GoCardless.Resources
     /// <li>`paused`: the subscription has been paused and will not create payments</li>
     /// </ul>
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum SubscriptionStatus {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
 
         /// <summary>`status` with a value of "pending_customer_approval"</summary>
         [EnumMember(Value = "pending_customer_approval")]
