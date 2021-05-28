@@ -199,6 +199,32 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("customer_billing_detail")]
         public string CustomerBillingDetail { get; set; }
+
+        /// <summary>
+        /// (Optional) ID of the associated mandate request
+        /// </summary>
+        [JsonProperty("mandate_request")]
+        public string MandateRequest { get; set; }
+
+        /// <summary>
+        /// (Optional) ID of the [mandate](#core-endpoints-mandates) that was
+        /// created from this mandate request. this mandate request.
+        /// </summary>
+        [JsonProperty("mandate_request_mandate")]
+        public string MandateRequestMandate { get; set; }
+
+        /// <summary>
+        /// (Optional) ID of the associated payment request
+        /// </summary>
+        [JsonProperty("payment_request")]
+        public string PaymentRequest { get; set; }
+
+        /// <summary>
+        /// (Optional) ID of the [payment](#core-endpoints-payments) that was
+        /// created from this payment request.
+        /// </summary>
+        [JsonProperty("payment_request_payment")]
+        public string PaymentRequestPayment { get; set; }
     }
     
     /// <summary>
