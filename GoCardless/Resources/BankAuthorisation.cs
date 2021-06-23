@@ -32,6 +32,13 @@ namespace GoCardless.Resources
         public string AuthorisationType { get; set; }
 
         /// <summary>
+        /// Fixed [timestamp](#api-usage-time-zones--dates), recording when the
+        /// user has been authorised.
+        /// </summary>
+        [JsonProperty("authorised_at")]
+        public string AuthorisedAt { get; set; }
+
+        /// <summary>
         /// Timestamp when the flow was created
         /// </summary>
         [JsonProperty("created_at")]
