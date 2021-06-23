@@ -88,6 +88,13 @@ namespace GoCardless.Resources
     public class BillingRequestAction
     {
         /// <summary>
+        /// Describes the behaviour of bank authorisations, for the
+        /// bank_authorisation action
+        /// </summary>
+        [JsonProperty("bank_authorisation")]
+        public BillingRequestActionBankAuthorisation BankAuthorisation { get; set; }
+
+        /// <summary>
         /// Which other action types this action can complete.
         /// </summary>
         [JsonProperty("completes_actions")]
@@ -120,6 +127,71 @@ namespace GoCardless.Resources
         public string Type { get; set; }
     }
     
+    /// <summary>
+    /// Represents a billing request action bank authorisation resource.
+    ///
+    /// Describes the behaviour of bank authorisations, for the
+    /// bank_authorisation action
+    /// </summary>
+    public class BillingRequestActionBankAuthorisation
+    {
+        /// <summary>
+        /// Which authorisation adapter will be used to power these
+        /// authorisations (GoCardless internal use only)
+        /// </summary>
+        [JsonProperty("adapter")]
+        public string Adapter { get; set; }
+
+        /// <summary>
+        /// What type of bank authorisations are supported on this billing
+        /// request
+        /// </summary>
+        [JsonProperty("authorisation_type")]
+        public string AuthorisationType { get; set; }
+
+        /// <summary>
+        /// Whether an institution is a required field when creating this bank
+        /// authorisation
+        /// </summary>
+        [JsonProperty("requires_institution")]
+        public bool? RequiresInstitution { get; set; }
+    }
+    
+    /// <summary>
+    /// Which authorisation adapter will be used to power these authorisations (GoCardless internal
+    /// use only)
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestActionBankAuthorisationAdapter {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`adapter` with a value of "open_banking_gateway_pis"</summary>
+        [EnumMember(Value = "open_banking_gateway_pis")]
+        OpenBankingGatewayPis,
+        /// <summary>`adapter` with a value of "plaid_ais"</summary>
+        [EnumMember(Value = "plaid_ais")]
+        PlaidAis,
+    }
+
+    /// <summary>
+    /// What type of bank authorisations are supported on this billing request
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestActionBankAuthorisationAuthorisationType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`authorisation_type` with a value of "payment"</summary>
+        [EnumMember(Value = "payment")]
+        Payment,
+        /// <summary>`authorisation_type` with a value of "mandate"</summary>
+        [EnumMember(Value = "mandate")]
+        Mandate,
+    }
+
     /// <summary>
     /// Status of the action
     /// </summary>
