@@ -16,7 +16,7 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with payer authorisation resources.
     ///
-    /// <p class="warning">
+    /// <p class="restricted-notice">
     ///   Payer Authorisations is deprecated in favour of
     ///   <a
     /// href="https://developer.gocardless.com/getting-started/billing-requests/overview/">

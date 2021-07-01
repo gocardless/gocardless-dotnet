@@ -26,9 +26,7 @@ namespace GoCardless.Services
     /// UIs
     /// (see Billing Request Flows) to ensure we meet regulatory requirements
     /// for
-    /// checkout flows. The exceptions are integrators with the custom payment
-    /// pages
-    /// upgrade, who have been audited to check their flows meet requirements.
+    /// checkout flows.
     /// </summary>
 
     public class BankAuthorisationService
