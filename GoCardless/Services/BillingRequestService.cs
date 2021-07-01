@@ -680,6 +680,14 @@ namespace GoCardless.Services
         public string AccountNumber { get; set; }
 
         /// <summary>
+        /// Account number suffix (only for bank accounts denominated in NZD) -
+        /// see [local details](#local-bank-details-new-zealand) for more
+        /// information.
+        /// </summary>
+        [JsonProperty("account_number_suffix")]
+        public string AccountNumberSuffix { get; set; }
+
+        /// <summary>
         /// Bank account type. Required for USD-denominated bank accounts. Must
         /// not be provided for bank accounts in other currencies. See [local
         /// details](#local-bank-details-united-states) for more information.
