@@ -95,6 +95,13 @@ namespace GoCardless.Resources
         public BillingRequestActionBankAuthorisation BankAuthorisation { get; set; }
 
         /// <summary>
+        /// Additional parameters to help complete the collect_customer_details
+        /// action
+        /// </summary>
+        [JsonProperty("collect_customer_details")]
+        public BillingRequestActionCollectCustomerDetails CollectCustomerDetails { get; set; }
+
+        /// <summary>
         /// Which other action types this action can complete.
         /// </summary>
         [JsonProperty("completes_actions")]
@@ -192,6 +199,22 @@ namespace GoCardless.Resources
         Mandate,
     }
 
+    /// <summary>
+    /// Represents a billing request action collect customer detail resource.
+    ///
+    /// Additional parameters to help complete the collect_customer_details
+    /// action
+    /// </summary>
+    public class BillingRequestActionCollectCustomerDetails
+    {
+        /// <summary>
+        /// Default customer country code, as determined by scheme and payer
+        /// location
+        /// </summary>
+        [JsonProperty("default_country_code")]
+        public string DefaultCountryCode { get; set; }
+    }
+    
     /// <summary>
     /// Status of the action
     /// </summary>
