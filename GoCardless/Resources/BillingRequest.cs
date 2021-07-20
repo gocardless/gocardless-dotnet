@@ -253,6 +253,9 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "bank_authorisation"</summary>
         [EnumMember(Value = "bank_authorisation")]
         BankAuthorisation,
+        /// <summary>`type` with a value of "confirm_payer_details"</summary>
+        [EnumMember(Value = "confirm_payer_details")]
+        ConfirmPayerDetails,
     }
 
     /// <summary>

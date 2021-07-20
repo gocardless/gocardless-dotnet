@@ -207,6 +207,29 @@ namespace GoCardless.Services
         }
 
         /// <summary>
+        /// This is needed when you have mandate_request. As a scheme compliance
+        /// rule we are required to
+        /// allow the payer to crosscheck the details entered by them and
+        /// confirm it.
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="request">An optional `BillingRequestConfirmPayerDetailsRequest` representing the body for this confirm_payer_details request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single billing request resource</returns>
+        public Task<BillingRequestResponse> ConfirmPayerDetailsAsync(string identity, BillingRequestConfirmPayerDetailsRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new BillingRequestConfirmPayerDetailsRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/confirm_payer_details", urlParams, request, null, "data", customiseRequestMessage);
+        }
+
+        /// <summary>
         /// Immediately cancels a billing request, causing all billing request
         /// flows
         /// to expire.
@@ -767,6 +790,24 @@ namespace GoCardless.Services
     /// it to fulfil, executing the payment.
     /// </summary>
     public class BillingRequestFulfilRequest
+    {
+
+        /// <summary>
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<String, String> Metadata { get; set; }
+    }
+
+        
+    /// <summary>
+    /// This is needed when you have mandate_request. As a scheme compliance
+    /// rule we are required to
+    /// allow the payer to crosscheck the details entered by them and confirm
+    /// it.
+    /// </summary>
+    public class BillingRequestConfirmPayerDetailsRequest
     {
 
         /// <summary>
