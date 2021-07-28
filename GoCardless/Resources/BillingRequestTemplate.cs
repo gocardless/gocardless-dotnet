@@ -45,7 +45,9 @@ namespace GoCardless.Resources
         public string MandateRequestCurrency { get; set; }
 
         /// <summary>
-        /// 
+        /// Key-value store of custom data that will be applied to the mandate
+        /// created when this request is fulfilled. Up to 3 keys are permitted,
+        /// with key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("mandate_request_metadata")]
         public IDictionary<string, string> MandateRequestMetadata { get; set; }
@@ -58,10 +60,22 @@ namespace GoCardless.Resources
         public string MandateRequestScheme { get; set; }
 
         /// <summary>
+        /// Verification preference for the mandate. One of:
+        /// <ul>
+        ///   <li>`minimum`: only verify if absolutely required, such as when
+        /// part of scheme rules</li>
+        ///   <li>`recommended`: in addition to minimum, use the GoCardless risk
+        /// engine to decide an appropriate level of verification</li>
+        ///   <li>`when_available`: if verification mechanisms are available,
+        /// use them</li>
+        ///   <li>`always`: as `when_available`, but fail to create the Billing
+        /// Request if a mechanism isn't available</li>
+        /// </ul>
         /// 
+        /// If not provided, the `recommended` level is chosen.
         /// </summary>
         [JsonProperty("mandate_request_verify")]
-        public IDictionary<string, string> MandateRequestVerify { get; set; }
+        public BillingRequestTemplateMandateRequestVerify? MandateRequestVerify { get; set; }
 
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
@@ -101,7 +115,9 @@ namespace GoCardless.Resources
         public string PaymentRequestDescription { get; set; }
 
         /// <summary>
-        /// 
+        /// Key-value store of custom data that will be applied to the payment
+        /// created when this request is fulfilled. Up to 3 keys are permitted,
+        /// with key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("payment_request_metadata")]
         public IDictionary<string, string> PaymentRequestMetadata { get; set; }
@@ -128,4 +144,37 @@ namespace GoCardless.Resources
         public string UpdatedAt { get; set; }
     }
     
+    /// <summary>
+    /// Verification preference for the mandate. One of:
+    /// <ul>
+    ///   <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
+    ///   <li>`recommended`: in addition to minimum, use the GoCardless risk engine to decide an
+    /// appropriate level of verification</li>
+    ///   <li>`when_available`: if verification mechanisms are available, use them</li>
+    ///   <li>`always`: as `when_available`, but fail to create the Billing Request if a mechanism
+    /// isn't available</li>
+    /// </ul>
+    /// 
+    /// If not provided, the `recommended` level is chosen.
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestTemplateMandateRequestVerify {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`mandate_request_verify` with a value of "minimum"</summary>
+        [EnumMember(Value = "minimum")]
+        Minimum,
+        /// <summary>`mandate_request_verify` with a value of "recommended"</summary>
+        [EnumMember(Value = "recommended")]
+        Recommended,
+        /// <summary>`mandate_request_verify` with a value of "when_available"</summary>
+        [EnumMember(Value = "when_available")]
+        WhenAvailable,
+        /// <summary>`mandate_request_verify` with a value of "always"</summary>
+        [EnumMember(Value = "always")]
+        Always,
+    }
+
 }

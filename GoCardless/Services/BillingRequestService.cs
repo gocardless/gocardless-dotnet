@@ -16,7 +16,17 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with billing request resources.
     ///
-    /// Billing Requests
+    /// Billing Requests help create resources that require input or action from
+    /// a
+    /// customer. An example of required input might be additional customer
+    /// billing
+    /// details, while an action would be asking a customer to authorise a
+    /// payment
+    /// using their mobile banking app.
+    /// 
+    /// See [Billing Requests:
+    /// Overview](https://developer.gocardless.com/getting-started/billing-requests/overview/)
+    /// for how-to's, explanations and tutorials.
     /// </summary>
 
     public class BillingRequestService
