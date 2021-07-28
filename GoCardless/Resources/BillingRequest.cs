@@ -352,6 +352,24 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("scheme")]
         public string Scheme { get; set; }
+
+        /// <summary>
+        /// Verification preference for the mandate. One of:
+        /// <ul>
+        ///   <li>`minimum`: only verify if absolutely required, such as when
+        /// part of scheme rules</li>
+        ///   <li>`recommended`: in addition to minimum, use the GoCardless risk
+        /// engine to decide an appropriate level of verification</li>
+        ///   <li>`when_available`: if verification mechanisms are available,
+        /// use them</li>
+        ///   <li>`always`: as `when_available`, but fail to create the Billing
+        /// Request if a mechanism isn't available</li>
+        /// </ul>
+        /// 
+        /// If not provided, the `recommended` level is chosen.
+        /// </summary>
+        [JsonProperty("verify")]
+        public BillingRequestMandateRequestVerify? Verify { get; set; }
     }
     
     /// <summary>
@@ -368,6 +386,39 @@ namespace GoCardless.Resources
         public string Mandate { get; set; }
     }
     
+    /// <summary>
+    /// Verification preference for the mandate. One of:
+    /// <ul>
+    ///   <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
+    ///   <li>`recommended`: in addition to minimum, use the GoCardless risk engine to decide an
+    /// appropriate level of verification</li>
+    ///   <li>`when_available`: if verification mechanisms are available, use them</li>
+    ///   <li>`always`: as `when_available`, but fail to create the Billing Request if a mechanism
+    /// isn't available</li>
+    /// </ul>
+    /// 
+    /// If not provided, the `recommended` level is chosen.
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestMandateRequestVerify {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`verify` with a value of "minimum"</summary>
+        [EnumMember(Value = "minimum")]
+        Minimum,
+        /// <summary>`verify` with a value of "recommended"</summary>
+        [EnumMember(Value = "recommended")]
+        Recommended,
+        /// <summary>`verify` with a value of "when_available"</summary>
+        [EnumMember(Value = "when_available")]
+        WhenAvailable,
+        /// <summary>`verify` with a value of "always"</summary>
+        [EnumMember(Value = "always")]
+        Always,
+    }
+
     /// <summary>
     /// Represents a billing request payment request resource.
     ///
