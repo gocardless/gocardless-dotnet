@@ -203,6 +203,9 @@ namespace GoCardless.Services
         [JsonProperty("mandate_request_scheme")]
         public string MandateRequestScheme { get; set; }
 
+        [JsonProperty("mandate_request_verify")]
+        public IDictionary<String, String> MandateRequestVerify { get; set; }
+
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
         /// names up to 50 characters and values up to 500 characters.
