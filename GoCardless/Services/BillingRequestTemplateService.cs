@@ -122,6 +122,27 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<BillingRequestTemplateResponse>("POST", "/billing_request_templates", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "billing_request_templates", customiseRequestMessage);
         }
+
+        /// <summary>
+        /// Updates a Billing Request Template, which will affect all future
+        /// Billing Requests created by this template.
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="request">An optional `BillingRequestTemplateUpdateRequest` representing the body for this update request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single billing request template resource</returns>
+        public Task<BillingRequestTemplateResponse> UpdateAsync(string identity, BillingRequestTemplateUpdateRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new BillingRequestTemplateUpdateRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<BillingRequestTemplateResponse>("PUT", "/billing_requests/:identity", urlParams, request, null, "billing_request_templates", customiseRequestMessage);
+        }
     }
 
         
@@ -325,6 +346,148 @@ namespace GoCardless.Services
         /// </summary>
         [JsonIgnore]
         public string IdempotencyKey { get; set; }
+    }
+
+        
+    /// <summary>
+    /// Updates a Billing Request Template, which will affect all future Billing
+    /// Requests created by this template.
+    /// </summary>
+    public class BillingRequestTemplateUpdateRequest
+    {
+
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently only "GBP" is supported as we only have one
+        /// scheme that is per_payment_authorised.
+        /// </summary>
+        [JsonProperty("mandate_request_currency")]
+        public string MandateRequestCurrency { get; set; }
+
+        /// <summary>
+        /// Key-value store of custom data that will be applied to the mandate
+        /// created when this request is fulfilled. Up to 3 keys are permitted,
+        /// with key names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("mandate_request_metadata")]
+        public IDictionary<String, String> MandateRequestMetadata { get; set; }
+
+        /// <summary>
+        /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs",
+        /// "becs_nz", "betalingsservice", "pad" and "sepa_core" are supported.
+        /// </summary>
+        [JsonProperty("mandate_request_scheme")]
+        public string MandateRequestScheme { get; set; }
+
+        /// <summary>
+        /// Verification preference for the mandate. One of:
+        /// <ul>
+        ///   <li>`minimum`: only verify if absolutely required, such as when
+        /// part of scheme rules</li>
+        ///   <li>`recommended`: in addition to minimum, use the GoCardless risk
+        /// engine to decide an appropriate level of verification</li>
+        ///   <li>`when_available`: if verification mechanisms are available,
+        /// use them</li>
+        ///   <li>`always`: as `when_available`, but fail to create the Billing
+        /// Request if a mechanism isn't available</li>
+        /// </ul>
+        /// 
+        /// If not provided, the `recommended` level is chosen.
+        /// </summary>
+        [JsonProperty("mandate_request_verify")]
+        public BillingRequestTemplateMandateRequestVerify? MandateRequestVerify { get; set; }
+            
+        /// <summary>
+        /// Verification preference for the mandate. One of:
+        /// <ul>
+        ///   <li>`minimum`: only verify if absolutely required, such as when
+        /// part of scheme rules</li>
+        ///   <li>`recommended`: in addition to minimum, use the GoCardless risk
+        /// engine to decide an appropriate level of verification</li>
+        ///   <li>`when_available`: if verification mechanisms are available,
+        /// use them</li>
+        ///   <li>`always`: as `when_available`, but fail to create the Billing
+        /// Request if a mechanism isn't available</li>
+        /// </ul>
+        /// 
+        /// If not provided, the `recommended` level is chosen.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BillingRequestTemplateMandateRequestVerify
+        {
+    
+            /// <summary>`mandate_request_verify` with a value of "minimum"</summary>
+            [EnumMember(Value = "minimum")]
+            Minimum,
+            /// <summary>`mandate_request_verify` with a value of "recommended"</summary>
+            [EnumMember(Value = "recommended")]
+            Recommended,
+            /// <summary>`mandate_request_verify` with a value of "when_available"</summary>
+            [EnumMember(Value = "when_available")]
+            WhenAvailable,
+            /// <summary>`mandate_request_verify` with a value of "always"</summary>
+            [EnumMember(Value = "always")]
+            Always,
+        }
+
+        /// <summary>
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<String, String> Metadata { get; set; }
+
+        /// <summary>
+        /// Name for the template. Provides a friendly human name for the
+        /// template, as it is shown in the dashboard. Must not exceed 255
+        /// characters.
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Amount in minor unit (e.g. pence in GBP, cents in EUR).
+        /// </summary>
+        [JsonProperty("payment_request_amount")]
+        public int? PaymentRequestAmount { get; set; }
+
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently only "GBP" is supported as we only have one
+        /// scheme that is per_payment_authorised.
+        /// </summary>
+        [JsonProperty("payment_request_currency")]
+        public string PaymentRequestCurrency { get; set; }
+
+        /// <summary>
+        /// A human-readable description of the payment. This will be displayed
+        /// to the payer when authorising the billing request.
+        /// 
+        /// </summary>
+        [JsonProperty("payment_request_description")]
+        public string PaymentRequestDescription { get; set; }
+
+        /// <summary>
+        /// Key-value store of custom data that will be applied to the payment
+        /// created when this request is fulfilled. Up to 3 keys are permitted,
+        /// with key names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("payment_request_metadata")]
+        public IDictionary<String, String> PaymentRequestMetadata { get; set; }
+
+        /// <summary>
+        /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs",
+        /// "becs_nz", "betalingsservice", "pad" and "sepa_core" are supported.
+        /// </summary>
+        [JsonProperty("payment_request_scheme")]
+        public string PaymentRequestScheme { get; set; }
+
+        /// <summary>
+        /// URL that the payer can be redirected to after completing the request
+        /// flow.
+        /// </summary>
+        [JsonProperty("redirect_uri")]
+        public string RedirectUri { get; set; }
     }
 
     /// <summary>
