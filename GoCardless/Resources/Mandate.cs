@@ -95,6 +95,8 @@ namespace GoCardless.Resources
         /// <li>`consumed`: the mandate has been consumed and cannot be reused
         /// (note that this only applies to schemes that are per-payment
         /// authorised)</li>
+        /// <li>`blocked`: the mandate has been blocked and payments cannot be
+        /// created</li>
         /// </ul>
         /// </summary>
         [JsonProperty("status")]
@@ -147,6 +149,7 @@ namespace GoCardless.Resources
     /// <li>`expired`: the mandate has expired due to dormancy</li>
     /// <li>`consumed`: the mandate has been consumed and cannot be reused (note that this only
     /// applies to schemes that are per-payment authorised)</li>
+    /// <li>`blocked`: the mandate has been blocked and payments cannot be created</li>
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
@@ -179,6 +182,9 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "consumed"</summary>
         [EnumMember(Value = "consumed")]
         Consumed,
+        /// <summary>`status` with a value of "blocked"</summary>
+        [EnumMember(Value = "blocked")]
+        Blocked,
     }
 
 }
