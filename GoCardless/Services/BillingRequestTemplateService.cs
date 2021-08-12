@@ -141,7 +141,7 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<BillingRequestTemplateResponse>("PUT", "/billing_requests/:identity", urlParams, request, null, "billing_request_templates", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BillingRequestTemplateResponse>("PUT", "/billing_request_templates/:identity", urlParams, request, null, "billing_request_templates", customiseRequestMessage);
         }
     }
 
