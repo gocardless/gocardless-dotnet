@@ -193,6 +193,7 @@ namespace GoCardless.Services
         /// <li>`subscription`</li>
         /// <li>`instalment_schedule`</li>
         /// <li>`creditor`</li>
+        /// <li>`billing_request`<\li>
         /// </ul>
         /// </summary>
         [JsonProperty("include")]
@@ -210,6 +211,7 @@ namespace GoCardless.Services
         /// <li>`subscription`</li>
         /// <li>`instalment_schedule`</li>
         /// <li>`creditor`</li>
+        /// <li>`billing_request`<\li>
         /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -240,6 +242,9 @@ namespace GoCardless.Services
             /// <summary>`include` with a value of "payer_authorisation"</summary>
             [EnumMember(Value = "payer_authorisation")]
             PayerAuthorisation,
+            /// <summary>`include` with a value of "billing_request"</summary>
+            [EnumMember(Value = "billing_request")]
+            BillingRequest,
         }
 
         /// <summary>

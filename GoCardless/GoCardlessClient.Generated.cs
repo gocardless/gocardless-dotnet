@@ -29,6 +29,11 @@ namespace GoCardless
         public BillingRequestFlowService BillingRequestFlows => new BillingRequestFlowService(this);
 
         /// <summary>
+        ///A service for working with billing request template resources.
+        /// </summary>
+        public BillingRequestTemplateService BillingRequestTemplates => new BillingRequestTemplateService(this);
+
+        /// <summary>
         ///A service for working with creditor resources.
         /// </summary>
         public CreditorService Creditors => new CreditorService(this);

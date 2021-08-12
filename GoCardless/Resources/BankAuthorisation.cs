@@ -21,9 +21,7 @@ namespace GoCardless.Resources
     /// UIs
     /// (see Billing Request Flows) to ensure we meet regulatory requirements
     /// for
-    /// checkout flows. The exceptions are integrators with the custom payment
-    /// pages
-    /// upgrade, who have been audited to check their flows meet requirements.
+    /// checkout flows.
     /// </summary>
     public class BankAuthorisation
     {
@@ -32,6 +30,13 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("authorisation_type")]
         public string AuthorisationType { get; set; }
+
+        /// <summary>
+        /// Fixed [timestamp](#api-usage-time-zones--dates), recording when the
+        /// user has been authorised.
+        /// </summary>
+        [JsonProperty("authorised_at")]
+        public string AuthorisedAt { get; set; }
 
         /// <summary>
         /// Timestamp when the flow was created

@@ -11,7 +11,17 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a billing request resource.
     ///
-    /// Billing Requests
+    /// Billing Requests help create resources that require input or action from
+    /// a
+    /// customer. An example of required input might be additional customer
+    /// billing
+    /// details, while an action would be asking a customer to authorise a
+    /// payment
+    /// using their mobile banking app.
+    /// 
+    /// See [Billing Requests:
+    /// Overview](https://developer.gocardless.com/getting-started/billing-requests/overview/)
+    /// for how-to's, explanations and tutorials.
     /// </summary>
     public class BillingRequest
     {
@@ -88,6 +98,20 @@ namespace GoCardless.Resources
     public class BillingRequestAction
     {
         /// <summary>
+        /// Describes the behaviour of bank authorisations, for the
+        /// bank_authorisation action
+        /// </summary>
+        [JsonProperty("bank_authorisation")]
+        public BillingRequestActionBankAuthorisation BankAuthorisation { get; set; }
+
+        /// <summary>
+        /// Additional parameters to help complete the collect_customer_details
+        /// action
+        /// </summary>
+        [JsonProperty("collect_customer_details")]
+        public BillingRequestActionCollectCustomerDetails CollectCustomerDetails { get; set; }
+
+        /// <summary>
         /// Which other action types this action can complete.
         /// </summary>
         [JsonProperty("completes_actions")]
@@ -118,6 +142,87 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; }
+    }
+    
+    /// <summary>
+    /// Represents a billing request action bank authorisation resource.
+    ///
+    /// Describes the behaviour of bank authorisations, for the
+    /// bank_authorisation action
+    /// </summary>
+    public class BillingRequestActionBankAuthorisation
+    {
+        /// <summary>
+        /// Which authorisation adapter will be used to power these
+        /// authorisations (GoCardless internal use only)
+        /// </summary>
+        [JsonProperty("adapter")]
+        public string Adapter { get; set; }
+
+        /// <summary>
+        /// What type of bank authorisations are supported on this billing
+        /// request
+        /// </summary>
+        [JsonProperty("authorisation_type")]
+        public string AuthorisationType { get; set; }
+
+        /// <summary>
+        /// Whether an institution is a required field when creating this bank
+        /// authorisation
+        /// </summary>
+        [JsonProperty("requires_institution")]
+        public bool? RequiresInstitution { get; set; }
+    }
+    
+    /// <summary>
+    /// Which authorisation adapter will be used to power these authorisations (GoCardless internal
+    /// use only)
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestActionBankAuthorisationAdapter {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`adapter` with a value of "open_banking_gateway_pis"</summary>
+        [EnumMember(Value = "open_banking_gateway_pis")]
+        OpenBankingGatewayPis,
+        /// <summary>`adapter` with a value of "plaid_ais"</summary>
+        [EnumMember(Value = "plaid_ais")]
+        PlaidAis,
+    }
+
+    /// <summary>
+    /// What type of bank authorisations are supported on this billing request
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestActionBankAuthorisationAuthorisationType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`authorisation_type` with a value of "payment"</summary>
+        [EnumMember(Value = "payment")]
+        Payment,
+        /// <summary>`authorisation_type` with a value of "mandate"</summary>
+        [EnumMember(Value = "mandate")]
+        Mandate,
+    }
+
+    /// <summary>
+    /// Represents a billing request action collect customer detail resource.
+    ///
+    /// Additional parameters to help complete the collect_customer_details
+    /// action
+    /// </summary>
+    public class BillingRequestActionCollectCustomerDetails
+    {
+        /// <summary>
+        /// Default customer country code, as determined by scheme and payer
+        /// location
+        /// </summary>
+        [JsonProperty("default_country_code")]
+        public string DefaultCountryCode { get; set; }
     }
     
     /// <summary>
@@ -158,6 +263,9 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "bank_authorisation"</summary>
         [EnumMember(Value = "bank_authorisation")]
         BankAuthorisation,
+        /// <summary>`type` with a value of "confirm_payer_details"</summary>
+        [EnumMember(Value = "confirm_payer_details")]
+        ConfirmPayerDetails,
     }
 
     /// <summary>
@@ -199,6 +307,32 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("customer_billing_detail")]
         public string CustomerBillingDetail { get; set; }
+
+        /// <summary>
+        /// (Optional) ID of the associated mandate request
+        /// </summary>
+        [JsonProperty("mandate_request")]
+        public string MandateRequest { get; set; }
+
+        /// <summary>
+        /// (Optional) ID of the [mandate](#core-endpoints-mandates) that was
+        /// created from this mandate request. this mandate request.
+        /// </summary>
+        [JsonProperty("mandate_request_mandate")]
+        public string MandateRequestMandate { get; set; }
+
+        /// <summary>
+        /// (Optional) ID of the associated payment request
+        /// </summary>
+        [JsonProperty("payment_request")]
+        public string PaymentRequest { get; set; }
+
+        /// <summary>
+        /// (Optional) ID of the [payment](#core-endpoints-payments) that was
+        /// created from this payment request.
+        /// </summary>
+        [JsonProperty("payment_request_payment")]
+        public string PaymentRequestPayment { get; set; }
     }
     
     /// <summary>
@@ -228,6 +362,24 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("scheme")]
         public string Scheme { get; set; }
+
+        /// <summary>
+        /// Verification preference for the mandate. One of:
+        /// <ul>
+        ///   <li>`minimum`: only verify if absolutely required, such as when
+        /// part of scheme rules</li>
+        ///   <li>`recommended`: in addition to minimum, use the GoCardless risk
+        /// engine to decide an appropriate level of verification</li>
+        ///   <li>`when_available`: if verification mechanisms are available,
+        /// use them</li>
+        ///   <li>`always`: as `when_available`, but fail to create the Billing
+        /// Request if a mechanism isn't available</li>
+        /// </ul>
+        /// 
+        /// If not provided, the `recommended` level is chosen.
+        /// </summary>
+        [JsonProperty("verify")]
+        public BillingRequestMandateRequestVerify? Verify { get; set; }
     }
     
     /// <summary>
@@ -245,6 +397,39 @@ namespace GoCardless.Resources
     }
     
     /// <summary>
+    /// Verification preference for the mandate. One of:
+    /// <ul>
+    ///   <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
+    ///   <li>`recommended`: in addition to minimum, use the GoCardless risk engine to decide an
+    /// appropriate level of verification</li>
+    ///   <li>`when_available`: if verification mechanisms are available, use them</li>
+    ///   <li>`always`: as `when_available`, but fail to create the Billing Request if a mechanism
+    /// isn't available</li>
+    /// </ul>
+    /// 
+    /// If not provided, the `recommended` level is chosen.
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestMandateRequestVerify {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`verify` with a value of "minimum"</summary>
+        [EnumMember(Value = "minimum")]
+        Minimum,
+        /// <summary>`verify` with a value of "recommended"</summary>
+        [EnumMember(Value = "recommended")]
+        Recommended,
+        /// <summary>`verify` with a value of "when_available"</summary>
+        [EnumMember(Value = "when_available")]
+        WhenAvailable,
+        /// <summary>`verify` with a value of "always"</summary>
+        [EnumMember(Value = "always")]
+        Always,
+    }
+
+    /// <summary>
     /// Represents a billing request payment request resource.
     ///
     /// Request for a one-off strongly authorised payment
@@ -256,6 +441,15 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
+
+        /// <summary>
+        /// The amount to be deducted from the payment as an app fee, to be paid
+        /// to the partner integration which created the billing request, in the
+        /// lowest denomination for the currency (e.g. pence in GBP, cents in
+        /// EUR).
+        /// </summary>
+        [JsonProperty("app_fee")]
+        public int? AppFee { get; set; }
 
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
@@ -578,6 +772,15 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
+
+        /// <summary>
+        /// For ACH customers only. Required for ACH customers. A string
+        /// containing the IP address of the payer to whom the mandate belongs
+        /// (i.e. as a result of their completion of a mandate setup flow in
+        /// their browser).
+        /// </summary>
+        [JsonProperty("ip_address")]
+        public string IpAddress { get; set; }
 
         /// <summary>
         /// The customer's postal code.
