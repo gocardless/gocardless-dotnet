@@ -17,6 +17,8 @@ namespace GoCardless.Exceptions
         {
             switch (apiErrorResponse.Error.Type)
             {
+                case ApiErrorType.AUTHENTICATION_FAILED:
+                    return new AuthenticationFailedException(apiErrorResponse);
                 case ApiErrorType.GOCARDLESS:
                     return new InternalException(apiErrorResponse);
                 case ApiErrorType.INVALID_API_USAGE:
@@ -25,6 +27,10 @@ namespace GoCardless.Exceptions
                     return new InvalidStateException(apiErrorResponse);
                 case ApiErrorType.VALIDATION_FAILED:
                     return new ValidationFailedException(apiErrorResponse);
+                case ApiErrorType.INSUFFICIENT_PERMISSIONS:
+                    return new InsufficientPermissionsException(apiErrorResponse);
+                case ApiErrorType.RATE_LIMIT_REACHED:
+                    return new RateLimitReachedException(apiErrorResponse);
                 default:
                     throw new InvalidOperationException($"Unknown ApiErrorType {apiErrorResponse}");
 

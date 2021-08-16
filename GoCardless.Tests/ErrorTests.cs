@@ -31,13 +31,12 @@ namespace GoCardless.Tests
             {
                 await MakeSomeRequest();
             }
-            catch (InvalidApiUsageException ex)
+            catch (InsufficientPermissionsException ex)
             {
                 TestHelpers.AssertResponseCanSerializeBackToFixture(ex.ApiErrorResponse, responseFixture);
-                Assert.AreEqual(ApiErrorType.INVALID_API_USAGE, ex.Type);
+                Assert.AreEqual(ApiErrorType.INSUFFICIENT_PERMISSIONS, ex.Type);
                 Assert.AreEqual("Insufficient permissions", ex.Message);
                 Assert.AreEqual("Insufficient permissions", ex.Errors.Single().Message);
-                Assert.AreEqual("insufficient_permissions", ex.Errors.Single().Reason);
                 Assert.AreEqual("insufficient_permissions", ex.Errors.Single().Reason);
                 Assert.AreEqual("https://developer.gocardless.com/api-reference#insufficient_permissions",
                     ex.DocumentationUrl);
@@ -133,5 +132,66 @@ namespace GoCardless.Tests
             Assert.AreEqual("BA000123", mandate.Mandate.Links.CustomerBankAccount);
         }
 
+        [Test]
+        public async Task WhenAuthenticationError_ShouldShowSpecificError()
+        {
+            //Authentication Errors should throw a specific more contextual type rather than generic invalid_api_usage
+
+            //Arrange
+            var responseFixture = "fixtures/authentication_failure.json";
+            mockHttp.EnqueueResponse(401, responseFixture, resp => resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative));
+
+            //Act
+
+            try
+            {
+                await MakeSomeRequest();
+            }
+            catch (AuthenticationFailedException ex)
+            {
+                Assert.AreEqual(401, ex.Code);
+                Assert.AreEqual(ApiErrorType.AUTHENTICATION_FAILED, ex.Type);
+                Assert.AreEqual("Authentication Failed", ex.Message);
+                Assert.AreEqual("Authentication Failed", ex.Errors.Single().Message);
+                Assert.AreEqual("authentication_failed", ex.Errors.Single().Reason);
+                TestHelpers.AssertResponseCanSerializeBackToFixture(ex.ApiErrorResponse, responseFixture);
+                Assert.AreEqual("https://developer.gocardless.com/api-reference/#api-usage-errors",
+                 ex.DocumentationUrl);
+                return;
+            }
+
+            //Assert
+            Assert.Fail("Exception was not thrown");
+        }
+
+        [Test]
+        public async Task WhenRateLimitReachedException_ShouldShowSpecificError()
+        {
+            //Rate Limit being reached errors should throw a specific more contextual type rather than generic 
+            //Arrange
+            var responseFixture = "fixtures/rate_limit_reached.json";
+            mockHttp.EnqueueResponse(429, responseFixture, resp => resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative));
+
+            //Act
+            try
+            {
+                await MakeSomeRequest();
+            }
+            catch (RateLimitReachedException ex)
+            {
+                Assert.AreEqual(429, ex.Code);
+                Assert.AreEqual(ApiErrorType.RATE_LIMIT_REACHED, ex.Type);
+                Assert.AreEqual("Rate Limit Reached you have made too many requests", ex.Message);
+                Assert.AreEqual("Rate Limit Reached you have made too many requests", ex.Errors.Single().Message);
+                Assert.AreEqual("rate_limit_reached", ex.Errors.Single().Reason);
+                TestHelpers.AssertResponseCanSerializeBackToFixture(ex.ApiErrorResponse, responseFixture);
+                Assert.AreEqual("https://developer.gocardless.com/api-reference/#making-requests-rate-limiting",
+                 ex.DocumentationUrl);
+                return;
+            }
+
+            //Assert
+            Assert.Fail("Exception was not thrown");
+        }
     }
 }

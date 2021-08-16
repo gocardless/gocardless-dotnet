@@ -211,6 +211,17 @@ namespace GoCardless
                     var json = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var result = JsonConvert.DeserializeObject<ApiErrorResponse>(json, new JsonSerializerSettings());
                     result.ResponseMessage = responseMessage;
+                    switch (result.Error.Code) { 
+                        case 401:
+                            result.Error.Type = ApiErrorType.AUTHENTICATION_FAILED;
+                            break;
+                        case 403:
+                            result.Error.Type = ApiErrorType.INSUFFICIENT_PERMISSIONS;
+                            break;
+                        case 429:
+                            result.Error.Type = ApiErrorType.RATE_LIMIT_REACHED;
+                            break;
+                    }
 
                     throw result.ToException();
                 }
