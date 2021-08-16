@@ -16,6 +16,20 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\GoCardless.xml</DocumentationFile>
+
+  </PropertyGroup>
+
+  <!--Constants-->
+  <PropertyGroup Condition=" $(TargetFramework.StartsWith('netstandard1.6')) ">
+    <DefineConstants>NETSTANDARD1.6</DefineConstants>
+  </PropertyGroup>
+ 
+  <PropertyGroup Condition=" $(TargetFramework.StartsWith('netstandard2.0')) ">
+    <DefineConstants>NETSTANDARD2.0</DefineConstants>
+  </PropertyGroup>
+ 
+  <PropertyGroup Condition=" $(TargetFramework.StartsWith('net46')) ">
+    <DefineConstants>NET46</DefineConstants>
   </PropertyGroup>
 
   <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
