@@ -193,5 +193,16 @@ namespace GoCardless.Tests
             //Assert
             Assert.Fail("Exception was not thrown");
         }
+
+        [Test]
+        public async Task runtimeTest()
+        {
+            var OSContextInformation = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
+            var runtimeFrameworkInformation = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
+
+
+            Console.WriteLine($"OS INFO: {OSContextInformation}");
+            Console.WriteLine($"Runtime Framework: {runtimeFrameworkInformation}");
+        }
     }
 }

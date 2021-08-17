@@ -263,19 +263,22 @@ namespace GoCardless
             var httpMethod = new HttpMethod(method);
 
             var requestMessage = new HttpRequestMessage(httpMethod, new Uri(_baseUrl, path));
-            var OSContextInformation = "";
+            var OSRunningOn = "";
             var runtimeFrameworkInformation = "";
 
 #if NETSTANDARD1_6 || NETSTANDARD2_0
-            OSContextInformation = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
-            runtimeFrameworkInformation = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
+            // Split to remove pointless information returned such as date day time format etc
+            var OSContextInformationArr = System.Runtime.InteropServices.RuntimeInformation.OSDescription.Split(':');
+            OSRunningOn = OSContextInformationArr[0];
+            runtimeFrameworkInformation = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription.ToString();
 #endif
 #if NET46
-            OSContextInformation = System.Environment.OSVersion;
+            OSRunningOn = System.Environment.OSVersion.VersionString;
             runtimeFrameworkInformation = System.Runtime.InteropServices.RuntimeEnvironment.GetSystemVersion();
-
 #endif
-            requestMessage.Headers.Add("User-Agent", $"gocardless-dotnet/4.11.0 {runtimeFrameworkInformation} {OSContextInformation}");
+
+            var userAgentInformation = $"gocardless-dotnet/4.11.0 {OSRunningOn} {runtimeFrameworkInformation}";
+            requestMessage.Headers.Add("User-Agent", userAgentInformation);
             requestMessage.Headers.Add("GoCardless-Version", "2015-07-06");
             requestMessage.Headers.Add("GoCardless-Client-Version", "4.11.0");
             requestMessage.Headers.Add("GoCardless-Client-Library", "gocardless-dotnet");
