@@ -1,0 +1,15 @@
+﻿{
+  "error": {
+    "message": "Rate Limit Reached you have made too many requests",
+    "errors": [
+      {
+        "reason": "rate_limit_reached",
+        "message": "Rate Limit Reached you have made too many requests"
+      }
+    ],
+    "documentation_url": "https://developer.gocardless.com/api-reference/#making-requests-rate-limiting",
+    "type": "rate_limit_reached",
+    "request_id": "b0e48853-abcd-41fa-9554-5f71820e915d",
+    "code": 429
+  }
+}
