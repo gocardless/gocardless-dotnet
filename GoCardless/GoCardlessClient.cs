@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using GoCardless.Errors;
@@ -212,6 +213,18 @@ namespace GoCardless
                     var result = JsonConvert.DeserializeObject<ApiErrorResponse>(json, new JsonSerializerSettings());
                     result.ResponseMessage = responseMessage;
 
+                    switch (result.Error.Code)
+                    { 
+                            case 401:
+                                result.Error.Type = ApiErrorType.AUTHENTICATION_FAILED;
+                                break;
+                            case 403:
+                                result.Error.Type = ApiErrorType.INSUFFICIENT_PERMISSIONS;
+                                break;
+                            case 429:
+                                result.Error.Type = ApiErrorType.RATE_LIMIT_REACHED;
+                                break;
+                    }
                     throw result.ToException();
                 }
             }
@@ -252,9 +265,23 @@ namespace GoCardless
             var httpMethod = new HttpMethod(method);
 
             var requestMessage = new HttpRequestMessage(httpMethod, new Uri(_baseUrl, path));
-            requestMessage.Headers.Add("User-Agent", "gocardless-dotnet/4.10.0");
+            var OSRunningOn = "";
+            var runtimeFrameworkInformation = "";
+
+#if NETSTANDARD
+            OSRunningOn = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
+            runtimeFrameworkInformation = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
+#endif
+#if NET46
+            OSRunningOn = System.Environment.OSVersion.VersionString;
+            runtimeFrameworkInformation = System.Runtime.InteropServices.RuntimeEnvironment.GetSystemVersion();
+#endif
+
+            var userAgentInformation = $" gocardless-dotnet/5.0.0 {runtimeFrameworkInformation} {Helpers.CleanupOSDescriptionString(OSRunningOn)}";
+
+            requestMessage.Headers.Add("User-Agent", userAgentInformation);
             requestMessage.Headers.Add("GoCardless-Version", "2015-07-06");
-            requestMessage.Headers.Add("GoCardless-Client-Version", "4.10.0");
+            requestMessage.Headers.Add("GoCardless-Client-Version", "5.0.0");
             requestMessage.Headers.Add("GoCardless-Client-Library", "gocardless-dotnet");
             requestMessage.Headers.Authorization =
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
@@ -369,6 +396,14 @@ namespace GoCardless
                 var urlEncodedValue = Helpers.Stringify(argument.Value);
                 var urlEncodedKey = WebUtility.UrlEncode(argument.Key);
                 return $"{urlEncodedKey}={urlEncodedValue}";
+            }
+
+            // Necessary due to a bug in User Agent header parser when multiple params passed
+            // fixed in later versions of .NET but required until a later date when we upgrade
+            internal static string CleanupOSDescriptionString(string input)
+            {
+                Regex pattern = new Regex("[;:#()~]");
+                return pattern.Replace(input, "-");
             }
         }
     }

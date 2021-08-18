@@ -1,0 +1,15 @@
+﻿{
+  "error": {
+    "message": "Authentication Failed",
+    "errors": [
+      {
+        "reason": "authentication_failed",
+        "message": "Authentication Failed"
+      }
+    ],
+    "documentation_url": "https://developer.gocardless.com/api-reference/#api-usage-errors",
+    "type": "authentication_failed",
+    "request_id": "b0e48853-abcd-41fa-9554-5f71820e915d",
+    "code": 401
+  }
+}
