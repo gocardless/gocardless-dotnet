@@ -120,13 +120,6 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("institution")]
         public string Institution { get; set; }
-
-        /// <summary>
-        /// ID of the payment request against which this authorisation was
-        /// created.
-        /// </summary>
-        [JsonProperty("payment_request")]
-        public string PaymentRequest { get; set; }
     }
     
 }
