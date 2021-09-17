@@ -70,6 +70,7 @@ namespace GoCardless.Resources
         /// <li>`payment_created`</li>
         /// <li>`payment_cancelled`</li>
         /// <li>`mandate_created`</li>
+        /// <li>`mandate_blocked`</li>
         /// <li>`subscription_created`</li>
         /// <li>`subscription_cancelled`</li>
         /// <li>`instalment_schedule_created`</li>
@@ -145,6 +146,7 @@ namespace GoCardless.Resources
     /// <li>`payment_created`</li>
     /// <li>`payment_cancelled`</li>
     /// <li>`mandate_created`</li>
+    /// <li>`mandate_blocked`</li>
     /// <li>`subscription_created`</li>
     /// <li>`subscription_cancelled`</li>
     /// <li>`instalment_schedule_created`</li>
@@ -166,6 +168,9 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "mandate_created"</summary>
         [EnumMember(Value = "mandate_created")]
         MandateCreated,
+        /// <summary>`type` with a value of "mandate_blocked"</summary>
+        [EnumMember(Value = "mandate_blocked")]
+        MandateBlocked,
         /// <summary>`type` with a value of "subscription_created"</summary>
         [EnumMember(Value = "subscription_created")]
         SubscriptionCreated,
