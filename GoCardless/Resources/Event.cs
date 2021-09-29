@@ -292,6 +292,9 @@ namespace GoCardless.Resources
         /// <summary>`origin` with a value of "customer"</summary>
         [EnumMember(Value = "customer")]
         Customer,
+        /// <summary>`origin` with a value of "payer"</summary>
+        [EnumMember(Value = "payer")]
+        Payer,
     }
 
     /// <summary>
@@ -450,6 +453,14 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("subscription")]
         public string Subscription { get; set; }
+
+        /// <summary>
+        /// If `resource_type` is `billing_requests`, this is the ID of the
+        /// [billing-requests](#billing-requests-billing-requests) which has been
+        /// updated.
+        /// </summary>
+        [JsonProperty("billing_request")]
+        public string BillingRequest { get; set; }
     }
     
     /// <summary>
