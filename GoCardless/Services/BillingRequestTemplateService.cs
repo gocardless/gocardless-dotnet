@@ -223,8 +223,8 @@ namespace GoCardless.Services
         public IDictionary<String, String> MandateRequestMetadata { get; set; }
 
         /// <summary>
-        /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs",
-        /// "becs_nz", "betalingsservice", "pad" and "sepa_core" are supported.
+        /// A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz",
+        /// "betalingsservice", "pad" and "sepa_core" are supported.
         /// </summary>
         [JsonProperty("mandate_request_scheme")]
         public string MandateRequestScheme { get; set; }
@@ -326,8 +326,8 @@ namespace GoCardless.Services
         public IDictionary<String, String> PaymentRequestMetadata { get; set; }
 
         /// <summary>
-        /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs",
-        /// "becs_nz", "betalingsservice", "pad" and "sepa_core" are supported.
+        /// A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz",
+        /// "betalingsservice", "pad" and "sepa_core" are supported.
         /// </summary>
         [JsonProperty("payment_request_scheme")]
         public string PaymentRequestScheme { get; set; }
@@ -373,8 +373,8 @@ namespace GoCardless.Services
         public IDictionary<String, String> MandateRequestMetadata { get; set; }
 
         /// <summary>
-        /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs",
-        /// "becs_nz", "betalingsservice", "pad" and "sepa_core" are supported.
+        /// A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz",
+        /// "betalingsservice", "pad" and "sepa_core" are supported.
         /// </summary>
         [JsonProperty("mandate_request_scheme")]
         public string MandateRequestScheme { get; set; }
@@ -476,8 +476,8 @@ namespace GoCardless.Services
         public IDictionary<String, String> PaymentRequestMetadata { get; set; }
 
         /// <summary>
-        /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs",
-        /// "becs_nz", "betalingsservice", "pad" and "sepa_core" are supported.
+        /// A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz",
+        /// "betalingsservice", "pad" and "sepa_core" are supported.
         /// </summary>
         [JsonProperty("payment_request_scheme")]
         public string PaymentRequestScheme { get; set; }

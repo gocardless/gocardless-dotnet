@@ -122,6 +122,7 @@ namespace GoCardless.Resources
         /// <li>`payment_created`</li>
         /// <li>`payment_cancelled`</li>
         /// <li>`mandate_created`</li>
+        /// <li>`mandate_blocked`</li>
         /// <li>`subscription_created`</li>
         /// <li>`subscription_cancelled`</li>
         /// <li>`instalment_schedule_created`</li>
@@ -139,6 +140,7 @@ namespace GoCardless.Resources
     /// <li>`payment_created`</li>
     /// <li>`payment_cancelled`</li>
     /// <li>`mandate_created`</li>
+    /// <li>`mandate_blocked`</li>
     /// <li>`subscription_created`</li>
     /// <li>`subscription_cancelled`</li>
     /// <li>`instalment_schedule_created`</li>
@@ -160,6 +162,9 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "mandate_created"</summary>
         [EnumMember(Value = "mandate_created")]
         MandateCreated,
+        /// <summary>`type` with a value of "mandate_blocked"</summary>
+        [EnumMember(Value = "mandate_blocked")]
+        MandateBlocked,
         /// <summary>`type` with a value of "subscription_created"</summary>
         [EnumMember(Value = "subscription_created")]
         SubscriptionCreated,
@@ -227,6 +232,7 @@ namespace GoCardless.Resources
         /// automatically</li>
         /// <li>`api`: this event was triggered by an API endpoint</li>
         /// <li>`customer`: this event was triggered by a Customer</li>
+        /// <li>`payer`: this event was triggered by a Payer</li>
         /// </ul>
         /// </summary>
         [JsonProperty("origin")]
@@ -272,6 +278,7 @@ namespace GoCardless.Resources
     /// <li>`gocardless`: this event was performed by GoCardless automatically</li>
     /// <li>`api`: this event was triggered by an API endpoint</li>
     /// <li>`customer`: this event was triggered by a Customer</li>
+    /// <li>`payer`: this event was triggered by a Payer</li>
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
@@ -292,6 +299,9 @@ namespace GoCardless.Resources
         /// <summary>`origin` with a value of "customer"</summary>
         [EnumMember(Value = "customer")]
         Customer,
+        /// <summary>`origin` with a value of "payer"</summary>
+        [EnumMember(Value = "payer")]
+        Payer,
     }
 
     /// <summary>
@@ -338,6 +348,25 @@ namespace GoCardless.Resources
     public class EventLinks
     {
         /// <summary>
+        /// ID of a [bank authorisation](#billing-requests-bank-authorisations).
+        /// </summary>
+        [JsonProperty("bank_authorisation")]
+        public string BankAuthorisation { get; set; }
+
+        /// <summary>
+        /// ID of a [billing request](#billing-requests-billing-requests).
+        /// </summary>
+        [JsonProperty("billing_request")]
+        public string BillingRequest { get; set; }
+
+        /// <summary>
+        /// ID of a [billing request
+        /// flow](#billing-requests-billing-request-flows).
+        /// </summary>
+        [JsonProperty("billing_request_flow")]
+        public string BillingRequestFlow { get; set; }
+
+        /// <summary>
         /// If `resource_type` is `creditor`, this is the ID of the
         /// [creditor](#core-endpoints-creditors) which has been updated.
         /// </summary>
@@ -371,6 +400,13 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("mandate")]
         public string Mandate { get; set; }
+
+        /// <summary>
+        /// If `resource_type` is `billing_requests`, this is the ID of the
+        /// [mandate](#core-endpoints-mandates) which has been created.
+        /// </summary>
+        [JsonProperty("mandate_request_mandate")]
+        public string MandateRequestMandate { get; set; }
 
         /// <summary>
         /// This is only included for mandate transfer events, when it is the ID
@@ -419,6 +455,14 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("payment")]
         public string Payment { get; set; }
+
+        /// <summary>
+        /// If `resource_type` is `billing_requests`, this is the ID of the
+        /// [payment](#core-endpoints-payments) which has been created for
+        /// Instant Bank Payment.
+        /// </summary>
+        [JsonProperty("payment_request_payment")]
+        public string PaymentRequestPayment { get; set; }
 
         /// <summary>
         /// If `resource_type` is `payouts`, this is the ID of the

@@ -357,8 +357,8 @@ namespace GoCardless.Resources
         public BillingRequestMandateRequestLinks Links { get; set; }
 
         /// <summary>
-        /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs",
-        /// "becs_nz", "betalingsservice", "pad" and "sepa_core" are supported.
+        /// A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz",
+        /// "betalingsservice", "pad" and "sepa_core" are supported.
         /// </summary>
         [JsonProperty("scheme")]
         public string Scheme { get; set; }
@@ -474,8 +474,8 @@ namespace GoCardless.Resources
         public BillingRequestPaymentRequestLinks Links { get; set; }
 
         /// <summary>
-        /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs",
-        /// "becs_nz", "betalingsservice", "pad" and "sepa_core" are supported.
+        /// A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz",
+        /// "betalingsservice", "pad" and "sepa_core" are supported.
         /// </summary>
         [JsonProperty("scheme")]
         public string Scheme { get; set; }

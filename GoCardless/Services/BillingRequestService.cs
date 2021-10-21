@@ -457,8 +457,8 @@ namespace GoCardless.Services
             public string Currency { get; set; }
 
             /// <summary>
-            /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs",
-            /// "becs", "becs_nz", "betalingsservice", "pad" and "sepa_core" are
+            /// A Direct Debit scheme. Currently "ach", "bacs", "becs",
+            /// "becs_nz", "betalingsservice", "pad" and "sepa_core" are
             /// supported.
             /// </summary>
             [JsonProperty("scheme")]
@@ -485,6 +485,15 @@ namespace GoCardless.Services
             /// </summary>
             [JsonProperty("amount")]
             public int? Amount { get; set; }
+
+            /// <summary>
+            /// The amount to be deducted from the payment as an app fee, to be
+            /// paid to the partner integration which created the billing
+            /// request, in the lowest denomination for the currency (e.g. pence
+            /// in GBP, cents in EUR).
+            /// </summary>
+            [JsonProperty("app_fee")]
+            public int? AppFee { get; set; }
 
             /// <summary>
             /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
