@@ -457,8 +457,8 @@ namespace GoCardless.Services
             public string Currency { get; set; }
 
             /// <summary>
-            /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs",
-            /// "becs", "becs_nz", "betalingsservice", "pad" and "sepa_core" are
+            /// A Direct Debit scheme. Currently "ach", "bacs", "becs",
+            /// "becs_nz", "betalingsservice", "pad" and "sepa_core" are
             /// supported.
             /// </summary>
             [JsonProperty("scheme")]

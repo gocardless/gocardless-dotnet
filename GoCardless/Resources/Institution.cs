@@ -17,6 +17,14 @@ namespace GoCardless.Resources
     public class Institution
     {
         /// <summary>
+        /// [ISO
+        /// 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+        /// alpha-2 code. The country code of the institution.
+        /// </summary>
+        [JsonProperty("country_code")]
+        public string CountryCode { get; set; }
+
+        /// <summary>
         /// A URL pointing to the icon for this institution
         /// </summary>
         [JsonProperty("icon_url")]
