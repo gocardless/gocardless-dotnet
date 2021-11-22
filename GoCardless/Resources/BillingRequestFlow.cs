@@ -58,14 +58,16 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// If true, the payer will not be able to change their bank account
-        /// within the flow
+        /// within the flow. If the bank_account details are collected as part
+        /// of bank_authorisation then GC will set this value to true mid flow
         /// </summary>
         [JsonProperty("lock_bank_account")]
         public bool? LockBankAccount { get; set; }
 
         /// <summary>
         /// If true, the payer will not be able to edit their customer details
-        /// within the flow
+        /// within the flow. If the customer details are collected as part of
+        /// bank_authorisation then GC will set this value to true mid flow
         /// </summary>
         [JsonProperty("lock_customer_details")]
         public bool? LockCustomerDetails { get; set; }

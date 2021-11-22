@@ -34,6 +34,11 @@ namespace GoCardless
         public BillingRequestTemplateService BillingRequestTemplates => new BillingRequestTemplateService(this);
 
         /// <summary>
+        ///A service for working with block resources.
+        /// </summary>
+        public BlockService Blocks => new BlockService(this);
+
+        /// <summary>
         ///A service for working with creditor resources.
         /// </summary>
         public CreditorService Creditors => new CreditorService(this);

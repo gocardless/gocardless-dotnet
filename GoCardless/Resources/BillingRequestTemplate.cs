@@ -38,8 +38,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently only "GBP" is supported as we only have one
-        /// scheme that is per_payment_authorised.
+        /// currency code.
         /// </summary>
         [JsonProperty("mandate_request_currency")]
         public string MandateRequestCurrency { get; set; }
@@ -100,8 +99,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently only "GBP" is supported as we only have one
-        /// scheme that is per_payment_authorised.
+        /// currency code.
         /// </summary>
         [JsonProperty("payment_request_currency")]
         public string PaymentRequestCurrency { get; set; }
