@@ -457,6 +457,12 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "sepa"</summary>
         [EnumMember(Value = "sepa")]
         Sepa,
+        /// <summary>`scheme` with a value of "sepa_credit_transfer"</summary>
+        [EnumMember(Value = "sepa_credit_transfer")]
+        SepaCreditTransfer,
+        /// <summary>`scheme` with a value of "sepa_instant_credit_transfer"</summary>
+        [EnumMember(Value = "sepa_instant_credit_transfer")]
+        SepaInstantCreditTransfer,
     }
 
     /// <summary>
