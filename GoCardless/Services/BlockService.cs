@@ -177,6 +177,26 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<BlockResponse>("POST", "/blocks/:identity/actions/enable", urlParams, request, null, "data", customiseRequestMessage);
         }
+
+        /// <summary>
+        /// Creates new blocks for a given reference. By default blocks will be
+        /// active.
+        /// Returns 201 if at least one block was created. Returns 200 if there
+        /// were no new
+        /// blocks created.
+        /// </summary>
+        /// <param name="request">An optional `BlockBlockByRefRequest` representing the body for this block_by_ref request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single block resource</returns>
+        public Task<BlockResponse> BlockByRefAsync(BlockBlockByRefRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new BlockBlockByRefRequest();
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {};
+
+            return _goCardlessClient.ExecuteAsync<BlockResponse>("POST", "/block_by_ref", urlParams, request, null, "data", customiseRequestMessage);
+        }
     }
 
         
@@ -457,6 +477,114 @@ namespace GoCardless.Services
     /// </summary>
     public class BlockEnableRequest
     {
+    }
+
+        
+    /// <summary>
+    /// Creates new blocks for a given reference. By default blocks will be
+    /// active.
+    /// Returns 201 if at least one block was created. Returns 200 if there were
+    /// no new
+    /// blocks created.
+    /// </summary>
+    public class BlockBlockByRefRequest
+    {
+
+        /// <summary>
+        /// Shows if the block is active or disabled. Only active blocks will be
+        /// used when deciding
+        /// if a mandate should be blocked.
+        /// </summary>
+        [JsonProperty("active")]
+        public bool? Active { get; set; }
+
+        /// <summary>
+        /// This field is required if the reason_type is other. It should be a
+        /// description of
+        /// the reason for why you wish to block this payer and why it does not
+        /// align with the
+        /// given reason_types. This is intended to help us improve our
+        /// knowledge of types of
+        /// fraud.
+        /// </summary>
+        [JsonProperty("reason_description")]
+        public string ReasonDescription { get; set; }
+
+        /// <summary>
+        /// The reason you wish to block this payer, can currently be one of
+        /// 'identity_fraud',
+        /// 'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't
+        /// captured by one of the
+        /// above then 'other' can be selected but you must provide a reason
+        /// description.
+        /// </summary>
+        [JsonProperty("reason_type")]
+        public string ReasonType { get; set; }
+            
+        /// <summary>
+        /// The reason you wish to block this payer, can currently be one of
+        /// 'identity_fraud',
+        /// 'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't
+        /// captured by one of the
+        /// above then 'other' can be selected but you must provide a reason
+        /// description.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BlockReasonType
+        {
+    
+            /// <summary>`reason_type` with a value of "identity_fraud"</summary>
+            [EnumMember(Value = "identity_fraud")]
+            IdentityFraud,
+            /// <summary>`reason_type` with a value of "no_intent_to_pay"</summary>
+            [EnumMember(Value = "no_intent_to_pay")]
+            NoIntentToPay,
+            /// <summary>`reason_type` with a value of "unfair_chargeback"</summary>
+            [EnumMember(Value = "unfair_chargeback")]
+            UnfairChargeback,
+            /// <summary>`reason_type` with a value of "other"</summary>
+            [EnumMember(Value = "other")]
+            Other,
+        }
+
+        /// <summary>
+        /// Type of entity we will seek to get the associated emails and bank
+        /// accounts to
+        /// create blocks from. This can currently be one of 'customer' or
+        /// 'mandate'.
+        /// </summary>
+        [JsonProperty("reference_type")]
+        public string ReferenceType { get; set; }
+            
+        /// <summary>
+        /// Type of entity we will seek to get the associated emails and bank
+        /// accounts to
+        /// create blocks from. This can currently be one of 'customer' or
+        /// 'mandate'.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BlockReferenceType
+        {
+    
+            /// <summary>`reference_type` with a value of "customer"</summary>
+            [EnumMember(Value = "customer")]
+            Customer,
+            /// <summary>`reference_type` with a value of "mandate"</summary>
+            [EnumMember(Value = "mandate")]
+            Mandate,
+        }
+
+        /// <summary>
+        /// This field is a reference to the entity you wish to block based on
+        /// its emails
+        /// and bank accounts. This may be the ID of a customer or a mandate.
+        /// This means in
+        /// order to block by reference the entity must have already been
+        /// created as a
+        /// resource.
+        /// </summary>
+        [JsonProperty("reference_value")]
+        public string ReferenceValue { get; set; }
     }
 
     /// <summary>
