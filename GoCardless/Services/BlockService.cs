@@ -187,15 +187,15 @@ namespace GoCardless.Services
         /// </summary>
         /// <param name="request">An optional `BlockBlockByRefRequest` representing the body for this block_by_ref request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
-        /// <returns>A single block resource</returns>
-        public Task<BlockResponse> BlockByRefAsync(BlockBlockByRefRequest request = null, RequestSettings customiseRequestMessage = null)
+        /// <returns>A set of block resources</returns>
+        public Task<BlockListResponse> BlockByRefAsync(BlockBlockByRefRequest request = null, RequestSettings customiseRequestMessage = null)
         {
             request = request ?? new BlockBlockByRefRequest();
 
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<BlockResponse>("POST", "/block_by_ref", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BlockListResponse>("POST", "/block_by_ref", urlParams, request, null, "data", customiseRequestMessage);
         }
     }
 
