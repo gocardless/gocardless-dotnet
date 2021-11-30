@@ -39,7 +39,7 @@ namespace GoCardless.Tests
             Assert.AreEqual(block.ReasonType, "no_intent_to_pay");
             Assert.AreEqual(block.ResourceReference, "example@example.com");
             Assert.AreEqual(block.Active, true);
-            Assert.AreEqual(block.CreatedAt.ToString(), "03/25/2021 17:26:28 +00:00");
+            Assert.AreEqual(block.CreatedAt.Value.ToString("o"), "2021-03-25T17:26:28.3050000+00:00");
         }
 
         [Test]
