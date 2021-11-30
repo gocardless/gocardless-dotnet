@@ -1,0 +1,11 @@
+{
+    "blocks": {
+        "id": "BLC456",
+        "block_type": "email",
+        "reason_type": "no_intent_to_pay",
+        "resource_reference": "example@example.com",
+        "active": true,
+        "created_at": "2021-03-25T17:26:28.305Z",
+        "updated_at": "2021-03-25T17:26:28.305Z"
+    }
+}
