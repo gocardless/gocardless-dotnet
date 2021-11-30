@@ -1,0 +1,7 @@
+{
+    "blocks": {
+      "reference_type": "customer",
+      "reference_value": "CU123",
+      "reason_type": "no_intent_to_pay"
+    }
+  }
