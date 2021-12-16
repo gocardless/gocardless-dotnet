@@ -25,8 +25,9 @@ namespace GoCardless.Resources
         public string AuthorisationUrl { get; set; }
 
         /// <summary>
-        /// Fulfil the Billing Request on completion of the flow (true by
-        /// default)
+        /// (Experimental feature) Fulfil the Billing Request on completion of
+        /// the flow (true by default). Disabling the auto_fulfil is not allowed
+        /// currently.
         /// </summary>
         [JsonProperty("auto_fulfil")]
         public bool? AutoFulfil { get; set; }
