@@ -89,6 +89,13 @@ namespace GoCardless.Services
         public bool? AutoFulfil { get; set; }
 
         /// <summary>
+        /// URL that the payer can be taken to if there isn't a way to progress
+        /// ahead in flow.
+        /// </summary>
+        [JsonProperty("exit_uri")]
+        public string ExitUri { get; set; }
+
+        /// <summary>
         /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
