@@ -496,7 +496,9 @@ namespace GoCardless.Services
 
             /// <summary>
             /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-            /// currency code.
+            /// currency code. `GBP` and `EUR` supported; `GBP` with your
+            /// customers in the UK and for `EUR` with your customers in Germany
+            /// only.
             /// </summary>
             [JsonProperty("currency")]
             public string Currency { get; set; }
@@ -508,6 +510,18 @@ namespace GoCardless.Services
             /// </summary>
             [JsonProperty("description")]
             public string Description { get; set; }
+
+            /// <summary>
+            /// (Optional) A scheme used for Open Banking payments. Currently
+            /// `faster_payments` is supported in the UK (GBP) and
+            /// `sepa_credit_transfer` and `sepa_instant_credit_transfer` are
+            /// supported in Germany (EUR). In Germany, `sepa_credit_transfer`
+            /// is used as the default. Please be aware that
+            /// `sepa_instant_credit_transfer` may incur an additional fee for
+            /// your customer.
+            /// </summary>
+            [JsonProperty("scheme")]
+            public string Scheme { get; set; }
         }
 
         /// <summary>
