@@ -55,7 +55,7 @@ namespace GoCardless.Services
         /// used to power
         /// integrations that manipulate the flow.
         /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="identity">Unique identifier, beginning with "BRF".</param> 
         /// <param name="request">An optional `BillingRequestFlowInitialiseRequest` representing the body for this initialise request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request flow resource</returns>
