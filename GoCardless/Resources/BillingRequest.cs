@@ -356,13 +356,6 @@ namespace GoCardless.Resources
         public BillingRequestMandateRequestLinks Links { get; set; }
 
         /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
-        /// </summary>
-        [JsonProperty("metadata")]
-        public IDictionary<string, string> Metadata { get; set; }
-
-        /// <summary>
         /// A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz",
         /// "betalingsservice", "pad" and "sepa_core" are supported.
         /// </summary>
@@ -478,13 +471,6 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("links")]
         public BillingRequestPaymentRequestLinks Links { get; set; }
-
-        /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
-        /// </summary>
-        [JsonProperty("metadata")]
-        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// (Optional) A scheme used for Open Banking payments. Currently
