@@ -456,6 +456,13 @@ namespace GoCardless.Services
             public string Currency { get; set; }
 
             /// <summary>
+            /// Key-value store of custom data. Up to 3 keys are permitted, with
+            /// key names up to 50 characters and values up to 500 characters.
+            /// </summary>
+            [JsonProperty("metadata")]
+            public IDictionary<String, String> Metadata { get; set; }
+
+            /// <summary>
             /// A Direct Debit scheme. Currently "ach", "bacs", "becs",
             /// "becs_nz", "betalingsservice", "pad" and "sepa_core" are
             /// supported.
@@ -510,6 +517,13 @@ namespace GoCardless.Services
             /// </summary>
             [JsonProperty("description")]
             public string Description { get; set; }
+
+            /// <summary>
+            /// Key-value store of custom data. Up to 3 keys are permitted, with
+            /// key names up to 50 characters and values up to 500 characters.
+            /// </summary>
+            [JsonProperty("metadata")]
+            public IDictionary<String, String> Metadata { get; set; }
 
             /// <summary>
             /// (Optional) A scheme used for Open Banking payments. Currently
