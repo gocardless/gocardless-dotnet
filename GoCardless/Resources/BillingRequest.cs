@@ -190,6 +190,9 @@ namespace GoCardless.Resources
         /// <summary>`adapter` with a value of "plaid_ais"</summary>
         [EnumMember(Value = "plaid_ais")]
         PlaidAis,
+        /// <summary>`adapter` with a value of "open_banking_gateway_ais"</summary>
+        [EnumMember(Value = "open_banking_gateway_ais")]
+        OpenBankingGatewayAis,
     }
 
     /// <summary>
@@ -266,6 +269,9 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "confirm_payer_details"</summary>
         [EnumMember(Value = "confirm_payer_details")]
         ConfirmPayerDetails,
+        /// <summary>`type` with a value of "select_institution"</summary>
+        [EnumMember(Value = "select_institution")]
+        SelectInstitution,
     }
 
     /// <summary>

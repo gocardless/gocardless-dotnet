@@ -47,6 +47,12 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
+
+        /// <summary>
+        /// Assigned roles for an institution
+        /// </summary>
+        [JsonProperty("roles")]
+        public List<string> Roles { get; set; }
     }
     
 }
