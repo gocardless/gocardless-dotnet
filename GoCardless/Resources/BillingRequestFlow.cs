@@ -92,6 +92,18 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("session_token")]
         public string SessionToken { get; set; }
+
+        /// <summary>
+        /// If true, the payer will be able to see redirect action buttons on
+        /// Thank You page. These action buttons will provide a way to connect
+        /// back to the billing request flow app if opened within a mobile app.
+        /// For successful flow, the button will take the payer back the billing
+        /// request flow where they will see the success screen. For failure,
+        /// button will take the payer to url being provided against exit_uri
+        /// field.
+        /// </summary>
+        [JsonProperty("show_redirect_buttons")]
+        public bool? ShowRedirectButtons { get; set; }
     }
     
     /// <summary>
