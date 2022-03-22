@@ -88,7 +88,7 @@ namespace GoCardless.Resources
         public string RedirectUri { get; set; }
 
         /// <summary>
-        /// Session token populated when responding to the initalise action
+        /// Session token populated when responding to the initialise action
         /// </summary>
         [JsonProperty("session_token")]
         public string SessionToken { get; set; }

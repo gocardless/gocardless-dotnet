@@ -233,15 +233,29 @@ namespace GoCardless.Services
         /// <ul>
         ///   <li>`minimum`: only verify if absolutely required, such as when
         /// part of scheme rules</li>
-        ///   <li>`recommended`: in addition to minimum, use the GoCardless risk
-        /// engine to decide an appropriate level of verification</li>
+        ///   <li>`recommended`: in addition to `minimum`, use the GoCardless
+        /// payment intelligence solution to decide if a payer should be
+        /// verified</li>
         ///   <li>`when_available`: if verification mechanisms are available,
         /// use them</li>
         ///   <li>`always`: as `when_available`, but fail to create the Billing
         /// Request if a mechanism isn't available</li>
         /// </ul>
         /// 
-        /// If not provided, the `recommended` level is chosen.
+        /// By default, all Billing Requests use the `recommended` verification
+        /// preference. It uses GoCardless payment intelligence solution to
+        /// determine if a payer is fraudulent or not. The verification
+        /// mechanism is based on the response and the payer may be asked to
+        /// verify themselves. If the feature is not available, `recommended`
+        /// behaves like `minimum`.
+        /// 
+        /// If you never wish to take advantage of our reduced risk products and
+        /// Verified Mandates as they are released in new schemes, please use
+        /// the `minimum` verification preference. 
+        /// 
+        /// See [Billing Requests: Creating Verified
+        /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
+        /// for more information.
         /// </summary>
         [JsonProperty("mandate_request_verify")]
         public BillingRequestTemplateMandateRequestVerify? MandateRequestVerify { get; set; }
@@ -251,15 +265,29 @@ namespace GoCardless.Services
         /// <ul>
         ///   <li>`minimum`: only verify if absolutely required, such as when
         /// part of scheme rules</li>
-        ///   <li>`recommended`: in addition to minimum, use the GoCardless risk
-        /// engine to decide an appropriate level of verification</li>
+        ///   <li>`recommended`: in addition to `minimum`, use the GoCardless
+        /// payment intelligence solution to decide if a payer should be
+        /// verified</li>
         ///   <li>`when_available`: if verification mechanisms are available,
         /// use them</li>
         ///   <li>`always`: as `when_available`, but fail to create the Billing
         /// Request if a mechanism isn't available</li>
         /// </ul>
         /// 
-        /// If not provided, the `recommended` level is chosen.
+        /// By default, all Billing Requests use the `recommended` verification
+        /// preference. It uses GoCardless payment intelligence solution to
+        /// determine if a payer is fraudulent or not. The verification
+        /// mechanism is based on the response and the payer may be asked to
+        /// verify themselves. If the feature is not available, `recommended`
+        /// behaves like `minimum`.
+        /// 
+        /// If you never wish to take advantage of our reduced risk products and
+        /// Verified Mandates as they are released in new schemes, please use
+        /// the `minimum` verification preference. 
+        /// 
+        /// See [Billing Requests: Creating Verified
+        /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
+        /// for more information.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BillingRequestTemplateMandateRequestVerify
@@ -387,15 +415,29 @@ namespace GoCardless.Services
         /// <ul>
         ///   <li>`minimum`: only verify if absolutely required, such as when
         /// part of scheme rules</li>
-        ///   <li>`recommended`: in addition to minimum, use the GoCardless risk
-        /// engine to decide an appropriate level of verification</li>
+        ///   <li>`recommended`: in addition to `minimum`, use the GoCardless
+        /// payment intelligence solution to decide if a payer should be
+        /// verified</li>
         ///   <li>`when_available`: if verification mechanisms are available,
         /// use them</li>
         ///   <li>`always`: as `when_available`, but fail to create the Billing
         /// Request if a mechanism isn't available</li>
         /// </ul>
         /// 
-        /// If not provided, the `recommended` level is chosen.
+        /// By default, all Billing Requests use the `recommended` verification
+        /// preference. It uses GoCardless payment intelligence solution to
+        /// determine if a payer is fraudulent or not. The verification
+        /// mechanism is based on the response and the payer may be asked to
+        /// verify themselves. If the feature is not available, `recommended`
+        /// behaves like `minimum`.
+        /// 
+        /// If you never wish to take advantage of our reduced risk products and
+        /// Verified Mandates as they are released in new schemes, please use
+        /// the `minimum` verification preference. 
+        /// 
+        /// See [Billing Requests: Creating Verified
+        /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
+        /// for more information.
         /// </summary>
         [JsonProperty("mandate_request_verify")]
         public BillingRequestTemplateMandateRequestVerify? MandateRequestVerify { get; set; }
@@ -405,15 +447,29 @@ namespace GoCardless.Services
         /// <ul>
         ///   <li>`minimum`: only verify if absolutely required, such as when
         /// part of scheme rules</li>
-        ///   <li>`recommended`: in addition to minimum, use the GoCardless risk
-        /// engine to decide an appropriate level of verification</li>
+        ///   <li>`recommended`: in addition to `minimum`, use the GoCardless
+        /// payment intelligence solution to decide if a payer should be
+        /// verified</li>
         ///   <li>`when_available`: if verification mechanisms are available,
         /// use them</li>
         ///   <li>`always`: as `when_available`, but fail to create the Billing
         /// Request if a mechanism isn't available</li>
         /// </ul>
         /// 
-        /// If not provided, the `recommended` level is chosen.
+        /// By default, all Billing Requests use the `recommended` verification
+        /// preference. It uses GoCardless payment intelligence solution to
+        /// determine if a payer is fraudulent or not. The verification
+        /// mechanism is based on the response and the payer may be asked to
+        /// verify themselves. If the feature is not available, `recommended`
+        /// behaves like `minimum`.
+        /// 
+        /// If you never wish to take advantage of our reduced risk products and
+        /// Verified Mandates as they are released in new schemes, please use
+        /// the `minimum` verification preference. 
+        /// 
+        /// See [Billing Requests: Creating Verified
+        /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
+        /// for more information.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BillingRequestTemplateMandateRequestVerify
