@@ -493,7 +493,7 @@ namespace GoCardless.Services
             /// 
             /// If you never wish to take advantage of our reduced risk products
             /// and Verified Mandates as they are released in new schemes,
-            /// please use the `minimum` verification preference. 
+            /// please use the `minimum` verification preference.
             /// 
             /// See [Billing Requests: Creating Verified
             /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
@@ -524,7 +524,7 @@ namespace GoCardless.Services
         /// 
         /// If you never wish to take advantage of our reduced risk products and
         /// Verified Mandates as they are released in new schemes, please use
-        /// the `minimum` verification preference. 
+        /// the `minimum` verification preference.
         /// 
         /// See [Billing Requests: Creating Verified
         /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
