@@ -193,6 +193,9 @@ namespace GoCardless.Resources
         /// <summary>`adapter` with a value of "open_banking_gateway_ais"</summary>
         [EnumMember(Value = "open_banking_gateway_ais")]
         OpenBankingGatewayAis,
+        /// <summary>`adapter` with a value of "bankid_ais"</summary>
+        [EnumMember(Value = "bankid_ais")]
+        BankidAis,
     }
 
     /// <summary>
