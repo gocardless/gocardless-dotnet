@@ -282,6 +282,27 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/notify", urlParams, request, null, "data", customiseRequestMessage);
         }
+
+        /// <summary>
+        /// Triggers a fallback from the open-banking flow to direct debit.
+        /// Note, the billing request must have fallback enabled.
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="request">An optional `BillingRequestFallbackRequest` representing the body for this fallback request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single billing request resource</returns>
+        public Task<BillingRequestResponse> FallbackAsync(string identity, BillingRequestFallbackRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new BillingRequestFallbackRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/fallback", urlParams, request, null, "data", customiseRequestMessage);
+        }
     }
 
         
@@ -404,6 +425,13 @@ namespace GoCardless.Services
     /// </summary>
     public class BillingRequestCreateRequest : IHasIdempotencyKey
     {
+
+        /// <summary>
+        /// If true, this billing request can fallback from instant payment to
+        /// direct debit.
+        /// </summary>
+        [JsonProperty("fallback_enabled")]
+        public bool? FallbackEnabled { get; set; }
 
         /// <summary>
         /// Linked resources.
@@ -990,6 +1018,15 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("redirect_uri")]
         public string RedirectUri { get; set; }
+    }
+
+        
+    /// <summary>
+    /// Triggers a fallback from the open-banking flow to direct debit. Note,
+    /// the billing request must have fallback enabled.
+    /// </summary>
+    public class BillingRequestFallbackRequest
+    {
     }
 
     /// <summary>

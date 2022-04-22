@@ -40,6 +40,13 @@ namespace GoCardless.Resources
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
+        /// If true, this billing request can fallback from instant payment to
+        /// direct debit.
+        /// </summary>
+        [JsonProperty("fallback_enabled")]
+        public bool? FallbackEnabled { get; set; }
+
+        /// <summary>
         /// Unique identifier, beginning with "BRQ".
         /// </summary>
         [JsonProperty("id")]
