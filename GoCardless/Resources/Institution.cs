@@ -12,7 +12,11 @@ namespace GoCardless.Resources
     /// Represents a institution resource.
     ///
     /// Institutions that are supported when creating [Bank
-    /// Authorisations](#billing-requests-bank-authorisations).
+    /// Authorisations](#billing-requests-bank-authorisations) for a particular
+    /// country or purpose.
+    /// 
+    /// Not all institutions support both Payment Initiation (PIS) and Account
+    /// Information (AIS) services.
     /// </summary>
     public class Institution
     {

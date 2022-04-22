@@ -57,6 +57,9 @@ namespace GoCardless.Tests
             mockHttp.AssertRequestMade("POST","/block_by_ref");
             TestHelpers.AssertResponseCanSerializeBackToFixture(resp, responseFixture);
 
+            resp.Meta.Cursors.Before.Should().BeNull();
+            resp.Meta.Cursors.After.Should().BeNull();
+
             IReadOnlyList<GoCardless.Resources.Block> blocks = resp.Blocks;
             Assert.AreEqual(blocks[0].Id, "BLC123");
             Assert.AreEqual(blocks[0].BlockType, "email");

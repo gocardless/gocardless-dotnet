@@ -55,7 +55,7 @@ namespace GoCardless.Services
         /// used to power
         /// integrations that manipulate the flow.
         /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="identity">Unique identifier, beginning with "BRF".</param> 
         /// <param name="request">An optional `BillingRequestFlowInitialiseRequest` representing the body for this initialise request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request flow resource</returns>
@@ -81,11 +81,19 @@ namespace GoCardless.Services
     {
 
         /// <summary>
-        /// Fulfil the Billing Request on completion of the flow (true by
-        /// default)
+        /// (Experimental feature) Fulfil the Billing Request on completion of
+        /// the flow (true by default). Disabling the auto_fulfil is not allowed
+        /// currently.
         /// </summary>
         [JsonProperty("auto_fulfil")]
         public bool? AutoFulfil { get; set; }
+
+        /// <summary>
+        /// URL that the payer can be taken to if there isn't a way to progress
+        /// ahead in flow.
+        /// </summary>
+        [JsonProperty("exit_uri")]
+        public string ExitUri { get; set; }
 
         /// <summary>
         /// Linked resources.
@@ -128,6 +136,18 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("redirect_uri")]
         public string RedirectUri { get; set; }
+
+        /// <summary>
+        /// If true, the payer will be able to see redirect action buttons on
+        /// Thank You page. These action buttons will provide a way to connect
+        /// back to the billing request flow app if opened within a mobile app.
+        /// For successful flow, the button will take the payer back the billing
+        /// request flow where they will see the success screen. For failure,
+        /// button will take the payer to url being provided against exit_uri
+        /// field.
+        /// </summary>
+        [JsonProperty("show_redirect_buttons")]
+        public bool? ShowRedirectButtons { get; set; }
     }
 
         

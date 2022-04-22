@@ -859,7 +859,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// The number of cycles to pause a subscription for. A cycle is one
-        /// duration of `interval` and `interval_unit`.
+        /// duration of `interval` and `interval_unit`. This should be a non
+        /// zero positive value.
         /// </summary>
         [JsonProperty("pause_cycles")]
         public int? PauseCycles { get; set; }

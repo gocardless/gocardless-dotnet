@@ -25,8 +25,9 @@ namespace GoCardless.Resources
         public string AuthorisationUrl { get; set; }
 
         /// <summary>
-        /// Fulfil the Billing Request on completion of the flow (true by
-        /// default)
+        /// (Experimental feature) Fulfil the Billing Request on completion of
+        /// the flow (true by default). Disabling the auto_fulfil is not allowed
+        /// currently.
         /// </summary>
         [JsonProperty("auto_fulfil")]
         public bool? AutoFulfil { get; set; }
@@ -36,6 +37,13 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
+
+        /// <summary>
+        /// URL that the payer can be taken to if there isn't a way to progress
+        /// ahead in flow.
+        /// </summary>
+        [JsonProperty("exit_uri")]
+        public string ExitUri { get; set; }
 
         /// <summary>
         /// Timestamp when the flow will expire. Each flow currently lasts for 7
@@ -80,10 +88,22 @@ namespace GoCardless.Resources
         public string RedirectUri { get; set; }
 
         /// <summary>
-        /// Session token populated when responding to the initalise action
+        /// Session token populated when responding to the initialise action
         /// </summary>
         [JsonProperty("session_token")]
         public string SessionToken { get; set; }
+
+        /// <summary>
+        /// If true, the payer will be able to see redirect action buttons on
+        /// Thank You page. These action buttons will provide a way to connect
+        /// back to the billing request flow app if opened within a mobile app.
+        /// For successful flow, the button will take the payer back the billing
+        /// request flow where they will see the success screen. For failure,
+        /// button will take the payer to url being provided against exit_uri
+        /// field.
+        /// </summary>
+        [JsonProperty("show_redirect_buttons")]
+        public bool? ShowRedirectButtons { get; set; }
     }
     
     /// <summary>

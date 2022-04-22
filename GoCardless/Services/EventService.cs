@@ -248,6 +248,14 @@ namespace GoCardless.Services
         }
 
         /// <summary>
+        /// ID of an [instalment
+        /// schedule](#core-endpoints-instalment-schedules). If specified, this
+        /// endpoint will return all events for the given instalment schedule.
+        /// </summary>
+        [JsonProperty("instalment_schedule")]
+        public string InstalmentSchedule { get; set; }
+
+        /// <summary>
         /// Number of records to return.
         /// </summary>
         [JsonProperty("limit")]

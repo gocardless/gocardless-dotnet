@@ -17,7 +17,11 @@ namespace GoCardless.Services
     /// Service class for working with institution resources.
     ///
     /// Institutions that are supported when creating [Bank
-    /// Authorisations](#billing-requests-bank-authorisations).
+    /// Authorisations](#billing-requests-bank-authorisations) for a particular
+    /// country or purpose.
+    /// 
+    /// Not all institutions support both Payment Initiation (PIS) and Account
+    /// Information (AIS) services.
     /// </summary>
 
     public class InstitutionService
@@ -34,7 +38,7 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a list of all supported institutions.
+        /// Returns a list of supported institutions.
         /// </summary>
         /// <param name="request">An optional `InstitutionListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -52,7 +56,7 @@ namespace GoCardless.Services
 
         
     /// <summary>
-    /// Returns a list of all supported institutions.
+    /// Returns a list of supported institutions.
     /// </summary>
     public class InstitutionListRequest
     {

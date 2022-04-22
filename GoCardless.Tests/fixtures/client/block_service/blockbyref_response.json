@@ -18,5 +18,9 @@
         "created_at": "2021-03-25T17:26:28.305Z",
         "updated_at": "2021-03-25T17:26:28.305Z"
       }
-    ]
+    ],
+    "meta": {
+      "cursors": {"before": null, "after": null},
+      "limit": 50
+    }
   }

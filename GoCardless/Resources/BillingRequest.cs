@@ -40,6 +40,13 @@ namespace GoCardless.Resources
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
+        /// If true, this billing request can fallback from instant payment to
+        /// direct debit.
+        /// </summary>
+        [JsonProperty("fallback_enabled")]
+        public bool? FallbackEnabled { get; set; }
+
+        /// <summary>
         /// Unique identifier, beginning with "BRQ".
         /// </summary>
         [JsonProperty("id")]
@@ -79,11 +86,11 @@ namespace GoCardless.Resources
         /// <summary>
         /// One of:
         /// <ul>
-        /// <li>`pending`: the billing_request is pending and can be used</li>
-        /// <li>`ready_to_fulfil`: the billing_request is ready to fulfil</li>
-        /// <li>`fulfilled`: the billing_request has been fulfilled and a
+        /// <li>`pending`: the billing request is pending and can be used</li>
+        /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
+        /// <li>`fulfilled`: the billing request has been fulfilled and a
         /// payment created</li>
-        /// <li>`cancelled`: the billing_request has been cancelled and cannot
+        /// <li>`cancelled`: the billing request has been cancelled and cannot
         /// be used</li>
         /// </ul>
         /// </summary>
@@ -190,6 +197,12 @@ namespace GoCardless.Resources
         /// <summary>`adapter` with a value of "plaid_ais"</summary>
         [EnumMember(Value = "plaid_ais")]
         PlaidAis,
+        /// <summary>`adapter` with a value of "open_banking_gateway_ais"</summary>
+        [EnumMember(Value = "open_banking_gateway_ais")]
+        OpenBankingGatewayAis,
+        /// <summary>`adapter` with a value of "bankid_ais"</summary>
+        [EnumMember(Value = "bankid_ais")]
+        BankidAis,
     }
 
     /// <summary>
@@ -266,6 +279,9 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "confirm_payer_details"</summary>
         [EnumMember(Value = "confirm_payer_details")]
         ConfirmPayerDetails,
+        /// <summary>`type` with a value of "select_institution"</summary>
+        [EnumMember(Value = "select_institution")]
+        SelectInstitution,
     }
 
     /// <summary>
@@ -356,6 +372,13 @@ namespace GoCardless.Resources
         public BillingRequestMandateRequestLinks Links { get; set; }
 
         /// <summary>
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<string, string> Metadata { get; set; }
+
+        /// <summary>
         /// A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz",
         /// "betalingsservice", "pad" and "sepa_core" are supported.
         /// </summary>
@@ -367,15 +390,29 @@ namespace GoCardless.Resources
         /// <ul>
         ///   <li>`minimum`: only verify if absolutely required, such as when
         /// part of scheme rules</li>
-        ///   <li>`recommended`: in addition to minimum, use the GoCardless risk
-        /// engine to decide an appropriate level of verification</li>
+        ///   <li>`recommended`: in addition to `minimum`, use the GoCardless
+        /// payment intelligence solution to decide if a payer should be
+        /// verified</li>
         ///   <li>`when_available`: if verification mechanisms are available,
         /// use them</li>
         ///   <li>`always`: as `when_available`, but fail to create the Billing
         /// Request if a mechanism isn't available</li>
         /// </ul>
         /// 
-        /// If not provided, the `recommended` level is chosen.
+        /// By default, all Billing Requests use the `recommended` verification
+        /// preference. It uses GoCardless payment intelligence solution to
+        /// determine if a payer is fraudulent or not. The verification
+        /// mechanism is based on the response and the payer may be asked to
+        /// verify themselves. If the feature is not available, `recommended`
+        /// behaves like `minimum`.
+        /// 
+        /// If you never wish to take advantage of our reduced risk products and
+        /// Verified Mandates as they are released in new schemes, please use
+        /// the `minimum` verification preference.
+        /// 
+        /// See [Billing Requests: Creating Verified
+        /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
+        /// for more information.
         /// </summary>
         [JsonProperty("verify")]
         public BillingRequestMandateRequestVerify? Verify { get; set; }
@@ -399,14 +436,24 @@ namespace GoCardless.Resources
     /// Verification preference for the mandate. One of:
     /// <ul>
     ///   <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
-    ///   <li>`recommended`: in addition to minimum, use the GoCardless risk engine to decide an
-    /// appropriate level of verification</li>
+    ///   <li>`recommended`: in addition to `minimum`, use the GoCardless payment intelligence
+    /// solution to decide if a payer should be verified</li>
     ///   <li>`when_available`: if verification mechanisms are available, use them</li>
     ///   <li>`always`: as `when_available`, but fail to create the Billing Request if a mechanism
     /// isn't available</li>
     /// </ul>
     /// 
-    /// If not provided, the `recommended` level is chosen.
+    /// By default, all Billing Requests use the `recommended` verification preference. It uses
+    /// GoCardless payment intelligence solution to determine if a payer is fraudulent or not. The
+    /// verification mechanism is based on the response and the payer may be asked to verify
+    /// themselves. If the feature is not available, `recommended` behaves like `minimum`.
+    /// 
+    /// If you never wish to take advantage of our reduced risk products and Verified Mandates as
+    /// they are released in new schemes, please use the `minimum` verification preference.
+    /// 
+    /// See [Billing Requests: Creating Verified
+    /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
+    /// for more information.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestMandateRequestVerify {
@@ -452,7 +499,8 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code.
+        /// currency code. `GBP` and `EUR` supported; `GBP` with your customers
+        /// in the UK and for `EUR` with your customers in Germany only.
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
@@ -472,8 +520,20 @@ namespace GoCardless.Resources
         public BillingRequestPaymentRequestLinks Links { get; set; }
 
         /// <summary>
-        /// A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz",
-        /// "betalingsservice", "pad" and "sepa_core" are supported.
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<string, string> Metadata { get; set; }
+
+        /// <summary>
+        /// (Optional) A scheme used for Open Banking payments. Currently
+        /// `faster_payments` is supported in the UK (GBP) and
+        /// `sepa_credit_transfer` and `sepa_instant_credit_transfer` are
+        /// supported in Germany (EUR). In Germany, `sepa_credit_transfer` is
+        /// used as the default. Please be aware that
+        /// `sepa_instant_credit_transfer` may incur an additional fee for your
+        /// customer.
         /// </summary>
         [JsonProperty("scheme")]
         public string Scheme { get; set; }
@@ -814,10 +874,10 @@ namespace GoCardless.Resources
     /// <summary>
     /// One of:
     /// <ul>
-    /// <li>`pending`: the billing_request is pending and can be used</li>
-    /// <li>`ready_to_fulfil`: the billing_request is ready to fulfil</li>
-    /// <li>`fulfilled`: the billing_request has been fulfilled and a payment created</li>
-    /// <li>`cancelled`: the billing_request has been cancelled and cannot be used</li>
+    /// <li>`pending`: the billing request is pending and can be used</li>
+    /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
+    /// <li>`fulfilled`: the billing request has been fulfilled and a payment created</li>
+    /// <li>`cancelled`: the billing request has been cancelled and cannot be used</li>
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]

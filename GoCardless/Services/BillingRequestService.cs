@@ -44,7 +44,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your billing_requests.
+        /// your billing requests.
         /// </summary>
         /// <param name="request">An optional `BillingRequestListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -217,8 +217,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// This is needed when you have mandate_request. As a scheme compliance
-        /// rule we are required to
+        /// This is needed when you have a mandate request. As a scheme
+        /// compliance rule we are required to
         /// allow the payer to crosscheck the details entered by them and
         /// confirm it.
         /// </summary>  
@@ -282,12 +282,33 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/notify", urlParams, request, null, "data", customiseRequestMessage);
         }
+
+        /// <summary>
+        /// Triggers a fallback from the open-banking flow to direct debit.
+        /// Note, the billing request must have fallback enabled.
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="request">An optional `BillingRequestFallbackRequest` representing the body for this fallback request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single billing request resource</returns>
+        public Task<BillingRequestResponse> FallbackAsync(string identity, BillingRequestFallbackRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new BillingRequestFallbackRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/fallback", urlParams, request, null, "data", customiseRequestMessage);
+        }
     }
 
         
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// billing_requests.
+    /// billing requests.
     /// </summary>
     public class BillingRequestListRequest
     {
@@ -357,11 +378,11 @@ namespace GoCardless.Services
         /// <summary>
         /// One of:
         /// <ul>
-        /// <li>`pending`: the billing_request is pending and can be used</li>
-        /// <li>`ready_to_fulfil`: the billing_request is ready to fulfil</li>
-        /// <li>`fulfilled`: the billing_request has been fulfilled and a
+        /// <li>`pending`: the billing request is pending and can be used</li>
+        /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
+        /// <li>`fulfilled`: the billing request has been fulfilled and a
         /// payment created</li>
-        /// <li>`cancelled`: the billing_request has been cancelled and cannot
+        /// <li>`cancelled`: the billing request has been cancelled and cannot
         /// be used</li>
         /// </ul>
         /// </summary>
@@ -371,11 +392,11 @@ namespace GoCardless.Services
         /// <summary>
         /// One of:
         /// <ul>
-        /// <li>`pending`: the billing_request is pending and can be used</li>
-        /// <li>`ready_to_fulfil`: the billing_request is ready to fulfil</li>
-        /// <li>`fulfilled`: the billing_request has been fulfilled and a
+        /// <li>`pending`: the billing request is pending and can be used</li>
+        /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
+        /// <li>`fulfilled`: the billing request has been fulfilled and a
         /// payment created</li>
-        /// <li>`cancelled`: the billing_request has been cancelled and cannot
+        /// <li>`cancelled`: the billing request has been cancelled and cannot
         /// be used</li>
         /// </ul>
         /// </summary>
@@ -404,6 +425,13 @@ namespace GoCardless.Services
     /// </summary>
     public class BillingRequestCreateRequest : IHasIdempotencyKey
     {
+
+        /// <summary>
+        /// If true, this billing request can fallback from instant payment to
+        /// direct debit.
+        /// </summary>
+        [JsonProperty("fallback_enabled")]
+        public bool? FallbackEnabled { get; set; }
 
         /// <summary>
         /// Linked resources.
@@ -456,12 +484,97 @@ namespace GoCardless.Services
             public string Currency { get; set; }
 
             /// <summary>
+            /// Key-value store of custom data. Up to 3 keys are permitted, with
+            /// key names up to 50 characters and values up to 500 characters.
+            /// </summary>
+            [JsonProperty("metadata")]
+            public IDictionary<String, String> Metadata { get; set; }
+
+            /// <summary>
             /// A Direct Debit scheme. Currently "ach", "bacs", "becs",
             /// "becs_nz", "betalingsservice", "pad" and "sepa_core" are
             /// supported.
             /// </summary>
             [JsonProperty("scheme")]
             public string Scheme { get; set; }
+
+            /// <summary>
+            /// Verification preference for the mandate. One of:
+            /// <ul>
+            ///   <li>`minimum`: only verify if absolutely required, such as
+            /// when part of scheme rules</li>
+            ///   <li>`recommended`: in addition to `minimum`, use the
+            /// GoCardless payment intelligence solution to decide if a payer
+            /// should be verified</li>
+            ///   <li>`when_available`: if verification mechanisms are
+            /// available, use them</li>
+            ///   <li>`always`: as `when_available`, but fail to create the
+            /// Billing Request if a mechanism isn't available</li>
+            /// </ul>
+            /// 
+            /// By default, all Billing Requests use the `recommended`
+            /// verification preference. It uses GoCardless payment intelligence
+            /// solution to determine if a payer is fraudulent or not. The
+            /// verification mechanism is based on the response and the payer
+            /// may be asked to verify themselves. If the feature is not
+            /// available, `recommended` behaves like `minimum`.
+            /// 
+            /// If you never wish to take advantage of our reduced risk products
+            /// and Verified Mandates as they are released in new schemes,
+            /// please use the `minimum` verification preference.
+            /// 
+            /// See [Billing Requests: Creating Verified
+            /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
+            /// for more information.
+            /// </summary>
+            [JsonProperty("verify")]
+            public BillingRequestVerify? Verify { get; set; }
+        /// <summary>
+        /// Verification preference for the mandate. One of:
+        /// <ul>
+        ///   <li>`minimum`: only verify if absolutely required, such as when
+        /// part of scheme rules</li>
+        ///   <li>`recommended`: in addition to `minimum`, use the GoCardless
+        /// payment intelligence solution to decide if a payer should be
+        /// verified</li>
+        ///   <li>`when_available`: if verification mechanisms are available,
+        /// use them</li>
+        ///   <li>`always`: as `when_available`, but fail to create the Billing
+        /// Request if a mechanism isn't available</li>
+        /// </ul>
+        /// 
+        /// By default, all Billing Requests use the `recommended` verification
+        /// preference. It uses GoCardless payment intelligence solution to
+        /// determine if a payer is fraudulent or not. The verification
+        /// mechanism is based on the response and the payer may be asked to
+        /// verify themselves. If the feature is not available, `recommended`
+        /// behaves like `minimum`.
+        /// 
+        /// If you never wish to take advantage of our reduced risk products and
+        /// Verified Mandates as they are released in new schemes, please use
+        /// the `minimum` verification preference.
+        /// 
+        /// See [Billing Requests: Creating Verified
+        /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
+        /// for more information.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BillingRequestVerify
+        {
+    
+            /// <summary>`verify` with a value of "minimum"</summary>
+            [EnumMember(Value = "minimum")]
+            Minimum,
+            /// <summary>`verify` with a value of "recommended"</summary>
+            [EnumMember(Value = "recommended")]
+            Recommended,
+            /// <summary>`verify` with a value of "when_available"</summary>
+            [EnumMember(Value = "when_available")]
+            WhenAvailable,
+            /// <summary>`verify` with a value of "always"</summary>
+            [EnumMember(Value = "always")]
+            Always,
+        }
         }
 
         /// <summary>
@@ -496,7 +609,9 @@ namespace GoCardless.Services
 
             /// <summary>
             /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-            /// currency code.
+            /// currency code. `GBP` and `EUR` supported; `GBP` with your
+            /// customers in the UK and for `EUR` with your customers in Germany
+            /// only.
             /// </summary>
             [JsonProperty("currency")]
             public string Currency { get; set; }
@@ -508,6 +623,25 @@ namespace GoCardless.Services
             /// </summary>
             [JsonProperty("description")]
             public string Description { get; set; }
+
+            /// <summary>
+            /// Key-value store of custom data. Up to 3 keys are permitted, with
+            /// key names up to 50 characters and values up to 500 characters.
+            /// </summary>
+            [JsonProperty("metadata")]
+            public IDictionary<String, String> Metadata { get; set; }
+
+            /// <summary>
+            /// (Optional) A scheme used for Open Banking payments. Currently
+            /// `faster_payments` is supported in the UK (GBP) and
+            /// `sepa_credit_transfer` and `sepa_instant_credit_transfer` are
+            /// supported in Germany (EUR). In Germany, `sepa_credit_transfer`
+            /// is used as the default. Please be aware that
+            /// `sepa_instant_credit_transfer` may incur an additional fee for
+            /// your customer.
+            /// </summary>
+            [JsonProperty("scheme")]
+            public string Scheme { get; set; }
         }
 
         /// <summary>
@@ -819,7 +953,7 @@ namespace GoCardless.Services
 
         
     /// <summary>
-    /// This is needed when you have mandate_request. As a scheme compliance
+    /// This is needed when you have a mandate request. As a scheme compliance
     /// rule we are required to
     /// allow the payer to crosscheck the details entered by them and confirm
     /// it.
@@ -884,6 +1018,15 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("redirect_uri")]
         public string RedirectUri { get; set; }
+    }
+
+        
+    /// <summary>
+    /// Triggers a fallback from the open-banking flow to direct debit. Note,
+    /// the billing request must have fallback enabled.
+    /// </summary>
+    public class BillingRequestFallbackRequest
+    {
     }
 
     /// <summary>

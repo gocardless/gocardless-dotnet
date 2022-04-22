@@ -139,6 +139,15 @@ namespace GoCardless.Resources
     public class RedirectFlowLinks
     {
         /// <summary>
+        /// ID of [billing request](#billing-requests-billing-requests) that a
+        /// redirect flow can create.<br />**Note**: The redirect flow will only
+        /// create a billing request in the event the redirect flow is eligible
+        /// to send the payer down this new and improved flow
+        /// </summary>
+        [JsonProperty("billing_request")]
+        public string BillingRequest { get; set; }
+
+        /// <summary>
         /// The [creditor](#core-endpoints-creditors) for whom the mandate will
         /// be created. The `name` of the creditor will be displayed on the
         /// payment page.
