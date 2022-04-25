@@ -427,8 +427,9 @@ namespace GoCardless.Services
     {
 
         /// <summary>
-        /// If true, this billing request can fallback from instant payment to
-        /// direct debit.
+        /// (Optional) If true, this billing request can fallback from instant
+        /// payment to direct debit. Should not be set if GoCardless payment
+        /// intelligence feature is used. 
         /// </summary>
         [JsonProperty("fallback_enabled")]
         public bool? FallbackEnabled { get; set; }
