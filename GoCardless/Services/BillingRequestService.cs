@@ -176,6 +176,16 @@ namespace GoCardless.Services
         /// the bank account is valid for the billing request scheme before
         /// creating
         /// and attaching it.
+        /// 
+        /// _ACH scheme_ For compliance reasons, an extra validation step is
+        /// done using
+        /// a third-party provider to make sure the customer's bank account can
+        /// accept
+        /// Direct Debit. If a bank account is discovered to be closed or
+        /// invalid, the
+        /// customer is requested to adjust the account number/routing number
+        /// and
+        /// succeed in this check to continue with the flow.
         /// </summary>  
         /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
         /// <param name="request">An optional `BillingRequestCollectBankAccountRequest` representing the body for this collect_bank_account request.</param>
@@ -831,6 +841,15 @@ namespace GoCardless.Services
     /// The endpoint takes the same payload as Customer Bank Accounts, but check
     /// the bank account is valid for the billing request scheme before creating
     /// and attaching it.
+    /// 
+    /// _ACH scheme_ For compliance reasons, an extra validation step is done
+    /// using
+    /// a third-party provider to make sure the customer's bank account can
+    /// accept
+    /// Direct Debit. If a bank account is discovered to be closed or invalid,
+    /// the
+    /// customer is requested to adjust the account number/routing number and
+    /// succeed in this check to continue with the flow.
     /// </summary>
     public class BillingRequestCollectBankAccountRequest
     {
