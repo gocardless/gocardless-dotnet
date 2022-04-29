@@ -93,6 +93,8 @@ namespace GoCardless.Resources
         /// One of:
         /// <ul>
         /// <li>`pending`: the billing request is pending and can be used</li>
+        /// <li>`authorised_with_bank`: the billing request is authorised with
+        /// bank</li>
         /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
         /// <li>`fulfilled`: the billing request has been fulfilled and a
         /// payment created</li>
@@ -881,6 +883,7 @@ namespace GoCardless.Resources
     /// One of:
     /// <ul>
     /// <li>`pending`: the billing request is pending and can be used</li>
+    /// <li>`authorised_with_bank`: the billing request is authorised with bank</li>
     /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
     /// <li>`fulfilled`: the billing request has been fulfilled and a payment created</li>
     /// <li>`cancelled`: the billing request has been cancelled and cannot be used</li>
@@ -895,6 +898,9 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "pending"</summary>
         [EnumMember(Value = "pending")]
         Pending,
+        /// <summary>`status` with a value of "authorised_with_bank"</summary>
+        [EnumMember(Value = "authorised_with_bank")]
+        AuthorisedWithBank,
         /// <summary>`status` with a value of "ready_to_fulfil"</summary>
         [EnumMember(Value = "ready_to_fulfil")]
         ReadyToFulfil,
