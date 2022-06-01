@@ -113,6 +113,12 @@ namespace GoCardless.Resources
     public class BillingRequestAction
     {
         /// <summary>
+        /// List of currencies the current mandate supports
+        /// </summary>
+        [JsonProperty("available_currencies")]
+        public List<string> AvailableCurrencies { get; set; }
+
+        /// <summary>
         /// Describes the behaviour of bank authorisations, for the
         /// bank_authorisation action
         /// </summary>
@@ -157,6 +163,21 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; }
+    }
+    
+    /// <summary>
+    /// Represents a billing request action available currency resource.
+    ///
+    /// List of currencies the current mandate supports
+    /// </summary>
+    public class BillingRequestActionAvailableCurrencies
+    {
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code.
+        /// </summary>
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
     }
     
     /// <summary>
