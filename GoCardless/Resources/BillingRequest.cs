@@ -232,6 +232,9 @@ namespace GoCardless.Resources
         /// <summary>`adapter` with a value of "bankid_ais"</summary>
         [EnumMember(Value = "bankid_ais")]
         BankidAis,
+        /// <summary>`adapter` with a value of "bank_pay_recurring"</summary>
+        [EnumMember(Value = "bank_pay_recurring")]
+        BankPayRecurring,
     }
 
     /// <summary>
