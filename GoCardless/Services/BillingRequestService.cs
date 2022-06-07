@@ -227,6 +227,29 @@ namespace GoCardless.Services
         }
 
         /// <summary>
+        /// This will allow for the updating of the currency and subsequently
+        /// the scheme if needed for a billing request
+        /// this will only be available for mandate only flows, it will not
+        /// support payments requests or plans
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="request">An optional `BillingRequestChooseCurrencyRequest` representing the body for this choose_currency request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single billing request resource</returns>
+        public Task<BillingRequestResponse> ChooseCurrencyAsync(string identity, BillingRequestChooseCurrencyRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new BillingRequestChooseCurrencyRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/choose_currency", urlParams, request, null, "data", customiseRequestMessage);
+        }
+
+        /// <summary>
         /// This is needed when you have a mandate request. As a scheme
         /// compliance rule we are required to
         /// allow the payer to crosscheck the details entered by them and
@@ -974,6 +997,32 @@ namespace GoCardless.Services
     /// </summary>
     public class BillingRequestFulfilRequest
     {
+
+        /// <summary>
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<String, String> Metadata { get; set; }
+    }
+
+        
+    /// <summary>
+    /// This will allow for the updating of the currency and subsequently the
+    /// scheme if needed for a billing request
+    /// this will only be available for mandate only flows, it will not support
+    /// payments requests or plans
+    /// </summary>
+    public class BillingRequestChooseCurrencyRequest
+    {
+
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        /// "SEK" and "USD" are supported.
+        /// </summary>
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
 
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
