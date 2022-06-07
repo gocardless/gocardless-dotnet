@@ -73,6 +73,13 @@ namespace GoCardless.Resources
         public bool? LockBankAccount { get; set; }
 
         /// <summary>
+        /// If true, the payer will not be able to edit their currency after its
+        /// been set for the flow.
+        /// </summary>
+        [JsonProperty("lock_currency")]
+        public bool? LockCurrency { get; set; }
+
+        /// <summary>
         /// If true, the payer will not be able to edit their customer details
         /// within the flow. If the customer details are collected as part of
         /// bank_authorisation then GC will set this value to true mid flow
