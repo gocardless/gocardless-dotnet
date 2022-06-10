@@ -370,6 +370,12 @@ namespace GoCardless.Resources
         public string MandateRequestMandate { get; set; }
 
         /// <summary>
+        /// ID of the associated organisation.
+        /// </summary>
+        [JsonProperty("organisation")]
+        public string Organisation { get; set; }
+
+        /// <summary>
         /// (Optional) ID of the associated payment request
         /// </summary>
         [JsonProperty("payment_request")]
