@@ -21,6 +21,14 @@ namespace GoCardless.Resources
     public class Institution
     {
         /// <summary>
+        /// Flag to show if the institution supports redirection to its
+        /// authorisation flow or if a provider's one is being used. The bank
+        /// authorisation screen on the UI is visible based on this property.
+        /// </summary>
+        [JsonProperty("bank_redirect")]
+        public bool? BankRedirect { get; set; }
+
+        /// <summary>
         /// [ISO
         /// 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
         /// alpha-2 code. The country code of the institution.

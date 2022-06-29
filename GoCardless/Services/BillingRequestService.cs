@@ -176,6 +176,16 @@ namespace GoCardless.Services
         /// the bank account is valid for the billing request scheme before
         /// creating
         /// and attaching it.
+        /// 
+        /// _ACH scheme_ For compliance reasons, an extra validation step is
+        /// done using
+        /// a third-party provider to make sure the customer's bank account can
+        /// accept
+        /// Direct Debit. If a bank account is discovered to be closed or
+        /// invalid, the
+        /// customer is requested to adjust the account number/routing number
+        /// and
+        /// succeed in this check to continue with the flow.
         /// </summary>  
         /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
         /// <param name="request">An optional `BillingRequestCollectBankAccountRequest` representing the body for this collect_bank_account request.</param>
@@ -214,6 +224,29 @@ namespace GoCardless.Services
             };
 
             return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/fulfil", urlParams, request, null, "data", customiseRequestMessage);
+        }
+
+        /// <summary>
+        /// This will allow for the updating of the currency and subsequently
+        /// the scheme if needed for a billing request
+        /// this will only be available for mandate only flows, it will not
+        /// support payments requests or plans
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="request">An optional `BillingRequestChooseCurrencyRequest` representing the body for this choose_currency request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single billing request resource</returns>
+        public Task<BillingRequestResponse> ChooseCurrencyAsync(string identity, BillingRequestChooseCurrencyRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new BillingRequestChooseCurrencyRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/choose_currency", urlParams, request, null, "data", customiseRequestMessage);
         }
 
         /// <summary>
@@ -380,6 +413,8 @@ namespace GoCardless.Services
         /// <ul>
         /// <li>`pending`: the billing request is pending and can be used</li>
         /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
+        /// <li>`fulfilling`: the billing request is currently undergoing
+        /// fulfilment</li>
         /// <li>`fulfilled`: the billing request has been fulfilled and a
         /// payment created</li>
         /// <li>`cancelled`: the billing request has been cancelled and cannot
@@ -394,6 +429,8 @@ namespace GoCardless.Services
         /// <ul>
         /// <li>`pending`: the billing request is pending and can be used</li>
         /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
+        /// <li>`fulfilling`: the billing request is currently undergoing
+        /// fulfilment</li>
         /// <li>`fulfilled`: the billing request has been fulfilled and a
         /// payment created</li>
         /// <li>`cancelled`: the billing request has been cancelled and cannot
@@ -410,6 +447,9 @@ namespace GoCardless.Services
             /// <summary>`status` with a value of "ready_to_fulfil"</summary>
             [EnumMember(Value = "ready_to_fulfil")]
             ReadyToFulfil,
+            /// <summary>`status` with a value of "fulfilling"</summary>
+            [EnumMember(Value = "fulfilling")]
+            Fulfilling,
             /// <summary>`status` with a value of "fulfilled"</summary>
             [EnumMember(Value = "fulfilled")]
             Fulfilled,
@@ -427,8 +467,14 @@ namespace GoCardless.Services
     {
 
         /// <summary>
-        /// If true, this billing request can fallback from instant payment to
-        /// direct debit.
+        /// (Optional) If true, this billing request can fallback from instant
+        /// payment to direct debit.
+        /// Should not be set if GoCardless payment intelligence feature is
+        /// used.
+        /// 
+        /// See [Billing Requests: Retain customers with
+        /// Fallbacks](https://developer.gocardless.com/getting-started/billing-requests/retain-customers-with-fallbacks/)
+        /// for more information.
         /// </summary>
         [JsonProperty("fallback_enabled")]
         public bool? FallbackEnabled { get; set; }
@@ -795,6 +841,15 @@ namespace GoCardless.Services
             public string DanishIdentityNumber { get; set; }
 
             /// <summary>
+            /// For ACH customers only. Required for ACH customers. A string
+            /// containing the IP address of the payer to whom the mandate
+            /// belongs (i.e. as a result of their completion of a mandate setup
+            /// flow in their browser).
+            /// </summary>
+            [JsonProperty("ip_address")]
+            public string IpAddress { get; set; }
+
+            /// <summary>
             /// The customer's postal code.
             /// </summary>
             [JsonProperty("postal_code")]
@@ -830,6 +885,15 @@ namespace GoCardless.Services
     /// The endpoint takes the same payload as Customer Bank Accounts, but check
     /// the bank account is valid for the billing request scheme before creating
     /// and attaching it.
+    /// 
+    /// _ACH scheme_ For compliance reasons, an extra validation step is done
+    /// using
+    /// a third-party provider to make sure the customer's bank account can
+    /// accept
+    /// Direct Debit. If a bank account is discovered to be closed or invalid,
+    /// the
+    /// customer is requested to adjust the account number/routing number and
+    /// succeed in this check to continue with the flow.
     /// </summary>
     public class BillingRequestCollectBankAccountRequest
     {
@@ -942,6 +1006,32 @@ namespace GoCardless.Services
     /// </summary>
     public class BillingRequestFulfilRequest
     {
+
+        /// <summary>
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<String, String> Metadata { get; set; }
+    }
+
+        
+    /// <summary>
+    /// This will allow for the updating of the currency and subsequently the
+    /// scheme if needed for a billing request
+    /// this will only be available for mandate only flows, it will not support
+    /// payments requests or plans
+    /// </summary>
+    public class BillingRequestChooseCurrencyRequest
+    {
+
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        /// "SEK" and "USD" are supported.
+        /// </summary>
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
 
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key

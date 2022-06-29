@@ -40,8 +40,14 @@ namespace GoCardless.Resources
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        /// If true, this billing request can fallback from instant payment to
-        /// direct debit.
+        /// (Optional) If true, this billing request can fallback from instant
+        /// payment to direct debit.
+        /// Should not be set if GoCardless payment intelligence feature is
+        /// used.
+        /// 
+        /// See [Billing Requests: Retain customers with
+        /// Fallbacks](https://developer.gocardless.com/getting-started/billing-requests/retain-customers-with-fallbacks/)
+        /// for more information.
         /// </summary>
         [JsonProperty("fallback_enabled")]
         public bool? FallbackEnabled { get; set; }
@@ -88,6 +94,8 @@ namespace GoCardless.Resources
         /// <ul>
         /// <li>`pending`: the billing request is pending and can be used</li>
         /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
+        /// <li>`fulfilling`: the billing request is currently undergoing
+        /// fulfilment</li>
         /// <li>`fulfilled`: the billing request has been fulfilled and a
         /// payment created</li>
         /// <li>`cancelled`: the billing request has been cancelled and cannot
@@ -104,6 +112,12 @@ namespace GoCardless.Resources
     /// </summary>
     public class BillingRequestAction
     {
+        /// <summary>
+        /// List of currencies the current mandate supports
+        /// </summary>
+        [JsonProperty("available_currencies")]
+        public List<string> AvailableCurrencies { get; set; }
+
         /// <summary>
         /// Describes the behaviour of bank authorisations, for the
         /// bank_authorisation action
@@ -149,6 +163,21 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; }
+    }
+    
+    /// <summary>
+    /// Represents a billing request action available currency resource.
+    ///
+    /// List of currencies the current mandate supports
+    /// </summary>
+    public class BillingRequestActionAvailableCurrencies
+    {
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code.
+        /// </summary>
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
     }
     
     /// <summary>
@@ -203,6 +232,9 @@ namespace GoCardless.Resources
         /// <summary>`adapter` with a value of "bankid_ais"</summary>
         [EnumMember(Value = "bankid_ais")]
         BankidAis,
+        /// <summary>`adapter` with a value of "bank_pay_recurring"</summary>
+        [EnumMember(Value = "bank_pay_recurring")]
+        BankPayRecurring,
     }
 
     /// <summary>
@@ -336,6 +368,12 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("mandate_request_mandate")]
         public string MandateRequestMandate { get; set; }
+
+        /// <summary>
+        /// ID of the associated organisation.
+        /// </summary>
+        [JsonProperty("organisation")]
+        public string Organisation { get; set; }
 
         /// <summary>
         /// (Optional) ID of the associated payment request
@@ -876,6 +914,7 @@ namespace GoCardless.Resources
     /// <ul>
     /// <li>`pending`: the billing request is pending and can be used</li>
     /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
+    /// <li>`fulfilling`: the billing request is currently undergoing fulfilment</li>
     /// <li>`fulfilled`: the billing request has been fulfilled and a payment created</li>
     /// <li>`cancelled`: the billing request has been cancelled and cannot be used</li>
     /// </ul>
@@ -892,6 +931,9 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "ready_to_fulfil"</summary>
         [EnumMember(Value = "ready_to_fulfil")]
         ReadyToFulfil,
+        /// <summary>`status` with a value of "fulfilling"</summary>
+        [EnumMember(Value = "fulfilling")]
+        Fulfilling,
         /// <summary>`status` with a value of "fulfilled"</summary>
         [EnumMember(Value = "fulfilled")]
         Fulfilled,
