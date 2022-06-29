@@ -841,6 +841,15 @@ namespace GoCardless.Services
             public string DanishIdentityNumber { get; set; }
 
             /// <summary>
+            /// For ACH customers only. Required for ACH customers. A string
+            /// containing the IP address of the payer to whom the mandate
+            /// belongs (i.e. as a result of their completion of a mandate setup
+            /// flow in their browser).
+            /// </summary>
+            [JsonProperty("ip_address")]
+            public string IpAddress { get; set; }
+
+            /// <summary>
             /// The customer's postal code.
             /// </summary>
             [JsonProperty("postal_code")]
