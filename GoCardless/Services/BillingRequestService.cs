@@ -538,8 +538,8 @@ namespace GoCardless.Services
 
             /// <summary>
             /// A Direct Debit scheme. Currently "ach", "bacs", "becs",
-            /// "becs_nz", "betalingsservice", "pad" and "sepa_core" are
-            /// supported.
+            /// "becs_nz", "betalingsservice", "pad", "pay_to" and "sepa_core"
+            /// are supported.
             /// </summary>
             [JsonProperty("scheme")]
             public string Scheme { get; set; }

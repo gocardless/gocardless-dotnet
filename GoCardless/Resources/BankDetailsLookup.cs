@@ -74,5 +74,8 @@ namespace GoCardless.Resources
         /// <summary>`available_debit_scheme` with a value of "sepa_core"</summary>
         [EnumMember(Value = "sepa_core")]
         SepaCore,
+        /// <summary>`available_debit_scheme` with a value of "pay_to"</summary>
+        [EnumMember(Value = "pay_to")]
+        PayTo,
     }
 }
