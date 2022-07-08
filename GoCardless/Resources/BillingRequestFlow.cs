@@ -90,6 +90,24 @@ namespace GoCardless.Resources
         public bool? LockCustomerDetails { get; set; }
 
         /// <summary>
+        /// Bank account information used to prefill the payment page so your
+        /// customer doesn't have to re-type details you already hold about
+        /// them. It will be stored unvalidated and the customer will be able to
+        /// review and amend it before completing the form.
+        /// </summary>
+        [JsonProperty("prefilled_bank_account")]
+        public BillingRequestFlowPrefilledBankAccount PrefilledBankAccount { get; set; }
+
+        /// <summary>
+        /// Customer information used to prefill the payment page so your
+        /// customer doesn't have to re-type details you already hold about
+        /// them. It will be stored unvalidated and the customer will be able to
+        /// review and amend it before completing the form.
+        /// </summary>
+        [JsonProperty("prefilled_customer")]
+        public BillingRequestFlowPrefilledCustomer PrefilledCustomer { get; set; }
+
+        /// <summary>
         /// URL that the payer can be redirected to after completing the request
         /// flow.
         /// </summary>
@@ -126,6 +144,150 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("billing_request")]
         public string BillingRequest { get; set; }
+    }
+    
+    /// <summary>
+    /// Represents a billing request flow prefilled bank account resource.
+    ///
+    /// Bank account information used to prefill the payment page so your
+    /// customer doesn't have to re-type details you already hold about them. It
+    /// will be stored unvalidated and the customer will be able to review and
+    /// amend it before completing the form.
+    /// </summary>
+    public class BillingRequestFlowPrefilledBankAccount
+    {
+        /// <summary>
+        /// Bank account type for USD-denominated bank accounts. Must not be
+        /// provided for bank accounts in other currencies. See [local
+        /// details](#local-bank-details-united-states) for more information.
+        /// </summary>
+        [JsonProperty("account_type")]
+        public BillingRequestFlowPrefilledBankAccountAccountType? AccountType { get; set; }
+    }
+    
+    /// <summary>
+    /// Bank account type for USD-denominated bank accounts. Must not be provided for bank accounts
+    /// in other currencies. See [local details](#local-bank-details-united-states) for more
+    /// information.
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestFlowPrefilledBankAccountAccountType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`account_type` with a value of "savings"</summary>
+        [EnumMember(Value = "savings")]
+        Savings,
+        /// <summary>`account_type` with a value of "checking"</summary>
+        [EnumMember(Value = "checking")]
+        Checking,
+    }
+
+    /// <summary>
+    /// Represents a billing request flow prefilled customer resource.
+    ///
+    /// Customer information used to prefill the payment page so your customer
+    /// doesn't have to re-type details you already hold about them. It will be
+    /// stored unvalidated and the customer will be able to review and amend it
+    /// before completing the form.
+    /// </summary>
+    public class BillingRequestFlowPrefilledCustomer
+    {
+        /// <summary>
+        /// The first line of the customer's address.
+        /// </summary>
+        [JsonProperty("address_line1")]
+        public string AddressLine1 { get; set; }
+
+        /// <summary>
+        /// The second line of the customer's address.
+        /// </summary>
+        [JsonProperty("address_line2")]
+        public string AddressLine2 { get; set; }
+
+        /// <summary>
+        /// The third line of the customer's address.
+        /// </summary>
+        [JsonProperty("address_line3")]
+        public string AddressLine3 { get; set; }
+
+        /// <summary>
+        /// The city of the customer's address.
+        /// </summary>
+        [JsonProperty("city")]
+        public string City { get; set; }
+
+        /// <summary>
+        /// Customer's company name. Company name should only be provided if
+        /// `given_name` and `family_name` are null.
+        /// </summary>
+        [JsonProperty("company_name")]
+        public string CompanyName { get; set; }
+
+        /// <summary>
+        /// [ISO 3166-1 alpha-2
+        /// code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+        /// </summary>
+        [JsonProperty("country_code")]
+        public string CountryCode { get; set; }
+
+        /// <summary>
+        /// For Danish customers only. The civic/company number (CPR or CVR) of
+        /// the customer.
+        /// </summary>
+        [JsonProperty("danish_identity_number")]
+        public string DanishIdentityNumber { get; set; }
+
+        /// <summary>
+        /// Customer's email address.
+        /// </summary>
+        [JsonProperty("email")]
+        public string Email { get; set; }
+
+        /// <summary>
+        /// Customer's surname.
+        /// </summary>
+        [JsonProperty("family_name")]
+        public string FamilyName { get; set; }
+
+        /// <summary>
+        /// Customer's first name.
+        /// </summary>
+        [JsonProperty("given_name")]
+        public string GivenName { get; set; }
+
+        /// <summary>
+        /// [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+        /// code.
+        /// </summary>
+        [JsonProperty("language")]
+        public string Language { get; set; }
+
+        /// <summary>
+        /// For New Zealand customers only.
+        /// </summary>
+        [JsonProperty("phone_number")]
+        public string PhoneNumber { get; set; }
+
+        /// <summary>
+        /// The customer's postal code.
+        /// </summary>
+        [JsonProperty("postal_code")]
+        public string PostalCode { get; set; }
+
+        /// <summary>
+        /// The customer's address region, county or department.
+        /// </summary>
+        [JsonProperty("region")]
+        public string Region { get; set; }
+
+        /// <summary>
+        /// For Swedish customers only. The civic/company number (personnummer,
+        /// samordningsnummer, or organisationsnummer) of the customer.
+        /// </summary>
+        [JsonProperty("swedish_identity_number")]
+        public string SwedishIdentityNumber { get; set; }
     }
     
 }

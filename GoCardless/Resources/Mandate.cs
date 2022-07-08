@@ -89,6 +89,8 @@ namespace GoCardless.Resources
         /// bank but has not been processed yet</li>
         /// <li>`active`: the mandate has been successfully set up by the
         /// customer's bank</li>
+        /// <li>`suspended_by_payer`: the mandate has been suspended by
+        /// payer</li>
         /// <li>`failed`: the mandate could not be created</li>
         /// <li>`cancelled`: the mandate has been cancelled</li>
         /// <li>`expired`: the mandate has expired due to dormancy</li>
@@ -144,6 +146,7 @@ namespace GoCardless.Resources
     /// <li>`submitted`: the mandate has been submitted to the customer's bank but has not been
     /// processed yet</li>
     /// <li>`active`: the mandate has been successfully set up by the customer's bank</li>
+    /// <li>`suspended_by_payer`: the mandate has been suspended by payer</li>
     /// <li>`failed`: the mandate could not be created</li>
     /// <li>`cancelled`: the mandate has been cancelled</li>
     /// <li>`expired`: the mandate has expired due to dormancy</li>
@@ -185,6 +188,9 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "blocked"</summary>
         [EnumMember(Value = "blocked")]
         Blocked,
+        /// <summary>`status` with a value of "suspended_by_payer"</summary>
+        [EnumMember(Value = "suspended_by_payer")]
+        SuspendedByPayer,
     }
 
 }

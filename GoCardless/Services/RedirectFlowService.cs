@@ -375,6 +375,9 @@ namespace GoCardless.Services
             /// <summary>`scheme` with a value of "sepa_core"</summary>
             [EnumMember(Value = "sepa_core")]
             SepaCore,
+            /// <summary>`scheme` with a value of "pay_to"</summary>
+            [EnumMember(Value = "pay_to")]
+            PayTo,
         }
 
         /// <summary>
