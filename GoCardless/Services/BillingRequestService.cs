@@ -537,6 +537,15 @@ namespace GoCardless.Services
             public IDictionary<String, String> Metadata { get; set; }
 
             /// <summary>
+            /// Unique reference. Different schemes have different length and
+            /// [character set](#appendix-character-sets) requirements.
+            /// GoCardless will generate a unique reference satisfying the
+            /// different scheme requirements if this field is left blank.
+            /// </summary>
+            [JsonProperty("reference")]
+            public string Reference { get; set; }
+
+            /// <summary>
             /// A Direct Debit scheme. Currently "ach", "bacs", "becs",
             /// "becs_nz", "betalingsservice", "pad", "pay_to" and "sepa_core"
             /// are supported.
