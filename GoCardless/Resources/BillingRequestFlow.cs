@@ -265,12 +265,6 @@ namespace GoCardless.Resources
         public string Language { get; set; }
 
         /// <summary>
-        /// For New Zealand customers only.
-        /// </summary>
-        [JsonProperty("phone_number")]
-        public string PhoneNumber { get; set; }
-
-        /// <summary>
         /// The customer's postal code.
         /// </summary>
         [JsonProperty("postal_code")]
