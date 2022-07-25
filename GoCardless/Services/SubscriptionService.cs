@@ -109,7 +109,9 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your subscriptions.
+        /// your subscriptions. Please note if the subscriptions are related to
+        /// customers who have been removed, they will not be shown in the
+        /// response.
         /// </summary>
         /// <param name="request">An optional `SubscriptionListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -580,7 +582,8 @@ namespace GoCardless.Services
         
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// subscriptions.
+    /// subscriptions. Please note if the subscriptions are related to customers
+    /// who have been removed, they will not be shown in the response.
     /// </summary>
     public class SubscriptionListRequest
     {
