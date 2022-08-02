@@ -417,8 +417,11 @@ namespace GoCardless.Resources
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz",
-        /// "betalingsservice", "pad", "pay_to" and "sepa_core" are supported.
+        /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs",
+        /// "becs_nz", "betalingsservice", "pad", "pay_to" and "sepa_core" are
+        /// supported. Optional for mandate only requests - if left blank, the
+        /// payer will be able to select the currency/scheme to pay with from a
+        /// list of your available schemes.
         /// </summary>
         [JsonProperty("scheme")]
         public string Scheme { get; set; }
