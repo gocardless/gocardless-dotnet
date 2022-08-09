@@ -299,6 +299,9 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "choose_currency"</summary>
         [EnumMember(Value = "choose_currency")]
         ChooseCurrency,
+        /// <summary>`type` with a value of "collect_amount"</summary>
+        [EnumMember(Value = "collect_amount")]
+        CollectAmount,
         /// <summary>`type` with a value of "collect_customer_details"</summary>
         [EnumMember(Value = "collect_customer_details")]
         CollectCustomerDetails,
