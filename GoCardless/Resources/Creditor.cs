@@ -22,6 +22,13 @@ namespace GoCardless.Resources
     public class Creditor
     {
         /// <summary>
+        /// Boolean value indicating whether the creditor is activated in the
+        /// product.
+        /// </summary>
+        [JsonProperty("activated")]
+        public bool? Activated { get; set; }
+
+        /// <summary>
         /// The first line of the creditor's address.
         /// </summary>
         [JsonProperty("address_line1")]
