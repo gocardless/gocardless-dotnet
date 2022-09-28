@@ -93,8 +93,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters. _Note:_
-        /// This should not be used for storing PII data.
+        /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }

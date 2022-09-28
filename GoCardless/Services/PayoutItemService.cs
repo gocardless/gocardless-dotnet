@@ -54,20 +54,6 @@ namespace GoCardless.Services
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// items in the payout.
         /// 
-        /// <div class="notice notice--warning u-block">
-        ///   <p><strong>Note</strong>: This endpoint is changing:</p>
-        /// 
-        ///   <ul>
-        ///     <li>For payouts created from 1 November 2022, the payout items
-        /// will be sorted by payout item ID. For more details, see <a
-        /// href="https://hub.gocardless.com/s/article/FAQ-page-about-payout-items-API-change">this
-        /// FAQ page on the customer hub</a>.</li>
-        ///     <li>From 1 March 2023 onwards, we will only serve requests for
-        /// payout items created in the last 6 months. Requests for older
-        /// payouts will return an HTTP status <code>410 Gone</code>.</li>
-        ///   </ul>
-        /// </div>
-        /// 
         /// </summary>
         /// <param name="request">An optional `PayoutItemListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -125,20 +111,6 @@ namespace GoCardless.Services
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of items
     /// in the payout.
-    /// 
-    /// <div class="notice notice--warning u-block">
-    ///   <p><strong>Note</strong>: This endpoint is changing:</p>
-    /// 
-    ///   <ul>
-    ///     <li>For payouts created from 1 November 2022, the payout items will
-    /// be sorted by payout item ID. For more details, see <a
-    /// href="https://hub.gocardless.com/s/article/FAQ-page-about-payout-items-API-change">this
-    /// FAQ page on the customer hub</a>.</li>
-    ///     <li>From 1 March 2023 onwards, we will only serve requests for
-    /// payout items created in the last 6 months. Requests for older payouts
-    /// will return an HTTP status <code>410 Gone</code>.</li>
-    ///   </ul>
-    /// </div>
     /// 
     /// </summary>
     public class PayoutItemListRequest
