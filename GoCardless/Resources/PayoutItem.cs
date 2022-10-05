@@ -58,9 +58,7 @@ namespace GoCardless.Resources
         /// An array of tax items <em>beta</em>
         /// 
         /// _Note_: VAT applies to transaction and surcharge fees for merchants
-        /// operating in the <a
-        /// href="https://gocardless.com/legal/vat-faqs">UK</a> and <a
-        /// href="https://gocardless.com/fr-fr/legal/faq-tva">France</a>.
+        /// operating in the UK and France.
         /// </summary>
         [JsonProperty("taxes")]
         public List<PayoutItemTaxis> Taxes { get; set; }
@@ -132,8 +130,7 @@ namespace GoCardless.Resources
     /// An array of tax items <em>beta</em>
     /// 
     /// _Note_: VAT applies to transaction and surcharge fees for merchants
-    /// operating in the <a href="https://gocardless.com/legal/vat-faqs">UK</a>
-    /// and <a href="https://gocardless.com/fr-fr/legal/faq-tva">France</a>.
+    /// operating in the UK and France.
     /// </summary>
     public class PayoutItemTaxis
     {

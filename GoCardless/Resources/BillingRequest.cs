@@ -299,6 +299,9 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "choose_currency"</summary>
         [EnumMember(Value = "choose_currency")]
         ChooseCurrency,
+        /// <summary>`type` with a value of "collect_amount"</summary>
+        [EnumMember(Value = "collect_amount")]
+        CollectAmount,
         /// <summary>`type` with a value of "collect_customer_details"</summary>
         [EnumMember(Value = "collect_customer_details")]
         CollectCustomerDetails,
@@ -397,6 +400,12 @@ namespace GoCardless.Resources
     public class BillingRequestMandateRequest
     {
         /// <summary>
+        /// (Optional) Payto and VRP Scheme specific information
+        /// </summary>
+        [JsonProperty("consent_parameters")]
+        public BillingRequestMandateRequestConsentParameters ConsentParameters { get; set; }
+
+        /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code.
         /// </summary>
@@ -417,8 +426,11 @@ namespace GoCardless.Resources
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz",
-        /// "betalingsservice", "pad", "pay_to" and "sepa_core" are supported.
+        /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs",
+        /// "becs_nz", "betalingsservice", "pad", "pay_to" and "sepa_core" are
+        /// supported. Optional for mandate only requests - if left blank, the
+        /// payer will be able to select the currency/scheme to pay with from a
+        /// list of your available schemes.
         /// </summary>
         [JsonProperty("scheme")]
         public string Scheme { get; set; }
@@ -456,6 +468,140 @@ namespace GoCardless.Resources
         public BillingRequestMandateRequestVerify? Verify { get; set; }
     }
     
+    /// <summary>
+    /// Represents a billing request mandate request consent parameter resource.
+    ///
+    /// (Optional) Payto and VRP Scheme specific information
+    /// </summary>
+    public class BillingRequestMandateRequestConsentParameters
+    {
+        /// <summary>
+        /// The latest date at which payments can be taken, must occur after
+        /// start_date if present
+        /// </summary>
+        [JsonProperty("end_date")]
+        public string EndDate { get; set; }
+
+        /// <summary>
+        /// Specifies the high-level purpose of the mandate based on a set of
+        /// pre-defined categories. PayTo specific
+        /// </summary>
+        [JsonProperty("mandate_purpose_code")]
+        public BillingRequestMandateRequestConsentParametersMandatePurposeCode? MandatePurposeCode { get; set; }
+
+        /// <summary>
+        /// The maximum amount that can be charged for a single payment
+        /// </summary>
+        [JsonProperty("max_amount_per_payment")]
+        public int? MaxAmountPerPayment { get; set; }
+
+        /// <summary>
+        /// The maximum total amount that can be charged for all payments in
+        /// this period
+        /// </summary>
+        [JsonProperty("max_amount_per_period")]
+        public int? MaxAmountPerPeriod { get; set; }
+
+        /// <summary>
+        /// The maximum total amount that can be charged for all payments in
+        /// this period
+        /// </summary>
+        [JsonProperty("max_payments_per_period")]
+        public int? MaxPaymentsPerPeriod { get; set; }
+
+        /// <summary>
+        /// The repeating period for this mandate
+        /// </summary>
+        [JsonProperty("period")]
+        public BillingRequestMandateRequestConsentParametersPeriod? Period { get; set; }
+
+        /// <summary>
+        /// The date from which payments can be taken
+        /// </summary>
+        [JsonProperty("start_date")]
+        public string StartDate { get; set; }
+    }
+    
+    /// <summary>
+    /// Specifies the high-level purpose of the mandate based on a set of pre-defined categories.
+    /// PayTo specific
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestMandateRequestConsentParametersMandatePurposeCode {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`mandate_purpose_code` with a value of "MORT"</summary>
+        [EnumMember(Value = "MORT")]
+        MORT,
+        /// <summary>`mandate_purpose_code` with a value of "UTIL"</summary>
+        [EnumMember(Value = "UTIL")]
+        UTIL,
+        /// <summary>`mandate_purpose_code` with a value of "LOAN"</summary>
+        [EnumMember(Value = "LOAN")]
+        LOAN,
+        /// <summary>`mandate_purpose_code` with a value of "DEPD"</summary>
+        [EnumMember(Value = "DEPD")]
+        DEPD,
+        /// <summary>`mandate_purpose_code` with a value of "GAMP"</summary>
+        [EnumMember(Value = "GAMP")]
+        GAMP,
+        /// <summary>`mandate_purpose_code` with a value of "RETL"</summary>
+        [EnumMember(Value = "RETL")]
+        RETL,
+        /// <summary>`mandate_purpose_code` with a value of "SALA"</summary>
+        [EnumMember(Value = "SALA")]
+        SALA,
+        /// <summary>`mandate_purpose_code` with a value of "PERS"</summary>
+        [EnumMember(Value = "PERS")]
+        PERS,
+        /// <summary>`mandate_purpose_code` with a value of "GOVT"</summary>
+        [EnumMember(Value = "GOVT")]
+        GOVT,
+        /// <summary>`mandate_purpose_code` with a value of "PENS"</summary>
+        [EnumMember(Value = "PENS")]
+        PENS,
+        /// <summary>`mandate_purpose_code` with a value of "TAXS"</summary>
+        [EnumMember(Value = "TAXS")]
+        TAXS,
+        /// <summary>`mandate_purpose_code` with a value of "OTHR"</summary>
+        [EnumMember(Value = "OTHR")]
+        OTHR,
+    }
+
+    /// <summary>
+    /// The repeating period for this mandate
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestMandateRequestConsentParametersPeriod {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`period` with a value of "Day"</summary>
+        [EnumMember(Value = "Day")]
+        Day,
+        /// <summary>`period` with a value of "Week"</summary>
+        [EnumMember(Value = "Week")]
+        Week,
+        /// <summary>`period` with a value of "Fortnight"</summary>
+        [EnumMember(Value = "Fortnight")]
+        Fortnight,
+        /// <summary>`period` with a value of "Month"</summary>
+        [EnumMember(Value = "Month")]
+        Month,
+        /// <summary>`period` with a value of "Half_year"</summary>
+        [EnumMember(Value = "Half_year")]
+        HalfYear,
+        /// <summary>`period` with a value of "Annual"</summary>
+        [EnumMember(Value = "Annual")]
+        Annual,
+        /// <summary>`period` with a value of "Adhoc"</summary>
+        [EnumMember(Value = "Adhoc")]
+        Adhoc,
+    }
+
     /// <summary>
     /// Resources linked to this BillingRequestMandateRequest
     /// </summary>
