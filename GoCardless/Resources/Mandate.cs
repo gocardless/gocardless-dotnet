@@ -222,27 +222,21 @@ namespace GoCardless.Resources
         [EnumMember(Value = "unknown")]
         Unknown = 0,
 
-        /// <summary>`period` with a value of "Day"</summary>
-        [EnumMember(Value = "Day")]
+        /// <summary>`period` with a value of "day"</summary>
+        [EnumMember(Value = "day")]
         Day,
-        /// <summary>`period` with a value of "Week"</summary>
-        [EnumMember(Value = "Week")]
+        /// <summary>`period` with a value of "week"</summary>
+        [EnumMember(Value = "week")]
         Week,
-        /// <summary>`period` with a value of "Fortnight"</summary>
-        [EnumMember(Value = "Fortnight")]
-        Fortnight,
-        /// <summary>`period` with a value of "Month"</summary>
-        [EnumMember(Value = "Month")]
+        /// <summary>`period` with a value of "month"</summary>
+        [EnumMember(Value = "month")]
         Month,
-        /// <summary>`period` with a value of "Half_year"</summary>
-        [EnumMember(Value = "Half_year")]
-        HalfYear,
-        /// <summary>`period` with a value of "Annual"</summary>
-        [EnumMember(Value = "Annual")]
-        Annual,
-        /// <summary>`period` with a value of "Adhoc"</summary>
-        [EnumMember(Value = "Adhoc")]
-        Adhoc,
+        /// <summary>`period` with a value of "year"</summary>
+        [EnumMember(Value = "year")]
+        Year,
+        /// <summary>`period` with a value of "flexible"</summary>
+        [EnumMember(Value = "flexible")]
+        Flexible,
     }
 
     /// <summary>
