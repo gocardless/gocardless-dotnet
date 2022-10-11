@@ -532,42 +532,42 @@ namespace GoCardless.Resources
         [EnumMember(Value = "unknown")]
         Unknown = 0,
 
-        /// <summary>`mandate_purpose_code` with a value of "MORT"</summary>
-        [EnumMember(Value = "MORT")]
-        MORT,
-        /// <summary>`mandate_purpose_code` with a value of "UTIL"</summary>
-        [EnumMember(Value = "UTIL")]
-        UTIL,
-        /// <summary>`mandate_purpose_code` with a value of "LOAN"</summary>
-        [EnumMember(Value = "LOAN")]
-        LOAN,
-        /// <summary>`mandate_purpose_code` with a value of "DEPD"</summary>
-        [EnumMember(Value = "DEPD")]
-        DEPD,
-        /// <summary>`mandate_purpose_code` with a value of "GAMP"</summary>
-        [EnumMember(Value = "GAMP")]
-        GAMP,
-        /// <summary>`mandate_purpose_code` with a value of "RETL"</summary>
-        [EnumMember(Value = "RETL")]
-        RETL,
-        /// <summary>`mandate_purpose_code` with a value of "SALA"</summary>
-        [EnumMember(Value = "SALA")]
-        SALA,
-        /// <summary>`mandate_purpose_code` with a value of "PERS"</summary>
-        [EnumMember(Value = "PERS")]
-        PERS,
-        /// <summary>`mandate_purpose_code` with a value of "GOVT"</summary>
-        [EnumMember(Value = "GOVT")]
-        GOVT,
-        /// <summary>`mandate_purpose_code` with a value of "PENS"</summary>
-        [EnumMember(Value = "PENS")]
-        PENS,
-        /// <summary>`mandate_purpose_code` with a value of "TAXS"</summary>
-        [EnumMember(Value = "TAXS")]
-        TAXS,
-        /// <summary>`mandate_purpose_code` with a value of "OTHR"</summary>
-        [EnumMember(Value = "OTHR")]
-        OTHR,
+        /// <summary>`mandate_purpose_code` with a value of "mortgage"</summary>
+        [EnumMember(Value = "mortgage")]
+        Mortgage,
+        /// <summary>`mandate_purpose_code` with a value of "utility"</summary>
+        [EnumMember(Value = "utility")]
+        Utility,
+        /// <summary>`mandate_purpose_code` with a value of "loan"</summary>
+        [EnumMember(Value = "loan")]
+        Loan,
+        /// <summary>`mandate_purpose_code` with a value of "dependant_support"</summary>
+        [EnumMember(Value = "dependant_support")]
+        DependantSupport,
+        /// <summary>`mandate_purpose_code` with a value of "gambling"</summary>
+        [EnumMember(Value = "gambling")]
+        Gambling,
+        /// <summary>`mandate_purpose_code` with a value of "retail"</summary>
+        [EnumMember(Value = "retail")]
+        Retail,
+        /// <summary>`mandate_purpose_code` with a value of "salary"</summary>
+        [EnumMember(Value = "salary")]
+        Salary,
+        /// <summary>`mandate_purpose_code` with a value of "personal"</summary>
+        [EnumMember(Value = "personal")]
+        Personal,
+        /// <summary>`mandate_purpose_code` with a value of "government"</summary>
+        [EnumMember(Value = "government")]
+        Government,
+        /// <summary>`mandate_purpose_code` with a value of "pension"</summary>
+        [EnumMember(Value = "pension")]
+        Pension,
+        /// <summary>`mandate_purpose_code` with a value of "tax"</summary>
+        [EnumMember(Value = "tax")]
+        Tax,
+        /// <summary>`mandate_purpose_code` with a value of "other"</summary>
+        [EnumMember(Value = "other")]
+        Other,
     }
 
     /// <summary>
