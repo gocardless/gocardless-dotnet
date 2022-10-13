@@ -496,24 +496,10 @@ namespace GoCardless.Resources
         public int? MaxAmountPerPayment { get; set; }
 
         /// <summary>
-        /// The maximum total amount that can be charged for all payments in
-        /// this period
+        /// Frequency configuration
         /// </summary>
-        [JsonProperty("max_amount_per_period")]
-        public int? MaxAmountPerPeriod { get; set; }
-
-        /// <summary>
-        /// The maximum total amount that can be charged for all payments in
-        /// this period
-        /// </summary>
-        [JsonProperty("max_payments_per_period")]
-        public int? MaxPaymentsPerPeriod { get; set; }
-
-        /// <summary>
-        /// The repeating period for this mandate
-        /// </summary>
-        [JsonProperty("period")]
-        public BillingRequestMandateRequestConsentParametersPeriod? Period { get; set; }
+        [JsonProperty("periods")]
+        public List<BillingRequestMandateRequestConsentParameterPeriod> Periods { get; set; }
 
         /// <summary>
         /// The date from which payments can be taken
@@ -571,10 +557,35 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
+    /// Frequency configuration
+    /// </summary>
+    public class BillingRequestMandateRequestConsentParameterPeriod
+    {
+        /// <summary>
+        /// The maximum total amount that can be charged for all payments in
+        /// this period
+        /// </summary>
+        [JsonProperty("max_amount_per_period")]
+        public int? MaxAmountPerPeriod { get; set; }
+
+        /// <summary>
+        /// The maximum number of payments that can be collected in this period
+        /// </summary>
+        [JsonProperty("max_payments_per_period")]
+        public int? MaxPaymentsPerPeriod { get; set; }
+
+        /// <summary>
+        /// The repeating period for this mandate
+        /// </summary>
+        [JsonProperty("period")]
+        public BillingRequestMandateRequestConsentParameterPeriodPeriod? Period { get; set; }
+    }
+    
+    /// <summary>
     /// The repeating period for this mandate
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestMandateRequestConsentParametersPeriod {
+    public enum BillingRequestMandateRequestConsentParameterPeriodPeriod {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
