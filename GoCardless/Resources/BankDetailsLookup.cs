@@ -42,7 +42,7 @@ namespace GoCardless.Resources
     }
     
     /// <summary>
-    /// A Direct Debit scheme for this bank account.
+    /// A bank payment scheme for this bank account.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BankDetailsLookupAvailableDebitScheme {
@@ -68,14 +68,17 @@ namespace GoCardless.Resources
         /// <summary>`available_debit_scheme` with a value of "betalingsservice"</summary>
         [EnumMember(Value = "betalingsservice")]
         Betalingsservice,
+        /// <summary>`available_debit_scheme` with a value of "faster_payments"</summary>
+        [EnumMember(Value = "faster_payments")]
+        FasterPayments,
         /// <summary>`available_debit_scheme` with a value of "pad"</summary>
         [EnumMember(Value = "pad")]
         Pad,
-        /// <summary>`available_debit_scheme` with a value of "sepa_core"</summary>
-        [EnumMember(Value = "sepa_core")]
-        SepaCore,
         /// <summary>`available_debit_scheme` with a value of "pay_to"</summary>
         [EnumMember(Value = "pay_to")]
         PayTo,
+        /// <summary>`available_debit_scheme` with a value of "sepa_core"</summary>
+        [EnumMember(Value = "sepa_core")]
+        SepaCore,
     }
 }

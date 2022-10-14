@@ -52,11 +52,11 @@ namespace GoCardless.Resources
         public IDictionary<string, string> MandateRequestMetadata { get; set; }
 
         /// <summary>
-        /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs",
-        /// "becs_nz", "betalingsservice", "pad", "pay_to" and "sepa_core" are
-        /// supported. Optional for mandate only requests - if left blank, the
-        /// payer will be able to select the currency/scheme to pay with from a
-        /// list of your available schemes.
+        /// A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs",
+        /// "becs_nz", "betalingsservice", "faster_payments", "pad", "pay_to"
+        /// and "sepa_core" are supported. Optional for mandate only requests -
+        /// if left blank, the payer will be able to select the currency/scheme
+        /// to pay with from a list of your available schemes.
         /// </summary>
         [JsonProperty("mandate_request_scheme")]
         public string MandateRequestScheme { get; set; }

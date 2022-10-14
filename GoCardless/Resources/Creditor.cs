@@ -461,6 +461,9 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "pad"</summary>
         [EnumMember(Value = "pad")]
         Pad,
+        /// <summary>`scheme` with a value of "pay_to"</summary>
+        [EnumMember(Value = "pay_to")]
+        PayTo,
         /// <summary>`scheme` with a value of "sepa"</summary>
         [EnumMember(Value = "sepa")]
         Sepa,
@@ -470,9 +473,6 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "sepa_instant_credit_transfer"</summary>
         [EnumMember(Value = "sepa_instant_credit_transfer")]
         SepaInstantCreditTransfer,
-        /// <summary>`scheme` with a value of "pay_to"</summary>
-        [EnumMember(Value = "pay_to")]
-        PayTo,
     }
 
     /// <summary>

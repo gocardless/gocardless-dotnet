@@ -458,16 +458,17 @@ namespace GoCardless.Resources
         public string Reference { get; set; }
 
         /// <summary>
-        /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs",
-        /// "becs_nz", "betalingsservice", "pad" and "sepa_core" are supported.
+        /// A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs",
+        /// "becs_nz", "betalingsservice", "faster_payments", "pad", "pay_to"
+        /// and "sepa_core" are supported.
         /// </summary>
         [JsonProperty("scheme")]
         public PayerAuthorisationMandateScheme? Scheme { get; set; }
     }
     
     /// <summary>
-    /// A Direct Debit scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
-    /// "betalingsservice", "pad" and "sepa_core" are supported.
+    /// A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
+    /// "betalingsservice", "faster_payments", "pad", "pay_to" and "sepa_core" are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum PayerAuthorisationMandateScheme {
@@ -493,15 +494,18 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "betalingsservice"</summary>
         [EnumMember(Value = "betalingsservice")]
         Betalingsservice,
+        /// <summary>`scheme` with a value of "faster_payments"</summary>
+        [EnumMember(Value = "faster_payments")]
+        FasterPayments,
         /// <summary>`scheme` with a value of "pad"</summary>
         [EnumMember(Value = "pad")]
         Pad,
-        /// <summary>`scheme` with a value of "sepa_core"</summary>
-        [EnumMember(Value = "sepa_core")]
-        SepaCore,
         /// <summary>`scheme` with a value of "pay_to"</summary>
         [EnumMember(Value = "pay_to")]
         PayTo,
+        /// <summary>`scheme` with a value of "sepa_core"</summary>
+        [EnumMember(Value = "sepa_core")]
+        SepaCore,
     }
 
     /// <summary>

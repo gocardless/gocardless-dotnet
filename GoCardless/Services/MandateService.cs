@@ -268,7 +268,7 @@ namespace GoCardless.Services
         public string Reference { get; set; }
 
         /// <summary>
-        /// <a name="mandates_scheme"></a>Direct Debit scheme to which this
+        /// <a name="mandates_scheme"></a>Bank payment scheme to which this
         /// mandate and associated payments are submitted. Can be supplied or
         /// automatically detected from the customer's bank account.
         /// </summary>
