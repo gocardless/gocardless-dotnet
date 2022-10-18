@@ -126,13 +126,6 @@ namespace GoCardless.Resources
         public string EndDate { get; set; }
 
         /// <summary>
-        /// Specifies the high-level purpose of the mandate based on a set of
-        /// pre-defined categories. PayTo specific
-        /// </summary>
-        [JsonProperty("mandate_purpose_code")]
-        public MandateConsentParametersMandatePurposeCode? MandatePurposeCode { get; set; }
-
-        /// <summary>
         /// The maximum amount that can be charged for a single payment
         /// </summary>
         [JsonProperty("max_amount_per_payment")]
@@ -151,54 +144,6 @@ namespace GoCardless.Resources
         public string StartDate { get; set; }
     }
     
-    /// <summary>
-    /// Specifies the high-level purpose of the mandate based on a set of pre-defined categories.
-    /// PayTo specific
-    /// </summary>
-    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum MandateConsentParametersMandatePurposeCode {
-        /// <summary>Unknown status</summary>
-        [EnumMember(Value = "unknown")]
-        Unknown = 0,
-
-        /// <summary>`mandate_purpose_code` with a value of "mortgage"</summary>
-        [EnumMember(Value = "mortgage")]
-        Mortgage,
-        /// <summary>`mandate_purpose_code` with a value of "utility"</summary>
-        [EnumMember(Value = "utility")]
-        Utility,
-        /// <summary>`mandate_purpose_code` with a value of "loan"</summary>
-        [EnumMember(Value = "loan")]
-        Loan,
-        /// <summary>`mandate_purpose_code` with a value of "dependant_support"</summary>
-        [EnumMember(Value = "dependant_support")]
-        DependantSupport,
-        /// <summary>`mandate_purpose_code` with a value of "gambling"</summary>
-        [EnumMember(Value = "gambling")]
-        Gambling,
-        /// <summary>`mandate_purpose_code` with a value of "retail"</summary>
-        [EnumMember(Value = "retail")]
-        Retail,
-        /// <summary>`mandate_purpose_code` with a value of "salary"</summary>
-        [EnumMember(Value = "salary")]
-        Salary,
-        /// <summary>`mandate_purpose_code` with a value of "personal"</summary>
-        [EnumMember(Value = "personal")]
-        Personal,
-        /// <summary>`mandate_purpose_code` with a value of "government"</summary>
-        [EnumMember(Value = "government")]
-        Government,
-        /// <summary>`mandate_purpose_code` with a value of "pension"</summary>
-        [EnumMember(Value = "pension")]
-        Pension,
-        /// <summary>`mandate_purpose_code` with a value of "tax"</summary>
-        [EnumMember(Value = "tax")]
-        Tax,
-        /// <summary>`mandate_purpose_code` with a value of "other"</summary>
-        [EnumMember(Value = "other")]
-        Other,
-    }
-
     /// <summary>
     /// Frequency configuration
     /// </summary>
