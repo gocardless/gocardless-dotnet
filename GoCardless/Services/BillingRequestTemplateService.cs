@@ -340,8 +340,8 @@ namespace GoCardless.Services
         public string PaymentRequestCurrency { get; set; }
 
         /// <summary>
-        /// A human-readable description of the payment. This will be displayed
-        /// to the payer when authorising the billing request.
+        /// A human-readable description of the payment and/or mandate. This
+        /// will be displayed to the payer when authorising the billing request.
         /// 
         /// </summary>
         [JsonProperty("payment_request_description")]
@@ -525,8 +525,8 @@ namespace GoCardless.Services
         public string PaymentRequestCurrency { get; set; }
 
         /// <summary>
-        /// A human-readable description of the payment. This will be displayed
-        /// to the payer when authorising the billing request.
+        /// A human-readable description of the payment and/or mandate. This
+        /// will be displayed to the payer when authorising the billing request.
         /// 
         /// </summary>
         [JsonProperty("payment_request_description")]

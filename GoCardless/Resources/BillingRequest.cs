@@ -413,6 +413,14 @@ namespace GoCardless.Resources
         public string Currency { get; set; }
 
         /// <summary>
+        /// A human-readable description of the payment and/or mandate. This
+        /// will be displayed to the payer when authorising the billing request.
+        /// 
+        /// </summary>
+        [JsonProperty("description")]
+        public string Description { get; set; }
+
+        /// <summary>
         /// Resources linked to this BillingRequestMandateRequest.
         /// </summary>
         [JsonProperty("links")]
@@ -640,8 +648,8 @@ namespace GoCardless.Resources
         public string Currency { get; set; }
 
         /// <summary>
-        /// A human-readable description of the payment. This will be displayed
-        /// to the payer when authorising the billing request.
+        /// A human-readable description of the payment and/or mandate. This
+        /// will be displayed to the payer when authorising the billing request.
         /// 
         /// </summary>
         [JsonProperty("description")]

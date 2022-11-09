@@ -533,6 +533,15 @@ namespace GoCardless.Services
             public string Currency { get; set; }
 
             /// <summary>
+            /// A human-readable description of the payment and/or mandate. This
+            /// will be displayed to the payer when authorising the billing
+            /// request.
+            /// 
+            /// </summary>
+            [JsonProperty("description")]
+            public string Description { get; set; }
+
+            /// <summary>
             /// Key-value store of custom data. Up to 3 keys are permitted, with
             /// key names up to 50 characters and values up to 500 characters.
             /// </summary>
@@ -678,8 +687,9 @@ namespace GoCardless.Services
             public string Currency { get; set; }
 
             /// <summary>
-            /// A human-readable description of the payment. This will be
-            /// displayed to the payer when authorising the billing request.
+            /// A human-readable description of the payment and/or mandate. This
+            /// will be displayed to the payer when authorising the billing
+            /// request.
             /// 
             /// </summary>
             [JsonProperty("description")]
