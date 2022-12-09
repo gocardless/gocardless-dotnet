@@ -400,10 +400,11 @@ namespace GoCardless.Resources
     public class BillingRequestMandateRequest
     {
         /// <summary>
-        /// (Optional) Payto and VRP Scheme specific information
+        /// Constraints that will apply to the mandate_request. (Optional)
+        /// Specifically for PayTo and VRP.
         /// </summary>
-        [JsonProperty("consent_parameters")]
-        public BillingRequestMandateRequestConsentParameters ConsentParameters { get; set; }
+        [JsonProperty("constraints")]
+        public BillingRequestMandateRequestConstraints Constraints { get; set; }
 
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
@@ -477,15 +478,23 @@ namespace GoCardless.Resources
     }
     
     /// <summary>
-    /// Represents a billing request mandate request consent parameter resource.
+    /// Represents a billing request mandate request constraint resource.
     ///
-    /// (Optional) Payto and VRP Scheme specific information
+    /// Constraints that will apply to the mandate_request. (Optional)
+    /// Specifically for PayTo and VRP.
     /// </summary>
-    public class BillingRequestMandateRequestConsentParameters
+    public class BillingRequestMandateRequestConstraints
     {
         /// <summary>
         /// The latest date at which payments can be taken, must occur after
         /// start_date if present
+        /// 
+        /// This is an optional field and if it is not supplied the agreement
+        /// will be considered open and
+        /// will not have an end date. Keep in mind the end date must take into
+        /// account how long it will
+        /// take the user to set up this agreement via the BillingRequest.
+        /// 
         /// </summary>
         [JsonProperty("end_date")]
         public string EndDate { get; set; }
@@ -497,48 +506,94 @@ namespace GoCardless.Resources
         public int? MaxAmountPerPayment { get; set; }
 
         /// <summary>
-        /// Frequency configuration
+        /// List of periodic limits and constraints which apply to them
         /// </summary>
-        [JsonProperty("periods")]
-        public List<BillingRequestMandateRequestConsentParameterPeriod> Periods { get; set; }
+        [JsonProperty("periodic_limits")]
+        public List<BillingRequestMandateRequestConstraintPeriodicLimit> PeriodicLimits { get; set; }
 
         /// <summary>
-        /// The date from which payments can be taken
+        /// The date from which payments can be taken.
+        /// 
+        /// This is an optional field and if it is not supplied the start date
+        /// will be set to the day
+        /// authorisation happens.
+        /// 
         /// </summary>
         [JsonProperty("start_date")]
         public string StartDate { get; set; }
     }
     
     /// <summary>
-    /// Frequency configuration
+    /// List of periodic limits and constraints which apply to them
     /// </summary>
-    public class BillingRequestMandateRequestConsentParameterPeriod
+    public class BillingRequestMandateRequestConstraintPeriodicLimit
     {
         /// <summary>
-        /// The maximum total amount that can be charged for all payments in
-        /// this period
+        /// The alignment of the period.
+        /// 
+        /// `calendar` - this will finish on the end of the current period. For
+        /// example this will expire on the Monday for the current week or the
+        /// January for the next year.
+        /// 
+        /// `creation_date` - this will finish on the next instance of the
+        /// current period. For example Monthly it will expire on the same day
+        /// of the next month, or yearly the same day of the next year.
+        /// 
         /// </summary>
-        [JsonProperty("max_amount_per_period")]
-        public int? MaxAmountPerPeriod { get; set; }
+        [JsonProperty("alignment")]
+        public BillingRequestMandateRequestConstraintPeriodicLimitAlignment? Alignment { get; set; }
 
         /// <summary>
-        /// The maximum number of payments that can be collected in this period
+        /// The maximum number of payments that can be collected in this
+        /// periodic limit
         /// </summary>
-        [JsonProperty("max_payments_per_period")]
-        public int? MaxPaymentsPerPeriod { get; set; }
+        [JsonProperty("max_payments")]
+        public int? MaxPayments { get; set; }
+
+        /// <summary>
+        /// The maximum total amount that can be charged for all payments in
+        /// this periodic limit
+        /// </summary>
+        [JsonProperty("max_total_amount")]
+        public int? MaxTotalAmount { get; set; }
 
         /// <summary>
         /// The repeating period for this mandate
         /// </summary>
         [JsonProperty("period")]
-        public BillingRequestMandateRequestConsentParameterPeriodPeriod? Period { get; set; }
+        public BillingRequestMandateRequestConstraintPeriodicLimitPeriod? Period { get; set; }
     }
     
+    /// <summary>
+    /// The alignment of the period.
+    /// 
+    /// `calendar` - this will finish on the end of the current period. For example this will expire
+    /// on the Monday for the current week or the January for the next year.
+    /// 
+    /// `creation_date` - this will finish on the next instance of the current period. For example
+    /// Monthly it will expire on the same day of the next month, or yearly the same day of the next
+    /// year.
+    /// 
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestMandateRequestConstraintPeriodicLimitAlignment {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`alignment` with a value of "calendar"</summary>
+        [EnumMember(Value = "calendar")]
+        Calendar,
+        /// <summary>`alignment` with a value of "creation_date"</summary>
+        [EnumMember(Value = "creation_date")]
+        CreationDate,
+    }
+
     /// <summary>
     /// The repeating period for this mandate
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestMandateRequestConsentParameterPeriodPeriod {
+    public enum BillingRequestMandateRequestConstraintPeriodicLimitPeriod {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,

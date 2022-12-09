@@ -84,7 +84,9 @@ namespace GoCardless.Resources
         /// specify a payment reference for Bacs payments (that is, when
         /// collecting from the UK) if you're on the <a
         /// href='https://gocardless.com/pricing'>GoCardless Plus, Pro or
-        /// Enterprise packages</a>.</p>
+        /// Enterprise packages</a>.</p> <p
+        /// class='restricted-notice'><strong>Restricted</strong>: You can not
+        /// specify a payment reference for Faster Payments.</p>
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }

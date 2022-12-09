@@ -44,6 +44,14 @@ namespace GoCardless.Resources
         public string MandateRequestCurrency { get; set; }
 
         /// <summary>
+        /// A human-readable description of the payment and/or mandate. This
+        /// will be displayed to the payer when authorising the billing request.
+        /// 
+        /// </summary>
+        [JsonProperty("mandate_request_description")]
+        public string MandateRequestDescription { get; set; }
+
+        /// <summary>
         /// Key-value store of custom data that will be applied to the mandate
         /// created when this request is fulfilled. Up to 3 keys are permitted,
         /// with key names up to 50 characters and values up to 500 characters.

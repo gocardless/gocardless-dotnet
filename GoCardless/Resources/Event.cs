@@ -118,69 +118,13 @@ namespace GoCardless.Resources
         public bool? Mandatory { get; set; }
 
         /// <summary>
-        /// The type of notification the customer shall receive.
-        /// One of:
-        /// <ul>
-        /// <li>`payment_created`</li>
-        /// <li>`payment_cancelled`</li>
-        /// <li>`mandate_created`</li>
-        /// <li>`mandate_blocked`</li>
-        /// <li>`subscription_created`</li>
-        /// <li>`subscription_cancelled`</li>
-        /// <li>`instalment_schedule_created`</li>
-        /// <li>`instalment_schedule_cancelled`</li>
-        /// </ul>
+        /// See [here](#core-endpoints-customer-notifications) for a complete
+        /// list of customer notification types.
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; }
     }
     
-    /// <summary>
-    /// The type of notification the customer shall receive.
-    /// One of:
-    /// <ul>
-    /// <li>`payment_created`</li>
-    /// <li>`payment_cancelled`</li>
-    /// <li>`mandate_created`</li>
-    /// <li>`mandate_blocked`</li>
-    /// <li>`subscription_created`</li>
-    /// <li>`subscription_cancelled`</li>
-    /// <li>`instalment_schedule_created`</li>
-    /// <li>`instalment_schedule_cancelled`</li>
-    /// </ul>
-    /// </summary>
-    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum EventCustomerNotificationType {
-        /// <summary>Unknown status</summary>
-        [EnumMember(Value = "unknown")]
-        Unknown = 0,
-
-        /// <summary>`type` with a value of "payment_created"</summary>
-        [EnumMember(Value = "payment_created")]
-        PaymentCreated,
-        /// <summary>`type` with a value of "payment_cancelled"</summary>
-        [EnumMember(Value = "payment_cancelled")]
-        PaymentCancelled,
-        /// <summary>`type` with a value of "mandate_created"</summary>
-        [EnumMember(Value = "mandate_created")]
-        MandateCreated,
-        /// <summary>`type` with a value of "mandate_blocked"</summary>
-        [EnumMember(Value = "mandate_blocked")]
-        MandateBlocked,
-        /// <summary>`type` with a value of "subscription_created"</summary>
-        [EnumMember(Value = "subscription_created")]
-        SubscriptionCreated,
-        /// <summary>`type` with a value of "subscription_cancelled"</summary>
-        [EnumMember(Value = "subscription_cancelled")]
-        SubscriptionCancelled,
-        /// <summary>`type` with a value of "instalment_schedule_created"</summary>
-        [EnumMember(Value = "instalment_schedule_created")]
-        InstalmentScheduleCreated,
-        /// <summary>`type` with a value of "instalment_schedule_cancelled"</summary>
-        [EnumMember(Value = "instalment_schedule_cancelled")]
-        InstalmentScheduleCancelled,
-    }
-
     public class EventDetails
     {
         /// <summary>

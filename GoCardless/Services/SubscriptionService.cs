@@ -457,13 +457,13 @@ namespace GoCardless.Services
         /// </summary>
         public class SubscriptionLinks
         {
-
-            /// <summary>
-            /// ID of the associated [mandate](#core-endpoints-mandates) which
+                
+                /// <summary>
+                            /// ID of the associated [mandate](#core-endpoints-mandates) which
             /// the subscription will create payments against.
-            /// </summary>
-            [JsonProperty("mandate")]
-            public string Mandate { get; set; }
+                /// </summary>
+                [JsonProperty("mandate")]
+                public string Mandate { get; set; }
         }
 
         /// <summary>

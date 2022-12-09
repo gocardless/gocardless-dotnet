@@ -59,6 +59,14 @@ namespace GoCardless.Resources
         public string Id { get; set; }
 
         /// <summary>
+        /// Sets the default language of the Billing Request Flow and the
+        /// customer. [ISO
+        /// 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+        /// </summary>
+        [JsonProperty("language")]
+        public string Language { get; set; }
+
+        /// <summary>
         /// Resources linked to this BillingRequestFlow.
         /// </summary>
         [JsonProperty("links")]
@@ -67,7 +75,11 @@ namespace GoCardless.Resources
         /// <summary>
         /// If true, the payer will not be able to change their bank account
         /// within the flow. If the bank_account details are collected as part
-        /// of bank_authorisation then GC will set this value to true mid flow
+        /// of bank_authorisation then GC will set this value to true mid flow.
+        /// 
+        /// You can only lock bank account if these have already been completed
+        /// as a part of the billing request.
+        /// 
         /// </summary>
         [JsonProperty("lock_bank_account")]
         public bool? LockBankAccount { get; set; }
@@ -84,7 +96,11 @@ namespace GoCardless.Resources
         /// <summary>
         /// If true, the payer will not be able to edit their customer details
         /// within the flow. If the customer details are collected as part of
-        /// bank_authorisation then GC will set this value to true mid flow
+        /// bank_authorisation then GC will set this value to true mid flow.
+        /// 
+        /// You can only lock customer details if these have already been
+        /// completed as a part of the billing request.
+        /// 
         /// </summary>
         [JsonProperty("lock_customer_details")]
         public bool? LockCustomerDetails { get; set; }
@@ -256,13 +272,6 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("given_name")]
         public string GivenName { get; set; }
-
-        /// <summary>
-        /// [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-        /// code.
-        /// </summary>
-        [JsonProperty("language")]
-        public string Language { get; set; }
 
         /// <summary>
         /// The customer's postal code.

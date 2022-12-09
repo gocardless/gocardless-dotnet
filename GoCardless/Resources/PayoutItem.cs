@@ -108,7 +108,9 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// Unique identifier, beginning with "MD". Note that this prefix may
-        /// not apply to mandates created before 2016.
+        /// not apply to mandates created before 2016. Present only for the
+        /// items of type `payment_refunded`, `refund` and
+        /// `refund_funds_returned`.
         /// </summary>
         [JsonProperty("mandate")]
         public string Mandate { get; set; }
@@ -120,7 +122,8 @@ namespace GoCardless.Resources
         public string Payment { get; set; }
 
         /// <summary>
-        /// Unique identifier, beginning with "RF".
+        /// Unique identifier, beginning with "RF". Present only for the items
+        /// of type `payment_refunded`, `refund` and `refund_funds_returned`.
         /// </summary>
         [JsonProperty("refund")]
         public string Refund { get; set; }

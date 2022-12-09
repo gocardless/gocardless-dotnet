@@ -177,16 +177,16 @@ namespace GoCardless.Services
         /// </summary>
         public class ScenarioSimulatorLinks
         {
-
-            /// <summary>
-            /// ID of the resource to run the simulation against.
+                
+                /// <summary>
+                            /// ID of the resource to run the simulation against.
             /// Must be same type of resource as the simulator that is being
             /// run.
             /// eg. Payment ID for `payment_failed`, Mandate ID for
             /// `mandate_activated` etc
-            /// </summary>
-            [JsonProperty("resource")]
-            public string Resource { get; set; }
+                /// </summary>
+                [JsonProperty("resource")]
+                public string Resource { get; set; }
         }
     }
 

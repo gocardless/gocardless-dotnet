@@ -197,13 +197,13 @@ namespace GoCardless.Services
         /// </summary>
         public class BillingRequestTemplateLinks
         {
-
-            /// <summary>
-            /// ID of the associated [creditor](#core-endpoints-creditors). Only
+                
+                /// <summary>
+                            /// ID of the associated [creditor](#core-endpoints-creditors). Only
             /// required if your account manages multiple creditors.
-            /// </summary>
-            [JsonProperty("creditor")]
-            public string Creditor { get; set; }
+                /// </summary>
+                [JsonProperty("creditor")]
+                public string Creditor { get; set; }
         }
 
         /// <summary>
@@ -212,6 +212,14 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("mandate_request_currency")]
         public string MandateRequestCurrency { get; set; }
+
+        /// <summary>
+        /// A human-readable description of the payment and/or mandate. This
+        /// will be displayed to the payer when authorising the billing request.
+        /// 
+        /// </summary>
+        [JsonProperty("mandate_request_description")]
+        public string MandateRequestDescription { get; set; }
 
         /// <summary>
         /// Key-value store of custom data that will be applied to the mandate
@@ -397,6 +405,14 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("mandate_request_currency")]
         public string MandateRequestCurrency { get; set; }
+
+        /// <summary>
+        /// A human-readable description of the payment and/or mandate. This
+        /// will be displayed to the payer when authorising the billing request.
+        /// 
+        /// </summary>
+        [JsonProperty("mandate_request_description")]
+        public string MandateRequestDescription { get; set; }
 
         /// <summary>
         /// Key-value store of custom data that will be applied to the mandate

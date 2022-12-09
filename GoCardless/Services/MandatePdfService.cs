@@ -262,15 +262,15 @@ namespace GoCardless.Services
         /// </summary>
         public class MandatePdfLinks
         {
-
-            /// <summary>
-            /// ID of an existing [mandate](#core-endpoints-mandates) to build
+                
+                /// <summary>
+                            /// ID of an existing [mandate](#core-endpoints-mandates) to build
             /// the PDF from. The customer's bank details will be censored in
             /// the generated PDF. No other parameters may be provided alongside
             /// this.
-            /// </summary>
-            [JsonProperty("mandate")]
-            public string Mandate { get; set; }
+                /// </summary>
+                [JsonProperty("mandate")]
+                public string Mandate { get; set; }
         }
 
         /// <summary>

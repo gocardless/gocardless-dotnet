@@ -492,29 +492,29 @@ namespace GoCardless.Services
         /// </summary>
         public class BillingRequestLinks
         {
-
-            /// <summary>
-            /// ID of the associated [creditor](#core-endpoints-creditors). Only
+                
+                /// <summary>
+                            /// ID of the associated [creditor](#core-endpoints-creditors). Only
             /// required if your account manages multiple creditors.
-            /// </summary>
-            [JsonProperty("creditor")]
-            public string Creditor { get; set; }
-
-            /// <summary>
-            /// ID of the [customer](#core-endpoints-customers) against which
+                /// </summary>
+                [JsonProperty("creditor")]
+                public string Creditor { get; set; }
+                
+                /// <summary>
+                            /// ID of the [customer](#core-endpoints-customers) against which
             /// this request should be made.
-            /// </summary>
-            [JsonProperty("customer")]
-            public string Customer { get; set; }
-
-            /// <summary>
-            /// (Optional) ID of the
+                /// </summary>
+                [JsonProperty("customer")]
+                public string Customer { get; set; }
+                
+                /// <summary>
+                            /// (Optional) ID of the
             /// [customer_bank_account](#core-endpoints-customer-bank-accounts)
             /// against which this request should be made.
             /// 
-            /// </summary>
-            [JsonProperty("customer_bank_account")]
-            public string CustomerBankAccount { get; set; }
+                /// </summary>
+                [JsonProperty("customer_bank_account")]
+                public string CustomerBankAccount { get; set; }
         }
 
         [JsonProperty("mandate_request")]
@@ -524,52 +524,190 @@ namespace GoCardless.Services
         /// </summary>
         public class BillingRequestMandateRequest
         {
-
-            /// <summary>
-            /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+                
+                /// <summary>
+                            /// Constraints that will apply to the mandate_request. (Optional)
+            /// Specifically for PayTo and VRP.
+                /// </summary>
+                [JsonProperty("constraints")]
+                public BillingRequestConstraints Constraints { get; set; }
+        /// <summary>
+        /// Constraints that will apply to the mandate_request. (Optional)
+        /// Specifically for PayTo and VRP.
+        /// </summary>
+        public class BillingRequestConstraints
+        {
+                
+                /// <summary>
+                            /// The latest date at which payments can be taken, must occur after
+            /// start_date if present
+            /// 
+            /// This is an optional field and if it is not supplied the
+            /// agreement will be considered open and
+            /// will not have an end date. Keep in mind the end date must take
+            /// into account how long it will
+            /// take the user to set up this agreement via the BillingRequest.
+            /// 
+                /// </summary>
+                [JsonProperty("end_date")]
+                public string EndDate { get; set; }
+                
+                /// <summary>
+                            /// The maximum amount that can be charged for a single payment
+                /// </summary>
+                [JsonProperty("max_amount_per_payment")]
+                public int? MaxAmountPerPayment { get; set; }
+                
+                /// <summary>
+                            /// List of periodic limits and constraints which apply to them
+                /// </summary>
+                [JsonProperty("periodic_limits")]
+                public BillingRequestPeriodicLimits[] PeriodicLimits { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public class BillingRequestPeriodicLimits
+        {
+                
+                /// <summary>
+                            /// The alignment of the period.
+            /// 
+            /// `calendar` - this will finish on the end of the current period.
+            /// For example this will expire on the Monday for the current week
+            /// or the January for the next year.
+            /// 
+            /// `creation_date` - this will finish on the next instance of the
+            /// current period. For example Monthly it will expire on the same
+            /// day of the next month, or yearly the same day of the next year.
+            /// 
+                /// </summary>
+                [JsonProperty("alignment")]
+                public BillingRequestAlignment? Alignment { get; set; }
+        /// <summary>
+        /// The alignment of the period.
+        /// 
+        /// `calendar` - this will finish on the end of the current period. For
+        /// example this will expire on the Monday for the current week or the
+        /// January for the next year.
+        /// 
+        /// `creation_date` - this will finish on the next instance of the
+        /// current period. For example Monthly it will expire on the same day
+        /// of the next month, or yearly the same day of the next year.
+        /// 
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BillingRequestAlignment
+        {
+    
+            /// <summary>`alignment` with a value of "calendar"</summary>
+            [EnumMember(Value = "calendar")]
+            Calendar,
+            /// <summary>`alignment` with a value of "creation_date"</summary>
+            [EnumMember(Value = "creation_date")]
+            CreationDate,
+        }
+                
+                /// <summary>
+                            /// The maximum number of payments that can be collected in this
+            /// periodic limit
+                /// </summary>
+                [JsonProperty("max_payments")]
+                public int? MaxPayments { get; set; }
+                
+                /// <summary>
+                            /// The maximum total amount that can be charged for all payments in
+            /// this periodic limit
+                /// </summary>
+                [JsonProperty("max_total_amount")]
+                public int? MaxTotalAmount { get; set; }
+                
+                /// <summary>
+                            /// The repeating period for this mandate
+                /// </summary>
+                [JsonProperty("period")]
+                public BillingRequestPeriod? Period { get; set; }
+        /// <summary>
+        /// The repeating period for this mandate
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BillingRequestPeriod
+        {
+    
+            /// <summary>`period` with a value of "day"</summary>
+            [EnumMember(Value = "day")]
+            Day,
+            /// <summary>`period` with a value of "week"</summary>
+            [EnumMember(Value = "week")]
+            Week,
+            /// <summary>`period` with a value of "month"</summary>
+            [EnumMember(Value = "month")]
+            Month,
+            /// <summary>`period` with a value of "year"</summary>
+            [EnumMember(Value = "year")]
+            Year,
+            /// <summary>`period` with a value of "flexible"</summary>
+            [EnumMember(Value = "flexible")]
+            Flexible,
+        }
+        }
+                
+                /// <summary>
+                            /// The date from which payments can be taken.
+            /// 
+            /// This is an optional field and if it is not supplied the start
+            /// date will be set to the day
+            /// authorisation happens.
+            /// 
+                /// </summary>
+                [JsonProperty("start_date")]
+                public string StartDate { get; set; }
+        }
+                
+                /// <summary>
+                            /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
             /// currency code.
-            /// </summary>
-            [JsonProperty("currency")]
-            public string Currency { get; set; }
-
-            /// <summary>
-            /// A human-readable description of the payment and/or mandate. This
+                /// </summary>
+                [JsonProperty("currency")]
+                public string Currency { get; set; }
+                
+                /// <summary>
+                            /// A human-readable description of the payment and/or mandate. This
             /// will be displayed to the payer when authorising the billing
             /// request.
             /// 
-            /// </summary>
-            [JsonProperty("description")]
-            public string Description { get; set; }
-
-            /// <summary>
-            /// Key-value store of custom data. Up to 3 keys are permitted, with
+                /// </summary>
+                [JsonProperty("description")]
+                public string Description { get; set; }
+                
+                /// <summary>
+                            /// Key-value store of custom data. Up to 3 keys are permitted, with
             /// key names up to 50 characters and values up to 500 characters.
-            /// </summary>
-            [JsonProperty("metadata")]
-            public IDictionary<String, String> Metadata { get; set; }
-
-            /// <summary>
-            /// Unique reference. Different schemes have different length and
+                /// </summary>
+                [JsonProperty("metadata")]
+                public IDictionary<String, String> Metadata { get; set; }
+                
+                /// <summary>
+                            /// Unique reference. Different schemes have different length and
             /// [character set](#appendix-character-sets) requirements.
             /// GoCardless will generate a unique reference satisfying the
             /// different scheme requirements if this field is left blank.
-            /// </summary>
-            [JsonProperty("reference")]
-            public string Reference { get; set; }
-
-            /// <summary>
-            /// A bank payment scheme. Currently "ach", "autogiro", "bacs",
+                /// </summary>
+                [JsonProperty("reference")]
+                public string Reference { get; set; }
+                
+                /// <summary>
+                            /// A bank payment scheme. Currently "ach", "autogiro", "bacs",
             /// "becs", "becs_nz", "betalingsservice", "faster_payments", "pad",
             /// "pay_to" and "sepa_core" are supported. Optional for mandate
             /// only requests - if left blank, the payer will be able to select
             /// the currency/scheme to pay with from a list of your available
             /// schemes.
-            /// </summary>
-            [JsonProperty("scheme")]
-            public string Scheme { get; set; }
-
-            /// <summary>
-            /// Verification preference for the mandate. One of:
+                /// </summary>
+                [JsonProperty("scheme")]
+                public string Scheme { get; set; }
+                
+                /// <summary>
+                            /// Verification preference for the mandate. One of:
             /// <ul>
             ///   <li>`minimum`: only verify if absolutely required, such as
             /// when part of scheme rules</li>
@@ -596,9 +734,9 @@ namespace GoCardless.Services
             /// See [Billing Requests: Creating Verified
             /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
             /// for more information.
-            /// </summary>
-            [JsonProperty("verify")]
-            public BillingRequestVerify? Verify { get; set; }
+                /// </summary>
+                [JsonProperty("verify")]
+                public BillingRequestVerify? Verify { get; set; }
         /// <summary>
         /// Verification preference for the mandate. One of:
         /// <ul>
@@ -661,58 +799,58 @@ namespace GoCardless.Services
         /// </summary>
         public class BillingRequestPaymentRequest
         {
-
-            /// <summary>
-            /// Amount in minor unit (e.g. pence in GBP, cents in EUR).
-            /// </summary>
-            [JsonProperty("amount")]
-            public int? Amount { get; set; }
-
-            /// <summary>
-            /// The amount to be deducted from the payment as an app fee, to be
+                
+                /// <summary>
+                            /// Amount in minor unit (e.g. pence in GBP, cents in EUR).
+                /// </summary>
+                [JsonProperty("amount")]
+                public int? Amount { get; set; }
+                
+                /// <summary>
+                            /// The amount to be deducted from the payment as an app fee, to be
             /// paid to the partner integration which created the billing
             /// request, in the lowest denomination for the currency (e.g. pence
             /// in GBP, cents in EUR).
-            /// </summary>
-            [JsonProperty("app_fee")]
-            public int? AppFee { get; set; }
-
-            /// <summary>
-            /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+                /// </summary>
+                [JsonProperty("app_fee")]
+                public int? AppFee { get; set; }
+                
+                /// <summary>
+                            /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
             /// currency code. `GBP` and `EUR` supported; `GBP` with your
             /// customers in the UK and for `EUR` with your customers in Germany
             /// only.
-            /// </summary>
-            [JsonProperty("currency")]
-            public string Currency { get; set; }
-
-            /// <summary>
-            /// A human-readable description of the payment and/or mandate. This
+                /// </summary>
+                [JsonProperty("currency")]
+                public string Currency { get; set; }
+                
+                /// <summary>
+                            /// A human-readable description of the payment and/or mandate. This
             /// will be displayed to the payer when authorising the billing
             /// request.
             /// 
-            /// </summary>
-            [JsonProperty("description")]
-            public string Description { get; set; }
-
-            /// <summary>
-            /// Key-value store of custom data. Up to 3 keys are permitted, with
+                /// </summary>
+                [JsonProperty("description")]
+                public string Description { get; set; }
+                
+                /// <summary>
+                            /// Key-value store of custom data. Up to 3 keys are permitted, with
             /// key names up to 50 characters and values up to 500 characters.
-            /// </summary>
-            [JsonProperty("metadata")]
-            public IDictionary<String, String> Metadata { get; set; }
-
-            /// <summary>
-            /// (Optional) A scheme used for Open Banking payments. Currently
+                /// </summary>
+                [JsonProperty("metadata")]
+                public IDictionary<String, String> Metadata { get; set; }
+                
+                /// <summary>
+                            /// (Optional) A scheme used for Open Banking payments. Currently
             /// `faster_payments` is supported in the UK (GBP) and
             /// `sepa_credit_transfer` and `sepa_instant_credit_transfer` are
             /// supported in Germany (EUR). In Germany, `sepa_credit_transfer`
             /// is used as the default. Please be aware that
             /// `sepa_instant_credit_transfer` may incur an additional fee for
             /// your customer.
-            /// </summary>
-            [JsonProperty("scheme")]
-            public string Scheme { get; set; }
+                /// </summary>
+                [JsonProperty("scheme")]
+                public string Scheme { get; set; }
         }
 
         /// <summary>
@@ -756,41 +894,41 @@ namespace GoCardless.Services
         /// </summary>
         public class BillingRequestCustomer
         {
-
-            /// <summary>
-            /// Customer's company name. Required unless a `given_name` and
+                
+                /// <summary>
+                            /// Customer's company name. Required unless a `given_name` and
             /// `family_name` are provided. For Canadian customers, the use of a
             /// `company_name` value will mean that any mandate created from
             /// this customer will be considered to be a "Business PAD"
             /// (otherwise, any mandate will be considered to be a "Personal
             /// PAD").
-            /// </summary>
-            [JsonProperty("company_name")]
-            public string CompanyName { get; set; }
-
-            /// <summary>
-            /// Customer's email address. Required in most cases, as this allows
+                /// </summary>
+                [JsonProperty("company_name")]
+                public string CompanyName { get; set; }
+                
+                /// <summary>
+                            /// Customer's email address. Required in most cases, as this allows
             /// GoCardless to send notifications to this customer.
-            /// </summary>
-            [JsonProperty("email")]
-            public string Email { get; set; }
-
-            /// <summary>
-            /// Customer's surname. Required unless a `company_name` is
+                /// </summary>
+                [JsonProperty("email")]
+                public string Email { get; set; }
+                
+                /// <summary>
+                            /// Customer's surname. Required unless a `company_name` is
             /// provided.
-            /// </summary>
-            [JsonProperty("family_name")]
-            public string FamilyName { get; set; }
-
-            /// <summary>
-            /// Customer's first name. Required unless a `company_name` is
+                /// </summary>
+                [JsonProperty("family_name")]
+                public string FamilyName { get; set; }
+                
+                /// <summary>
+                            /// Customer's first name. Required unless a `company_name` is
             /// provided.
-            /// </summary>
-            [JsonProperty("given_name")]
-            public string GivenName { get; set; }
-
-            /// <summary>
-            /// [ISO
+                /// </summary>
+                [JsonProperty("given_name")]
+                public string GivenName { get; set; }
+                
+                /// <summary>
+                            /// [ISO
             /// 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
             /// code. Used as the language for notification emails sent by
             /// GoCardless if your organisation does not send its own (see
@@ -799,23 +937,23 @@ namespace GoCardless.Services
             /// "nb", "sl", "sv" are supported. If this is not provided, the
             /// language will be chosen based on the `country_code` (if
             /// supplied) or default to "en".
-            /// </summary>
-            [JsonProperty("language")]
-            public string Language { get; set; }
-
-            /// <summary>
-            /// Key-value store of custom data. Up to 3 keys are permitted, with
+                /// </summary>
+                [JsonProperty("language")]
+                public string Language { get; set; }
+                
+                /// <summary>
+                            /// Key-value store of custom data. Up to 3 keys are permitted, with
             /// key names up to 50 characters and values up to 500 characters.
-            /// </summary>
-            [JsonProperty("metadata")]
-            public IDictionary<String, String> Metadata { get; set; }
-
-            /// <summary>
-            /// [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone
+                /// </summary>
+                [JsonProperty("metadata")]
+                public IDictionary<String, String> Metadata { get; set; }
+                
+                /// <summary>
+                            /// [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone
             /// number, including country code.
-            /// </summary>
-            [JsonProperty("phone_number")]
-            public string PhoneNumber { get; set; }
+                /// </summary>
+                [JsonProperty("phone_number")]
+                public string PhoneNumber { get; set; }
         }
 
         [JsonProperty("customer_billing_detail")]
@@ -825,79 +963,79 @@ namespace GoCardless.Services
         /// </summary>
         public class BillingRequestCustomerBillingDetail
         {
-
-            /// <summary>
-            /// The first line of the customer's address.
-            /// </summary>
-            [JsonProperty("address_line1")]
-            public string AddressLine1 { get; set; }
-
-            /// <summary>
-            /// The second line of the customer's address.
-            /// </summary>
-            [JsonProperty("address_line2")]
-            public string AddressLine2 { get; set; }
-
-            /// <summary>
-            /// The third line of the customer's address.
-            /// </summary>
-            [JsonProperty("address_line3")]
-            public string AddressLine3 { get; set; }
-
-            /// <summary>
-            /// The city of the customer's address.
-            /// </summary>
-            [JsonProperty("city")]
-            public string City { get; set; }
-
-            /// <summary>
-            /// [ISO 3166-1 alpha-2
+                
+                /// <summary>
+                            /// The first line of the customer's address.
+                /// </summary>
+                [JsonProperty("address_line1")]
+                public string AddressLine1 { get; set; }
+                
+                /// <summary>
+                            /// The second line of the customer's address.
+                /// </summary>
+                [JsonProperty("address_line2")]
+                public string AddressLine2 { get; set; }
+                
+                /// <summary>
+                            /// The third line of the customer's address.
+                /// </summary>
+                [JsonProperty("address_line3")]
+                public string AddressLine3 { get; set; }
+                
+                /// <summary>
+                            /// The city of the customer's address.
+                /// </summary>
+                [JsonProperty("city")]
+                public string City { get; set; }
+                
+                /// <summary>
+                            /// [ISO 3166-1 alpha-2
             /// code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-            /// </summary>
-            [JsonProperty("country_code")]
-            public string CountryCode { get; set; }
-
-            /// <summary>
-            /// For Danish customers only. The civic/company number (CPR or CVR)
+                /// </summary>
+                [JsonProperty("country_code")]
+                public string CountryCode { get; set; }
+                
+                /// <summary>
+                            /// For Danish customers only. The civic/company number (CPR or CVR)
             /// of the customer. Must be supplied if the customer's bank account
             /// is denominated in Danish krone (DKK).
-            /// </summary>
-            [JsonProperty("danish_identity_number")]
-            public string DanishIdentityNumber { get; set; }
-
-            /// <summary>
-            /// For ACH customers only. Required for ACH customers. A string
+                /// </summary>
+                [JsonProperty("danish_identity_number")]
+                public string DanishIdentityNumber { get; set; }
+                
+                /// <summary>
+                            /// For ACH customers only. Required for ACH customers. A string
             /// containing the IP address of the payer to whom the mandate
             /// belongs (i.e. as a result of their completion of a mandate setup
             /// flow in their browser).
-            /// </summary>
-            [JsonProperty("ip_address")]
-            public string IpAddress { get; set; }
-
-            /// <summary>
-            /// The customer's postal code.
-            /// </summary>
-            [JsonProperty("postal_code")]
-            public string PostalCode { get; set; }
-
-            /// <summary>
-            /// The customer's address region, county or department. For US
+                /// </summary>
+                [JsonProperty("ip_address")]
+                public string IpAddress { get; set; }
+                
+                /// <summary>
+                            /// The customer's postal code.
+                /// </summary>
+                [JsonProperty("postal_code")]
+                public string PostalCode { get; set; }
+                
+                /// <summary>
+                            /// The customer's address region, county or department. For US
             /// customers a 2 letter
             /// [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US)
             /// state code is required (e.g. `CA` for California).
-            /// </summary>
-            [JsonProperty("region")]
-            public string Region { get; set; }
-
-            /// <summary>
-            /// For Swedish customers only. The civic/company number
+                /// </summary>
+                [JsonProperty("region")]
+                public string Region { get; set; }
+                
+                /// <summary>
+                            /// For Swedish customers only. The civic/company number
             /// (personnummer, samordningsnummer, or organisationsnummer) of the
             /// customer. Must be supplied if the customer's bank account is
             /// denominated in Swedish krona (SEK). This field cannot be changed
             /// once it has been set.
-            /// </summary>
-            [JsonProperty("swedish_identity_number")]
-            public string SwedishIdentityNumber { get; set; }
+                /// </summary>
+                [JsonProperty("swedish_identity_number")]
+                public string SwedishIdentityNumber { get; set; }
         }
     }
 
