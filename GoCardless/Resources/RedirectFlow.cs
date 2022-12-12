@@ -96,7 +96,8 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
+        /// names up to 50 characters and values up to 500 characters. _Note:_
+        /// This should not be used for storing PII data.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
@@ -211,15 +212,18 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "betalingsservice"</summary>
         [EnumMember(Value = "betalingsservice")]
         Betalingsservice,
+        /// <summary>`scheme` with a value of "faster_payments"</summary>
+        [EnumMember(Value = "faster_payments")]
+        FasterPayments,
         /// <summary>`scheme` with a value of "pad"</summary>
         [EnumMember(Value = "pad")]
         Pad,
-        /// <summary>`scheme` with a value of "sepa_core"</summary>
-        [EnumMember(Value = "sepa_core")]
-        SepaCore,
         /// <summary>`scheme` with a value of "pay_to"</summary>
         [EnumMember(Value = "pay_to")]
         PayTo,
+        /// <summary>`scheme` with a value of "sepa_core"</summary>
+        [EnumMember(Value = "sepa_core")]
+        SepaCore,
     }
 
 }

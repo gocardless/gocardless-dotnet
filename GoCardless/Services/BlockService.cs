@@ -22,24 +22,38 @@ namespace GoCardless.Services
     /// 
     /// The details used to create blocks can be exact matches, like a bank
     /// account or an email,
-    /// or a more generic match such as an email domain. New block types may be
-    /// added over time.
+    /// or a more generic match such as an email domain or bank name. Please be
+    /// careful when creating
+    /// blocks for more generic matches as this may block legitimate payers from
+    /// using your service.
     /// 
-    /// A block object is in essence a simple rule that is used to match against
-    /// details in a
-    /// newly created mandate. If there is a successful match then the mandate
-    /// is transitioned
-    /// to a "blocked" state.
+    /// New block types may be added over time.
     /// 
-    /// Payments and subscriptions cannot be created against a mandate in
+    /// A block is in essence a simple rule that is used to match against
+    /// details in a newly
+    /// created mandate. If there is a successful match then the mandate is
+    /// transitioned to a
+    /// "blocked" state.
+    /// 
+    /// Please note:
+    /// 
+    ///   - Payments and subscriptions cannot be created against a mandate in
     /// blocked state.
+    ///   - A mandate can never be transitioned out of the blocked state.
     /// 
-    /// A mandate can never be transitioned out of the blocked state.
+    /// The one exception to this is when blocking a 'bank_name'. This block
+    /// will prevent bank
+    /// accounts from being created for banks that match the given name. To
+    /// ensure we match
+    /// bank names correctly an existing bank account must be used when creating
+    /// this block. Please
+    /// be aware that we cannot always match a bank account to a given bank
+    /// name.
     /// 
     /// <p class="notice">
-    ///   This API is currently only available for approved integrators - please
-    /// <a href="mailto:help@gocardless.com">get in touch</a> if you would like
-    /// to use this API.
+    ///   This API is currently only available for GoCardless Protect+
+    /// integrators - please <a href="mailto:help@gocardless.com">get in
+    /// touch</a> if you would like to use this API.
     /// </p>
     /// </summary>
 
@@ -227,7 +241,8 @@ namespace GoCardless.Services
         /// <summary>
         /// Type of entity we will seek to match against when blocking the
         /// mandate. This
-        /// can currently be one of 'email', 'email_domain', or 'bank_account'.
+        /// can currently be one of 'email', 'email_domain', 'bank_account', or
+        /// 'bank_name'.
         /// </summary>
         [JsonProperty("block_type")]
         public string BlockType { get; set; }
@@ -235,7 +250,8 @@ namespace GoCardless.Services
         /// <summary>
         /// Type of entity we will seek to match against when blocking the
         /// mandate. This
-        /// can currently be one of 'email', 'email_domain', or 'bank_account'.
+        /// can currently be one of 'email', 'email_domain', 'bank_account', or
+        /// 'bank_name'.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BlockBlockType
@@ -250,6 +266,9 @@ namespace GoCardless.Services
             /// <summary>`block_type` with a value of "bank_account"</summary>
             [EnumMember(Value = "bank_account")]
             BankAccount,
+            /// <summary>`block_type` with a value of "bank_name"</summary>
+            [EnumMember(Value = "bank_name")]
+            BankName,
         }
 
         /// <summary>
@@ -306,9 +325,11 @@ namespace GoCardless.Services
         /// be the raw value
         /// (in the case of emails or email domains) or the ID of the resource
         /// (in the case of
-        /// bank accounts). This means in order to block a specific bank account
-        /// it must already
-        /// have been created as a resource.
+        /// bank accounts and bank names). This means in order to block a
+        /// specific bank account
+        /// (even if you wish to block generically by name) it must already have
+        /// been created as
+        /// a resource.
         /// </summary>
         [JsonProperty("resource_reference")]
         public string ResourceReference { get; set; }
@@ -359,7 +380,8 @@ namespace GoCardless.Services
         /// <summary>
         /// Type of entity we will seek to match against when blocking the
         /// mandate. This
-        /// can currently be one of 'email', 'email_domain', or 'bank_account'.
+        /// can currently be one of 'email', 'email_domain', 'bank_account', or
+        /// 'bank_name'.
         /// </summary>
         [JsonProperty("block_type")]
         public string BlockType { get; set; }
@@ -367,7 +389,8 @@ namespace GoCardless.Services
         /// <summary>
         /// Type of entity we will seek to match against when blocking the
         /// mandate. This
-        /// can currently be one of 'email', 'email_domain', or 'bank_account'.
+        /// can currently be one of 'email', 'email_domain', 'bank_account', or
+        /// 'bank_name'.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BlockBlockType
@@ -382,6 +405,9 @@ namespace GoCardless.Services
             /// <summary>`block_type` with a value of "bank_account"</summary>
             [EnumMember(Value = "bank_account")]
             BankAccount,
+            /// <summary>`block_type` with a value of "bank_name"</summary>
+            [EnumMember(Value = "bank_name")]
+            BankName,
         }
 
         /// <summary>

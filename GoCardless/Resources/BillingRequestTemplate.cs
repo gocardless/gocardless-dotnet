@@ -44,6 +44,14 @@ namespace GoCardless.Resources
         public string MandateRequestCurrency { get; set; }
 
         /// <summary>
+        /// A human-readable description of the payment and/or mandate. This
+        /// will be displayed to the payer when authorising the billing request.
+        /// 
+        /// </summary>
+        [JsonProperty("mandate_request_description")]
+        public string MandateRequestDescription { get; set; }
+
+        /// <summary>
         /// Key-value store of custom data that will be applied to the mandate
         /// created when this request is fulfilled. Up to 3 keys are permitted,
         /// with key names up to 50 characters and values up to 500 characters.
@@ -52,8 +60,11 @@ namespace GoCardless.Resources
         public IDictionary<string, string> MandateRequestMetadata { get; set; }
 
         /// <summary>
-        /// A Direct Debit scheme. Currently "ach", "bacs", "becs", "becs_nz",
-        /// "betalingsservice", "pad", "pay_to" and "sepa_core" are supported.
+        /// A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs",
+        /// "becs_nz", "betalingsservice", "faster_payments", "pad", "pay_to"
+        /// and "sepa_core" are supported. Optional for mandate only requests -
+        /// if left blank, the payer will be able to select the currency/scheme
+        /// to pay with from a list of your available schemes.
         /// </summary>
         [JsonProperty("mandate_request_scheme")]
         public string MandateRequestScheme { get; set; }
@@ -120,8 +131,8 @@ namespace GoCardless.Resources
         public string PaymentRequestCurrency { get; set; }
 
         /// <summary>
-        /// A human-readable description of the payment. This will be displayed
-        /// to the payer when authorising the billing request.
+        /// A human-readable description of the payment and/or mandate. This
+        /// will be displayed to the payer when authorising the billing request.
         /// 
         /// </summary>
         [JsonProperty("payment_request_description")]

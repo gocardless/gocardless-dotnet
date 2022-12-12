@@ -116,6 +116,9 @@ namespace GoCardless.Services
         /// Service (CASS) or when a customer contacts GoCardless to change their bank details. It
         /// must start in the `pending_submission` state. Only compatible with Bacs, SEPA and
         /// Autogiro mandates.</li>
+        /// <li>`mandate_suspended_by_payer`: Transitions a mandate to `suspended_by_payer`, as if
+        /// payer has suspended the mandate after it has been setup successfully. It must start in
+        /// the `activated` state. Only compatible with PAY_TO mandates.</li>
         /// <li>`refund_paid`: Transitions a refund to `paid`. It must start in either the
         /// `pending_submission` or `submitted` state.</li>
         /// <li>`refund_settled`: Transitions a refund to `paid`, if it's not already, then
@@ -174,16 +177,16 @@ namespace GoCardless.Services
         /// </summary>
         public class ScenarioSimulatorLinks
         {
-
-            /// <summary>
-            /// ID of the resource to run the simulation against.
+                
+                /// <summary>
+                            /// ID of the resource to run the simulation against.
             /// Must be same type of resource as the simulator that is being
             /// run.
             /// eg. Payment ID for `payment_failed`, Mandate ID for
             /// `mandate_activated` etc
-            /// </summary>
-            [JsonProperty("resource")]
-            public string Resource { get; set; }
+                /// </summary>
+                [JsonProperty("resource")]
+                public string Resource { get; set; }
         }
     }
 

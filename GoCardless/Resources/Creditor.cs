@@ -22,6 +22,13 @@ namespace GoCardless.Resources
     public class Creditor
     {
         /// <summary>
+        /// Boolean value indicating whether the creditor is activated in the
+        /// product.
+        /// </summary>
+        [JsonProperty("activated")]
+        public bool? Activated { get; set; }
+
+        /// <summary>
         /// The first line of the creditor's address.
         /// </summary>
         [JsonProperty("address_line1")]
@@ -68,7 +75,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Boolean value indicating whether creditor has the [Custom Payment
-        /// Pages](https://support.gocardless.com/hc/en-gb/articles/115003734705-Custom-payment-pages)
+        /// Pages](https://hub.gocardless.com/s/article/Custom-payment-pages)
         /// functionality enabled.
         /// </summary>
         [JsonProperty("custom_payment_pages_enabled")]
@@ -454,6 +461,9 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "pad"</summary>
         [EnumMember(Value = "pad")]
         Pad,
+        /// <summary>`scheme` with a value of "pay_to"</summary>
+        [EnumMember(Value = "pay_to")]
+        PayTo,
         /// <summary>`scheme` with a value of "sepa"</summary>
         [EnumMember(Value = "sepa")]
         Sepa,
@@ -463,9 +473,6 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "sepa_instant_credit_transfer"</summary>
         [EnumMember(Value = "sepa_instant_credit_transfer")]
         SepaInstantCreditTransfer,
-        /// <summary>`scheme` with a value of "pay_to"</summary>
-        [EnumMember(Value = "pay_to")]
-        PayTo,
     }
 
     /// <summary>

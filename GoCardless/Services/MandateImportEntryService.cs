@@ -166,31 +166,31 @@ namespace GoCardless.Services
         /// </summary>
         public class MandateImportEntryAmendment
         {
-
-            /// <summary>
-            /// The creditor identifier of the direct debit originator. Required
+                
+                /// <summary>
+                            /// The creditor identifier of the direct debit originator. Required
             /// if mandate
             /// import scheme is `sepa`.
             /// 
-            /// </summary>
-            [JsonProperty("original_creditor_id")]
-            public string OriginalCreditorId { get; set; }
-
-            /// <summary>
-            /// Data about the original mandate to be moved or modified.
+                /// </summary>
+                [JsonProperty("original_creditor_id")]
+                public string OriginalCreditorId { get; set; }
+                
+                /// <summary>
+                            /// Data about the original mandate to be moved or modified.
             /// 
-            /// </summary>
-            [JsonProperty("original_creditor_name")]
-            public string OriginalCreditorName { get; set; }
-
-            /// <summary>
-            /// The unique SEPA reference for the mandate being amended.
+                /// </summary>
+                [JsonProperty("original_creditor_name")]
+                public string OriginalCreditorName { get; set; }
+                
+                /// <summary>
+                            /// The unique SEPA reference for the mandate being amended.
             /// Required if mandate
             /// import scheme is `sepa`.
             /// 
-            /// </summary>
-            [JsonProperty("original_mandate_reference")]
-            public string OriginalMandateReference { get; set; }
+                /// </summary>
+                [JsonProperty("original_mandate_reference")]
+                public string OriginalMandateReference { get; set; }
         }
 
         [JsonProperty("bank_account")]
@@ -200,57 +200,57 @@ namespace GoCardless.Services
         /// </summary>
         public class MandateImportEntryBankAccount
         {
-
-            /// <summary>
-            /// Name of the account holder, as known by the bank. Usually this
+                
+                /// <summary>
+                            /// Name of the account holder, as known by the bank. Usually this
             /// is the same as the name stored with the linked
             /// [creditor](#core-endpoints-creditors). This field will be
             /// transliterated, upcased and truncated to 18 characters. This
             /// field is required unless the request includes a [customer bank
             /// account token](#javascript-flow-customer-bank-account-tokens).
-            /// </summary>
-            [JsonProperty("account_holder_name")]
-            public string AccountHolderName { get; set; }
-
-            /// <summary>
-            /// Bank account number - see [local
+                /// </summary>
+                [JsonProperty("account_holder_name")]
+                public string AccountHolderName { get; set; }
+                
+                /// <summary>
+                            /// Bank account number - see [local
             /// details](#appendix-local-bank-details) for more information.
             /// Alternatively you can provide an `iban`.
-            /// </summary>
-            [JsonProperty("account_number")]
-            public string AccountNumber { get; set; }
-
-            /// <summary>
-            /// Bank code - see [local details](#appendix-local-bank-details)
+                /// </summary>
+                [JsonProperty("account_number")]
+                public string AccountNumber { get; set; }
+                
+                /// <summary>
+                            /// Bank code - see [local details](#appendix-local-bank-details)
             /// for more information. Alternatively you can provide an `iban`.
-            /// </summary>
-            [JsonProperty("bank_code")]
-            public string BankCode { get; set; }
-
-            /// <summary>
-            /// Branch code - see [local details](#appendix-local-bank-details)
+                /// </summary>
+                [JsonProperty("bank_code")]
+                public string BankCode { get; set; }
+                
+                /// <summary>
+                            /// Branch code - see [local details](#appendix-local-bank-details)
             /// for more information. Alternatively you can provide an `iban`.
-            /// </summary>
-            [JsonProperty("branch_code")]
-            public string BranchCode { get; set; }
-
-            /// <summary>
-            /// [ISO 3166-1 alpha-2
+                /// </summary>
+                [JsonProperty("branch_code")]
+                public string BranchCode { get; set; }
+                
+                /// <summary>
+                            /// [ISO 3166-1 alpha-2
             /// code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
             /// Defaults to the country code of the `iban` if supplied,
             /// otherwise is required.
-            /// </summary>
-            [JsonProperty("country_code")]
-            public string CountryCode { get; set; }
-
-            /// <summary>
-            /// International Bank Account Number. Alternatively you can provide
+                /// </summary>
+                [JsonProperty("country_code")]
+                public string CountryCode { get; set; }
+                
+                /// <summary>
+                            /// International Bank Account Number. Alternatively you can provide
             /// [local details](#appendix-local-bank-details). IBANs are not
             /// accepted for Swedish bank accounts denominated in SEK - you must
             /// supply [local details](#local-bank-details-sweden).
-            /// </summary>
-            [JsonProperty("iban")]
-            public string Iban { get; set; }
+                /// </summary>
+                [JsonProperty("iban")]
+                public string Iban { get; set; }
         }
 
         [JsonProperty("customer")]
@@ -260,82 +260,82 @@ namespace GoCardless.Services
         /// </summary>
         public class MandateImportEntryCustomer
         {
-
-            /// <summary>
-            /// The first line of the customer's address. Required if mandate
+                
+                /// <summary>
+                            /// The first line of the customer's address. Required if mandate
             /// import scheme is either `bacs` or `sepa`.
             /// 
-            /// </summary>
-            [JsonProperty("address_line1")]
-            public string AddressLine1 { get; set; }
-
-            /// <summary>
-            /// The second line of the customer's address.
-            /// </summary>
-            [JsonProperty("address_line2")]
-            public string AddressLine2 { get; set; }
-
-            /// <summary>
-            /// The third line of the customer's address.
-            /// </summary>
-            [JsonProperty("address_line3")]
-            public string AddressLine3 { get; set; }
-
-            /// <summary>
-            /// The city of the customer's address.
-            /// </summary>
-            [JsonProperty("city")]
-            public string City { get; set; }
-
-            /// <summary>
-            /// Customer's company name. Required unless a `given_name` and
+                /// </summary>
+                [JsonProperty("address_line1")]
+                public string AddressLine1 { get; set; }
+                
+                /// <summary>
+                            /// The second line of the customer's address.
+                /// </summary>
+                [JsonProperty("address_line2")]
+                public string AddressLine2 { get; set; }
+                
+                /// <summary>
+                            /// The third line of the customer's address.
+                /// </summary>
+                [JsonProperty("address_line3")]
+                public string AddressLine3 { get; set; }
+                
+                /// <summary>
+                            /// The city of the customer's address.
+                /// </summary>
+                [JsonProperty("city")]
+                public string City { get; set; }
+                
+                /// <summary>
+                            /// Customer's company name. Required unless a `given_name` and
             /// `family_name` are provided. For Canadian customers, the use of a
             /// `company_name` value will mean that any mandate created from
             /// this customer will be considered to be a "Business PAD"
             /// (otherwise, any mandate will be considered to be a "Personal
             /// PAD").
-            /// </summary>
-            [JsonProperty("company_name")]
-            public string CompanyName { get; set; }
-
-            /// <summary>
-            /// [ISO 3166-1 alpha-2
+                /// </summary>
+                [JsonProperty("company_name")]
+                public string CompanyName { get; set; }
+                
+                /// <summary>
+                            /// [ISO 3166-1 alpha-2
             /// code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-            /// </summary>
-            [JsonProperty("country_code")]
-            public string CountryCode { get; set; }
-
-            /// <summary>
-            /// For Danish customers only. The civic/company number (CPR or CVR)
+                /// </summary>
+                [JsonProperty("country_code")]
+                public string CountryCode { get; set; }
+                
+                /// <summary>
+                            /// For Danish customers only. The civic/company number (CPR or CVR)
             /// of the customer. Must be supplied if the customer's bank account
             /// is denominated in Danish krone (DKK).
-            /// </summary>
-            [JsonProperty("danish_identity_number")]
-            public string DanishIdentityNumber { get; set; }
-
-            /// <summary>
-            /// Customer's email address. Required in most cases, as this allows
+                /// </summary>
+                [JsonProperty("danish_identity_number")]
+                public string DanishIdentityNumber { get; set; }
+                
+                /// <summary>
+                            /// Customer's email address. Required in most cases, as this allows
             /// GoCardless to send notifications to this customer.
-            /// </summary>
-            [JsonProperty("email")]
-            public string Email { get; set; }
-
-            /// <summary>
-            /// Customer's surname. Required unless a `company_name` is
+                /// </summary>
+                [JsonProperty("email")]
+                public string Email { get; set; }
+                
+                /// <summary>
+                            /// Customer's surname. Required unless a `company_name` is
             /// provided.
-            /// </summary>
-            [JsonProperty("family_name")]
-            public string FamilyName { get; set; }
-
-            /// <summary>
-            /// Customer's first name. Required unless a `company_name` is
+                /// </summary>
+                [JsonProperty("family_name")]
+                public string FamilyName { get; set; }
+                
+                /// <summary>
+                            /// Customer's first name. Required unless a `company_name` is
             /// provided.
-            /// </summary>
-            [JsonProperty("given_name")]
-            public string GivenName { get; set; }
-
-            /// <summary>
-            /// [ISO
+                /// </summary>
+                [JsonProperty("given_name")]
+                public string GivenName { get; set; }
+                
+                /// <summary>
+                            /// [ISO
             /// 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
             /// code. Used as the language for notification emails sent by
             /// GoCardless if your organisation does not send its own (see
@@ -344,43 +344,43 @@ namespace GoCardless.Services
             /// "nb", "sl", "sv" are supported. If this is not provided, the
             /// language will be chosen based on the `country_code` (if
             /// supplied) or default to "en".
-            /// </summary>
-            [JsonProperty("language")]
-            public string Language { get; set; }
-
-            /// <summary>
-            /// [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone
+                /// </summary>
+                [JsonProperty("language")]
+                public string Language { get; set; }
+                
+                /// <summary>
+                            /// [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone
             /// number, including country code.
-            /// </summary>
-            [JsonProperty("phone_number")]
-            public string PhoneNumber { get; set; }
-
-            /// <summary>
-            /// The customer's postal code. Required if mandate import scheme is
+                /// </summary>
+                [JsonProperty("phone_number")]
+                public string PhoneNumber { get; set; }
+                
+                /// <summary>
+                            /// The customer's postal code. Required if mandate import scheme is
             /// either `bacs` or `sepa`.
             /// 
-            /// </summary>
-            [JsonProperty("postal_code")]
-            public string PostalCode { get; set; }
-
-            /// <summary>
-            /// The customer's address region, county or department. For US
+                /// </summary>
+                [JsonProperty("postal_code")]
+                public string PostalCode { get; set; }
+                
+                /// <summary>
+                            /// The customer's address region, county or department. For US
             /// customers a 2 letter
             /// [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US)
             /// state code is required (e.g. `CA` for California).
-            /// </summary>
-            [JsonProperty("region")]
-            public string Region { get; set; }
-
-            /// <summary>
-            /// For Swedish customers only. The civic/company number
+                /// </summary>
+                [JsonProperty("region")]
+                public string Region { get; set; }
+                
+                /// <summary>
+                            /// For Swedish customers only. The civic/company number
             /// (personnummer, samordningsnummer, or organisationsnummer) of the
             /// customer. Must be supplied if the customer's bank account is
             /// denominated in Swedish krona (SEK). This field cannot be changed
             /// once it has been set.
-            /// </summary>
-            [JsonProperty("swedish_identity_number")]
-            public string SwedishIdentityNumber { get; set; }
+                /// </summary>
+                [JsonProperty("swedish_identity_number")]
+                public string SwedishIdentityNumber { get; set; }
         }
 
         /// <summary>
@@ -393,12 +393,12 @@ namespace GoCardless.Services
         /// </summary>
         public class MandateImportEntryLinks
         {
-
-            /// <summary>
-            /// Unique identifier, beginning with "IM".
-            /// </summary>
-            [JsonProperty("mandate_import")]
-            public string MandateImport { get; set; }
+                
+                /// <summary>
+                            /// Unique identifier, beginning with "IM".
+                /// </summary>
+                [JsonProperty("mandate_import")]
+                public string MandateImport { get; set; }
         }
 
         /// <summary>

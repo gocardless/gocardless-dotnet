@@ -225,21 +225,21 @@ namespace GoCardless.Services
         /// </summary>
         public class MandateLinks
         {
-
-            /// <summary>
-            /// ID of the associated [creditor](#core-endpoints-creditors). Only
+                
+                /// <summary>
+                            /// ID of the associated [creditor](#core-endpoints-creditors). Only
             /// required if your account manages multiple creditors.
-            /// </summary>
-            [JsonProperty("creditor")]
-            public string Creditor { get; set; }
-
-            /// <summary>
-            /// ID of the associated [customer bank
+                /// </summary>
+                [JsonProperty("creditor")]
+                public string Creditor { get; set; }
+                
+                /// <summary>
+                            /// ID of the associated [customer bank
             /// account](#core-endpoints-customer-bank-accounts) which the
             /// mandate is created and submits payments against.
-            /// </summary>
-            [JsonProperty("customer_bank_account")]
-            public string CustomerBankAccount { get; set; }
+                /// </summary>
+                [JsonProperty("customer_bank_account")]
+                public string CustomerBankAccount { get; set; }
         }
 
         /// <summary>
@@ -268,7 +268,7 @@ namespace GoCardless.Services
         public string Reference { get; set; }
 
         /// <summary>
-        /// <a name="mandates_scheme"></a>Direct Debit scheme to which this
+        /// <a name="mandates_scheme"></a>Bank payment scheme to which this
         /// mandate and associated payments are submitted. Can be supplied or
         /// automatically detected from the customer's bank account.
         /// </summary>
@@ -370,6 +370,12 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
+
+        /// <summary>
+        /// Mandate type
+        /// </summary>
+        [JsonProperty("mandate_type")]
+        public string MandateType { get; set; }
 
         /// <summary>
         /// Unique reference. Different schemes have different length and

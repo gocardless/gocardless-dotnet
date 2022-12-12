@@ -157,20 +157,21 @@ namespace GoCardless.Services
         /// </summary>
         public class RedirectFlowLinks
         {
-
-            /// <summary>
-            /// The [creditor](#core-endpoints-creditors) for whom the mandate
+                
+                /// <summary>
+                            /// The [creditor](#core-endpoints-creditors) for whom the mandate
             /// will be created. The `name` of the creditor will be displayed on
             /// the payment page. Required if your account manages multiple
             /// creditors.
-            /// </summary>
-            [JsonProperty("creditor")]
-            public string Creditor { get; set; }
+                /// </summary>
+                [JsonProperty("creditor")]
+                public string Creditor { get; set; }
         }
 
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
+        /// names up to 50 characters and values up to 500 characters. _Note:_
+        /// This should not be used for storing PII data.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<String, String> Metadata { get; set; }
@@ -191,15 +192,15 @@ namespace GoCardless.Services
         /// </summary>
         public class RedirectFlowPrefilledBankAccount
         {
-
-            /// <summary>
-            /// Bank account type for USD-denominated bank accounts. Must not be
+                
+                /// <summary>
+                            /// Bank account type for USD-denominated bank accounts. Must not be
             /// provided for bank accounts in other currencies. See [local
             /// details](#local-bank-details-united-states) for more
             /// information.
-            /// </summary>
-            [JsonProperty("account_type")]
-            public RedirectFlowAccountType? AccountType { get; set; }
+                /// </summary>
+                [JsonProperty("account_type")]
+                public RedirectFlowAccountType? AccountType { get; set; }
         /// <summary>
         /// Bank account type for USD-denominated bank accounts. Must not be
         /// provided for bank accounts in other currencies. See [local
@@ -234,103 +235,103 @@ namespace GoCardless.Services
         /// </summary>
         public class RedirectFlowPrefilledCustomer
         {
-
-            /// <summary>
-            /// The first line of the customer's address.
-            /// </summary>
-            [JsonProperty("address_line1")]
-            public string AddressLine1 { get; set; }
-
-            /// <summary>
-            /// The second line of the customer's address.
-            /// </summary>
-            [JsonProperty("address_line2")]
-            public string AddressLine2 { get; set; }
-
-            /// <summary>
-            /// The third line of the customer's address.
-            /// </summary>
-            [JsonProperty("address_line3")]
-            public string AddressLine3 { get; set; }
-
-            /// <summary>
-            /// The city of the customer's address.
-            /// </summary>
-            [JsonProperty("city")]
-            public string City { get; set; }
-
-            /// <summary>
-            /// Customer's company name. Company name should only be provided if
+                
+                /// <summary>
+                            /// The first line of the customer's address.
+                /// </summary>
+                [JsonProperty("address_line1")]
+                public string AddressLine1 { get; set; }
+                
+                /// <summary>
+                            /// The second line of the customer's address.
+                /// </summary>
+                [JsonProperty("address_line2")]
+                public string AddressLine2 { get; set; }
+                
+                /// <summary>
+                            /// The third line of the customer's address.
+                /// </summary>
+                [JsonProperty("address_line3")]
+                public string AddressLine3 { get; set; }
+                
+                /// <summary>
+                            /// The city of the customer's address.
+                /// </summary>
+                [JsonProperty("city")]
+                public string City { get; set; }
+                
+                /// <summary>
+                            /// Customer's company name. Company name should only be provided if
             /// `given_name` and `family_name` are null.
-            /// </summary>
-            [JsonProperty("company_name")]
-            public string CompanyName { get; set; }
-
-            /// <summary>
-            /// [ISO 3166-1 alpha-2
+                /// </summary>
+                [JsonProperty("company_name")]
+                public string CompanyName { get; set; }
+                
+                /// <summary>
+                            /// [ISO 3166-1 alpha-2
             /// code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-            /// </summary>
-            [JsonProperty("country_code")]
-            public string CountryCode { get; set; }
-
-            /// <summary>
-            /// For Danish customers only. The civic/company number (CPR or CVR)
+                /// </summary>
+                [JsonProperty("country_code")]
+                public string CountryCode { get; set; }
+                
+                /// <summary>
+                            /// For Danish customers only. The civic/company number (CPR or CVR)
             /// of the customer.
-            /// </summary>
-            [JsonProperty("danish_identity_number")]
-            public string DanishIdentityNumber { get; set; }
-
-            /// <summary>
-            /// Customer's email address.
-            /// </summary>
-            [JsonProperty("email")]
-            public string Email { get; set; }
-
-            /// <summary>
-            /// Customer's surname.
-            /// </summary>
-            [JsonProperty("family_name")]
-            public string FamilyName { get; set; }
-
-            /// <summary>
-            /// Customer's first name.
-            /// </summary>
-            [JsonProperty("given_name")]
-            public string GivenName { get; set; }
-
-            /// <summary>
-            /// [ISO
+                /// </summary>
+                [JsonProperty("danish_identity_number")]
+                public string DanishIdentityNumber { get; set; }
+                
+                /// <summary>
+                            /// Customer's email address.
+                /// </summary>
+                [JsonProperty("email")]
+                public string Email { get; set; }
+                
+                /// <summary>
+                            /// Customer's surname.
+                /// </summary>
+                [JsonProperty("family_name")]
+                public string FamilyName { get; set; }
+                
+                /// <summary>
+                            /// Customer's first name.
+                /// </summary>
+                [JsonProperty("given_name")]
+                public string GivenName { get; set; }
+                
+                /// <summary>
+                            /// [ISO
             /// 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
             /// code.
-            /// </summary>
-            [JsonProperty("language")]
-            public string Language { get; set; }
-
-            /// <summary>
-            /// For New Zealand customers only.
-            /// </summary>
-            [JsonProperty("phone_number")]
-            public string PhoneNumber { get; set; }
-
-            /// <summary>
-            /// The customer's postal code.
-            /// </summary>
-            [JsonProperty("postal_code")]
-            public string PostalCode { get; set; }
-
-            /// <summary>
-            /// The customer's address region, county or department.
-            /// </summary>
-            [JsonProperty("region")]
-            public string Region { get; set; }
-
-            /// <summary>
-            /// For Swedish customers only. The civic/company number
+                /// </summary>
+                [JsonProperty("language")]
+                public string Language { get; set; }
+                
+                /// <summary>
+                            /// For New Zealand customers only.
+                /// </summary>
+                [JsonProperty("phone_number")]
+                public string PhoneNumber { get; set; }
+                
+                /// <summary>
+                            /// The customer's postal code.
+                /// </summary>
+                [JsonProperty("postal_code")]
+                public string PostalCode { get; set; }
+                
+                /// <summary>
+                            /// The customer's address region, county or department.
+                /// </summary>
+                [JsonProperty("region")]
+                public string Region { get; set; }
+                
+                /// <summary>
+                            /// For Swedish customers only. The civic/company number
             /// (personnummer, samordningsnummer, or organisationsnummer) of the
             /// customer.
-            /// </summary>
-            [JsonProperty("swedish_identity_number")]
-            public string SwedishIdentityNumber { get; set; }
+                /// </summary>
+                [JsonProperty("swedish_identity_number")]
+                public string SwedishIdentityNumber { get; set; }
         }
 
         /// <summary>
@@ -370,15 +371,18 @@ namespace GoCardless.Services
             /// <summary>`scheme` with a value of "betalingsservice"</summary>
             [EnumMember(Value = "betalingsservice")]
             Betalingsservice,
+            /// <summary>`scheme` with a value of "faster_payments"</summary>
+            [EnumMember(Value = "faster_payments")]
+            FasterPayments,
             /// <summary>`scheme` with a value of "pad"</summary>
             [EnumMember(Value = "pad")]
             Pad,
-            /// <summary>`scheme` with a value of "sepa_core"</summary>
-            [EnumMember(Value = "sepa_core")]
-            SepaCore,
             /// <summary>`scheme` with a value of "pay_to"</summary>
             [EnumMember(Value = "pay_to")]
             PayTo,
+            /// <summary>`scheme` with a value of "sepa_core"</summary>
+            [EnumMember(Value = "sepa_core")]
+            SepaCore,
         }
 
         /// <summary>

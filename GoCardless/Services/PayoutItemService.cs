@@ -54,6 +54,13 @@ namespace GoCardless.Services
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// items in the payout.
         /// 
+        /// <div class="notice notice--warning u-block">
+        ///   <strong>Note</strong>: From 1 March 2023 onwards, we will only
+        /// serve requests for payout items created in the last 6 months.
+        /// Requests for older payouts will return an HTTP status <code>410
+        /// Gone</code>.
+        /// </div>
+        /// 
         /// </summary>
         /// <param name="request">An optional `PayoutItemListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -111,6 +118,12 @@ namespace GoCardless.Services
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of items
     /// in the payout.
+    /// 
+    /// <div class="notice notice--warning u-block">
+    ///   <strong>Note</strong>: From 1 March 2023 onwards, we will only serve
+    /// requests for payout items created in the last 6 months. Requests for
+    /// older payouts will return an HTTP status <code>410 Gone</code>.
+    /// </div>
     /// 
     /// </summary>
     public class PayoutItemListRequest

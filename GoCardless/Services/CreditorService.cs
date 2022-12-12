@@ -342,62 +342,62 @@ namespace GoCardless.Services
         /// </summary>
         public class CreditorLinks
         {
-
-            /// <summary>
-            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+                
+                /// <summary>
+                            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in AUD.
-            /// </summary>
-            [JsonProperty("default_aud_payout_account")]
-            public string DefaultAudPayoutAccount { get; set; }
-
-            /// <summary>
-            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+                /// </summary>
+                [JsonProperty("default_aud_payout_account")]
+                public string DefaultAudPayoutAccount { get; set; }
+                
+                /// <summary>
+                            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in CAD.
-            /// </summary>
-            [JsonProperty("default_cad_payout_account")]
-            public string DefaultCadPayoutAccount { get; set; }
-
-            /// <summary>
-            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+                /// </summary>
+                [JsonProperty("default_cad_payout_account")]
+                public string DefaultCadPayoutAccount { get; set; }
+                
+                /// <summary>
+                            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in DKK.
-            /// </summary>
-            [JsonProperty("default_dkk_payout_account")]
-            public string DefaultDkkPayoutAccount { get; set; }
-
-            /// <summary>
-            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+                /// </summary>
+                [JsonProperty("default_dkk_payout_account")]
+                public string DefaultDkkPayoutAccount { get; set; }
+                
+                /// <summary>
+                            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in EUR.
-            /// </summary>
-            [JsonProperty("default_eur_payout_account")]
-            public string DefaultEurPayoutAccount { get; set; }
-
-            /// <summary>
-            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+                /// </summary>
+                [JsonProperty("default_eur_payout_account")]
+                public string DefaultEurPayoutAccount { get; set; }
+                
+                /// <summary>
+                            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in GBP.
-            /// </summary>
-            [JsonProperty("default_gbp_payout_account")]
-            public string DefaultGbpPayoutAccount { get; set; }
-
-            /// <summary>
-            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+                /// </summary>
+                [JsonProperty("default_gbp_payout_account")]
+                public string DefaultGbpPayoutAccount { get; set; }
+                
+                /// <summary>
+                            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in NZD.
-            /// </summary>
-            [JsonProperty("default_nzd_payout_account")]
-            public string DefaultNzdPayoutAccount { get; set; }
-
-            /// <summary>
-            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+                /// </summary>
+                [JsonProperty("default_nzd_payout_account")]
+                public string DefaultNzdPayoutAccount { get; set; }
+                
+                /// <summary>
+                            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in SEK.
-            /// </summary>
-            [JsonProperty("default_sek_payout_account")]
-            public string DefaultSekPayoutAccount { get; set; }
-
-            /// <summary>
-            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+                /// </summary>
+                [JsonProperty("default_sek_payout_account")]
+                public string DefaultSekPayoutAccount { get; set; }
+                
+                /// <summary>
+                            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in USD.
-            /// </summary>
-            [JsonProperty("default_usd_payout_account")]
-            public string DefaultUsdPayoutAccount { get; set; }
+                /// </summary>
+                [JsonProperty("default_usd_payout_account")]
+                public string DefaultUsdPayoutAccount { get; set; }
         }
 
         /// <summary>

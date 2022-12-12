@@ -261,13 +261,13 @@ namespace GoCardless.Services
         /// </summary>
         public class CreditorBankAccountLinks
         {
-
-            /// <summary>
-            /// ID of the [creditor](#core-endpoints-creditors) that owns this
+                
+                /// <summary>
+                            /// ID of the [creditor](#core-endpoints-creditors) that owns this
             /// bank account.
-            /// </summary>
-            [JsonProperty("creditor")]
-            public string Creditor { get; set; }
+                /// </summary>
+                [JsonProperty("creditor")]
+                public string Creditor { get; set; }
         }
 
         /// <summary>

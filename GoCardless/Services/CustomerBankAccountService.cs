@@ -313,21 +313,21 @@ namespace GoCardless.Services
         /// </summary>
         public class CustomerBankAccountLinks
         {
-
-            /// <summary>
-            /// ID of the [customer](#core-endpoints-customers) that owns this
+                
+                /// <summary>
+                            /// ID of the [customer](#core-endpoints-customers) that owns this
             /// bank account.
-            /// </summary>
-            [JsonProperty("customer")]
-            public string Customer { get; set; }
-
-            /// <summary>
-            /// ID of a [customer bank account
+                /// </summary>
+                [JsonProperty("customer")]
+                public string Customer { get; set; }
+                
+                /// <summary>
+                            /// ID of a [customer bank account
             /// token](#javascript-flow-customer-bank-account-tokens) to use in
             /// place of bank account parameters.
-            /// </summary>
-            [JsonProperty("customer_bank_account_token")]
-            public string CustomerBankAccountToken { get; set; }
+                /// </summary>
+                [JsonProperty("customer_bank_account_token")]
+                public string CustomerBankAccountToken { get; set; }
         }
 
         /// <summary>

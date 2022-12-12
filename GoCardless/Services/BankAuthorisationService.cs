@@ -125,20 +125,20 @@ namespace GoCardless.Services
         /// </summary>
         public class BankAuthorisationLinks
         {
-
-            /// <summary>
-            /// ID of the [billing request](#billing-requests-billing-requests)
+                
+                /// <summary>
+                            /// ID of the [billing request](#billing-requests-billing-requests)
             /// against which this authorisation was created.
-            /// </summary>
-            [JsonProperty("billing_request")]
-            public string BillingRequest { get; set; }
-
-            /// <summary>
-            /// ID of the [institution](#billing-requests-institutions) against
+                /// </summary>
+                [JsonProperty("billing_request")]
+                public string BillingRequest { get; set; }
+                
+                /// <summary>
+                            /// ID of the [institution](#billing-requests-institutions) against
             /// which this authorisation was created.
-            /// </summary>
-            [JsonProperty("institution")]
-            public string Institution { get; set; }
+                /// </summary>
+                [JsonProperty("institution")]
+                public string Institution { get; set; }
         }
 
         /// <summary>

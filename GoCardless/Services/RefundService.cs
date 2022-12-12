@@ -207,23 +207,23 @@ namespace GoCardless.Services
         /// </summary>
         public class RefundLinks
         {
-
-            /// <summary>
-            ///  ID of the [mandate](#core-endpoints-mandates) against which the
+                
+                /// <summary>
+                            ///  ID of the [mandate](#core-endpoints-mandates) against which the
             /// refund is being made. <br /> <p
             /// class="restricted-notice"><strong>Restricted</strong>: You must
             /// request access to Mandate Refunds by contacting <a
             /// href="mailto:support@gocardless.com">our support team</a>.</p>
-            /// </summary>
-            [JsonProperty("mandate")]
-            public string Mandate { get; set; }
-
-            /// <summary>
-            /// ID of the [payment](#core-endpoints-payments) against which the
+                /// </summary>
+                [JsonProperty("mandate")]
+                public string Mandate { get; set; }
+                
+                /// <summary>
+                            /// ID of the [payment](#core-endpoints-payments) against which the
             /// refund is being made.
-            /// </summary>
-            [JsonProperty("payment")]
-            public string Payment { get; set; }
+                /// </summary>
+                [JsonProperty("payment")]
+                public string Payment { get; set; }
         }
 
         /// <summary>
@@ -241,6 +241,7 @@ namespace GoCardless.Services
         /// <strong>Bacs</strong> - 10 characters<br /> <strong>BECS</strong> -
         /// 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
         /// <strong>Betalingsservice</strong> - 30 characters<br />
+        /// <strong>Faster Payments</strong> - 18 characters<br />
         /// <strong>PAD</strong> - scheme doesn't offer references<br />
         /// <strong>PayTo</strong> - 18 characters<br /> <strong>SEPA</strong> -
         /// 140 characters<br /> Note that this reference must be unique (for
@@ -249,7 +250,9 @@ namespace GoCardless.Services
         /// specify a payment reference for Bacs payments (that is, when
         /// collecting from the UK) if you're on the <a
         /// href='https://gocardless.com/pricing'>GoCardless Plus, Pro or
-        /// Enterprise packages</a>.</p>
+        /// Enterprise packages</a>.</p> <p
+        /// class='restricted-notice'><strong>Restricted</strong>: You can not
+        /// specify a payment reference for Faster Payments.</p>
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }

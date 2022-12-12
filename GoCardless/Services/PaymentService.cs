@@ -312,13 +312,13 @@ namespace GoCardless.Services
         /// </summary>
         public class PaymentLinks
         {
-
-            /// <summary>
-            /// ID of the [mandate](#core-endpoints-mandates) against which this
+                
+                /// <summary>
+                            /// ID of the [mandate](#core-endpoints-mandates) against which this
             /// payment should be collected.
-            /// </summary>
-            [JsonProperty("mandate")]
-            public string Mandate { get; set; }
+                /// </summary>
+                [JsonProperty("mandate")]
+                public string Mandate { get; set; }
         }
 
         /// <summary>
@@ -336,6 +336,7 @@ namespace GoCardless.Services
         /// <strong>Bacs</strong> - 10 characters<br /> <strong>BECS</strong> -
         /// 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
         /// <strong>Betalingsservice</strong> - 30 characters<br />
+        /// <strong>Faster Payments</strong> - 18 characters<br />
         /// <strong>PAD</strong> - scheme doesn't offer references<br />
         /// <strong>PayTo</strong> - 18 characters<br /> <strong>SEPA</strong> -
         /// 140 characters<br /> Note that this reference must be unique (for
@@ -344,7 +345,9 @@ namespace GoCardless.Services
         /// specify a payment reference for Bacs payments (that is, when
         /// collecting from the UK) if you're on the <a
         /// href='https://gocardless.com/pricing'>GoCardless Plus, Pro or
-        /// Enterprise packages</a>.</p>
+        /// Enterprise packages</a>.</p> <p
+        /// class='restricted-notice'><strong>Restricted</strong>: You can not
+        /// specify a payment reference for Faster Payments.</p>
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
@@ -392,34 +395,34 @@ namespace GoCardless.Services
         /// </summary>
         public class PaymentChargeDate
         {
-
-            /// <summary>
-            /// Limit to records where the payment was or will be collected from
+                
+                /// <summary>
+                            /// Limit to records where the payment was or will be collected from
             /// the customer's bank account after the specified date.
-            /// </summary>
-            [JsonProperty("gt")]
-            public string Gt { get; set; }
-
-            /// <summary>
-            /// Limit to records where the payment was or will be collected from
+                /// </summary>
+                [JsonProperty("gt")]
+                public string Gt { get; set; }
+                
+                /// <summary>
+                            /// Limit to records where the payment was or will be collected from
             /// the customer's bank account on or after the specified date.
-            /// </summary>
-            [JsonProperty("gte")]
-            public string Gte { get; set; }
-
-            /// <summary>
-            /// Limit to records where the payment was or will be collected from
+                /// </summary>
+                [JsonProperty("gte")]
+                public string Gte { get; set; }
+                
+                /// <summary>
+                            /// Limit to records where the payment was or will be collected from
             /// the customer's bank account before the specified date.
-            /// </summary>
-            [JsonProperty("lt")]
-            public string Lt { get; set; }
-
-            /// <summary>
-            /// Limit to records where the payment was or will be collected from
+                /// </summary>
+                [JsonProperty("lt")]
+                public string Lt { get; set; }
+                
+                /// <summary>
+                            /// Limit to records where the payment was or will be collected from
             /// the customer's bank account on or before the specified date.
-            /// </summary>
-            [JsonProperty("lte")]
-            public string Lte { get; set; }
+                /// </summary>
+                [JsonProperty("lte")]
+                public string Lte { get; set; }
         }
 
         /// <summary>

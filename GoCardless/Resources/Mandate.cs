@@ -20,6 +20,12 @@ namespace GoCardless.Resources
     public class Mandate
     {
         /// <summary>
+        /// (Optional) Payto and VRP Scheme specific information
+        /// </summary>
+        [JsonProperty("consent_parameters")]
+        public MandateConsentParameters ConsentParameters { get; set; }
+
+        /// <summary>
         /// Fixed [timestamp](#api-usage-time-zones--dates), recording when this
         /// resource was created.
         /// </summary>
@@ -71,7 +77,7 @@ namespace GoCardless.Resources
         public string Reference { get; set; }
 
         /// <summary>
-        /// <a name="mandates_scheme"></a>Direct Debit scheme to which this
+        /// <a name="mandates_scheme"></a>Bank payment scheme to which this
         /// mandate and associated payments are submitted. Can be supplied or
         /// automatically detected from the customer's bank account.
         /// </summary>
@@ -105,6 +111,90 @@ namespace GoCardless.Resources
         public MandateStatus? Status { get; set; }
     }
     
+    /// <summary>
+    /// Represents a mandate consent parameter resource.
+    ///
+    /// (Optional) Payto and VRP Scheme specific information
+    /// </summary>
+    public class MandateConsentParameters
+    {
+        /// <summary>
+        /// The latest date at which payments can be taken, must occur after
+        /// start_date if present
+        /// </summary>
+        [JsonProperty("end_date")]
+        public string EndDate { get; set; }
+
+        /// <summary>
+        /// The maximum amount that can be charged for a single payment
+        /// </summary>
+        [JsonProperty("max_amount_per_payment")]
+        public int? MaxAmountPerPayment { get; set; }
+
+        /// <summary>
+        /// Frequency configuration
+        /// </summary>
+        [JsonProperty("periods")]
+        public List<MandateConsentParameterPeriod> Periods { get; set; }
+
+        /// <summary>
+        /// The date from which payments can be taken
+        /// </summary>
+        [JsonProperty("start_date")]
+        public string StartDate { get; set; }
+    }
+    
+    /// <summary>
+    /// Frequency configuration
+    /// </summary>
+    public class MandateConsentParameterPeriod
+    {
+        /// <summary>
+        /// The maximum total amount that can be charged for all payments in
+        /// this period
+        /// </summary>
+        [JsonProperty("max_amount_per_period")]
+        public int? MaxAmountPerPeriod { get; set; }
+
+        /// <summary>
+        /// The maximum number of payments that can be collected in this period
+        /// </summary>
+        [JsonProperty("max_payments_per_period")]
+        public int? MaxPaymentsPerPeriod { get; set; }
+
+        /// <summary>
+        /// The repeating period for this mandate
+        /// </summary>
+        [JsonProperty("period")]
+        public MandateConsentParameterPeriodPeriod? Period { get; set; }
+    }
+    
+    /// <summary>
+    /// The repeating period for this mandate
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum MandateConsentParameterPeriodPeriod {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`period` with a value of "day"</summary>
+        [EnumMember(Value = "day")]
+        Day,
+        /// <summary>`period` with a value of "week"</summary>
+        [EnumMember(Value = "week")]
+        Week,
+        /// <summary>`period` with a value of "month"</summary>
+        [EnumMember(Value = "month")]
+        Month,
+        /// <summary>`period` with a value of "year"</summary>
+        [EnumMember(Value = "year")]
+        Year,
+        /// <summary>`period` with a value of "flexible"</summary>
+        [EnumMember(Value = "flexible")]
+        Flexible,
+    }
+
     /// <summary>
     /// Resources linked to this Mandate
     /// </summary>

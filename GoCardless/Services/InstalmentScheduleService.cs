@@ -324,34 +324,34 @@ namespace GoCardless.Services
         /// </summary>
         public class InstalmentScheduleInstalments
         {
-
-            /// <summary>
-            /// Amount, in the lowest denomination for the currency (e.g. pence
+                
+                /// <summary>
+                            /// Amount, in the lowest denomination for the currency (e.g. pence
             /// in GBP, cents in EUR).
-            /// </summary>
-            [JsonProperty("amount")]
-            public int? Amount { get; set; }
-
-            /// <summary>
-            /// A future date on which the payment should be collected. If the
+                /// </summary>
+                [JsonProperty("amount")]
+                public int? Amount { get; set; }
+                
+                /// <summary>
+                            /// A future date on which the payment should be collected. If the
             /// date
             /// is before the next_possible_charge_date on the
             /// [mandate](#core-endpoints-mandates), it will be automatically
             /// rolled
             /// forwards to that date.
-            /// </summary>
-            [JsonProperty("charge_date")]
-            public string ChargeDate { get; set; }
-
-            /// <summary>
-            /// A human-readable description of the payment. This will be
+                /// </summary>
+                [JsonProperty("charge_date")]
+                public string ChargeDate { get; set; }
+                
+                /// <summary>
+                            /// A human-readable description of the payment. This will be
             /// included in the notification email GoCardless sends to your
             /// customer if your organisation does not send its own
             /// notifications (see [compliance
             /// requirements](#appendix-compliance-requirements)).
-            /// </summary>
-            [JsonProperty("description")]
-            public string Description { get; set; }
+                /// </summary>
+                [JsonProperty("description")]
+                public string Description { get; set; }
         }
 
         /// <summary>
@@ -364,13 +364,13 @@ namespace GoCardless.Services
         /// </summary>
         public class InstalmentScheduleLinks
         {
-
-            /// <summary>
-            /// ID of the associated [mandate](#core-endpoints-mandates) which
+                
+                /// <summary>
+                            /// ID of the associated [mandate](#core-endpoints-mandates) which
             /// the instalment schedule will create payments against.
-            /// </summary>
-            [JsonProperty("mandate")]
-            public string Mandate { get; set; }
+                /// </summary>
+                [JsonProperty("mandate")]
+                public string Mandate { get; set; }
         }
 
         /// <summary>
@@ -397,6 +397,7 @@ namespace GoCardless.Services
         /// <strong>Bacs</strong> - 10 characters<br /> <strong>BECS</strong> -
         /// 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
         /// <strong>Betalingsservice</strong> - 30 characters<br />
+        /// <strong>Faster Payments</strong> - 18 characters<br />
         /// <strong>PAD</strong> - scheme doesn't offer references<br />
         /// <strong>PayTo</strong> - 18 characters<br /> <strong>SEPA</strong> -
         /// 140 characters<br /> Note that this reference must be unique (for
@@ -405,7 +406,9 @@ namespace GoCardless.Services
         /// specify a payment reference for Bacs payments (that is, when
         /// collecting from the UK) if you're on the <a
         /// href='https://gocardless.com/pricing'>GoCardless Plus, Pro or
-        /// Enterprise packages</a>.</p>
+        /// Enterprise packages</a>.</p> <p
+        /// class='restricted-notice'><strong>Restricted</strong>: You can not
+        /// specify a payment reference for Faster Payments.</p>
         /// </summary>
         [JsonProperty("payment_reference")]
         public string PaymentReference { get; set; }
@@ -530,31 +533,31 @@ namespace GoCardless.Services
         /// </summary>
         public class InstalmentScheduleInstalments
         {
-
-            /// <summary>
-            /// List of amounts of each instalment, in the lowest denomination
+                
+                /// <summary>
+                            /// List of amounts of each instalment, in the lowest denomination
             /// for the
             /// currency (e.g. pence in GBP, cents in EUR).
             /// 
-            /// </summary>
-            [JsonProperty("amounts")]
-            public int?[] Amounts { get; set; }
-
-            /// <summary>
-            /// Number of `interval_units` between charge dates. Must be greater
+                /// </summary>
+                [JsonProperty("amounts")]
+                public int?[] Amounts { get; set; }
+                
+                /// <summary>
+                            /// Number of `interval_units` between charge dates. Must be greater
             /// than or
             /// equal to `1`.
             /// 
-            /// </summary>
-            [JsonProperty("interval")]
-            public int? Interval { get; set; }
-
-            /// <summary>
-            /// The unit of time between customer charge dates. One of `weekly`,
+                /// </summary>
+                [JsonProperty("interval")]
+                public int? Interval { get; set; }
+                
+                /// <summary>
+                            /// The unit of time between customer charge dates. One of `weekly`,
             /// `monthly` or `yearly`.
-            /// </summary>
-            [JsonProperty("interval_unit")]
-            public InstalmentScheduleIntervalUnit? IntervalUnit { get; set; }
+                /// </summary>
+                [JsonProperty("interval_unit")]
+                public InstalmentScheduleIntervalUnit? IntervalUnit { get; set; }
         /// <summary>
         /// The unit of time between customer charge dates. One of `weekly`,
         /// `monthly` or `yearly`.
@@ -573,17 +576,17 @@ namespace GoCardless.Services
             [EnumMember(Value = "yearly")]
             Yearly,
         }
-
-            /// <summary>
-            /// The date on which the first payment should be charged. Must be
+                
+                /// <summary>
+                            /// The date on which the first payment should be charged. Must be
             /// on or after the [mandate](#core-endpoints-mandates)'s
             /// `next_possible_charge_date`. When left blank and `month` or
             /// `day_of_month` are provided, this will be set to the date of the
             /// first payment. If created without `month` or `day_of_month` this
             /// will be set as the mandate's `next_possible_charge_date`
-            /// </summary>
-            [JsonProperty("start_date")]
-            public string StartDate { get; set; }
+                /// </summary>
+                [JsonProperty("start_date")]
+                public string StartDate { get; set; }
         }
 
         /// <summary>
@@ -596,13 +599,13 @@ namespace GoCardless.Services
         /// </summary>
         public class InstalmentScheduleLinks
         {
-
-            /// <summary>
-            /// ID of the associated [mandate](#core-endpoints-mandates) which
+                
+                /// <summary>
+                            /// ID of the associated [mandate](#core-endpoints-mandates) which
             /// the instalment schedule will create payments against.
-            /// </summary>
-            [JsonProperty("mandate")]
-            public string Mandate { get; set; }
+                /// </summary>
+                [JsonProperty("mandate")]
+                public string Mandate { get; set; }
         }
 
         /// <summary>
@@ -629,6 +632,7 @@ namespace GoCardless.Services
         /// <strong>Bacs</strong> - 10 characters<br /> <strong>BECS</strong> -
         /// 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
         /// <strong>Betalingsservice</strong> - 30 characters<br />
+        /// <strong>Faster Payments</strong> - 18 characters<br />
         /// <strong>PAD</strong> - scheme doesn't offer references<br />
         /// <strong>PayTo</strong> - 18 characters<br /> <strong>SEPA</strong> -
         /// 140 characters<br /> Note that this reference must be unique (for
@@ -637,7 +641,9 @@ namespace GoCardless.Services
         /// specify a payment reference for Bacs payments (that is, when
         /// collecting from the UK) if you're on the <a
         /// href='https://gocardless.com/pricing'>GoCardless Plus, Pro or
-        /// Enterprise packages</a>.</p>
+        /// Enterprise packages</a>.</p> <p
+        /// class='restricted-notice'><strong>Restricted</strong>: You can not
+        /// specify a payment reference for Faster Payments.</p>
         /// </summary>
         [JsonProperty("payment_reference")]
         public string PaymentReference { get; set; }

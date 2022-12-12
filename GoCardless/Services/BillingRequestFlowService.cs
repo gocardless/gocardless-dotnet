@@ -96,6 +96,14 @@ namespace GoCardless.Services
         public string ExitUri { get; set; }
 
         /// <summary>
+        /// Sets the default language of the Billing Request Flow and the
+        /// customer. [ISO
+        /// 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+        /// </summary>
+        [JsonProperty("language")]
+        public string Language { get; set; }
+
+        /// <summary>
         /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
@@ -105,19 +113,23 @@ namespace GoCardless.Services
         /// </summary>
         public class BillingRequestFlowLinks
         {
-
-            /// <summary>
-            /// ID of the [billing request](#billing-requests-billing-requests)
+                
+                /// <summary>
+                            /// ID of the [billing request](#billing-requests-billing-requests)
             /// against which this flow was created.
-            /// </summary>
-            [JsonProperty("billing_request")]
-            public string BillingRequest { get; set; }
+                /// </summary>
+                [JsonProperty("billing_request")]
+                public string BillingRequest { get; set; }
         }
 
         /// <summary>
         /// If true, the payer will not be able to change their bank account
         /// within the flow. If the bank_account details are collected as part
-        /// of bank_authorisation then GC will set this value to true mid flow
+        /// of bank_authorisation then GC will set this value to true mid flow.
+        /// 
+        /// You can only lock bank account if these have already been completed
+        /// as a part of the billing request.
+        /// 
         /// </summary>
         [JsonProperty("lock_bank_account")]
         public bool? LockBankAccount { get; set; }
@@ -134,7 +146,11 @@ namespace GoCardless.Services
         /// <summary>
         /// If true, the payer will not be able to edit their customer details
         /// within the flow. If the customer details are collected as part of
-        /// bank_authorisation then GC will set this value to true mid flow
+        /// bank_authorisation then GC will set this value to true mid flow.
+        /// 
+        /// You can only lock customer details if these have already been
+        /// completed as a part of the billing request.
+        /// 
         /// </summary>
         [JsonProperty("lock_customer_details")]
         public bool? LockCustomerDetails { get; set; }
@@ -155,15 +171,15 @@ namespace GoCardless.Services
         /// </summary>
         public class BillingRequestFlowPrefilledBankAccount
         {
-
-            /// <summary>
-            /// Bank account type for USD-denominated bank accounts. Must not be
+                
+                /// <summary>
+                            /// Bank account type for USD-denominated bank accounts. Must not be
             /// provided for bank accounts in other currencies. See [local
             /// details](#local-bank-details-united-states) for more
             /// information.
-            /// </summary>
-            [JsonProperty("account_type")]
-            public BillingRequestFlowAccountType? AccountType { get; set; }
+                /// </summary>
+                [JsonProperty("account_type")]
+                public BillingRequestFlowAccountType? AccountType { get; set; }
         /// <summary>
         /// Bank account type for USD-denominated bank accounts. Must not be
         /// provided for bank accounts in other currencies. See [local
@@ -198,97 +214,89 @@ namespace GoCardless.Services
         /// </summary>
         public class BillingRequestFlowPrefilledCustomer
         {
-
-            /// <summary>
-            /// The first line of the customer's address.
-            /// </summary>
-            [JsonProperty("address_line1")]
-            public string AddressLine1 { get; set; }
-
-            /// <summary>
-            /// The second line of the customer's address.
-            /// </summary>
-            [JsonProperty("address_line2")]
-            public string AddressLine2 { get; set; }
-
-            /// <summary>
-            /// The third line of the customer's address.
-            /// </summary>
-            [JsonProperty("address_line3")]
-            public string AddressLine3 { get; set; }
-
-            /// <summary>
-            /// The city of the customer's address.
-            /// </summary>
-            [JsonProperty("city")]
-            public string City { get; set; }
-
-            /// <summary>
-            /// Customer's company name. Company name should only be provided if
+                
+                /// <summary>
+                            /// The first line of the customer's address.
+                /// </summary>
+                [JsonProperty("address_line1")]
+                public string AddressLine1 { get; set; }
+                
+                /// <summary>
+                            /// The second line of the customer's address.
+                /// </summary>
+                [JsonProperty("address_line2")]
+                public string AddressLine2 { get; set; }
+                
+                /// <summary>
+                            /// The third line of the customer's address.
+                /// </summary>
+                [JsonProperty("address_line3")]
+                public string AddressLine3 { get; set; }
+                
+                /// <summary>
+                            /// The city of the customer's address.
+                /// </summary>
+                [JsonProperty("city")]
+                public string City { get; set; }
+                
+                /// <summary>
+                            /// Customer's company name. Company name should only be provided if
             /// `given_name` and `family_name` are null.
-            /// </summary>
-            [JsonProperty("company_name")]
-            public string CompanyName { get; set; }
-
-            /// <summary>
-            /// [ISO 3166-1 alpha-2
+                /// </summary>
+                [JsonProperty("company_name")]
+                public string CompanyName { get; set; }
+                
+                /// <summary>
+                            /// [ISO 3166-1 alpha-2
             /// code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-            /// </summary>
-            [JsonProperty("country_code")]
-            public string CountryCode { get; set; }
-
-            /// <summary>
-            /// For Danish customers only. The civic/company number (CPR or CVR)
+                /// </summary>
+                [JsonProperty("country_code")]
+                public string CountryCode { get; set; }
+                
+                /// <summary>
+                            /// For Danish customers only. The civic/company number (CPR or CVR)
             /// of the customer.
-            /// </summary>
-            [JsonProperty("danish_identity_number")]
-            public string DanishIdentityNumber { get; set; }
-
-            /// <summary>
-            /// Customer's email address.
-            /// </summary>
-            [JsonProperty("email")]
-            public string Email { get; set; }
-
-            /// <summary>
-            /// Customer's surname.
-            /// </summary>
-            [JsonProperty("family_name")]
-            public string FamilyName { get; set; }
-
-            /// <summary>
-            /// Customer's first name.
-            /// </summary>
-            [JsonProperty("given_name")]
-            public string GivenName { get; set; }
-
-            /// <summary>
-            /// [ISO
-            /// 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-            /// code.
-            /// </summary>
-            [JsonProperty("language")]
-            public string Language { get; set; }
-
-            /// <summary>
-            /// The customer's postal code.
-            /// </summary>
-            [JsonProperty("postal_code")]
-            public string PostalCode { get; set; }
-
-            /// <summary>
-            /// The customer's address region, county or department.
-            /// </summary>
-            [JsonProperty("region")]
-            public string Region { get; set; }
-
-            /// <summary>
-            /// For Swedish customers only. The civic/company number
+                /// </summary>
+                [JsonProperty("danish_identity_number")]
+                public string DanishIdentityNumber { get; set; }
+                
+                /// <summary>
+                            /// Customer's email address.
+                /// </summary>
+                [JsonProperty("email")]
+                public string Email { get; set; }
+                
+                /// <summary>
+                            /// Customer's surname.
+                /// </summary>
+                [JsonProperty("family_name")]
+                public string FamilyName { get; set; }
+                
+                /// <summary>
+                            /// Customer's first name.
+                /// </summary>
+                [JsonProperty("given_name")]
+                public string GivenName { get; set; }
+                
+                /// <summary>
+                            /// The customer's postal code.
+                /// </summary>
+                [JsonProperty("postal_code")]
+                public string PostalCode { get; set; }
+                
+                /// <summary>
+                            /// The customer's address region, county or department.
+                /// </summary>
+                [JsonProperty("region")]
+                public string Region { get; set; }
+                
+                /// <summary>
+                            /// For Swedish customers only. The civic/company number
             /// (personnummer, samordningsnummer, or organisationsnummer) of the
             /// customer.
-            /// </summary>
-            [JsonProperty("swedish_identity_number")]
-            public string SwedishIdentityNumber { get; set; }
+                /// </summary>
+                [JsonProperty("swedish_identity_number")]
+                public string SwedishIdentityNumber { get; set; }
         }
 
         /// <summary>
