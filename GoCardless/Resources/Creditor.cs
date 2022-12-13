@@ -74,7 +74,8 @@ namespace GoCardless.Resources
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        /// The type of business of the creditor
+        /// The type of business of the creditor. Currently, `individual`,
+        /// `company`, `charity`, `partnership`, and `trust` are supported.
         /// </summary>
         [JsonProperty("creditor_type")]
         public CreditorCreditorType? CreditorType { get; set; }
@@ -190,7 +191,8 @@ namespace GoCardless.Resources
     }
     
     /// <summary>
-    /// The type of business of the creditor
+    /// The type of business of the creditor. Currently, `individual`, `company`, `charity`,
+    /// `partnership`, and `trust` are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum CreditorCreditorType {
