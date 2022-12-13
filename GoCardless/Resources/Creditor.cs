@@ -74,6 +74,12 @@ namespace GoCardless.Resources
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
+        /// The type of business of the creditor
+        /// </summary>
+        [JsonProperty("creditor_type")]
+        public CreditorCreditorType? CreditorType { get; set; }
+
+        /// <summary>
         /// Boolean value indicating whether creditor has the [Custom Payment
         /// Pages](https://hub.gocardless.com/s/article/Custom-payment-pages)
         /// functionality enabled.
@@ -183,6 +189,32 @@ namespace GoCardless.Resources
         public CreditorVerificationStatus? VerificationStatus { get; set; }
     }
     
+    /// <summary>
+    /// The type of business of the creditor
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum CreditorCreditorType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`creditor_type` with a value of "company"</summary>
+        [EnumMember(Value = "company")]
+        Company,
+        /// <summary>`creditor_type` with a value of "individual"</summary>
+        [EnumMember(Value = "individual")]
+        Individual,
+        /// <summary>`creditor_type` with a value of "charity"</summary>
+        [EnumMember(Value = "charity")]
+        Charity,
+        /// <summary>`creditor_type` with a value of "partnership"</summary>
+        [EnumMember(Value = "partnership")]
+        Partnership,
+        /// <summary>`creditor_type` with a value of "trust"</summary>
+        [EnumMember(Value = "trust")]
+        Trust,
+    }
+
     /// <summary>
     /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in
     /// which amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK",

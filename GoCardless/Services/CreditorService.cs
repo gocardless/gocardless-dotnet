@@ -190,6 +190,36 @@ namespace GoCardless.Services
         public string CountryCode { get; set; }
 
         /// <summary>
+        /// The type of business of the creditor
+        /// </summary>
+        [JsonProperty("creditor_type")]
+        public CreditorCreditorType? CreditorType { get; set; }
+            
+        /// <summary>
+        /// The type of business of the creditor
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum CreditorCreditorType
+        {
+    
+            /// <summary>`creditor_type` with a value of "company"</summary>
+            [EnumMember(Value = "company")]
+            Company,
+            /// <summary>`creditor_type` with a value of "individual"</summary>
+            [EnumMember(Value = "individual")]
+            Individual,
+            /// <summary>`creditor_type` with a value of "charity"</summary>
+            [EnumMember(Value = "charity")]
+            Charity,
+            /// <summary>`creditor_type` with a value of "partnership"</summary>
+            [EnumMember(Value = "partnership")]
+            Partnership,
+            /// <summary>`creditor_type` with a value of "trust"</summary>
+            [EnumMember(Value = "trust")]
+            Trust,
+        }
+
+        /// <summary>
         /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
