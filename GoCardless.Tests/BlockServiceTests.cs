@@ -54,7 +54,7 @@ namespace GoCardless.Tests
                 ReferenceValue = "CU123",
             };
             var resp = await client.Blocks.BlockByRefAsync(request);
-            mockHttp.AssertRequestMade("POST","/block_by_ref");
+            mockHttp.AssertRequestMade("POST","/blocks/block_by_ref");
             TestHelpers.AssertResponseCanSerializeBackToFixture(resp, responseFixture);
 
             resp.Meta.Cursors.Before.Should().BeNull();

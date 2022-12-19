@@ -219,7 +219,7 @@ namespace GoCardless.Services
             var urlParams = new List<KeyValuePair<string, object>>
             {};
 
-            return _goCardlessClient.ExecuteAsync<BlockListResponse>("POST", "/block_by_ref", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BlockListResponse>("POST", "/blocks/block_by_ref", urlParams, request, null, "data", customiseRequestMessage);
         }
     }
 
