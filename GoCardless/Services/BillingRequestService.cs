@@ -526,6 +526,50 @@ namespace GoCardless.Services
         {
                 
                 /// <summary>
+                            /// This field is ACH specific, sometimes referred to as [SEC
+            /// code](https://www.moderntreasury.com/learn/sec-codes).
+            /// 
+            /// This is the way that the payer gives authorisation to the
+            /// merchant.
+            ///   web: Authorisation is Internet Initiated or via Mobile Entry
+            /// (maps to SEC code: WEB)
+            ///   telephone: Authorisation is provided orally over telephone
+            /// (maps to SEC code: TEL)
+            ///   paper: Authorisation is provided in writing and signed, or
+            /// similarly authenticated (maps to SEC code: PPD)
+            /// 
+                /// </summary>
+                [JsonProperty("authorisation_source")]
+                public BillingRequestAuthorisationSource? AuthorisationSource { get; set; }
+        /// <summary>
+        /// This field is ACH specific, sometimes referred to as [SEC
+        /// code](https://www.moderntreasury.com/learn/sec-codes).
+        /// 
+        /// This is the way that the payer gives authorisation to the merchant.
+        ///   web: Authorisation is Internet Initiated or via Mobile Entry (maps
+        /// to SEC code: WEB)
+        ///   telephone: Authorisation is provided orally over telephone (maps
+        /// to SEC code: TEL)
+        ///   paper: Authorisation is provided in writing and signed, or
+        /// similarly authenticated (maps to SEC code: PPD)
+        /// 
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BillingRequestAuthorisationSource
+        {
+    
+            /// <summary>`authorisation_source` with a value of "web"</summary>
+            [EnumMember(Value = "web")]
+            Web,
+            /// <summary>`authorisation_source` with a value of "telephone"</summary>
+            [EnumMember(Value = "telephone")]
+            Telephone,
+            /// <summary>`authorisation_source` with a value of "paper"</summary>
+            [EnumMember(Value = "paper")]
+            Paper,
+        }
+                
+                /// <summary>
                             /// Constraints that will apply to the mandate_request. (Optional)
             /// Specifically for PayTo and VRP.
                 /// </summary>
