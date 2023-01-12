@@ -159,30 +159,6 @@ namespace GoCardless.Services
     {
 
         /// <summary>
-        /// The first line of the creditor's address.
-        /// </summary>
-        [JsonProperty("address_line1")]
-        public string AddressLine1 { get; set; }
-
-        /// <summary>
-        /// The second line of the creditor's address.
-        /// </summary>
-        [JsonProperty("address_line2")]
-        public string AddressLine2 { get; set; }
-
-        /// <summary>
-        /// The third line of the creditor's address.
-        /// </summary>
-        [JsonProperty("address_line3")]
-        public string AddressLine3 { get; set; }
-
-        /// <summary>
-        /// The city of the creditor's address.
-        /// </summary>
-        [JsonProperty("city")]
-        public string City { get; set; }
-
-        /// <summary>
         /// [ISO 3166-1 alpha-2
         /// code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
         /// </summary>
@@ -232,18 +208,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
-
-        /// <summary>
-        /// The creditor's postal code.
-        /// </summary>
-        [JsonProperty("postal_code")]
-        public string PostalCode { get; set; }
-
-        /// <summary>
-        /// The creditor's address region, county or department.
-        /// </summary>
-        [JsonProperty("region")]
-        public string Region { get; set; }
 
         /// <summary>
         /// A unique key to ensure that this request only succeeds once, allowing you to safely retry request errors such as network failures.
