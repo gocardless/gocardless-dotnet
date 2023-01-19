@@ -12,26 +12,36 @@ jobs:
       OUT_DIR: "/GoCardless/bin/Release"
     steps:
     - uses: actions/checkout@v3.3.0
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '2.1.x'
+        include-prerelease: true
     - name: Restore
       run: dotnet restore
-    - name: Build
-      run: msbuild "GoCardless.sln" /property:Configuration=Release
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
     - name: Run Tests
       run: dotnet test
     - uses: actions/upload-artifact@v3.1.1
       with:
-        path: "/GoCardless/bin/Release/*.nupkg"
+        path: "GoCardless/bin/Release/*.nupkg"
   publish:
     if: github.ref == 'refs/heads/convert-gocardless-gocardless-dotnet-to-actions-20230113-132812'
     runs-on: ubuntu-latest
     needs:
     - build_and_test
     env:
-      OUT_DIR: "/GoCardless/bin/Release/artifact"
+      OUT_DIR: "artifact"
     steps:
     - uses: actions/download-artifact@v3.0.1
-      with:
-        path: "/GoCardless/bin/Release"
     - name: List
-      run: ls -all & ls -all artifact
-    
+      run: ls -all artifact
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '2.1.x'
+        include-prerelease: true
+    - name: Publish the library
+      run: dotnet nuget push artifact/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} -n --skip-duplicate
+      
