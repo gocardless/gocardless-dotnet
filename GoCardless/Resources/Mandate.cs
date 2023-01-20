@@ -125,13 +125,6 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("status")]
         public MandateStatus? Status { get; set; }
-
-        /// <summary>
-        /// [Timestamp](#api-usage-time-zones--dates) recording when this
-        /// mandate was verified.
-        /// </summary>
-        [JsonProperty("verified_at")]
-        public string VerifiedAt { get; set; }
     }
     
     /// <summary>
