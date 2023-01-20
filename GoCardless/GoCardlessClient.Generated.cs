@@ -139,6 +139,11 @@ namespace GoCardless
         public ScenarioSimulatorService ScenarioSimulators => new ScenarioSimulatorService(this);
 
         /// <summary>
+        ///A service for working with schemeentifier resources.
+        /// </summary>
+        public SchemeIdentifierService SchemeIdentifiers => new SchemeIdentifierService(this);
+
+        /// <summary>
         ///A service for working with subscription resources.
         /// </summary>
         public SubscriptionService Subscriptions => new SubscriptionService(this);
