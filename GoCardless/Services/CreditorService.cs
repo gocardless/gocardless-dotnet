@@ -204,7 +204,7 @@ namespace GoCardless.Services
         public IDictionary<String, String> Links { get; set; }
 
         /// <summary>
-        /// The creditor's name.
+        /// The creditor's trading name.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -397,7 +397,7 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// The creditor's name.
+        /// The creditor's trading name.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }

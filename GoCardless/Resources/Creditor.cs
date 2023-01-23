@@ -136,7 +136,7 @@ namespace GoCardless.Resources
         public bool? MerchantResponsibleForNotifications { get; set; }
 
         /// <summary>
-        /// The creditor's name.
+        /// The creditor's trading name.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
