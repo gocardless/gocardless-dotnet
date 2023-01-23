@@ -404,7 +404,8 @@ namespace GoCardless.Resources
         public int? MinimumAdvanceNotice { get; set; }
 
         /// <summary>
-        /// The name which appears on customers' bank statements.
+        /// The name which appears on customers' bank statements. This should
+        /// usually be the merchant's trading name.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }

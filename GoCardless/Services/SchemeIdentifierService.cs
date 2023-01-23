@@ -16,7 +16,10 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with scheme identifier resources.
     ///
-    /// Scheme identifiers
+    /// This represents a scheme identifier (e.g. a SUN in Bacs or a CID in
+    /// SEPA). Scheme identifiers are used to specify the beneficiary name that
+    /// appears on customers' bank statements.
+    /// 
     /// </summary>
 
     public class SchemeIdentifierService
@@ -30,6 +33,28 @@ namespace GoCardless.Services
         public SchemeIdentifierService(GoCardlessClient goCardlessClient)
         {
             _goCardlessClient = goCardlessClient;
+        }
+
+        /// <summary>
+        /// Creates a new scheme identifier. The scheme identifier must be
+        /// [applied to a creditor](#creditors-apply-a-scheme-identifier) before
+        /// payments are taken using it. The scheme identifier must also have
+        /// the `status` of active before it can be used. For some schemes e.g.
+        /// faster_payments this will happen instantly. For other schemes e.g.
+        /// bacs this can take several days.
+        /// 
+        /// </summary>
+        /// <param name="request">An optional `SchemeIdentifierCreateRequest` representing the body for this create request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single scheme identifier resource</returns>
+        public Task<SchemeIdentifierResponse> CreateAsync(SchemeIdentifierCreateRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new SchemeIdentifierCreateRequest();
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {};
+
+            return _goCardlessClient.ExecuteAsync<SchemeIdentifierResponse>("POST", "/scheme_identifiers", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "scheme_identifiers", customiseRequestMessage);
         }
 
         /// <summary>
@@ -106,6 +131,86 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<SchemeIdentifierResponse>("GET", "/scheme_identifiers/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
+    }
+
+        
+    /// <summary>
+    /// Creates a new scheme identifier. The scheme identifier must be [applied
+    /// to a creditor](#creditors-apply-a-scheme-identifier) before payments are
+    /// taken using it. The scheme identifier must also have the `status` of
+    /// active before it can be used. For some schemes e.g. faster_payments this
+    /// will happen instantly. For other schemes e.g. bacs this can take several
+    /// days.
+    /// 
+    /// </summary>
+    public class SchemeIdentifierCreateRequest : IHasIdempotencyKey
+    {
+
+        /// <summary>
+        /// The name which appears on customers' bank statements. This should
+        /// usually be the merchant's trading name.
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// The scheme which this scheme identifier applies to.
+        /// </summary>
+        [JsonProperty("scheme")]
+        public SchemeIdentifierScheme? Scheme { get; set; }
+            
+        /// <summary>
+        /// The scheme which this scheme identifier applies to.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum SchemeIdentifierScheme
+        {
+    
+            /// <summary>`scheme` with a value of "ach"</summary>
+            [EnumMember(Value = "ach")]
+            Ach,
+            /// <summary>`scheme` with a value of "autogiro"</summary>
+            [EnumMember(Value = "autogiro")]
+            Autogiro,
+            /// <summary>`scheme` with a value of "bacs"</summary>
+            [EnumMember(Value = "bacs")]
+            Bacs,
+            /// <summary>`scheme` with a value of "becs"</summary>
+            [EnumMember(Value = "becs")]
+            Becs,
+            /// <summary>`scheme` with a value of "becs_nz"</summary>
+            [EnumMember(Value = "becs_nz")]
+            BecsNz,
+            /// <summary>`scheme` with a value of "betalingsservice"</summary>
+            [EnumMember(Value = "betalingsservice")]
+            Betalingsservice,
+            /// <summary>`scheme` with a value of "faster_payments"</summary>
+            [EnumMember(Value = "faster_payments")]
+            FasterPayments,
+            /// <summary>`scheme` with a value of "pad"</summary>
+            [EnumMember(Value = "pad")]
+            Pad,
+            /// <summary>`scheme` with a value of "pay_to"</summary>
+            [EnumMember(Value = "pay_to")]
+            PayTo,
+            /// <summary>`scheme` with a value of "sepa"</summary>
+            [EnumMember(Value = "sepa")]
+            Sepa,
+            /// <summary>`scheme` with a value of "sepa_credit_transfer"</summary>
+            [EnumMember(Value = "sepa_credit_transfer")]
+            SepaCreditTransfer,
+            /// <summary>`scheme` with a value of "sepa_instant_credit_transfer"</summary>
+            [EnumMember(Value = "sepa_instant_credit_transfer")]
+            SepaInstantCreditTransfer,
+        }
+
+        /// <summary>
+        /// A unique key to ensure that this request only succeeds once, allowing you to safely retry request errors such as network failures.
+        /// Any requests, where supported, to create a resource with a key that has previously been used will not succeed.
+        /// See: https://developer.gocardless.com/api-reference/#making-requests-idempotency-keys
+        /// </summary>
+        [JsonIgnore]
+        public string IdempotencyKey { get; set; }
     }
 
         

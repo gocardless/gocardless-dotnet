@@ -11,7 +11,10 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a schemeentifier resource.
     ///
-    /// Scheme identifiers
+    /// This represents a scheme identifier (e.g. a SUN in Bacs or a CID in
+    /// SEPA). Scheme identifiers are used to specify the beneficiary name that
+    /// appears on customers' bank statements.
+    /// 
     /// </summary>
     public class SchemeIdentifier
     {
@@ -91,7 +94,8 @@ namespace GoCardless.Resources
         public int? MinimumAdvanceNotice { get; set; }
 
         /// <summary>
-        /// The name which appears on customers' bank statements.
+        /// The name which appears on customers' bank statements. This should
+        /// usually be the merchant's trading name.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
