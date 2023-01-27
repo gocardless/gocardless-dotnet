@@ -38,24 +38,18 @@ namespace GoCardless.Services
         /// Currently, only UK-based companies are supported. 
         /// In other words, to submit verification details for a creditor, their
         /// creditor_type must be company and their country_code must be GB.
-        /// </summary>  
-        /// <param name="identity">Unique identifier of the creditor these details are being stored
-        /// against,
-        /// beginning with "CR".</param> 
+        /// </summary>
         /// <param name="request">An optional `VerificationDetailCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single verification detail resource</returns>
-        public Task<VerificationDetailResponse> CreateAsync(string identity, VerificationDetailCreateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<VerificationDetailResponse> CreateAsync(VerificationDetailCreateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
             request = request ?? new VerificationDetailCreateRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
-            {
-                new KeyValuePair<string, object>("identity", identity),
-            };
+            {};
 
-            return _goCardlessClient.ExecuteAsync<VerificationDetailResponse>("POST", "/verification_details/:identity", urlParams, request, null, "verification_details", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<VerificationDetailResponse>("POST", "/verification_details", urlParams, request, null, "verification_details", customiseRequestMessage);
         }
     }
 
