@@ -154,6 +154,11 @@ namespace GoCardless
         public TaxRateService TaxRates => new TaxRateService(this);
 
         /// <summary>
+        ///A service for working with verification detail resources.
+        /// </summary>
+        public VerificationDetailService VerificationDetails => new VerificationDetailService(this);
+
+        /// <summary>
         ///A service for working with webhook resources.
         /// </summary>
         public WebhookService Webhooks => new WebhookService(this);
