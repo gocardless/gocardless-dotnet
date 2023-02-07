@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>GoCardless</PackageId>
-    <PackageVersion>5.11.0</PackageVersion>
+    <PackageVersion>5.12.0</PackageVersion>
     <Authors>GoCardless Ltd</Authors>
     <Description>Client for the GoCardless API - a powerful, simple solution for the collection of recurring bank-to-bank payments</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -11,7 +11,7 @@
     <Copyright>GoCardless Ltd</Copyright>
     <PackageTags>gocardless payments rest api direct debit</PackageTags>
     <PackageLicenseUrl>https://github.com/gocardless/gocardless-dotnet/blob/master/LICENSE.txt</PackageLicenseUrl>
-    <PackageReleaseNotes>https://github.com/gocardless/gocardless-dotnet/releases/tag/v5.11.0</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/gocardless/gocardless-dotnet/releases/tag/v5.12.0</PackageReleaseNotes>
     <TargetFrameworks>netstandard1.6;netstandard2.0;net46</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
