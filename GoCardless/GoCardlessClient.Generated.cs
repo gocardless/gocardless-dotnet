@@ -139,6 +139,11 @@ namespace GoCardless
         public ScenarioSimulatorService ScenarioSimulators => new ScenarioSimulatorService(this);
 
         /// <summary>
+        ///A service for working with schemeentifier resources.
+        /// </summary>
+        public SchemeIdentifierService SchemeIdentifiers => new SchemeIdentifierService(this);
+
+        /// <summary>
         ///A service for working with subscription resources.
         /// </summary>
         public SubscriptionService Subscriptions => new SubscriptionService(this);
@@ -147,6 +152,11 @@ namespace GoCardless
         ///A service for working with tax rate resources.
         /// </summary>
         public TaxRateService TaxRates => new TaxRateService(this);
+
+        /// <summary>
+        ///A service for working with verification detail resources.
+        /// </summary>
+        public VerificationDetailService VerificationDetails => new VerificationDetailService(this);
 
         /// <summary>
         ///A service for working with webhook resources.

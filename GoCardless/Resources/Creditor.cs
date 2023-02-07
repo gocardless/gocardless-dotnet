@@ -136,7 +136,7 @@ namespace GoCardless.Resources
         public bool? MerchantResponsibleForNotifications { get; set; }
 
         /// <summary>
-        /// The creditor's name.
+        /// The creditor's trading name.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -329,19 +329,19 @@ namespace GoCardless.Resources
     public class CreditorSchemeIdentifier
     {
         /// <summary>
-        /// The first line of the support address.
+        /// The first line of the scheme identifier's support address.
         /// </summary>
         [JsonProperty("address_line1")]
         public string AddressLine1 { get; set; }
 
         /// <summary>
-        /// The second line of the support address.
+        /// The second line of the scheme identifier's support address.
         /// </summary>
         [JsonProperty("address_line2")]
         public string AddressLine2 { get; set; }
 
         /// <summary>
-        /// The third line of the support address.
+        /// The third line of the scheme identifier's support address.
         /// </summary>
         [JsonProperty("address_line3")]
         public string AddressLine3 { get; set; }
@@ -354,7 +354,7 @@ namespace GoCardless.Resources
         public bool? CanSpecifyMandateReference { get; set; }
 
         /// <summary>
-        /// The city of the support address.
+        /// The city of the scheme identifier's support address.
         /// </summary>
         [JsonProperty("city")]
         public string City { get; set; }
@@ -367,16 +367,29 @@ namespace GoCardless.Resources
         public string CountryCode { get; set; }
 
         /// <summary>
+        /// Fixed [timestamp](#api-usage-time-zones--dates), recording when this
+        /// resource was created.
+        /// </summary>
+        [JsonProperty("created_at")]
+        public DateTimeOffset? CreatedAt { get; set; }
+
+        /// <summary>
         /// The currency of the scheme identifier.
         /// </summary>
         [JsonProperty("currency")]
         public CreditorSchemeIdentifierCurrency? Currency { get; set; }
 
         /// <summary>
-        /// The support email address.
+        /// Scheme identifier's support email address.
         /// </summary>
         [JsonProperty("email")]
         public string Email { get; set; }
+
+        /// <summary>
+        /// Unique identifier, usually beginning with "SU".
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; set; }
 
         /// <summary>
         /// The minimum interval, in working days, between the sending of a
@@ -391,19 +404,20 @@ namespace GoCardless.Resources
         public int? MinimumAdvanceNotice { get; set; }
 
         /// <summary>
-        /// The name which appears on customers' bank statements.
+        /// The name which appears on customers' bank statements. This should
+        /// usually be the merchant's trading name.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// The support phone number.
+        /// Scheme identifier's support phone number.
         /// </summary>
         [JsonProperty("phone_number")]
         public string PhoneNumber { get; set; }
 
         /// <summary>
-        /// The support postal code.
+        /// The scheme identifier's support postal code.
         /// </summary>
         [JsonProperty("postal_code")]
         public string PostalCode { get; set; }
@@ -415,7 +429,8 @@ namespace GoCardless.Resources
         public string Reference { get; set; }
 
         /// <summary>
-        /// The support address region, county or department.
+        /// The scheme identifier's support address region, county or
+        /// department.
         /// </summary>
         [JsonProperty("region")]
         public string Region { get; set; }
@@ -425,6 +440,13 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("scheme")]
         public CreditorSchemeIdentifierScheme? Scheme { get; set; }
+
+        /// <summary>
+        /// The status of the scheme identifier. Only `active` scheme
+        /// identifiers will be applied to a creditor and used against payments.
+        /// </summary>
+        [JsonProperty("status")]
+        public CreditorSchemeIdentifierStatus? Status { get; set; }
     }
     
     /// <summary>
@@ -507,6 +529,24 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "sepa_instant_credit_transfer"</summary>
         [EnumMember(Value = "sepa_instant_credit_transfer")]
         SepaInstantCreditTransfer,
+    }
+
+    /// <summary>
+    /// The status of the scheme identifier. Only `active` scheme identifiers will be applied to a
+    /// creditor and used against payments.
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum CreditorSchemeIdentifierStatus {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`status` with a value of "pending"</summary>
+        [EnumMember(Value = "pending")]
+        Pending,
+        /// <summary>`status` with a value of "active"</summary>
+        [EnumMember(Value = "active")]
+        Active,
     }
 
     /// <summary>
