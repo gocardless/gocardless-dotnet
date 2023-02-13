@@ -149,6 +149,9 @@ namespace GoCardless.Services
         /// parameter for displaying the result of the
         /// bank authorisation as outlined above.
         /// 
+        /// The BillingRequestFlow ID will also be appended to the
+        /// `redirect_uri` as query parameter `id=BRF123`.
+        /// 
         /// Defaults to `https://pay.gocardless.com/billing/static/thankyou`.
         /// </summary>
         [JsonProperty("redirect_uri")]
