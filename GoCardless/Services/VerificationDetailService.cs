@@ -16,7 +16,17 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with verification detail resources.
     ///
-    /// Details of a creditor that are required for verification
+    /// Verification details represent any information needed by GoCardless to
+    /// verify a creditor.
+    /// 
+    /// <p class="restricted-notice"><strong>Restricted</strong>:
+    ///   These endpoints are restricted to customers who want to collect their
+    /// merchant's
+    ///   verification details and pass them to GoCardless via our API. Please
+    /// [get in
+    ///   touch](mailto:help@gocardless.com) if you wish to enable this feature
+    /// on your
+    ///   account.</p>
     /// </summary>
 
     public class VerificationDetailService
@@ -87,11 +97,7 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Verification details represent any information needed by GoCardless
-        /// to verify a creditor.
-        /// Currently, only UK-based companies are supported.
-        /// In other words, to submit verification details for a creditor, their
-        /// creditor_type must be company and their country_code must be GB.
+        /// Creates a new verification detail
         /// </summary>
         /// <param name="request">An optional `VerificationDetailCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -141,11 +147,7 @@ namespace GoCardless.Services
 
         
     /// <summary>
-    /// Verification details represent any information needed by GoCardless to
-    /// verify a creditor.
-    /// Currently, only UK-based companies are supported.
-    /// In other words, to submit verification details for a creditor, their
-    /// creditor_type must be company and their country_code must be GB.
+    /// Creates a new verification detail
     /// </summary>
     public class VerificationDetailCreateRequest
     {
