@@ -43,61 +43,6 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your billing requests.
-        /// </summary>
-        /// <param name="request">An optional `BillingRequestListRequest` representing the query parameters for this list request.</param>
-        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
-        /// <returns>A set of billing request resources</returns>
-        public Task<BillingRequestListResponse> ListAsync(BillingRequestListRequest request = null, RequestSettings customiseRequestMessage = null)
-        {
-            request = request ?? new BillingRequestListRequest();
-
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
-
-            return _goCardlessClient.ExecuteAsync<BillingRequestListResponse>("GET", "/billing_requests", urlParams, request, null, null, customiseRequestMessage);
-        }
-
-        /// <summary>
-        /// Get a lazily enumerated list of billing requests.
-        /// This acts like the #list method, but paginates for you automatically.
-        /// </summary>
-        public IEnumerable<BillingRequest> All(BillingRequestListRequest request = null, RequestSettings customiseRequestMessage = null)
-        {
-            request = request ?? new BillingRequestListRequest();
-
-            string cursor = null;
-            do
-            {
-                request.After = cursor;
-
-                var result = Task.Run(() => ListAsync(request, customiseRequestMessage)).Result;
-                foreach (var item in result.BillingRequests)
-                {
-                    yield return item;
-                }
-                cursor = result.Meta?.Cursors?.After;
-            } while (cursor != null);
-        }
-
-        /// <summary>
-        /// Get a lazily enumerated list of billing requests.
-        /// This acts like the #list method, but paginates for you automatically.
-        /// </summary>
-        public IEnumerable<Task<IReadOnlyList<BillingRequest>>> AllAsync(BillingRequestListRequest request = null, RequestSettings customiseRequestMessage = null)
-        {
-            request = request ?? new BillingRequestListRequest();
-
-            return new TaskEnumerable<IReadOnlyList<BillingRequest>, string>(async after =>
-            {
-                request.After = after;
-                var list = await this.ListAsync(request, customiseRequestMessage);
-                return Tuple.Create(list.BillingRequests, list.Meta?.Cursors?.After);
-            });
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="request">An optional `BillingRequestCreateRequest` representing the body for this create request.</param>
@@ -111,26 +56,6 @@ namespace GoCardless.Services
             {};
 
             return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "billing_requests", customiseRequestMessage);
-        }
-
-        /// <summary>
-        /// Fetches a billing request
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
-        /// <param name="request">An optional `BillingRequestGetRequest` representing the query parameters for this get request.</param>
-        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
-        /// <returns>A single billing request resource</returns>
-        public Task<BillingRequestResponse> GetAsync(string identity, BillingRequestGetRequest request = null, RequestSettings customiseRequestMessage = null)
-        {
-            request = request ?? new BillingRequestGetRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
-
-            var urlParams = new List<KeyValuePair<string, object>>
-            {
-                new KeyValuePair<string, object>("identity", identity),
-            };
-
-            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("GET", "/billing_requests/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -205,54 +130,6 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// If a billing request is ready to be fulfilled, call this endpoint to
-        /// cause
-        /// it to fulfil, executing the payment.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
-        /// <param name="request">An optional `BillingRequestFulfilRequest` representing the body for this fulfil request.</param>
-        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
-        /// <returns>A single billing request resource</returns>
-        public Task<BillingRequestResponse> FulfilAsync(string identity, BillingRequestFulfilRequest request = null, RequestSettings customiseRequestMessage = null)
-        {
-            request = request ?? new BillingRequestFulfilRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
-
-            var urlParams = new List<KeyValuePair<string, object>>
-            {
-                new KeyValuePair<string, object>("identity", identity),
-            };
-
-            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/fulfil", urlParams, request, null, "data", customiseRequestMessage);
-        }
-
-        /// <summary>
-        /// This will allow for the updating of the currency and subsequently
-        /// the scheme if
-        /// needed for a Billing Request. This will only be available for
-        /// mandate only flows
-        /// which do not have the lock_currency flag set to true on the Billing
-        /// Request Flow. It
-        /// will also not support any request which has a payments request.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
-        /// <param name="request">An optional `BillingRequestChooseCurrencyRequest` representing the body for this choose_currency request.</param>
-        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
-        /// <returns>A single billing request resource</returns>
-        public Task<BillingRequestResponse> ChooseCurrencyAsync(string identity, BillingRequestChooseCurrencyRequest request = null, RequestSettings customiseRequestMessage = null)
-        {
-            request = request ?? new BillingRequestChooseCurrencyRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
-
-            var urlParams = new List<KeyValuePair<string, object>>
-            {
-                new KeyValuePair<string, object>("identity", identity),
-            };
-
-            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/choose_currency", urlParams, request, null, "data", customiseRequestMessage);
-        }
-
-        /// <summary>
         /// This is needed when you have a mandate request. As a scheme
         /// compliance rule we are required to
         /// allow the payer to crosscheck the details entered by them and
@@ -276,6 +153,28 @@ namespace GoCardless.Services
         }
 
         /// <summary>
+        /// If a billing request is ready to be fulfilled, call this endpoint to
+        /// cause
+        /// it to fulfil, executing the payment.
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="request">An optional `BillingRequestFulfilRequest` representing the body for this fulfil request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single billing request resource</returns>
+        public Task<BillingRequestResponse> FulfilAsync(string identity, BillingRequestFulfilRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new BillingRequestFulfilRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/fulfil", urlParams, request, null, "data", customiseRequestMessage);
+        }
+
+        /// <summary>
         /// Immediately cancels a billing request, causing all billing request
         /// flows
         /// to expire.
@@ -295,6 +194,81 @@ namespace GoCardless.Services
             };
 
             return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/cancel", urlParams, request, null, "data", customiseRequestMessage);
+        }
+
+        /// <summary>
+        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+        /// your billing requests.
+        /// </summary>
+        /// <param name="request">An optional `BillingRequestListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A set of billing request resources</returns>
+        public Task<BillingRequestListResponse> ListAsync(BillingRequestListRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new BillingRequestListRequest();
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {};
+
+            return _goCardlessClient.ExecuteAsync<BillingRequestListResponse>("GET", "/billing_requests", urlParams, request, null, null, customiseRequestMessage);
+        }
+
+        /// <summary>
+        /// Get a lazily enumerated list of billing requests.
+        /// This acts like the #list method, but paginates for you automatically.
+        /// </summary>
+        public IEnumerable<BillingRequest> All(BillingRequestListRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new BillingRequestListRequest();
+
+            string cursor = null;
+            do
+            {
+                request.After = cursor;
+
+                var result = Task.Run(() => ListAsync(request, customiseRequestMessage)).Result;
+                foreach (var item in result.BillingRequests)
+                {
+                    yield return item;
+                }
+                cursor = result.Meta?.Cursors?.After;
+            } while (cursor != null);
+        }
+
+        /// <summary>
+        /// Get a lazily enumerated list of billing requests.
+        /// This acts like the #list method, but paginates for you automatically.
+        /// </summary>
+        public IEnumerable<Task<IReadOnlyList<BillingRequest>>> AllAsync(BillingRequestListRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new BillingRequestListRequest();
+
+            return new TaskEnumerable<IReadOnlyList<BillingRequest>, string>(async after =>
+            {
+                request.After = after;
+                var list = await this.ListAsync(request, customiseRequestMessage);
+                return Tuple.Create(list.BillingRequests, list.Meta?.Cursors?.After);
+            });
+        }
+
+        /// <summary>
+        /// Fetches a billing request
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="request">An optional `BillingRequestGetRequest` representing the query parameters for this get request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single billing request resource</returns>
+        public Task<BillingRequestResponse> GetAsync(string identity, BillingRequestGetRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new BillingRequestGetRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("GET", "/billing_requests/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -339,126 +313,31 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/fallback", urlParams, request, null, "data", customiseRequestMessage);
         }
-    }
-
-        
-    /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// billing requests.
-    /// </summary>
-    public class BillingRequestListRequest
-    {
 
         /// <summary>
-        /// Cursor pointing to the start of the desired set.
-        /// </summary>
-        [JsonProperty("after")]
-        public string After { get; set; }
-
-        /// <summary>
-        /// Cursor pointing to the end of the desired set.
-        /// </summary>
-        [JsonProperty("before")]
-        public string Before { get; set; }
-
-        /// <summary>
-        /// Fixed [timestamp](#api-usage-time-zones--dates), recording when this
-        /// resource was created.
-        /// </summary>
-        [JsonProperty("created_at")]
-        public CreatedAtParam CreatedAt { get; set; }
-
-        /// <summary>
-        /// Specify filters to limit records by creation time.
-        /// </summary>
-        public class CreatedAtParam
+        /// This will allow for the updating of the currency and subsequently
+        /// the scheme if
+        /// needed for a Billing Request. This will only be available for
+        /// mandate only flows
+        /// which do not have the lock_currency flag set to true on the Billing
+        /// Request Flow. It
+        /// will also not support any request which has a payments request.
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="request">An optional `BillingRequestChooseCurrencyRequest` representing the body for this choose_currency request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single billing request resource</returns>
+        public Task<BillingRequestResponse> ChooseCurrencyAsync(string identity, BillingRequestChooseCurrencyRequest request = null, RequestSettings customiseRequestMessage = null)
         {
-            /// <summary>
-            /// Limit to records created after the specified date-time.
-            /// </summary>
-            [JsonProperty("gt")]
-            public DateTimeOffset? GreaterThan { get; set; }
+            request = request ?? new BillingRequestChooseCurrencyRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
 
-            /// <summary>
-            /// Limit to records created on or after the specified date-time.
-            /// </summary>
-            [JsonProperty("gte")]
-            public DateTimeOffset? GreaterThanOrEqual { get; set; }
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
 
-            /// <summary>
-            /// Limit to records created before the specified date-time.
-            /// </summary>
-            [JsonProperty("lt")]
-            public DateTimeOffset? LessThan { get; set; }
-
-            /// <summary>
-            ///Limit to records created on or before the specified date-time.
-            /// </summary>
-            [JsonProperty("lte")]
-            public DateTimeOffset? LessThanOrEqual { get; set; }
-        }
-
-        /// <summary>
-        /// ID of a [customer](#core-endpoints-customers). If specified, this
-        /// endpoint will return all requests for the given customer.
-        /// </summary>
-        [JsonProperty("customer")]
-        public string Customer { get; set; }
-
-        /// <summary>
-        /// Number of records to return.
-        /// </summary>
-        [JsonProperty("limit")]
-        public int? Limit { get; set; }
-
-        /// <summary>
-        /// One of:
-        /// <ul>
-        /// <li>`pending`: the billing request is pending and can be used</li>
-        /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
-        /// <li>`fulfilling`: the billing request is currently undergoing
-        /// fulfilment</li>
-        /// <li>`fulfilled`: the billing request has been fulfilled and a
-        /// payment created</li>
-        /// <li>`cancelled`: the billing request has been cancelled and cannot
-        /// be used</li>
-        /// </ul>
-        /// </summary>
-        [JsonProperty("status")]
-        public string Status { get; set; }
-            
-        /// <summary>
-        /// One of:
-        /// <ul>
-        /// <li>`pending`: the billing request is pending and can be used</li>
-        /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
-        /// <li>`fulfilling`: the billing request is currently undergoing
-        /// fulfilment</li>
-        /// <li>`fulfilled`: the billing request has been fulfilled and a
-        /// payment created</li>
-        /// <li>`cancelled`: the billing request has been cancelled and cannot
-        /// be used</li>
-        /// </ul>
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum BillingRequestStatus
-        {
-    
-            /// <summary>`status` with a value of "pending"</summary>
-            [EnumMember(Value = "pending")]
-            Pending,
-            /// <summary>`status` with a value of "ready_to_fulfil"</summary>
-            [EnumMember(Value = "ready_to_fulfil")]
-            ReadyToFulfil,
-            /// <summary>`status` with a value of "fulfilling"</summary>
-            [EnumMember(Value = "fulfilling")]
-            Fulfilling,
-            /// <summary>`status` with a value of "fulfilled"</summary>
-            [EnumMember(Value = "fulfilled")]
-            Fulfilled,
-            /// <summary>`status` with a value of "cancelled"</summary>
-            [EnumMember(Value = "cancelled")]
-            Cancelled,
+            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/choose_currency", urlParams, request, null, "data", customiseRequestMessage);
         }
     }
 
@@ -963,14 +842,6 @@ namespace GoCardless.Services
 
         
     /// <summary>
-    /// Fetches a billing request
-    /// </summary>
-    public class BillingRequestGetRequest
-    {
-    }
-
-        
-    /// <summary>
     /// If the billing request has a pending
     /// <code>collect_customer_details</code>
     /// action, this endpoint can be used to collect the details in order to
@@ -1266,58 +1137,29 @@ namespace GoCardless.Services
 
         
     /// <summary>
-    /// If a billing request is ready to be fulfilled, call this endpoint to
-    /// cause
-    /// it to fulfil, executing the payment.
-    /// </summary>
-    public class BillingRequestFulfilRequest
-    {
-
-        /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
-        /// </summary>
-        [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
-    }
-
-        
-    /// <summary>
-    /// This will allow for the updating of the currency and subsequently the
-    /// scheme if
-    /// needed for a Billing Request. This will only be available for mandate
-    /// only flows
-    /// which do not have the lock_currency flag set to true on the Billing
-    /// Request Flow. It
-    /// will also not support any request which has a payments request.
-    /// </summary>
-    public class BillingRequestChooseCurrencyRequest
-    {
-
-        /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
-        /// </summary>
-        [JsonProperty("currency")]
-        public string Currency { get; set; }
-
-        /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
-        /// </summary>
-        [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
-    }
-
-        
-    /// <summary>
     /// This is needed when you have a mandate request. As a scheme compliance
     /// rule we are required to
     /// allow the payer to crosscheck the details entered by them and confirm
     /// it.
     /// </summary>
     public class BillingRequestConfirmPayerDetailsRequest
+    {
+
+        /// <summary>
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<String, String> Metadata { get; set; }
+    }
+
+        
+    /// <summary>
+    /// If a billing request is ready to be fulfilled, call this endpoint to
+    /// cause
+    /// it to fulfil, executing the payment.
+    /// </summary>
+    public class BillingRequestFulfilRequest
     {
 
         /// <summary>
@@ -1342,6 +1184,135 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<String, String> Metadata { get; set; }
+    }
+
+        
+    /// <summary>
+    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    /// billing requests.
+    /// </summary>
+    public class BillingRequestListRequest
+    {
+
+        /// <summary>
+        /// Cursor pointing to the start of the desired set.
+        /// </summary>
+        [JsonProperty("after")]
+        public string After { get; set; }
+
+        /// <summary>
+        /// Cursor pointing to the end of the desired set.
+        /// </summary>
+        [JsonProperty("before")]
+        public string Before { get; set; }
+
+        /// <summary>
+        /// Fixed [timestamp](#api-usage-time-zones--dates), recording when this
+        /// resource was created.
+        /// </summary>
+        [JsonProperty("created_at")]
+        public CreatedAtParam CreatedAt { get; set; }
+
+        /// <summary>
+        /// Specify filters to limit records by creation time.
+        /// </summary>
+        public class CreatedAtParam
+        {
+            /// <summary>
+            /// Limit to records created after the specified date-time.
+            /// </summary>
+            [JsonProperty("gt")]
+            public DateTimeOffset? GreaterThan { get; set; }
+
+            /// <summary>
+            /// Limit to records created on or after the specified date-time.
+            /// </summary>
+            [JsonProperty("gte")]
+            public DateTimeOffset? GreaterThanOrEqual { get; set; }
+
+            /// <summary>
+            /// Limit to records created before the specified date-time.
+            /// </summary>
+            [JsonProperty("lt")]
+            public DateTimeOffset? LessThan { get; set; }
+
+            /// <summary>
+            ///Limit to records created on or before the specified date-time.
+            /// </summary>
+            [JsonProperty("lte")]
+            public DateTimeOffset? LessThanOrEqual { get; set; }
+        }
+
+        /// <summary>
+        /// ID of a [customer](#core-endpoints-customers). If specified, this
+        /// endpoint will return all requests for the given customer.
+        /// </summary>
+        [JsonProperty("customer")]
+        public string Customer { get; set; }
+
+        /// <summary>
+        /// Number of records to return.
+        /// </summary>
+        [JsonProperty("limit")]
+        public int? Limit { get; set; }
+
+        /// <summary>
+        /// One of:
+        /// <ul>
+        /// <li>`pending`: the billing request is pending and can be used</li>
+        /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
+        /// <li>`fulfilling`: the billing request is currently undergoing
+        /// fulfilment</li>
+        /// <li>`fulfilled`: the billing request has been fulfilled and a
+        /// payment created</li>
+        /// <li>`cancelled`: the billing request has been cancelled and cannot
+        /// be used</li>
+        /// </ul>
+        /// </summary>
+        [JsonProperty("status")]
+        public string Status { get; set; }
+            
+        /// <summary>
+        /// One of:
+        /// <ul>
+        /// <li>`pending`: the billing request is pending and can be used</li>
+        /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
+        /// <li>`fulfilling`: the billing request is currently undergoing
+        /// fulfilment</li>
+        /// <li>`fulfilled`: the billing request has been fulfilled and a
+        /// payment created</li>
+        /// <li>`cancelled`: the billing request has been cancelled and cannot
+        /// be used</li>
+        /// </ul>
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BillingRequestStatus
+        {
+    
+            /// <summary>`status` with a value of "pending"</summary>
+            [EnumMember(Value = "pending")]
+            Pending,
+            /// <summary>`status` with a value of "ready_to_fulfil"</summary>
+            [EnumMember(Value = "ready_to_fulfil")]
+            ReadyToFulfil,
+            /// <summary>`status` with a value of "fulfilling"</summary>
+            [EnumMember(Value = "fulfilling")]
+            Fulfilling,
+            /// <summary>`status` with a value of "fulfilled"</summary>
+            [EnumMember(Value = "fulfilled")]
+            Fulfilled,
+            /// <summary>`status` with a value of "cancelled"</summary>
+            [EnumMember(Value = "cancelled")]
+            Cancelled,
+        }
+    }
+
+        
+    /// <summary>
+    /// Fetches a billing request
+    /// </summary>
+    public class BillingRequestGetRequest
+    {
     }
 
         
@@ -1386,6 +1357,35 @@ namespace GoCardless.Services
     /// </summary>
     public class BillingRequestFallbackRequest
     {
+    }
+
+        
+    /// <summary>
+    /// This will allow for the updating of the currency and subsequently the
+    /// scheme if
+    /// needed for a Billing Request. This will only be available for mandate
+    /// only flows
+    /// which do not have the lock_currency flag set to true on the Billing
+    /// Request Flow. It
+    /// will also not support any request which has a payments request.
+    /// </summary>
+    public class BillingRequestChooseCurrencyRequest
+    {
+
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        /// "SEK" and "USD" are supported.
+        /// </summary>
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
+
+        /// <summary>
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<String, String> Metadata { get; set; }
     }
 
     /// <summary>

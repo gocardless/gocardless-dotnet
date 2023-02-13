@@ -43,7 +43,23 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Fetches a bank authorisation
+        /// Create a Bank Authorisation.
+        /// </summary>
+        /// <param name="request">An optional `BankAuthorisationCreateRequest` representing the body for this create request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single bank authorisation resource</returns>
+        public Task<BankAuthorisationResponse> CreateAsync(BankAuthorisationCreateRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new BankAuthorisationCreateRequest();
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {};
+
+            return _goCardlessClient.ExecuteAsync<BankAuthorisationResponse>("POST", "/bank_authorisations", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "bank_authorisations", customiseRequestMessage);
+        }
+
+        /// <summary>
+        /// Get a single bank authorisation.
         /// </summary>  
         /// <param name="identity">Unique identifier, beginning with "BAU".</param> 
         /// <param name="request">An optional `BankAuthorisationGetRequest` representing the query parameters for this get request.</param>
@@ -61,30 +77,6 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<BankAuthorisationResponse>("GET", "/bank_authorisations/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
-
-        /// <summary>
-        /// Create a Bank Authorisation.
-        /// </summary>
-        /// <param name="request">An optional `BankAuthorisationCreateRequest` representing the body for this create request.</param>
-        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
-        /// <returns>A single bank authorisation resource</returns>
-        public Task<BankAuthorisationResponse> CreateAsync(BankAuthorisationCreateRequest request = null, RequestSettings customiseRequestMessage = null)
-        {
-            request = request ?? new BankAuthorisationCreateRequest();
-
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
-
-            return _goCardlessClient.ExecuteAsync<BankAuthorisationResponse>("POST", "/bank_authorisations", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "bank_authorisations", customiseRequestMessage);
-        }
-    }
-
-        
-    /// <summary>
-    /// Fetches a bank authorisation
-    /// </summary>
-    public class BankAuthorisationGetRequest
-    {
     }
 
         
@@ -169,6 +161,14 @@ namespace GoCardless.Services
         /// </summary>
         [JsonIgnore]
         public string IdempotencyKey { get; set; }
+    }
+
+        
+    /// <summary>
+    /// Get a single bank authorisation.
+    /// </summary>
+    public class BankAuthorisationGetRequest
+    {
     }
 
     /// <summary>
