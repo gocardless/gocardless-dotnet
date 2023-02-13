@@ -84,6 +84,14 @@ namespace GoCardless.Resources
         public BillingRequestPaymentRequest PaymentRequest { get; set; }
 
         /// <summary>
+        /// Specifies the high-level purpose of a mandate and/or payment using a
+        /// set of pre-defined categories. Required for the PayTo scheme,
+        /// optional for all others.
+        /// </summary>
+        [JsonProperty("purpose_code")]
+        public BillingRequestPurposeCode? PurposeCode { get; set; }
+
+        /// <summary>
         /// 
         /// </summary>
         [JsonProperty("resources")]
@@ -793,6 +801,54 @@ namespace GoCardless.Resources
         public string Payment { get; set; }
     }
     
+    /// <summary>
+    /// Specifies the high-level purpose of a mandate and/or payment using a set of pre-defined
+    /// categories. Required for the PayTo scheme, optional for all others.
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestPurposeCode {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`purpose_code` with a value of "mortgage"</summary>
+        [EnumMember(Value = "mortgage")]
+        Mortgage,
+        /// <summary>`purpose_code` with a value of "utility"</summary>
+        [EnumMember(Value = "utility")]
+        Utility,
+        /// <summary>`purpose_code` with a value of "loan"</summary>
+        [EnumMember(Value = "loan")]
+        Loan,
+        /// <summary>`purpose_code` with a value of "dependant_support"</summary>
+        [EnumMember(Value = "dependant_support")]
+        DependantSupport,
+        /// <summary>`purpose_code` with a value of "gambling"</summary>
+        [EnumMember(Value = "gambling")]
+        Gambling,
+        /// <summary>`purpose_code` with a value of "retail"</summary>
+        [EnumMember(Value = "retail")]
+        Retail,
+        /// <summary>`purpose_code` with a value of "salary"</summary>
+        [EnumMember(Value = "salary")]
+        Salary,
+        /// <summary>`purpose_code` with a value of "personal"</summary>
+        [EnumMember(Value = "personal")]
+        Personal,
+        /// <summary>`purpose_code` with a value of "government"</summary>
+        [EnumMember(Value = "government")]
+        Government,
+        /// <summary>`purpose_code` with a value of "pension"</summary>
+        [EnumMember(Value = "pension")]
+        Pension,
+        /// <summary>`purpose_code` with a value of "tax"</summary>
+        [EnumMember(Value = "tax")]
+        Tax,
+        /// <summary>`purpose_code` with a value of "other"</summary>
+        [EnumMember(Value = "other")]
+        Other,
+    }
+
     public class BillingRequestResources
     {
         /// <summary>

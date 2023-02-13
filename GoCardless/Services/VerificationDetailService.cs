@@ -33,6 +33,60 @@ namespace GoCardless.Services
         }
 
         /// <summary>
+        /// Returns a list of verification details belonging to a creditor.
+        /// </summary>
+        /// <param name="request">An optional `VerificationDetailListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A set of verification detail resources</returns>
+        public Task<VerificationDetailListResponse> ListAsync(VerificationDetailListRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new VerificationDetailListRequest();
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {};
+
+            return _goCardlessClient.ExecuteAsync<VerificationDetailListResponse>("GET", "/verification_details", urlParams, request, null, null, customiseRequestMessage);
+        }
+
+        /// <summary>
+        /// Get a lazily enumerated list of verification details.
+        /// This acts like the #list method, but paginates for you automatically.
+        /// </summary>
+        public IEnumerable<VerificationDetail> All(VerificationDetailListRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new VerificationDetailListRequest();
+
+            string cursor = null;
+            do
+            {
+                request.After = cursor;
+
+                var result = Task.Run(() => ListAsync(request, customiseRequestMessage)).Result;
+                foreach (var item in result.VerificationDetails)
+                {
+                    yield return item;
+                }
+                cursor = result.Meta?.Cursors?.After;
+            } while (cursor != null);
+        }
+
+        /// <summary>
+        /// Get a lazily enumerated list of verification details.
+        /// This acts like the #list method, but paginates for you automatically.
+        /// </summary>
+        public IEnumerable<Task<IReadOnlyList<VerificationDetail>>> AllAsync(VerificationDetailListRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new VerificationDetailListRequest();
+
+            return new TaskEnumerable<IReadOnlyList<VerificationDetail>, string>(async after =>
+            {
+                request.After = after;
+                var list = await this.ListAsync(request, customiseRequestMessage);
+                return Tuple.Create(list.VerificationDetails, list.Meta?.Cursors?.After);
+            });
+        }
+
+        /// <summary>
         /// Verification details represent any information needed by GoCardless
         /// to verify a creditor.
         /// Currently, only UK-based companies are supported.
@@ -51,6 +105,38 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<VerificationDetailResponse>("POST", "/verification_details", urlParams, request, null, "verification_details", customiseRequestMessage);
         }
+    }
+
+        
+    /// <summary>
+    /// Returns a list of verification details belonging to a creditor.
+    /// </summary>
+    public class VerificationDetailListRequest
+    {
+
+        /// <summary>
+        /// Cursor pointing to the start of the desired set.
+        /// </summary>
+        [JsonProperty("after")]
+        public string After { get; set; }
+
+        /// <summary>
+        /// Cursor pointing to the end of the desired set.
+        /// </summary>
+        [JsonProperty("before")]
+        public string Before { get; set; }
+
+        /// <summary>
+        /// Unique identifier, beginning with "CR".
+        /// </summary>
+        [JsonProperty("creditor")]
+        public string Creditor { get; set; }
+
+        /// <summary>
+        /// Number of records to return.
+        /// </summary>
+        [JsonProperty("limit")]
+        public int? Limit { get; set; }
     }
 
         
@@ -174,6 +260,12 @@ namespace GoCardless.Services
         }
 
         /// <summary>
+        /// The company's legal name.
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        /// <summary>
         /// The company's postal code.
         /// </summary>
         [JsonProperty("postal_code")]
@@ -190,5 +282,21 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("verification_details")]
         public VerificationDetail VerificationDetail { get; private set; }
+    }
+
+    /// <summary>
+    /// An API response for a request returning a list of verification details.
+    /// </summary>
+    public class VerificationDetailListResponse : ApiResponse
+    {
+        /// <summary>
+        /// The list of verification details from the response.
+        /// </summary>
+        [JsonProperty("verification_details")]
+        public IReadOnlyList<VerificationDetail> VerificationDetails { get; private set; }
+        /// <summary>
+        /// Response metadata (e.g. pagination cursors)
+        /// </summary>
+        public Meta Meta { get; private set; }
     }
 }

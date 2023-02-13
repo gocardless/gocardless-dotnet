@@ -64,6 +64,12 @@ namespace GoCardless.Resources
         public VerificationDetailLinks Links { get; set; }
 
         /// <summary>
+        /// The company's legal name.
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        /// <summary>
         /// The company's postal code.
         /// </summary>
         [JsonProperty("postal_code")]
