@@ -64,6 +64,10 @@ namespace GoCardless.Services
         /// | faster_payments | 18 characters      | `a-zA-Z0-9/?:().,'+-`    |
         /// yes        |
         /// 
+        /// The validation error that gets returned for an invalid name will
+        /// contain a suggested name
+        /// in the metadata that is guaranteed to pass name validations.
+        /// 
         /// </summary>
         /// <param name="request">An optional `SchemeIdentifierCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -183,6 +187,10 @@ namespace GoCardless.Services
     ///       |
     /// | faster_payments | 18 characters      | `a-zA-Z0-9/?:().,'+-`    | yes 
     ///       |
+    /// 
+    /// The validation error that gets returned for an invalid name will contain
+    /// a suggested name
+    /// in the metadata that is guaranteed to pass name validations.
     /// 
     /// </summary>
     public class SchemeIdentifierCreateRequest : IHasIdempotencyKey
