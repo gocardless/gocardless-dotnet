@@ -440,6 +440,14 @@ namespace GoCardless.Resources
         public string Refund { get; set; }
 
         /// <summary>
+        /// If `resource_type` is `scheme_identifiers`. This is the ID of the
+        /// [scheme_identifier](#core-endpoints-scheme-identifiers) which has
+        /// been updated.
+        /// </summary>
+        [JsonProperty("scheme_identifier")]
+        public string SchemeIdentifier { get; set; }
+
+        /// <summary>
         /// If `resource_type` is `subscription`, this is the ID of the
         /// [subscription](#core-endpoints-subscriptions) which has been
         /// updated.
