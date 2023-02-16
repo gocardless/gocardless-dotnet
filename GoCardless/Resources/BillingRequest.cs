@@ -545,7 +545,7 @@ namespace GoCardless.Resources
         /// will be considered open and
         /// will not have an end date. Keep in mind the end date must take into
         /// account how long it will
-        /// take the user to set up this agreement via the BillingRequest.
+        /// take the user to set up this agreement via the Billing Request.
         /// 
         /// </summary>
         [JsonProperty("end_date")]

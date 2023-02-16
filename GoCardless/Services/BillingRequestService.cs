@@ -339,6 +339,28 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/choose_currency", urlParams, request, null, "data", customiseRequestMessage);
         }
+
+        /// <summary>
+        /// Returns all institutions valid for a Billing Request.
+        /// 
+        /// This endpoint is currently supported only for FasterPayments.
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="request">An optional `BillingRequestListInstitutionsRequest` representing the query parameters for this list_institutions request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single billing request resource</returns>
+        public Task<BillingRequestResponse> ListInstitutionsAsync(string identity, BillingRequestListInstitutionsRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new BillingRequestListInstitutionsRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("GET", "/billing_requests/:identity/actions/list_institutions", urlParams, request, null, null, customiseRequestMessage);
+        }
     }
 
         
@@ -469,7 +491,7 @@ namespace GoCardless.Services
             /// agreement will be considered open and
             /// will not have an end date. Keep in mind the end date must take
             /// into account how long it will
-            /// take the user to set up this agreement via the BillingRequest.
+            /// take the user to set up this agreement via the Billing Request.
             /// 
                 /// </summary>
                 [JsonProperty("end_date")]
@@ -1386,6 +1408,30 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<String, String> Metadata { get; set; }
+    }
+
+        
+    /// <summary>
+    /// Returns all institutions valid for a Billing Request.
+    /// 
+    /// This endpoint is currently supported only for FasterPayments.
+    /// </summary>
+    public class BillingRequestListInstitutionsRequest
+    {
+
+        /// <summary>
+        /// ID(s) of the institution(s) to retrieve. More than one ID can be
+        /// specified using a comma-separated string.
+        /// </summary>
+        [JsonProperty("ids")]
+        public string[] Ids { get; set; }
+
+        /// <summary>
+        /// A search substring for retrieving institution(s), based on the
+        /// institution's name.
+        /// </summary>
+        [JsonProperty("search")]
+        public string Search { get; set; }
     }
 
     /// <summary>
