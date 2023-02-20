@@ -359,7 +359,7 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("GET", "/billing_requests/:identity/actions/list_institutions", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("GET", "/billing_requests/:identity/list_institutions", urlParams, request, null, null, customiseRequestMessage);
         }
     }
 
