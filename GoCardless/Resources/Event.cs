@@ -440,7 +440,7 @@ namespace GoCardless.Resources
         public string Refund { get; set; }
 
         /// <summary>
-        /// If `resource_type` is `scheme_identifiers`. This is the ID of the
+        /// If `resource_type` is `scheme_identifiers`, this is the ID of the
         /// [scheme_identifier](#core-endpoints-scheme-identifiers) which has
         /// been updated.
         /// </summary>
