@@ -275,6 +275,9 @@ namespace GoCardless.Services
         /// Notifies the customer linked to the billing request, asking them to
         /// authorise it.
         /// Currently, the customer can only be notified by email.
+        /// 
+        /// This endpoint is currently supported only for Instant Bank Pay
+        /// Billing Requests.
         /// </summary>  
         /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
         /// <param name="request">An optional `BillingRequestNotifyRequest` representing the body for this notify request.</param>
@@ -1342,6 +1345,9 @@ namespace GoCardless.Services
     /// Notifies the customer linked to the billing request, asking them to
     /// authorise it.
     /// Currently, the customer can only be notified by email.
+    /// 
+    /// This endpoint is currently supported only for Instant Bank Pay Billing
+    /// Requests.
     /// </summary>
     public class BillingRequestNotifyRequest
     {
