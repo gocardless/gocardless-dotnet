@@ -82,6 +82,7 @@ namespace GoCardless.Resources
         /// <li>`payments`</li>
         /// <li>`payouts`</li>
         /// <li>`refunds`</li>
+        /// <li>`scheme_identifiers`</li>
         /// <li>`subscriptions`</li>
         /// </ul>
         /// </summary>
@@ -467,6 +468,7 @@ namespace GoCardless.Resources
     /// <li>`payments`</li>
     /// <li>`payouts`</li>
     /// <li>`refunds`</li>
+    /// <li>`scheme_identifiers`</li>
     /// <li>`subscriptions`</li>
     /// </ul>
     /// </summary>
@@ -503,6 +505,9 @@ namespace GoCardless.Resources
         /// <summary>`resource_type` with a value of "refunds"</summary>
         [EnumMember(Value = "refunds")]
         Refunds,
+        /// <summary>`resource_type` with a value of "scheme_identifiers"</summary>
+        [EnumMember(Value = "scheme_identifiers")]
+        SchemeIdentifiers,
         /// <summary>`resource_type` with a value of "subscriptions"</summary>
         [EnumMember(Value = "subscriptions")]
         Subscriptions,
