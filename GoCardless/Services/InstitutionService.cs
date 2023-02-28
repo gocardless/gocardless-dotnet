@@ -52,6 +52,28 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<InstitutionListResponse>("GET", "/institutions", urlParams, request, null, null, customiseRequestMessage);
         }
+
+        /// <summary>
+        /// Returns all institutions valid for a Billing Request.
+        /// 
+        /// This endpoint is currently supported only for FasterPayments.
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="request">An optional `InstitutionListForBillingRequestRequest` representing the query parameters for this list_for_billing_request request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A set of institution resources</returns>
+        public Task<InstitutionListResponse> ListForBillingRequestAsync(string identity, InstitutionListForBillingRequestRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new InstitutionListForBillingRequestRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<InstitutionListResponse>("GET", "/billing_requests/:identity/institutions", urlParams, request, null, null, customiseRequestMessage);
+        }
     }
 
         
@@ -68,6 +90,30 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
+    }
+
+        
+    /// <summary>
+    /// Returns all institutions valid for a Billing Request.
+    /// 
+    /// This endpoint is currently supported only for FasterPayments.
+    /// </summary>
+    public class InstitutionListForBillingRequestRequest
+    {
+
+        /// <summary>
+        /// ID(s) of the institution(s) to retrieve. More than one ID can be
+        /// specified using a comma-separated string.
+        /// </summary>
+        [JsonProperty("ids")]
+        public string[] Ids { get; set; }
+
+        /// <summary>
+        /// A search substring for retrieving institution(s), based on the
+        /// institution's name.
+        /// </summary>
+        [JsonProperty("search")]
+        public string Search { get; set; }
     }
 
     /// <summary>
