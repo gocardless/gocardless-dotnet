@@ -342,6 +342,26 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/choose_currency", urlParams, request, null, "data", customiseRequestMessage);
         }
+
+        /// <summary>
+        /// Creates an Institution object and attaches it to the Billing Request
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="request">An optional `BillingRequestSelectInstitutionRequest` representing the body for this select_institution request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single billing request resource</returns>
+        public Task<BillingRequestResponse> SelectInstitutionAsync(string identity, BillingRequestSelectInstitutionRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new BillingRequestSelectInstitutionRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/select_institution", urlParams, request, null, "data", customiseRequestMessage);
+        }
     }
 
         
@@ -1392,6 +1412,28 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<String, String> Metadata { get; set; }
+    }
+
+        
+    /// <summary>
+    /// Creates an Institution object and attaches it to the Billing Request
+    /// </summary>
+    public class BillingRequestSelectInstitutionRequest
+    {
+
+        /// <summary>
+        /// [ISO
+        /// 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+        /// alpha-2 code. The country code of the institution.
+        /// </summary>
+        [JsonProperty("country_code")]
+        public string CountryCode { get; set; }
+
+        /// <summary>
+        /// The unique identifier for this institution
+        /// </summary>
+        [JsonProperty("institution")]
+        public string Institution { get; set; }
     }
 
     /// <summary>
