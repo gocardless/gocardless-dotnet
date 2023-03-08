@@ -156,6 +156,30 @@ namespace GoCardless.Services
         public bool? LockCustomerDetails { get; set; }
 
         /// <summary>
+        /// Options used to pass configurational parameters to billing request
+        /// flow
+        /// </summary>
+        [JsonProperty("options")]
+        public BillingRequestFlowOptions Options { get; set; }
+        /// <summary>
+        /// Options used to pass configurational parameters to billing request
+        /// flow
+        /// </summary>
+        public class BillingRequestFlowOptions
+        {
+                
+                /// <summary>
+                            /// If true, we will show redirect button on success page.
+            /// 
+            /// If false, we will automatically redirect user to the given
+            /// redirect_uri
+            /// 
+                /// </summary>
+                [JsonProperty("show_success_redirect_button")]
+                public bool? ShowSuccessRedirectButton { get; set; }
+        }
+
+        /// <summary>
         /// Bank account information used to prefill the payment page so your
         /// customer doesn't have to re-type details you already hold about
         /// them. It will be stored unvalidated and the customer will be able to
