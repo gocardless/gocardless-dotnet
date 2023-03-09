@@ -278,7 +278,7 @@ namespace GoCardless.Services
         public IDictionary<String, String> Metadata { get; set; }
 
         /// <summary>
-        /// Defaults to `false`. When this is set to `true`, it will cause this
+        /// Defaults to `true`. When this is set to `true`, it will cause this
         /// bank account to be set as the account that GoCardless will pay out
         /// to.
         /// </summary>
