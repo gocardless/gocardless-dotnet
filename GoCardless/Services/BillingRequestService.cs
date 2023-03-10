@@ -802,7 +802,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Specifies the high-level purpose of a mandate and/or payment using a
         /// set of pre-defined categories. Required for the PayTo scheme,
-        /// optional for all others.
+        /// optional for all others. Currently `mortgage`, `utility`, `loan`,
+        /// `dependant_support`, `gambling`, `retail`, `salary`, `personal`,
+        /// `government`, `pension`, `tax` and `other` are supported.
         /// </summary>
         [JsonProperty("purpose_code")]
         public BillingRequestPurposeCode? PurposeCode { get; set; }
@@ -810,7 +812,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Specifies the high-level purpose of a mandate and/or payment using a
         /// set of pre-defined categories. Required for the PayTo scheme,
-        /// optional for all others.
+        /// optional for all others. Currently `mortgage`, `utility`, `loan`,
+        /// `dependant_support`, `gambling`, `retail`, `salary`, `personal`,
+        /// `government`, `pension`, `tax` and `other` are supported.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BillingRequestPurposeCode
