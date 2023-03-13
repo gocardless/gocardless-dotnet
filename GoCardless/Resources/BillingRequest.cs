@@ -278,6 +278,27 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("default_country_code")]
         public string DefaultCountryCode { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("incomplete_fields")]
+        public BillingRequestActionCollectCustomerDetailsIncompleteFields IncompleteFields { get; set; }
+    }
+    
+    public class BillingRequestActionCollectCustomerDetailsIncompleteFields
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("customer")]
+        public List<string> Customer { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("customer_billing_detail")]
+        public List<string> CustomerBillingDetail { get; set; }
     }
     
     /// <summary>
