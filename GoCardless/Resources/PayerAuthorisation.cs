@@ -13,7 +13,7 @@ namespace GoCardless.Resources
     ///
     /// <p class="restricted-notice">
     ///   Don't use Payer Authorisations for new integrations.
-    ///   It is deprecated in favour of 
+    ///   It is deprecated in favour of
     ///   <a
     /// href="https://developer.gocardless.com/getting-started/billing-requests/overview/">
     ///   Billing Requests</a>. Use Billing Requests to build any future
