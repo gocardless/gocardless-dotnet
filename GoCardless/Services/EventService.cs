@@ -184,18 +184,26 @@ namespace GoCardless.Services
         }
 
         /// <summary>
+        /// ID of an [creditor](#core-endpoints-creditors). If specified, this
+        /// endpoint will return all events for the given creditor.
+        /// </summary>
+        [JsonProperty("creditor")]
+        public string Creditor { get; set; }
+
+        /// <summary>
         /// Includes linked resources in the response. Must be used with the
         /// `resource_type` parameter specified. The include should be one of:
         /// <ul>
-        /// <li>`payment`</li>
+        /// <li>`billing_request`</li>
+        /// <li>`creditor`</li>
+        /// <li>`instalment_schedule`</li>
         /// <li>`mandate`</li>
         /// <li>`payer_authorisation`</li>
+        /// <li>`payment`</li>
         /// <li>`payout`</li>
         /// <li>`refund`</li>
+        /// <li>`scheme_identifier`</li>
         /// <li>`subscription`</li>
-        /// <li>`instalment_schedule`</li>
-        /// <li>`creditor`</li>
-        /// <li>`billing_request`</li>
         /// </ul>
         /// </summary>
         [JsonProperty("include")]
@@ -205,48 +213,52 @@ namespace GoCardless.Services
         /// Includes linked resources in the response. Must be used with the
         /// `resource_type` parameter specified. The include should be one of:
         /// <ul>
-        /// <li>`payment`</li>
+        /// <li>`billing_request`</li>
+        /// <li>`creditor`</li>
+        /// <li>`instalment_schedule`</li>
         /// <li>`mandate`</li>
         /// <li>`payer_authorisation`</li>
+        /// <li>`payment`</li>
         /// <li>`payout`</li>
         /// <li>`refund`</li>
+        /// <li>`scheme_identifier`</li>
         /// <li>`subscription`</li>
-        /// <li>`instalment_schedule`</li>
-        /// <li>`creditor`</li>
-        /// <li>`billing_request`</li>
         /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum EventInclude
         {
     
-            /// <summary>`include` with a value of "payment"</summary>
-            [EnumMember(Value = "payment")]
-            Payment,
+            /// <summary>`include` with a value of "billing_request"</summary>
+            [EnumMember(Value = "billing_request")]
+            BillingRequest,
+            /// <summary>`include` with a value of "creditor"</summary>
+            [EnumMember(Value = "creditor")]
+            Creditor,
+            /// <summary>`include` with a value of "instalment_schedule"</summary>
+            [EnumMember(Value = "instalment_schedule")]
+            InstalmentSchedule,
             /// <summary>`include` with a value of "mandate"</summary>
             [EnumMember(Value = "mandate")]
             Mandate,
+            /// <summary>`include` with a value of "payer_authorisation"</summary>
+            [EnumMember(Value = "payer_authorisation")]
+            PayerAuthorisation,
+            /// <summary>`include` with a value of "payment"</summary>
+            [EnumMember(Value = "payment")]
+            Payment,
             /// <summary>`include` with a value of "payout"</summary>
             [EnumMember(Value = "payout")]
             Payout,
             /// <summary>`include` with a value of "refund"</summary>
             [EnumMember(Value = "refund")]
             Refund,
+            /// <summary>`include` with a value of "scheme_identifier"</summary>
+            [EnumMember(Value = "scheme_identifier")]
+            SchemeIdentifier,
             /// <summary>`include` with a value of "subscription"</summary>
             [EnumMember(Value = "subscription")]
             Subscription,
-            /// <summary>`include` with a value of "instalment_schedule"</summary>
-            [EnumMember(Value = "instalment_schedule")]
-            InstalmentSchedule,
-            /// <summary>`include` with a value of "creditor"</summary>
-            [EnumMember(Value = "creditor")]
-            Creditor,
-            /// <summary>`include` with a value of "payer_authorisation"</summary>
-            [EnumMember(Value = "payer_authorisation")]
-            PayerAuthorisation,
-            /// <summary>`include` with a value of "billing_request"</summary>
-            [EnumMember(Value = "billing_request")]
-            BillingRequest,
         }
 
         /// <summary>
@@ -305,10 +317,12 @@ namespace GoCardless.Services
         public string Refund { get; set; }
 
         /// <summary>
-        /// Type of resource that you'd like to get all events for. Cannot be
-        /// used together with the `payment`,    `payer_authorisation`,
-        /// `mandate`, `subscription`, `instalment_schedule`, `creditor`,
-        /// `refund` or `payout` parameter. The type can be one of:
+        /// Type of resource that you'd like to get all events for.
+        /// Cannot be used together with the `billing_request`, `creditor`,
+        /// `instalment_schedule`, `mandate`, `payer_authorisation`, `payment`,
+        /// `payout`, `refund`, `scheme_identifier` or `subscription`
+        /// parameters.
+        /// The type can be one of:
         /// <ul>
         /// <li>`billing_requests`</li>
         /// <li>`creditors`</li>
@@ -318,6 +332,7 @@ namespace GoCardless.Services
         /// <li>`payments`</li>
         /// <li>`payouts`</li>
         /// <li>`refunds`</li>
+        /// <li>`scheme_identifiers`</li>
         /// <li>`subscriptions`</li>
         /// </ul>
         /// </summary>
@@ -325,10 +340,12 @@ namespace GoCardless.Services
         public EventResourceType? ResourceType { get; set; }
             
         /// <summary>
-        /// Type of resource that you'd like to get all events for. Cannot be
-        /// used together with the `payment`,    `payer_authorisation`,
-        /// `mandate`, `subscription`, `instalment_schedule`, `creditor`,
-        /// `refund` or `payout` parameter. The type can be one of:
+        /// Type of resource that you'd like to get all events for.
+        /// Cannot be used together with the `billing_request`, `creditor`,
+        /// `instalment_schedule`, `mandate`, `payer_authorisation`, `payment`,
+        /// `payout`, `refund`, `scheme_identifier` or `subscription`
+        /// parameters.
+        /// The type can be one of:
         /// <ul>
         /// <li>`billing_requests`</li>
         /// <li>`creditors`</li>
@@ -338,6 +355,7 @@ namespace GoCardless.Services
         /// <li>`payments`</li>
         /// <li>`payouts`</li>
         /// <li>`refunds`</li>
+        /// <li>`scheme_identifiers`</li>
         /// <li>`subscriptions`</li>
         /// </ul>
         /// </summary>
@@ -372,10 +390,21 @@ namespace GoCardless.Services
             /// <summary>`resource_type` with a value of "refunds"</summary>
             [EnumMember(Value = "refunds")]
             Refunds,
+            /// <summary>`resource_type` with a value of "scheme_identifiers"</summary>
+            [EnumMember(Value = "scheme_identifiers")]
+            SchemeIdentifiers,
             /// <summary>`resource_type` with a value of "subscriptions"</summary>
             [EnumMember(Value = "subscriptions")]
             Subscriptions,
         }
+
+        /// <summary>
+        /// ID of a [scheme identifier](#core-endpoints-scheme-identifiers). If
+        /// specified, this endpoint will return all events for the given scheme
+        /// identifier.
+        /// </summary>
+        [JsonProperty("scheme_identifier")]
+        public string SchemeIdentifier { get; set; }
 
         /// <summary>
         /// ID of a [subscription](#core-endpoints-subscriptions). If specified,

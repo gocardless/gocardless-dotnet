@@ -82,6 +82,7 @@ namespace GoCardless.Resources
         /// <li>`payments`</li>
         /// <li>`payouts`</li>
         /// <li>`refunds`</li>
+        /// <li>`scheme_identifiers`</li>
         /// <li>`subscriptions`</li>
         /// </ul>
         /// </summary>
@@ -440,6 +441,14 @@ namespace GoCardless.Resources
         public string Refund { get; set; }
 
         /// <summary>
+        /// If `resource_type` is `scheme_identifiers`, this is the ID of the
+        /// [scheme_identifier](#core-endpoints-scheme-identifiers) which has
+        /// been updated.
+        /// </summary>
+        [JsonProperty("scheme_identifier")]
+        public string SchemeIdentifier { get; set; }
+
+        /// <summary>
         /// If `resource_type` is `subscription`, this is the ID of the
         /// [subscription](#core-endpoints-subscriptions) which has been
         /// updated.
@@ -459,6 +468,7 @@ namespace GoCardless.Resources
     /// <li>`payments`</li>
     /// <li>`payouts`</li>
     /// <li>`refunds`</li>
+    /// <li>`scheme_identifiers`</li>
     /// <li>`subscriptions`</li>
     /// </ul>
     /// </summary>
@@ -495,6 +505,9 @@ namespace GoCardless.Resources
         /// <summary>`resource_type` with a value of "refunds"</summary>
         [EnumMember(Value = "refunds")]
         Refunds,
+        /// <summary>`resource_type` with a value of "scheme_identifiers"</summary>
+        [EnumMember(Value = "scheme_identifiers")]
+        SchemeIdentifiers,
         /// <summary>`resource_type` with a value of "subscriptions"</summary>
         [EnumMember(Value = "subscriptions")]
         Subscriptions,

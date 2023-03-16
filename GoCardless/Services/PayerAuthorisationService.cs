@@ -18,7 +18,7 @@ namespace GoCardless.Services
     ///
     /// <p class="restricted-notice">
     ///   Don't use Payer Authorisations for new integrations.
-    ///   It is deprecated in favour of 
+    ///   It is deprecated in favour of
     ///   <a
     /// href="https://developer.gocardless.com/getting-started/billing-requests/overview/">
     ///   Billing Requests</a>. Use Billing Requests to build any future
@@ -193,7 +193,7 @@ namespace GoCardless.Services
         /// 
         /// <p class="notice">
         ///   The main use of the confirm endpoint is to enable integrators to
-        /// acknowledge the end of the setup process. 
+        /// acknowledge the end of the setup process.
         ///   They might want to make the payers go through some other steps
         /// after they go through our flow or make them go through the necessary
         /// verification mechanism (upcoming feature).
@@ -958,7 +958,7 @@ namespace GoCardless.Services
     /// 
     /// <p class="notice">
     ///   The main use of the confirm endpoint is to enable integrators to
-    /// acknowledge the end of the setup process. 
+    /// acknowledge the end of the setup process.
     ///   They might want to make the payers go through some other steps after
     /// they go through our flow or make them go through the necessary
     /// verification mechanism (upcoming feature).

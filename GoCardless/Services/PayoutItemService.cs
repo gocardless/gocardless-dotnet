@@ -33,7 +33,11 @@ namespace GoCardless.Services
     /// 
     /// The Payout Items API allows you to view, on a per-payout basis, the
     /// credit and debit
-    /// items that make up that payout's amount.
+    /// items that make up that payout's amount.  Payout items can only be
+    /// retrieved for payouts
+    /// created in the last 6 months. Requests for older payouts will return an
+    /// HTTP status
+    /// <code>410 Gone</code>.
     /// 
     /// </summary>
 
@@ -54,12 +58,9 @@ namespace GoCardless.Services
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// items in the payout.
         /// 
-        /// <div class="notice notice--warning u-block">
-        ///   <strong>Note</strong>: From 1 March 2023 onwards, we will only
-        /// serve requests for payout items created in the last 6 months.
-        /// Requests for older payouts will return an HTTP status <code>410
-        /// Gone</code>.
-        /// </div>
+        /// <strong>This endpoint only serves requests for payouts created in
+        /// the last 6 months. Requests for older payouts will return an HTTP
+        /// status <code>410 Gone</code>.</strong>
         /// 
         /// </summary>
         /// <param name="request">An optional `PayoutItemListRequest` representing the query parameters for this list request.</param>
@@ -119,11 +120,9 @@ namespace GoCardless.Services
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of items
     /// in the payout.
     /// 
-    /// <div class="notice notice--warning u-block">
-    ///   <strong>Note</strong>: From 1 March 2023 onwards, we will only serve
-    /// requests for payout items created in the last 6 months. Requests for
-    /// older payouts will return an HTTP status <code>410 Gone</code>.
-    /// </div>
+    /// <strong>This endpoint only serves requests for payouts created in the
+    /// last 6 months. Requests for older payouts will return an HTTP status
+    /// <code>410 Gone</code>.</strong>
     /// 
     /// </summary>
     public class PayoutItemListRequest

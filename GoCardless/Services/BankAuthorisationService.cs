@@ -124,13 +124,6 @@ namespace GoCardless.Services
                 /// </summary>
                 [JsonProperty("billing_request")]
                 public string BillingRequest { get; set; }
-                
-                /// <summary>
-                            /// ID of the [institution](#billing-requests-institutions) against
-            /// which this authorisation was created.
-                /// </summary>
-                [JsonProperty("institution")]
-                public string Institution { get; set; }
         }
 
         /// <summary>
@@ -148,6 +141,9 @@ namespace GoCardless.Services
         /// The `redirect_uri` you provide should handle the `outcome` query
         /// parameter for displaying the result of the
         /// bank authorisation as outlined above.
+        /// 
+        /// The BillingRequestFlow ID will also be appended to the
+        /// `redirect_uri` as query parameter `id=BRF123`.
         /// 
         /// Defaults to `https://pay.gocardless.com/billing/static/thankyou`.
         /// </summary>

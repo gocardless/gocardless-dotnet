@@ -317,6 +317,14 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("show_redirect_buttons")]
         public bool? ShowRedirectButtons { get; set; }
+
+        /// <summary>
+        /// If true, the payer will be able to see redirect action buttons on
+        /// Success page. These action buttons will provide a way to redirect
+        /// payer to the given redirect_uri.
+        /// </summary>
+        [JsonProperty("show_success_redirect_button")]
+        public bool? ShowSuccessRedirectButton { get; set; }
     }
 
         

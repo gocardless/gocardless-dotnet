@@ -16,7 +16,17 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with verification detail resources.
     ///
-    /// Details of a creditor that are required for verification
+    /// Verification details represent any information needed by GoCardless to
+    /// verify a creditor.
+    /// 
+    /// <p class="restricted-notice"><strong>Restricted</strong>:
+    ///   These endpoints are restricted to customers who want to collect their
+    /// merchant's
+    ///   verification details and pass them to GoCardless via our API. Please
+    /// [get in
+    ///   touch](mailto:help@gocardless.com) if you wish to enable this feature
+    /// on your
+    ///   account.</p>
     /// </summary>
 
     public class VerificationDetailService
@@ -30,6 +40,22 @@ namespace GoCardless.Services
         public VerificationDetailService(GoCardlessClient goCardlessClient)
         {
             _goCardlessClient = goCardlessClient;
+        }
+
+        /// <summary>
+        /// Creates a new verification detail
+        /// </summary>
+        /// <param name="request">An optional `VerificationDetailCreateRequest` representing the body for this create request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single verification detail resource</returns>
+        public Task<VerificationDetailResponse> CreateAsync(VerificationDetailCreateRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new VerificationDetailCreateRequest();
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {};
+
+            return _goCardlessClient.ExecuteAsync<VerificationDetailResponse>("POST", "/verification_details", urlParams, request, null, "verification_details", customiseRequestMessage);
         }
 
         /// <summary>
@@ -85,67 +111,11 @@ namespace GoCardless.Services
                 return Tuple.Create(list.VerificationDetails, list.Meta?.Cursors?.After);
             });
         }
-
-        /// <summary>
-        /// Verification details represent any information needed by GoCardless
-        /// to verify a creditor.
-        /// Currently, only UK-based companies are supported.
-        /// In other words, to submit verification details for a creditor, their
-        /// creditor_type must be company and their country_code must be GB.
-        /// </summary>
-        /// <param name="request">An optional `VerificationDetailCreateRequest` representing the body for this create request.</param>
-        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
-        /// <returns>A single verification detail resource</returns>
-        public Task<VerificationDetailResponse> CreateAsync(VerificationDetailCreateRequest request = null, RequestSettings customiseRequestMessage = null)
-        {
-            request = request ?? new VerificationDetailCreateRequest();
-
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
-
-            return _goCardlessClient.ExecuteAsync<VerificationDetailResponse>("POST", "/verification_details", urlParams, request, null, "verification_details", customiseRequestMessage);
-        }
     }
 
         
     /// <summary>
-    /// Returns a list of verification details belonging to a creditor.
-    /// </summary>
-    public class VerificationDetailListRequest
-    {
-
-        /// <summary>
-        /// Cursor pointing to the start of the desired set.
-        /// </summary>
-        [JsonProperty("after")]
-        public string After { get; set; }
-
-        /// <summary>
-        /// Cursor pointing to the end of the desired set.
-        /// </summary>
-        [JsonProperty("before")]
-        public string Before { get; set; }
-
-        /// <summary>
-        /// Unique identifier, beginning with "CR".
-        /// </summary>
-        [JsonProperty("creditor")]
-        public string Creditor { get; set; }
-
-        /// <summary>
-        /// Number of records to return.
-        /// </summary>
-        [JsonProperty("limit")]
-        public int? Limit { get; set; }
-    }
-
-        
-    /// <summary>
-    /// Verification details represent any information needed by GoCardless to
-    /// verify a creditor.
-    /// Currently, only UK-based companies are supported.
-    /// In other words, to submit verification details for a creditor, their
-    /// creditor_type must be company and their country_code must be GB.
+    /// Creates a new verification detail
     /// </summary>
     public class VerificationDetailCreateRequest
     {
@@ -270,6 +240,38 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("postal_code")]
         public string PostalCode { get; set; }
+    }
+
+        
+    /// <summary>
+    /// Returns a list of verification details belonging to a creditor.
+    /// </summary>
+    public class VerificationDetailListRequest
+    {
+
+        /// <summary>
+        /// Cursor pointing to the start of the desired set.
+        /// </summary>
+        [JsonProperty("after")]
+        public string After { get; set; }
+
+        /// <summary>
+        /// Cursor pointing to the end of the desired set.
+        /// </summary>
+        [JsonProperty("before")]
+        public string Before { get; set; }
+
+        /// <summary>
+        /// Unique identifier, beginning with "CR".
+        /// </summary>
+        [JsonProperty("creditor")]
+        public string Creditor { get; set; }
+
+        /// <summary>
+        /// Number of records to return.
+        /// </summary>
+        [JsonProperty("limit")]
+        public int? Limit { get; set; }
     }
 
     /// <summary>

@@ -11,7 +11,17 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a verification detail resource.
     ///
-    /// Details of a creditor that are required for verification
+    /// Verification details represent any information needed by GoCardless to
+    /// verify a creditor.
+    /// 
+    /// <p class="restricted-notice"><strong>Restricted</strong>:
+    ///   These endpoints are restricted to customers who want to collect their
+    /// merchant's
+    ///   verification details and pass them to GoCardless via our API. Please
+    /// [get in
+    ///   touch](mailto:help@gocardless.com) if you wish to enable this feature
+    /// on your
+    ///   account.</p>
     /// </summary>
     public class VerificationDetail
     {

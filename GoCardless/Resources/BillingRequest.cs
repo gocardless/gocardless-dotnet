@@ -86,7 +86,9 @@ namespace GoCardless.Resources
         /// <summary>
         /// Specifies the high-level purpose of a mandate and/or payment using a
         /// set of pre-defined categories. Required for the PayTo scheme,
-        /// optional for all others.
+        /// optional for all others. Currently `mortgage`, `utility`, `loan`,
+        /// `dependant_support`, `gambling`, `retail`, `salary`, `personal`,
+        /// `government`, `pension`, `tax` and `other` are supported.
         /// </summary>
         [JsonProperty("purpose_code")]
         public BillingRequestPurposeCode? PurposeCode { get; set; }
@@ -276,6 +278,27 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("default_country_code")]
         public string DefaultCountryCode { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("incomplete_fields")]
+        public BillingRequestActionCollectCustomerDetailsIncompleteFields IncompleteFields { get; set; }
+    }
+    
+    public class BillingRequestActionCollectCustomerDetailsIncompleteFields
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("customer")]
+        public List<string> Customer { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("customer_billing_detail")]
+        public List<string> CustomerBillingDetail { get; set; }
     }
     
     /// <summary>
@@ -545,7 +568,7 @@ namespace GoCardless.Resources
         /// will be considered open and
         /// will not have an end date. Keep in mind the end date must take into
         /// account how long it will
-        /// take the user to set up this agreement via the BillingRequest.
+        /// take the user to set up this agreement via the Billing Request.
         /// 
         /// </summary>
         [JsonProperty("end_date")]
@@ -803,7 +826,9 @@ namespace GoCardless.Resources
     
     /// <summary>
     /// Specifies the high-level purpose of a mandate and/or payment using a set of pre-defined
-    /// categories. Required for the PayTo scheme, optional for all others.
+    /// categories. Required for the PayTo scheme, optional for all others. Currently `mortgage`,
+    /// `utility`, `loan`, `dependant_support`, `gambling`, `retail`, `salary`, `personal`,
+    /// `government`, `pension`, `tax` and `other` are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestPurposeCode {

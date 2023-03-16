@@ -275,6 +275,9 @@ namespace GoCardless.Services
         /// Notifies the customer linked to the billing request, asking them to
         /// authorise it.
         /// Currently, the customer can only be notified by email.
+        /// 
+        /// This endpoint is currently supported only for Instant Bank Pay
+        /// Billing Requests.
         /// </summary>  
         /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
         /// <param name="request">An optional `BillingRequestNotifyRequest` representing the body for this notify request.</param>
@@ -338,6 +341,26 @@ namespace GoCardless.Services
             };
 
             return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/choose_currency", urlParams, request, null, "data", customiseRequestMessage);
+        }
+
+        /// <summary>
+        /// Creates an Institution object and attaches it to the Billing Request
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="request">An optional `BillingRequestSelectInstitutionRequest` representing the body for this select_institution request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single billing request resource</returns>
+        public Task<BillingRequestResponse> SelectInstitutionAsync(string identity, BillingRequestSelectInstitutionRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new BillingRequestSelectInstitutionRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<BillingRequestResponse>("POST", "/billing_requests/:identity/actions/select_institution", urlParams, request, null, "data", customiseRequestMessage);
         }
     }
 
@@ -469,7 +492,7 @@ namespace GoCardless.Services
             /// agreement will be considered open and
             /// will not have an end date. Keep in mind the end date must take
             /// into account how long it will
-            /// take the user to set up this agreement via the BillingRequest.
+            /// take the user to set up this agreement via the Billing Request.
             /// 
                 /// </summary>
                 [JsonProperty("end_date")]
@@ -779,7 +802,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Specifies the high-level purpose of a mandate and/or payment using a
         /// set of pre-defined categories. Required for the PayTo scheme,
-        /// optional for all others.
+        /// optional for all others. Currently `mortgage`, `utility`, `loan`,
+        /// `dependant_support`, `gambling`, `retail`, `salary`, `personal`,
+        /// `government`, `pension`, `tax` and `other` are supported.
         /// </summary>
         [JsonProperty("purpose_code")]
         public BillingRequestPurposeCode? PurposeCode { get; set; }
@@ -787,7 +812,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Specifies the high-level purpose of a mandate and/or payment using a
         /// set of pre-defined categories. Required for the PayTo scheme,
-        /// optional for all others.
+        /// optional for all others. Currently `mortgage`, `utility`, `loan`,
+        /// `dependant_support`, `gambling`, `retail`, `salary`, `personal`,
+        /// `government`, `pension`, `tax` and `other` are supported.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BillingRequestPurposeCode
@@ -1320,6 +1347,9 @@ namespace GoCardless.Services
     /// Notifies the customer linked to the billing request, asking them to
     /// authorise it.
     /// Currently, the customer can only be notified by email.
+    /// 
+    /// This endpoint is currently supported only for Instant Bank Pay Billing
+    /// Requests.
     /// </summary>
     public class BillingRequestNotifyRequest
     {
@@ -1386,6 +1416,28 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<String, String> Metadata { get; set; }
+    }
+
+        
+    /// <summary>
+    /// Creates an Institution object and attaches it to the Billing Request
+    /// </summary>
+    public class BillingRequestSelectInstitutionRequest
+    {
+
+        /// <summary>
+        /// [ISO
+        /// 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+        /// alpha-2 code. The country code of the institution.
+        /// </summary>
+        [JsonProperty("country_code")]
+        public string CountryCode { get; set; }
+
+        /// <summary>
+        /// The unique identifier for this institution
+        /// </summary>
+        [JsonProperty("institution")]
+        public string Institution { get; set; }
     }
 
     /// <summary>
