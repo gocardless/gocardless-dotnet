@@ -39,6 +39,13 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a list of supported institutions.
+        /// 
+        /// <p class="deprecated-notice"><strong>Deprecated</strong>: This list
+        /// institutions endpoint
+        /// is no longer supported. We strongly recommend using the
+        /// [List Institutions For Billing
+        /// Request](#institutions-list-institutions-for-billing-request)
+        /// instead.</p>
         /// </summary>
         /// <param name="request">An optional `InstitutionListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -79,6 +86,13 @@ namespace GoCardless.Services
         
     /// <summary>
     /// Returns a list of supported institutions.
+    /// 
+    /// <p class="deprecated-notice"><strong>Deprecated</strong>: This list
+    /// institutions endpoint
+    /// is no longer supported. We strongly recommend using the
+    /// [List Institutions For Billing
+    /// Request](#institutions-list-institutions-for-billing-request)
+    /// instead.</p>
     /// </summary>
     public class InstitutionListRequest
     {
