@@ -87,27 +87,6 @@ namespace GoCardless.Services
     {
 
         /// <summary>
-        /// Type of authorisation, can be either 'mandate' or 'payment'.
-        /// </summary>
-        [JsonProperty("authorisation_type")]
-        public string AuthorisationType { get; set; }
-            
-        /// <summary>
-        /// Type of authorisation, can be either 'mandate' or 'payment'.
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum BankAuthorisationAuthorisationType
-        {
-    
-            /// <summary>`authorisation_type` with a value of "mandate"</summary>
-            [EnumMember(Value = "mandate")]
-            Mandate,
-            /// <summary>`authorisation_type` with a value of "payment"</summary>
-            [EnumMember(Value = "payment")]
-            Payment,
-        }
-
-        /// <summary>
         /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
