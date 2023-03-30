@@ -33,13 +33,6 @@ namespace GoCardless.Resources
         public List<BillingRequestAction> Actions { get; set; }
 
         /// <summary>
-        /// Should the billing request be fulfilled as soon as it's ready (true
-        /// by default)
-        /// </summary>
-        [JsonProperty("auto_fulfil")]
-        public bool? AutoFulfil { get; set; }
-
-        /// <summary>
         /// Fixed [timestamp](#api-usage-time-zones--dates), recording when this
         /// resource was created.
         /// </summary>
