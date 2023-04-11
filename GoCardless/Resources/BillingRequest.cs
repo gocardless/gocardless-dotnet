@@ -211,13 +211,6 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("authorisation_type")]
         public string AuthorisationType { get; set; }
-
-        /// <summary>
-        /// Whether an institution is a required field when creating this bank
-        /// authorisation
-        /// </summary>
-        [JsonProperty("requires_institution")]
-        public bool? RequiresInstitution { get; set; }
     }
     
     /// <summary>
