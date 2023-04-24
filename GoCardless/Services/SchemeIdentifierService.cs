@@ -296,6 +296,12 @@ namespace GoCardless.Services
         public string Before { get; set; }
 
         /// <summary>
+        /// Unique identifier, beginning with "CR".
+        /// </summary>
+        [JsonProperty("creditor")]
+        public string Creditor { get; set; }
+
+        /// <summary>
         /// Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
