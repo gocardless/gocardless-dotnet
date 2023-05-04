@@ -46,7 +46,7 @@ namespace GoCardless.Resources
         /// used.
         /// 
         /// See [Billing Requests: Retain customers with
-        /// Fallbacks](https://developer.gocardless.com/getting-started/billing-requests/retain-customers-with-fallbacks/)
+        /// Fallbacks](https://developer.gocardless.com/billing-requests/retain-customers-with-fallbacks/)
         /// for more information.
         /// </summary>
         [JsonProperty("fallback_enabled")]
