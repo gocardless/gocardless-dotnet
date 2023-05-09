@@ -40,8 +40,21 @@ namespace GoCardless.Resources
         public string AddressLine3 { get; set; }
 
         /// <summary>
+        /// Prefix for the bank reference of payouts sent to this creditor. For
+        /// instance, if
+        /// the creditor's `bank_reference_prefix` was `ACME`, the bank
+        /// reference of a payout
+        /// sent to that creditor could be `ACME-8G7Q8`.
+        /// 
+        /// This prefix is also used for refunds in EUR and GBP.
+        /// 
+        /// </summary>
+        [JsonProperty("bank_reference_prefix")]
+        public string BankReferencePrefix { get; set; }
+
+        /// <summary>
         /// Boolean indicating whether the creditor is permitted to create
-        /// refunds
+        /// refunds.
         /// </summary>
         [JsonProperty("can_create_refunds")]
         public bool? CanCreateRefunds { get; set; }
