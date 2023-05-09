@@ -104,6 +104,11 @@ namespace GoCardless
         public MandatePdfService MandatePdfs => new MandatePdfService(this);
 
         /// <summary>
+        ///A service for working with negative balance limit resources.
+        /// </summary>
+        public NegativeBalanceLimitService NegativeBalanceLimits => new NegativeBalanceLimitService(this);
+
+        /// <summary>
         ///A service for working with payer authorisation resources.
         /// </summary>
         public PayerAuthorisationService PayerAuthorisations => new PayerAuthorisationService(this);
