@@ -209,6 +209,26 @@ namespace GoCardless.Services
     {
 
         /// <summary>
+        /// Linked resources.
+        /// </summary>
+        [JsonProperty("links")]
+        public SchemeIdentifierLinks Links { get; set; }
+        /// <summary>
+        /// Linked resources for a SchemeIdentifier.
+        /// </summary>
+        public class SchemeIdentifierLinks
+        {
+                
+                /// <summary>
+                            /// <em>required</em> ID of the associated
+            /// [creditor](#core-endpoints-creditors).
+            /// 
+                /// </summary>
+                [JsonProperty("creditor")]
+                public string Creditor { get; set; }
+        }
+
+        /// <summary>
         /// The name which appears on customers' bank statements. This should
         /// usually be the merchant's trading name.
         /// </summary>
