@@ -149,42 +149,6 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<CreditorResponse>("PUT", "/creditors/:identity", urlParams, request, null, "creditors", customiseRequestMessage);
         }
-
-        /// <summary>
-        /// Applies a [scheme identifier](#core-endpoints-scheme-identifiers) to
-        /// a creditor.
-        /// 
-        /// If the scheme identifier has a `pending` status, it will be applied
-        /// asynchronously
-        /// once it becomes `active`.
-        /// 
-        /// If the creditor already has a scheme identifier for the scheme, it
-        /// will be replaced,
-        /// and any mandates attached to it transferred asynchronously. On Bacs
-        /// and SEPA, if
-        /// payments were about to be submitted, they will be delayed. To
-        /// minimise this delay, we
-        /// recommend that you apply the new scheme identifier after the daily
-        /// payment submission
-        /// time (4 PM Europe/London time).
-        /// 
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "CR".</param> 
-        /// <param name="request">An optional `CreditorApplySchemeIdentifierRequest` representing the body for this apply_scheme_identifier request.</param>
-        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
-        /// <returns>A single creditor resource</returns>
-        public Task<CreditorResponse> ApplySchemeIdentifierAsync(string identity, CreditorApplySchemeIdentifierRequest request = null, RequestSettings customiseRequestMessage = null)
-        {
-            request = request ?? new CreditorApplySchemeIdentifierRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
-
-            var urlParams = new List<KeyValuePair<string, object>>
-            {
-                new KeyValuePair<string, object>("identity", identity),
-            };
-
-            return _goCardlessClient.ExecuteAsync<CreditorResponse>("POST", "/creditors/:identity/actions/apply_scheme_identifier", urlParams, request, null, "data", customiseRequestMessage);
-        }
     }
 
         
@@ -475,48 +439,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("region")]
         public string Region { get; set; }
-    }
-
-        
-    /// <summary>
-    /// Applies a [scheme identifier](#core-endpoints-scheme-identifiers) to a
-    /// creditor.
-    /// 
-    /// If the scheme identifier has a `pending` status, it will be applied
-    /// asynchronously
-    /// once it becomes `active`.
-    /// 
-    /// If the creditor already has a scheme identifier for the scheme, it will
-    /// be replaced,
-    /// and any mandates attached to it transferred asynchronously. On Bacs and
-    /// SEPA, if
-    /// payments were about to be submitted, they will be delayed. To minimise
-    /// this delay, we
-    /// recommend that you apply the new scheme identifier after the daily
-    /// payment submission
-    /// time (4 PM Europe/London time).
-    /// 
-    /// </summary>
-    public class CreditorApplySchemeIdentifierRequest
-    {
-
-        /// <summary>
-        /// The ID of the scheme identifier to apply
-        /// </summary>
-        [JsonProperty("links")]
-        public CreditorLinks Links { get; set; }
-        /// <summary>
-        /// Linked resources for a Creditor.
-        /// </summary>
-        public class CreditorLinks
-        {
-                
-                /// <summary>
-                            /// Unique identifier, usually beginning with "SU".
-                /// </summary>
-                [JsonProperty("scheme_identifier")]
-                public string SchemeIdentifier { get; set; }
-        }
     }
 
     /// <summary>
