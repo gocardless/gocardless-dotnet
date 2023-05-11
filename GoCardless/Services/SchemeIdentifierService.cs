@@ -59,7 +59,7 @@ namespace GoCardless.Services
         /// :-------------------------------------------------- |
         /// | `bacs`            | 18 characters      | `/` `.` `&` `-`          
         ///                           |
-        /// | `sepa_core`       | 70 characters      | `/` `?` `:` `(` `)` `.`
+        /// | `sepa`            | 70 characters      | `/` `?` `:` `(` `)` `.`
         /// `,` `+` `&` `<` `>` `'` `"` |
         /// | `ach`             | 16 characters      | `/` `?` `:` `(` `)` `.`
         /// `,` `'` `+` `-`             |
@@ -189,7 +189,7 @@ namespace GoCardless.Services
     /// :-------------------------------------------------- |
     /// | `bacs`            | 18 characters      | `/` `.` `&` `-`              
     ///                       |
-    /// | `sepa_core`       | 70 characters      | `/` `?` `:` `(` `)` `.` `,`
+    /// | `sepa`            | 70 characters      | `/` `?` `:` `(` `)` `.` `,`
     /// `+` `&` `<` `>` `'` `"` |
     /// | `ach`             | 16 characters      | `/` `?` `:` `(` `)` `.` `,`
     /// `'` `+` `-`             |
@@ -207,6 +207,26 @@ namespace GoCardless.Services
     /// </summary>
     public class SchemeIdentifierCreateRequest : IHasIdempotencyKey
     {
+
+        /// <summary>
+        /// Linked resources.
+        /// </summary>
+        [JsonProperty("links")]
+        public SchemeIdentifierLinks Links { get; set; }
+        /// <summary>
+        /// Linked resources for a SchemeIdentifier.
+        /// </summary>
+        public class SchemeIdentifierLinks
+        {
+                
+                /// <summary>
+                            /// <em>required</em> ID of the associated
+            /// [creditor](#core-endpoints-creditors).
+            /// 
+                /// </summary>
+                [JsonProperty("creditor")]
+                public string Creditor { get; set; }
+        }
 
         /// <summary>
         /// The name which appears on customers' bank statements. This should
@@ -294,6 +314,12 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
+
+        /// <summary>
+        /// Unique identifier, beginning with "CR".
+        /// </summary>
+        [JsonProperty("creditor")]
+        public string Creditor { get; set; }
 
         /// <summary>
         /// Number of records to return.

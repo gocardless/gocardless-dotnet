@@ -21,12 +21,12 @@ namespace GoCardless.Resources
     public class Institution
     {
         /// <summary>
-        /// Flag to show if the institution supports redirection to its
-        /// authorisation flow or if a provider's one is being used. The bank
-        /// authorisation screen on the UI is visible based on this property.
+        /// Flag to show if selecting this institution in the select_institution
+        /// action can auto-complete the collect_bank_account action. The bank
+        /// can return the payer's bank account details to GoCardless.
         /// </summary>
-        [JsonProperty("bank_redirect")]
-        public bool? BankRedirect { get; set; }
+        [JsonProperty("autocompletes_collect_bank_account")]
+        public bool? AutocompletesCollectBankAccount { get; set; }
 
         /// <summary>
         /// [ISO

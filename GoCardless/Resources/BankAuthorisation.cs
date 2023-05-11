@@ -71,6 +71,14 @@ namespace GoCardless.Resources
         public BankAuthorisationLinks Links { get; set; }
 
         /// <summary>
+        /// URL to a QR code PNG image of the bank authorisation url.
+        /// This QR code can be used as an alternative to providing the `url` to
+        /// the payer to allow them to authorise with their mobile devices.
+        /// </summary>
+        [JsonProperty("qr_code_url")]
+        public string QrCodeUrl { get; set; }
+
+        /// <summary>
         /// URL that the payer can be redirected to after authorising the
         /// payment.
         /// 
