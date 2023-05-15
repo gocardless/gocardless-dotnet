@@ -137,6 +137,12 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("jurisdiction")]
         public string Jurisdiction { get; set; }
+
+        /// <summary>
+        /// Number of records to return.
+        /// </summary>
+        [JsonProperty("limit")]
+        public int? Limit { get; set; }
     }
 
         
