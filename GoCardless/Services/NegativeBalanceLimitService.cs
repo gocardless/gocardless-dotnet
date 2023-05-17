@@ -282,12 +282,6 @@ namespace GoCardless.Services
                 [JsonProperty("creditor")]
                 public string Creditor { get; set; }
         }
-
-        /// <summary>
-        /// the reason this limit was created
-        /// </summary>
-        [JsonProperty("reason")]
-        public string Reason { get; set; }
     }
 
     /// <summary>
