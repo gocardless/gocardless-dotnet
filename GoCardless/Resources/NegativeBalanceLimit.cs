@@ -20,12 +20,6 @@ namespace GoCardless.Resources
     public class NegativeBalanceLimit
     {
         /// <summary>
-        /// Whether or not this limit is currently active
-        /// </summary>
-        [JsonProperty("active")]
-        public bool? Active { get; set; }
-
-        /// <summary>
         /// The limit amount in pence (e.g. 10000 for a -100 GBP limit).
         /// </summary>
         [JsonProperty("balance_limit")]
