@@ -51,13 +51,6 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("links")]
         public NegativeBalanceLimitLinks Links { get; set; }
-
-        /// <summary>
-        /// Fixed [timestamp](#api-usage-time-zones--dates), recording when this
-        /// limit was last updated.
-        /// </summary>
-        [JsonProperty("updated_at")]
-        public string UpdatedAt { get; set; }
     }
     
     /// <summary>
