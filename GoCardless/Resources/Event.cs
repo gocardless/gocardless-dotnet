@@ -66,13 +66,26 @@ namespace GoCardless.Resources
         /// <summary>
         /// The metadata that was passed when making the API request that
         /// triggered the event
-        /// (for instance, cancelling a mandate). Note that this field will be
-        /// an empty object,
-        /// unless the event's `details[origin]` is `api`.
+        /// (for instance, cancelling a mandate). 
+        /// 
+        /// This field will only be populated if the `details[origin]` field is
+        /// `api` otherwise it will be an empty object.
         /// 
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
+
+        /// <summary>
+        /// The metadata that was passed when making the API request that
+        /// triggered the event
+        /// (for instance, cancelling a mandate). 
+        /// 
+        /// This field will only be populated if the `details[origin]` field is
+        /// `api` otherwise it will be an empty object.
+        /// 
+        /// </summary>
+        [JsonProperty("resource_metadata")]
+        public IDictionary<string, string> ResourceMetadata { get; set; }
 
         /// <summary>
         /// The resource type for this event. One of:
