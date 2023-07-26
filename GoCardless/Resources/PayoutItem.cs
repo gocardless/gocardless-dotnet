@@ -294,6 +294,9 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "surcharge_fee"</summary>
         [EnumMember(Value = "surcharge_fee")]
         SurchargeFee,
+        /// <summary>`type` with a value of "refund_funds_returned"</summary>
+        [EnumMember(Value = "refund_funds_returned")]
+        RefundFundsReturned,
     }
 
 }
