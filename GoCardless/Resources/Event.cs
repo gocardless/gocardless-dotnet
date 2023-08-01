@@ -66,7 +66,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// The metadata that was passed when making the API request that
         /// triggered the event
-        /// (for instance, cancelling a mandate). 
+        /// (for instance, cancelling a mandate).
         /// 
         /// This field will only be populated if the `details[origin]` field is
         /// `api` otherwise it will be an empty object.
@@ -77,7 +77,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// The metadata of the resource that the event is for. For example,
-        /// this field will have the same 
+        /// this field will have the same
         /// value of the `mandate[metadata]` field on the response you would
         /// receive from performing a GET request on a mandate.
         /// 
