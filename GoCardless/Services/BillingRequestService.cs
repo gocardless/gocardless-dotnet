@@ -499,7 +499,8 @@ namespace GoCardless.Services
                 public string EndDate { get; set; }
                 
                 /// <summary>
-                            /// The maximum amount that can be charged for a single payment
+                            /// The maximum amount that can be charged for a single payment.
+            /// Required for VRP.
                 /// </summary>
                 [JsonProperty("max_amount_per_payment")]
                 public int? MaxAmountPerPayment { get; set; }
@@ -554,15 +555,17 @@ namespace GoCardless.Services
         }
                 
                 /// <summary>
-                            /// The maximum number of payments that can be collected in this
-            /// periodic limit
+                            /// (Optional) The maximum number of payments that can be collected
+            /// in this periodic limit.
                 /// </summary>
                 [JsonProperty("max_payments")]
                 public int? MaxPayments { get; set; }
                 
                 /// <summary>
                             /// The maximum total amount that can be charged for all payments in
-            /// this periodic limit
+            /// this periodic limit.
+            /// Required for VRP.
+            /// 
                 /// </summary>
                 [JsonProperty("max_total_amount")]
                 public int? MaxTotalAmount { get; set; }
