@@ -149,6 +149,25 @@ namespace GoCardless.Resources
         public List<string> CompletesActions { get; set; }
 
         /// <summary>
+        /// Describes whether we inferred the institution from the provided bank
+        /// account details.
+        /// 
+        /// <ul>
+        ///   <li>`not_needed`: we won't attempt to infer the institution as it
+        /// is not needed. Either because it was manually selected or the
+        /// billing request does not support this feature</li>
+        ///   <li>`pending`: we are waiting on the bank details in order to
+        /// infer the institution</li>
+        ///   <li>`failed`: we weren't able to infer the institution</li>
+        ///   <li>`success`: we inferred the institution and added it to the
+        /// resources of a Billing Request</li>
+        /// </ul>
+        /// 
+        /// </summary>
+        [JsonProperty("institution_guess_status")]
+        public string InstitutionGuessStatus { get; set; }
+
+        /// <summary>
         /// Informs you whether the action is required to fulfil the billing
         /// request or not.
         /// </summary>
@@ -294,6 +313,39 @@ namespace GoCardless.Resources
         public List<string> CustomerBillingDetail { get; set; }
     }
     
+    /// <summary>
+    /// Describes whether we inferred the institution from the provided bank account details.
+    /// 
+    /// <ul>
+    ///   <li>`not_needed`: we won't attempt to infer the institution as it is not needed. Either
+    /// because it was manually selected or the billing request does not support this feature</li>
+    ///   <li>`pending`: we are waiting on the bank details in order to infer the institution</li>
+    ///   <li>`failed`: we weren't able to infer the institution</li>
+    ///   <li>`success`: we inferred the institution and added it to the resources of a Billing
+    /// Request</li>
+    /// </ul>
+    /// 
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestActionInstitutionGuessStatus {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`institution_guess_status` with a value of "not_needed"</summary>
+        [EnumMember(Value = "not_needed")]
+        NotNeeded,
+        /// <summary>`institution_guess_status` with a value of "pending"</summary>
+        [EnumMember(Value = "pending")]
+        Pending,
+        /// <summary>`institution_guess_status` with a value of "failed"</summary>
+        [EnumMember(Value = "failed")]
+        Failed,
+        /// <summary>`institution_guess_status` with a value of "success"</summary>
+        [EnumMember(Value = "success")]
+        Success,
+    }
+
     /// <summary>
     /// Status of the action
     /// </summary>
