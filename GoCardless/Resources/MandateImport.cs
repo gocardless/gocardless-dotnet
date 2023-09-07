@@ -70,6 +70,12 @@ namespace GoCardless.Resources
         public string Id { get; set; }
 
         /// <summary>
+        /// Resources linked to this MandateImport.
+        /// </summary>
+        [JsonProperty("links")]
+        public MandateImportLinks Links { get; set; }
+
+        /// <summary>
         /// The scheme of the mandates to be imported.<br>All mandates in a
         /// single mandate
         /// import must be for the same scheme.
@@ -96,6 +102,20 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("status")]
         public MandateImportStatus? Status { get; set; }
+    }
+    
+    /// <summary>
+    /// Represents a mandate import link resource.
+    ///
+    /// Related resources
+    /// </summary>
+    public class MandateImportLinks
+    {
+        /// <summary>
+        /// ID of the associated creditor.
+        /// </summary>
+        [JsonProperty("creditor")]
+        public string Creditor { get; set; }
     }
     
     /// <summary>

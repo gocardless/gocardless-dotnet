@@ -186,6 +186,25 @@ namespace GoCardless.Services
     {
 
         /// <summary>
+        /// Related resources
+        /// </summary>
+        [JsonProperty("links")]
+        public MandateImportLinks Links { get; set; }
+        /// <summary>
+        /// Linked resources for a MandateImport.
+        /// </summary>
+        public class MandateImportLinks
+        {
+                
+                /// <summary>
+                            /// ID of the associated creditor. Only required if your account
+            /// manages multiple creditors.
+                /// </summary>
+                [JsonProperty("creditor")]
+                public string Creditor { get; set; }
+        }
+
+        /// <summary>
         /// A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs",
         /// "becs_nz", "betalingsservice", "faster_payments", "pad", "pay_to"
         /// and "sepa_core" are supported.
