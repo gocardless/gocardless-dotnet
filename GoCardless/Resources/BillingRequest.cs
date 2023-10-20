@@ -449,6 +449,12 @@ namespace GoCardless.Resources
         public string Organisation { get; set; }
 
         /// <summary>
+        /// (Optional) ID of the associated payment provider
+        /// </summary>
+        [JsonProperty("payment_provider")]
+        public string PaymentProvider { get; set; }
+
+        /// <summary>
         /// (Optional) ID of the associated payment request
         /// </summary>
         [JsonProperty("payment_request")]
