@@ -105,6 +105,13 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
+
+        /// <summary>
+        /// Verification status of the Bank Account. Can be one of `pending`,
+        /// `in_review` or `successful`
+        /// </summary>
+        [JsonProperty("verification_status")]
+        public CreditorBankAccountVerificationStatus? VerificationStatus { get; set; }
     }
     
     /// <summary>
@@ -139,4 +146,28 @@ namespace GoCardless.Resources
         public string Creditor { get; set; }
     }
     
+    /// <summary>
+    /// Verification status of the Bank Account. Can be one of `pending`, `in_review` or
+    /// `successful`
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum CreditorBankAccountVerificationStatus {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`verification_status` with a value of "pending"</summary>
+        [EnumMember(Value = "pending")]
+        Pending,
+        /// <summary>`verification_status` with a value of "in_review"</summary>
+        [EnumMember(Value = "in_review")]
+        InReview,
+        /// <summary>`verification_status` with a value of "successful"</summary>
+        [EnumMember(Value = "successful")]
+        Successful,
+        /// <summary>`verification_status` with a value of "could_not_verify"</summary>
+        [EnumMember(Value = "could_not_verify")]
+        CouldNotVerify,
+    }
+
 }

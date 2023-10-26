@@ -92,9 +92,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Creates a new negative balance limit, which also deactivates the
-        /// existing limit (if present) for that currency and creditor
-        /// combination.
+        /// Creates a new negative balance limit, which replaces the existing
+        /// limit (if present) for that currency and creditor combination.
+        /// 
         /// </summary>
         /// <param name="request">An optional `NegativeBalanceLimitCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -117,27 +117,6 @@ namespace GoCardless.Services
     /// </summary>
     public class NegativeBalanceLimitListRequest
     {
-
-        /// <summary>
-        /// Whether or not this limit is currently active
-        /// </summary>
-        [JsonProperty("active")]
-        public NegativeBalanceLimitActive? Active { get; set; }
-            
-        /// <summary>
-        /// Whether or not this limit is currently active
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum NegativeBalanceLimitActive
-        {
-    
-            /// <summary>`active` with a value of "true"</summary>
-            [EnumMember(Value = "true")]
-            True,
-            /// <summary>`active` with a value of "false"</summary>
-            [EnumMember(Value = "false")]
-            False,
-        }
 
         /// <summary>
         /// Cursor pointing to the start of the desired set.
@@ -209,8 +188,9 @@ namespace GoCardless.Services
 
         
     /// <summary>
-    /// Creates a new negative balance limit, which also deactivates the
-    /// existing limit (if present) for that currency and creditor combination.
+    /// Creates a new negative balance limit, which replaces the existing limit
+    /// (if present) for that currency and creditor combination.
+    /// 
     /// </summary>
     public class NegativeBalanceLimitCreateRequest
     {
@@ -282,12 +262,6 @@ namespace GoCardless.Services
                 [JsonProperty("creditor")]
                 public string Creditor { get; set; }
         }
-
-        /// <summary>
-        /// the reason this limit was created
-        /// </summary>
-        [JsonProperty("reason")]
-        public string Reason { get; set; }
     }
 
     /// <summary>

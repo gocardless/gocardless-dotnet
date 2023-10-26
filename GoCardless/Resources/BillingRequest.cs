@@ -149,6 +149,22 @@ namespace GoCardless.Resources
         public List<string> CompletesActions { get; set; }
 
         /// <summary>
+        /// Describes whether we inferred the institution from the provided bank
+        /// account details. One of:
+        /// - `not_needed`: we won't attempt to infer the institution as it is
+        /// not needed. Either because it was manually selected or the billing
+        /// request does not support this feature
+        /// - `pending`: we are waiting on the bank details in order to infer
+        /// the institution
+        /// - `failed`: we weren't able to infer the institution
+        /// - `success`: we inferred the institution and added it to the
+        /// resources of a Billing Request
+        /// 
+        /// </summary>
+        [JsonProperty("institution_guess_status")]
+        public string InstitutionGuessStatus { get; set; }
+
+        /// <summary>
         /// Informs you whether the action is required to fulfil the billing
         /// request or not.
         /// </summary>
@@ -295,6 +311,36 @@ namespace GoCardless.Resources
     }
     
     /// <summary>
+    /// Describes whether we inferred the institution from the provided bank account details. One
+    /// of:
+    /// - `not_needed`: we won't attempt to infer the institution as it is not needed. Either
+    /// because it was manually selected or the billing request does not support this feature
+    /// - `pending`: we are waiting on the bank details in order to infer the institution
+    /// - `failed`: we weren't able to infer the institution
+    /// - `success`: we inferred the institution and added it to the resources of a Billing Request
+    /// 
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestActionInstitutionGuessStatus {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`institution_guess_status` with a value of "not_needed"</summary>
+        [EnumMember(Value = "not_needed")]
+        NotNeeded,
+        /// <summary>`institution_guess_status` with a value of "pending"</summary>
+        [EnumMember(Value = "pending")]
+        Pending,
+        /// <summary>`institution_guess_status` with a value of "failed"</summary>
+        [EnumMember(Value = "failed")]
+        Failed,
+        /// <summary>`institution_guess_status` with a value of "success"</summary>
+        [EnumMember(Value = "success")]
+        Success,
+    }
+
+    /// <summary>
     /// Status of the action
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
@@ -401,6 +447,12 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("organisation")]
         public string Organisation { get; set; }
+
+        /// <summary>
+        /// (Optional) ID of the associated payment provider
+        /// </summary>
+        [JsonProperty("payment_provider")]
+        public string PaymentProvider { get; set; }
 
         /// <summary>
         /// (Optional) ID of the associated payment request
@@ -568,7 +620,8 @@ namespace GoCardless.Resources
         public string EndDate { get; set; }
 
         /// <summary>
-        /// The maximum amount that can be charged for a single payment
+        /// The maximum amount that can be charged for a single payment.
+        /// Required for VRP.
         /// </summary>
         [JsonProperty("max_amount_per_payment")]
         public int? MaxAmountPerPayment { get; set; }
@@ -612,15 +665,17 @@ namespace GoCardless.Resources
         public BillingRequestMandateRequestConstraintPeriodicLimitAlignment? Alignment { get; set; }
 
         /// <summary>
-        /// The maximum number of payments that can be collected in this
-        /// periodic limit
+        /// (Optional) The maximum number of payments that can be collected in
+        /// this periodic limit.
         /// </summary>
         [JsonProperty("max_payments")]
         public int? MaxPayments { get; set; }
 
         /// <summary>
         /// The maximum total amount that can be charged for all payments in
-        /// this periodic limit
+        /// this periodic limit.
+        /// Required for VRP.
+        /// 
         /// </summary>
         [JsonProperty("max_total_amount")]
         public int? MaxTotalAmount { get; set; }

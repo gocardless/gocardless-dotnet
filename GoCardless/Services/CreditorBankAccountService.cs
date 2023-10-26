@@ -357,15 +357,15 @@ namespace GoCardless.Services
         public string Creditor { get; set; }
 
         /// <summary>
-        /// Boolean value showing whether the bank account is enabled or
-        /// disabled
+        /// If `true`, only return enabled bank accounts. If `false`, only
+        /// return disabled bank accounts.
         /// </summary>
         [JsonProperty("enabled")]
         public bool? Enabled { get; set; }
             
         /// <summary>
-        /// Boolean value showing whether the bank account is enabled or
-        /// disabled
+        /// If `true`, only return enabled bank accounts. If `false`, only
+        /// return disabled bank accounts.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CreditorBankAccountEnabled
