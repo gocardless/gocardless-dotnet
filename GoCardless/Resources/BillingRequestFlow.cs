@@ -39,6 +39,12 @@ namespace GoCardless.Resources
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
+        /// Identifies whether a Billing Request belongs to a specific customer
+        /// </summary>
+        [JsonProperty("customer_details_captured")]
+        public bool? CustomerDetailsCaptured { get; set; }
+
+        /// <summary>
         /// URL that the payer can be taken to if there isn't a way to progress
         /// ahead in flow.
         /// </summary>
