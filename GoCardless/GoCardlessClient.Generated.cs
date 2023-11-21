@@ -159,6 +159,11 @@ namespace GoCardless
         public TaxRateService TaxRates => new TaxRateService(this);
 
         /// <summary>
+        ///A service for working with transferred mandate resources.
+        /// </summary>
+        public TransferredMandateService TransferredMandates => new TransferredMandateService(this);
+
+        /// <summary>
         ///A service for working with verification detail resources.
         /// </summary>
         public VerificationDetailService VerificationDetails => new VerificationDetailService(this);
