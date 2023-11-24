@@ -16,28 +16,32 @@ namespace GoCardless.Resources
     public class TransferredMandate
     {
         /// <summary>
-        /// Encrypted bank account details
+        /// Encrypted customer bank account details, containing:
+        /// `iban`, `account_holder_name`, `swift_bank_code`,
+        /// `swift_branch_code`, `swift_account_number`
         /// </summary>
-        [JsonProperty("encrypted_data")]
-        public string EncryptedData { get; set; }
+        [JsonProperty("encrypted_customer_bank_details")]
+        public string EncryptedCustomerBankDetails { get; set; }
 
         /// <summary>
-        /// Encrypted AES key
+        /// Random AES-256 key used to encrypt bank account details, itself
+        /// encrypted with your public key.
         /// </summary>
-        [JsonProperty("key")]
-        public string Key { get; set; }
-
-        /// <summary>
-        /// Public key id used to encrypt AES key
-        /// </summary>
-        [JsonProperty("kid")]
-        public string Kid { get; set; }
+        [JsonProperty("encrypted_decryption_key")]
+        public string EncryptedDecryptionKey { get; set; }
 
         /// <summary>
         /// Resources linked to this TransferredMandate.
         /// </summary>
         [JsonProperty("links")]
         public TransferredMandateLinks Links { get; set; }
+
+        /// <summary>
+        /// The ID of an RSA-2048 public key, from your JWKS, used to encrypt
+        /// the AES key.
+        /// </summary>
+        [JsonProperty("public_key_id")]
+        public string PublicKeyId { get; set; }
     }
     
     /// <summary>

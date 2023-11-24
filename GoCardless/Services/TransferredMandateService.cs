@@ -33,7 +33,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns encrypted bank details for the transferred mandate
+        /// Returns new customer bank details for a mandate that's been recently
+        /// transferred
         /// </summary>  
         /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may
         /// not apply to mandates created before 2016.</param> 
@@ -50,23 +51,17 @@ namespace GoCardless.Services
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<TransferredMandateResponse>("GET", "/transferred_mandate/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<TransferredMandateResponse>("GET", "/transferred_mandates/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
     }
 
         
     /// <summary>
-    /// Returns encrypted bank details for the transferred mandate
+    /// Returns new customer bank details for a mandate that's been recently
+    /// transferred
     /// </summary>
     public class TransferredMandateTransferredMandatesRequest
     {
-
-        /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
-        /// </summary>
-        [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
     }
 
     /// <summary>
