@@ -102,6 +102,10 @@ namespace GoCardless.Services
         /// creating
         /// and attaching it.
         /// 
+        /// If the scheme is PayTo and the pay_id is available, this can be
+        /// included in the payload along with the
+        /// country_code.
+        /// 
         /// _ACH scheme_ For compliance reasons, an extra validation step is
         /// done using
         /// a third-party provider to make sure the customer's bank account can
@@ -1054,6 +1058,10 @@ namespace GoCardless.Services
     /// the bank account is valid for the billing request scheme before creating
     /// and attaching it.
     /// 
+    /// If the scheme is PayTo and the pay_id is available, this can be included
+    /// in the payload along with the
+    /// country_code.
+    /// 
     /// _ACH scheme_ For compliance reasons, an extra validation step is done
     /// using
     /// a third-party provider to make sure the customer's bank account can
@@ -1164,6 +1172,13 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<String, String> Metadata { get; set; }
+
+        /// <summary>
+        /// A unique record such as an email address, mobile number or company
+        /// number, that can be used to make and accept payments.
+        /// </summary>
+        [JsonProperty("pay_id")]
+        public string PayId { get; set; }
     }
 
         

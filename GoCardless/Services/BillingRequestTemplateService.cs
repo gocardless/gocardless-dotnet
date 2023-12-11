@@ -16,7 +16,21 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with billing request template resources.
     ///
-    /// Billing Request Templates
+    /// Billing Request Templates are reusable templates that result in 
+    /// numerous Billing Requests with similar attributes. They provide 
+    /// a no-code solution for generating various types of multi-user payment
+    /// links. 
+    /// 
+    /// Each template includes a reusable URL that can be embedded in a website 
+    /// or shared with customers via email. Every time the URL is opened, 
+    /// it generates a new Billing Request.
+    /// 
+    /// Billing Request Templates overcome the key limitation of the Billing
+    /// Request: 
+    /// a Billing Request cannot be shared among multiple users because it is
+    /// intended
+    /// for single-use and is designed to cater to the unique needs of
+    /// individual customers.
     /// </summary>
 
     public class BillingRequestTemplateService
