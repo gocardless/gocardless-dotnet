@@ -90,6 +90,18 @@ namespace GoCardless.Resources
         public string NextPossibleChargeDate { get; set; }
 
         /// <summary>
+        /// If this is an an ACH mandate, the earliest date that can be used as
+        /// a
+        /// `charge_date` on any newly created payment to be charged through
+        /// standard
+        /// ACH, rather than Faster ACH. This value will change over time.
+        /// 
+        /// It is only present in the API response for ACH mandates.
+        /// </summary>
+        [JsonProperty("next_possible_standard_ach_charge_date")]
+        public string NextPossibleStandardAchChargeDate { get; set; }
+
+        /// <summary>
         /// Boolean value showing whether payments and subscriptions under this
         /// mandate require approval via an automated email before being
         /// processed.

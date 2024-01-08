@@ -70,6 +70,16 @@ namespace GoCardless.Resources
         public string Description { get; set; }
 
         /// <summary>
+        /// This field indicates whether the ACH payment is processed through
+        /// Faster
+        /// ACH or standard ACH.
+        /// 
+        /// It is only present in the API response for ACH payments.
+        /// </summary>
+        [JsonProperty("faster_ach")]
+        public bool? FasterAch { get; set; }
+
+        /// <summary>
         /// 
         /// </summary>
         [JsonProperty("fx")]
