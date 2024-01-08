@@ -37,6 +37,11 @@ namespace GoCardless.Services
         /// check and
         /// reachability check are performed.
         /// 
+        /// In case an account holder name is provided (and an account number, a
+        /// sort code or an iban
+        /// are already present) an account holder name verification will also
+        /// be performed.
+        /// 
         /// If your request returns an [error](#api-usage-errors) or the
         /// `available_debit_schemes`
         /// attribute is an empty array, you will not be able to collect
@@ -83,6 +88,11 @@ namespace GoCardless.Services
     /// and
     /// reachability check are performed.
     /// 
+    /// In case an account holder name is provided (and an account number, a
+    /// sort code or an iban
+    /// are already present) an account holder name verification will also be
+    /// performed.
+    /// 
     /// If your request returns an [error](#api-usage-errors) or the
     /// `available_debit_schemes`
     /// attribute is an empty array, you will not be able to collect payments
@@ -110,6 +120,14 @@ namespace GoCardless.Services
     /// </summary>
     public class BankDetailsLookupCreateRequest
     {
+
+        /// <summary>
+        /// The account holder name associated with the account number (if
+        /// available). If provided and the country code is GB, a payer name
+        /// verification will be performed.
+        /// </summary>
+        [JsonProperty("account_holder_name")]
+        public string AccountHolderName { get; set; }
 
         /// <summary>
         /// Bank account number - see [local
