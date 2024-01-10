@@ -303,6 +303,17 @@ namespace GoCardless.Services
         public string Description { get; set; }
 
         /// <summary>
+        /// Set this to true or false in the request to create an ACH payment to
+        /// explicitly choose whether the payment should be processed through
+        /// Faster
+        /// ACH or standard ACH, rather than relying on the presence or absence
+        /// of the
+        /// charge date to indicate that.
+        /// </summary>
+        [JsonProperty("faster_ach")]
+        public bool? FasterAch { get; set; }
+
+        /// <summary>
         /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
