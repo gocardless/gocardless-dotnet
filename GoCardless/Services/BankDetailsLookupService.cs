@@ -122,14 +122,6 @@ namespace GoCardless.Services
     {
 
         /// <summary>
-        /// The account holder name associated with the account number (if
-        /// available). If provided and the country code is GB, a payer name
-        /// verification will be performed.
-        /// </summary>
-        [JsonProperty("account_holder_name")]
-        public string AccountHolderName { get; set; }
-
-        /// <summary>
         /// Bank account number - see [local
         /// details](#appendix-local-bank-details) for more information.
         /// Alternatively you can provide an `iban`.
