@@ -527,6 +527,17 @@ namespace GoCardless.Resources
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
+        /// This attribute can be set to true if the payer has indicated that
+        /// multiple signatures are required for the mandate. As long as every
+        /// other Billing Request actions have been completed, the payer will
+        /// receive an email notification containing instructions on how to
+        /// complete the additional signature. The dual signature flow can only
+        /// be completed using GoCardless branded pages.
+        /// </summary>
+        [JsonProperty("payer_requested_dual_signature")]
+        public bool? PayerRequestedDualSignature { get; set; }
+
+        /// <summary>
         /// A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs",
         /// "becs_nz", "betalingsservice", "faster_payments", "pad", "pay_to"
         /// and "sepa_core" are supported. Optional for mandate only requests -

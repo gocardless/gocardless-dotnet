@@ -401,6 +401,24 @@ namespace GoCardless.Services
                 public string MandateImport { get; set; }
         }
 
+        [JsonProperty("mandate")]
+        public MandateImportEntryMandate Mandate { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public class MandateImportEntryMandate
+        {
+                
+                /// <summary>
+                            /// Unique reference. Different schemes have different length and
+            /// [character set](#appendix-character-sets) requirements.
+            /// GoCardless will generate a unique reference satisfying the
+            /// different scheme requirements if this field is left blank.
+                /// </summary>
+                [JsonProperty("reference")]
+                public string Reference { get; set; }
+        }
+
         /// <summary>
         /// A unique identifier for this entry, which you can use (once the
         /// import has been
