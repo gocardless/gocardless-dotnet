@@ -115,6 +115,12 @@ namespace GoCardless.Services
         /// customer is requested to adjust the account number/routing number
         /// and
         /// succeed in this check to continue with the flow.
+        /// 
+        /// _BACS scheme_ [Payer Name
+        /// Verification](https://hub.gocardless.com/s/article/Introduction-to-Payer-Name-Verification?language=en_GB)
+        /// is enabled by default for UK based bank accounts, meaning we verify
+        /// the account holder name and bank account
+        /// number match the details held by the relevant bank.
         /// </summary>  
         /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
         /// <param name="request">An optional `BillingRequestCollectBankAccountRequest` representing the body for this collect_bank_account request.</param>
@@ -787,6 +793,42 @@ namespace GoCardless.Services
                 public string Description { get; set; }
                 
                 /// <summary>
+                            /// This field will decide how GoCardless handles settlement of
+            /// funds from the customer.
+            /// 
+            /// - `managed` will be moved through GoCardless' account, batched,
+            /// and payed out.
+            /// - `direct` will be a direct transfer from the payer's account to
+            /// the merchant where
+            ///   invoicing will be handled separately.
+            /// 
+                /// </summary>
+                [JsonProperty("funds_settlement")]
+                public BillingRequestFundsSettlement? FundsSettlement { get; set; }
+        /// <summary>
+        /// This field will decide how GoCardless handles settlement of funds
+        /// from the customer.
+        /// 
+        /// - `managed` will be moved through GoCardless' account, batched, and
+        /// payed out.
+        /// - `direct` will be a direct transfer from the payer's account to the
+        /// merchant where
+        ///   invoicing will be handled separately.
+        /// 
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BillingRequestFundsSettlement
+        {
+    
+            /// <summary>`funds_settlement` with a value of "managed"</summary>
+            [EnumMember(Value = "managed")]
+            Managed,
+            /// <summary>`funds_settlement` with a value of "direct"</summary>
+            [EnumMember(Value = "direct")]
+            Direct,
+        }
+                
+                /// <summary>
                             /// Key-value store of custom data. Up to 3 keys are permitted, with
             /// key names up to 50 characters and values up to 500 characters.
                 /// </summary>
@@ -1070,6 +1112,12 @@ namespace GoCardless.Services
     /// the
     /// customer is requested to adjust the account number/routing number and
     /// succeed in this check to continue with the flow.
+    /// 
+    /// _BACS scheme_ [Payer Name
+    /// Verification](https://hub.gocardless.com/s/article/Introduction-to-Payer-Name-Verification?language=en_GB)
+    /// is enabled by default for UK based bank accounts, meaning we verify the
+    /// account holder name and bank account
+    /// number match the details held by the relevant bank.
     /// </summary>
     public class BillingRequestCollectBankAccountRequest
     {
