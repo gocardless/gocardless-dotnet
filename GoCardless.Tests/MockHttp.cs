@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using System.Linq;
 
 namespace GoCardless.Tests
@@ -30,8 +31,8 @@ namespace GoCardless.Tests
         public void AssertRequestMade(string httpMethod, string url, string pathToBodyDocument = null, Action<Tuple<HttpRequestMessage, string>> handle = null)
         {
             var req = _requests.Dequeue();
-            Assert.AreEqual(httpMethod, req.Item1.Method.ToString());
-            Assert.AreEqual(url, req.Item1.RequestUri.PathAndQuery);
+            ClassicAssert.AreEqual(httpMethod, req.Item1.Method.ToString());
+            ClassicAssert.AreEqual(url, req.Item1.RequestUri.PathAndQuery);
             if (pathToBodyDocument != null)
             {
                 var errors = TestHelpers.GetDifferences(JToken.Parse(req.Item2), JToken.Parse(File.ReadAllText(pathToBodyDocument)));

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GoCardless.Resources;
 using GoCardless.Services;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using FluentAssertions;
 
 namespace GoCardless.Tests
@@ -38,11 +39,11 @@ namespace GoCardless.Tests
             var listResponse = await client.Mandates.ListAsync(mandateListRequest);
             TestHelpers.AssertResponseCanSerializeBackToFixture(listResponse, responseFixture);
             var mandates = listResponse.Mandates;
-            Assert.AreEqual(2, mandates.Count);
-            Assert.AreEqual("MD00001PEYCSQF", mandates[0].Id);
-            Assert.AreEqual("CR000035EME9H5", mandates[0].Links.Creditor);
-            Assert.AreEqual("MD00001P57AN84", mandates[1].Id);
-            Assert.AreEqual("CR000035EME9H5", mandates[1].Links.Creditor);
+            ClassicAssert.AreEqual(2, mandates.Count);
+            ClassicAssert.AreEqual("MD00001PEYCSQF", mandates[0].Id);
+            ClassicAssert.AreEqual("CR000035EME9H5", mandates[0].Links.Creditor);
+            ClassicAssert.AreEqual("MD00001P57AN84", mandates[1].Id);
+            ClassicAssert.AreEqual("CR000035EME9H5", mandates[1].Links.Creditor);
             mockHttp.AssertRequestMade("GET",
                 "/mandates?created_at%5Bgt%5D=2017-05-02T11%3A12%3A13.0000000-05%3A00&customer=CU00003068FG73");
         }
@@ -94,8 +95,8 @@ namespace GoCardless.Tests
             var mandates =
                 mandateListResponse.Mandates;
 
-            Assert.AreEqual(mandates.Count, 1);
-            Assert.AreEqual(mandates[0].Id, "MD00001PEYCSQF");
+            ClassicAssert.AreEqual(mandates.Count, 1);
+            ClassicAssert.AreEqual(mandates[0].Id, "MD00001PEYCSQF");
             mockHttp.AssertRequestMade("GET", "/mandates?customer=CU00003068FG73&status=active%2Cfailed");
         }
 
@@ -115,8 +116,8 @@ namespace GoCardless.Tests
             var mandates =
                 mandateListResponse.Mandates;
 
-            Assert.AreEqual(mandates.Count, 1);
-            Assert.AreEqual(mandates[0].Id, "MD00001PEYCSQF");
+            ClassicAssert.AreEqual(mandates.Count, 1);
+            ClassicAssert.AreEqual(mandates[0].Id, "MD00001PEYCSQF");
             mockHttp.AssertRequestMade("GET", "/mandates?after=id%3AMD123&customer=CU00003068FG73&status=active%2Cfailed");
         }
 
@@ -151,9 +152,9 @@ namespace GoCardless.Tests
             mockHttp.EnqueueResponse(200, "fixtures/client/list_mandates_page_2.json");
             var mandates = client.Mandates.All(new MandateListRequest { Limit = 2 }).ToArray();
             mandates.Count().Should().Be(3);
-            Assert.AreEqual(mandates[0].Id, "MD00001PEYCSQF");
-            Assert.AreEqual(mandates[1].Id, "MD00001P57AN84");
-            Assert.AreEqual(mandates[2].Id, "MD00001P1KTRNY");
+            ClassicAssert.AreEqual(mandates[0].Id, "MD00001PEYCSQF");
+            ClassicAssert.AreEqual(mandates[1].Id, "MD00001P57AN84");
+            ClassicAssert.AreEqual(mandates[2].Id, "MD00001P1KTRNY");
             mockHttp.AssertRequestMade("GET", "/mandates?limit=2");
             mockHttp.AssertRequestMade("GET", "/mandates?after=MD00001P57AN84&limit=2");
         }
@@ -165,9 +166,9 @@ namespace GoCardless.Tests
             mockHttp.EnqueueResponse(200, "fixtures/client/list_mandates_page_2.json");
             var mandates = client.Mandates.AllAsync(new MandateListRequest { Limit = 2 }).SelectMany(t => t.Result).ToArray();
             mandates.Count().Should().Be(3);
-            Assert.AreEqual(mandates[0].Id, "MD00001PEYCSQF");
-            Assert.AreEqual(mandates[1].Id, "MD00001P57AN84");
-            Assert.AreEqual(mandates[2].Id, "MD00001P1KTRNY");
+            ClassicAssert.AreEqual(mandates[0].Id, "MD00001PEYCSQF");
+            ClassicAssert.AreEqual(mandates[1].Id, "MD00001P57AN84");
+            ClassicAssert.AreEqual(mandates[2].Id, "MD00001P1KTRNY");
             mockHttp.AssertRequestMade("GET", "/mandates?limit=2");
             mockHttp.AssertRequestMade("GET", "/mandates?after=MD00001P57AN84&limit=2");
         }
@@ -196,7 +197,7 @@ namespace GoCardless.Tests
                 resp => resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative));
             MandateResponse mandateResponse = await client.Mandates.CreateAsync(TestHelpers.CreateMandateCreateRequest());
 
-            Assert.AreEqual(new DateTimeOffset(2017, 06, 19, 17, 01, 06, TimeSpan.FromHours(3)),
+            ClassicAssert.AreEqual(new DateTimeOffset(2017, 06, 19, 17, 01, 06, TimeSpan.FromHours(3)),
                 mandateResponse.Mandate.CreatedAt, "DateTimeOffset not correct");
 
             TestHelpers.AssertResponseCanSerializeBackToFixture(mandateResponse, responseFixture);

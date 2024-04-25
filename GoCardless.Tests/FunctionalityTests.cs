@@ -7,6 +7,7 @@ using FluentAssertions;
 using GoCardless.Internals;
 using GoCardless.Services;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using System.Threading.Tasks;
 using System.Linq;
 
@@ -36,7 +37,7 @@ namespace GoCardless.Tests
             //Then the responseMessage content can be read
             listResponse.ResponseMessage.Should().NotBeNull();
             var content = await listResponse.ResponseMessage.Content.ReadAsStringAsync();
-            Assert.AreEqual(File.ReadAllText("fixtures/client/list_mandates_for_a_customer.json"), content);
+            ClassicAssert.AreEqual(File.ReadAllText("fixtures/client/list_mandates_for_a_customer.json"), content);
         }
 
         [Test]
@@ -48,9 +49,9 @@ namespace GoCardless.Tests
             var mandate = mandateResponse.Mandate;
             http.AssertRequestMade("POST", "/mandates", null, req =>
             {
-                Assert.AreEqual("Bearer access-token", req.Item1.Headers.GetValues("Authorization").Single());
-                Assert.AreEqual("2015-07-06", req.Item1.Headers.GetValues("GoCardless-Version").Single());
-                Assert.AreEqual("gocardless-dotnet", req.Item1.Headers.GetValues("GoCardless-Client-Library").Single());
+                ClassicAssert.AreEqual("Bearer access-token", req.Item1.Headers.GetValues("Authorization").Single());
+                ClassicAssert.AreEqual("2015-07-06", req.Item1.Headers.GetValues("GoCardless-Version").Single());
+                ClassicAssert.AreEqual("gocardless-dotnet", req.Item1.Headers.GetValues("GoCardless-Client-Library").Single());
             });
         }
 
@@ -68,7 +69,7 @@ namespace GoCardless.Tests
             });
 
             //Then an idempotency key should have been set automatically by the client library
-            Assert.NotNull(idempotencyKey);
+            ClassicAssert.NotNull(idempotencyKey);
 
         }
 
@@ -95,7 +96,7 @@ namespace GoCardless.Tests
             });
 
             //Then the modification should have been applied to the request
-            Assert.NotNull(customHeader);
+            ClassicAssert.NotNull(customHeader);
         }
 
         [Test]
@@ -118,11 +119,11 @@ namespace GoCardless.Tests
             http.AssertRequestMade("POST", "/mandates", null, req =>
             {
                 //The brand new header we've set should be there
-                Assert.AreEqual(req.Item1.Headers.GetValues("Accept-Language").Single(), "fr");
+                ClassicAssert.AreEqual(req.Item1.Headers.GetValues("Accept-Language").Single(), "fr");
                 //We should still get the default headers set by the client
-                Assert.NotNull(req.Item1.Headers.GetValues("Authorization").Single());
+                ClassicAssert.NotNull(req.Item1.Headers.GetValues("Authorization").Single());
                 //Headers we set should override the client's default headers
-                Assert.AreEqual(req.Item1.Headers.GetValues("User-Agent").Single(), "Skynet");
+                ClassicAssert.AreEqual(req.Item1.Headers.GetValues("User-Agent").Single(), "Skynet");
             });
         }
 
@@ -151,17 +152,17 @@ namespace GoCardless.Tests
                         //Then the idempotency keys should stay the same on successive retries
                         var newIdempotencyKey = req.Headers.GetValues("Idempotency-Key").Single();
                         firstIdempotencyKey = firstIdempotencyKey ?? newIdempotencyKey;
-                        Assert.NotNull(newIdempotencyKey);
-                        Assert.AreEqual(firstIdempotencyKey, newIdempotencyKey, "Idempotency keys must match on retried requests");
+                        ClassicAssert.NotNull(newIdempotencyKey);
+                        ClassicAssert.AreEqual(firstIdempotencyKey, newIdempotencyKey, "Idempotency keys must match on retried requests");
                     }
                 });
                 //And if there were enough retries to handle the failures the call should succeed
-                Assert.True(response.ResponseMessage.IsSuccessStatusCode);
+                ClassicAssert.True(response.ResponseMessage.IsSuccessStatusCode);
             }
             catch (TaskCanceledException)
             {
                 //And if not the call should have timed out
-                Assert.False(requestShouldSucceed);
+                ClassicAssert.False(requestShouldSucceed);
             }
 
         }
@@ -191,17 +192,17 @@ namespace GoCardless.Tests
                         // Then the idempotency keys should stay the same on successive retries
                         var newIdempotencyKey = req.Headers.GetValues("Idempotency-Key").Single();
                         firstIdempotencyKey = firstIdempotencyKey ?? newIdempotencyKey;
-                        Assert.NotNull(newIdempotencyKey);
-                        Assert.AreEqual(firstIdempotencyKey, newIdempotencyKey, "Idempotency keys must match on retried requests");
+                        ClassicAssert.NotNull(newIdempotencyKey);
+                        ClassicAssert.AreEqual(firstIdempotencyKey, newIdempotencyKey, "Idempotency keys must match on retried requests");
                     }
                 });
                 //And if there were enough retries to handle the failures the call should succeed
-                Assert.True(response.ResponseMessage.IsSuccessStatusCode);
+                ClassicAssert.True(response.ResponseMessage.IsSuccessStatusCode);
             }
             catch (HttpRequestException)
             {
                 //And if not the call should have timed out
-                Assert.False(requestShouldSucceed);
+                ClassicAssert.False(requestShouldSucceed);
             }
 
         }
@@ -234,7 +235,7 @@ namespace GoCardless.Tests
 
             }
 
-            Assert.AreEqual(shouldBeSuccessful, wasSuccessful);
+            ClassicAssert.AreEqual(shouldBeSuccessful, wasSuccessful);
 
         }
 
