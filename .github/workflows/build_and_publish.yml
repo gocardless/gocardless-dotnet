@@ -14,7 +14,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '2.2.x'
+        dotnet-version: '8.0.x'
     - name: Restore
       run: dotnet restore
     - name: Build with dotnet
@@ -37,6 +37,6 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '2.2.x'
+        dotnet-version: '8.0.x'
     - name: Publish the library
       run: dotnet nuget push artifact/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} -n --skip-duplicate
