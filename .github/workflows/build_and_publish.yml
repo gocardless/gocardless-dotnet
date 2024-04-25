@@ -15,7 +15,6 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '2.1.x'
-        include-prerelease: true
     - name: Restore
       run: dotnet restore
     - name: Build with dotnet
@@ -39,6 +38,5 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '2.1.x'
-        include-prerelease: true
     - name: Publish the library
       run: dotnet nuget push artifact/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} -n --skip-duplicate
