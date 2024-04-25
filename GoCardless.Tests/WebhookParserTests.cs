@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using GoCardless.Exceptions;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace GoCardless.Tests
 {
@@ -16,7 +17,7 @@ namespace GoCardless.Tests
         {
             var result = WebhookParser.Parse(body, key, signature);
 
-            Assert.AreEqual(2, result.Count());
+            ClassicAssert.AreEqual(2, result.Count());
         }
 
         [Test]

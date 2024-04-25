@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GoCardless.Resources;
 using GoCardless.Services;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using FluentAssertions;
 
 namespace GoCardless.Tests
@@ -34,12 +35,12 @@ namespace GoCardless.Tests
             TestHelpers.AssertResponseCanSerializeBackToFixture(resp, responseFixture);
 
             GoCardless.Resources.Block block = resp.Block;
-            Assert.AreEqual(block.Id, "BLC456");
-            Assert.AreEqual(block.BlockType, "email");
-            Assert.AreEqual(block.ReasonType, "no_intent_to_pay");
-            Assert.AreEqual(block.ResourceReference, "example@example.com");
-            Assert.AreEqual(block.Active, true);
-            Assert.AreEqual(block.CreatedAt.Value.ToString("o"), "2021-03-25T17:26:28.3050000+00:00");
+            ClassicAssert.AreEqual(block.Id, "BLC456");
+            ClassicAssert.AreEqual(block.BlockType, "email");
+            ClassicAssert.AreEqual(block.ReasonType, "no_intent_to_pay");
+            ClassicAssert.AreEqual(block.ResourceReference, "example@example.com");
+            ClassicAssert.AreEqual(block.Active, true);
+            ClassicAssert.AreEqual(block.CreatedAt.Value.ToString("o"), "2021-03-25T17:26:28.3050000+00:00");
         }
 
         [Test]
@@ -61,14 +62,14 @@ namespace GoCardless.Tests
             resp.Meta.Cursors.After.Should().BeNull();
 
             IReadOnlyList<GoCardless.Resources.Block> blocks = resp.Blocks;
-            Assert.AreEqual(blocks[0].Id, "BLC123");
-            Assert.AreEqual(blocks[0].BlockType, "email");
-            Assert.AreEqual(blocks[0].ReasonType, "no_intent_to_pay");
-            Assert.AreEqual(blocks[0].ResourceReference, "example@example.com");
-            Assert.AreEqual(blocks[1].Id, "BLC456");
-            Assert.AreEqual(blocks[1].BlockType, "bank_account");
-            Assert.AreEqual(blocks[1].ReasonType, "no_intent_to_pay");
-            Assert.AreEqual(blocks[1].ResourceReference, "BA123");
+            ClassicAssert.AreEqual(blocks[0].Id, "BLC123");
+            ClassicAssert.AreEqual(blocks[0].BlockType, "email");
+            ClassicAssert.AreEqual(blocks[0].ReasonType, "no_intent_to_pay");
+            ClassicAssert.AreEqual(blocks[0].ResourceReference, "example@example.com");
+            ClassicAssert.AreEqual(blocks[1].Id, "BLC456");
+            ClassicAssert.AreEqual(blocks[1].BlockType, "bank_account");
+            ClassicAssert.AreEqual(blocks[1].ReasonType, "no_intent_to_pay");
+            ClassicAssert.AreEqual(blocks[1].ResourceReference, "BA123");
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GoCardless.Resources;
 using GoCardless.Services;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using FluentAssertions;
 
 namespace GoCardless.Tests
@@ -47,7 +48,7 @@ namespace GoCardless.Tests
             TestHelpers.AssertResponseCanSerializeBackToFixture(redirectFlowResponse, responseFixture);
 
             var redirectFlow = redirectFlowResponse.RedirectFlow;
-            Assert.AreEqual("http://pay.gocardless.dev/flow/RE123", redirectFlow.RedirectUrl);
+            ClassicAssert.AreEqual("http://pay.gocardless.dev/flow/RE123", redirectFlow.RedirectUrl);
             mockHttp.AssertRequestMade("POST", "/redirect_flows");
         }
     }

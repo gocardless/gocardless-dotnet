@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using GoCardless.Errors;
 using GoCardless.Exceptions;
 
@@ -34,14 +35,14 @@ namespace GoCardless.Tests
             catch (InsufficientPermissionsException ex)
             {
                 TestHelpers.AssertResponseCanSerializeBackToFixture(ex.ApiErrorResponse, responseFixture);
-                Assert.AreEqual(ApiErrorType.INSUFFICIENT_PERMISSIONS, ex.Type);
-                Assert.AreEqual("Insufficient permissions", ex.Message);
-                Assert.AreEqual("Insufficient permissions", ex.Errors.Single().Message);
-                Assert.AreEqual("insufficient_permissions", ex.Errors.Single().Reason);
-                Assert.AreEqual("https://developer.gocardless.com/api-reference#insufficient_permissions",
+                ClassicAssert.AreEqual(ApiErrorType.INSUFFICIENT_PERMISSIONS, ex.Type);
+                ClassicAssert.AreEqual("Insufficient permissions", ex.Message);
+                ClassicAssert.AreEqual("Insufficient permissions", ex.Errors.Single().Message);
+                ClassicAssert.AreEqual("insufficient_permissions", ex.Errors.Single().Reason);
+                ClassicAssert.AreEqual("https://developer.gocardless.com/api-reference#insufficient_permissions",
                     ex.DocumentationUrl);
-                Assert.AreEqual("b0e48853-abcd-41fa-9554-5f71820e915d", ex.RequestId);
-                Assert.AreEqual(403, ex.Code);
+                ClassicAssert.AreEqual("b0e48853-abcd-41fa-9554-5f71820e915d", ex.RequestId);
+                ClassicAssert.AreEqual(403, ex.Code);
                 return;
             }
             Assert.Fail("Exception was not thrown");
@@ -60,15 +61,15 @@ namespace GoCardless.Tests
             catch (ValidationFailedException ex)
             {
                 TestHelpers.AssertResponseCanSerializeBackToFixture(ex.ApiErrorResponse, responseFixture);
-                Assert.AreEqual(ApiErrorType.VALIDATION_FAILED, ex.Type);
-                Assert.AreEqual("Validation failed", ex.Message);
-                Assert.AreEqual("scheme", ex.Errors[0].Field);
-                Assert.AreEqual("must be one of bacs, sepa_core, autogiro", ex.Errors[0].Message);
-                Assert.AreEqual("/mandates/scheme", ex.Errors[0].RequestPointer);
-                Assert.AreEqual("https://developer.gocardless.com/api-reference#validation_failed",
+                ClassicAssert.AreEqual(ApiErrorType.VALIDATION_FAILED, ex.Type);
+                ClassicAssert.AreEqual("Validation failed", ex.Message);
+                ClassicAssert.AreEqual("scheme", ex.Errors[0].Field);
+                ClassicAssert.AreEqual("must be one of bacs, sepa_core, autogiro", ex.Errors[0].Message);
+                ClassicAssert.AreEqual("/mandates/scheme", ex.Errors[0].RequestPointer);
+                ClassicAssert.AreEqual("https://developer.gocardless.com/api-reference#validation_failed",
                     ex.DocumentationUrl);
-                Assert.AreEqual("2f33a336-abcd-4aeb-85c0-101286065dfd", ex.RequestId);
-                Assert.AreEqual(422, ex.Code);
+                ClassicAssert.AreEqual("2f33a336-abcd-4aeb-85c0-101286065dfd", ex.RequestId);
+                ClassicAssert.AreEqual(422, ex.Code);
                 return;
             }
             Assert.Fail("Exception was not thrown");
@@ -91,10 +92,10 @@ namespace GoCardless.Tests
             }
             catch (ApiException ex)
             {
-                Assert.AreEqual(500, ex.Code);
-                Assert.AreEqual(ApiErrorType.GOCARDLESS, ex.Type);
-                Assert.AreEqual("Something went wrong with this request. Please check the ResponseMessage property.", ex.Message);
-                Assert.AreEqual("500 Internal Server Error", ex.ResponseMessage.Content.ReadAsStringAsync().Result);
+                ClassicAssert.AreEqual(500, ex.Code);
+                ClassicAssert.AreEqual(ApiErrorType.GOCARDLESS, ex.Type);
+                ClassicAssert.AreEqual("Something went wrong with this request. Please check the ResponseMessage property.", ex.Message);
+                ClassicAssert.AreEqual("500 Internal Server Error", ex.ResponseMessage.Content.ReadAsStringAsync().Result);
                 return;
             }
             Assert.Fail("Exception was not thrown");
@@ -111,10 +112,10 @@ namespace GoCardless.Tests
             }
             catch (ApiException ex)
             {
-                Assert.AreEqual(502, ex.Code);
-                Assert.AreEqual(ApiErrorType.GOCARDLESS, ex.Type);
-                Assert.AreEqual("Something went wrong with this request. Please check the ResponseMessage property.", ex.Message);
-                Assert.AreEqual("<!DOCTYPE html>\n<html>\n  <head>\n    <title>This is an HTML error page, like one returned by Cloudflare</title>\n  </head>\n</html>\n", ex.ResponseMessage.Content.ReadAsStringAsync().Result.Replace("\r\n", "\n"));
+                ClassicAssert.AreEqual(502, ex.Code);
+                ClassicAssert.AreEqual(ApiErrorType.GOCARDLESS, ex.Type);
+                ClassicAssert.AreEqual("Something went wrong with this request. Please check the ResponseMessage property.", ex.Message);
+                ClassicAssert.AreEqual("<!DOCTYPE html>\n<html>\n  <head>\n    <title>This is an HTML error page, like one returned by Cloudflare</title>\n  </head>\n</html>\n", ex.ResponseMessage.Content.ReadAsStringAsync().Result.Replace("\r\n", "\n"));
                 return;
             }
             Assert.Fail("Exception was not thrown");
@@ -129,7 +130,7 @@ namespace GoCardless.Tests
             //When an attempt to created the mandate is made
             var mandate = await this.client.Mandates.CreateAsync(TestHelpers.CreateMandateCreateRequest());
             //Then the mandate should be successfully retrieved.
-            Assert.AreEqual("BA000123", mandate.Mandate.Links.CustomerBankAccount);
+            ClassicAssert.AreEqual("BA000123", mandate.Mandate.Links.CustomerBankAccount);
         }
 
         [Test]
@@ -149,13 +150,13 @@ namespace GoCardless.Tests
             }
             catch (AuthenticationFailedException ex)
             {
-                Assert.AreEqual(401, ex.Code);
-                Assert.AreEqual(ApiErrorType.AUTHENTICATION_FAILED, ex.Type);
-                Assert.AreEqual("Authentication Failed", ex.Message);
-                Assert.AreEqual("Authentication Failed", ex.Errors.Single().Message);
-                Assert.AreEqual("authentication_failed", ex.Errors.Single().Reason);
+                ClassicAssert.AreEqual(401, ex.Code);
+                ClassicAssert.AreEqual(ApiErrorType.AUTHENTICATION_FAILED, ex.Type);
+                ClassicAssert.AreEqual("Authentication Failed", ex.Message);
+                ClassicAssert.AreEqual("Authentication Failed", ex.Errors.Single().Message);
+                ClassicAssert.AreEqual("authentication_failed", ex.Errors.Single().Reason);
                 TestHelpers.AssertResponseCanSerializeBackToFixture(ex.ApiErrorResponse, responseFixture);
-                Assert.AreEqual("https://developer.gocardless.com/api-reference/#api-usage-errors",
+                ClassicAssert.AreEqual("https://developer.gocardless.com/api-reference/#api-usage-errors",
                  ex.DocumentationUrl);
                 return;
             }
@@ -179,13 +180,13 @@ namespace GoCardless.Tests
             }
             catch (RateLimitReachedException ex)
             {
-                Assert.AreEqual(429, ex.Code);
-                Assert.AreEqual(ApiErrorType.RATE_LIMIT_REACHED, ex.Type);
-                Assert.AreEqual("Rate Limit Reached you have made too many requests", ex.Message);
-                Assert.AreEqual("Rate Limit Reached you have made too many requests", ex.Errors.Single().Message);
-                Assert.AreEqual("rate_limit_reached", ex.Errors.Single().Reason);
+                ClassicAssert.AreEqual(429, ex.Code);
+                ClassicAssert.AreEqual(ApiErrorType.RATE_LIMIT_REACHED, ex.Type);
+                ClassicAssert.AreEqual("Rate Limit Reached you have made too many requests", ex.Message);
+                ClassicAssert.AreEqual("Rate Limit Reached you have made too many requests", ex.Errors.Single().Message);
+                ClassicAssert.AreEqual("rate_limit_reached", ex.Errors.Single().Reason);
                 TestHelpers.AssertResponseCanSerializeBackToFixture(ex.ApiErrorResponse, responseFixture);
-                Assert.AreEqual("https://developer.gocardless.com/api-reference/#making-requests-rate-limiting",
+                ClassicAssert.AreEqual("https://developer.gocardless.com/api-reference/#making-requests-rate-limiting",
                  ex.DocumentationUrl);
                 return;
             }
