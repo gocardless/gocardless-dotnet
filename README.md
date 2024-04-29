@@ -3,7 +3,7 @@
 For full details of the GoCardless API, see the [API docs](https://developer.gocardless.com/).
 
 [![NuGet](https://img.shields.io/nuget/v/GoCardless.svg)](https://www.nuget.org/packages/GoCardless/)
-[![<GoCardless>](https://github.com/gocardless/gocardless-dotnet/actions/workflows/build_and_publish.yml/badge.svg)](https://github.com/gocardless/gocardless-dotnet/actions)
+[![<GoCardless>](https://circleci.com/gh/gocardless/gocardless-dotnet.svg?style=svg)](https://circleci.com/gh/gocardless/gocardless-dotnet)
 
 - ["Getting started" guide](https://developer.gocardless.com/getting-started/api/introduction/)
 - [API Reference](https://developer.gocardless.com/api-reference)
