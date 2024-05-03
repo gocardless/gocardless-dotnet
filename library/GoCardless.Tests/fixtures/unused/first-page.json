@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "string_field": "foo",
+      "int_field": 111
+    },
+    {
+      "string_field": "bar",
+      "int_field": 222
+    }
+  ],
+  "meta": {
+    "cursors": {
+      "after": "ID123"
+    },
+    "limit": 2
+  }
+}

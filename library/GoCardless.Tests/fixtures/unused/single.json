@@ -1,0 +1,6 @@
+{
+  "items": {
+    "string_field": "foo",
+    "int_field": 123
+  }
+}

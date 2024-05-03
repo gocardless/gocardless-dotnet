@@ -1,0 +1,18 @@
+{
+  "error": {
+    "message": "Bank account already exists",
+    "documentation_url": "https://developer.gocardless.com/pro#bank_account_exists",
+    "type": "invalid_state",
+    "request_id": "bd271b37-a2f5-47c8-b461-040dfe0e9cb1",
+    "code": 409,
+    "errors": [
+      {
+        "reason": "bank_account_exists",
+        "message": "Bank account already exists",
+        "links": {
+          "creditor_bank_account": "BA123"
+        }
+      }
+    ]
+  }
+}

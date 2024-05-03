@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>GoCardless</PackageId>
+    <PackageVersion>6.0.1</PackageVersion>
+    <Authors>GoCardless Ltd</Authors>
+    <Description>Client for the GoCardless API - a powerful, simple solution for the collection of recurring bank-to-bank payments</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/gocardless/gocardless-dotnet</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/gocardless/gocardless-dotnet/master/nuget_package_icon.png</PackageIconUrl>
+    <Copyright>GoCardless Ltd</Copyright>
+    <PackageTags>gocardless payments rest api direct debit</PackageTags>
+    <PackageLicenseUrl>https://github.com/gocardless/gocardless-dotnet/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageReleaseNotes>https://github.com/gocardless/gocardless-dotnet/releases/tag/v6.0.1</PackageReleaseNotes>
+    <TargetFrameworks>netstandard1.6;netstandard2.0;netstandard2.1;net46;net8.0</TargetFrameworks>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\GoCardless.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
+    <ItemGroup>
+      <DocFile Include="bin\$(Configuration)\$(TargetFramework)\*.xml" />
+    </ItemGroup>
+    <Copy SourceFiles="@(DocFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="false" />
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+  </ItemGroup>
+
+</Project>
