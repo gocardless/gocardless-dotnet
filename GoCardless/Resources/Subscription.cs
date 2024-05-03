@@ -69,7 +69,6 @@ namespace GoCardless.Resources
     /// (i.e., the last working day of the month).
     /// - otherwise the charge date will be rolled __forwards__ to the next
     /// business day.
-    /// 
     /// </summary>
     public class Subscription
     {
