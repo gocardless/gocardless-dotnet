@@ -74,7 +74,6 @@ namespace GoCardless.Services
     /// (i.e., the last working day of the month).
     /// - otherwise the charge date will be rolled __forwards__ to the next
     /// business day.
-    /// 
     /// </summary>
 
     public class SubscriptionService
@@ -273,7 +272,6 @@ namespace GoCardless.Services
         /// 
         /// - `pause_cycles_must_be_greater_than_or_equal_to` if the provided
         /// value for `pause_cycles` cannot be satisfied.
-        /// 
         /// </summary>  
         /// <param name="identity">Unique identifier, beginning with "SB".</param> 
         /// <param name="request">An optional `SubscriptionPauseRequest` representing the body for this pause request.</param>
@@ -853,7 +851,6 @@ namespace GoCardless.Services
     /// 
     /// - `pause_cycles_must_be_greater_than_or_equal_to` if the provided value
     /// for `pause_cycles` cannot be satisfied.
-    /// 
     /// </summary>
     public class SubscriptionPauseRequest
     {
@@ -869,6 +866,12 @@ namespace GoCardless.Services
         /// The number of cycles to pause a subscription for. A cycle is one
         /// duration of `interval` and `interval_unit`. This should be a non
         /// zero positive value.
+        /// For AUD subscriptions with `interval_unit: weekly` the minimum value
+        /// varies between `3` & `4` because of the [mandatory minimum waiting
+        /// period](#subscriptions-resume-a-subscription).
+        /// For NZD subscriptions with `interval_unit: weekly` the minimum value
+        /// is `2` because of the [mandatory minimum waiting
+        /// period](#subscriptions-resume-a-subscription).
         /// </summary>
         [JsonProperty("pause_cycles")]
         public int? PauseCycles { get; set; }
