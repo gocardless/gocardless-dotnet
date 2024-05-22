@@ -84,6 +84,11 @@ namespace GoCardless
         public InstitutionService Institutions => new InstitutionService(this);
 
         /// <summary>
+        ///A service for working with logo resources.
+        /// </summary>
+        public LogoService Logos => new LogoService(this);
+
+        /// <summary>
         ///A service for working with mandate resources.
         /// </summary>
         public MandateService Mandates => new MandateService(this);
@@ -112,6 +117,11 @@ namespace GoCardless
         ///A service for working with payer authorisation resources.
         /// </summary>
         public PayerAuthorisationService PayerAuthorisations => new PayerAuthorisationService(this);
+
+        /// <summary>
+        ///A service for working with payer theme resources.
+        /// </summary>
+        public PayerThemeService PayerThemes => new PayerThemeService(this);
 
         /// <summary>
         ///A service for working with payment resources.
