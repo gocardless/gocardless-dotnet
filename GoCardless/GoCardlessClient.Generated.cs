@@ -119,6 +119,11 @@ namespace GoCardless
         public PayerAuthorisationService PayerAuthorisations => new PayerAuthorisationService(this);
 
         /// <summary>
+        ///A service for working with payer theme resources.
+        /// </summary>
+        public PayerThemeService PayerThemes => new PayerThemeService(this);
+
+        /// <summary>
         ///A service for working with payment resources.
         /// </summary>
         public PaymentService Payments => new PaymentService(this);

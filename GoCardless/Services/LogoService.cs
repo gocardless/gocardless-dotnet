@@ -33,6 +33,37 @@ namespace GoCardless.Services
         {
             _goCardlessClient = goCardlessClient;
         }
+
+        /// <summary>
+        /// Creates a new logo associated with a creditor. If a creditor already
+        /// has a logo, this will update the existing logo linked to the
+        /// creditor.
+        /// </summary>  
+        /// <param name="identity">Unique identifier, beginning with "CR".</param> 
+        /// <param name="request">An optional `LogoCreateForCreditorRequest` representing the body for this create_for_creditor request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single logo resource</returns>
+        public Task<LogoResponse> CreateForCreditorAsync(string identity, LogoCreateForCreditorRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new LogoCreateForCreditorRequest();
+            if (identity == null) throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<LogoResponse>("POST", "/creditors/:identity/branding/logos", urlParams, request, null, "logos", customiseRequestMessage);
+        }
+    }
+
+        
+    /// <summary>
+    /// Creates a new logo associated with a creditor. If a creditor already has
+    /// a logo, this will update the existing logo linked to the creditor.
+    /// </summary>
+    public class LogoCreateForCreditorRequest
+    {
     }
 
     /// <summary>
