@@ -36,22 +36,18 @@ namespace GoCardless.Services
         /// Creates a new payer theme associated with a creditor. If a creditor
         /// already has payer themes, this will update the existing payer theme
         /// linked to the creditor.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "CR".</param> 
+        /// </summary>
         /// <param name="request">An optional `PayerThemeCreateForCreditorRequest` representing the body for this create_for_creditor request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payer theme resource</returns>
-        public Task<PayerThemeResponse> CreateForCreditorAsync(string identity, PayerThemeCreateForCreditorRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<PayerThemeResponse> CreateForCreditorAsync(PayerThemeCreateForCreditorRequest request = null, RequestSettings customiseRequestMessage = null)
         {
             request = request ?? new PayerThemeCreateForCreditorRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
-            {
-                new KeyValuePair<string, object>("identity", identity),
-            };
+            {};
 
-            return _goCardlessClient.ExecuteAsync<PayerThemeResponse>("POST", "/creditors/:identity/branding/payer_themes", urlParams, request, null, "payer_themes", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<PayerThemeResponse>("POST", "/branding/payer_themes", urlParams, request, null, "payer_themes", customiseRequestMessage);
         }
     }
 
@@ -87,6 +83,24 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("link_text_colour")]
         public string LinkTextColour { get; set; }
+
+        /// <summary>
+        /// Linked resources.
+        /// </summary>
+        [JsonProperty("links")]
+        public PayerThemeLinks Links { get; set; }
+        /// <summary>
+        /// Linked resources for a PayerTheme.
+        /// </summary>
+        public class PayerThemeLinks
+        {
+                
+                /// <summary>
+                            /// ID of the creditor the payer theme belongs to
+                /// </summary>
+                [JsonProperty("creditor")]
+                public string Creditor { get; set; }
+        }
     }
 
     /// <summary>
