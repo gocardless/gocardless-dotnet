@@ -79,7 +79,7 @@ namespace GoCardless.Services
         {
                 
                 /// <summary>
-                            /// ID of the creditor the payer theme belongs to
+                            /// ID of the creditor the logo belongs to
                 /// </summary>
                 [JsonProperty("creditor")]
                 public string Creditor { get; set; }
