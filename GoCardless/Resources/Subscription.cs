@@ -190,6 +190,12 @@ namespace GoCardless.Resources
         public string Name { get; set; }
 
         /// <summary>
+        /// Whether the parent plan of this subscription is paused.
+        /// </summary>
+        [JsonProperty("parent_plan_paused")]
+        public bool? ParentPlanPaused { get; set; }
+
+        /// <summary>
         /// An optional payment reference. This will be set as the reference on
         /// each payment
         /// created and will appear on your customer's bank statement. See the
