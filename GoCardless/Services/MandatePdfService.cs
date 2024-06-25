@@ -230,6 +230,13 @@ namespace GoCardless.Services
         public string City { get; set; }
 
         /// <summary>
+        /// The customer's company name. Used to populate the "Customer Name or
+        /// Company name" field on the PDF.
+        /// </summary>
+        [JsonProperty("company_name")]
+        public string CompanyName { get; set; }
+
+        /// <summary>
         /// [ISO
         /// 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
         /// alpha-2 code. Required if providing local details.
@@ -243,6 +250,22 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("danish_identity_number")]
         public string DanishIdentityNumber { get; set; }
+
+        /// <summary>
+        /// The customer's family name (i.e. last name). Used to populate the
+        /// "Customer Name or Company name" field on the PDF. Ignored if
+        /// `company_name` is provided.
+        /// </summary>
+        [JsonProperty("family_name")]
+        public string FamilyName { get; set; }
+
+        /// <summary>
+        /// The customer's given name (i.e. first name). Used to populate the
+        /// "Customer Name or Company name" field on the PDF. Ignored if
+        /// `company_name` is provided.
+        /// </summary>
+        [JsonProperty("given_name")]
+        public string GivenName { get; set; }
 
         /// <summary>
         /// International Bank Account Number. Alternatively you can provide
