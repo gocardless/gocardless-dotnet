@@ -38,6 +38,12 @@ namespace GoCardless.Services
         /// Creates a new logo associated with a creditor. If a creditor already
         /// has a logo, this will update the existing logo linked to the
         /// creditor.
+        /// 
+        /// We support JPG and PNG formats. Your logo will be scaled to a
+        /// maximum of 300px by 40px. For more guidance on how to upload logos
+        /// that will look
+        /// great across your customer payment page and notification emails see
+        /// [here](https://developer.gocardless.com/gc-embed/setting-up-branding#tips_for_uploading_your_logo).
         /// </summary>
         /// <param name="request">An optional `LogoCreateForCreditorRequest` representing the body for this create_for_creditor request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -57,6 +63,11 @@ namespace GoCardless.Services
     /// <summary>
     /// Creates a new logo associated with a creditor. If a creditor already has
     /// a logo, this will update the existing logo linked to the creditor.
+    /// 
+    /// We support JPG and PNG formats. Your logo will be scaled to a maximum of
+    /// 300px by 40px. For more guidance on how to upload logos that will look
+    /// great across your customer payment page and notification emails see
+    /// [here](https://developer.gocardless.com/gc-embed/setting-up-branding#tips_for_uploading_your_logo).
     /// </summary>
     public class LogoCreateForCreditorRequest
     {
@@ -79,7 +90,7 @@ namespace GoCardless.Services
         {
                 
                 /// <summary>
-                            /// ID of the creditor the payer theme belongs to
+                            /// ID of the creditor the logo belongs to
                 /// </summary>
                 [JsonProperty("creditor")]
                 public string Creditor { get; set; }
