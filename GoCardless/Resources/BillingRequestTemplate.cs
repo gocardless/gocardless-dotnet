@@ -134,7 +134,7 @@ namespace GoCardless.Resources
         /// Amount in minor unit (e.g. pence in GBP, cents in EUR).
         /// </summary>
         [JsonProperty("payment_request_amount")]
-        public int? PaymentRequestAmount { get; set; }
+        public string PaymentRequestAmount { get; set; }
 
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
