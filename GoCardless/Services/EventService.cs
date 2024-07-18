@@ -191,6 +191,13 @@ namespace GoCardless.Services
         public string Creditor { get; set; }
 
         /// <summary>
+        /// ID of an export. If specified, this endpoint will return all events
+        /// for the given export.
+        /// </summary>
+        [JsonProperty("export")]
+        public string Export { get; set; }
+
+        /// <summary>
         /// Includes linked resources in the response. Must be used with the
         /// `resource_type` parameter specified. The include should be one of:
         /// <ul>
@@ -319,13 +326,14 @@ namespace GoCardless.Services
         /// <summary>
         /// Type of resource that you'd like to get all events for.
         /// Cannot be used together with the `billing_request`, `creditor`,
-        /// `instalment_schedule`, `mandate`, `payer_authorisation`, `payment`,
-        /// `payout`, `refund`, `scheme_identifier` or `subscription`
+        /// `export`,`instalment_schedule`, `mandate`, `payer_authorisation`,
+        /// `payment`, `payout`, `refund`, `scheme_identifier` or `subscription`
         /// parameters.
         /// The type can be one of:
         /// <ul>
         /// <li>`billing_requests`</li>
         /// <li>`creditors`</li>
+        /// <li>`exports`</li>
         /// <li>`instalment_schedules`</li>
         /// <li>`mandates`</li>
         /// <li>`payer_authorisations`</li>
@@ -342,13 +350,14 @@ namespace GoCardless.Services
         /// <summary>
         /// Type of resource that you'd like to get all events for.
         /// Cannot be used together with the `billing_request`, `creditor`,
-        /// `instalment_schedule`, `mandate`, `payer_authorisation`, `payment`,
-        /// `payout`, `refund`, `scheme_identifier` or `subscription`
+        /// `export`,`instalment_schedule`, `mandate`, `payer_authorisation`,
+        /// `payment`, `payout`, `refund`, `scheme_identifier` or `subscription`
         /// parameters.
         /// The type can be one of:
         /// <ul>
         /// <li>`billing_requests`</li>
         /// <li>`creditors`</li>
+        /// <li>`exports`</li>
         /// <li>`instalment_schedules`</li>
         /// <li>`mandates`</li>
         /// <li>`payer_authorisations`</li>
@@ -369,6 +378,9 @@ namespace GoCardless.Services
             /// <summary>`resource_type` with a value of "creditors"</summary>
             [EnumMember(Value = "creditors")]
             Creditors,
+            /// <summary>`resource_type` with a value of "exports"</summary>
+            [EnumMember(Value = "exports")]
+            Exports,
             /// <summary>`resource_type` with a value of "instalment_schedules"</summary>
             [EnumMember(Value = "instalment_schedules")]
             InstalmentSchedules,

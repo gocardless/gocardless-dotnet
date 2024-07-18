@@ -90,6 +90,7 @@ namespace GoCardless.Resources
         /// <ul>
         /// <li>`billing_requests`</li>
         /// <li>`creditors`</li>
+        /// <li>`exports`</li>
         /// <li>`instalment_schedules`</li>
         /// <li>`mandates`</li>
         /// <li>`payer_authorisations`</li>
@@ -476,6 +477,7 @@ namespace GoCardless.Resources
     /// <ul>
     /// <li>`billing_requests`</li>
     /// <li>`creditors`</li>
+    /// <li>`exports`</li>
     /// <li>`instalment_schedules`</li>
     /// <li>`mandates`</li>
     /// <li>`payer_authorisations`</li>
@@ -498,6 +500,9 @@ namespace GoCardless.Resources
         /// <summary>`resource_type` with a value of "creditors"</summary>
         [EnumMember(Value = "creditors")]
         Creditors,
+        /// <summary>`resource_type` with a value of "exports"</summary>
+        [EnumMember(Value = "exports")]
+        Exports,
         /// <summary>`resource_type` with a value of "instalment_schedules"</summary>
         [EnumMember(Value = "instalment_schedules")]
         InstalmentSchedules,
