@@ -356,7 +356,8 @@ namespace GoCardless.Services
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code. `GBP` and `EUR` supported; `GBP` with your customers
-        /// in the UK and for `EUR` with your customers in Germany only.
+        /// in the UK and for `EUR` with your customers in supported Eurozone
+        /// countries only.
         /// </summary>
         [JsonProperty("payment_request_currency")]
         public string PaymentRequestCurrency { get; set; }
@@ -381,10 +382,10 @@ namespace GoCardless.Services
         /// (Optional) A scheme used for Open Banking payments. Currently
         /// `faster_payments` is supported in the UK (GBP) and
         /// `sepa_credit_transfer` and `sepa_instant_credit_transfer` are
-        /// supported in Germany (EUR). In Germany, `sepa_credit_transfer` is
-        /// used as the default. Please be aware that
-        /// `sepa_instant_credit_transfer` may incur an additional fee for your
-        /// customer.
+        /// supported in supported Eurozone countries (EUR). For Eurozone
+        /// countries, `sepa_credit_transfer` is used as the default. Please be
+        /// aware that `sepa_instant_credit_transfer` may incur an additional
+        /// fee for your customer.
         /// </summary>
         [JsonProperty("payment_request_scheme")]
         public string PaymentRequestScheme { get; set; }
@@ -549,7 +550,8 @@ namespace GoCardless.Services
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code. `GBP` and `EUR` supported; `GBP` with your customers
-        /// in the UK and for `EUR` with your customers in Germany only.
+        /// in the UK and for `EUR` with your customers in supported Eurozone
+        /// countries only.
         /// </summary>
         [JsonProperty("payment_request_currency")]
         public string PaymentRequestCurrency { get; set; }
@@ -574,10 +576,10 @@ namespace GoCardless.Services
         /// (Optional) A scheme used for Open Banking payments. Currently
         /// `faster_payments` is supported in the UK (GBP) and
         /// `sepa_credit_transfer` and `sepa_instant_credit_transfer` are
-        /// supported in Germany (EUR). In Germany, `sepa_credit_transfer` is
-        /// used as the default. Please be aware that
-        /// `sepa_instant_credit_transfer` may incur an additional fee for your
-        /// customer.
+        /// supported in supported Eurozone countries (EUR). For Eurozone
+        /// countries, `sepa_credit_transfer` is used as the default. Please be
+        /// aware that `sepa_instant_credit_transfer` may incur an additional
+        /// fee for your customer.
         /// </summary>
         [JsonProperty("payment_request_scheme")]
         public string PaymentRequestScheme { get; set; }
