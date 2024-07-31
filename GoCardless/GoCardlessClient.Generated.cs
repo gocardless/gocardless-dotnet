@@ -74,6 +74,11 @@ namespace GoCardless
         public EventService Events => new EventService(this);
 
         /// <summary>
+        ///A service for working with export resources.
+        /// </summary>
+        public ExportService Exports => new ExportService(this);
+
+        /// <summary>
         ///A service for working with instalment schedule resources.
         /// </summary>
         public InstalmentScheduleService InstalmentSchedules => new InstalmentScheduleService(this);
