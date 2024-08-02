@@ -836,6 +836,15 @@ namespace GoCardless.Services
                 public IDictionary<String, String> Metadata { get; set; }
                 
                 /// <summary>
+                            /// A custom payment reference defined by the merchant. It is only
+            /// available for payments using the Direct Funds settlement model
+            /// on the Faster Payments scheme.
+            /// 
+                /// </summary>
+                [JsonProperty("reference")]
+                public string Reference { get; set; }
+                
+                /// <summary>
                             /// (Optional) A scheme used for Open Banking payments. Currently
             /// `faster_payments` is supported in the UK (GBP) and
             /// `sepa_credit_transfer` and `sepa_instant_credit_transfer` are
