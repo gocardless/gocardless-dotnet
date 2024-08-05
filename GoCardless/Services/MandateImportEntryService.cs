@@ -202,12 +202,11 @@ namespace GoCardless.Services
         {
                 
                 /// <summary>
-                            /// Name of the account holder, as known by the bank. Usually this
-            /// is the same as the name stored with the linked
-            /// [creditor](#core-endpoints-creditors). This field will be
-            /// transliterated, upcased and truncated to 18 characters. This
-            /// field is required unless the request includes a [customer bank
-            /// account token](#javascript-flow-customer-bank-account-tokens).
+                            /// Name of the account holder, as known by the bank. This field
+            /// will be transliterated, upcased and truncated to 18 characters.
+            /// This field is required unless the request includes a [customer
+            /// bank account
+            /// token](#javascript-flow-customer-bank-account-tokens).
                 /// </summary>
                 [JsonProperty("account_holder_name")]
                 public string AccountHolderName { get; set; }
@@ -219,6 +218,31 @@ namespace GoCardless.Services
                 /// </summary>
                 [JsonProperty("account_number")]
                 public string AccountNumber { get; set; }
+                
+                /// <summary>
+                            /// Bank account type. Required for USD-denominated bank accounts.
+            /// Must not be provided for bank accounts in other currencies. See
+            /// [local details](#local-bank-details-united-states) for more
+            /// information.
+                /// </summary>
+                [JsonProperty("account_type")]
+                public MandateImportEntryAccountType? AccountType { get; set; }
+        /// <summary>
+        /// Bank account type. Required for USD-denominated bank accounts. Must
+        /// not be provided for bank accounts in other currencies. See [local
+        /// details](#local-bank-details-united-states) for more information.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum MandateImportEntryAccountType
+        {
+    
+            /// <summary>`account_type` with a value of "savings"</summary>
+            [EnumMember(Value = "savings")]
+            Savings,
+            /// <summary>`account_type` with a value of "checking"</summary>
+            [EnumMember(Value = "checking")]
+            Checking,
+        }
                 
                 /// <summary>
                             /// Bank code - see [local details](#appendix-local-bank-details)
@@ -251,6 +275,13 @@ namespace GoCardless.Services
                 /// </summary>
                 [JsonProperty("iban")]
                 public string Iban { get; set; }
+                
+                /// <summary>
+                            /// Key-value store of custom data. Up to 3 keys are permitted, with
+            /// key names up to 50 characters and values up to 500 characters.
+                /// </summary>
+                [JsonProperty("metadata")]
+                public IDictionary<String, String> Metadata { get; set; }
         }
 
         [JsonProperty("customer")]
@@ -349,6 +380,13 @@ namespace GoCardless.Services
                 public string Language { get; set; }
                 
                 /// <summary>
+                            /// Key-value store of custom data. Up to 3 keys are permitted, with
+            /// key names up to 50 characters and values up to 500 characters.
+                /// </summary>
+                [JsonProperty("metadata")]
+                public IDictionary<String, String> Metadata { get; set; }
+                
+                /// <summary>
                             /// [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone
             /// number, including country code.
                 /// </summary>
@@ -408,6 +446,13 @@ namespace GoCardless.Services
         /// </summary>
         public class MandateImportEntryMandate
         {
+                
+                /// <summary>
+                            /// Key-value store of custom data. Up to 3 keys are permitted, with
+            /// key names up to 50 characters and values up to 500 characters.
+                /// </summary>
+                [JsonProperty("metadata")]
+                public IDictionary<String, String> Metadata { get; set; }
                 
                 /// <summary>
                             /// Unique reference. Different schemes have different length and
