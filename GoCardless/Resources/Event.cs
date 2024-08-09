@@ -172,6 +172,12 @@ namespace GoCardless.Resources
         public string Description { get; set; }
 
         /// <summary>
+        /// Count of rows in the csv. This is sent for export events
+        /// </summary>
+        [JsonProperty("item_count")]
+        public int? ItemCount { get; set; }
+
+        /// <summary>
         /// When will_attempt_retry is set to false, this field will contain
         /// the reason the payment was not retried. This can be one of:
         /// <ul>
