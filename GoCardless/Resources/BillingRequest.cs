@@ -617,34 +617,6 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// This attribute represents the authorisation type between the payer and merchant. It can be
-    /// set to one-off, recurring or standing for ACH scheme. And single, recurring and sporadic for
-    /// PAD scheme.
-    /// </summary>
-    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestMandateRequestConsentType {
-        /// <summary>Unknown status</summary>
-        [EnumMember(Value = "unknown")]
-        Unknown = 0,
-
-        /// <summary>`consent_type` with a value of "one_off"</summary>
-        [EnumMember(Value = "one_off")]
-        OneOff,
-        /// <summary>`consent_type` with a value of "single"</summary>
-        [EnumMember(Value = "single")]
-        Single,
-        /// <summary>`consent_type` with a value of "recurring"</summary>
-        [EnumMember(Value = "recurring")]
-        Recurring,
-        /// <summary>`consent_type` with a value of "standing"</summary>
-        [EnumMember(Value = "standing")]
-        Standing,
-        /// <summary>`consent_type` with a value of "sporadic"</summary>
-        [EnumMember(Value = "sporadic")]
-        Sporadic,
-    }
-
-    /// <summary>
     /// Represents a billing request mandate request constraint resource.
     ///
     /// Constraints that will apply to the mandate_request. (Optional)
