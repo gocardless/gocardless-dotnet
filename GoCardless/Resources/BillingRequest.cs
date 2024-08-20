@@ -492,6 +492,14 @@ namespace GoCardless.Resources
         public BillingRequestMandateRequestAuthorisationSource? AuthorisationSource { get; set; }
 
         /// <summary>
+        /// This attribute represents the authorisation type between the payer
+        /// and merchant. It can be set to one-off, recurring or standing for
+        /// ACH scheme. And single, recurring and sporadic for PAD scheme.
+        /// </summary>
+        [JsonProperty("consent_type")]
+        public string ConsentType { get; set; }
+
+        /// <summary>
         /// Constraints that will apply to the mandate_request. (Optional)
         /// Specifically for PayTo and VRP.
         /// </summary>
@@ -817,7 +825,7 @@ namespace GoCardless.Resources
         /// Amount in minor unit (e.g. pence in GBP, cents in EUR).
         /// </summary>
         [JsonProperty("amount")]
-        public int? Amount { get; set; }
+        public string Amount { get; set; }
 
         /// <summary>
         /// The amount to be deducted from the payment as an app fee, to be paid
