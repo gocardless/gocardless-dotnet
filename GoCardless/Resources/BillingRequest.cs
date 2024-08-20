@@ -825,7 +825,7 @@ namespace GoCardless.Resources
         /// Amount in minor unit (e.g. pence in GBP, cents in EUR).
         /// </summary>
         [JsonProperty("amount")]
-        public int? Amount { get; set; }
+        public string Amount { get; set; }
 
         /// <summary>
         /// The amount to be deducted from the payment as an app fee, to be paid
