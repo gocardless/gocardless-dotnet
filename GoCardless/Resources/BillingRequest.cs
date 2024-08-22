@@ -1117,6 +1117,14 @@ namespace GoCardless.Resources
         public BillingRequestResourcesCustomerBankAccountAccountType? AccountType { get; set; }
 
         /// <summary>
+        /// A token to uniquely refer to a set of bank account details. This
+        /// feature is still in early access and is only available for certain
+        /// organisations.
+        /// </summary>
+        [JsonProperty("bank_account_token")]
+        public string BankAccountToken { get; set; }
+
+        /// <summary>
         /// Name of bank, taken from the bank details.
         /// </summary>
         [JsonProperty("bank_name")]
