@@ -42,6 +42,14 @@ namespace GoCardless.Resources
         public MandateConsentParameters ConsentParameters { get; set; }
 
         /// <summary>
+        /// (Optional) Specifies the type of authorisation agreed between the
+        /// payer and merchant. It can be set to one-off, recurring or standing
+        /// for ACH, or single, recurring and sporadic for PAD.
+        /// </summary>
+        [JsonProperty("consent_type")]
+        public string ConsentType { get; set; }
+
+        /// <summary>
         /// Fixed [timestamp](#api-usage-time-zones--dates), recording when this
         /// resource was created.
         /// </summary>
@@ -270,6 +278,33 @@ namespace GoCardless.Resources
         /// <summary>`period` with a value of "flexible"</summary>
         [EnumMember(Value = "flexible")]
         Flexible,
+    }
+
+    /// <summary>
+    /// (Optional) Specifies the type of authorisation agreed between the payer and merchant. It can
+    /// be set to one-off, recurring or standing for ACH, or single, recurring and sporadic for PAD.
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum MandateConsentType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`consent_type` with a value of "one_off"</summary>
+        [EnumMember(Value = "one_off")]
+        OneOff,
+        /// <summary>`consent_type` with a value of "single"</summary>
+        [EnumMember(Value = "single")]
+        Single,
+        /// <summary>`consent_type` with a value of "recurring"</summary>
+        [EnumMember(Value = "recurring")]
+        Recurring,
+        /// <summary>`consent_type` with a value of "standing"</summary>
+        [EnumMember(Value = "standing")]
+        Standing,
+        /// <summary>`consent_type` with a value of "sporadic"</summary>
+        [EnumMember(Value = "sporadic")]
+        Sporadic,
     }
 
     /// <summary>
