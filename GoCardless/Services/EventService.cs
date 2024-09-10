@@ -248,6 +248,9 @@ namespace GoCardless.Services
             /// <summary>`include` with a value of "mandate"</summary>
             [EnumMember(Value = "mandate")]
             Mandate,
+            /// <summary>`include` with a value of "outbound_payment"</summary>
+            [EnumMember(Value = "outbound_payment")]
+            OutboundPayment,
             /// <summary>`include` with a value of "payer_authorisation"</summary>
             [EnumMember(Value = "payer_authorisation")]
             PayerAuthorisation,
@@ -390,6 +393,9 @@ namespace GoCardless.Services
             /// <summary>`resource_type` with a value of "organisations"</summary>
             [EnumMember(Value = "organisations")]
             Organisations,
+            /// <summary>`resource_type` with a value of "outbound_payments"</summary>
+            [EnumMember(Value = "outbound_payments")]
+            OutboundPayments,
             /// <summary>`resource_type` with a value of "payer_authorisations"</summary>
             [EnumMember(Value = "payer_authorisations")]
             PayerAuthorisations,
