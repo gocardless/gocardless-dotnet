@@ -11,17 +11,17 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a billing request template resource.
     ///
-    /// Billing Request Templates are reusable templates that result in 
-    /// numerous Billing Requests with similar attributes. They provide 
+    /// Billing Request Templates are reusable templates that result in
+    /// numerous Billing Requests with similar attributes. They provide
     /// a no-code solution for generating various types of multi-user payment
-    /// links. 
+    /// links.
     /// 
-    /// Each template includes a reusable URL that can be embedded in a website 
-    /// or shared with customers via email. Every time the URL is opened, 
+    /// Each template includes a reusable URL that can be embedded in a website
+    /// or shared with customers via email. Every time the URL is opened,
     /// it generates a new Billing Request.
     /// 
     /// Billing Request Templates overcome the key limitation of the Billing
-    /// Request: 
+    /// Request:
     /// a Billing Request cannot be shared among multiple users because it is
     /// intended
     /// for single-use and is designed to cater to the unique needs of
@@ -131,7 +131,7 @@ namespace GoCardless.Resources
         public string Name { get; set; }
 
         /// <summary>
-        /// Amount in minor unit (e.g. pence in GBP, cents in EUR).
+        /// Amount in full.
         /// </summary>
         [JsonProperty("payment_request_amount")]
         public string PaymentRequestAmount { get; set; }
