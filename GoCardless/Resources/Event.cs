@@ -518,6 +518,9 @@ namespace GoCardless.Resources
         /// <summary>`resource_type` with a value of "organisations"</summary>
         [EnumMember(Value = "organisations")]
         Organisations,
+        /// <summary>`resource_type` with a value of "outbound_payments"</summary>
+        [EnumMember(Value = "outbound_payments")]
+        OutboundPayments,
         /// <summary>`resource_type` with a value of "payer_authorisations"</summary>
         [EnumMember(Value = "payer_authorisations")]
         PayerAuthorisations,
