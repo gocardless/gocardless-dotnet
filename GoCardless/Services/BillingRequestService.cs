@@ -845,6 +845,18 @@ namespace GoCardless.Services
                 public string Reference { get; set; }
                 
                 /// <summary>
+                            /// On failure, automatically retry payments using [intelligent
+            /// retries](#success-intelligent-retries). Default is `false`. <p
+            /// class="notice"><strong>Important</strong>: To be able to use
+            /// intelligent retries, Success+ needs to be enabled in [GoCardless
+            /// dashboard](https://manage.gocardless.com/success-plus). </p> <p
+            /// class="notice"><strong>Important</strong>: This is not
+            /// applicable to IBP and VRP payments. </p>
+                /// </summary>
+                [JsonProperty("retry_if_possible")]
+                public bool? RetryIfPossible { get; set; }
+                
+                /// <summary>
                             /// (Optional) A scheme used for Open Banking payments. Currently
             /// `faster_payments` is supported in the UK (GBP) and
             /// `sepa_credit_transfer` and `sepa_instant_credit_transfer` are
