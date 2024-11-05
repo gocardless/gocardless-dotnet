@@ -53,6 +53,12 @@ namespace GoCardless.Resources
         public bool? FallbackEnabled { get; set; }
 
         /// <summary>
+        /// True if the billing request was completed with direct debit.
+        /// </summary>
+        [JsonProperty("fallback_occurred")]
+        public bool? FallbackOccurred { get; set; }
+
+        /// <summary>
         /// Unique identifier, beginning with "BRQ".
         /// </summary>
         [JsonProperty("id")]
