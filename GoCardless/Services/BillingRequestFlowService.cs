@@ -333,6 +333,14 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("show_success_redirect_button")]
         public bool? ShowSuccessRedirectButton { get; set; }
+
+        /// <summary>
+        /// If true, the payer will not be redirected to the success screen
+        /// after completing the flow. A redirect_uri needs to be provided for
+        /// this parameter to be taken into account.
+        /// </summary>
+        [JsonProperty("skip_success_screen")]
+        public bool? SkipSuccessScreen { get; set; }
     }
 
         
