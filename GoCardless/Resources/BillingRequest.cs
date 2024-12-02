@@ -11,17 +11,17 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a billing request resource.
     ///
-    /// Billing Requests help create resources that require input or action from
-    /// a
-    /// customer. An example of required input might be additional customer
-    /// billing
-    /// details, while an action would be asking a customer to authorise a
-    /// payment
-    /// using their mobile banking app.
+    ///  Billing Requests help create resources that require input or action
+    /// from a customer. An example of required input might be additional
+    /// customer billing details, while an action would be asking a customer to
+    /// authorise a payment using their mobile banking app.
     /// 
     /// See [Billing Requests:
     /// Overview](https://developer.gocardless.com/getting-started/billing-requests/overview/)
-    /// for how-to's, explanations and tutorials.
+    /// for how-to's, explanations and tutorials. <p
+    /// class="notice"><strong>Important</strong>: All properties associated
+    /// with `subscription_request` and `instalment_schedule_request` are only
+    /// supported for ACH and PAD schemes.</p>
     /// </summary>
     public class BillingRequest
     {
@@ -63,6 +63,12 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
+
+        /// <summary>
+        /// Request for an instalment schedule
+        /// </summary>
+        [JsonProperty("instalment_schedule_request")]
+        public BillingRequestInstalmentScheduleRequest InstalmentScheduleRequest { get; set; }
 
         /// <summary>
         /// Resources linked to this BillingRequest.
@@ -120,6 +126,12 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("status")]
         public string Status { get; set; }
+
+        /// <summary>
+        /// Request for a subscription
+        /// </summary>
+        [JsonProperty("subscription_request")]
+        public BillingRequestSubscriptionRequest SubscriptionRequest { get; set; }
     }
     
     /// <summary>
@@ -396,6 +408,147 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
+    /// Represents a billing request instalment schedule request resource.
+    ///
+    /// Request for an instalment schedule
+    /// </summary>
+    public class BillingRequestInstalmentScheduleRequest
+    {
+        /// <summary>
+        /// The amount to be deducted from each payment as an app fee, to be
+        /// paid to the partner integration which created the subscription, in
+        /// the lowest denomination for the currency (e.g. pence in GBP, cents
+        /// in EUR).
+        /// </summary>
+        [JsonProperty("app_fee")]
+        public int? AppFee { get; set; }
+
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        /// "SEK" and "USD" are supported.
+        /// </summary>
+        [JsonProperty("currency")]
+        public BillingRequestInstalmentScheduleRequestCurrency? Currency { get; set; }
+
+        /// <summary>
+        /// instalments to be created. See [create (with
+        /// dates)](#instalment-schedules-create-with-dates) and [create (with
+        /// schedule)](#instalment-schedules-create-with-schedule) for more
+        /// information on how to specify instalments.
+        /// </summary>
+        [JsonProperty("instalments")]
+        public List<string> Instalments { get; set; }
+
+        /// <summary>
+        /// Resources linked to this BillingRequestInstalmentScheduleRequest.
+        /// </summary>
+        [JsonProperty("links")]
+        public BillingRequestInstalmentScheduleRequestLinks Links { get; set; }
+
+        /// <summary>
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<string, string> Metadata { get; set; }
+
+        /// <summary>
+        /// Name of the instalment schedule, up to 100 chars. This name will
+        /// also be
+        /// copied to the payments of the instalment schedule if you use
+        /// schedule-based creation.
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// An optional payment reference. This will be set as the reference on
+        /// each payment
+        /// created and will appear on your customer's bank statement. See the
+        /// documentation for
+        /// the [create payment endpoint](#payments-create-a-payment) for more
+        /// details.
+        /// <br />
+        /// </summary>
+        [JsonProperty("payment_reference")]
+        public string PaymentReference { get; set; }
+
+        /// <summary>
+        /// On failure, automatically retry payments using [intelligent
+        /// retries](#success-intelligent-retries). Default is `false`. <p
+        /// class="notice"><strong>Important</strong>: To be able to use
+        /// intelligent retries, Success+ needs to be enabled in [GoCardless
+        /// dashboard](https://manage.gocardless.com/success-plus). </p>
+        /// </summary>
+        [JsonProperty("retry_if_possible")]
+        public bool? RetryIfPossible { get; set; }
+
+        /// <summary>
+        /// The total amount of the instalment schedule, defined as the sum of
+        /// all individual
+        /// payments, in the lowest denomination for the currency (e.g. pence in
+        /// GBP, cents in
+        /// EUR). If the requested payment amounts do not sum up correctly, a
+        /// validation error
+        /// will be returned.
+        /// </summary>
+        [JsonProperty("total_amount")]
+        public int? TotalAmount { get; set; }
+    }
+    
+    /// <summary>
+    /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+    /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestInstalmentScheduleRequestCurrency {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`currency` with a value of "AUD"</summary>
+        [EnumMember(Value = "AUD")]
+        AUD,
+        /// <summary>`currency` with a value of "CAD"</summary>
+        [EnumMember(Value = "CAD")]
+        CAD,
+        /// <summary>`currency` with a value of "DKK"</summary>
+        [EnumMember(Value = "DKK")]
+        DKK,
+        /// <summary>`currency` with a value of "EUR"</summary>
+        [EnumMember(Value = "EUR")]
+        EUR,
+        /// <summary>`currency` with a value of "GBP"</summary>
+        [EnumMember(Value = "GBP")]
+        GBP,
+        /// <summary>`currency` with a value of "NZD"</summary>
+        [EnumMember(Value = "NZD")]
+        NZD,
+        /// <summary>`currency` with a value of "SEK"</summary>
+        [EnumMember(Value = "SEK")]
+        SEK,
+        /// <summary>`currency` with a value of "USD"</summary>
+        [EnumMember(Value = "USD")]
+        USD,
+    }
+
+    /// <summary>
+    /// Resources linked to this BillingRequestInstalmentScheduleRequest
+    /// </summary>
+    public class BillingRequestInstalmentScheduleRequestLinks
+    {
+        /// <summary>
+        /// (Optional) ID of the
+        /// [instalment_schedule](#core-endpoints-instalment-schedules) that was
+        /// created from this instalment schedule request.
+        /// 
+        /// </summary>
+        [JsonProperty("instalment_schedule")]
+        public string InstalmentSchedule { get; set; }
+    }
+    
+    /// <summary>
     /// Resources linked to this BillingRequest
     /// </summary>
     public class BillingRequestLinks
@@ -436,6 +589,20 @@ namespace GoCardless.Resources
         public string CustomerBillingDetail { get; set; }
 
         /// <summary>
+        /// (Optional) ID of the associated instalment schedule request
+        /// </summary>
+        [JsonProperty("instalment_schedule_request")]
+        public string InstalmentScheduleRequest { get; set; }
+
+        /// <summary>
+        /// (Optional) ID of the
+        /// [instalment_schedule](#core-endpoints-instalment-schedules) that was
+        /// created from this instalment schedule request.
+        /// </summary>
+        [JsonProperty("instalment_schedule_request_instalment_schedule")]
+        public string InstalmentScheduleRequestInstalmentSchedule { get; set; }
+
+        /// <summary>
         /// (Optional) ID of the associated mandate request
         /// </summary>
         [JsonProperty("mandate_request")]
@@ -472,6 +639,19 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("payment_request_payment")]
         public string PaymentRequestPayment { get; set; }
+
+        /// <summary>
+        /// (Optional) ID of the associated subscription request
+        /// </summary>
+        [JsonProperty("subscription_request")]
+        public string SubscriptionRequest { get; set; }
+
+        /// <summary>
+        /// (Optional) ID of the [subscription](#core-endpoints-subscriptions)
+        /// that was created from this subscription request.
+        /// </summary>
+        [JsonProperty("subscription_request_subscription")]
+        public string SubscriptionRequestSubscription { get; set; }
     }
     
     /// <summary>
@@ -499,8 +679,11 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// This attribute represents the authorisation type between the payer
-        /// and merchant. It can be set to one-off, recurring or standing for
-        /// ACH scheme. And single, recurring and sporadic for PAD scheme.
+        /// and merchant. It can be set to `one_off`,
+        /// `recurring` or `standing` for ACH scheme. And `single`, `recurring`
+        /// and `sporadic` for PAD scheme. _Note:_ This is only supported for
+        /// ACH and PAD schemes.
+        /// 
         /// </summary>
         [JsonProperty("consent_type")]
         public string ConsentType { get; set; }
@@ -650,6 +833,15 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("max_amount_per_payment")]
         public int? MaxAmountPerPayment { get; set; }
+
+        /// <summary>
+        /// A constraint where you can specify info (free text string) about how
+        /// payments are calculated. _Note:_ This is only supported for ACH and
+        /// PAD schemes.
+        /// 
+        /// </summary>
+        [JsonProperty("payment_method")]
+        public string PaymentMethod { get; set; }
 
         /// <summary>
         /// List of periodic limits and constraints which apply to them
@@ -1353,6 +1545,214 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "cancelled"</summary>
         [EnumMember(Value = "cancelled")]
         Cancelled,
+    }
+
+    /// <summary>
+    /// Represents a billing request subscription request resource.
+    ///
+    /// Request for a subscription
+    /// </summary>
+    public class BillingRequestSubscriptionRequest
+    {
+        /// <summary>
+        /// Amount in the lowest denomination for the currency (e.g. pence in
+        /// GBP, cents in EUR).
+        /// </summary>
+        [JsonProperty("amount")]
+        public int? Amount { get; set; }
+
+        /// <summary>
+        /// The amount to be deducted from each payment as an app fee, to be
+        /// paid to the partner integration which created the subscription, in
+        /// the lowest denomination for the currency (e.g. pence in GBP, cents
+        /// in EUR).
+        /// </summary>
+        [JsonProperty("app_fee")]
+        public int? AppFee { get; set; }
+
+        /// <summary>
+        /// The total number of payments that should be taken by this
+        /// subscription.
+        /// </summary>
+        [JsonProperty("count")]
+        public int? Count { get; set; }
+
+        /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        /// "SEK" and "USD" are supported.
+        /// </summary>
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
+
+        /// <summary>
+        /// As per RFC 2445. The day of the month to charge customers on.
+        /// `1`-`28` or `-1` to indicate the last day of the month.
+        /// </summary>
+        [JsonProperty("day_of_month")]
+        public int? DayOfMonth { get; set; }
+
+        /// <summary>
+        /// Number of `interval_units` between customer charge dates. Must be
+        /// greater than or equal to `1`. Must result in at least one charge
+        /// date per year. Defaults to `1`.
+        /// </summary>
+        [JsonProperty("interval")]
+        public int? Interval { get; set; }
+
+        /// <summary>
+        /// The unit of time between customer charge dates. One of `weekly`,
+        /// `monthly` or `yearly`.
+        /// </summary>
+        [JsonProperty("interval_unit")]
+        public BillingRequestSubscriptionRequestIntervalUnit? IntervalUnit { get; set; }
+
+        /// <summary>
+        /// Resources linked to this BillingRequestSubscriptionRequest.
+        /// </summary>
+        [JsonProperty("links")]
+        public BillingRequestSubscriptionRequestLinks Links { get; set; }
+
+        /// <summary>
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IDictionary<string, string> Metadata { get; set; }
+
+        /// <summary>
+        /// Name of the month on which to charge a customer. Must be lowercase.
+        /// Only applies
+        /// when the interval_unit is `yearly`.
+        /// 
+        /// </summary>
+        [JsonProperty("month")]
+        public BillingRequestSubscriptionRequestMonth? Month { get; set; }
+
+        /// <summary>
+        /// Optional name for the subscription. This will be set as the
+        /// description on each payment created. Must not exceed 255 characters.
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// An optional payment reference. This will be set as the reference on
+        /// each payment
+        /// created and will appear on your customer's bank statement. See the
+        /// documentation for
+        /// the [create payment endpoint](#payments-create-a-payment) for more
+        /// details.
+        /// <br />
+        /// </summary>
+        [JsonProperty("payment_reference")]
+        public string PaymentReference { get; set; }
+
+        /// <summary>
+        /// On failure, automatically retry payments using [intelligent
+        /// retries](#success-intelligent-retries). Default is `false`. <p
+        /// class="notice"><strong>Important</strong>: To be able to use
+        /// intelligent retries, Success+ needs to be enabled in [GoCardless
+        /// dashboard](https://manage.gocardless.com/success-plus). </p>
+        /// </summary>
+        [JsonProperty("retry_if_possible")]
+        public bool? RetryIfPossible { get; set; }
+
+        /// <summary>
+        /// The date on which the first payment should be charged. If fulfilled
+        /// after this date, this will be set as the mandate's
+        /// `next_possible_charge_date`.
+        /// When left blank and `month` or `day_of_month` are provided, this
+        /// will be set to the date of the first payment.
+        /// If created without `month` or `day_of_month` this will be set as the
+        /// mandate's `next_possible_charge_date`.
+        /// 
+        /// </summary>
+        [JsonProperty("start_date")]
+        public string StartDate { get; set; }
+    }
+    
+    /// <summary>
+    /// The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestSubscriptionRequestIntervalUnit {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`interval_unit` with a value of "weekly"</summary>
+        [EnumMember(Value = "weekly")]
+        Weekly,
+        /// <summary>`interval_unit` with a value of "monthly"</summary>
+        [EnumMember(Value = "monthly")]
+        Monthly,
+        /// <summary>`interval_unit` with a value of "yearly"</summary>
+        [EnumMember(Value = "yearly")]
+        Yearly,
+    }
+
+    /// <summary>
+    /// Resources linked to this BillingRequestSubscriptionRequest
+    /// </summary>
+    public class BillingRequestSubscriptionRequestLinks
+    {
+        /// <summary>
+        /// (Optional) ID of the [subscription](#core-endpoints-subscriptions)
+        /// that was created from this subscription request.
+        /// 
+        /// </summary>
+        [JsonProperty("subscription")]
+        public string Subscription { get; set; }
+    }
+    
+    /// <summary>
+    /// Name of the month on which to charge a customer. Must be lowercase. Only applies
+    /// when the interval_unit is `yearly`.
+    /// 
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestSubscriptionRequestMonth {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`month` with a value of "january"</summary>
+        [EnumMember(Value = "january")]
+        January,
+        /// <summary>`month` with a value of "february"</summary>
+        [EnumMember(Value = "february")]
+        February,
+        /// <summary>`month` with a value of "march"</summary>
+        [EnumMember(Value = "march")]
+        March,
+        /// <summary>`month` with a value of "april"</summary>
+        [EnumMember(Value = "april")]
+        April,
+        /// <summary>`month` with a value of "may"</summary>
+        [EnumMember(Value = "may")]
+        May,
+        /// <summary>`month` with a value of "june"</summary>
+        [EnumMember(Value = "june")]
+        June,
+        /// <summary>`month` with a value of "july"</summary>
+        [EnumMember(Value = "july")]
+        July,
+        /// <summary>`month` with a value of "august"</summary>
+        [EnumMember(Value = "august")]
+        August,
+        /// <summary>`month` with a value of "september"</summary>
+        [EnumMember(Value = "september")]
+        September,
+        /// <summary>`month` with a value of "october"</summary>
+        [EnumMember(Value = "october")]
+        October,
+        /// <summary>`month` with a value of "november"</summary>
+        [EnumMember(Value = "november")]
+        November,
+        /// <summary>`month` with a value of "december"</summary>
+        [EnumMember(Value = "december")]
+        December,
     }
 
 }
