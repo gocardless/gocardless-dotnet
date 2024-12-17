@@ -438,7 +438,7 @@ namespace GoCardless.Resources
         /// information on how to specify instalments.
         /// </summary>
         [JsonProperty("instalments")]
-        public List<string> Instalments { get; set; }
+        public IDictionary<string, string> Instalments { get; set; }
 
         /// <summary>
         /// Resources linked to this BillingRequestInstalmentScheduleRequest.

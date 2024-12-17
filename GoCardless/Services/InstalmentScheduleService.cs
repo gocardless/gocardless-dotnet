@@ -315,7 +315,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// An explicit array of instalment payments, each specifying at least
-        /// an `amount` and `charge_date`.
+        /// an `amount` and `charge_date`. See [create (with
+        /// dates)](#instalment-schedules-create-with-dates)
         /// </summary>
         [JsonProperty("instalments")]
         public InstalmentScheduleInstalments[] Instalments { get; set; }
@@ -523,6 +524,8 @@ namespace GoCardless.Services
         /// of payment
         /// amounts to be collected, with a specified start date for the first
         /// payment.
+        /// See [create (with
+        /// schedule)](#instalment-schedules-create-with-schedule)
         /// 
         /// </summary>
         [JsonProperty("instalments")]
@@ -532,6 +535,8 @@ namespace GoCardless.Services
         /// of payment
         /// amounts to be collected, with a specified start date for the first
         /// payment.
+        /// See [create (with
+        /// schedule)](#instalment-schedules-create-with-schedule)
         /// 
         /// </summary>
         public class InstalmentScheduleInstalments
