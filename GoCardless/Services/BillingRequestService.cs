@@ -465,7 +465,7 @@ namespace GoCardless.Services
             /// more information on how to specify instalments.
                 /// </summary>
                 [JsonProperty("instalments")]
-                public string[] Instalments { get; set; }
+                public IDictionary<String, String> Instalments { get; set; }
                 
                 /// <summary>
                             /// Key-value store of custom data. Up to 3 keys are permitted, with
