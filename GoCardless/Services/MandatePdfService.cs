@@ -287,6 +287,13 @@ namespace GoCardless.Services
         {
                 
                 /// <summary>
+                            /// ID of an existing [creditor](#core-endpoints-creditors). Only
+            /// required if your account manages multiple creditors.
+                /// </summary>
+                [JsonProperty("creditor")]
+                public string Creditor { get; set; }
+                
+                /// <summary>
                             /// ID of an existing [mandate](#core-endpoints-mandates) to build
             /// the PDF from. The customer's bank details will be censored in
             /// the generated PDF. No other parameters may be provided alongside
