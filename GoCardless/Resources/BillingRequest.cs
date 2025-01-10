@@ -425,11 +425,10 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// currency code. Currently "USD" and "CAD" are supported.
         /// </summary>
         [JsonProperty("currency")]
-        public BillingRequestInstalmentScheduleRequestCurrency? Currency { get; set; }
+        public string Currency { get; set; }
 
         /// <summary>
         /// instalments to be created. See [create (with
@@ -497,42 +496,6 @@ namespace GoCardless.Resources
         public int? TotalAmount { get; set; }
     }
     
-    /// <summary>
-    /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-    /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
-    /// </summary>
-    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestInstalmentScheduleRequestCurrency {
-        /// <summary>Unknown status</summary>
-        [EnumMember(Value = "unknown")]
-        Unknown = 0,
-
-        /// <summary>`currency` with a value of "AUD"</summary>
-        [EnumMember(Value = "AUD")]
-        AUD,
-        /// <summary>`currency` with a value of "CAD"</summary>
-        [EnumMember(Value = "CAD")]
-        CAD,
-        /// <summary>`currency` with a value of "DKK"</summary>
-        [EnumMember(Value = "DKK")]
-        DKK,
-        /// <summary>`currency` with a value of "EUR"</summary>
-        [EnumMember(Value = "EUR")]
-        EUR,
-        /// <summary>`currency` with a value of "GBP"</summary>
-        [EnumMember(Value = "GBP")]
-        GBP,
-        /// <summary>`currency` with a value of "NZD"</summary>
-        [EnumMember(Value = "NZD")]
-        NZD,
-        /// <summary>`currency` with a value of "SEK"</summary>
-        [EnumMember(Value = "SEK")]
-        SEK,
-        /// <summary>`currency` with a value of "USD"</summary>
-        [EnumMember(Value = "USD")]
-        USD,
-    }
-
     /// <summary>
     /// Resources linked to this BillingRequestInstalmentScheduleRequest
     /// </summary>
@@ -1579,8 +1542,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// currency code. Currently "USD" and "CAD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
