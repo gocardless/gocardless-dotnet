@@ -58,6 +58,12 @@ namespace GoCardless.Resources
         public MandateImportEntryLinks Links { get; set; }
 
         /// <summary>
+        /// Per-resource processing errors
+        /// </summary>
+        [JsonProperty("processing_errors")]
+        public IDictionary<string, string> ProcessingErrors { get; set; }
+
+        /// <summary>
         /// A unique identifier for this entry, which you can use (once the
         /// import has been
         /// processed by GoCardless) to identify the records that have been
