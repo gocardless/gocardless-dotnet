@@ -708,6 +708,15 @@ namespace GoCardless.Resources
         public string Scheme { get; set; }
 
         /// <summary>
+        /// If true, this billing request would be used to set up a mandate
+        /// solely for moving (or sweeping) money from one account owned by the
+        /// payer to another account that the payer also owns. This is required
+        /// for Faster Payments
+        /// </summary>
+        [JsonProperty("sweeping")]
+        public bool? Sweeping { get; set; }
+
+        /// <summary>
         /// Verification preference for the mandate. One of:
         /// <ul>
         ///   <li>`minimum`: only verify if absolutely required, such as when
