@@ -122,6 +122,9 @@ namespace GoCardless.Resources
         /// <summary>`export_type` with a value of "payments_import_template"</summary>
         [EnumMember(Value = "payments_import_template")]
         PaymentsImportTemplate,
+        /// <summary>`export_type` with a value of "payment_account_statement"</summary>
+        [EnumMember(Value = "payment_account_statement")]
+        PaymentAccountStatement,
     }
 
 }
