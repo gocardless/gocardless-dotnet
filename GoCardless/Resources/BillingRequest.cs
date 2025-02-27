@@ -440,6 +440,26 @@ namespace GoCardless.Resources
         public IDictionary<string, string> Instalments { get; set; }
 
         /// <summary>
+        /// An explicit array of instalment payments, each specifying at least
+        /// an `amount` and `charge_date`. See [create (with
+        /// dates)](#instalment-schedules-create-with-dates)
+        /// </summary>
+        [JsonProperty("instalments_with_dates")]
+        public List<BillingRequestInstalmentScheduleRequestInstalmentsWithDate> InstalmentsWithDates { get; set; }
+
+        /// <summary>
+        /// Frequency of the payments you want to create, together with an array
+        /// of payment
+        /// amounts to be collected, with a specified start date for the first
+        /// payment.
+        /// See [create (with
+        /// schedule)](#instalment-schedules-create-with-schedule)
+        /// 
+        /// </summary>
+        [JsonProperty("instalments_with_schedule")]
+        public BillingRequestInstalmentScheduleRequestInstalmentsWithSchedule InstalmentsWithSchedule { get; set; }
+
+        /// <summary>
         /// Resources linked to this BillingRequestInstalmentScheduleRequest.
         /// </summary>
         [JsonProperty("links")]
@@ -496,6 +516,108 @@ namespace GoCardless.Resources
         public int? TotalAmount { get; set; }
     }
     
+    /// <summary>
+    /// An explicit array of instalment payments, each specifying at least an
+    /// `amount` and `charge_date`. See [create (with
+    /// dates)](#instalment-schedules-create-with-dates)
+    /// </summary>
+    public class BillingRequestInstalmentScheduleRequestInstalmentsWithDate
+    {
+        /// <summary>
+        /// Amount, in the lowest denomination for the currency (e.g. pence in
+        /// GBP, cents in EUR).
+        /// </summary>
+        [JsonProperty("amount")]
+        public int? Amount { get; set; }
+
+        /// <summary>
+        /// A future date on which the payment should be collected. If the date
+        /// is before the next_possible_charge_date on the
+        /// [mandate](#core-endpoints-mandates), it will be automatically rolled
+        /// forwards to that date.
+        /// </summary>
+        [JsonProperty("charge_date")]
+        public string ChargeDate { get; set; }
+
+        /// <summary>
+        /// A human-readable description of the payment. This will be included
+        /// in the notification email GoCardless sends to your customer if your
+        /// organisation does not send its own notifications (see [compliance
+        /// requirements](#appendix-compliance-requirements)).
+        /// </summary>
+        [JsonProperty("description")]
+        public string Description { get; set; }
+    }
+    
+    /// <summary>
+    /// Represents a billing request instalment schedule request instalments with schedule resource.
+    ///
+    /// Frequency of the payments you want to create, together with an array of
+    /// payment
+    /// amounts to be collected, with a specified start date for the first
+    /// payment.
+    /// See [create (with schedule)](#instalment-schedules-create-with-schedule)
+    /// 
+    /// </summary>
+    public class BillingRequestInstalmentScheduleRequestInstalmentsWithSchedule
+    {
+        /// <summary>
+        /// List of amounts of each instalment, in the lowest denomination for
+        /// the
+        /// currency (e.g. cents in USD).
+        /// 
+        /// </summary>
+        [JsonProperty("amounts")]
+        public List<int?> Amounts { get; set; }
+
+        /// <summary>
+        /// Number of `interval_units` between charge dates. Must be greater
+        /// than or
+        /// equal to `1`.
+        /// 
+        /// </summary>
+        [JsonProperty("interval")]
+        public int? Interval { get; set; }
+
+        /// <summary>
+        /// The unit of time between customer charge dates. One of `weekly`,
+        /// `monthly` or `yearly`.
+        /// </summary>
+        [JsonProperty("interval_unit")]
+        public BillingRequestInstalmentScheduleRequestInstalmentsWithScheduleIntervalUnit? IntervalUnit { get; set; }
+
+        /// <summary>
+        /// The date on which the first payment should be charged. Must be on or
+        /// after the [mandate](#core-endpoints-mandates)'s
+        /// `next_possible_charge_date`. When left blank and `month` or
+        /// `day_of_month` are provided, this will be set to the date of the
+        /// first payment. If created without `month` or `day_of_month` this
+        /// will be set as the mandate's `next_possible_charge_date`
+        /// </summary>
+        [JsonProperty("start_date")]
+        public string StartDate { get; set; }
+    }
+    
+    /// <summary>
+    /// The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestInstalmentScheduleRequestInstalmentsWithScheduleIntervalUnit {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`interval_unit` with a value of "weekly"</summary>
+        [EnumMember(Value = "weekly")]
+        Weekly,
+        /// <summary>`interval_unit` with a value of "monthly"</summary>
+        [EnumMember(Value = "monthly")]
+        Monthly,
+        /// <summary>`interval_unit` with a value of "yearly"</summary>
+        [EnumMember(Value = "yearly")]
+        Yearly,
+    }
+
     /// <summary>
     /// Resources linked to this BillingRequestInstalmentScheduleRequest
     /// </summary>
