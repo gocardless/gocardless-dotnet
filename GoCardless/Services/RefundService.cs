@@ -265,6 +265,10 @@ namespace GoCardless.Services
         /// existing refunds plus the amount of the refund being created.
         /// <br />
         /// Must be supplied if `links[payment]` is present.
+        /// <p class="notice">It is possible to opt out of requiring
+        /// `total_amount_confirmation`, please contact <a
+        /// href="mailto:support@gocardless.com">our support team</a> for more
+        /// information.</p>
         /// </summary>
         [JsonProperty("total_amount_confirmation")]
         public int? TotalAmountConfirmation { get; set; }
