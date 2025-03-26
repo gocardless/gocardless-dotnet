@@ -50,8 +50,8 @@ namespace GoCardless.Services
         /// safeguard is there to prevent two processes from creating refunds
         /// without awareness of each other.
         /// 
-        /// - `number_of_refunds_exceeded` if five or more refunds have already
-        /// been created against the payment.
+        /// - `number_of_refunds_exceeded` if twenty five or more refunds have
+        /// already been created against the payment.
         /// 
         /// - `available_refund_amount_insufficient` if the creditor does not
         /// have sufficient balance for refunds available to cover the cost of
@@ -180,8 +180,8 @@ namespace GoCardless.Services
     /// to prevent two processes from creating refunds without awareness of each
     /// other.
     /// 
-    /// - `number_of_refunds_exceeded` if five or more refunds have already been
-    /// created against the payment.
+    /// - `number_of_refunds_exceeded` if twenty five or more refunds have
+    /// already been created against the payment.
     /// 
     /// - `available_refund_amount_insufficient` if the creditor does not have
     /// sufficient balance for refunds available to cover the cost of the
@@ -265,6 +265,10 @@ namespace GoCardless.Services
         /// existing refunds plus the amount of the refund being created.
         /// <br />
         /// Must be supplied if `links[payment]` is present.
+        /// <p class="notice">It is possible to opt out of requiring
+        /// `total_amount_confirmation`, please contact <a
+        /// href="mailto:support@gocardless.com">our support team</a> for more
+        /// information.</p>
         /// </summary>
         [JsonProperty("total_amount_confirmation")]
         public int? TotalAmountConfirmation { get; set; }
