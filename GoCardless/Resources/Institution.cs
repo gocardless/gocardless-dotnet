@@ -59,6 +59,32 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
+
+        /// <summary>
+        /// The status of the institution
+        /// </summary>
+        [JsonProperty("status")]
+        public string Status { get; set; }
     }
     
+    /// <summary>
+    /// The status of the institution
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum InstitutionStatus {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`status` with a value of "enabled"</summary>
+        [EnumMember(Value = "enabled")]
+        Enabled,
+        /// <summary>`status` with a value of "disabled"</summary>
+        [EnumMember(Value = "disabled")]
+        Disabled,
+        /// <summary>`status` with a value of "temporarily_disabled"</summary>
+        [EnumMember(Value = "temporarily_disabled")]
+        TemporarilyDisabled,
+    }
+
 }
