@@ -399,17 +399,10 @@ namespace GoCardless.Services
         [JsonProperty("fallback_enabled")]
         public bool? FallbackEnabled { get; set; }
 
-        /// <summary>
-        /// Request for an instalment schedule. Has to contain either
-        /// `instalments_with_schedule` object or an array of
-        /// `instalments_with_dates` objects
-        /// </summary>
         [JsonProperty("instalment_schedule_request")]
         public BillingRequestInstalmentScheduleRequest InstalmentScheduleRequest { get; set; }
         /// <summary>
-        /// Request for an instalment schedule. Has to contain either
-        /// `instalments_with_schedule` object or an array of
-        /// `instalments_with_dates` objects
+        /// 
         /// </summary>
         public class BillingRequestInstalmentScheduleRequest
         {
@@ -548,24 +541,6 @@ namespace GoCardless.Services
                 /// </summary>
                 [JsonProperty("start_date")]
                 public string StartDate { get; set; }
-        }
-                
-                [JsonProperty("links")]
-                public BillingRequestLinks Links { get; set; }
-        /// <summary>
-        /// Linked resources for a BillingRequest.
-        /// </summary>
-        public class BillingRequestLinks
-        {
-                
-                /// <summary>
-                            /// (Optional) ID of the
-            /// [instalment_schedule](#core-endpoints-instalment-schedules) that
-            /// was created from this instalment schedule request.
-            /// 
-                /// </summary>
-                [JsonProperty("instalment_schedule")]
-                public string InstalmentSchedule { get; set; }
         }
                 
                 /// <summary>
