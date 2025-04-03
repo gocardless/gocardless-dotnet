@@ -65,7 +65,9 @@ namespace GoCardless.Resources
         public string Id { get; set; }
 
         /// <summary>
-        /// Request for an instalment schedule
+        /// Request for an instalment schedule. Has to contain either
+        /// `instalments_with_schedule` object or an array of
+        /// `instalments_with_dates` objects
         /// </summary>
         [JsonProperty("instalment_schedule_request")]
         public BillingRequestInstalmentScheduleRequest InstalmentScheduleRequest { get; set; }
@@ -410,7 +412,9 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a billing request instalment schedule request resource.
     ///
-    /// Request for an instalment schedule
+    /// Request for an instalment schedule. Has to contain either
+    /// `instalments_with_schedule` object or an array of
+    /// `instalments_with_dates` objects
     /// </summary>
     public class BillingRequestInstalmentScheduleRequest
     {
@@ -429,15 +433,6 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
-
-        /// <summary>
-        /// instalments to be created. See [create (with
-        /// dates)](#instalment-schedules-create-with-dates) and [create (with
-        /// schedule)](#instalment-schedules-create-with-schedule) for more
-        /// information on how to specify instalments.
-        /// </summary>
-        [JsonProperty("instalments")]
-        public IDictionary<string, string> Instalments { get; set; }
 
         /// <summary>
         /// An explicit array of instalment payments, each specifying at least

@@ -14,6 +14,11 @@ namespace GoCardless
         public BalanceService Balances => new BalanceService(this);
 
         /// <summary>
+        ///A service for working with bank account detail resources.
+        /// </summary>
+        public BankAccountDetailService BankAccountDetails => new BankAccountDetailService(this);
+
+        /// <summary>
         ///A service for working with bank authorisation resources.
         /// </summary>
         public BankAuthorisationService BankAuthorisations => new BankAuthorisationService(this);
