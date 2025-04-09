@@ -38,7 +38,7 @@ namespace GoCardless.Resources
         public string AuthorisationUrl { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-time-zones--dates), recording when this
+        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
         /// resource was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -181,8 +181,8 @@ namespace GoCardless.Resources
         public string RedirectUri { get; set; }
 
         /// <summary>
-        /// Dynamic [timestamp](#api-usage-time-zones--dates) recording when
-        /// this resource was last updated.
+        /// Dynamic [timestamp](#api-usage-dates-and-times) recording when this
+        /// resource was last updated.
         /// </summary>
         [JsonProperty("updated_at")]
         public string UpdatedAt { get; set; }

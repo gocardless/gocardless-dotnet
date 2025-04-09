@@ -50,7 +50,7 @@ namespace GoCardless.Resources
         public string ConsentType { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-time-zones--dates), recording when this
+        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
         /// resource was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -161,8 +161,8 @@ namespace GoCardless.Resources
         public MandateStatus? Status { get; set; }
 
         /// <summary>
-        /// [Timestamp](#api-usage-time-zones--dates) recording when this
-        /// mandate was verified.
+        /// [Timestamp](#api-usage-dates-and-times) recording when this mandate
+        /// was verified.
         /// </summary>
         [JsonProperty("verified_at")]
         public string VerifiedAt { get; set; }

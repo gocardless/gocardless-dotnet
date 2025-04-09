@@ -59,8 +59,8 @@ namespace GoCardless.Resources
         public BalanceCurrency? Currency { get; set; }
 
         /// <summary>
-        /// Dynamic [timestamp](#api-usage-time-zones--dates) recording when
-        /// this resource was last updated.
+        /// Dynamic [timestamp](#api-usage-dates-and-times) recording when this
+        /// resource was last updated.
         /// </summary>
         [JsonProperty("last_updated_at")]
         public string LastUpdatedAt { get; set; }

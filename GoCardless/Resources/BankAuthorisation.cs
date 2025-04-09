@@ -32,7 +32,7 @@ namespace GoCardless.Resources
         public string AuthorisationType { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-time-zones--dates), recording when the
+        /// Fixed [timestamp](#api-usage-dates-and-times), recording when the
         /// user has been authorised.
         /// </summary>
         [JsonProperty("authorised_at")]
@@ -58,7 +58,7 @@ namespace GoCardless.Resources
         public string Id { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-time-zones--dates), recording when the
+        /// Fixed [timestamp](#api-usage-dates-and-times), recording when the
         /// authorisation URL has been visited.
         /// </summary>
         [JsonProperty("last_visited_at")]
