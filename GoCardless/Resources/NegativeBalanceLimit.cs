@@ -95,8 +95,7 @@ namespace GoCardless.Resources
     public class NegativeBalanceLimitLinks
     {
         /// <summary>
-        /// ID of the [creator_user](#core-endpoints-creator_users) who created
-        /// this limit
+        /// ID of the creator_user who created this limit
         /// </summary>
         [JsonProperty("creator_user")]
         public string CreatorUser { get; set; }
