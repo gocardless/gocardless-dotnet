@@ -140,6 +140,13 @@ namespace GoCardless.Resources
         public string Creditor { get; set; }
 
         /// <summary>
+        /// ID of the [customer](#core-endpoints-customers) that receives this
+        /// outbound payment
+        /// </summary>
+        [JsonProperty("customer")]
+        public string Customer { get; set; }
+
+        /// <summary>
         /// ID of the customer bank account which receives the outbound payment.
         /// </summary>
         [JsonProperty("recipient_bank_account")]
