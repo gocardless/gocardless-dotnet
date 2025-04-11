@@ -38,7 +38,7 @@ namespace GoCardless.Resources
         public string ActionTaken { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-time-zones--dates), recording when this
+        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
         /// action was taken.
         /// </summary>
         [JsonProperty("action_taken_at")]

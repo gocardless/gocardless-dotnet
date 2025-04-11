@@ -28,7 +28,7 @@ namespace GoCardless.Resources
         public string Action { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-time-zones--dates), recording when this
+        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
         /// resource was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -99,6 +99,7 @@ namespace GoCardless.Resources
         /// <li>`refunds`</li>
         /// <li>`scheme_identifiers`</li>
         /// <li>`subscriptions`</li>
+        /// <li>`outbound_payment`</li>
         /// </ul>
         /// </summary>
         [JsonProperty("resource_type")]
@@ -492,6 +493,7 @@ namespace GoCardless.Resources
     /// <li>`refunds`</li>
     /// <li>`scheme_identifiers`</li>
     /// <li>`subscriptions`</li>
+    /// <li>`outbound_payment`</li>
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
@@ -539,6 +541,9 @@ namespace GoCardless.Resources
         /// <summary>`resource_type` with a value of "subscriptions"</summary>
         [EnumMember(Value = "subscriptions")]
         Subscriptions,
+        /// <summary>`resource_type` with a value of "outbound_payment"</summary>
+        [EnumMember(Value = "outbound_payment")]
+        OutboundPayment,
     }
 
 }

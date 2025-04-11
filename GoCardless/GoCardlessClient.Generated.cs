@@ -129,6 +129,11 @@ namespace GoCardless
         public NegativeBalanceLimitService NegativeBalanceLimits => new NegativeBalanceLimitService(this);
 
         /// <summary>
+        ///A service for working with outbound payment resources.
+        /// </summary>
+        public OutboundPaymentService OutboundPayments => new OutboundPaymentService(this);
+
+        /// <summary>
         ///A service for working with payer authorisation resources.
         /// </summary>
         public PayerAuthorisationService PayerAuthorisations => new PayerAuthorisationService(this);

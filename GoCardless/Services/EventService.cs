@@ -293,6 +293,13 @@ namespace GoCardless.Services
         public string Mandate { get; set; }
 
         /// <summary>
+        /// ID of an outbound_payment. If specified, this endpoint will return
+        /// all events for the given payment.
+        /// </summary>
+        [JsonProperty("outbound_payment")]
+        public string OutboundPayment { get; set; }
+
+        /// <summary>
         /// ID of an event. If specified, this endpoint will return all events
         /// whose parent_event is the given event ID.
         /// </summary>
@@ -414,6 +421,9 @@ namespace GoCardless.Services
             /// <summary>`resource_type` with a value of "subscriptions"</summary>
             [EnumMember(Value = "subscriptions")]
             Subscriptions,
+            /// <summary>`resource_type` with a value of "outbound_payment"</summary>
+            [EnumMember(Value = "outbound_payment")]
+            OutboundPayment,
         }
 
         /// <summary>

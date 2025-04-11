@@ -80,7 +80,7 @@ namespace GoCardless.Resources
         public PayerAuthorisationBankAccount BankAccount { get; set; }
 
         /// <summary>
-        /// [Timestamp](#api-usage-time-zones--dates), recording when this Payer
+        /// [Timestamp](#api-usage-dates-and-times), recording when this Payer
         /// Authorisation was created.
         /// </summary>
         [JsonProperty("created_at")]

@@ -67,7 +67,7 @@ namespace GoCardless.Resources
         public string ConfirmationUrl { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-time-zones--dates), recording when this
+        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
         /// resource was created.
         /// </summary>
         [JsonProperty("created_at")]
