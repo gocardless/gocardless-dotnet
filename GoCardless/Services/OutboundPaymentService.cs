@@ -84,62 +84,62 @@ namespace GoCardless.Services
         /// Once an outbound payment is `executing`, the money moving process
         /// has begun and cannot be reversed.
         /// </summary>  
-        /// <param name="id">Unique identifier of the outbound payment.</param> 
+        /// <param name="identity">Unique identifier of the outbound payment.</param> 
         /// <param name="request">An optional `OutboundPaymentCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single outbound payment resource</returns>
-        public Task<OutboundPaymentResponse> CancelAsync(string id, OutboundPaymentCancelRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<OutboundPaymentResponse> CancelAsync(string identity, OutboundPaymentCancelRequest request = null, RequestSettings customiseRequestMessage = null)
         {
             request = request ?? new OutboundPaymentCancelRequest();
-            if (id == null) throw new ArgumentException(nameof(id));
+            if (identity == null) throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
-                new KeyValuePair<string, object>("id", id),
+                new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<OutboundPaymentResponse>("POST", "/outbound_payments/:id/actions/cancel", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<OutboundPaymentResponse>("POST", "/outbound_payments/:identity/actions/cancel", urlParams, request, null, "data", customiseRequestMessage);
         }
 
         /// <summary>
         /// Approves an outbound payment. Only outbound payments in the
         /// “pending_approval” state can be approved.
         /// </summary>  
-        /// <param name="id">Unique identifier of the outbound payment.</param> 
+        /// <param name="identity">Unique identifier of the outbound payment.</param> 
         /// <param name="request">An optional `OutboundPaymentApproveRequest` representing the body for this approve request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single outbound payment resource</returns>
-        public Task<OutboundPaymentResponse> ApproveAsync(string id, OutboundPaymentApproveRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<OutboundPaymentResponse> ApproveAsync(string identity, OutboundPaymentApproveRequest request = null, RequestSettings customiseRequestMessage = null)
         {
             request = request ?? new OutboundPaymentApproveRequest();
-            if (id == null) throw new ArgumentException(nameof(id));
+            if (identity == null) throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
-                new KeyValuePair<string, object>("id", id),
+                new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<OutboundPaymentResponse>("POST", "/outbound_payments/:id/actions/approve", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<OutboundPaymentResponse>("POST", "/outbound_payments/:identity/actions/approve", urlParams, request, null, "data", customiseRequestMessage);
         }
 
         /// <summary>
         /// Fetches an outbound_payment by ID
         /// </summary>  
-        /// <param name="id">Unique identifier of the outbound payment.</param> 
+        /// <param name="identity">Unique identifier of the outbound payment.</param> 
         /// <param name="request">An optional `OutboundPaymentGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single outbound payment resource</returns>
-        public Task<OutboundPaymentResponse> GetAsync(string id, OutboundPaymentGetRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<OutboundPaymentResponse> GetAsync(string identity, OutboundPaymentGetRequest request = null, RequestSettings customiseRequestMessage = null)
         {
             request = request ?? new OutboundPaymentGetRequest();
-            if (id == null) throw new ArgumentException(nameof(id));
+            if (identity == null) throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
-                new KeyValuePair<string, object>("id", id),
+                new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<OutboundPaymentResponse>("GET", "/outbound_payments/:id", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<OutboundPaymentResponse>("GET", "/outbound_payments/:identity", urlParams, request, null, null, customiseRequestMessage);
         }
 
         /// <summary>
@@ -201,21 +201,21 @@ namespace GoCardless.Services
         /// Updates an outbound payment object. This accepts only the metadata
         /// parameter.
         /// </summary>  
-        /// <param name="id">Unique identifier of the outbound payment.</param> 
+        /// <param name="identity">Unique identifier of the outbound payment.</param> 
         /// <param name="request">An optional `OutboundPaymentUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single outbound payment resource</returns>
-        public Task<OutboundPaymentResponse> UpdateAsync(string id, OutboundPaymentUpdateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<OutboundPaymentResponse> UpdateAsync(string identity, OutboundPaymentUpdateRequest request = null, RequestSettings customiseRequestMessage = null)
         {
             request = request ?? new OutboundPaymentUpdateRequest();
-            if (id == null) throw new ArgumentException(nameof(id));
+            if (identity == null) throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
-                new KeyValuePair<string, object>("id", id),
+                new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<OutboundPaymentResponse>("PUT", "/outbound_payments/:id", urlParams, request, null, "outbound_payments", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<OutboundPaymentResponse>("PUT", "/outbound_payments/:identity", urlParams, request, null, "outbound_payments", customiseRequestMessage);
         }
     }
 
