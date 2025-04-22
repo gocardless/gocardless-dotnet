@@ -24,11 +24,11 @@ namespace GoCardless.Services
     /// [changes](#event-actions-outbound-payment).
     /// 
     /// <p class="restricted-notice"><strong>Restricted</strong>: Outbound
-    /// Payments are currently in Beta and available only to a limited list of
-    /// organisations. If you are interested in using this feature, please stay
-    /// tuned for our public launch announcement. We are actively testing and
-    /// refining our API to ensure it meets your needs and provides the best
-    /// experience.</p>
+    /// Payments are currently in Early Access and available only to a limited
+    /// list of organisations. If you are interested in using this feature,
+    /// please stay tuned for our public launch announcement. We are actively
+    /// testing and refining our API to ensure it meets your needs and provides
+    /// the best experience.</p>
     /// </summary>
 
     public class OutboundPaymentService
@@ -102,8 +102,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Approves an outbound payment. Only outbound payments in the
-        /// “pending_approval” state can be approved.
+        /// Approves an outbound payment. Only outbound payments with the
+        /// “pending_approval” status can be approved.
         /// </summary>  
         /// <param name="identity">Unique identifier of the outbound payment.</param> 
         /// <param name="request">An optional `OutboundPaymentApproveRequest` representing the body for this approve request.</param>
@@ -375,8 +375,8 @@ namespace GoCardless.Services
 
         
     /// <summary>
-    /// Approves an outbound payment. Only outbound payments in the
-    /// “pending_approval” state can be approved.
+    /// Approves an outbound payment. Only outbound payments with the
+    /// “pending_approval” status can be approved.
     /// </summary>
     public class OutboundPaymentApproveRequest
     {
