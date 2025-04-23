@@ -31,7 +31,9 @@ namespace GoCardless.Resources
         /// <summary>
         /// [ISO
         /// 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-        /// alpha-2 code. The country code of the institution.
+        /// alpha-2 code. The country code of the institution. If nothing is
+        /// provided, institutions with the country code 'GB' are returned by
+        /// default.
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
@@ -47,6 +49,12 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
+
+        /// <summary>
+        /// Defines individual limits for business and personal accounts.
+        /// </summary>
+        [JsonProperty("limits")]
+        public InstitutionLimits Limits { get; set; }
 
         /// <summary>
         /// A URL pointing to the logo for this institution
@@ -65,6 +73,30 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("status")]
         public string Status { get; set; }
+    }
+    
+    /// <summary>
+    /// Represents a institution limit resource.
+    ///
+    /// Defines individual limits for business and personal accounts.
+    /// </summary>
+    public class InstitutionLimits
+    {
+        /// <summary>
+        /// Daily limit details for this institution. (The 'limits' property is
+        /// only available via an authenticated request with a generated access
+        /// token)
+        /// </summary>
+        [JsonProperty("daily")]
+        public IDictionary<string, string> Daily { get; set; }
+
+        /// <summary>
+        /// Single transaction limit details for this institution. (The 'limits'
+        /// property is only available via an authenticated request with a
+        /// generated access token)
+        /// </summary>
+        [JsonProperty("single")]
+        public IDictionary<string, string> Single { get; set; }
     }
     
     /// <summary>
