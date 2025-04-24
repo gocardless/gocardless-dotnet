@@ -211,6 +211,7 @@ namespace GoCardless.Services
         /// <li>`refund`</li>
         /// <li>`scheme_identifier`</li>
         /// <li>`subscription`</li>
+        /// <li>`outbound_payment`</li>
         /// </ul>
         /// </summary>
         [JsonProperty("include")]
@@ -230,6 +231,7 @@ namespace GoCardless.Services
         /// <li>`refund`</li>
         /// <li>`scheme_identifier`</li>
         /// <li>`subscription`</li>
+        /// <li>`outbound_payment`</li>
         /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -337,8 +339,8 @@ namespace GoCardless.Services
         /// Type of resource that you'd like to get all events for.
         /// Cannot be used together with the `billing_request`, `creditor`,
         /// `export`,`instalment_schedule`, `mandate`, `payer_authorisation`,
-        /// `payment`, `payout`, `refund`, `scheme_identifier` or `subscription`
-        /// parameters.
+        /// `payment`, `payout`, `refund`, `scheme_identifier`, `subscription`
+        /// or `outbound_payment` parameters.
         /// The type can be one of:
         /// <ul>
         /// <li>`billing_requests`</li>
@@ -352,6 +354,7 @@ namespace GoCardless.Services
         /// <li>`refunds`</li>
         /// <li>`scheme_identifiers`</li>
         /// <li>`subscriptions`</li>
+        /// <li>`outbound_payments`</li>
         /// </ul>
         /// </summary>
         [JsonProperty("resource_type")]
@@ -361,8 +364,8 @@ namespace GoCardless.Services
         /// Type of resource that you'd like to get all events for.
         /// Cannot be used together with the `billing_request`, `creditor`,
         /// `export`,`instalment_schedule`, `mandate`, `payer_authorisation`,
-        /// `payment`, `payout`, `refund`, `scheme_identifier` or `subscription`
-        /// parameters.
+        /// `payment`, `payout`, `refund`, `scheme_identifier`, `subscription`
+        /// or `outbound_payment` parameters.
         /// The type can be one of:
         /// <ul>
         /// <li>`billing_requests`</li>
@@ -376,6 +379,7 @@ namespace GoCardless.Services
         /// <li>`refunds`</li>
         /// <li>`scheme_identifiers`</li>
         /// <li>`subscriptions`</li>
+        /// <li>`outbound_payments`</li>
         /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -421,9 +425,6 @@ namespace GoCardless.Services
             /// <summary>`resource_type` with a value of "subscriptions"</summary>
             [EnumMember(Value = "subscriptions")]
             Subscriptions,
-            /// <summary>`resource_type` with a value of "outbound_payment"</summary>
-            [EnumMember(Value = "outbound_payment")]
-            OutboundPayment,
         }
 
         /// <summary>
