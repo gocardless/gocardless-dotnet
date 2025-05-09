@@ -50,9 +50,6 @@ namespace GoCardless.Services
         /// safeguard is there to prevent two processes from creating refunds
         /// without awareness of each other.
         /// 
-        /// - `number_of_refunds_exceeded` if twenty five or more refunds have
-        /// already been created against the payment.
-        /// 
         /// - `available_refund_amount_insufficient` if the creditor does not
         /// have sufficient balance for refunds available to cover the cost of
         /// the requested refund.
@@ -179,9 +176,6 @@ namespace GoCardless.Services
     /// match the total amount refunded for the payment. This safeguard is there
     /// to prevent two processes from creating refunds without awareness of each
     /// other.
-    /// 
-    /// - `number_of_refunds_exceeded` if twenty five or more refunds have
-    /// already been created against the payment.
     /// 
     /// - `available_refund_amount_insufficient` if the creditor does not have
     /// sufficient balance for refunds available to cover the cost of the
