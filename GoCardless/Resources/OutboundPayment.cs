@@ -42,6 +42,13 @@ namespace GoCardless.Resources
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency. Currently only "GBP" is supported.
+        /// </summary>
+        [JsonProperty("currency")]
+        public OutboundPaymentCurrency? Currency { get; set; }
+
+        /// <summary>
         /// A human-readable description of the outbound payment
         /// </summary>
         [JsonProperty("description")]
@@ -128,6 +135,21 @@ namespace GoCardless.Resources
         public OutboundPaymentVerifications Verifications { get; set; }
     }
     
+    /// <summary>
+    /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency. Currently only
+    /// "GBP" is supported.
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum OutboundPaymentCurrency {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`currency` with a value of "GBP"</summary>
+        [EnumMember(Value = "GBP")]
+        GBP,
+    }
+
     /// <summary>
     /// Resources linked to this OutboundPayment
     /// </summary>
