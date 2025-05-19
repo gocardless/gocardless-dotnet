@@ -44,6 +44,11 @@ namespace GoCardless
         public BillingRequestTemplateService BillingRequestTemplates => new BillingRequestTemplateService(this);
 
         /// <summary>
+        ///A service for working with billing request with action resources.
+        /// </summary>
+        public BillingRequestWithActionService BillingRequestWithActions => new BillingRequestWithActionService(this);
+
+        /// <summary>
         ///A service for working with block resources.
         /// </summary>
         public BlockService Blocks => new BlockService(this);
