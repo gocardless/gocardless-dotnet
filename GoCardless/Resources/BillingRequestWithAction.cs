@@ -18,10 +18,7 @@ namespace GoCardless.Resources
     /// 
     /// See [Billing Requests:
     /// Overview](https://developer.gocardless.com/getting-started/billing-requests/overview/)
-    /// for how-to's, explanations and tutorials. <p
-    /// class="notice"><strong>Important</strong>: All properties associated
-    /// with `subscription_request` and `instalment_schedule_request` are only
-    /// supported for ACH and PAD schemes.</p>
+    /// for how-to's, explanations and tutorials.
     /// </summary>
     public class BillingRequestWithAction
     {
