@@ -903,8 +903,8 @@ namespace GoCardless.Services
                 
                 /// <summary>
                             /// A custom payment reference defined by the merchant. It is only
-            /// available for payments using the Direct Funds settlement model
-            /// on the Faster Payments scheme.
+            /// available for payments on the PayTo scheme or payments using the
+            /// Direct Funds settlement model on the Faster Payments scheme.
             /// 
                 /// </summary>
                 [JsonProperty("reference")]
