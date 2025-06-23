@@ -221,6 +221,158 @@ namespace GoCardless.Services
         }
 
         /// <summary>
+        /// Constraints that will apply to the mandate_request. (Optional)
+        /// Specifically required for PayTo and VRP.
+        /// </summary>
+        [JsonProperty("mandate_request_constraints")]
+        public BillingRequestTemplateMandateRequestConstraints MandateRequestConstraints { get; set; }
+        /// <summary>
+        /// Constraints that will apply to the mandate_request. (Optional)
+        /// Specifically required for PayTo and VRP.
+        /// </summary>
+        public class BillingRequestTemplateMandateRequestConstraints
+        {
+                
+                /// <summary>
+                            /// The latest date at which payments can be taken, must occur after
+            /// start_date if present
+            /// 
+            /// This is an optional field and if it is not supplied the
+            /// agreement will be considered open and
+            /// will not have an end date. Keep in mind the end date must take
+            /// into account how long it will
+            /// take the user to set up this agreement via the Billing Request.
+            /// 
+                /// </summary>
+                [JsonProperty("end_date")]
+                public string EndDate { get; set; }
+                
+                /// <summary>
+                            /// The maximum amount that can be charged for a single payment.
+            /// Required for PayTo and VRP.
+                /// </summary>
+                [JsonProperty("max_amount_per_payment")]
+                public int? MaxAmountPerPayment { get; set; }
+                
+                /// <summary>
+                            /// A constraint where you can specify info (free text string) about
+            /// how payments are calculated. _Note:_ This is only supported for
+            /// ACH and PAD schemes.
+            /// 
+                /// </summary>
+                [JsonProperty("payment_method")]
+                public string PaymentMethod { get; set; }
+                
+                /// <summary>
+                            /// List of periodic limits and constraints which apply to them
+                /// </summary>
+                [JsonProperty("periodic_limits")]
+                public BillingRequestTemplatePeriodicLimits[] PeriodicLimits { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public class BillingRequestTemplatePeriodicLimits
+        {
+                
+                /// <summary>
+                            /// The alignment of the period.
+            /// 
+            /// `calendar` - this will finish on the end of the current period.
+            /// For example this will expire on the Monday for the current week
+            /// or the January for the next year.
+            /// 
+            /// `creation_date` - this will finish on the next instance of the
+            /// current period. For example Monthly it will expire on the same
+            /// day of the next month, or yearly the same day of the next year.
+            /// 
+                /// </summary>
+                [JsonProperty("alignment")]
+                public BillingRequestTemplateAlignment? Alignment { get; set; }
+        /// <summary>
+        /// The alignment of the period.
+        /// 
+        /// `calendar` - this will finish on the end of the current period. For
+        /// example this will expire on the Monday for the current week or the
+        /// January for the next year.
+        /// 
+        /// `creation_date` - this will finish on the next instance of the
+        /// current period. For example Monthly it will expire on the same day
+        /// of the next month, or yearly the same day of the next year.
+        /// 
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BillingRequestTemplateAlignment
+        {
+    
+            /// <summary>`alignment` with a value of "calendar"</summary>
+            [EnumMember(Value = "calendar")]
+            Calendar,
+            /// <summary>`alignment` with a value of "creation_date"</summary>
+            [EnumMember(Value = "creation_date")]
+            CreationDate,
+        }
+                
+                /// <summary>
+                            /// (Optional) The maximum number of payments that can be collected
+            /// in this periodic limit.
+                /// </summary>
+                [JsonProperty("max_payments")]
+                public int? MaxPayments { get; set; }
+                
+                /// <summary>
+                            /// The maximum total amount that can be charged for all payments in
+            /// this periodic limit.
+            /// Required for VRP.
+            /// 
+                /// </summary>
+                [JsonProperty("max_total_amount")]
+                public int? MaxTotalAmount { get; set; }
+                
+                /// <summary>
+                            /// The repeating period for this mandate. Defaults to flexible for
+            /// PayTo if not specified.
+                /// </summary>
+                [JsonProperty("period")]
+                public BillingRequestTemplatePeriod? Period { get; set; }
+        /// <summary>
+        /// The repeating period for this mandate. Defaults to flexible for
+        /// PayTo if not specified.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BillingRequestTemplatePeriod
+        {
+    
+            /// <summary>`period` with a value of "day"</summary>
+            [EnumMember(Value = "day")]
+            Day,
+            /// <summary>`period` with a value of "week"</summary>
+            [EnumMember(Value = "week")]
+            Week,
+            /// <summary>`period` with a value of "month"</summary>
+            [EnumMember(Value = "month")]
+            Month,
+            /// <summary>`period` with a value of "year"</summary>
+            [EnumMember(Value = "year")]
+            Year,
+            /// <summary>`period` with a value of "flexible"</summary>
+            [EnumMember(Value = "flexible")]
+            Flexible,
+        }
+        }
+                
+                /// <summary>
+                            /// The date from which payments can be taken.
+            /// 
+            /// This is an optional field and if it is not supplied the start
+            /// date will be set to the day
+            /// authorisation happens.
+            /// 
+                /// </summary>
+                [JsonProperty("start_date")]
+                public string StartDate { get; set; }
+        }
+
+        /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code.
         /// </summary>
@@ -413,6 +565,158 @@ namespace GoCardless.Services
     /// </summary>
     public class BillingRequestTemplateUpdateRequest
     {
+
+        /// <summary>
+        /// Constraints that will apply to the mandate_request. (Optional)
+        /// Specifically required for PayTo and VRP.
+        /// </summary>
+        [JsonProperty("mandate_request_constraints")]
+        public BillingRequestTemplateMandateRequestConstraints MandateRequestConstraints { get; set; }
+        /// <summary>
+        /// Constraints that will apply to the mandate_request. (Optional)
+        /// Specifically required for PayTo and VRP.
+        /// </summary>
+        public class BillingRequestTemplateMandateRequestConstraints
+        {
+                
+                /// <summary>
+                            /// The latest date at which payments can be taken, must occur after
+            /// start_date if present
+            /// 
+            /// This is an optional field and if it is not supplied the
+            /// agreement will be considered open and
+            /// will not have an end date. Keep in mind the end date must take
+            /// into account how long it will
+            /// take the user to set up this agreement via the Billing Request.
+            /// 
+                /// </summary>
+                [JsonProperty("end_date")]
+                public string EndDate { get; set; }
+                
+                /// <summary>
+                            /// The maximum amount that can be charged for a single payment.
+            /// Required for PayTo and VRP.
+                /// </summary>
+                [JsonProperty("max_amount_per_payment")]
+                public int? MaxAmountPerPayment { get; set; }
+                
+                /// <summary>
+                            /// A constraint where you can specify info (free text string) about
+            /// how payments are calculated. _Note:_ This is only supported for
+            /// ACH and PAD schemes.
+            /// 
+                /// </summary>
+                [JsonProperty("payment_method")]
+                public string PaymentMethod { get; set; }
+                
+                /// <summary>
+                            /// List of periodic limits and constraints which apply to them
+                /// </summary>
+                [JsonProperty("periodic_limits")]
+                public BillingRequestTemplatePeriodicLimits[] PeriodicLimits { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public class BillingRequestTemplatePeriodicLimits
+        {
+                
+                /// <summary>
+                            /// The alignment of the period.
+            /// 
+            /// `calendar` - this will finish on the end of the current period.
+            /// For example this will expire on the Monday for the current week
+            /// or the January for the next year.
+            /// 
+            /// `creation_date` - this will finish on the next instance of the
+            /// current period. For example Monthly it will expire on the same
+            /// day of the next month, or yearly the same day of the next year.
+            /// 
+                /// </summary>
+                [JsonProperty("alignment")]
+                public BillingRequestTemplateAlignment? Alignment { get; set; }
+        /// <summary>
+        /// The alignment of the period.
+        /// 
+        /// `calendar` - this will finish on the end of the current period. For
+        /// example this will expire on the Monday for the current week or the
+        /// January for the next year.
+        /// 
+        /// `creation_date` - this will finish on the next instance of the
+        /// current period. For example Monthly it will expire on the same day
+        /// of the next month, or yearly the same day of the next year.
+        /// 
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BillingRequestTemplateAlignment
+        {
+    
+            /// <summary>`alignment` with a value of "calendar"</summary>
+            [EnumMember(Value = "calendar")]
+            Calendar,
+            /// <summary>`alignment` with a value of "creation_date"</summary>
+            [EnumMember(Value = "creation_date")]
+            CreationDate,
+        }
+                
+                /// <summary>
+                            /// (Optional) The maximum number of payments that can be collected
+            /// in this periodic limit.
+                /// </summary>
+                [JsonProperty("max_payments")]
+                public int? MaxPayments { get; set; }
+                
+                /// <summary>
+                            /// The maximum total amount that can be charged for all payments in
+            /// this periodic limit.
+            /// Required for VRP.
+            /// 
+                /// </summary>
+                [JsonProperty("max_total_amount")]
+                public int? MaxTotalAmount { get; set; }
+                
+                /// <summary>
+                            /// The repeating period for this mandate. Defaults to flexible for
+            /// PayTo if not specified.
+                /// </summary>
+                [JsonProperty("period")]
+                public BillingRequestTemplatePeriod? Period { get; set; }
+        /// <summary>
+        /// The repeating period for this mandate. Defaults to flexible for
+        /// PayTo if not specified.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BillingRequestTemplatePeriod
+        {
+    
+            /// <summary>`period` with a value of "day"</summary>
+            [EnumMember(Value = "day")]
+            Day,
+            /// <summary>`period` with a value of "week"</summary>
+            [EnumMember(Value = "week")]
+            Week,
+            /// <summary>`period` with a value of "month"</summary>
+            [EnumMember(Value = "month")]
+            Month,
+            /// <summary>`period` with a value of "year"</summary>
+            [EnumMember(Value = "year")]
+            Year,
+            /// <summary>`period` with a value of "flexible"</summary>
+            [EnumMember(Value = "flexible")]
+            Flexible,
+        }
+        }
+                
+                /// <summary>
+                            /// The date from which payments can be taken.
+            /// 
+            /// This is an optional field and if it is not supplied the start
+            /// date will be set to the day
+            /// authorisation happens.
+            /// 
+                /// </summary>
+                [JsonProperty("start_date")]
+                public string StartDate { get; set; }
+        }
 
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)

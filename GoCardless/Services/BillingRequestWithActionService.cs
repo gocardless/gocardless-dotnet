@@ -531,13 +531,13 @@ namespace GoCardless.Services
                 
                 /// <summary>
                             /// Constraints that will apply to the mandate_request. (Optional)
-            /// Specifically for PayTo and VRP.
+            /// Specifically required for PayTo and VRP.
                 /// </summary>
                 [JsonProperty("constraints")]
                 public BillingRequestWithActionConstraints Constraints { get; set; }
         /// <summary>
         /// Constraints that will apply to the mandate_request. (Optional)
-        /// Specifically for PayTo and VRP.
+        /// Specifically required for PayTo and VRP.
         /// </summary>
         public class BillingRequestWithActionConstraints
         {
@@ -558,7 +558,7 @@ namespace GoCardless.Services
                 
                 /// <summary>
                             /// The maximum amount that can be charged for a single payment.
-            /// Required for VRP.
+            /// Required for PayTo and VRP.
                 /// </summary>
                 [JsonProperty("max_amount_per_payment")]
                 public int? MaxAmountPerPayment { get; set; }
@@ -638,12 +638,14 @@ namespace GoCardless.Services
                 public int? MaxTotalAmount { get; set; }
                 
                 /// <summary>
-                            /// The repeating period for this mandate
+                            /// The repeating period for this mandate. Defaults to flexible for
+            /// PayTo if not specified.
                 /// </summary>
                 [JsonProperty("period")]
                 public BillingRequestWithActionPeriod? Period { get; set; }
         /// <summary>
-        /// The repeating period for this mandate
+        /// The repeating period for this mandate. Defaults to flexible for
+        /// PayTo if not specified.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BillingRequestWithActionPeriod
@@ -903,8 +905,8 @@ namespace GoCardless.Services
                 
                 /// <summary>
                             /// A custom payment reference defined by the merchant. It is only
-            /// available for payments using the Direct Funds settlement model
-            /// on the Faster Payments scheme.
+            /// available for payments on the PayTo scheme or payments using the
+            /// Direct Funds settlement model on the Faster Payments scheme.
             /// 
                 /// </summary>
                 [JsonProperty("reference")]

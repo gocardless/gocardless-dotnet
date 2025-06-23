@@ -770,7 +770,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Constraints that will apply to the mandate_request. (Optional)
-        /// Specifically for PayTo and VRP.
+        /// Specifically required for PayTo and VRP.
         /// </summary>
         [JsonProperty("constraints")]
         public BillingRequestMandateRequestConstraints Constraints { get; set; }
@@ -898,7 +898,7 @@ namespace GoCardless.Resources
     /// Represents a billing request mandate request constraint resource.
     ///
     /// Constraints that will apply to the mandate_request. (Optional)
-    /// Specifically for PayTo and VRP.
+    /// Specifically required for PayTo and VRP.
     /// </summary>
     public class BillingRequestMandateRequestConstraints
     {
@@ -918,7 +918,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// The maximum amount that can be charged for a single payment.
-        /// Required for VRP.
+        /// Required for PayTo and VRP.
         /// </summary>
         [JsonProperty("max_amount_per_payment")]
         public int? MaxAmountPerPayment { get; set; }
@@ -987,7 +987,8 @@ namespace GoCardless.Resources
         public int? MaxTotalAmount { get; set; }
 
         /// <summary>
-        /// The repeating period for this mandate
+        /// The repeating period for this mandate. Defaults to flexible for
+        /// PayTo if not specified.
         /// </summary>
         [JsonProperty("period")]
         public BillingRequestMandateRequestConstraintPeriodicLimitPeriod? Period { get; set; }
@@ -1019,7 +1020,7 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// The repeating period for this mandate
+    /// The repeating period for this mandate. Defaults to flexible for PayTo if not specified.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestMandateRequestConstraintPeriodicLimitPeriod {
@@ -1169,8 +1170,8 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// A custom payment reference defined by the merchant. It is only
-        /// available for payments using the Direct Funds settlement model on
-        /// the Faster Payments scheme.
+        /// available for payments on the PayTo scheme or payments using the
+        /// Direct Funds settlement model on the Faster Payments scheme.
         /// 
         /// </summary>
         [JsonProperty("reference")]

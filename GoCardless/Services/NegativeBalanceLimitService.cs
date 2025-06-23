@@ -90,24 +90,6 @@ namespace GoCardless.Services
                 return Tuple.Create(list.NegativeBalanceLimits, list.Meta?.Cursors?.After);
             });
         }
-
-        /// <summary>
-        /// Creates a new negative balance limit, which replaces the existing
-        /// limit (if present) for that currency and creditor combination.
-        /// 
-        /// </summary>
-        /// <param name="request">An optional `NegativeBalanceLimitCreateRequest` representing the body for this create request.</param>
-        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
-        /// <returns>A single negative balance limit resource</returns>
-        public Task<NegativeBalanceLimitResponse> CreateAsync(NegativeBalanceLimitCreateRequest request = null, RequestSettings customiseRequestMessage = null)
-        {
-            request = request ?? new NegativeBalanceLimitCreateRequest();
-
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
-
-            return _goCardlessClient.ExecuteAsync<NegativeBalanceLimitResponse>("POST", "/negative_balance_limits", urlParams, request, null, "negative_balance_limits", customiseRequestMessage);
-        }
     }
 
         
@@ -184,84 +166,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
-    }
-
-        
-    /// <summary>
-    /// Creates a new negative balance limit, which replaces the existing limit
-    /// (if present) for that currency and creditor combination.
-    /// 
-    /// </summary>
-    public class NegativeBalanceLimitCreateRequest
-    {
-
-        /// <summary>
-        /// The limit amount in pence (e.g. 10000 for a -100 GBP limit).
-        /// </summary>
-        [JsonProperty("balance_limit")]
-        public int? BalanceLimit { get; set; }
-
-        /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
-        /// </summary>
-        [JsonProperty("currency")]
-        public NegativeBalanceLimitCurrency? Currency { get; set; }
-            
-        /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum NegativeBalanceLimitCurrency
-        {
-    
-            /// <summary>`currency` with a value of "AUD"</summary>
-            [EnumMember(Value = "AUD")]
-            AUD,
-            /// <summary>`currency` with a value of "CAD"</summary>
-            [EnumMember(Value = "CAD")]
-            CAD,
-            /// <summary>`currency` with a value of "DKK"</summary>
-            [EnumMember(Value = "DKK")]
-            DKK,
-            /// <summary>`currency` with a value of "EUR"</summary>
-            [EnumMember(Value = "EUR")]
-            EUR,
-            /// <summary>`currency` with a value of "GBP"</summary>
-            [EnumMember(Value = "GBP")]
-            GBP,
-            /// <summary>`currency` with a value of "NZD"</summary>
-            [EnumMember(Value = "NZD")]
-            NZD,
-            /// <summary>`currency` with a value of "SEK"</summary>
-            [EnumMember(Value = "SEK")]
-            SEK,
-            /// <summary>`currency` with a value of "USD"</summary>
-            [EnumMember(Value = "USD")]
-            USD,
-        }
-
-        /// <summary>
-        /// Linked resources.
-        /// </summary>
-        [JsonProperty("links")]
-        public NegativeBalanceLimitLinks Links { get; set; }
-        /// <summary>
-        /// Linked resources for a NegativeBalanceLimit.
-        /// </summary>
-        public class NegativeBalanceLimitLinks
-        {
-                
-                /// <summary>
-                            /// ID of the [creditor](#core-endpoints-creditors) this limit
-            /// relates to
-                /// </summary>
-                [JsonProperty("creditor")]
-                public string Creditor { get; set; }
-        }
     }
 
     /// <summary>
