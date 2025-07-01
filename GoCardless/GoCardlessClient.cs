@@ -34,6 +34,11 @@ namespace GoCardless
         /// </summary>
         public static HttpClient DefaultHttpClient { get; set; } = new HttpClient();
 
+        /// <summary>
+        /// Information required to sign API requests.
+        /// </summary>
+        public RequestSigningSettings _requestSigningSettings { get; private set; }
+
         public static ushort DefaultNumberOfRetriesOnTimeout { get; set; } = 2;
         public static TimeSpan DefaultWaitBetweenRetries { get; set; } = TimeSpan.FromSeconds(0.5d);
 
@@ -42,16 +47,23 @@ namespace GoCardless
         private readonly Uri _baseUrl;
         private readonly bool _errorOnIdempotencyConflict;
 
-        private GoCardlessClient(string accessToken, string baseUrl, HttpClient httpClient, bool errorOnIdempotencyConflict)
+        /// <summary>
+        /// Set to true for dummy values for "nonce" and "created" used for request signature generation.
+        /// </summary>
+        public bool _testMode = false;
+
+        private GoCardlessClient(string accessToken, string baseUrl, HttpClient httpClient, bool errorOnIdempotencyConflict, RequestSigningSettings requestSigningSettings = default(RequestSigningSettings))
         {
             this._httpClient = httpClient ?? DefaultHttpClient;
             // Disable ExpectContinue when using the Default Http Client
-            if (httpClient == null) {
+            if (httpClient == null)
+            {
                 this._httpClient.DefaultRequestHeaders.ExpectContinue = false;
             }
             _accessToken = accessToken;
             _baseUrl = new Uri(baseUrl, UriKind.Absolute);
             _errorOnIdempotencyConflict = errorOnIdempotencyConflict;
+            _requestSigningSettings = requestSigningSettings;
         }
 
 
@@ -114,6 +126,28 @@ namespace GoCardless
         public static GoCardlessClient Create(string accessToken, string baseUrl, HttpClient client = null, bool errorOnIdempotencyConflict = false)
         {
             return new GoCardlessClient(accessToken, baseUrl, client, errorOnIdempotencyConflict);
+        }
+
+        /// <summary>
+        ///Creates an instance of the client with Request Signing.
+        ///
+        ///@param accessToken the access token
+        ///@param requestSigningSettings the information required to sign API requests
+        ///@param environment the environment
+        ///@param baseUrl the base URL of the API (overrides the URL inferred from the environment)
+        ///@param errorOnIdempotencyConflict the behaviour for Idemptency Key conflicts
+        /// </summary>
+        public static GoCardlessClient Create(
+            string accessToken,
+            RequestSigningSettings requestSigningSettings,
+            Environment environment = Environment.LIVE,
+            string baseUrl = null,
+            HttpClient client = null,
+            bool errorOnIdempotencyConflict = false
+        )
+        {
+            string url = baseUrl ?? GetBaseUrl(environment);
+            return new GoCardlessClient(accessToken, url, client, errorOnIdempotencyConflict, requestSigningSettings);
         }
 
         private static string GetBaseUrl(Environment env)
@@ -214,16 +248,16 @@ namespace GoCardless
                     result.ResponseMessage = responseMessage;
 
                     switch (result.Error.Code)
-                    { 
-                            case 401:
-                                result.Error.Type = ApiErrorType.AUTHENTICATION_FAILED;
-                                break;
-                            case 403:
-                                result.Error.Type = ApiErrorType.INSUFFICIENT_PERMISSIONS;
-                                break;
-                            case 429:
-                                result.Error.Type = ApiErrorType.RATE_LIMIT_REACHED;
-                                break;
+                    {
+                        case 401:
+                            result.Error.Type = ApiErrorType.AUTHENTICATION_FAILED;
+                            break;
+                        case 403:
+                            result.Error.Type = ApiErrorType.INSUFFICIENT_PERMISSIONS;
+                            break;
+                        case 429:
+                            result.Error.Type = ApiErrorType.RATE_LIMIT_REACHED;
+                            break;
                     }
                     throw result.ToException();
                 }
@@ -235,7 +269,7 @@ namespace GoCardless
                     ResponseMessage = responseMessage,
                     Error = new ApiError()
                     {
-                        Code = (int) responseMessage.StatusCode,
+                        Code = (int)responseMessage.StatusCode,
                         Type = ApiErrorType.GOCARDLESS,
                         Message = "Something went wrong with this request. Please check the ResponseMessage property."
                     }
@@ -277,16 +311,17 @@ namespace GoCardless
             runtimeFrameworkInformation = System.Runtime.InteropServices.RuntimeEnvironment.GetSystemVersion();
 #endif
 
-            var userAgentInformation = $" gocardless-dotnet/8.1.0 {runtimeFrameworkInformation} {Helpers.CleanupOSDescriptionString(OSRunningOn)}";
+            var userAgentInformation = $" gocardless-dotnet/9.0.0 {runtimeFrameworkInformation} {Helpers.CleanupOSDescriptionString(OSRunningOn)}";
 
             requestMessage.Headers.Add("User-Agent", userAgentInformation);
             requestMessage.Headers.Add("GoCardless-Version", "2015-07-06");
-            requestMessage.Headers.Add("GoCardless-Client-Version", "8.1.0");
+            requestMessage.Headers.Add("GoCardless-Client-Version", "9.0.0");
             requestMessage.Headers.Add("GoCardless-Client-Library", "gocardless-dotnet");
             requestMessage.Headers.Authorization =
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
 
             //add request body for non-GETs
+            string content = null;
             if (method != "GET" && requestParams != null && !String.IsNullOrWhiteSpace(payloadKey))
             {
                 var settings = new Newtonsoft.Json.JsonSerializerSettings
@@ -305,8 +340,8 @@ namespace GoCardless
                         serializer.Serialize(jsonTextWriter, requestParams);
                         jo[payloadKey] = JToken.Parse(sb.ToString());
                     }
-                    requestMessage.Content = new StringContent(jo.ToString(Formatting.Indented), Encoding.UTF8,
-                        "application/json");
+                    content = jo.ToString(Formatting.Indented);
+                    requestMessage.Content = new StringContent(content, Encoding.UTF8, "application/json");
                 }
             }
 
@@ -318,10 +353,12 @@ namespace GoCardless
                 requestMessage.Headers.TryAddWithoutValidation("Idempotency-Key", hasIdempotencyKey.IdempotencyKey);
             }
 
-            if (requestSettings != null) {
+            if (requestSettings != null)
+            {
                 foreach (var header in requestSettings.Headers)
                 {
-                    if (requestMessage.Headers.Contains(header.Key)) {
+                    if (requestMessage.Headers.Contains(header.Key))
+                    {
                         requestMessage.Headers.Remove(header.Key);
                     }
 
@@ -329,6 +366,10 @@ namespace GoCardless
                 }
             }
 
+            if (!_requestSigningSettings.Equals(default(RequestSigningSettings)))
+            {
+                RequestSigningHelper.SignRequest(requestMessage, _requestSigningSettings, content, _testMode);
+            }
             requestSettings?.CustomiseRequestMessage?.Invoke(requestMessage);
             return requestMessage;
         }
@@ -340,11 +381,11 @@ namespace GoCardless
                 if (value is bool)
                     return value.ToString().ToLower();
                 if (value is DateTimeOffset)
-                    return WebUtility.UrlEncode(((DateTimeOffset?) value).Value.ToString("o"));
+                    return WebUtility.UrlEncode(((DateTimeOffset?)value).Value.ToString("o"));
                 var typeInfo = value.GetType().GetTypeInfo();
                 if (typeInfo.IsArray)
                 {
-                    return String.Join(WebUtility.UrlEncode(","), ((IEnumerable) value).Cast<object>().Select(Stringify));
+                    return String.Join(WebUtility.UrlEncode(","), ((IEnumerable)value).Cast<object>().Select(Stringify));
                 }
                 if (typeInfo.IsEnum)
                 {

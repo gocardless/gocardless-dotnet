@@ -1,0 +1,26 @@
+{
+  "outbound_payments": {
+    "id": "OUT01JYRWBFC1G45PG92PHDHNJB4V",
+    "created_at": "2025-06-27T14:23:35.777Z",
+    "status": "pending_approval",
+    "reference": "GC-JWSVSEQA33T3C3M",
+    "description": "Outbound payment",
+    "scheme": "faster_payments",
+    "currency": "GBP",
+    "amount": 100,
+    "is_withdrawal": false,
+    "execution_date": "2025-06-27",
+    "metadata": null,
+    "links": {
+      "recipient_bank_account": "BA0003GXWZ71HA",
+      "creditor": "CR000095QA5P07"
+    },
+    "verifications": {
+      "recipient_bank_account_holder_verification": {
+        "type": "confirmation_of_payee",
+        "result": "full_match",
+        "actual_account_name": null
+      }
+    }
+  }
+}
