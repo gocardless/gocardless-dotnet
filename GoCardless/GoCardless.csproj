@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>GoCardless</PackageId>
-    <PackageVersion>8.1.0</PackageVersion>
+    <PackageVersion>9.0.0</PackageVersion>
     <Authors>GoCardless Ltd</Authors>
     <Description>Client for the GoCardless API - a powerful, simple solution for the collection of recurring bank-to-bank payments</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -11,8 +11,8 @@
     <Copyright>GoCardless Ltd</Copyright>
     <PackageTags>gocardless payments rest api direct debit</PackageTags>
     <PackageLicenseUrl>https://github.com/gocardless/gocardless-dotnet/blob/master/LICENSE.txt</PackageLicenseUrl>
-    <PackageReleaseNotes>https://github.com/gocardless/gocardless-dotnet/releases/tag/v8.1.0</PackageReleaseNotes>
-    <TargetFrameworks>netstandard1.6;netstandard2.0;netstandard2.1;net46;net8.0</TargetFrameworks>
+    <PackageReleaseNotes>https://github.com/gocardless/gocardless-dotnet/releases/tag/v9.0.0</PackageReleaseNotes>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net461;net8.0</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\GoCardless.xml</DocumentationFile>
@@ -28,6 +28,7 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="BouncyCastle.Cryptography" Version="2.6.1" />
   </ItemGroup>
 
 </Project>
