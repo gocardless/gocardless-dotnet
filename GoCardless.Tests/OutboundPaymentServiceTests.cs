@@ -107,7 +107,7 @@ namespace GoCardless.Tests
             var resp = await client.OutboundPayments.CreateAsync(new OutboundPaymentCreateRequest
             {
                 Amount = 100,
-                Scheme = "faster_payments",
+                Scheme = OutboundPaymentCreateRequest.OutboundPaymentScheme.FasterPayments,
                 Links = new OutboundPaymentCreateRequest.OutboundPaymentLinks
                 {
                     RecipientBankAccount = "BA0000XZDKC8VY",

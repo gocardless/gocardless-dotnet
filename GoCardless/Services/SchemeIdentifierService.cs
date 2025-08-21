@@ -365,6 +365,5 @@ namespace GoCardless.Services
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }
-    }
+        public Meta Meta { get; private set; }}
 }

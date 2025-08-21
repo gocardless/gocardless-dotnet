@@ -88,8 +88,13 @@ namespace GoCardless.Resources
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// An auto-generated reference that will appear on your receiver's bank
+        /// An optional reference that will appear on your customer's bank
         /// statement.
+        /// The character limit for this reference is dependent on the
+        /// scheme.<br />
+        /// <strong>Faster Payments</strong> - 18 characters, including:
+        /// "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
+        /// &-./"<br />
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
@@ -99,7 +104,7 @@ namespace GoCardless.Resources
         /// "faster_payments" (GBP) is supported.
         /// </summary>
         [JsonProperty("scheme")]
-        public string Scheme { get; set; }
+        public OutboundPaymentScheme? Scheme { get; set; }
 
         /// <summary>
         /// One of:
@@ -176,6 +181,21 @@ namespace GoCardless.Resources
     }
     
     /// <summary>
+    /// Bank payment scheme to process the outbound payment. Currently only "faster_payments" (GBP)
+    /// is supported.
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum OutboundPaymentScheme {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`scheme` with a value of "faster_payments"</summary>
+        [EnumMember(Value = "faster_payments")]
+        FasterPayments,
+    }
+
+    /// <summary>
     /// One of:
     /// <ul>
     /// <li>`verifying`: The payment has been
@@ -248,8 +268,8 @@ namespace GoCardless.Resources
     public class OutboundPaymentVerificationsRecipientBankAccountHolderVerification
     {
         /// <summary>
-        /// -| The actual account name returned by the recipient's bank,
-        /// populated only in the case of a partial match.
+        /// The actual account name returned by the recipient's bank, populated
+        /// only in the case of a partial match.
         /// </summary>
         [JsonProperty("actual_account_name")]
         public string ActualAccountName { get; set; }

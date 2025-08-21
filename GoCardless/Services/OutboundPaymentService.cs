@@ -279,11 +279,36 @@ namespace GoCardless.Services
         public IDictionary<String, String> Metadata { get; set; }
 
         /// <summary>
+        /// An optional reference that will appear on your customer's bank
+        /// statement.
+        /// The character limit for this reference is dependent on the
+        /// scheme.<br />
+        /// <strong>Faster Payments</strong> - 18 characters, including:
+        /// "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
+        /// &-./"<br />
+        /// </summary>
+        [JsonProperty("reference")]
+        public string Reference { get; set; }
+
+        /// <summary>
         /// Bank payment scheme to process the outbound payment. Currently only
         /// "faster_payments" (GBP) is supported.
         /// </summary>
         [JsonProperty("scheme")]
-        public string Scheme { get; set; }
+        public OutboundPaymentScheme? Scheme { get; set; }
+            
+        /// <summary>
+        /// Bank payment scheme to process the outbound payment. Currently only
+        /// "faster_payments" (GBP) is supported.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum OutboundPaymentScheme
+        {
+    
+            /// <summary>`scheme` with a value of "faster_payments"</summary>
+            [EnumMember(Value = "faster_payments")]
+            FasterPayments,
+        }
 
         /// <summary>
         /// A unique key to ensure that this request only succeeds once, allowing you to safely retry request errors such as network failures.
@@ -348,11 +373,36 @@ namespace GoCardless.Services
         public IDictionary<String, String> Metadata { get; set; }
 
         /// <summary>
+        /// An optional reference that will appear on your customer's bank
+        /// statement.
+        /// The character limit for this reference is dependent on the
+        /// scheme.<br />
+        /// <strong>Faster Payments</strong> - 18 characters, including:
+        /// "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
+        /// &-./"<br />
+        /// </summary>
+        [JsonProperty("reference")]
+        public string Reference { get; set; }
+
+        /// <summary>
         /// Bank payment scheme to process the outbound payment. Currently only
         /// "faster_payments" (GBP) is supported.
         /// </summary>
         [JsonProperty("scheme")]
-        public string Scheme { get; set; }
+        public OutboundPaymentScheme? Scheme { get; set; }
+            
+        /// <summary>
+        /// Bank payment scheme to process the outbound payment. Currently only
+        /// "faster_payments" (GBP) is supported.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum OutboundPaymentScheme
+        {
+    
+            /// <summary>`scheme` with a value of "faster_payments"</summary>
+            [EnumMember(Value = "faster_payments")]
+            FasterPayments,
+        }
     }
 
         
@@ -546,6 +596,5 @@ namespace GoCardless.Services
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }
-    }
+        public Meta Meta { get; private set; }}
 }

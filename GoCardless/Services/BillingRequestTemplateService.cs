@@ -184,6 +184,18 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
+
+        /// <summary>
+        /// (Optional) A scheme used for Open Banking payments. Currently
+        /// `faster_payments` is supported in the UK (GBP) and
+        /// `sepa_credit_transfer` and `sepa_instant_credit_transfer` are
+        /// supported in supported Eurozone countries (EUR). For Eurozone
+        /// countries, `sepa_credit_transfer` is used as the default. Please be
+        /// aware that `sepa_instant_credit_transfer` may incur an additional
+        /// fee for your customer.
+        /// </summary>
+        [JsonProperty("payment_request_scheme")]
+        public string PaymentRequestScheme { get; set; }
     }
 
         
@@ -921,6 +933,5 @@ namespace GoCardless.Services
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }
-    }
+        public Meta Meta { get; private set; }}
 }
