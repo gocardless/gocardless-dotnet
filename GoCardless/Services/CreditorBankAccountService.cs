@@ -160,6 +160,22 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<CreditorBankAccountResponse>("POST", "/creditor_bank_accounts/:identity/actions/disable", urlParams, request, null, "data", customiseRequestMessage);
         }
+
+        /// <summary>
+        /// Validate bank details without creating a creditor bank account
+        /// </summary>
+        /// <param name="request">An optional `CreditorBankAccountValidateRequest` representing the body for this validate request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single creditor bank account resource</returns>
+        public Task<CreditorBankAccountResponse> ValidateAsync(CreditorBankAccountValidateRequest request = null, RequestSettings customiseRequestMessage = null)
+        {
+            request = request ?? new CreditorBankAccountValidateRequest();
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {};
+
+            return _goCardlessClient.ExecuteAsync<CreditorBankAccountResponse>("POST", "/creditor_bank_accounts/validate", urlParams, request, null, "data", customiseRequestMessage);
+        }
     }
 
         
@@ -407,6 +423,47 @@ namespace GoCardless.Services
     /// </summary>
     public class CreditorBankAccountDisableRequest
     {
+    }
+
+        
+    /// <summary>
+    /// Validate bank details without creating a creditor bank account
+    /// </summary>
+    public class CreditorBankAccountValidateRequest
+    {
+
+        /// <summary>
+        /// International Bank Account Number. Alternatively you can provide
+        /// [local details](#appendix-local-bank-details). IBANs are not
+        /// accepted for Swedish bank accounts denominated in SEK - you must
+        /// supply [local details](#local-bank-details-sweden).
+        /// </summary>
+        [JsonProperty("iban")]
+        public string Iban { get; set; }
+
+        [JsonProperty("local_details")]
+        public CreditorBankAccountLocalDetails LocalDetails { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public class CreditorBankAccountLocalDetails
+        {
+                
+                /// <summary>
+                            /// Bank account number - see [local
+            /// details](#appendix-local-bank-details) for more information.
+            /// Alternatively you can provide an `iban`.
+                /// </summary>
+                [JsonProperty("bank_number")]
+                public string BankNumber { get; set; }
+                
+                /// <summary>
+                            /// Branch code - see [local details](#appendix-local-bank-details)
+            /// for more information. Alternatively you can provide an `iban`.
+                /// </summary>
+                [JsonProperty("sort_code")]
+                public string SortCode { get; set; }
+        }
     }
 
     /// <summary>
