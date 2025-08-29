@@ -217,24 +217,6 @@ namespace GoCardless.Resources
         public int? MaxAmountPerPayment { get; set; }
 
         /// <summary>
-        /// Frequency configuration
-        /// </summary>
-        [JsonProperty("periods")]
-        public List<MandateConsentParameterPeriod> Periods { get; set; }
-
-        /// <summary>
-        /// The date from which payments can be taken
-        /// </summary>
-        [JsonProperty("start_date")]
-        public string StartDate { get; set; }
-    }
-    
-    /// <summary>
-    /// Frequency configuration
-    /// </summary>
-    public class MandateConsentParameterPeriod
-    {
-        /// <summary>
         /// The maximum total amount that can be charged for all payments in
         /// this period
         /// </summary>
@@ -251,14 +233,20 @@ namespace GoCardless.Resources
         /// The repeating period for this mandate
         /// </summary>
         [JsonProperty("period")]
-        public MandateConsentParameterPeriodPeriod? Period { get; set; }
+        public MandateConsentParametersPeriod? Period { get; set; }
+
+        /// <summary>
+        /// The date from which payments can be taken
+        /// </summary>
+        [JsonProperty("start_date")]
+        public string StartDate { get; set; }
     }
     
     /// <summary>
     /// The repeating period for this mandate
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum MandateConsentParameterPeriodPeriod {
+    public enum MandateConsentParametersPeriod {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,

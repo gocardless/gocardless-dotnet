@@ -203,6 +203,5 @@ namespace GoCardless.Services
         /// The list of institutions from the response.
         /// </summary>
         [JsonProperty("institutions")]
-        public IReadOnlyList<Institution> Institutions { get; private set; }
-    }
+        public IReadOnlyList<Institution> Institutions { get; private set; }}
 }
