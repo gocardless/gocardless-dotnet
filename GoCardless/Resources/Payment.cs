@@ -139,6 +139,14 @@ namespace GoCardless.Resources
         public bool? RetryIfPossible { get; set; }
 
         /// <summary>
+        /// A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs",
+        /// "becs_nz", "betalingsservice", "faster_payments", "pad", "pay_to"
+        /// and "sepa_core" are supported.
+        /// </summary>
+        [JsonProperty("scheme")]
+        public string Scheme { get; set; }
+
+        /// <summary>
         /// One of:
         /// <ul>
         /// <li>`pending_customer_approval`: we're waiting for the customer to
