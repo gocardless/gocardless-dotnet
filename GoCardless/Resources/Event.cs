@@ -377,6 +377,12 @@ namespace GoCardless.Resources
         public string Mandate { get; set; }
 
         /// <summary>
+        /// This is the id of the mandate request associated to this event
+        /// </summary>
+        [JsonProperty("mandate_request")]
+        public string MandateRequest { get; set; }
+
+        /// <summary>
         /// If `resource_type` is `billing_requests`, this is the ID of the
         /// [mandate](#core-endpoints-mandates) which has been created.
         /// </summary>
