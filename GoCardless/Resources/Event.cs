@@ -104,6 +104,12 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("resource_type")]
         public EventResourceType? ResourceType { get; set; }
+
+        /// <summary>
+        /// Audit information about the source of the event.
+        /// </summary>
+        [JsonProperty("source")]
+        public EventSource Source { get; set; }
     }
     
     /// <summary>
@@ -377,6 +383,12 @@ namespace GoCardless.Resources
         public string Mandate { get; set; }
 
         /// <summary>
+        /// This is the id of the mandate request associated to this event
+        /// </summary>
+        [JsonProperty("mandate_request")]
+        public string MandateRequest { get; set; }
+
+        /// <summary>
         /// If `resource_type` is `billing_requests`, this is the ID of the
         /// [mandate](#core-endpoints-mandates) which has been created.
         /// </summary>
@@ -541,6 +553,49 @@ namespace GoCardless.Resources
         /// <summary>`resource_type` with a value of "subscriptions"</summary>
         [EnumMember(Value = "subscriptions")]
         Subscriptions,
+    }
+
+    /// <summary>
+    /// Represents a event source resource.
+    ///
+    /// Audit information about the source of the event.
+    /// </summary>
+    public class EventSource
+    {
+        /// <summary>
+        /// The name of the event's source.
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// The type of the event's source.
+        /// </summary>
+        [JsonProperty("type")]
+        public EventSourceType? Type { get; set; }
+    }
+    
+    /// <summary>
+    /// The type of the event's source.
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum EventSourceType {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`type` with a value of "app"</summary>
+        [EnumMember(Value = "app")]
+        App,
+        /// <summary>`type` with a value of "user"</summary>
+        [EnumMember(Value = "user")]
+        User,
+        /// <summary>`type` with a value of "gc_team"</summary>
+        [EnumMember(Value = "gc_team")]
+        GcTeam,
+        /// <summary>`type` with a value of "access_token"</summary>
+        [EnumMember(Value = "access_token")]
+        AccessToken,
     }
 
 }

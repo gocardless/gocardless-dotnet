@@ -441,7 +441,7 @@ namespace GoCardless.Services
         public string[] Scheme { get; set; }
 
         /// <summary>
-        /// At most four valid status values
+        /// One or more valid statuses
         /// </summary>
         [JsonProperty("status")]
         public MandateStatus[] Status { get; set; }
