@@ -311,11 +311,11 @@ namespace GoCardless
             runtimeFrameworkInformation = System.Runtime.InteropServices.RuntimeEnvironment.GetSystemVersion();
 #endif
 
-            var userAgentInformation = $" gocardless-dotnet/9.1.0 {runtimeFrameworkInformation} {Helpers.CleanupOSDescriptionString(OSRunningOn)}";
+            var userAgentInformation = $" gocardless-dotnet/9.2.0 {runtimeFrameworkInformation} {Helpers.CleanupOSDescriptionString(OSRunningOn)}";
 
             requestMessage.Headers.Add("User-Agent", userAgentInformation);
             requestMessage.Headers.Add("GoCardless-Version", "2015-07-06");
-            requestMessage.Headers.Add("GoCardless-Client-Version", "9.1.0");
+            requestMessage.Headers.Add("GoCardless-Client-Version", "9.2.0");
             requestMessage.Headers.Add("GoCardless-Client-Library", "gocardless-dotnet");
             requestMessage.Headers.Authorization =
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
