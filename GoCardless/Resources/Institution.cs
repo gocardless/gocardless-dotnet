@@ -51,7 +51,9 @@ namespace GoCardless.Resources
         public string Id { get; set; }
 
         /// <summary>
-        /// Defines individual limits for business and personal accounts.
+        /// Defines individual limits for business and personal accounts, in the
+        /// lowest denomination for the currency (e.g. pence in GBP, cents in
+        /// EUR).
         /// </summary>
         [JsonProperty("limits")]
         public InstitutionLimits Limits { get; set; }
@@ -78,22 +80,25 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a institution limit resource.
     ///
-    /// Defines individual limits for business and personal accounts.
+    /// Defines individual limits for business and personal accounts, in the
+    /// lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
     /// </summary>
     public class InstitutionLimits
     {
         /// <summary>
-        /// Daily limit details for this institution. (The 'limits' property is
-        /// only available via an authenticated request with a generated access
-        /// token)
+        /// Daily limit details for this institution, in the lowest denomination
+        /// for the currency (e.g. pence in GBP, cents in EUR). The 'limits'
+        /// property is only available via an authenticated request with a
+        /// generated access token
         /// </summary>
         [JsonProperty("daily")]
         public IDictionary<string, string> Daily { get; set; }
 
         /// <summary>
-        /// Single transaction limit details for this institution. (The 'limits'
-        /// property is only available via an authenticated request with a
-        /// generated access token)
+        /// Single transaction limit details for this institution, in the lowest
+        /// denomination for the currency (e.g. pence in GBP, cents in EUR). The
+        /// 'limits' property is only available via an authenticated request
+        /// with a generated access token
         /// </summary>
         [JsonProperty("single")]
         public IDictionary<string, string> Single { get; set; }
