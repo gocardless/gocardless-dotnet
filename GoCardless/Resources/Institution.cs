@@ -51,9 +51,7 @@ namespace GoCardless.Resources
         public string Id { get; set; }
 
         /// <summary>
-        /// Defines individual limits for business and personal accounts, in the
-        /// lowest denomination for the currency (e.g. pence in GBP, cents in
-        /// EUR).
+        /// Defines individual limits for business and personal accounts.
         /// </summary>
         [JsonProperty("limits")]
         public InstitutionLimits Limits { get; set; }
@@ -80,8 +78,7 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a institution limit resource.
     ///
-    /// Defines individual limits for business and personal accounts, in the
-    /// lowest denomination for the currency (e.g. pence in GBP, cents in EUR).
+    /// Defines individual limits for business and personal accounts.
     /// </summary>
     public class InstitutionLimits
     {
