@@ -83,17 +83,19 @@ namespace GoCardless.Resources
     public class InstitutionLimits
     {
         /// <summary>
-        /// Daily limit details for this institution. (The 'limits' property is
-        /// only available via an authenticated request with a generated access
-        /// token)
+        /// Daily limit details for this institution, in the lowest denomination
+        /// for the currency (e.g. pence in GBP, cents in EUR). The 'limits'
+        /// property is only available via an authenticated request with a
+        /// generated access token
         /// </summary>
         [JsonProperty("daily")]
         public IDictionary<string, string> Daily { get; set; }
 
         /// <summary>
-        /// Single transaction limit details for this institution. (The 'limits'
-        /// property is only available via an authenticated request with a
-        /// generated access token)
+        /// Single transaction limit details for this institution, in the lowest
+        /// denomination for the currency (e.g. pence in GBP, cents in EUR). The
+        /// 'limits' property is only available via an authenticated request
+        /// with a generated access token
         /// </summary>
         [JsonProperty("single")]
         public IDictionary<string, string> Single { get; set; }
