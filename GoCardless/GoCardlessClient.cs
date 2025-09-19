@@ -22,11 +22,218 @@ using JsonSerializerSettings = GoCardless.Internals.JsonSerializerSettings;
 
 namespace GoCardless
 {
+    public interface IGoCardlessClient
+    {
+        /// <summary>
+        /// Information required to sign API requests.
+        /// </summary>
+        RequestSigningSettings _requestSigningSettings { get; }
+
+        /// <summary>
+        ///A service for working with balance resources.
+        /// </summary>
+        BalanceService Balances { get; }
+
+        /// <summary>
+        ///A service for working with bank account detail resources.
+        /// </summary>
+        BankAccountDetailService BankAccountDetails { get; }
+
+        /// <summary>
+        ///A service for working with bank authorisation resources.
+        /// </summary>
+        BankAuthorisationService BankAuthorisations { get; }
+
+        /// <summary>
+        ///A service for working with bank details lookup resources.
+        /// </summary>
+        BankDetailsLookupService BankDetailsLookups { get; }
+
+        /// <summary>
+        ///A service for working with billing request resources.
+        /// </summary>
+        BillingRequestService BillingRequests { get; }
+
+        /// <summary>
+        ///A service for working with billing request flow resources.
+        /// </summary>
+        BillingRequestFlowService BillingRequestFlows { get; }
+
+        /// <summary>
+        ///A service for working with billing request template resources.
+        /// </summary>
+        BillingRequestTemplateService BillingRequestTemplates { get; }
+
+        /// <summary>
+        ///A service for working with billing request with action resources.
+        /// </summary>
+        BillingRequestWithActionService BillingRequestWithActions { get; }
+
+        /// <summary>
+        ///A service for working with block resources.
+        /// </summary>
+        BlockService Blocks { get; }
+
+        /// <summary>
+        ///A service for working with creditor resources.
+        /// </summary>
+        CreditorService Creditors { get; }
+
+        /// <summary>
+        ///A service for working with creditor bank account resources.
+        /// </summary>
+        CreditorBankAccountService CreditorBankAccounts { get; }
+
+        /// <summary>
+        ///A service for working with currency exchange rate resources.
+        /// </summary>
+        CurrencyExchangeRateService CurrencyExchangeRates { get; }
+
+        /// <summary>
+        ///A service for working with customer resources.
+        /// </summary>
+        CustomerService Customers { get; }
+
+        /// <summary>
+        ///A service for working with customer bank account resources.
+        /// </summary>
+        CustomerBankAccountService CustomerBankAccounts { get; }
+
+        /// <summary>
+        ///A service for working with customer notification resources.
+        /// </summary>
+        CustomerNotificationService CustomerNotifications { get; }
+
+        /// <summary>
+        ///A service for working with event resources.
+        /// </summary>
+        EventService Events { get; }
+
+        /// <summary>
+        ///A service for working with export resources.
+        /// </summary>
+        ExportService Exports { get; }
+
+        /// <summary>
+        ///A service for working with instalment schedule resources.
+        /// </summary>
+        InstalmentScheduleService InstalmentSchedules { get; }
+
+        /// <summary>
+        ///A service for working with institution resources.
+        /// </summary>
+        InstitutionService Institutions { get; }
+
+        /// <summary>
+        ///A service for working with logo resources.
+        /// </summary>
+        LogoService Logos { get; }
+
+        /// <summary>
+        ///A service for working with mandate resources.
+        /// </summary>
+        MandateService Mandates { get; }
+
+        /// <summary>
+        ///A service for working with mandate import resources.
+        /// </summary>
+        MandateImportService MandateImports { get; }
+
+        /// <summary>
+        ///A service for working with mandate import entry resources.
+        /// </summary>
+        MandateImportEntryService MandateImportEntries { get; }
+
+        /// <summary>
+        ///A service for working with mandate pdf resources.
+        /// </summary>
+        MandatePdfService MandatePdfs { get; }
+
+        /// <summary>
+        ///A service for working with negative balance limit resources.
+        /// </summary>
+        NegativeBalanceLimitService NegativeBalanceLimits { get; }
+
+        /// <summary>
+        ///A service for working with outbound payment resources.
+        /// </summary>
+        OutboundPaymentService OutboundPayments { get; }
+
+        /// <summary>
+        ///A service for working with payer authorisation resources.
+        /// </summary>
+        PayerAuthorisationService PayerAuthorisations { get; }
+
+        /// <summary>
+        ///A service for working with payer theme resources.
+        /// </summary>
+        PayerThemeService PayerThemes { get; }
+
+        /// <summary>
+        ///A service for working with payment resources.
+        /// </summary>
+        PaymentService Payments { get; }
+
+        /// <summary>
+        ///A service for working with payout resources.
+        /// </summary>
+        PayoutService Payouts { get; }
+
+        /// <summary>
+        ///A service for working with payout item resources.
+        /// </summary>
+        PayoutItemService PayoutItems { get; }
+
+        /// <summary>
+        ///A service for working with redirect flow resources.
+        /// </summary>
+        RedirectFlowService RedirectFlows { get; }
+
+        /// <summary>
+        ///A service for working with refund resources.
+        /// </summary>
+        RefundService Refunds { get; }
+
+        /// <summary>
+        ///A service for working with scenario simulator resources.
+        /// </summary>
+        ScenarioSimulatorService ScenarioSimulators { get; }
+
+        /// <summary>
+        ///A service for working with schemeentifier resources.
+        /// </summary>
+        SchemeIdentifierService SchemeIdentifiers { get; }
+
+        /// <summary>
+        ///A service for working with subscription resources.
+        /// </summary>
+        SubscriptionService Subscriptions { get; }
+
+        /// <summary>
+        ///A service for working with tax rate resources.
+        /// </summary>
+        TaxRateService TaxRates { get; }
+
+        /// <summary>
+        ///A service for working with transferred mandate resources.
+        /// </summary>
+        TransferredMandateService TransferredMandates { get; }
+
+        /// <summary>
+        ///A service for working with verification detail resources.
+        /// </summary>
+        VerificationDetailService VerificationDetails { get; }
+
+        /// <summary>
+        ///A service for working with webhook resources.
+        /// </summary>
+        WebhookService Webhooks { get; }
+    }
 
     /// <summary>
     ///Entry point into the client.
     /// </summary>
-    public partial class GoCardlessClient
+    public partial class GoCardlessClient : IGoCardlessClient
     {
         /// <summary>
         /// This is the singleton HttpClient used if none is passed in via the .Create factory methods.
