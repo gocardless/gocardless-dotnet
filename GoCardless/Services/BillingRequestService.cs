@@ -861,6 +861,42 @@ namespace GoCardless.Services
                 public string Description { get; set; }
                 
                 /// <summary>
+                            /// This field will decide how GoCardless handles settlement of
+            /// funds from the customer.
+            /// 
+            /// - `managed` will be moved through GoCardless' account, batched,
+            /// and payed out.
+            /// - `direct` will be a direct transfer from the payer's account to
+            /// the merchant where
+            ///   invoicing will be handled separately.
+            /// 
+                /// </summary>
+                [JsonProperty("funds_settlement")]
+                public BillingRequestFundsSettlement? FundsSettlement { get; set; }
+        /// <summary>
+        /// This field will decide how GoCardless handles settlement of funds
+        /// from the customer.
+        /// 
+        /// - `managed` will be moved through GoCardless' account, batched, and
+        /// payed out.
+        /// - `direct` will be a direct transfer from the payer's account to the
+        /// merchant where
+        ///   invoicing will be handled separately.
+        /// 
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BillingRequestFundsSettlement
+        {
+    
+            /// <summary>`funds_settlement` with a value of "managed"</summary>
+            [EnumMember(Value = "managed")]
+            Managed,
+            /// <summary>`funds_settlement` with a value of "direct"</summary>
+            [EnumMember(Value = "direct")]
+            Direct,
+        }
+                
+                /// <summary>
                             /// Key-value store of custom data. Up to 3 keys are permitted, with
             /// key names up to 50 characters and values up to 500 characters.
                 /// </summary>
