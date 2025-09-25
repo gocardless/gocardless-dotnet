@@ -13,7 +13,7 @@ For full details of the GoCardless API, see the [API docs](https://developer.goc
 
 To install `GoCardless`, run the following command in the [Package Manager Console](https://docs.microsoft.com/en-us/nuget/tools/package-manager-console)
 
-`Install-Package GoCardless -Version 9.2.0`
+`Install-Package GoCardless -Version 9.2.2`
 
 
 ## Usage
@@ -208,9 +208,3 @@ When the API returns an `invalid_state` error due to an `idempotent_creation_con
 automatically retrieve the existing record which was created using the same idempotency key.
 
 If a timeout occurs, and the request being made is idempotent, the library will automatically retry the request up to 2 more times.
-
-### Support and feedback
-
-- [Developer documentation](https://developer.gocardless.com/)
-- [Developer support](https://support.gocardless.com/hc/en-us/categories/115000140449)
-- api@gocardless.com
