@@ -791,6 +791,20 @@ namespace GoCardless.Resources
         public string Description { get; set; }
 
         /// <summary>
+        /// This field will decide how GoCardless handles settlement of funds
+        /// from the customer.
+        /// 
+        /// - `managed` will be moved through GoCardless' account, batched, and
+        /// payed out.
+        /// - `direct` will be a direct transfer from the payer's account to the
+        /// merchant where
+        ///   invoicing will be handled separately.
+        /// 
+        /// </summary>
+        [JsonProperty("funds_settlement")]
+        public BillingRequestMandateRequestFundsSettlement? FundsSettlement { get; set; }
+
+        /// <summary>
         /// Resources linked to this BillingRequestMandateRequest.
         /// </summary>
         [JsonProperty("links")]
@@ -1043,6 +1057,28 @@ namespace GoCardless.Resources
         /// <summary>`period` with a value of "flexible"</summary>
         [EnumMember(Value = "flexible")]
         Flexible,
+    }
+
+    /// <summary>
+    /// This field will decide how GoCardless handles settlement of funds from the customer.
+    /// 
+    /// - `managed` will be moved through GoCardless' account, batched, and payed out.
+    /// - `direct` will be a direct transfer from the payer's account to the merchant where
+    ///   invoicing will be handled separately.
+    /// 
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestMandateRequestFundsSettlement {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`funds_settlement` with a value of "managed"</summary>
+        [EnumMember(Value = "managed")]
+        Managed,
+        /// <summary>`funds_settlement` with a value of "direct"</summary>
+        [EnumMember(Value = "direct")]
+        Direct,
     }
 
     /// <summary>
