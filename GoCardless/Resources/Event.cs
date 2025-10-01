@@ -520,6 +520,9 @@ namespace GoCardless.Resources
         /// <summary>`resource_type` with a value of "creditors"</summary>
         [EnumMember(Value = "creditors")]
         Creditors,
+        /// <summary>`resource_type` with a value of "customers"</summary>
+        [EnumMember(Value = "customers")]
+        Customers,
         /// <summary>`resource_type` with a value of "exports"</summary>
         [EnumMember(Value = "exports")]
         Exports,

@@ -244,6 +244,9 @@ namespace GoCardless.Services
             /// <summary>`include` with a value of "creditor"</summary>
             [EnumMember(Value = "creditor")]
             Creditor,
+            /// <summary>`include` with a value of "customer"</summary>
+            [EnumMember(Value = "customer")]
+            Customer,
             /// <summary>`include` with a value of "instalment_schedule"</summary>
             [EnumMember(Value = "instalment_schedule")]
             InstalmentSchedule,
@@ -392,6 +395,9 @@ namespace GoCardless.Services
             /// <summary>`resource_type` with a value of "creditors"</summary>
             [EnumMember(Value = "creditors")]
             Creditors,
+            /// <summary>`resource_type` with a value of "customers"</summary>
+            [EnumMember(Value = "customers")]
+            Customers,
             /// <summary>`resource_type` with a value of "exports"</summary>
             [EnumMember(Value = "exports")]
             Exports,
