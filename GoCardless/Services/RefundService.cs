@@ -20,9 +20,9 @@ namespace GoCardless.Services
     /// [payment](#core-endpoints-payments) back to the
     /// [customer](#core-endpoints-customers).
     /// 
-    /// GoCardless will notify you via a [webhook](#appendix-more-on-webhooks)
-    /// whenever a refund is created, and will update the `amount_refunded`
-    /// property of the payment.
+    /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
+    /// a refund is created, and will update the `amount_refunded` property of
+    /// the payment.
     /// </summary>
 
     public class RefundService

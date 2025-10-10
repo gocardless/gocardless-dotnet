@@ -95,7 +95,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of a single payout. For an example of how to
         /// reconcile the transactions in a payout, see [this
-        /// guide](#webhooks-payouts-with-events).
+        /// guide](#events-reconciling-payouts-with-events).
         /// </summary>  
         /// <param name="identity">Unique identifier, beginning with "PO".</param> 
         /// <param name="request">An optional `PayoutGetRequest` representing the query parameters for this get request.</param>
@@ -336,7 +336,7 @@ namespace GoCardless.Services
     /// <summary>
     /// Retrieves the details of a single payout. For an example of how to
     /// reconcile the transactions in a payout, see [this
-    /// guide](#webhooks-payouts-with-events).
+    /// guide](#events-reconciling-payouts-with-events).
     /// </summary>
     public class PayoutGetRequest
     {

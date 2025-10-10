@@ -16,13 +16,13 @@ namespace GoCardless.Resources
     /// mandate which has been transferred. Event creation is an asynchronous
     /// process, so it can take some time between an action occurring and its
     /// corresponding event getting included in API responses. See
-    /// [here](#webhooks) for a complete list of event types.
+    /// [here](#event-actions) for a complete list of event types.
     /// </summary>
     public class Event
     {
         /// <summary>
-        /// What has happened to the resource. See [Event Actions](#webhooks)
-        /// for the possible actions.
+        /// What has happened to the resource. See [Event
+        /// Actions](#event-actions) for the possible actions.
         /// </summary>
         [JsonProperty("action")]
         public string Action { get; set; }
