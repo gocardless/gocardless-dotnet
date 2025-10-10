@@ -21,7 +21,7 @@ namespace GoCardless.Services
     /// mandate which has been transferred. Event creation is an asynchronous
     /// process, so it can take some time between an action occurring and its
     /// corresponding event getting included in API responses. See
-    /// [here](#event-actions) for a complete list of event types.
+    /// [here](#webhooks) for a complete list of event types.
     /// </summary>
 
     public class EventService

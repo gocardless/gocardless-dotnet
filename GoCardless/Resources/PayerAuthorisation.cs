@@ -46,7 +46,7 @@ namespace GoCardless.Resources
     /// the following:
     /// <ol>
     ///   <li> Listen to <code>  payer_authorisation_completed </code>  <a
-    /// href="#appendix-webhooks"> webhook</a> (recommended)</li>
+    /// href="#appendix-more-on-webhooks"> webhook</a> (recommended)</li>
     ///   <li> Poll the GET <a
     /// href="#payer-authorisations-get-a-single-payer-authorisation">
     /// endpoint</a></li>
