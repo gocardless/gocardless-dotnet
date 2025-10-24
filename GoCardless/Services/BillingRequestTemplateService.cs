@@ -141,7 +141,7 @@ namespace GoCardless.Services
         /// Updates a Billing Request Template, which will affect all future
         /// Billing Requests created by this template.
         /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "BRQ".</param> 
+        /// <param name="identity">Unique identifier, beginning with "BRT".</param> 
         /// <param name="request">An optional `BillingRequestTemplateUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request template resource</returns>

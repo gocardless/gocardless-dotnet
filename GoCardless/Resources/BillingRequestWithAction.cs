@@ -403,21 +403,6 @@ namespace GoCardless.Resources
     }
     
     /// <summary>
-    /// Represents a billing request with action billing request action available currency resource.
-    ///
-    /// List of currencies the current mandate supports
-    /// </summary>
-    public class BillingRequestWithActionBillingRequestActionAvailableCurrencies
-    {
-        /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code.
-        /// </summary>
-        [JsonProperty("currency")]
-        public string Currency { get; set; }
-    }
-    
-    /// <summary>
     /// Represents a billing request with action billing request action bank authorisation resource.
     ///
     /// Describes the behaviour of bank authorisations, for the
