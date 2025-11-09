@@ -1,20 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a institution resource.
     ///
     /// Institutions that are supported when creating [Bank
     /// Authorisations](#billing-requests-bank-authorisations) for a particular
     /// country or purpose.
-    /// 
+    ///
     /// Not all institutions support both Payment Initiation (PIS) and Account
     /// Information (AIS) services.
     /// </summary>
@@ -74,7 +73,7 @@ namespace GoCardless.Resources
         [JsonProperty("status")]
         public string Status { get; set; }
     }
-    
+
     /// <summary>
     /// Represents a institution limit resource.
     ///
@@ -100,12 +99,13 @@ namespace GoCardless.Resources
         [JsonProperty("single")]
         public IDictionary<string, string> Single { get; set; }
     }
-    
+
     /// <summary>
     /// The status of the institution
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum InstitutionStatus {
+    public enum InstitutionStatus
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -113,12 +113,13 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "enabled"</summary>
         [EnumMember(Value = "enabled")]
         Enabled,
+
         /// <summary>`status` with a value of "disabled"</summary>
         [EnumMember(Value = "disabled")]
         Disabled,
+
         /// <summary>`status` with a value of "temporarily_disabled"</summary>
         [EnumMember(Value = "temporarily_disabled")]
         TemporarilyDisabled,
     }
-
 }

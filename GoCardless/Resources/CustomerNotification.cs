@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a customer notification resource.
     ///
@@ -16,11 +15,11 @@ namespace GoCardless.Resources
     /// after an event has happened. The event, the resource and the customer to
     /// be notified
     /// are all identified in the `links` property.
-    /// 
+    ///
     /// Note that these are ephemeral records - once the notification has been
     /// actioned in some
     /// way, it is no longer visible using this API.
-    /// 
+    ///
     /// <p class="restricted-notice"><strong>Restricted</strong>: This API is
     /// currently only available for approved integrators - please <a
     /// href="mailto:help@gocardless.com">get in touch</a> if you would like to
@@ -32,7 +31,7 @@ namespace GoCardless.Resources
         /// The action that was taken on the notification. Currently this can
         /// only be `handled`,
         /// which means the integrator sent the notification themselves.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("action_taken")]
         public string ActionTaken { get; set; }
@@ -80,14 +79,15 @@ namespace GoCardless.Resources
         [JsonProperty("type")]
         public string Type { get; set; }
     }
-    
+
     /// <summary>
     /// The action that was taken on the notification. Currently this can only be `handled`,
     /// which means the integrator sent the notification themselves.
-    /// 
+    ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum CustomerNotificationActionTaken {
+    public enum CustomerNotificationActionTaken
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -138,7 +138,7 @@ namespace GoCardless.Resources
         [JsonProperty("subscription")]
         public string Subscription { get; set; }
     }
-    
+
     /// <summary>
     /// The type of notification the customer shall receive.
     /// One of:
@@ -154,7 +154,8 @@ namespace GoCardless.Resources
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum CustomerNotificationType {
+    public enum CustomerNotificationType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -162,27 +163,33 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "payment_created"</summary>
         [EnumMember(Value = "payment_created")]
         PaymentCreated,
+
         /// <summary>`type` with a value of "payment_cancelled"</summary>
         [EnumMember(Value = "payment_cancelled")]
         PaymentCancelled,
+
         /// <summary>`type` with a value of "mandate_created"</summary>
         [EnumMember(Value = "mandate_created")]
         MandateCreated,
+
         /// <summary>`type` with a value of "mandate_blocked"</summary>
         [EnumMember(Value = "mandate_blocked")]
         MandateBlocked,
+
         /// <summary>`type` with a value of "subscription_created"</summary>
         [EnumMember(Value = "subscription_created")]
         SubscriptionCreated,
+
         /// <summary>`type` with a value of "subscription_cancelled"</summary>
         [EnumMember(Value = "subscription_cancelled")]
         SubscriptionCancelled,
+
         /// <summary>`type` with a value of "instalment_schedule_created"</summary>
         [EnumMember(Value = "instalment_schedule_created")]
         InstalmentScheduleCreated,
+
         /// <summary>`type` with a value of "instalment_schedule_cancelled"</summary>
         [EnumMember(Value = "instalment_schedule_cancelled")]
         InstalmentScheduleCancelled,
     }
-
 }

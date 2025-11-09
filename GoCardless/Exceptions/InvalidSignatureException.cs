@@ -6,7 +6,5 @@ namespace GoCardless.Exceptions
     ///Thrown when a webhook body's signature header does not match the computed
     ///HMAC of the body.
     /// </summary>
-    public class InvalidSignatureException : Exception
-    {
-    }
+    public class InvalidSignatureException : Exception { }
 }

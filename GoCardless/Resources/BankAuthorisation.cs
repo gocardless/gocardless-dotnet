@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a bank authorisation resource.
     ///
@@ -16,7 +15,7 @@ namespace GoCardless.Resources
     /// are created against a specific bank, usually the bank that provides the
     /// payer's
     /// account.
-    /// 
+    ///
     /// Creation of Bank Authorisations is only permitted from GoCardless hosted
     /// UIs
     /// (see Billing Request Flows) to ensure we meet regulatory requirements
@@ -81,7 +80,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// URL that the payer can be redirected to after authorising the
         /// payment.
-        /// 
+        ///
         /// On completion of bank authorisation, the query parameter of either
         /// `outcome=success` or `outcome=failure` will be
         /// appended to the `redirect_uri` to indicate the result of the bank
@@ -89,7 +88,7 @@ namespace GoCardless.Resources
         /// expired, the query parameter `outcome=timeout` will be appended to
         /// the `redirect_uri`, in which case you should
         /// prompt the user to try the bank authorisation step again.
-        /// 
+        ///
         /// Please note: bank authorisations can still fail despite an
         /// `outcome=success` on the `redirect_uri`. It is therefore recommended
         /// to wait for the relevant bank authorisation event, such as
@@ -98,10 +97,10 @@ namespace GoCardless.Resources
         /// or
         /// [`BANK_AUTHORISATION_FAILED`](#billing-request-bankauthorisationfailed)
         /// in order to show the correct outcome to the user.
-        /// 
+        ///
         /// The BillingRequestFlow ID will also be appended to the
         /// `redirect_uri` as query parameter `id=BRF123`.
-        /// 
+        ///
         /// Defaults to `https://pay.gocardless.com/billing/static/thankyou`.
         /// </summary>
         [JsonProperty("redirect_uri")]
@@ -114,12 +113,13 @@ namespace GoCardless.Resources
         [JsonProperty("url")]
         public string Url { get; set; }
     }
-    
+
     /// <summary>
     /// Type of authorisation, can be either 'mandate' or 'payment'.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BankAuthorisationAuthorisationType {
+    public enum BankAuthorisationAuthorisationType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -127,6 +127,7 @@ namespace GoCardless.Resources
         /// <summary>`authorisation_type` with a value of "mandate"</summary>
         [EnumMember(Value = "mandate")]
         Mandate,
+
         /// <summary>`authorisation_type` with a value of "payment"</summary>
         [EnumMember(Value = "payment")]
         Payment,
@@ -151,5 +152,4 @@ namespace GoCardless.Resources
         [JsonProperty("institution")]
         public string Institution { get; set; }
     }
-    
 }

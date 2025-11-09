@@ -1,5 +1,3 @@
-
-
 using System.Collections.Generic;
 using System.Linq;
 using GoCardless.Errors;
@@ -12,11 +10,10 @@ namespace GoCardless.Exceptions
     /// </summary>
     public class InvalidStateException : ApiException
     {
-        internal InvalidStateException(ApiErrorResponse apiErrorResponse) : base(apiErrorResponse)
-        {
-        }
+        internal InvalidStateException(ApiErrorResponse apiErrorResponse)
+            : base(apiErrorResponse) { }
 
-        public new IReadOnlyList<Error.IError> Errors => base.Errors.Cast<Error.IError>().ToList().AsReadOnly();
-
+        public new IReadOnlyList<Error.IError> Errors =>
+            base.Errors.Cast<Error.IError>().ToList().AsReadOnly();
     }
 }

@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +16,6 @@ namespace GoCardless.Services
     ///
     /// Basic description of a webhook
     /// </summary>
-
     public class WebhookService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -39,21 +36,34 @@ namespace GoCardless.Services
         /// <param name="request">An optional `WebhookListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of webhook resources</returns>
-        public Task<WebhookListResponse> ListAsync(WebhookListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<WebhookListResponse> ListAsync(
+            WebhookListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new WebhookListRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<WebhookListResponse>("GET", "/webhooks", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<WebhookListResponse>(
+                "GET",
+                "/webhooks",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Get a lazily enumerated list of webhooks.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Webhook> All(WebhookListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Webhook> All(
+            WebhookListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new WebhookListRequest();
 
@@ -75,7 +85,10 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of webhooks.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Task<IReadOnlyList<Webhook>>> AllAsync(WebhookListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Task<IReadOnlyList<Webhook>>> AllAsync(
+            WebhookListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new WebhookListRequest();
 
@@ -89,53 +102,77 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of an existing webhook.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "WB".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "WB".</param>
         /// <param name="request">An optional `WebhookGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single webhook resource</returns>
-        public Task<WebhookResponse> GetAsync(string identity, WebhookGetRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<WebhookResponse> GetAsync(
+            string identity,
+            WebhookGetRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new WebhookGetRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<WebhookResponse>("GET", "/webhooks/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<WebhookResponse>(
+                "GET",
+                "/webhooks/:identity",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Requests for a previous webhook to be sent again
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "WB".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "WB".</param>
         /// <param name="request">An optional `WebhookRetryRequest` representing the body for this retry request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single webhook resource</returns>
-        public Task<WebhookResponse> RetryAsync(string identity, WebhookRetryRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<WebhookResponse> RetryAsync(
+            string identity,
+            WebhookRetryRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new WebhookRetryRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<WebhookResponse>("POST", "/webhooks/:identity/actions/retry", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<WebhookResponse>(
+                "POST",
+                "/webhooks/:identity/actions/retry",
+                urlParams,
+                request,
+                null,
+                "data",
+                customiseRequestMessage
+            );
         }
     }
 
-        
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// webhooks.
     /// </summary>
     public class WebhookListRequest
     {
-
         /// <summary>
         /// Cursor pointing to the start of the desired set.
         /// </summary>
@@ -189,17 +226,17 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("is_test")]
         public bool? IsTest { get; set; }
-            
+
         /// <summary>
         /// Show only test/non test webhooks
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum WebhookIsTest
         {
-    
             /// <summary>`is_test` with a value of "true"</summary>
             [EnumMember(Value = "true")]
             True,
+
             /// <summary>`is_test` with a value of "false"</summary>
             [EnumMember(Value = "false")]
             False,
@@ -216,38 +253,32 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("successful")]
         public bool? Successful { get; set; }
-            
+
         /// <summary>
         /// Show only successful/failed webhooks
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum WebhookSuccessful
         {
-    
             /// <summary>`successful` with a value of "true"</summary>
             [EnumMember(Value = "true")]
             True,
+
             /// <summary>`successful` with a value of "false"</summary>
             [EnumMember(Value = "false")]
             False,
         }
     }
 
-        
     /// <summary>
     /// Retrieves the details of an existing webhook.
     /// </summary>
-    public class WebhookGetRequest
-    {
-    }
+    public class WebhookGetRequest { }
 
-        
     /// <summary>
     /// Requests for a previous webhook to be sent again
     /// </summary>
-    public class WebhookRetryRequest
-    {
-    }
+    public class WebhookRetryRequest { }
 
     /// <summary>
     /// An API response for a request returning a single webhook.
@@ -271,8 +302,10 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("webhooks")]
         public IReadOnlyList<Webhook> Webhooks { get; private set; }
+
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }}
+        public Meta Meta { get; private set; }
+    }
 }

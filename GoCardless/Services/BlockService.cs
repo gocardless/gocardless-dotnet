@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,28 +17,28 @@ namespace GoCardless.Services
     /// Blocks are created to prevent certain customer details from being used
     /// when creating
     /// mandates.
-    /// 
+    ///
     /// The details used to create blocks can be exact matches, like a bank
     /// account or an email,
     /// or a more generic match such as an email domain or bank name. Please be
     /// careful when creating
     /// blocks for more generic matches as this may block legitimate payers from
     /// using your service.
-    /// 
+    ///
     /// New block types may be added over time.
-    /// 
+    ///
     /// A block is in essence a simple rule that is used to match against
     /// details in a newly
     /// created mandate. If there is a successful match then the mandate is
     /// transitioned to a
     /// "blocked" state.
-    /// 
+    ///
     /// Please note:
-    /// 
+    ///
     ///   - Payments and subscriptions cannot be created against a mandate in
     /// blocked state.
     ///   - A mandate can never be transitioned out of the blocked state.
-    /// 
+    ///
     /// The one exception to this is when blocking a 'bank_name'. This block
     /// will prevent bank
     /// accounts from being created for banks that match the given name. To
@@ -49,14 +47,13 @@ namespace GoCardless.Services
     /// this block. Please
     /// be aware that we cannot always match a bank account to a given bank
     /// name.
-    /// 
+    ///
     /// <p class="notice">
     ///   This API is currently only available for GoCardless Protect+
     /// integrators - please <a href="mailto:help@gocardless.com">get in
     /// touch</a> if you would like to use this API.
     /// </p>
     /// </summary>
-
     public class BlockService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -76,34 +73,57 @@ namespace GoCardless.Services
         /// <param name="request">An optional `BlockCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single block resource</returns>
-        public Task<BlockResponse> CreateAsync(BlockCreateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<BlockResponse> CreateAsync(
+            BlockCreateRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BlockCreateRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<BlockResponse>("POST", "/blocks", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "blocks", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BlockResponse>(
+                "POST",
+                "/blocks",
+                urlParams,
+                request,
+                id => GetAsync(id, null, customiseRequestMessage),
+                "blocks",
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Retrieves the details of an existing block.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "BLC".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "BLC".</param>
         /// <param name="request">An optional `BlockGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single block resource</returns>
-        public Task<BlockResponse> GetAsync(string identity, BlockGetRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<BlockResponse> GetAsync(
+            string identity,
+            BlockGetRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BlockGetRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<BlockResponse>("GET", "/blocks/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BlockResponse>(
+                "GET",
+                "/blocks/:identity",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
@@ -113,21 +133,34 @@ namespace GoCardless.Services
         /// <param name="request">An optional `BlockListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of block resources</returns>
-        public Task<BlockListResponse> ListAsync(BlockListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<BlockListResponse> ListAsync(
+            BlockListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BlockListRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<BlockListResponse>("GET", "/blocks", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BlockListResponse>(
+                "GET",
+                "/blocks",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Get a lazily enumerated list of blocks.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Block> All(BlockListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Block> All(
+            BlockListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BlockListRequest();
 
@@ -149,7 +182,10 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of blocks.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Task<IReadOnlyList<Block>>> AllAsync(BlockListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Task<IReadOnlyList<Block>>> AllAsync(
+            BlockListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BlockListRequest();
 
@@ -163,43 +199,69 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Disables a block so that it no longer will prevent mandate creation.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "BLC".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "BLC".</param>
         /// <param name="request">An optional `BlockDisableRequest` representing the body for this disable request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single block resource</returns>
-        public Task<BlockResponse> DisableAsync(string identity, BlockDisableRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<BlockResponse> DisableAsync(
+            string identity,
+            BlockDisableRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BlockDisableRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<BlockResponse>("POST", "/blocks/:identity/actions/disable", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BlockResponse>(
+                "POST",
+                "/blocks/:identity/actions/disable",
+                urlParams,
+                request,
+                null,
+                "data",
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Enables a previously disabled block so that it will prevent mandate
         /// creation
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "BLC".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "BLC".</param>
         /// <param name="request">An optional `BlockEnableRequest` representing the body for this enable request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single block resource</returns>
-        public Task<BlockResponse> EnableAsync(string identity, BlockEnableRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<BlockResponse> EnableAsync(
+            string identity,
+            BlockEnableRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BlockEnableRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<BlockResponse>("POST", "/blocks/:identity/actions/enable", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BlockResponse>(
+                "POST",
+                "/blocks/:identity/actions/enable",
+                urlParams,
+                request,
+                null,
+                "data",
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
@@ -212,24 +274,32 @@ namespace GoCardless.Services
         /// <param name="request">An optional `BlockBlockByRefRequest` representing the body for this block_by_ref request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of block resources</returns>
-        public Task<BlockListResponse> BlockByRefAsync(BlockBlockByRefRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<BlockListResponse> BlockByRefAsync(
+            BlockBlockByRefRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BlockBlockByRefRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<BlockListResponse>("POST", "/blocks/block_by_ref", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BlockListResponse>(
+                "POST",
+                "/blocks/block_by_ref",
+                urlParams,
+                request,
+                null,
+                "data",
+                customiseRequestMessage
+            );
         }
     }
 
-        
     /// <summary>
     /// Creates a new Block of a given type. By default it will be active.
     /// </summary>
     public class BlockCreateRequest : IHasIdempotencyKey
     {
-
         /// <summary>
         /// Shows if the block is active or disabled. Only active blocks will be
         /// used when deciding
@@ -246,7 +316,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("block_type")]
         public string BlockType { get; set; }
-            
+
         /// <summary>
         /// Type of entity we will seek to match against when blocking the
         /// mandate. This
@@ -256,16 +326,18 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BlockBlockType
         {
-    
             /// <summary>`block_type` with a value of "email"</summary>
             [EnumMember(Value = "email")]
             Email,
+
             /// <summary>`block_type` with a value of "email_domain"</summary>
             [EnumMember(Value = "email_domain")]
             EmailDomain,
+
             /// <summary>`block_type` with a value of "bank_account"</summary>
             [EnumMember(Value = "bank_account")]
             BankAccount,
+
             /// <summary>`block_type` with a value of "bank_name"</summary>
             [EnumMember(Value = "bank_name")]
             BankName,
@@ -293,7 +365,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("reason_type")]
         public string ReasonType { get; set; }
-            
+
         /// <summary>
         /// The reason you wish to block this payer, can currently be one of
         /// 'identity_fraud',
@@ -305,16 +377,18 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BlockReasonType
         {
-    
             /// <summary>`reason_type` with a value of "identity_fraud"</summary>
             [EnumMember(Value = "identity_fraud")]
             IdentityFraud,
+
             /// <summary>`reason_type` with a value of "no_intent_to_pay"</summary>
             [EnumMember(Value = "no_intent_to_pay")]
             NoIntentToPay,
+
             /// <summary>`reason_type` with a value of "unfair_chargeback"</summary>
             [EnumMember(Value = "unfair_chargeback")]
             UnfairChargeback,
+
             /// <summary>`reason_type` with a value of "other"</summary>
             [EnumMember(Value = "other")]
             Other,
@@ -343,22 +417,17 @@ namespace GoCardless.Services
         public string IdempotencyKey { get; set; }
     }
 
-        
     /// <summary>
     /// Retrieves the details of an existing block.
     /// </summary>
-    public class BlockGetRequest
-    {
-    }
+    public class BlockGetRequest { }
 
-        
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// blocks.
     /// </summary>
     public class BlockListRequest
     {
-
         /// <summary>
         /// Cursor pointing to the start of the desired set.
         /// </summary>
@@ -385,7 +454,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("block_type")]
         public string BlockType { get; set; }
-            
+
         /// <summary>
         /// Type of entity we will seek to match against when blocking the
         /// mandate. This
@@ -395,16 +464,18 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BlockBlockType
         {
-    
             /// <summary>`block_type` with a value of "email"</summary>
             [EnumMember(Value = "email")]
             Email,
+
             /// <summary>`block_type` with a value of "email_domain"</summary>
             [EnumMember(Value = "email_domain")]
             EmailDomain,
+
             /// <summary>`block_type` with a value of "bank_account"</summary>
             [EnumMember(Value = "bank_account")]
             BankAccount,
+
             /// <summary>`block_type` with a value of "bank_name"</summary>
             [EnumMember(Value = "bank_name")]
             BankName,
@@ -463,7 +534,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("reason_type")]
         public string ReasonType { get; set; }
-            
+
         /// <summary>
         /// The reason you wish to block this payer, can currently be one of
         /// 'identity_fraud',
@@ -475,16 +546,18 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BlockReasonType
         {
-    
             /// <summary>`reason_type` with a value of "identity_fraud"</summary>
             [EnumMember(Value = "identity_fraud")]
             IdentityFraud,
+
             /// <summary>`reason_type` with a value of "no_intent_to_pay"</summary>
             [EnumMember(Value = "no_intent_to_pay")]
             NoIntentToPay,
+
             /// <summary>`reason_type` with a value of "unfair_chargeback"</summary>
             [EnumMember(Value = "unfair_chargeback")]
             UnfairChargeback,
+
             /// <summary>`reason_type` with a value of "other"</summary>
             [EnumMember(Value = "other")]
             Other,
@@ -498,24 +571,17 @@ namespace GoCardless.Services
         public string UpdatedAt { get; set; }
     }
 
-        
     /// <summary>
     /// Disables a block so that it no longer will prevent mandate creation.
     /// </summary>
-    public class BlockDisableRequest
-    {
-    }
+    public class BlockDisableRequest { }
 
-        
     /// <summary>
     /// Enables a previously disabled block so that it will prevent mandate
     /// creation
     /// </summary>
-    public class BlockEnableRequest
-    {
-    }
+    public class BlockEnableRequest { }
 
-        
     /// <summary>
     /// Creates new blocks for a given reference. By default blocks will be
     /// active.
@@ -525,7 +591,6 @@ namespace GoCardless.Services
     /// </summary>
     public class BlockBlockByRefRequest
     {
-
         /// <summary>
         /// Shows if the block is active or disabled. Only active blocks will be
         /// used when deciding
@@ -556,7 +621,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("reason_type")]
         public string ReasonType { get; set; }
-            
+
         /// <summary>
         /// The reason you wish to block this payer, can currently be one of
         /// 'identity_fraud',
@@ -568,16 +633,18 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BlockReasonType
         {
-    
             /// <summary>`reason_type` with a value of "identity_fraud"</summary>
             [EnumMember(Value = "identity_fraud")]
             IdentityFraud,
+
             /// <summary>`reason_type` with a value of "no_intent_to_pay"</summary>
             [EnumMember(Value = "no_intent_to_pay")]
             NoIntentToPay,
+
             /// <summary>`reason_type` with a value of "unfair_chargeback"</summary>
             [EnumMember(Value = "unfair_chargeback")]
             UnfairChargeback,
+
             /// <summary>`reason_type` with a value of "other"</summary>
             [EnumMember(Value = "other")]
             Other,
@@ -591,7 +658,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("reference_type")]
         public string ReferenceType { get; set; }
-            
+
         /// <summary>
         /// Type of entity we will seek to get the associated emails and bank
         /// accounts to
@@ -601,10 +668,10 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BlockReferenceType
         {
-    
             /// <summary>`reference_type` with a value of "customer"</summary>
             [EnumMember(Value = "customer")]
             Customer,
+
             /// <summary>`reference_type` with a value of "mandate"</summary>
             [EnumMember(Value = "mandate")]
             Mandate,
@@ -645,8 +712,10 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("blocks")]
         public IReadOnlyList<Block> Blocks { get; private set; }
+
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }}
+        public Meta Meta { get; private set; }
+    }
 }

@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +18,10 @@ namespace GoCardless.Services
     /// to a "creditor", to whom the payment is then paid out. In most cases
     /// your organisation will have a single "creditor", but the API also
     /// supports collecting payments on behalf of others.
-    /// 
+    ///
     /// Currently, for Anti Money Laundering reasons, any creditors you add must
     /// be directly related to your organisation.
     /// </summary>
-
     public class CreditorService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -44,14 +41,24 @@ namespace GoCardless.Services
         /// <param name="request">An optional `CreditorCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor resource</returns>
-        public Task<CreditorResponse> CreateAsync(CreditorCreateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CreditorResponse> CreateAsync(
+            CreditorCreateRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CreditorCreateRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<CreditorResponse>("POST", "/creditors", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "creditors", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CreditorResponse>(
+                "POST",
+                "/creditors",
+                urlParams,
+                request,
+                id => GetAsync(id, null, customiseRequestMessage),
+                "creditors",
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
@@ -61,21 +68,34 @@ namespace GoCardless.Services
         /// <param name="request">An optional `CreditorListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of creditor resources</returns>
-        public Task<CreditorListResponse> ListAsync(CreditorListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CreditorListResponse> ListAsync(
+            CreditorListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CreditorListRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<CreditorListResponse>("GET", "/creditors", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CreditorListResponse>(
+                "GET",
+                "/creditors",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Get a lazily enumerated list of creditors.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Creditor> All(CreditorListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Creditor> All(
+            CreditorListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CreditorListRequest();
 
@@ -97,7 +117,10 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of creditors.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Task<IReadOnlyList<Creditor>>> AllAsync(CreditorListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Task<IReadOnlyList<Creditor>>> AllAsync(
+            CreditorListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CreditorListRequest();
 
@@ -111,62 +134,86 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of an existing creditor.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "CR".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "CR".</param>
         /// <param name="request">An optional `CreditorGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor resource</returns>
-        public Task<CreditorResponse> GetAsync(string identity, CreditorGetRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CreditorResponse> GetAsync(
+            string identity,
+            CreditorGetRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CreditorGetRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CreditorResponse>("GET", "/creditors/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CreditorResponse>(
+                "GET",
+                "/creditors/:identity",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Updates a creditor object. Supports all of the fields supported when
         /// creating a creditor.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "CR".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "CR".</param>
         /// <param name="request">An optional `CreditorUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor resource</returns>
-        public Task<CreditorResponse> UpdateAsync(string identity, CreditorUpdateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CreditorResponse> UpdateAsync(
+            string identity,
+            CreditorUpdateRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CreditorUpdateRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CreditorResponse>("PUT", "/creditors/:identity", urlParams, request, null, "creditors", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CreditorResponse>(
+                "PUT",
+                "/creditors/:identity",
+                urlParams,
+                request,
+                null,
+                "creditors",
+                customiseRequestMessage
+            );
         }
     }
 
-        
     /// <summary>
     /// Creates a new creditor.
     /// </summary>
     public class CreditorCreateRequest : IHasIdempotencyKey
     {
-
         /// <summary>
         /// Prefix for the bank reference of payouts sent to this creditor. For
         /// instance, if
         /// the creditor's `bank_reference_prefix` was `ACME`, the bank
         /// reference of a payout
         /// sent to that creditor could be `ACME-8G7Q8`.
-        /// 
+        ///
         /// This prefix is also used for refunds in EUR and GBP.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("bank_reference_prefix")]
         public string BankReferencePrefix { get; set; }
@@ -184,7 +231,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("creditor_type")]
         public CreditorCreditorType? CreditorType { get; set; }
-            
+
         /// <summary>
         /// The type of business of the creditor. Currently, `individual`,
         /// `company`, `charity`, `partnership`, and `trust` are supported.
@@ -192,19 +239,22 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CreditorCreditorType
         {
-    
             /// <summary>`creditor_type` with a value of "company"</summary>
             [EnumMember(Value = "company")]
             Company,
+
             /// <summary>`creditor_type` with a value of "individual"</summary>
             [EnumMember(Value = "individual")]
             Individual,
+
             /// <summary>`creditor_type` with a value of "charity"</summary>
             [EnumMember(Value = "charity")]
             Charity,
+
             /// <summary>`creditor_type` with a value of "partnership"</summary>
             [EnumMember(Value = "partnership")]
             Partnership,
+
             /// <summary>`creditor_type` with a value of "trust"</summary>
             [EnumMember(Value = "trust")]
             Trust,
@@ -231,14 +281,12 @@ namespace GoCardless.Services
         public string IdempotencyKey { get; set; }
     }
 
-        
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// creditors.
     /// </summary>
     public class CreditorListRequest
     {
-
         /// <summary>
         /// Cursor pointing to the start of the desired set.
         /// </summary>
@@ -294,22 +342,17 @@ namespace GoCardless.Services
         public int? Limit { get; set; }
     }
 
-        
     /// <summary>
     /// Retrieves the details of an existing creditor.
     /// </summary>
-    public class CreditorGetRequest
-    {
-    }
+    public class CreditorGetRequest { }
 
-        
     /// <summary>
     /// Updates a creditor object. Supports all of the fields supported when
     /// creating a creditor.
     /// </summary>
     public class CreditorUpdateRequest
     {
-
         /// <summary>
         /// The first line of the creditor's address.
         /// </summary>
@@ -334,9 +377,9 @@ namespace GoCardless.Services
         /// the creditor's `bank_reference_prefix` was `ACME`, the bank
         /// reference of a payout
         /// sent to that creditor could be `ACME-8G7Q8`.
-        /// 
+        ///
         /// This prefix is also used for refunds in EUR and GBP.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("bank_reference_prefix")]
         public string BankReferencePrefix { get; set; }
@@ -359,67 +402,67 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("links")]
         public CreditorLinks Links { get; set; }
+
         /// <summary>
         /// Linked resources for a Creditor.
         /// </summary>
         public class CreditorLinks
         {
-                
-                /// <summary>
-                            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// <summary>
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in AUD.
-                /// </summary>
-                [JsonProperty("default_aud_payout_account")]
-                public string DefaultAudPayoutAccount { get; set; }
-                
-                /// <summary>
-                            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// </summary>
+            [JsonProperty("default_aud_payout_account")]
+            public string DefaultAudPayoutAccount { get; set; }
+
+            /// <summary>
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in CAD.
-                /// </summary>
-                [JsonProperty("default_cad_payout_account")]
-                public string DefaultCadPayoutAccount { get; set; }
-                
-                /// <summary>
-                            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// </summary>
+            [JsonProperty("default_cad_payout_account")]
+            public string DefaultCadPayoutAccount { get; set; }
+
+            /// <summary>
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in DKK.
-                /// </summary>
-                [JsonProperty("default_dkk_payout_account")]
-                public string DefaultDkkPayoutAccount { get; set; }
-                
-                /// <summary>
-                            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// </summary>
+            [JsonProperty("default_dkk_payout_account")]
+            public string DefaultDkkPayoutAccount { get; set; }
+
+            /// <summary>
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in EUR.
-                /// </summary>
-                [JsonProperty("default_eur_payout_account")]
-                public string DefaultEurPayoutAccount { get; set; }
-                
-                /// <summary>
-                            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// </summary>
+            [JsonProperty("default_eur_payout_account")]
+            public string DefaultEurPayoutAccount { get; set; }
+
+            /// <summary>
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in GBP.
-                /// </summary>
-                [JsonProperty("default_gbp_payout_account")]
-                public string DefaultGbpPayoutAccount { get; set; }
-                
-                /// <summary>
-                            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// </summary>
+            [JsonProperty("default_gbp_payout_account")]
+            public string DefaultGbpPayoutAccount { get; set; }
+
+            /// <summary>
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in NZD.
-                /// </summary>
-                [JsonProperty("default_nzd_payout_account")]
-                public string DefaultNzdPayoutAccount { get; set; }
-                
-                /// <summary>
-                            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// </summary>
+            [JsonProperty("default_nzd_payout_account")]
+            public string DefaultNzdPayoutAccount { get; set; }
+
+            /// <summary>
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in SEK.
-                /// </summary>
-                [JsonProperty("default_sek_payout_account")]
-                public string DefaultSekPayoutAccount { get; set; }
-                
-                /// <summary>
-                            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// </summary>
+            [JsonProperty("default_sek_payout_account")]
+            public string DefaultSekPayoutAccount { get; set; }
+
+            /// <summary>
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
             /// which is set up to receive payouts in USD.
-                /// </summary>
-                [JsonProperty("default_usd_payout_account")]
-                public string DefaultUsdPayoutAccount { get; set; }
+            /// </summary>
+            [JsonProperty("default_usd_payout_account")]
+            public string DefaultUsdPayoutAccount { get; set; }
         }
 
         /// <summary>
@@ -463,8 +506,10 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("creditors")]
         public IReadOnlyList<Creditor> Creditors { get; private set; }
+
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }}
+        public Meta Meta { get; private set; }
+    }
 }

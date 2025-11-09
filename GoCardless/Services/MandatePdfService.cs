@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +18,6 @@ namespace GoCardless.Services
     /// compliant](#appendix-compliance-requirements) Direct Debit mandates to
     /// your customers.
     /// </summary>
-
     public class MandatePdfService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -36,45 +33,45 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Generates a PDF mandate and returns its temporary URL.
-        /// 
+        ///
         /// Customer and bank account details can be left blank (for a blank
         /// mandate), provided manually, or inferred from the ID of an existing
         /// [mandate](#core-endpoints-mandates).
-        /// 
+        ///
         /// By default, we'll generate PDF mandates in English.
-        /// 
+        ///
         /// To generate a PDF mandate in another language, set the
         /// `Accept-Language` header when creating the PDF mandate to the
         /// relevant [ISO
         /// 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
         /// language code supported for the scheme.
-        /// 
-        /// | Scheme           | Supported languages                            
-        ///                                                                     
+        ///
+        /// | Scheme           | Supported languages
+        ///
         ///                         |
         /// | :--------------- |
         /// :-------------------------------------------------------------------------------------------------------------------------------------------
         /// |
-        /// | ACH              | English (`en`)                                 
-        ///                                                                     
+        /// | ACH              | English (`en`)
+        ///
         ///                         |
-        /// | Autogiro         | English (`en`), Swedish (`sv`)                 
-        ///                                                                     
+        /// | Autogiro         | English (`en`), Swedish (`sv`)
+        ///
         ///                         |
-        /// | Bacs             | English (`en`)                                 
-        ///                                                                     
+        /// | Bacs             | English (`en`)
+        ///
         ///                         |
-        /// | BECS             | English (`en`)                                 
-        ///                                                                     
+        /// | BECS             | English (`en`)
+        ///
         ///                         |
-        /// | BECS NZ          | English (`en`)                                 
-        ///                                                                     
+        /// | BECS NZ          | English (`en`)
+        ///
         ///                         |
-        /// | Betalingsservice | Danish (`da`), English (`en`)                  
-        ///                                                                     
+        /// | Betalingsservice | Danish (`da`), English (`en`)
+        ///
         ///                         |
-        /// | PAD              | English (`en`)                                 
-        ///                                                                     
+        /// | PAD              | English (`en`)
+        ///
         ///                         |
         /// | SEPA Core        | Danish (`da`), Dutch (`nl`), English (`en`),
         /// French (`fr`), German (`de`), Italian (`it`), Portuguese (`pt`),
@@ -83,58 +80,67 @@ namespace GoCardless.Services
         /// <param name="request">An optional `MandatePdfCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate pdf resource</returns>
-        public Task<MandatePdfResponse> CreateAsync(MandatePdfCreateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<MandatePdfResponse> CreateAsync(
+            MandatePdfCreateRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new MandatePdfCreateRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<MandatePdfResponse>("POST", "/mandate_pdfs", urlParams, request, null, "mandate_pdfs", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<MandatePdfResponse>(
+                "POST",
+                "/mandate_pdfs",
+                urlParams,
+                request,
+                null,
+                "mandate_pdfs",
+                customiseRequestMessage
+            );
         }
     }
 
-        
     /// <summary>
     /// Generates a PDF mandate and returns its temporary URL.
-    /// 
+    ///
     /// Customer and bank account details can be left blank (for a blank
     /// mandate), provided manually, or inferred from the ID of an existing
     /// [mandate](#core-endpoints-mandates).
-    /// 
+    ///
     /// By default, we'll generate PDF mandates in English.
-    /// 
+    ///
     /// To generate a PDF mandate in another language, set the `Accept-Language`
     /// header when creating the PDF mandate to the relevant [ISO
     /// 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language
     /// code supported for the scheme.
-    /// 
-    /// | Scheme           | Supported languages                                
-    ///                                                                         
+    ///
+    /// | Scheme           | Supported languages
+    ///
     ///                 |
     /// | :--------------- |
     /// :-------------------------------------------------------------------------------------------------------------------------------------------
     /// |
-    /// | ACH              | English (`en`)                                     
-    ///                                                                         
+    /// | ACH              | English (`en`)
+    ///
     ///                 |
-    /// | Autogiro         | English (`en`), Swedish (`sv`)                     
-    ///                                                                         
+    /// | Autogiro         | English (`en`), Swedish (`sv`)
+    ///
     ///                 |
-    /// | Bacs             | English (`en`)                                     
-    ///                                                                         
+    /// | Bacs             | English (`en`)
+    ///
     ///                 |
-    /// | BECS             | English (`en`)                                     
-    ///                                                                         
+    /// | BECS             | English (`en`)
+    ///
     ///                 |
-    /// | BECS NZ          | English (`en`)                                     
-    ///                                                                         
+    /// | BECS NZ          | English (`en`)
+    ///
     ///                 |
-    /// | Betalingsservice | Danish (`da`), English (`en`)                      
-    ///                                                                         
+    /// | Betalingsservice | Danish (`da`), English (`en`)
+    ///
     ///                 |
-    /// | PAD              | English (`en`)                                     
-    ///                                                                         
+    /// | PAD              | English (`en`)
+    ///
     ///                 |
     /// | SEPA Core        | Danish (`da`), Dutch (`nl`), English (`en`), French
     /// (`fr`), German (`de`), Italian (`it`), Portuguese (`pt`), Spanish
@@ -142,7 +148,6 @@ namespace GoCardless.Services
     /// </summary>
     public class MandatePdfCreateRequest
     {
-
         /// <summary>
         /// Name of the account holder, as known by the bank. Usually this
         /// matches the name of the [customer](#core-endpoints-customers). This
@@ -166,7 +171,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("account_type")]
         public MandatePdfAccountType? AccountType { get; set; }
-            
+
         /// <summary>
         /// Bank account type. Required for USD-denominated bank accounts. Must
         /// not be provided for bank accounts in other currencies. See [local
@@ -175,10 +180,10 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum MandatePdfAccountType
         {
-    
             /// <summary>`account_type` with a value of "savings"</summary>
             [EnumMember(Value = "savings")]
             Savings,
+
             /// <summary>`account_type` with a value of "checking"</summary>
             [EnumMember(Value = "checking")]
             Checking,
@@ -280,27 +285,27 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("links")]
         public MandatePdfLinks Links { get; set; }
+
         /// <summary>
         /// Linked resources for a MandatePdf.
         /// </summary>
         public class MandatePdfLinks
         {
-                
-                /// <summary>
-                            /// ID of an existing [creditor](#core-endpoints-creditors). Only
+            /// <summary>
+            /// ID of an existing [creditor](#core-endpoints-creditors). Only
             /// required if your account manages multiple creditors.
-                /// </summary>
-                [JsonProperty("creditor")]
-                public string Creditor { get; set; }
-                
-                /// <summary>
-                            /// ID of an existing [mandate](#core-endpoints-mandates) to build
+            /// </summary>
+            [JsonProperty("creditor")]
+            public string Creditor { get; set; }
+
+            /// <summary>
+            /// ID of an existing [mandate](#core-endpoints-mandates) to build
             /// the PDF from. The customer's bank details will be censored in
             /// the generated PDF. No other parameters may be provided alongside
             /// this.
-                /// </summary>
-                [JsonProperty("mandate")]
-                public string Mandate { get; set; }
+            /// </summary>
+            [JsonProperty("mandate")]
+            public string Mandate { get; set; }
         }
 
         /// <summary>
@@ -371,7 +376,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("subscription_frequency")]
         public string SubscriptionFrequency { get; set; }
-            
+
         /// <summary>
         /// For American customers only. Frequency of the subscription being
         /// authorised by the mandate. One of `weekly`, `monthly` or `yearly`.
@@ -380,13 +385,14 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum MandatePdfSubscriptionFrequency
         {
-    
             /// <summary>`subscription_frequency` with a value of "weekly"</summary>
             [EnumMember(Value = "weekly")]
             Weekly,
+
             /// <summary>`subscription_frequency` with a value of "monthly"</summary>
             [EnumMember(Value = "monthly")]
             Monthly,
+
             /// <summary>`subscription_frequency` with a value of "yearly"</summary>
             [EnumMember(Value = "yearly")]
             Yearly,

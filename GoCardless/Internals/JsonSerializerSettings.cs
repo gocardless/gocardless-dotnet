@@ -24,7 +24,8 @@ namespace GoCardless.Internals
 
             protected override JsonProperty CreateProperty(
                 MemberInfo member,
-                MemberSerialization memberSerialization)
+                MemberSerialization memberSerialization
+            )
             {
                 var prop = base.CreateProperty(member, memberSerialization);
 

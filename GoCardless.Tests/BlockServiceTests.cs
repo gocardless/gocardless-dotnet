@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using FluentAssertions;
 using GoCardless.Resources;
 using GoCardless.Services;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using FluentAssertions;
 
 namespace GoCardless.Tests
 {
@@ -31,7 +31,7 @@ namespace GoCardless.Tests
             mockHttp.EnqueueResponse(200, responseFixture);
 
             var resp = await client.Blocks.GetAsync("BLC456");
-            mockHttp.AssertRequestMade("GET","/blocks/BLC456");
+            mockHttp.AssertRequestMade("GET", "/blocks/BLC456");
             TestHelpers.AssertResponseCanSerializeBackToFixture(resp, responseFixture);
 
             GoCardless.Resources.Block block = resp.Block;
@@ -40,7 +40,10 @@ namespace GoCardless.Tests
             ClassicAssert.AreEqual(block.ReasonType, "no_intent_to_pay");
             ClassicAssert.AreEqual(block.ResourceReference, "example@example.com");
             ClassicAssert.AreEqual(block.Active, true);
-            ClassicAssert.AreEqual(block.CreatedAt.Value.ToString("o"), "2021-03-25T17:26:28.3050000+00:00");
+            ClassicAssert.AreEqual(
+                block.CreatedAt.Value.ToString("o"),
+                "2021-03-25T17:26:28.3050000+00:00"
+            );
         }
 
         [Test]
@@ -49,13 +52,14 @@ namespace GoCardless.Tests
             var responseFixture = "fixtures/client/block_service/blockbyref_response.json";
             mockHttp.EnqueueResponse(200, responseFixture);
 
-            var request = new BlockBlockByRefRequest(){
+            var request = new BlockBlockByRefRequest()
+            {
                 ReasonType = BlockBlockByRefRequest.BlockReasonType.NoIntentToPay.ToString(),
                 ReferenceType = BlockBlockByRefRequest.BlockReferenceType.Customer.ToString(),
                 ReferenceValue = "CU123",
             };
             var resp = await client.Blocks.BlockByRefAsync(request);
-            mockHttp.AssertRequestMade("POST","/blocks/block_by_ref");
+            mockHttp.AssertRequestMade("POST", "/blocks/block_by_ref");
             TestHelpers.AssertResponseCanSerializeBackToFixture(resp, responseFixture);
 
             resp.Meta.Cursors.Before.Should().BeNull();

@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +17,11 @@ namespace GoCardless.Services
     /// Refund objects represent (partial) refunds of a
     /// [payment](#core-endpoints-payments) back to the
     /// [customer](#core-endpoints-customers).
-    /// 
+    ///
     /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
     /// a refund is created, and will update the `amount_refunded` property of
     /// the payment.
     /// </summary>
-
     public class RefundService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -40,32 +37,42 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Creates a new refund object.
-        /// 
+        ///
         /// This fails with:<a name="total_amount_confirmation_invalid"></a><a
         /// name="number_of_refunds_exceeded"></a><a
         /// name="available_refund_amount_insufficient"></a>
-        /// 
+        ///
         /// - `total_amount_confirmation_invalid` if the confirmation amount
         /// doesn't match the total amount refunded for the payment. This
         /// safeguard is there to prevent two processes from creating refunds
         /// without awareness of each other.
-        /// 
+        ///
         /// - `available_refund_amount_insufficient` if the creditor does not
         /// have sufficient balance for refunds available to cover the cost of
         /// the requested refund.
-        /// 
+        ///
         /// </summary>
         /// <param name="request">An optional `RefundCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single refund resource</returns>
-        public Task<RefundResponse> CreateAsync(RefundCreateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<RefundResponse> CreateAsync(
+            RefundCreateRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new RefundCreateRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<RefundResponse>("POST", "/refunds", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "refunds", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<RefundResponse>(
+                "POST",
+                "/refunds",
+                urlParams,
+                request,
+                id => GetAsync(id, null, customiseRequestMessage),
+                "refunds",
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
@@ -75,21 +82,34 @@ namespace GoCardless.Services
         /// <param name="request">An optional `RefundListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of refund resources</returns>
-        public Task<RefundListResponse> ListAsync(RefundListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<RefundListResponse> ListAsync(
+            RefundListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new RefundListRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<RefundListResponse>("GET", "/refunds", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<RefundListResponse>(
+                "GET",
+                "/refunds",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Get a lazily enumerated list of refunds.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Refund> All(RefundListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Refund> All(
+            RefundListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new RefundListRequest();
 
@@ -111,7 +131,10 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of refunds.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Task<IReadOnlyList<Refund>>> AllAsync(RefundListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Task<IReadOnlyList<Refund>>> AllAsync(
+            RefundListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new RefundListRequest();
 
@@ -125,66 +148,90 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves all details for a single refund
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "RF".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "RF".</param>
         /// <param name="request">An optional `RefundGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single refund resource</returns>
-        public Task<RefundResponse> GetAsync(string identity, RefundGetRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<RefundResponse> GetAsync(
+            string identity,
+            RefundGetRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new RefundGetRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<RefundResponse>("GET", "/refunds/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<RefundResponse>(
+                "GET",
+                "/refunds/:identity",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Updates a refund object.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "RF".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "RF".</param>
         /// <param name="request">An optional `RefundUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single refund resource</returns>
-        public Task<RefundResponse> UpdateAsync(string identity, RefundUpdateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<RefundResponse> UpdateAsync(
+            string identity,
+            RefundUpdateRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new RefundUpdateRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<RefundResponse>("PUT", "/refunds/:identity", urlParams, request, null, "refunds", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<RefundResponse>(
+                "PUT",
+                "/refunds/:identity",
+                urlParams,
+                request,
+                null,
+                "refunds",
+                customiseRequestMessage
+            );
         }
     }
 
-        
     /// <summary>
     /// Creates a new refund object.
-    /// 
+    ///
     /// This fails with:<a name="total_amount_confirmation_invalid"></a><a
     /// name="number_of_refunds_exceeded"></a><a
     /// name="available_refund_amount_insufficient"></a>
-    /// 
+    ///
     /// - `total_amount_confirmation_invalid` if the confirmation amount doesn't
     /// match the total amount refunded for the payment. This safeguard is there
     /// to prevent two processes from creating refunds without awareness of each
     /// other.
-    /// 
+    ///
     /// - `available_refund_amount_insufficient` if the creditor does not have
     /// sufficient balance for refunds available to cover the cost of the
     /// requested refund.
-    /// 
+    ///
     /// </summary>
     public class RefundCreateRequest : IHasIdempotencyKey
     {
-
         /// <summary>
         /// Amount in minor unit (e.g. pence in GBP, cents in EUR).
         /// </summary>
@@ -196,28 +243,28 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("links")]
         public RefundLinks Links { get; set; }
+
         /// <summary>
         /// Linked resources for a Refund.
         /// </summary>
         public class RefundLinks
         {
-                
-                /// <summary>
-                            ///  ID of the [mandate](#core-endpoints-mandates) against which the
+            /// <summary>
+            ///  ID of the [mandate](#core-endpoints-mandates) against which the
             /// refund is being made. <br /> <p
             /// class="restricted-notice"><strong>Restricted</strong>: You must
             /// request access to Mandate Refunds by contacting <a
             /// href="mailto:support@gocardless.com">our support team</a>.</p>
-                /// </summary>
-                [JsonProperty("mandate")]
-                public string Mandate { get; set; }
-                
-                /// <summary>
-                            /// ID of the [payment](#core-endpoints-payments) against which the
+            /// </summary>
+            [JsonProperty("mandate")]
+            public string Mandate { get; set; }
+
+            /// <summary>
+            /// ID of the [payment](#core-endpoints-payments) against which the
             /// refund is being made.
-                /// </summary>
-                [JsonProperty("payment")]
-                public string Payment { get; set; }
+            /// </summary>
+            [JsonProperty("payment")]
+            public string Payment { get; set; }
         }
 
         /// <summary>
@@ -276,14 +323,12 @@ namespace GoCardless.Services
         public string IdempotencyKey { get; set; }
     }
 
-        
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// refunds.
     /// </summary>
     public class RefundListRequest
     {
-
         /// <summary>
         /// Cursor pointing to the start of the desired set.
         /// </summary>
@@ -361,7 +406,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("refund_type")]
         public RefundRefundType? RefundType { get; set; }
-            
+
         /// <summary>
         /// Whether a refund was issued against a mandate or a payment. One of:
         /// <ul>
@@ -373,31 +418,26 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum RefundRefundType
         {
-    
             /// <summary>`refund_type` with a value of "mandate"</summary>
             [EnumMember(Value = "mandate")]
             Mandate,
+
             /// <summary>`refund_type` with a value of "payment"</summary>
             [EnumMember(Value = "payment")]
             Payment,
         }
     }
 
-        
     /// <summary>
     /// Retrieves all details for a single refund
     /// </summary>
-    public class RefundGetRequest
-    {
-    }
+    public class RefundGetRequest { }
 
-        
     /// <summary>
     /// Updates a refund object.
     /// </summary>
     public class RefundUpdateRequest
     {
-
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
         /// names up to 50 characters and values up to 500 characters.
@@ -428,8 +468,10 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("refunds")]
         public IReadOnlyList<Refund> Refunds { get; private set; }
+
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }}
+        public Meta Meta { get; private set; }
+    }
 }

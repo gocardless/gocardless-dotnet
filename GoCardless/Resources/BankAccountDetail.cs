@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a bank account detail resource.
     ///
@@ -37,7 +36,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Base64 URL encoded JWE header values, containing the following keys:
-        /// 
+        ///
         ///   - `alg`: the asymmetric encryption type used to encrypt symmetric
         /// key, e.g: `RSA-OAEP`.
         ///   - `enc`: the content encryption type, e.g: `A256GCM`.
@@ -54,5 +53,4 @@ namespace GoCardless.Resources
         [JsonProperty("tag")]
         public string Tag { get; set; }
     }
-    
 }

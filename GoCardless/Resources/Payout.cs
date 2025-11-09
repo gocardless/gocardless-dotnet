@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a payout resource.
     ///
@@ -35,7 +34,7 @@ namespace GoCardless.Resources
         ///   account on this day</li>
         ///   <li>`null`: the payout hasn't been paid yet</li>
         /// </ul>
-        /// 
+        ///
         /// </summary>
         [JsonProperty("arrival_date")]
         public string ArrivalDate { get; set; }
@@ -74,7 +73,7 @@ namespace GoCardless.Resources
         public int? DeductedFees { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [JsonProperty("fx")]
         public PayoutFx Fx { get; set; }
@@ -137,13 +136,14 @@ namespace GoCardless.Resources
         [JsonProperty("tax_currency")]
         public string TaxCurrency { get; set; }
     }
-    
+
     /// <summary>
     /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
     /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum PayoutCurrency {
+    public enum PayoutCurrency
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -151,24 +151,31 @@ namespace GoCardless.Resources
         /// <summary>`currency` with a value of "AUD"</summary>
         [EnumMember(Value = "AUD")]
         AUD,
+
         /// <summary>`currency` with a value of "CAD"</summary>
         [EnumMember(Value = "CAD")]
         CAD,
+
         /// <summary>`currency` with a value of "DKK"</summary>
         [EnumMember(Value = "DKK")]
         DKK,
+
         /// <summary>`currency` with a value of "EUR"</summary>
         [EnumMember(Value = "EUR")]
         EUR,
+
         /// <summary>`currency` with a value of "GBP"</summary>
         [EnumMember(Value = "GBP")]
         GBP,
+
         /// <summary>`currency` with a value of "NZD"</summary>
         [EnumMember(Value = "NZD")]
         NZD,
+
         /// <summary>`currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
+
         /// <summary>`currency` with a value of "USD"</summary>
         [EnumMember(Value = "USD")]
         USD,
@@ -214,7 +221,7 @@ namespace GoCardless.Resources
         [JsonProperty("fx_currency")]
         public PayoutFxFxCurrency? FxCurrency { get; set; }
     }
-    
+
     /// <summary>
     /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in
     /// which amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK",
@@ -222,7 +229,8 @@ namespace GoCardless.Resources
     /// were) made via foreign exchange.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum PayoutFxFxCurrency {
+    public enum PayoutFxFxCurrency
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -230,24 +238,31 @@ namespace GoCardless.Resources
         /// <summary>`fx_currency` with a value of "AUD"</summary>
         [EnumMember(Value = "AUD")]
         AUD,
+
         /// <summary>`fx_currency` with a value of "CAD"</summary>
         [EnumMember(Value = "CAD")]
         CAD,
+
         /// <summary>`fx_currency` with a value of "DKK"</summary>
         [EnumMember(Value = "DKK")]
         DKK,
+
         /// <summary>`fx_currency` with a value of "EUR"</summary>
         [EnumMember(Value = "EUR")]
         EUR,
+
         /// <summary>`fx_currency` with a value of "GBP"</summary>
         [EnumMember(Value = "GBP")]
         GBP,
+
         /// <summary>`fx_currency` with a value of "NZD"</summary>
         [EnumMember(Value = "NZD")]
         NZD,
+
         /// <summary>`fx_currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
+
         /// <summary>`fx_currency` with a value of "USD"</summary>
         [EnumMember(Value = "USD")]
         USD,
@@ -272,12 +287,13 @@ namespace GoCardless.Resources
         [JsonProperty("creditor_bank_account")]
         public string CreditorBankAccount { get; set; }
     }
-    
+
     /// <summary>
     /// Whether a payout contains merchant revenue or partner fees.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum PayoutPayoutType {
+    public enum PayoutPayoutType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -285,6 +301,7 @@ namespace GoCardless.Resources
         /// <summary>`payout_type` with a value of "merchant"</summary>
         [EnumMember(Value = "merchant")]
         Merchant,
+
         /// <summary>`payout_type` with a value of "partner"</summary>
         [EnumMember(Value = "partner")]
         Partner,
@@ -301,7 +318,8 @@ namespace GoCardless.Resources
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum PayoutStatus {
+    public enum PayoutStatus
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -309,12 +327,13 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "pending"</summary>
         [EnumMember(Value = "pending")]
         Pending,
+
         /// <summary>`status` with a value of "paid"</summary>
         [EnumMember(Value = "paid")]
         Paid,
+
         /// <summary>`status` with a value of "bounced"</summary>
         [EnumMember(Value = "bounced")]
         Bounced,
     }
-
 }

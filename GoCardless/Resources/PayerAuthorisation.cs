@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a payer authorisation resource.
     ///
@@ -19,14 +18,14 @@ namespace GoCardless.Resources
     ///   Billing Requests</a>. Use Billing Requests to build any future
     /// integrations.
     /// </p>
-    /// 
+    ///
     /// Payer Authorisation resource acts as a wrapper for creating customer,
     /// bank account and mandate details in a single request.
     /// PayerAuthorisation API enables the integrators to build their own custom
     /// payment pages.
-    /// 
+    ///
     /// The process to use the Payer Authorisation API is as follows:
-    /// 
+    ///
     ///   1. Create a Payer Authorisation, either empty or with already
     /// available information
     ///   2. Update the authorisation with additional information or fix any
@@ -38,10 +37,10 @@ namespace GoCardless.Resources
     /// non-breaking change)
     ///   5. Confirm the authorisation to indicate that the resources can be
     /// created
-    /// 
+    ///
     /// After the Payer Authorisation is confirmed, resources will eventually be
     /// created as it's an asynchronous process.
-    /// 
+    ///
     /// To retrieve the status and ID of the linked resources you can do one of
     /// the following:
     /// <ol>
@@ -54,7 +53,7 @@ namespace GoCardless.Resources
     /// <code>https://api.gocardless.com/events?payer_authorisation={id}&action=completed</code>
     /// </li>
     /// </ol>
-    /// 
+    ///
     /// <p class="notice">
     ///   Note that the `create` and `update` endpoints behave differently than
     ///   other existing `create` and `update` endpoints. The Payer
@@ -136,7 +135,7 @@ namespace GoCardless.Resources
         [JsonProperty("status")]
         public PayerAuthorisationStatus? Status { get; set; }
     }
-    
+
     /// <summary>
     /// Represents a payer authorisation bank account resource.
     ///
@@ -232,14 +231,15 @@ namespace GoCardless.Resources
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
     }
-    
+
     /// <summary>
     /// Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
     /// accounts in other currencies. See [local details](#local-bank-details-united-states) for
     /// more information.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum PayerAuthorisationBankAccountAccountType {
+    public enum PayerAuthorisationBankAccountAccountType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -247,6 +247,7 @@ namespace GoCardless.Resources
         /// <summary>`account_type` with a value of "savings"</summary>
         [EnumMember(Value = "savings")]
         Savings,
+
         /// <summary>`account_type` with a value of "checking"</summary>
         [EnumMember(Value = "checking")]
         Checking,
@@ -332,7 +333,7 @@ namespace GoCardless.Resources
         /// An [IETF Language Tag](https://tools.ietf.org/html/rfc5646), used
         /// for both language
         /// and regional variations of our product.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("locale")]
         public string Locale { get; set; }
@@ -368,7 +369,7 @@ namespace GoCardless.Resources
         [JsonProperty("swedish_identity_number")]
         public string SwedishIdentityNumber { get; set; }
     }
-    
+
     /// <summary>
     /// An array of fields which are missing and is required to set up the
     /// mandate.
@@ -393,7 +394,7 @@ namespace GoCardless.Resources
         [JsonProperty("request_pointer")]
         public string RequestPointer { get; set; }
     }
-    
+
     /// <summary>
     /// Represents a payer authorisation link resource.
     ///
@@ -421,7 +422,7 @@ namespace GoCardless.Resources
         [JsonProperty("mandate")]
         public string Mandate { get; set; }
     }
-    
+
     /// <summary>
     /// Represents a payer authorisation mandate resource.
     ///
@@ -442,10 +443,10 @@ namespace GoCardless.Resources
         /// containing the IP address of the payer to whom the mandate belongs
         /// (i.e. as a result of their completion of a mandate setup flow in
         /// their browser).
-        /// 
+        ///
         /// Not required for creating offline mandates where
         /// `authorisation_source` is set to telephone or paper.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("payer_ip_address")]
         public string PayerIpAddress { get; set; }
@@ -467,13 +468,14 @@ namespace GoCardless.Resources
         [JsonProperty("scheme")]
         public PayerAuthorisationMandateScheme? Scheme { get; set; }
     }
-    
+
     /// <summary>
     /// A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs", "becs_nz",
     /// "betalingsservice", "faster_payments", "pad", "pay_to" and "sepa_core" are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum PayerAuthorisationMandateScheme {
+    public enum PayerAuthorisationMandateScheme
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -481,30 +483,39 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "ach"</summary>
         [EnumMember(Value = "ach")]
         Ach,
+
         /// <summary>`scheme` with a value of "autogiro"</summary>
         [EnumMember(Value = "autogiro")]
         Autogiro,
+
         /// <summary>`scheme` with a value of "bacs"</summary>
         [EnumMember(Value = "bacs")]
         Bacs,
+
         /// <summary>`scheme` with a value of "becs"</summary>
         [EnumMember(Value = "becs")]
         Becs,
+
         /// <summary>`scheme` with a value of "becs_nz"</summary>
         [EnumMember(Value = "becs_nz")]
         BecsNz,
+
         /// <summary>`scheme` with a value of "betalingsservice"</summary>
         [EnumMember(Value = "betalingsservice")]
         Betalingsservice,
+
         /// <summary>`scheme` with a value of "faster_payments"</summary>
         [EnumMember(Value = "faster_payments")]
         FasterPayments,
+
         /// <summary>`scheme` with a value of "pad"</summary>
         [EnumMember(Value = "pad")]
         Pad,
+
         /// <summary>`scheme` with a value of "pay_to"</summary>
         [EnumMember(Value = "pay_to")]
         PayTo,
+
         /// <summary>`scheme` with a value of "sepa_core"</summary>
         [EnumMember(Value = "sepa_core")]
         SepaCore,
@@ -523,7 +534,8 @@ namespace GoCardless.Resources
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum PayerAuthorisationStatus {
+    public enum PayerAuthorisationStatus
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -531,18 +543,21 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "created"</summary>
         [EnumMember(Value = "created")]
         Created,
+
         /// <summary>`status` with a value of "submitted"</summary>
         [EnumMember(Value = "submitted")]
         Submitted,
+
         /// <summary>`status` with a value of "confirmed"</summary>
         [EnumMember(Value = "confirmed")]
         Confirmed,
+
         /// <summary>`status` with a value of "completed"</summary>
         [EnumMember(Value = "completed")]
         Completed,
+
         /// <summary>`status` with a value of "failed"</summary>
         [EnumMember(Value = "failed")]
         Failed,
     }
-
 }

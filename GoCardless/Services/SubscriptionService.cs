@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,18 +16,18 @@ namespace GoCardless.Services
     ///
     /// Subscriptions create [payments](#core-endpoints-payments) according to a
     /// schedule.
-    /// 
+    ///
     /// ### Recurrence Rules
-    /// 
+    ///
     /// The following rules apply when specifying recurrence:
-    /// 
+    ///
     /// - If `day_of_month` and `start_date` are not provided `start_date` will
     /// be the [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`
     /// and the subscription will then recur based on the `interval` &
     /// `interval_unit`
     /// - If `month` or `day_of_month` are present the following validations
     /// apply:
-    /// 
+    ///
     /// | __interval_unit__ | __month__                                      |
     /// __day_of_month__                           |
     /// | :---------------- | :--------------------------------------------- |
@@ -40,9 +38,9 @@ namespace GoCardless.Services
     /// optional                                   |
     /// | weekly            | invalid                                        |
     /// invalid                                    |
-    /// 
+    ///
     /// Examples:
-    /// 
+    ///
     /// | __interval_unit__ | __interval__ | __month__ | __day_of_month__ |
     /// valid?                                             |
     /// | :---------------- | :----------- | :-------- | :--------------- |
@@ -63,19 +61,18 @@ namespace GoCardless.Services
     /// invalid - `month` must be blank                    |
     /// | weekly            | 2            | october   | 10               |
     /// invalid - `month` and `day_of_month` must be blank |
-    /// 
+    ///
     /// ### Rolling dates
-    /// 
+    ///
     /// When a charge date falls on a non-business day, one of two things will
     /// happen:
-    /// 
+    ///
     /// - if the recurrence rule specified `-1` as the `day_of_month`, the
     /// charge date will be rolled __backwards__ to the previous business day
     /// (i.e., the last working day of the month).
     /// - otherwise the charge date will be rolled __forwards__ to the next
     /// business day.
     /// </summary>
-
     public class SubscriptionService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -95,14 +92,24 @@ namespace GoCardless.Services
         /// <param name="request">An optional `SubscriptionCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
-        public Task<SubscriptionResponse> CreateAsync(SubscriptionCreateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<SubscriptionResponse> CreateAsync(
+            SubscriptionCreateRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new SubscriptionCreateRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<SubscriptionResponse>("POST", "/subscriptions", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "subscriptions", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<SubscriptionResponse>(
+                "POST",
+                "/subscriptions",
+                urlParams,
+                request,
+                id => GetAsync(id, null, customiseRequestMessage),
+                "subscriptions",
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
@@ -114,21 +121,34 @@ namespace GoCardless.Services
         /// <param name="request">An optional `SubscriptionListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of subscription resources</returns>
-        public Task<SubscriptionListResponse> ListAsync(SubscriptionListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<SubscriptionListResponse> ListAsync(
+            SubscriptionListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new SubscriptionListRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<SubscriptionListResponse>("GET", "/subscriptions", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<SubscriptionListResponse>(
+                "GET",
+                "/subscriptions",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Get a lazily enumerated list of subscriptions.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Subscription> All(SubscriptionListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Subscription> All(
+            SubscriptionListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new SubscriptionListRequest();
 
@@ -150,7 +170,10 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of subscriptions.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Task<IReadOnlyList<Subscription>>> AllAsync(SubscriptionListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Task<IReadOnlyList<Subscription>>> AllAsync(
+            SubscriptionListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new SubscriptionListRequest();
 
@@ -164,130 +187,169 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of a single subscription.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "SB".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "SB".</param>
         /// <param name="request">An optional `SubscriptionGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
-        public Task<SubscriptionResponse> GetAsync(string identity, SubscriptionGetRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<SubscriptionResponse> GetAsync(
+            string identity,
+            SubscriptionGetRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new SubscriptionGetRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<SubscriptionResponse>("GET", "/subscriptions/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<SubscriptionResponse>(
+                "GET",
+                "/subscriptions/:identity",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Updates a subscription object.
-        /// 
+        ///
         /// This fails with:
-        /// 
+        ///
         /// - `validation_failed` if invalid data is provided when attempting to
         /// update a subscription.
-        /// 
+        ///
         /// - `subscription_not_active` if the subscription is no longer active.
-        /// 
+        ///
         /// - `subscription_already_ended` if the subscription has taken all
         /// payments.
-        /// 
+        ///
         /// - `mandate_payments_require_approval` if the amount is being changed
         /// and the mandate requires approval.
-        /// 
+        ///
         /// - `number_of_subscription_amendments_exceeded` error if the
         /// subscription amount has already been changed 10 times.
-        /// 
+        ///
         /// - `forbidden` if the amount is being changed, and the subscription
         /// was created by an app and you are not authenticated as that app, or
         /// if the subscription was not created by an app and you are
         /// authenticated as an app
-        /// 
+        ///
         /// - `resource_created_by_another_app` if the app fee is being changed,
         /// and the subscription was created by an app other than the app you
         /// are authenticated as
-        /// 
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "SB".</param> 
+        ///
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "SB".</param>
         /// <param name="request">An optional `SubscriptionUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
-        public Task<SubscriptionResponse> UpdateAsync(string identity, SubscriptionUpdateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<SubscriptionResponse> UpdateAsync(
+            string identity,
+            SubscriptionUpdateRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new SubscriptionUpdateRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<SubscriptionResponse>("PUT", "/subscriptions/:identity", urlParams, request, null, "subscriptions", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<SubscriptionResponse>(
+                "PUT",
+                "/subscriptions/:identity",
+                urlParams,
+                request,
+                null,
+                "subscriptions",
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Pause a subscription object.
         /// No payments will be created until it is resumed.
-        /// 
+        ///
         /// This can only be used when a subscription is collecting a fixed
         /// number of payments (created using `count`),
         /// when they continue forever (created without `count` or `end_date`)
         /// or
         /// the subscription is already paused for a number of cycles.
-        /// 
+        ///
         /// When `pause_cycles` is omitted the subscription is paused until the
         /// [resume endpoint](#subscriptions-resume-a-subscription) is called.
         /// If the subscription is collecting a fixed number of payments,
         /// `end_date` will be set to `null`.
         /// When paused indefinitely, `upcoming_payments` will be empty.
-        /// 
+        ///
         /// When `pause_cycles` is provided the subscription will be paused for
         /// the number of cycles requested.
         /// If the subscription is collecting a fixed number of payments,
         /// `end_date` will be set to a new value.
         /// When paused for a number of cycles, `upcoming_payments` will still
         /// contain the upcoming charge dates.
-        /// 
+        ///
         /// This fails with:
-        /// 
+        ///
         /// - `forbidden` if the subscription was created by an app and you are
         /// not authenticated as that app, or if the subscription was not
         /// created by an app and you are authenticated as an app
-        /// 
+        ///
         /// - `validation_failed` if invalid data is provided when attempting to
         /// pause a subscription.
-        /// 
+        ///
         /// - `subscription_paused_cannot_update_cycles` if the subscription is
         /// already paused for a number of cycles and the request provides a
         /// value for `pause_cycle`.
-        /// 
+        ///
         /// - `subscription_cannot_be_paused` if the subscription cannot be
         /// paused.
-        /// 
+        ///
         /// - `subscription_already_ended` if the subscription has taken all
         /// payments.
-        /// 
+        ///
         /// - `pause_cycles_must_be_greater_than_or_equal_to` if the provided
         /// value for `pause_cycles` cannot be satisfied.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "SB".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "SB".</param>
         /// <param name="request">An optional `SubscriptionPauseRequest` representing the body for this pause request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
-        public Task<SubscriptionResponse> PauseAsync(string identity, SubscriptionPauseRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<SubscriptionResponse> PauseAsync(
+            string identity,
+            SubscriptionPauseRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new SubscriptionPauseRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<SubscriptionResponse>("POST", "/subscriptions/:identity/actions/pause", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<SubscriptionResponse>(
+                "POST",
+                "/subscriptions/:identity/actions/pause",
+                urlParams,
+                request,
+                null,
+                "data",
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
@@ -296,69 +358,93 @@ namespace GoCardless.Services
         /// recurrence rules.
         /// The `charge_date` on the next payment will be the same as the
         /// subscriptions `earliest_charge_date_after_resume`
-        /// 
+        ///
         /// This fails with:
-        /// 
+        ///
         /// - `forbidden` if the subscription was created by an app and you are
         /// not authenticated as that app, or if the subscription was not
         /// created by an app and you are authenticated as an app
-        /// 
+        ///
         /// - `validation_failed` if invalid data is provided when attempting to
         /// resume a subscription.
-        /// 
+        ///
         /// - `subscription_not_paused` if the subscription is not paused.
-        /// 
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "SB".</param> 
+        ///
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "SB".</param>
         /// <param name="request">An optional `SubscriptionResumeRequest` representing the body for this resume request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
-        public Task<SubscriptionResponse> ResumeAsync(string identity, SubscriptionResumeRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<SubscriptionResponse> ResumeAsync(
+            string identity,
+            SubscriptionResumeRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new SubscriptionResumeRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<SubscriptionResponse>("POST", "/subscriptions/:identity/actions/resume", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<SubscriptionResponse>(
+                "POST",
+                "/subscriptions/:identity/actions/resume",
+                urlParams,
+                request,
+                null,
+                "data",
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Immediately cancels a subscription; no more payments will be created
         /// under it. Any metadata supplied to this endpoint will be stored on
         /// the payment cancellation event it causes.
-        /// 
+        ///
         /// This will fail with a cancellation_failed error if the subscription
         /// is already cancelled or finished.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "SB".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "SB".</param>
         /// <param name="request">An optional `SubscriptionCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
-        public Task<SubscriptionResponse> CancelAsync(string identity, SubscriptionCancelRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<SubscriptionResponse> CancelAsync(
+            string identity,
+            SubscriptionCancelRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new SubscriptionCancelRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<SubscriptionResponse>("POST", "/subscriptions/:identity/actions/cancel", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<SubscriptionResponse>(
+                "POST",
+                "/subscriptions/:identity/actions/cancel",
+                urlParams,
+                request,
+                null,
+                "data",
+                customiseRequestMessage
+            );
         }
     }
 
-        
     /// <summary>
     /// Creates a new subscription object
     /// </summary>
     public class SubscriptionCreateRequest : IHasIdempotencyKey
     {
-
         /// <summary>
         /// Amount in the lowest denomination for the currency (e.g. pence in
         /// GBP, cents in EUR).
@@ -424,7 +510,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("interval_unit")]
         public SubscriptionIntervalUnit? IntervalUnit { get; set; }
-            
+
         /// <summary>
         /// The unit of time between customer charge dates. One of `weekly`,
         /// `monthly` or `yearly`.
@@ -432,13 +518,14 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum SubscriptionIntervalUnit
         {
-    
             /// <summary>`interval_unit` with a value of "weekly"</summary>
             [EnumMember(Value = "weekly")]
             Weekly,
+
             /// <summary>`interval_unit` with a value of "monthly"</summary>
             [EnumMember(Value = "monthly")]
             Monthly,
+
             /// <summary>`interval_unit` with a value of "yearly"</summary>
             [EnumMember(Value = "yearly")]
             Yearly,
@@ -449,18 +536,18 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("links")]
         public SubscriptionLinks Links { get; set; }
+
         /// <summary>
         /// Linked resources for a Subscription.
         /// </summary>
         public class SubscriptionLinks
         {
-                
-                /// <summary>
-                            /// ID of the associated [mandate](#core-endpoints-mandates) which
+            /// <summary>
+            /// ID of the associated [mandate](#core-endpoints-mandates) which
             /// the subscription will create payments against.
-                /// </summary>
-                [JsonProperty("mandate")]
-                public string Mandate { get; set; }
+            /// </summary>
+            [JsonProperty("mandate")]
+            public string Mandate { get; set; }
         }
 
         /// <summary>
@@ -474,54 +561,64 @@ namespace GoCardless.Services
         /// Name of the month on which to charge a customer. Must be lowercase.
         /// Only applies
         /// when the interval_unit is `yearly`.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("month")]
         public SubscriptionMonth? Month { get; set; }
-            
+
         /// <summary>
         /// Name of the month on which to charge a customer. Must be lowercase.
         /// Only applies
         /// when the interval_unit is `yearly`.
-        /// 
+        ///
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum SubscriptionMonth
         {
-    
             /// <summary>`month` with a value of "january"</summary>
             [EnumMember(Value = "january")]
             January,
+
             /// <summary>`month` with a value of "february"</summary>
             [EnumMember(Value = "february")]
             February,
+
             /// <summary>`month` with a value of "march"</summary>
             [EnumMember(Value = "march")]
             March,
+
             /// <summary>`month` with a value of "april"</summary>
             [EnumMember(Value = "april")]
             April,
+
             /// <summary>`month` with a value of "may"</summary>
             [EnumMember(Value = "may")]
             May,
+
             /// <summary>`month` with a value of "june"</summary>
             [EnumMember(Value = "june")]
             June,
+
             /// <summary>`month` with a value of "july"</summary>
             [EnumMember(Value = "july")]
             July,
+
             /// <summary>`month` with a value of "august"</summary>
             [EnumMember(Value = "august")]
             August,
+
             /// <summary>`month` with a value of "september"</summary>
             [EnumMember(Value = "september")]
             September,
+
             /// <summary>`month` with a value of "october"</summary>
             [EnumMember(Value = "october")]
             October,
+
             /// <summary>`month` with a value of "november"</summary>
             [EnumMember(Value = "november")]
             November,
+
             /// <summary>`month` with a value of "december"</summary>
             [EnumMember(Value = "december")]
             December,
@@ -579,7 +676,6 @@ namespace GoCardless.Services
         public string IdempotencyKey { get; set; }
     }
 
-        
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// subscriptions. Please note if the subscriptions are related to customers
@@ -587,7 +683,6 @@ namespace GoCardless.Services
     /// </summary>
     public class SubscriptionListRequest
     {
-
         /// <summary>
         /// Cursor pointing to the start of the desired set.
         /// </summary>
@@ -669,6 +764,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("status")]
         public string[] Status { get; set; }
+
         /// <summary>
         /// One of:
         /// <ul>
@@ -689,69 +785,68 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum SubscriptionStatus
         {
-    
             /// <summary>`status` with a value of "pending_customer_approval"</summary>
             [EnumMember(Value = "pending_customer_approval")]
             PendingCustomerApproval,
+
             /// <summary>`status` with a value of "customer_approval_denied"</summary>
             [EnumMember(Value = "customer_approval_denied")]
             CustomerApprovalDenied,
+
             /// <summary>`status` with a value of "active"</summary>
             [EnumMember(Value = "active")]
             Active,
+
             /// <summary>`status` with a value of "finished"</summary>
             [EnumMember(Value = "finished")]
             Finished,
+
             /// <summary>`status` with a value of "cancelled"</summary>
             [EnumMember(Value = "cancelled")]
             Cancelled,
+
             /// <summary>`status` with a value of "paused"</summary>
             [EnumMember(Value = "paused")]
             Paused,
         }
     }
 
-        
     /// <summary>
     /// Retrieves the details of a single subscription.
     /// </summary>
-    public class SubscriptionGetRequest
-    {
-    }
+    public class SubscriptionGetRequest { }
 
-        
     /// <summary>
     /// Updates a subscription object.
-    /// 
+    ///
     /// This fails with:
-    /// 
+    ///
     /// - `validation_failed` if invalid data is provided when attempting to
     /// update a subscription.
-    /// 
+    ///
     /// - `subscription_not_active` if the subscription is no longer active.
-    /// 
+    ///
     /// - `subscription_already_ended` if the subscription has taken all
     /// payments.
-    /// 
+    ///
     /// - `mandate_payments_require_approval` if the amount is being changed and
     /// the mandate requires approval.
-    /// 
+    ///
     /// - `number_of_subscription_amendments_exceeded` error if the subscription
     /// amount has already been changed 10 times.
-    /// 
+    ///
     /// - `forbidden` if the amount is being changed, and the subscription was
     /// created by an app and you are not authenticated as that app, or if the
     /// subscription was not created by an app and you are authenticated as an
     /// app
-    /// 
+    ///
     /// - `resource_created_by_another_app` if the app fee is being changed, and
     /// the subscription was created by an app other than the app you are
     /// authenticated as
-    /// 
+    ///
     /// </summary>
     public class SubscriptionUpdateRequest
     {
-
         /// <summary>
         /// Amount in the lowest denomination for the currency (e.g. pence in
         /// GBP, cents in EUR).
@@ -808,53 +903,51 @@ namespace GoCardless.Services
         public bool? RetryIfPossible { get; set; }
     }
 
-        
     /// <summary>
     /// Pause a subscription object.
     /// No payments will be created until it is resumed.
-    /// 
+    ///
     /// This can only be used when a subscription is collecting a fixed number
     /// of payments (created using `count`),
     /// when they continue forever (created without `count` or `end_date`) or
     /// the subscription is already paused for a number of cycles.
-    /// 
+    ///
     /// When `pause_cycles` is omitted the subscription is paused until the
     /// [resume endpoint](#subscriptions-resume-a-subscription) is called.
     /// If the subscription is collecting a fixed number of payments, `end_date`
     /// will be set to `null`.
     /// When paused indefinitely, `upcoming_payments` will be empty.
-    /// 
+    ///
     /// When `pause_cycles` is provided the subscription will be paused for the
     /// number of cycles requested.
     /// If the subscription is collecting a fixed number of payments, `end_date`
     /// will be set to a new value.
     /// When paused for a number of cycles, `upcoming_payments` will still
     /// contain the upcoming charge dates.
-    /// 
+    ///
     /// This fails with:
-    /// 
+    ///
     /// - `forbidden` if the subscription was created by an app and you are not
     /// authenticated as that app, or if the subscription was not created by an
     /// app and you are authenticated as an app
-    /// 
+    ///
     /// - `validation_failed` if invalid data is provided when attempting to
     /// pause a subscription.
-    /// 
+    ///
     /// - `subscription_paused_cannot_update_cycles` if the subscription is
     /// already paused for a number of cycles and the request provides a value
     /// for `pause_cycle`.
-    /// 
+    ///
     /// - `subscription_cannot_be_paused` if the subscription cannot be paused.
-    /// 
+    ///
     /// - `subscription_already_ended` if the subscription has taken all
     /// payments.
-    /// 
+    ///
     /// - `pause_cycles_must_be_greater_than_or_equal_to` if the provided value
     /// for `pause_cycles` cannot be satisfied.
     /// </summary>
     public class SubscriptionPauseRequest
     {
-
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
         /// names up to 50 characters and values up to 500 characters.
@@ -877,29 +970,27 @@ namespace GoCardless.Services
         public int? PauseCycles { get; set; }
     }
 
-        
     /// <summary>
     /// Resume a subscription object.
     /// Payments will start to be created again based on the subscriptions
     /// recurrence rules.
     /// The `charge_date` on the next payment will be the same as the
     /// subscriptions `earliest_charge_date_after_resume`
-    /// 
+    ///
     /// This fails with:
-    /// 
+    ///
     /// - `forbidden` if the subscription was created by an app and you are not
     /// authenticated as that app, or if the subscription was not created by an
     /// app and you are authenticated as an app
-    /// 
+    ///
     /// - `validation_failed` if invalid data is provided when attempting to
     /// resume a subscription.
-    /// 
+    ///
     /// - `subscription_not_paused` if the subscription is not paused.
-    /// 
+    ///
     /// </summary>
     public class SubscriptionResumeRequest
     {
-
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
         /// names up to 50 characters and values up to 500 characters.
@@ -908,18 +999,16 @@ namespace GoCardless.Services
         public IDictionary<String, String> Metadata { get; set; }
     }
 
-        
     /// <summary>
     /// Immediately cancels a subscription; no more payments will be created
     /// under it. Any metadata supplied to this endpoint will be stored on the
     /// payment cancellation event it causes.
-    /// 
+    ///
     /// This will fail with a cancellation_failed error if the subscription is
     /// already cancelled or finished.
     /// </summary>
     public class SubscriptionCancelRequest
     {
-
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
         /// names up to 50 characters and values up to 500 characters.
@@ -950,8 +1039,10 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("subscriptions")]
         public IReadOnlyList<Subscription> Subscriptions { get; private set; }
+
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }}
+        public Meta Meta { get; private set; }
+    }
 }

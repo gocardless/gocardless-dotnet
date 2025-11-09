@@ -14,7 +14,8 @@ namespace GoCardless.Exceptions
         public ApiErrorResponse ApiErrorResponse { get; }
         public HttpResponseMessage ResponseMessage { get; set; }
 
-        public ApiException(ApiErrorResponse apiErrorResponse) : base(apiErrorResponse.Error.Message)
+        public ApiException(ApiErrorResponse apiErrorResponse)
+            : base(apiErrorResponse.Error.Message)
         {
             this.ApiErrorResponse = apiErrorResponse;
             this.ResponseMessage = apiErrorResponse.ResponseMessage;
@@ -45,6 +46,5 @@ namespace GoCardless.Exceptions
         ///Returns a list of errors.
         /// </summary>
         public IReadOnlyList<Error> Errors => ApiErrorResponse?.Error.Errors;
-
     }
 }

@@ -1,19 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a verification detail resource.
     ///
     /// Verification details represent any information needed by GoCardless to
     /// verify a creditor.
-    /// 
+    ///
     /// <p class="restricted-notice"><strong>Restricted</strong>:
     ///   These endpoints are restricted to customers who want to collect their
     /// merchant's
@@ -85,7 +84,7 @@ namespace GoCardless.Resources
         [JsonProperty("postal_code")]
         public string PostalCode { get; set; }
     }
-    
+
     /// <summary>
     /// Represents a verification detail director resource.
     ///
@@ -136,7 +135,7 @@ namespace GoCardless.Resources
         [JsonProperty("street")]
         public string Street { get; set; }
     }
-    
+
     /// <summary>
     /// Resources linked to this VerificationDetail
     /// </summary>
@@ -148,5 +147,4 @@ namespace GoCardless.Resources
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
     }
-    
 }

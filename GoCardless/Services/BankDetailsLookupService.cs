@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +16,6 @@ namespace GoCardless.Services
     ///
     /// Look up the name and reachability of a bank account.
     /// </summary>
-
     public class BankDetailsLookupService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -36,13 +33,13 @@ namespace GoCardless.Services
         /// Performs a bank details lookup. As part of the lookup, a modulus
         /// check and
         /// reachability check are performed.
-        /// 
+        ///
         /// For UK-based bank accounts, where an account holder name is provided
         /// (and an account number, a sort code or an iban
         /// are already present), we verify that the account holder name and
         /// bank account number match the details held by
         /// the relevant bank.
-        /// 
+        ///
         /// If your request returns an [error](#api-usage-errors) or the
         /// `available_debit_schemes`
         /// attribute is an empty array, you will not be able to collect
@@ -50,10 +47,10 @@ namespace GoCardless.Services
         /// specified bank account. GoCardless may be able to collect payments
         /// from an account
         /// even if no `bic` is returned.
-        /// 
+        ///
         /// Bank account details may be supplied using [local
         /// details](#appendix-local-bank-details) or an IBAN.
-        /// 
+        ///
         /// _ACH scheme_ For compliance reasons, an extra validation step is
         /// done using
         /// a third-party provider to make sure the customer's bank account can
@@ -63,7 +60,7 @@ namespace GoCardless.Services
         /// customer is requested to adjust the account number/routing number
         /// and
         /// succeed in this check to continue with the flow.
-        /// 
+        ///
         /// _Note:_ Usage of this endpoint is monitored. If your organisation
         /// relies on GoCardless for
         /// modulus or reachability checking but not for payment collection,
@@ -72,29 +69,38 @@ namespace GoCardless.Services
         /// <param name="request">An optional `BankDetailsLookupCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single bank details lookup resource</returns>
-        public Task<BankDetailsLookupResponse> CreateAsync(BankDetailsLookupCreateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<BankDetailsLookupResponse> CreateAsync(
+            BankDetailsLookupCreateRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BankDetailsLookupCreateRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<BankDetailsLookupResponse>("POST", "/bank_details_lookups", urlParams, request, null, "bank_details_lookups", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BankDetailsLookupResponse>(
+                "POST",
+                "/bank_details_lookups",
+                urlParams,
+                request,
+                null,
+                "bank_details_lookups",
+                customiseRequestMessage
+            );
         }
     }
 
-        
     /// <summary>
     /// Performs a bank details lookup. As part of the lookup, a modulus check
     /// and
     /// reachability check are performed.
-    /// 
+    ///
     /// For UK-based bank accounts, where an account holder name is provided
     /// (and an account number, a sort code or an iban
     /// are already present), we verify that the account holder name and bank
     /// account number match the details held by
     /// the relevant bank.
-    /// 
+    ///
     /// If your request returns an [error](#api-usage-errors) or the
     /// `available_debit_schemes`
     /// attribute is an empty array, you will not be able to collect payments
@@ -102,10 +108,10 @@ namespace GoCardless.Services
     /// specified bank account. GoCardless may be able to collect payments from
     /// an account
     /// even if no `bic` is returned.
-    /// 
+    ///
     /// Bank account details may be supplied using [local
     /// details](#appendix-local-bank-details) or an IBAN.
-    /// 
+    ///
     /// _ACH scheme_ For compliance reasons, an extra validation step is done
     /// using
     /// a third-party provider to make sure the customer's bank account can
@@ -114,7 +120,7 @@ namespace GoCardless.Services
     /// the
     /// customer is requested to adjust the account number/routing number and
     /// succeed in this check to continue with the flow.
-    /// 
+    ///
     /// _Note:_ Usage of this endpoint is monitored. If your organisation relies
     /// on GoCardless for
     /// modulus or reachability checking but not for payment collection, please
@@ -122,7 +128,6 @@ namespace GoCardless.Services
     /// </summary>
     public class BankDetailsLookupCreateRequest
     {
-
         /// <summary>
         /// The account holder name associated with the account number (if
         /// available). If provided and the country code is GB, a payer name

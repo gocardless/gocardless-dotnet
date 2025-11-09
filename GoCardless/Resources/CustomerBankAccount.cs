@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a customer bank account resource.
     ///
@@ -15,13 +14,13 @@ namespace GoCardless.Resources
     /// [customer](#core-endpoints-customers). They always belong to a
     /// [customer](#core-endpoints-customers), and may be linked to several
     /// Direct Debit [mandates](#core-endpoints-mandates).
-    /// 
+    ///
     /// Note that customer bank accounts must be unique, and so you will
     /// encounter a `bank_account_exists` error if you try to create a duplicate
     /// bank account. You may wish to handle this by updating the existing
     /// record instead, the ID of which will be provided as
     /// `links[customer_bank_account]` in the error response.
-    /// 
+    ///
     /// _Note:_ To ensure the customer's bank accounts are valid, verify them
     /// first
     /// using
@@ -119,14 +118,15 @@ namespace GoCardless.Resources
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
     }
-    
+
     /// <summary>
     /// Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
     /// accounts in other currencies. See [local details](#local-bank-details-united-states) for
     /// more information.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum CustomerBankAccountAccountType {
+    public enum CustomerBankAccountAccountType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -134,6 +134,7 @@ namespace GoCardless.Resources
         /// <summary>`account_type` with a value of "savings"</summary>
         [EnumMember(Value = "savings")]
         Savings,
+
         /// <summary>`account_type` with a value of "checking"</summary>
         [EnumMember(Value = "checking")]
         Checking,
@@ -151,5 +152,4 @@ namespace GoCardless.Resources
         [JsonProperty("customer")]
         public string Customer { get; set; }
     }
-    
 }

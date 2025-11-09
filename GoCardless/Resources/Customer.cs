@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a customer resource.
     ///
@@ -150,5 +149,4 @@ namespace GoCardless.Resources
         [JsonProperty("swedish_identity_number")]
         public string SwedishIdentityNumber { get; set; }
     }
-    
 }

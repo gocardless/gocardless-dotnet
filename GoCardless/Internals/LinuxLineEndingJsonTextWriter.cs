@@ -5,10 +5,8 @@ namespace GoCardless.Internals
 {
     public class LinuxLineEndingJsonTextWriter : JsonTextWriter
     {
-
-        public LinuxLineEndingJsonTextWriter(TextWriter textWriter) : base(textWriter)
-        {
-        }
+        public LinuxLineEndingJsonTextWriter(TextWriter textWriter)
+            : base(textWriter) { }
 
         protected override void WriteIndent()
         {

@@ -33,7 +33,6 @@ namespace GoCardless.Exceptions
                     return new RateLimitReachedException(apiErrorResponse);
                 default:
                     throw new InvalidOperationException($"Unknown ApiErrorType {apiErrorResponse}");
-
             }
         }
     }

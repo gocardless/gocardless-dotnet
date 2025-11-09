@@ -1,22 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a outbound payment resource.
     ///
     /// Outbound Payments represent payments sent from
     /// [creditors](#core-endpoints-creditors).
-    /// 
+    ///
     /// GoCardless will notify you via a [webhook](#appendix-webhooks) when the
     /// status of the outbound payment [changes](#event-types-outbound-payment).
-    /// 
+    ///
     /// <p class="restricted-notice"><strong>Restricted</strong>: Outbound
     /// Payments are currently in Early Access and available only to a limited
     /// list of organisations. If you are interested in using this feature,
@@ -138,13 +137,14 @@ namespace GoCardless.Resources
         [JsonProperty("verifications")]
         public OutboundPaymentVerifications Verifications { get; set; }
     }
-    
+
     /// <summary>
     /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency. Currently only
     /// "GBP" is supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum OutboundPaymentCurrency {
+    public enum OutboundPaymentCurrency
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -178,13 +178,14 @@ namespace GoCardless.Resources
         [JsonProperty("recipient_bank_account")]
         public string RecipientBankAccount { get; set; }
     }
-    
+
     /// <summary>
     /// Bank payment scheme to process the outbound payment. Currently only "faster_payments" (GBP)
     /// is supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum OutboundPaymentScheme {
+    public enum OutboundPaymentScheme
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -217,7 +218,8 @@ namespace GoCardless.Resources
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum OutboundPaymentStatus {
+    public enum OutboundPaymentStatus
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -225,21 +227,27 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "verifying"</summary>
         [EnumMember(Value = "verifying")]
         Verifying,
+
         /// <summary>`status` with a value of "pending_approval"</summary>
         [EnumMember(Value = "pending_approval")]
         PendingApproval,
+
         /// <summary>`status` with a value of "scheduled"</summary>
         [EnumMember(Value = "scheduled")]
         Scheduled,
+
         /// <summary>`status` with a value of "executing"</summary>
         [EnumMember(Value = "executing")]
         Executing,
+
         /// <summary>`status` with a value of "executed"</summary>
         [EnumMember(Value = "executed")]
         Executed,
+
         /// <summary>`status` with a value of "cancelled"</summary>
         [EnumMember(Value = "cancelled")]
         Cancelled,
+
         /// <summary>`status` with a value of "failed"</summary>
         [EnumMember(Value = "failed")]
         Failed,
@@ -258,7 +266,7 @@ namespace GoCardless.Resources
         [JsonProperty("recipient_bank_account_holder_verification")]
         public OutboundPaymentVerificationsRecipientBankAccountHolderVerification RecipientBankAccountHolderVerification { get; set; }
     }
-    
+
     /// <summary>
     /// Represents a outbound payment verifications recipient bank account holder verification resource.
     ///
@@ -298,7 +306,7 @@ namespace GoCardless.Resources
         [JsonProperty("type")]
         public OutboundPaymentVerificationsRecipientBankAccountHolderVerificationType? Type { get; set; }
     }
-    
+
     /// <summary>
     /// Result of the verification, could be one of
     /// <ul>
@@ -313,7 +321,8 @@ namespace GoCardless.Resources
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum OutboundPaymentVerificationsRecipientBankAccountHolderVerificationResult {
+    public enum OutboundPaymentVerificationsRecipientBankAccountHolderVerificationResult
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -321,12 +330,15 @@ namespace GoCardless.Resources
         /// <summary>`result` with a value of "full_match"</summary>
         [EnumMember(Value = "full_match")]
         FullMatch,
+
         /// <summary>`result` with a value of "partial_match"</summary>
         [EnumMember(Value = "partial_match")]
         PartialMatch,
+
         /// <summary>`result` with a value of "no_match"</summary>
         [EnumMember(Value = "no_match")]
         NoMatch,
+
         /// <summary>`result` with a value of "unable_to_match"</summary>
         [EnumMember(Value = "unable_to_match")]
         UnableToMatch,
@@ -338,7 +350,8 @@ namespace GoCardless.Resources
     /// Payee](https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/)
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum OutboundPaymentVerificationsRecipientBankAccountHolderVerificationType {
+    public enum OutboundPaymentVerificationsRecipientBankAccountHolderVerificationType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -347,5 +360,4 @@ namespace GoCardless.Resources
         [EnumMember(Value = "confirmation_of_payee")]
         ConfirmationOfPayee,
     }
-
 }

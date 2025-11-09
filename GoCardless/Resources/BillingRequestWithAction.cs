@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a billing request with action resource.
     ///
@@ -15,7 +14,7 @@ namespace GoCardless.Resources
     /// from a customer. An example of required input might be additional
     /// customer billing details, while an action would be asking a customer to
     /// authorise a payment using their mobile banking app.
-    /// 
+    ///
     /// See [Billing Requests:
     /// Overview](https://developer.gocardless.com/getting-started/billing-requests/overview/)
     /// for how-to's, explanations and tutorials.
@@ -28,7 +27,7 @@ namespace GoCardless.Resources
         /// are created against a specific bank, usually the bank that provides
         /// the payer's
         /// account.
-        /// 
+        ///
         /// Creation of Bank Authorisations is only permitted from GoCardless
         /// hosted UIs
         /// (see Billing Request Flows) to ensure we meet regulatory
@@ -43,7 +42,7 @@ namespace GoCardless.Resources
         /// from a customer. An example of required input might be additional
         /// customer billing details, while an action would be asking a customer
         /// to authorise a payment using their mobile banking app.
-        /// 
+        ///
         /// See [Billing Requests:
         /// Overview](https://developer.gocardless.com/getting-started/billing-requests/overview/)
         /// for how-to's, explanations and tutorials. <p
@@ -54,7 +53,7 @@ namespace GoCardless.Resources
         [JsonProperty("billing_requests")]
         public BillingRequestWithActionBillingRequests BillingRequests { get; set; }
     }
-    
+
     /// <summary>
     /// Represents a billing request with action bank authorisation resource.
     ///
@@ -63,7 +62,7 @@ namespace GoCardless.Resources
     /// are created against a specific bank, usually the bank that provides the
     /// payer's
     /// account.
-    /// 
+    ///
     /// Creation of Bank Authorisations is only permitted from GoCardless hosted
     /// UIs
     /// (see Billing Request Flows) to ensure we meet regulatory requirements
@@ -128,7 +127,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// URL that the payer can be redirected to after authorising the
         /// payment.
-        /// 
+        ///
         /// On completion of bank authorisation, the query parameter of either
         /// `outcome=success` or `outcome=failure` will be
         /// appended to the `redirect_uri` to indicate the result of the bank
@@ -136,7 +135,7 @@ namespace GoCardless.Resources
         /// expired, the query parameter `outcome=timeout` will be appended to
         /// the `redirect_uri`, in which case you should
         /// prompt the user to try the bank authorisation step again.
-        /// 
+        ///
         /// Please note: bank authorisations can still fail despite an
         /// `outcome=success` on the `redirect_uri`. It is therefore recommended
         /// to wait for the relevant bank authorisation event, such as
@@ -145,10 +144,10 @@ namespace GoCardless.Resources
         /// or
         /// [`BANK_AUTHORISATION_FAILED`](#billing-request-bankauthorisationfailed)
         /// in order to show the correct outcome to the user.
-        /// 
+        ///
         /// The BillingRequestFlow ID will also be appended to the
         /// `redirect_uri` as query parameter `id=BRF123`.
-        /// 
+        ///
         /// Defaults to `https://pay.gocardless.com/billing/static/thankyou`.
         /// </summary>
         [JsonProperty("redirect_uri")]
@@ -161,12 +160,13 @@ namespace GoCardless.Resources
         [JsonProperty("url")]
         public string Url { get; set; }
     }
-    
+
     /// <summary>
     /// Type of authorisation, can be either 'mandate' or 'payment'.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBankAuthorisationsAuthorisationType {
+    public enum BillingRequestWithActionBankAuthorisationsAuthorisationType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -174,6 +174,7 @@ namespace GoCardless.Resources
         /// <summary>`authorisation_type` with a value of "mandate"</summary>
         [EnumMember(Value = "mandate")]
         Mandate,
+
         /// <summary>`authorisation_type` with a value of "payment"</summary>
         [EnumMember(Value = "payment")]
         Payment,
@@ -198,7 +199,7 @@ namespace GoCardless.Resources
         [JsonProperty("institution")]
         public string Institution { get; set; }
     }
-    
+
     /// <summary>
     /// Represents a billing request with action billing request resource.
     ///
@@ -206,7 +207,7 @@ namespace GoCardless.Resources
     /// from a customer. An example of required input might be additional
     /// customer billing details, while an action would be asking a customer to
     /// authorise a payment using their mobile banking app.
-    /// 
+    ///
     /// See [Billing Requests:
     /// Overview](https://developer.gocardless.com/getting-started/billing-requests/overview/)
     /// for how-to's, explanations and tutorials. <p
@@ -235,7 +236,7 @@ namespace GoCardless.Resources
         /// payment to direct debit.
         /// Should not be set if GoCardless payment intelligence feature is
         /// used.
-        /// 
+        ///
         /// See [Billing Requests: Retain customers with
         /// Fallbacks](https://developer.gocardless.com/billing-requests/retain-customers-with-fallbacks/)
         /// for more information.
@@ -299,7 +300,7 @@ namespace GoCardless.Resources
         public BillingRequestWithActionBillingRequestsPurposeCode? PurposeCode { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [JsonProperty("resources")]
         public BillingRequestWithActionBillingRequestsResources Resources { get; set; }
@@ -326,7 +327,7 @@ namespace GoCardless.Resources
         [JsonProperty("subscription_request")]
         public BillingRequestWithActionBillingRequestsSubscriptionRequest SubscriptionRequest { get; set; }
     }
-    
+
     /// <summary>
     /// List of actions that can be performed before this billing request can be
     /// fulfilled.
@@ -370,7 +371,7 @@ namespace GoCardless.Resources
         /// - `failed`: we weren't able to infer the institution
         /// - `success`: we inferred the institution and added it to the
         /// resources of a Billing Request
-        /// 
+        ///
         /// </summary>
         [JsonProperty("institution_guess_status")]
         public string InstitutionGuessStatus { get; set; }
@@ -401,7 +402,7 @@ namespace GoCardless.Resources
         [JsonProperty("type")]
         public string Type { get; set; }
     }
-    
+
     /// <summary>
     /// Represents a billing request with action billing request action bank authorisation resource.
     ///
@@ -424,13 +425,14 @@ namespace GoCardless.Resources
         [JsonProperty("authorisation_type")]
         public string AuthorisationType { get; set; }
     }
-    
+
     /// <summary>
     /// Which authorisation adapter will be used to power these authorisations (GoCardless internal
     /// use only)
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBillingRequestActionBankAuthorisationAdapter {
+    public enum BillingRequestWithActionBillingRequestActionBankAuthorisationAdapter
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -438,15 +440,19 @@ namespace GoCardless.Resources
         /// <summary>`adapter` with a value of "open_banking_gateway_pis"</summary>
         [EnumMember(Value = "open_banking_gateway_pis")]
         OpenBankingGatewayPis,
+
         /// <summary>`adapter` with a value of "plaid_ais"</summary>
         [EnumMember(Value = "plaid_ais")]
         PlaidAis,
+
         /// <summary>`adapter` with a value of "open_banking_gateway_ais"</summary>
         [EnumMember(Value = "open_banking_gateway_ais")]
         OpenBankingGatewayAis,
+
         /// <summary>`adapter` with a value of "bankid_ais"</summary>
         [EnumMember(Value = "bankid_ais")]
         BankidAis,
+
         /// <summary>`adapter` with a value of "bank_pay_recurring"</summary>
         [EnumMember(Value = "bank_pay_recurring")]
         BankPayRecurring,
@@ -456,7 +462,8 @@ namespace GoCardless.Resources
     /// What type of bank authorisations are supported on this billing request
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBillingRequestActionBankAuthorisationAuthorisationType {
+    public enum BillingRequestWithActionBillingRequestActionBankAuthorisationAuthorisationType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -464,6 +471,7 @@ namespace GoCardless.Resources
         /// <summary>`authorisation_type` with a value of "payment"</summary>
         [EnumMember(Value = "payment")]
         Payment,
+
         /// <summary>`authorisation_type` with a value of "mandate"</summary>
         [EnumMember(Value = "mandate")]
         Mandate,
@@ -485,27 +493,27 @@ namespace GoCardless.Resources
         public string DefaultCountryCode { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [JsonProperty("incomplete_fields")]
         public BillingRequestWithActionBillingRequestActionCollectCustomerDetailsIncompleteFields IncompleteFields { get; set; }
     }
-    
+
     public class BillingRequestWithActionBillingRequestActionCollectCustomerDetailsIncompleteFields
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [JsonProperty("customer")]
         public List<string> Customer { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [JsonProperty("customer_billing_detail")]
         public List<string> CustomerBillingDetail { get; set; }
     }
-    
+
     /// <summary>
     /// Describes whether we inferred the institution from the provided bank account details. One
     /// of:
@@ -514,10 +522,11 @@ namespace GoCardless.Resources
     /// - `pending`: we are waiting on the bank details in order to infer the institution
     /// - `failed`: we weren't able to infer the institution
     /// - `success`: we inferred the institution and added it to the resources of a Billing Request
-    /// 
+    ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBillingRequestActionInstitutionGuessStatus {
+    public enum BillingRequestWithActionBillingRequestActionInstitutionGuessStatus
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -525,12 +534,15 @@ namespace GoCardless.Resources
         /// <summary>`institution_guess_status` with a value of "not_needed"</summary>
         [EnumMember(Value = "not_needed")]
         NotNeeded,
+
         /// <summary>`institution_guess_status` with a value of "pending"</summary>
         [EnumMember(Value = "pending")]
         Pending,
+
         /// <summary>`institution_guess_status` with a value of "failed"</summary>
         [EnumMember(Value = "failed")]
         Failed,
+
         /// <summary>`institution_guess_status` with a value of "success"</summary>
         [EnumMember(Value = "success")]
         Success,
@@ -540,7 +552,8 @@ namespace GoCardless.Resources
     /// Status of the action
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBillingRequestActionStatus {
+    public enum BillingRequestWithActionBillingRequestActionStatus
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -548,6 +561,7 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "pending"</summary>
         [EnumMember(Value = "pending")]
         Pending,
+
         /// <summary>`status` with a value of "completed"</summary>
         [EnumMember(Value = "completed")]
         Completed,
@@ -557,7 +571,8 @@ namespace GoCardless.Resources
     /// Unique identifier for the action.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBillingRequestActionType {
+    public enum BillingRequestWithActionBillingRequestActionType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -565,21 +580,27 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "choose_currency"</summary>
         [EnumMember(Value = "choose_currency")]
         ChooseCurrency,
+
         /// <summary>`type` with a value of "collect_amount"</summary>
         [EnumMember(Value = "collect_amount")]
         CollectAmount,
+
         /// <summary>`type` with a value of "collect_customer_details"</summary>
         [EnumMember(Value = "collect_customer_details")]
         CollectCustomerDetails,
+
         /// <summary>`type` with a value of "collect_bank_account"</summary>
         [EnumMember(Value = "collect_bank_account")]
         CollectBankAccount,
+
         /// <summary>`type` with a value of "bank_authorisation"</summary>
         [EnumMember(Value = "bank_authorisation")]
         BankAuthorisation,
+
         /// <summary>`type` with a value of "confirm_payer_details"</summary>
         [EnumMember(Value = "confirm_payer_details")]
         ConfirmPayerDetails,
+
         /// <summary>`type` with a value of "select_institution"</summary>
         [EnumMember(Value = "select_institution")]
         SelectInstitution,
@@ -625,7 +646,7 @@ namespace GoCardless.Resources
         /// payment.
         /// See [create (with
         /// schedule)](#instalment-schedules-create-with-schedule)
-        /// 
+        ///
         /// </summary>
         [JsonProperty("instalments_with_schedule")]
         public BillingRequestWithActionBillingRequestsInstalmentScheduleRequestInstalmentsWithSchedule InstalmentsWithSchedule { get; set; }
@@ -686,7 +707,7 @@ namespace GoCardless.Resources
         [JsonProperty("total_amount")]
         public int? TotalAmount { get; set; }
     }
-    
+
     /// <summary>
     /// An explicit array of instalment payments, each specifying at least an
     /// `amount` and `charge_date`. See [create (with
@@ -719,7 +740,7 @@ namespace GoCardless.Resources
         [JsonProperty("description")]
         public string Description { get; set; }
     }
-    
+
     /// <summary>
     /// Represents a billing request with action billing requests instalment schedule request instalments with schedule resource.
     ///
@@ -728,7 +749,7 @@ namespace GoCardless.Resources
     /// amounts to be collected, with a specified start date for the first
     /// payment.
     /// See [create (with schedule)](#instalment-schedules-create-with-schedule)
-    /// 
+    ///
     /// </summary>
     public class BillingRequestWithActionBillingRequestsInstalmentScheduleRequestInstalmentsWithSchedule
     {
@@ -736,7 +757,7 @@ namespace GoCardless.Resources
         /// List of amounts of each instalment, in the lowest denomination for
         /// the
         /// currency (e.g. cents in USD).
-        /// 
+        ///
         /// </summary>
         [JsonProperty("amounts")]
         public List<int?> Amounts { get; set; }
@@ -745,7 +766,7 @@ namespace GoCardless.Resources
         /// Number of `interval_units` between charge dates. Must be greater
         /// than or
         /// equal to `1`.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("interval")]
         public int? Interval { get; set; }
@@ -768,12 +789,13 @@ namespace GoCardless.Resources
         [JsonProperty("start_date")]
         public string StartDate { get; set; }
     }
-    
+
     /// <summary>
     /// The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBillingRequestsInstalmentScheduleRequestInstalmentsWithScheduleIntervalUnit {
+    public enum BillingRequestWithActionBillingRequestsInstalmentScheduleRequestInstalmentsWithScheduleIntervalUnit
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -781,9 +803,11 @@ namespace GoCardless.Resources
         /// <summary>`interval_unit` with a value of "weekly"</summary>
         [EnumMember(Value = "weekly")]
         Weekly,
+
         /// <summary>`interval_unit` with a value of "monthly"</summary>
         [EnumMember(Value = "monthly")]
         Monthly,
+
         /// <summary>`interval_unit` with a value of "yearly"</summary>
         [EnumMember(Value = "yearly")]
         Yearly,
@@ -798,12 +822,12 @@ namespace GoCardless.Resources
         /// (Optional) ID of the
         /// [instalment_schedule](#core-endpoints-instalment-schedules) that was
         /// created from this instalment schedule request.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("instalment_schedule")]
         public string InstalmentSchedule { get; set; }
     }
-    
+
     /// <summary>
     /// Resources linked to this BillingRequestWithActionBillingRequests
     /// </summary>
@@ -909,7 +933,7 @@ namespace GoCardless.Resources
         [JsonProperty("subscription_request_subscription")]
         public string SubscriptionRequestSubscription { get; set; }
     }
-    
+
     /// <summary>
     /// Represents a billing request with action billing requests mandate request resource.
     ///
@@ -920,7 +944,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// This field is ACH specific, sometimes referred to as [SEC
         /// code](https://www.moderntreasury.com/learn/sec-codes).
-        /// 
+        ///
         /// This is the way that the payer gives authorisation to the merchant.
         ///   web: Authorisation is Internet Initiated or via Mobile Entry (maps
         /// to SEC code: WEB)
@@ -928,7 +952,7 @@ namespace GoCardless.Resources
         /// to SEC code: TEL)
         ///   paper: Authorisation is provided in writing and signed, or
         /// similarly authenticated (maps to SEC code: PPD)
-        /// 
+        ///
         /// </summary>
         [JsonProperty("authorisation_source")]
         public BillingRequestWithActionBillingRequestsMandateRequestAuthorisationSource? AuthorisationSource { get; set; }
@@ -939,7 +963,7 @@ namespace GoCardless.Resources
         /// `recurring` or `standing` for ACH scheme. And `single`, `recurring`
         /// and `sporadic` for PAD scheme. _Note:_ This is only supported for
         /// ACH and PAD schemes.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("consent_type")]
         public string ConsentType { get; set; }
@@ -961,7 +985,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// A human-readable description of the payment and/or mandate. This
         /// will be displayed to the payer when authorising the billing request.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
@@ -969,13 +993,13 @@ namespace GoCardless.Resources
         /// <summary>
         /// This field will decide how GoCardless handles settlement of funds
         /// from the customer.
-        /// 
+        ///
         /// - `managed` will be moved through GoCardless' account, batched, and
         /// payed out.
         /// - `direct` will be a direct transfer from the payer's account to the
         /// merchant where
         ///   invoicing will be handled separately.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("funds_settlement")]
         public BillingRequestWithActionBillingRequestsMandateRequestFundsSettlement? FundsSettlement { get; set; }
@@ -1036,18 +1060,18 @@ namespace GoCardless.Resources
         ///   <li>`always`: as `when_available`, but fail to create the Billing
         /// Request if a mechanism isn't available</li>
         /// </ul>
-        /// 
+        ///
         /// By default, all Billing Requests use the `recommended` verification
         /// preference. It uses GoCardless payment intelligence solution to
         /// determine if a payer is fraudulent or not. The verification
         /// mechanism is based on the response and the payer may be asked to
         /// verify themselves. If the feature is not available, `recommended`
         /// behaves like `minimum`.
-        /// 
+        ///
         /// If you never wish to take advantage of our reduced risk products and
         /// Verified Mandates as they are released in new schemes, please use
         /// the `minimum` verification preference.
-        /// 
+        ///
         /// See [Billing Requests: Creating Verified
         /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
         /// for more information.
@@ -1055,20 +1079,21 @@ namespace GoCardless.Resources
         [JsonProperty("verify")]
         public BillingRequestWithActionBillingRequestsMandateRequestVerify? Verify { get; set; }
     }
-    
+
     /// <summary>
     /// This field is ACH specific, sometimes referred to as [SEC
     /// code](https://www.moderntreasury.com/learn/sec-codes).
-    /// 
+    ///
     /// This is the way that the payer gives authorisation to the merchant.
     ///   web: Authorisation is Internet Initiated or via Mobile Entry (maps to SEC code: WEB)
     ///   telephone: Authorisation is provided orally over telephone (maps to SEC code: TEL)
     ///   paper: Authorisation is provided in writing and signed, or similarly authenticated (maps
     /// to SEC code: PPD)
-    /// 
+    ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBillingRequestsMandateRequestAuthorisationSource {
+    public enum BillingRequestWithActionBillingRequestsMandateRequestAuthorisationSource
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -1076,9 +1101,11 @@ namespace GoCardless.Resources
         /// <summary>`authorisation_source` with a value of "web"</summary>
         [EnumMember(Value = "web")]
         Web,
+
         /// <summary>`authorisation_source` with a value of "telephone"</summary>
         [EnumMember(Value = "telephone")]
         Telephone,
+
         /// <summary>`authorisation_source` with a value of "paper"</summary>
         [EnumMember(Value = "paper")]
         Paper,
@@ -1095,13 +1122,13 @@ namespace GoCardless.Resources
         /// <summary>
         /// The latest date at which payments can be taken, must occur after
         /// start_date if present
-        /// 
+        ///
         /// This is an optional field and if it is not supplied the agreement
         /// will be considered open and
         /// will not have an end date. Keep in mind the end date must take into
         /// account how long it will
         /// take the user to set up this agreement via the Billing Request.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("end_date")]
         public string EndDate { get; set; }
@@ -1117,7 +1144,7 @@ namespace GoCardless.Resources
         /// A constraint where you can specify info (free text string) about how
         /// payments are calculated. _Note:_ This is only supported for ACH and
         /// PAD schemes.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("payment_method")]
         public string PaymentMethod { get; set; }
@@ -1130,16 +1157,16 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// The date from which payments can be taken.
-        /// 
+        ///
         /// This is an optional field and if it is not supplied the start date
         /// will be set to the day
         /// authorisation happens.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("start_date")]
         public string StartDate { get; set; }
     }
-    
+
     /// <summary>
     /// List of periodic limits and constraints which apply to them
     /// </summary>
@@ -1147,15 +1174,15 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// The alignment of the period.
-        /// 
+        ///
         /// `calendar` - this will finish on the end of the current period. For
         /// example this will expire on the Monday for the current week or the
         /// January for the next year.
-        /// 
+        ///
         /// `creation_date` - this will finish on the next instance of the
         /// current period. For example Monthly it will expire on the same day
         /// of the next month, or yearly the same day of the next year.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("alignment")]
         public BillingRequestWithActionBillingRequestsMandateRequestConstraintPeriodicLimitAlignment? Alignment { get; set; }
@@ -1171,7 +1198,7 @@ namespace GoCardless.Resources
         /// The maximum total amount that can be charged for all payments in
         /// this periodic limit.
         /// Required for VRP.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("max_total_amount")]
         public int? MaxTotalAmount { get; set; }
@@ -1183,20 +1210,21 @@ namespace GoCardless.Resources
         [JsonProperty("period")]
         public BillingRequestWithActionBillingRequestsMandateRequestConstraintPeriodicLimitPeriod? Period { get; set; }
     }
-    
+
     /// <summary>
     /// The alignment of the period.
-    /// 
+    ///
     /// `calendar` - this will finish on the end of the current period. For example this will expire
     /// on the Monday for the current week or the January for the next year.
-    /// 
+    ///
     /// `creation_date` - this will finish on the next instance of the current period. For example
     /// Monthly it will expire on the same day of the next month, or yearly the same day of the next
     /// year.
-    /// 
+    ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBillingRequestsMandateRequestConstraintPeriodicLimitAlignment {
+    public enum BillingRequestWithActionBillingRequestsMandateRequestConstraintPeriodicLimitAlignment
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -1204,6 +1232,7 @@ namespace GoCardless.Resources
         /// <summary>`alignment` with a value of "calendar"</summary>
         [EnumMember(Value = "calendar")]
         Calendar,
+
         /// <summary>`alignment` with a value of "creation_date"</summary>
         [EnumMember(Value = "creation_date")]
         CreationDate,
@@ -1213,7 +1242,8 @@ namespace GoCardless.Resources
     /// The repeating period for this mandate. Defaults to flexible for PayTo if not specified.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBillingRequestsMandateRequestConstraintPeriodicLimitPeriod {
+    public enum BillingRequestWithActionBillingRequestsMandateRequestConstraintPeriodicLimitPeriod
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -1221,15 +1251,19 @@ namespace GoCardless.Resources
         /// <summary>`period` with a value of "day"</summary>
         [EnumMember(Value = "day")]
         Day,
+
         /// <summary>`period` with a value of "week"</summary>
         [EnumMember(Value = "week")]
         Week,
+
         /// <summary>`period` with a value of "month"</summary>
         [EnumMember(Value = "month")]
         Month,
+
         /// <summary>`period` with a value of "year"</summary>
         [EnumMember(Value = "year")]
         Year,
+
         /// <summary>`period` with a value of "flexible"</summary>
         [EnumMember(Value = "flexible")]
         Flexible,
@@ -1237,14 +1271,15 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// This field will decide how GoCardless handles settlement of funds from the customer.
-    /// 
+    ///
     /// - `managed` will be moved through GoCardless' account, batched, and payed out.
     /// - `direct` will be a direct transfer from the payer's account to the merchant where
     ///   invoicing will be handled separately.
-    /// 
+    ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBillingRequestsMandateRequestFundsSettlement {
+    public enum BillingRequestWithActionBillingRequestsMandateRequestFundsSettlement
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -1252,6 +1287,7 @@ namespace GoCardless.Resources
         /// <summary>`funds_settlement` with a value of "managed"</summary>
         [EnumMember(Value = "managed")]
         Managed,
+
         /// <summary>`funds_settlement` with a value of "direct"</summary>
         [EnumMember(Value = "direct")]
         Direct,
@@ -1265,12 +1301,12 @@ namespace GoCardless.Resources
         /// <summary>
         /// (Optional) ID of the [mandate](#core-endpoints-mandates) that was
         /// created from this mandate request. this mandate request.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("mandate")]
         public string Mandate { get; set; }
     }
-    
+
     /// <summary>
     /// Verification preference for the mandate. One of:
     /// <ul>
@@ -1281,21 +1317,22 @@ namespace GoCardless.Resources
     ///   <li>`always`: as `when_available`, but fail to create the Billing Request if a mechanism
     /// isn't available</li>
     /// </ul>
-    /// 
+    ///
     /// By default, all Billing Requests use the `recommended` verification preference. It uses
     /// GoCardless payment intelligence solution to determine if a payer is fraudulent or not. The
     /// verification mechanism is based on the response and the payer may be asked to verify
     /// themselves. If the feature is not available, `recommended` behaves like `minimum`.
-    /// 
+    ///
     /// If you never wish to take advantage of our reduced risk products and Verified Mandates as
     /// they are released in new schemes, please use the `minimum` verification preference.
-    /// 
+    ///
     /// See [Billing Requests: Creating Verified
     /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
     /// for more information.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBillingRequestsMandateRequestVerify {
+    public enum BillingRequestWithActionBillingRequestsMandateRequestVerify
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -1303,12 +1340,15 @@ namespace GoCardless.Resources
         /// <summary>`verify` with a value of "minimum"</summary>
         [EnumMember(Value = "minimum")]
         Minimum,
+
         /// <summary>`verify` with a value of "recommended"</summary>
         [EnumMember(Value = "recommended")]
         Recommended,
+
         /// <summary>`verify` with a value of "when_available"</summary>
         [EnumMember(Value = "when_available")]
         WhenAvailable,
+
         /// <summary>`verify` with a value of "always"</summary>
         [EnumMember(Value = "always")]
         Always,
@@ -1348,7 +1388,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// A human-readable description of the payment and/or mandate. This
         /// will be displayed to the payer when authorising the billing request.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
@@ -1356,13 +1396,13 @@ namespace GoCardless.Resources
         /// <summary>
         /// This field will decide how GoCardless handles settlement of funds
         /// from the customer.
-        /// 
+        ///
         /// - `managed` will be moved through GoCardless' account, batched, and
         /// payed out.
         /// - `direct` will be a direct transfer from the payer's account to the
         /// merchant where
         ///   invoicing will be handled separately.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("funds_settlement")]
         public BillingRequestWithActionBillingRequestsPaymentRequestFundsSettlement? FundsSettlement { get; set; }
@@ -1384,7 +1424,7 @@ namespace GoCardless.Resources
         /// A custom payment reference defined by the merchant. It is only
         /// available for payments on the PayTo scheme or payments using the
         /// Direct Funds settlement model on the Faster Payments scheme.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
@@ -1401,17 +1441,18 @@ namespace GoCardless.Resources
         [JsonProperty("scheme")]
         public string Scheme { get; set; }
     }
-    
+
     /// <summary>
     /// This field will decide how GoCardless handles settlement of funds from the customer.
-    /// 
+    ///
     /// - `managed` will be moved through GoCardless' account, batched, and payed out.
     /// - `direct` will be a direct transfer from the payer's account to the merchant where
     ///   invoicing will be handled separately.
-    /// 
+    ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBillingRequestsPaymentRequestFundsSettlement {
+    public enum BillingRequestWithActionBillingRequestsPaymentRequestFundsSettlement
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -1419,6 +1460,7 @@ namespace GoCardless.Resources
         /// <summary>`funds_settlement` with a value of "managed"</summary>
         [EnumMember(Value = "managed")]
         Managed,
+
         /// <summary>`funds_settlement` with a value of "direct"</summary>
         [EnumMember(Value = "direct")]
         Direct,
@@ -1436,7 +1478,7 @@ namespace GoCardless.Resources
         [JsonProperty("payment")]
         public string Payment { get; set; }
     }
-    
+
     /// <summary>
     /// Specifies the high-level purpose of a mandate and/or payment using a set of pre-defined
     /// categories. Required for the PayTo scheme, optional for all others. Currently `mortgage`,
@@ -1444,7 +1486,8 @@ namespace GoCardless.Resources
     /// `government`, `pension`, `tax` and `other` are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBillingRequestsPurposeCode {
+    public enum BillingRequestWithActionBillingRequestsPurposeCode
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -1452,48 +1495,63 @@ namespace GoCardless.Resources
         /// <summary>`purpose_code` with a value of "mortgage"</summary>
         [EnumMember(Value = "mortgage")]
         Mortgage,
+
         /// <summary>`purpose_code` with a value of "utility"</summary>
         [EnumMember(Value = "utility")]
         Utility,
+
         /// <summary>`purpose_code` with a value of "loan"</summary>
         [EnumMember(Value = "loan")]
         Loan,
+
         /// <summary>`purpose_code` with a value of "dependant_support"</summary>
         [EnumMember(Value = "dependant_support")]
         DependantSupport,
+
         /// <summary>`purpose_code` with a value of "gambling"</summary>
         [EnumMember(Value = "gambling")]
         Gambling,
+
         /// <summary>`purpose_code` with a value of "retail"</summary>
         [EnumMember(Value = "retail")]
         Retail,
+
         /// <summary>`purpose_code` with a value of "salary"</summary>
         [EnumMember(Value = "salary")]
         Salary,
+
         /// <summary>`purpose_code` with a value of "personal"</summary>
         [EnumMember(Value = "personal")]
         Personal,
+
         /// <summary>`purpose_code` with a value of "government"</summary>
         [EnumMember(Value = "government")]
         Government,
+
         /// <summary>`purpose_code` with a value of "pension"</summary>
         [EnumMember(Value = "pension")]
         Pension,
+
         /// <summary>`purpose_code` with a value of "tax"</summary>
         [EnumMember(Value = "tax")]
         Tax,
+
         /// <summary>`purpose_code` with a value of "other"</summary>
         [EnumMember(Value = "other")]
         Other,
+
         /// <summary>`purpose_code` with a value of "Epayment"</summary>
         [EnumMember(Value = "Epayment")]
         Epayment,
+
         /// <summary>`purpose_code` with a value of "Commercial"</summary>
         [EnumMember(Value = "Commercial")]
         Commercial,
+
         /// <summary>`purpose_code` with a value of "OtherPayment"</summary>
         [EnumMember(Value = "OtherPayment")]
         OtherPayment,
+
         /// <summary>`purpose_code` with a value of "Trade"</summary>
         [EnumMember(Value = "Trade")]
         Trade,
@@ -1519,7 +1577,7 @@ namespace GoCardless.Resources
         [JsonProperty("customer_billing_detail")]
         public BillingRequestWithActionBillingRequestsResourcesCustomerBillingDetail CustomerBillingDetail { get; set; }
     }
-    
+
     /// <summary>
     /// Represents a billing request with action billing requests resources customer resource.
     ///
@@ -1596,7 +1654,7 @@ namespace GoCardless.Resources
         [JsonProperty("phone_number")]
         public string PhoneNumber { get; set; }
     }
-    
+
     /// <summary>
     /// Represents a billing request with action billing requests resources customer bank account resource.
     ///
@@ -1692,14 +1750,15 @@ namespace GoCardless.Resources
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
     }
-    
+
     /// <summary>
     /// Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
     /// accounts in other currencies. See [local details](#local-bank-details-united-states) for
     /// more information.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBillingRequestsResourcesCustomerBankAccountAccountType {
+    public enum BillingRequestWithActionBillingRequestsResourcesCustomerBankAccountAccountType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -1707,6 +1766,7 @@ namespace GoCardless.Resources
         /// <summary>`account_type` with a value of "savings"</summary>
         [EnumMember(Value = "savings")]
         Savings,
+
         /// <summary>`account_type` with a value of "checking"</summary>
         [EnumMember(Value = "checking")]
         Checking,
@@ -1724,7 +1784,7 @@ namespace GoCardless.Resources
         [JsonProperty("customer")]
         public string Customer { get; set; }
     }
-    
+
     /// <summary>
     /// Represents a billing request with action billing requests resources customer billing detail resource.
     ///
@@ -1789,10 +1849,10 @@ namespace GoCardless.Resources
         /// containing the IP address of the payer to whom the mandate belongs
         /// (i.e. as a result of their completion of a mandate setup flow in
         /// their browser).
-        /// 
+        ///
         /// Not required for creating offline mandates where
         /// `authorisation_source` is set to telephone or paper.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("ip_address")]
         public string IpAddress { get; set; }
@@ -1827,7 +1887,7 @@ namespace GoCardless.Resources
         [JsonProperty("swedish_identity_number")]
         public string SwedishIdentityNumber { get; set; }
     }
-    
+
     /// <summary>
     /// One of:
     /// <ul>
@@ -1839,7 +1899,8 @@ namespace GoCardless.Resources
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBillingRequestsStatus {
+    public enum BillingRequestWithActionBillingRequestsStatus
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -1847,15 +1908,19 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "pending"</summary>
         [EnumMember(Value = "pending")]
         Pending,
+
         /// <summary>`status` with a value of "ready_to_fulfil"</summary>
         [EnumMember(Value = "ready_to_fulfil")]
         ReadyToFulfil,
+
         /// <summary>`status` with a value of "fulfilling"</summary>
         [EnumMember(Value = "fulfilling")]
         Fulfilling,
+
         /// <summary>`status` with a value of "fulfilled"</summary>
         [EnumMember(Value = "fulfilled")]
         Fulfilled,
+
         /// <summary>`status` with a value of "cancelled"</summary>
         [EnumMember(Value = "cancelled")]
         Cancelled,
@@ -1937,7 +2002,7 @@ namespace GoCardless.Resources
         /// Name of the month on which to charge a customer. Must be lowercase.
         /// Only applies
         /// when the interval_unit is `yearly`.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("month")]
         public BillingRequestWithActionBillingRequestsSubscriptionRequestMonth? Month { get; set; }
@@ -1979,17 +2044,18 @@ namespace GoCardless.Resources
         /// will be set to the date of the first payment.
         /// If created without `month` or `day_of_month` this will be set as the
         /// mandate's `next_possible_charge_date`.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("start_date")]
         public string StartDate { get; set; }
     }
-    
+
     /// <summary>
     /// The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBillingRequestsSubscriptionRequestIntervalUnit {
+    public enum BillingRequestWithActionBillingRequestsSubscriptionRequestIntervalUnit
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -1997,9 +2063,11 @@ namespace GoCardless.Resources
         /// <summary>`interval_unit` with a value of "weekly"</summary>
         [EnumMember(Value = "weekly")]
         Weekly,
+
         /// <summary>`interval_unit` with a value of "monthly"</summary>
         [EnumMember(Value = "monthly")]
         Monthly,
+
         /// <summary>`interval_unit` with a value of "yearly"</summary>
         [EnumMember(Value = "yearly")]
         Yearly,
@@ -2013,19 +2081,20 @@ namespace GoCardless.Resources
         /// <summary>
         /// (Optional) ID of the [subscription](#core-endpoints-subscriptions)
         /// that was created from this subscription request.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("subscription")]
         public string Subscription { get; set; }
     }
-    
+
     /// <summary>
     /// Name of the month on which to charge a customer. Must be lowercase. Only applies
     /// when the interval_unit is `yearly`.
-    /// 
+    ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestWithActionBillingRequestsSubscriptionRequestMonth {
+    public enum BillingRequestWithActionBillingRequestsSubscriptionRequestMonth
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -2033,39 +2102,49 @@ namespace GoCardless.Resources
         /// <summary>`month` with a value of "january"</summary>
         [EnumMember(Value = "january")]
         January,
+
         /// <summary>`month` with a value of "february"</summary>
         [EnumMember(Value = "february")]
         February,
+
         /// <summary>`month` with a value of "march"</summary>
         [EnumMember(Value = "march")]
         March,
+
         /// <summary>`month` with a value of "april"</summary>
         [EnumMember(Value = "april")]
         April,
+
         /// <summary>`month` with a value of "may"</summary>
         [EnumMember(Value = "may")]
         May,
+
         /// <summary>`month` with a value of "june"</summary>
         [EnumMember(Value = "june")]
         June,
+
         /// <summary>`month` with a value of "july"</summary>
         [EnumMember(Value = "july")]
         July,
+
         /// <summary>`month` with a value of "august"</summary>
         [EnumMember(Value = "august")]
         August,
+
         /// <summary>`month` with a value of "september"</summary>
         [EnumMember(Value = "september")]
         September,
+
         /// <summary>`month` with a value of "october"</summary>
         [EnumMember(Value = "october")]
         October,
+
         /// <summary>`month` with a value of "november"</summary>
         [EnumMember(Value = "november")]
         November,
+
         /// <summary>`month` with a value of "december"</summary>
         [EnumMember(Value = "december")]
         December,
     }
-
 }

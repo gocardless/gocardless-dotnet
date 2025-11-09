@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +16,6 @@ namespace GoCardless.Services
     ///
     /// Mandates that have been transferred using Current Account Switch Service
     /// </summary>
-
     public class TransferredMandateService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -35,34 +32,44 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns new customer bank details for a mandate that's been recently
         /// transferred
-        /// </summary>  
+        /// </summary>
         /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may
-        /// not apply to mandates created before 2016.</param> 
+        /// not apply to mandates created before 2016.</param>
         /// <param name="request">An optional `TransferredMandateTransferredMandatesRequest` representing the query parameters for this transferred_mandates request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single transferred mandate resource</returns>
-        public Task<TransferredMandateResponse> TransferredMandatesAsync(string identity, TransferredMandateTransferredMandatesRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<TransferredMandateResponse> TransferredMandatesAsync(
+            string identity,
+            TransferredMandateTransferredMandatesRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new TransferredMandateTransferredMandatesRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<TransferredMandateResponse>("GET", "/transferred_mandates/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<TransferredMandateResponse>(
+                "GET",
+                "/transferred_mandates/:identity",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
     }
 
-        
     /// <summary>
     /// Returns new customer bank details for a mandate that's been recently
     /// transferred
     /// </summary>
-    public class TransferredMandateTransferredMandatesRequest
-    {
-    }
+    public class TransferredMandateTransferredMandatesRequest { }
 
     /// <summary>
     /// An API response for a request returning a single transferred mandate.

@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +21,6 @@ namespace GoCardless.Services
     /// corresponding event getting included in API responses. See
     /// [here](#event-types) for a complete list of event types.
     /// </summary>
-
     public class EventService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -44,21 +41,34 @@ namespace GoCardless.Services
         /// <param name="request">An optional `EventListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of event resources</returns>
-        public Task<EventListResponse> ListAsync(EventListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<EventListResponse> ListAsync(
+            EventListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new EventListRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<EventListResponse>("GET", "/events", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<EventListResponse>(
+                "GET",
+                "/events",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Get a lazily enumerated list of events.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Event> All(EventListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Event> All(
+            EventListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new EventListRequest();
 
@@ -80,7 +90,10 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of events.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Task<IReadOnlyList<Event>>> AllAsync(EventListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Task<IReadOnlyList<Event>>> AllAsync(
+            EventListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new EventListRequest();
 
@@ -94,33 +107,44 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of a single event.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "EV".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "EV".</param>
         /// <param name="request">An optional `EventGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single event resource</returns>
-        public Task<EventResponse> GetAsync(string identity, EventGetRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<EventResponse> GetAsync(
+            string identity,
+            EventGetRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new EventGetRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<EventResponse>("GET", "/events/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<EventResponse>(
+                "GET",
+                "/events/:identity",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
     }
 
-        
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// events.
     /// </summary>
     public class EventListRequest
     {
-
         /// <summary>
         /// Limit to events with a given `action`.
         /// </summary>
@@ -216,7 +240,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("include")]
         public EventInclude? Include { get; set; }
-            
+
         /// <summary>
         /// Includes linked resources in the response. Must be used with the
         /// `resource_type` parameter specified. The include should be one of:
@@ -237,40 +261,50 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum EventInclude
         {
-    
             /// <summary>`include` with a value of "billing_request"</summary>
             [EnumMember(Value = "billing_request")]
             BillingRequest,
+
             /// <summary>`include` with a value of "creditor"</summary>
             [EnumMember(Value = "creditor")]
             Creditor,
+
             /// <summary>`include` with a value of "customer"</summary>
             [EnumMember(Value = "customer")]
             Customer,
+
             /// <summary>`include` with a value of "instalment_schedule"</summary>
             [EnumMember(Value = "instalment_schedule")]
             InstalmentSchedule,
+
             /// <summary>`include` with a value of "mandate"</summary>
             [EnumMember(Value = "mandate")]
             Mandate,
+
             /// <summary>`include` with a value of "outbound_payment"</summary>
             [EnumMember(Value = "outbound_payment")]
             OutboundPayment,
+
             /// <summary>`include` with a value of "payer_authorisation"</summary>
             [EnumMember(Value = "payer_authorisation")]
             PayerAuthorisation,
+
             /// <summary>`include` with a value of "payment"</summary>
             [EnumMember(Value = "payment")]
             Payment,
+
             /// <summary>`include` with a value of "payout"</summary>
             [EnumMember(Value = "payout")]
             Payout,
+
             /// <summary>`include` with a value of "refund"</summary>
             [EnumMember(Value = "refund")]
             Refund,
+
             /// <summary>`include` with a value of "scheme_identifier"</summary>
             [EnumMember(Value = "scheme_identifier")]
             SchemeIdentifier,
+
             /// <summary>`include` with a value of "subscription"</summary>
             [EnumMember(Value = "subscription")]
             Subscription,
@@ -362,7 +396,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("resource_type")]
         public EventResourceType? ResourceType { get; set; }
-            
+
         /// <summary>
         /// Type of resource that you'd like to get all events for.
         /// Cannot be used together with the `billing_request`, `creditor`,
@@ -388,46 +422,58 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum EventResourceType
         {
-    
             /// <summary>`resource_type` with a value of "billing_requests"</summary>
             [EnumMember(Value = "billing_requests")]
             BillingRequests,
+
             /// <summary>`resource_type` with a value of "creditors"</summary>
             [EnumMember(Value = "creditors")]
             Creditors,
+
             /// <summary>`resource_type` with a value of "customers"</summary>
             [EnumMember(Value = "customers")]
             Customers,
+
             /// <summary>`resource_type` with a value of "exports"</summary>
             [EnumMember(Value = "exports")]
             Exports,
+
             /// <summary>`resource_type` with a value of "instalment_schedules"</summary>
             [EnumMember(Value = "instalment_schedules")]
             InstalmentSchedules,
+
             /// <summary>`resource_type` with a value of "mandates"</summary>
             [EnumMember(Value = "mandates")]
             Mandates,
+
             /// <summary>`resource_type` with a value of "organisations"</summary>
             [EnumMember(Value = "organisations")]
             Organisations,
+
             /// <summary>`resource_type` with a value of "outbound_payments"</summary>
             [EnumMember(Value = "outbound_payments")]
             OutboundPayments,
+
             /// <summary>`resource_type` with a value of "payer_authorisations"</summary>
             [EnumMember(Value = "payer_authorisations")]
             PayerAuthorisations,
+
             /// <summary>`resource_type` with a value of "payments"</summary>
             [EnumMember(Value = "payments")]
             Payments,
+
             /// <summary>`resource_type` with a value of "payouts"</summary>
             [EnumMember(Value = "payouts")]
             Payouts,
+
             /// <summary>`resource_type` with a value of "refunds"</summary>
             [EnumMember(Value = "refunds")]
             Refunds,
+
             /// <summary>`resource_type` with a value of "scheme_identifiers"</summary>
             [EnumMember(Value = "scheme_identifiers")]
             SchemeIdentifiers,
+
             /// <summary>`resource_type` with a value of "subscriptions"</summary>
             [EnumMember(Value = "subscriptions")]
             Subscriptions,
@@ -449,13 +495,10 @@ namespace GoCardless.Services
         public string Subscription { get; set; }
     }
 
-        
     /// <summary>
     /// Retrieves the details of a single event.
     /// </summary>
-    public class EventGetRequest
-    {
-    }
+    public class EventGetRequest { }
 
     /// <summary>
     /// An API response for a request returning a single event.
@@ -479,8 +522,11 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("events")]
         public IReadOnlyList<Event> Events { get; private set; }
+
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }public Linked Linked {get; private set; }}
+        public Meta Meta { get; private set; }
+        public Linked Linked { get; private set; }
+    }
 }

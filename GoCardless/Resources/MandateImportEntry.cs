@@ -1,20 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a mandate import entry resource.
     ///
     /// Mandate Import Entries are added to a [Mandate
     /// Import](#core-endpoints-mandate-imports).
     /// Each entry corresponds to one mandate to be imported into GoCardless.
-    /// 
+    ///
     /// To import a mandate you will need:
     /// <ol>
     ///   <li>Identifying information about the customer (name/company and
@@ -24,7 +23,7 @@ namespace GoCardless.Resources
     /// details</a></li>
     ///   <li>Amendment details (SEPA only)</li>
     /// </ol>
-    /// 
+    ///
     /// We suggest you provide a `record_identifier` (which is unique within the
     /// context of a
     /// single mandate import) to help you to identify mandates that have been
@@ -36,7 +35,7 @@ namespace GoCardless.Resources
     /// the `links`
     /// fields to find the mandate, customer and customer bank account that have
     /// been imported.
-    /// 
+    ///
     /// <p class="restricted-notice"><strong>Restricted</strong>: This API is
     /// currently only available for approved integrators - please <a
     /// href="mailto:help@gocardless.com">get in touch</a> if you would like to
@@ -69,12 +68,12 @@ namespace GoCardless.Resources
         /// processed by GoCardless) to identify the records that have been
         /// created. Limited
         /// to 255 characters.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("record_identifier")]
         public string RecordIdentifier { get; set; }
     }
-    
+
     /// <summary>
     /// Represents a mandate import entry link resource.
     ///
@@ -108,10 +107,9 @@ namespace GoCardless.Resources
         /// The ID of the mandate import. This is returned when you
         /// [create a Mandate
         /// Import](#mandate-imports-create-a-new-mandate-import).
-        /// 
+        ///
         /// </summary>
         [JsonProperty("mandate_import")]
         public string MandateImport { get; set; }
     }
-    
 }

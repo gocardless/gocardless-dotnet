@@ -2,7 +2,5 @@
 
 namespace GoCardless.Errors
 {
-    public class Links : Dictionary<string, string>
-    {
-    }
+    public class Links : Dictionary<string, string> { }
 }

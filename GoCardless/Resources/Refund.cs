@@ -1,20 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a refund resource.
     ///
     /// Refund objects represent (partial) refunds of a
     /// [payment](#core-endpoints-payments) back to the
     /// [customer](#core-endpoints-customers).
-    /// 
+    ///
     /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
     /// a refund is created, and will update the `amount_refunded` property of
     /// the payment.
@@ -43,7 +42,7 @@ namespace GoCardless.Resources
         public string Currency { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [JsonProperty("fx")]
         public RefundFx Fx { get; set; }
@@ -108,7 +107,7 @@ namespace GoCardless.Resources
         [JsonProperty("status")]
         public RefundStatus? Status { get; set; }
     }
-    
+
     public class RefundFx
     {
         /// <summary>
@@ -149,7 +148,7 @@ namespace GoCardless.Resources
         [JsonProperty("fx_currency")]
         public RefundFxFxCurrency? FxCurrency { get; set; }
     }
-    
+
     /// <summary>
     /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in
     /// which amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK",
@@ -157,7 +156,8 @@ namespace GoCardless.Resources
     /// were) made via foreign exchange.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum RefundFxFxCurrency {
+    public enum RefundFxFxCurrency
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -165,24 +165,31 @@ namespace GoCardless.Resources
         /// <summary>`fx_currency` with a value of "AUD"</summary>
         [EnumMember(Value = "AUD")]
         AUD,
+
         /// <summary>`fx_currency` with a value of "CAD"</summary>
         [EnumMember(Value = "CAD")]
         CAD,
+
         /// <summary>`fx_currency` with a value of "DKK"</summary>
         [EnumMember(Value = "DKK")]
         DKK,
+
         /// <summary>`fx_currency` with a value of "EUR"</summary>
         [EnumMember(Value = "EUR")]
         EUR,
+
         /// <summary>`fx_currency` with a value of "GBP"</summary>
         [EnumMember(Value = "GBP")]
         GBP,
+
         /// <summary>`fx_currency` with a value of "NZD"</summary>
         [EnumMember(Value = "NZD")]
         NZD,
+
         /// <summary>`fx_currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
+
         /// <summary>`fx_currency` with a value of "USD"</summary>
         [EnumMember(Value = "USD")]
         USD,
@@ -207,7 +214,7 @@ namespace GoCardless.Resources
         [JsonProperty("payment")]
         public string Payment { get; set; }
     }
-    
+
     /// <summary>
     /// One of:
     /// <ul>
@@ -222,7 +229,8 @@ namespace GoCardless.Resources
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum RefundStatus {
+    public enum RefundStatus
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -230,24 +238,29 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "created"</summary>
         [EnumMember(Value = "created")]
         Created,
+
         /// <summary>`status` with a value of "pending_submission"</summary>
         [EnumMember(Value = "pending_submission")]
         PendingSubmission,
+
         /// <summary>`status` with a value of "submitted"</summary>
         [EnumMember(Value = "submitted")]
         Submitted,
+
         /// <summary>`status` with a value of "paid"</summary>
         [EnumMember(Value = "paid")]
         Paid,
+
         /// <summary>`status` with a value of "cancelled"</summary>
         [EnumMember(Value = "cancelled")]
         Cancelled,
+
         /// <summary>`status` with a value of "bounced"</summary>
         [EnumMember(Value = "bounced")]
         Bounced,
+
         /// <summary>`status` with a value of "funds_returned"</summary>
         [EnumMember(Value = "funds_returned")]
         FundsReturned,
     }
-
 }

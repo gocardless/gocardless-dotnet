@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a currency exchange rate resource.
     ///
@@ -40,5 +39,4 @@ namespace GoCardless.Resources
         [JsonProperty("time")]
         public string Time { get; set; }
     }
-    
 }

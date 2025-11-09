@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a payment resource.
     ///
@@ -15,7 +14,7 @@ namespace GoCardless.Resources
     /// [customer](#core-endpoints-customers) to a
     /// [creditor](#core-endpoints-creditors), taken against a Direct Debit
     /// [mandate](#core-endpoints-mandates).
-    /// 
+    ///
     /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
     /// the state of a payment changes.
     /// </summary>
@@ -73,14 +72,14 @@ namespace GoCardless.Resources
         /// This field indicates whether the ACH payment is processed through
         /// Faster
         /// ACH or standard ACH.
-        /// 
+        ///
         /// It is only present in the API response for ACH payments.
         /// </summary>
         [JsonProperty("faster_ach")]
         public bool? FasterAch { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [JsonProperty("fx")]
         public PaymentFx Fx { get; set; }
@@ -169,13 +168,14 @@ namespace GoCardless.Resources
         [JsonProperty("status")]
         public PaymentStatus? Status { get; set; }
     }
-    
+
     /// <summary>
     /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
     /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum PaymentCurrency {
+    public enum PaymentCurrency
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -183,24 +183,31 @@ namespace GoCardless.Resources
         /// <summary>`currency` with a value of "AUD"</summary>
         [EnumMember(Value = "AUD")]
         AUD,
+
         /// <summary>`currency` with a value of "CAD"</summary>
         [EnumMember(Value = "CAD")]
         CAD,
+
         /// <summary>`currency` with a value of "DKK"</summary>
         [EnumMember(Value = "DKK")]
         DKK,
+
         /// <summary>`currency` with a value of "EUR"</summary>
         [EnumMember(Value = "EUR")]
         EUR,
+
         /// <summary>`currency` with a value of "GBP"</summary>
         [EnumMember(Value = "GBP")]
         GBP,
+
         /// <summary>`currency` with a value of "NZD"</summary>
         [EnumMember(Value = "NZD")]
         NZD,
+
         /// <summary>`currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
+
         /// <summary>`currency` with a value of "USD"</summary>
         [EnumMember(Value = "USD")]
         USD,
@@ -246,7 +253,7 @@ namespace GoCardless.Resources
         [JsonProperty("fx_currency")]
         public PaymentFxFxCurrency? FxCurrency { get; set; }
     }
-    
+
     /// <summary>
     /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in
     /// which amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK",
@@ -254,7 +261,8 @@ namespace GoCardless.Resources
     /// were) made via foreign exchange.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum PaymentFxFxCurrency {
+    public enum PaymentFxFxCurrency
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -262,24 +270,31 @@ namespace GoCardless.Resources
         /// <summary>`fx_currency` with a value of "AUD"</summary>
         [EnumMember(Value = "AUD")]
         AUD,
+
         /// <summary>`fx_currency` with a value of "CAD"</summary>
         [EnumMember(Value = "CAD")]
         CAD,
+
         /// <summary>`fx_currency` with a value of "DKK"</summary>
         [EnumMember(Value = "DKK")]
         DKK,
+
         /// <summary>`fx_currency` with a value of "EUR"</summary>
         [EnumMember(Value = "EUR")]
         EUR,
+
         /// <summary>`fx_currency` with a value of "GBP"</summary>
         [EnumMember(Value = "GBP")]
         GBP,
+
         /// <summary>`fx_currency` with a value of "NZD"</summary>
         [EnumMember(Value = "NZD")]
         NZD,
+
         /// <summary>`fx_currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
+
         /// <summary>`fx_currency` with a value of "USD"</summary>
         [EnumMember(Value = "USD")]
         USD,
@@ -329,7 +344,7 @@ namespace GoCardless.Resources
         [JsonProperty("subscription")]
         public string Subscription { get; set; }
     }
-    
+
     /// <summary>
     /// One of:
     /// <ul>
@@ -348,7 +363,8 @@ namespace GoCardless.Resources
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum PaymentStatus {
+    public enum PaymentStatus
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -356,30 +372,37 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "pending_customer_approval"</summary>
         [EnumMember(Value = "pending_customer_approval")]
         PendingCustomerApproval,
+
         /// <summary>`status` with a value of "pending_submission"</summary>
         [EnumMember(Value = "pending_submission")]
         PendingSubmission,
+
         /// <summary>`status` with a value of "submitted"</summary>
         [EnumMember(Value = "submitted")]
         Submitted,
+
         /// <summary>`status` with a value of "confirmed"</summary>
         [EnumMember(Value = "confirmed")]
         Confirmed,
+
         /// <summary>`status` with a value of "paid_out"</summary>
         [EnumMember(Value = "paid_out")]
         PaidOut,
+
         /// <summary>`status` with a value of "cancelled"</summary>
         [EnumMember(Value = "cancelled")]
         Cancelled,
+
         /// <summary>`status` with a value of "customer_approval_denied"</summary>
         [EnumMember(Value = "customer_approval_denied")]
         CustomerApprovalDenied,
+
         /// <summary>`status` with a value of "failed"</summary>
         [EnumMember(Value = "failed")]
         Failed,
+
         /// <summary>`status` with a value of "charged_back"</summary>
         [EnumMember(Value = "charged_back")]
         ChargedBack,
     }
-
 }

@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a payout item resource.
     ///
@@ -18,14 +17,14 @@ namespace GoCardless.Resources
     /// we take any positive balance in your GoCardless account, and pay it out
     /// to your
     /// nominated bank account.
-    /// 
+    ///
     /// Other actions in your GoCardless account can also affect your balance.
     /// For example,
     /// if a customer charges back a payment, we'll deduct the payment's amount
     /// from your
     /// balance, but add any fees you paid for that payment back to your
     /// balance.
-    /// 
+    ///
     /// The Payout Items API allows you to view, on a per-payout basis, the
     /// credit and debit
     /// items that make up that payout's amount.  Payout items can only be
@@ -33,7 +32,7 @@ namespace GoCardless.Resources
     /// created in the last 6 months. Requests for older payouts will return an
     /// HTTP status
     /// <code>410 Gone</code>.
-    /// 
+    ///
     /// </summary>
     public class PayoutItem
     {
@@ -60,7 +59,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// An array of tax items <em>beta</em>
-        /// 
+        ///
         /// _Note_: VAT applies to transaction and surcharge fees for merchants
         /// operating in the UK and France.
         /// </summary>
@@ -99,12 +98,12 @@ namespace GoCardless.Resources
         /// surcharge fee as the bank or customer cancelled the chargeback. Will
         /// include taxes if applicable for merchants.</li>
         /// </ul>
-        /// 
+        ///
         /// </summary>
         [JsonProperty("type")]
         public PayoutItemType? Type { get; set; }
     }
-    
+
     /// <summary>
     /// Resources linked to this PayoutItem
     /// </summary>
@@ -132,10 +131,10 @@ namespace GoCardless.Resources
         [JsonProperty("refund")]
         public string Refund { get; set; }
     }
-    
+
     /// <summary>
     /// An array of tax items <em>beta</em>
-    /// 
+    ///
     /// _Note_: VAT applies to transaction and surcharge fees for merchants
     /// operating in the UK and France.
     /// </summary>
@@ -161,7 +160,7 @@ namespace GoCardless.Resources
         /// The amount of tax to be paid out to the tax authorities in
         /// fractional currency; the lowest denomination for the currency (e.g.
         /// pence in GBP, cents in EUR), to one decimal place.
-        /// 
+        ///
         /// When `currency` and `destination_currency` don't match this will be
         /// `null` until the `exchange_rate` has been finalised.
         /// </summary>
@@ -180,10 +179,10 @@ namespace GoCardless.Resources
         /// <summary>
         /// The exchange rate for the tax from the currency into the destination
         /// currency.
-        /// 
+        ///
         /// Present only if the currency and the destination currency don't
         /// match and the exchange rate has been finalised.
-        /// 
+        ///
         /// You can listen for the payout's [`tax_exchange_rates_confirmed`
         /// webhook](https://developer.gocardless.com/api-reference/#event-types-payout)
         /// to know when the exchange rate has been finalised for all fees in
@@ -199,13 +198,14 @@ namespace GoCardless.Resources
         [JsonProperty("tax_rate_id")]
         public string TaxRateId { get; set; }
     }
-    
+
     /// <summary>
     /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
     /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum PayoutItemTaxisCurrency {
+    public enum PayoutItemTaxisCurrency
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -213,24 +213,31 @@ namespace GoCardless.Resources
         /// <summary>`currency` with a value of "AUD"</summary>
         [EnumMember(Value = "AUD")]
         AUD,
+
         /// <summary>`currency` with a value of "CAD"</summary>
         [EnumMember(Value = "CAD")]
         CAD,
+
         /// <summary>`currency` with a value of "DKK"</summary>
         [EnumMember(Value = "DKK")]
         DKK,
+
         /// <summary>`currency` with a value of "EUR"</summary>
         [EnumMember(Value = "EUR")]
         EUR,
+
         /// <summary>`currency` with a value of "GBP"</summary>
         [EnumMember(Value = "GBP")]
         GBP,
+
         /// <summary>`currency` with a value of "NZD"</summary>
         [EnumMember(Value = "NZD")]
         NZD,
+
         /// <summary>`currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
+
         /// <summary>`currency` with a value of "USD"</summary>
         [EnumMember(Value = "USD")]
         USD,
@@ -259,10 +266,11 @@ namespace GoCardless.Resources
     /// failed or was charged back, or refunded a surcharge fee as the bank or customer cancelled
     /// the chargeback. Will include taxes if applicable for merchants.</li>
     /// </ul>
-    /// 
+    ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum PayoutItemType {
+    public enum PayoutItemType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -270,33 +278,41 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "payment_paid_out"</summary>
         [EnumMember(Value = "payment_paid_out")]
         PaymentPaidOut,
+
         /// <summary>`type` with a value of "payment_failed"</summary>
         [EnumMember(Value = "payment_failed")]
         PaymentFailed,
+
         /// <summary>`type` with a value of "payment_charged_back"</summary>
         [EnumMember(Value = "payment_charged_back")]
         PaymentChargedBack,
+
         /// <summary>`type` with a value of "payment_refunded"</summary>
         [EnumMember(Value = "payment_refunded")]
         PaymentRefunded,
+
         /// <summary>`type` with a value of "refund"</summary>
         [EnumMember(Value = "refund")]
         Refund,
+
         /// <summary>`type` with a value of "gocardless_fee"</summary>
         [EnumMember(Value = "gocardless_fee")]
         GocardlessFee,
+
         /// <summary>`type` with a value of "app_fee"</summary>
         [EnumMember(Value = "app_fee")]
         AppFee,
+
         /// <summary>`type` with a value of "revenue_share"</summary>
         [EnumMember(Value = "revenue_share")]
         RevenueShare,
+
         /// <summary>`type` with a value of "surcharge_fee"</summary>
         [EnumMember(Value = "surcharge_fee")]
         SurchargeFee,
+
         /// <summary>`type` with a value of "refund_funds_returned"</summary>
         [EnumMember(Value = "refund_funds_returned")]
         RefundFundsReturned,
     }
-
 }
