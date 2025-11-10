@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +18,6 @@ namespace GoCardless.Services
     /// on the [billing request flow](#billing-requests-billing-request-flows)
     /// payment pages.
     /// </summary>
-
     public class LogoService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -38,7 +35,7 @@ namespace GoCardless.Services
         /// Creates a new logo associated with a creditor. If a creditor already
         /// has a logo, this will update the existing logo linked to the
         /// creditor.
-        /// 
+        ///
         /// We support JPG and PNG formats. Your logo will be scaled to a
         /// maximum of 300px by 40px. For more guidance on how to upload logos
         /// that will look
@@ -48,22 +45,31 @@ namespace GoCardless.Services
         /// <param name="request">An optional `LogoCreateForCreditorRequest` representing the body for this create_for_creditor request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single logo resource</returns>
-        public Task<LogoResponse> CreateForCreditorAsync(LogoCreateForCreditorRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<LogoResponse> CreateForCreditorAsync(
+            LogoCreateForCreditorRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new LogoCreateForCreditorRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<LogoResponse>("POST", "/branding/logos", urlParams, request, null, "logos", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<LogoResponse>(
+                "POST",
+                "/branding/logos",
+                urlParams,
+                request,
+                null,
+                "logos",
+                customiseRequestMessage
+            );
         }
     }
 
-        
     /// <summary>
     /// Creates a new logo associated with a creditor. If a creditor already has
     /// a logo, this will update the existing logo linked to the creditor.
-    /// 
+    ///
     /// We support JPG and PNG formats. Your logo will be scaled to a maximum of
     /// 300px by 40px. For more guidance on how to upload logos that will look
     /// great across your customer payment page and notification emails see
@@ -71,7 +77,6 @@ namespace GoCardless.Services
     /// </summary>
     public class LogoCreateForCreditorRequest
     {
-
         /// <summary>
         /// Base64 encoded string.
         /// </summary>
@@ -83,17 +88,17 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("links")]
         public LogoLinks Links { get; set; }
+
         /// <summary>
         /// Linked resources for a Logo.
         /// </summary>
         public class LogoLinks
         {
-                
-                /// <summary>
-                            /// ID of the creditor the logo belongs to
-                /// </summary>
-                [JsonProperty("creditor")]
-                public string Creditor { get; set; }
+            /// <summary>
+            /// ID of the creditor the logo belongs to
+            /// </summary>
+            [JsonProperty("creditor")]
+            public string Creditor { get; set; }
         }
     }
 

@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +18,8 @@ namespace GoCardless.Services
     /// beyond which refunds are not permitted. The default limit is zero —
     /// refunds are not permitted if the creditor has a negative balance. The
     /// limit can be changed on a per-creditor basis.
-    /// 
+    ///
     /// </summary>
-
     public class NegativeBalanceLimitService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -43,21 +40,34 @@ namespace GoCardless.Services
         /// <param name="request">An optional `NegativeBalanceLimitListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of negative balance limit resources</returns>
-        public Task<NegativeBalanceLimitListResponse> ListAsync(NegativeBalanceLimitListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<NegativeBalanceLimitListResponse> ListAsync(
+            NegativeBalanceLimitListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new NegativeBalanceLimitListRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<NegativeBalanceLimitListResponse>("GET", "/negative_balance_limits", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<NegativeBalanceLimitListResponse>(
+                "GET",
+                "/negative_balance_limits",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Get a lazily enumerated list of negative balance limits.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<NegativeBalanceLimit> All(NegativeBalanceLimitListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<NegativeBalanceLimit> All(
+            NegativeBalanceLimitListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new NegativeBalanceLimitListRequest();
 
@@ -79,7 +89,10 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of negative balance limits.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Task<IReadOnlyList<NegativeBalanceLimit>>> AllAsync(NegativeBalanceLimitListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Task<IReadOnlyList<NegativeBalanceLimit>>> AllAsync(
+            NegativeBalanceLimitListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new NegativeBalanceLimitListRequest();
 
@@ -92,14 +105,12 @@ namespace GoCardless.Services
         }
     }
 
-        
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
     /// negative balance limits.
     /// </summary>
     public class NegativeBalanceLimitListRequest
     {
-
         /// <summary>
         /// Cursor pointing to the start of the desired set.
         /// </summary>
@@ -125,7 +136,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("currency")]
         public NegativeBalanceLimitCurrency? Currency { get; set; }
-            
+
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
@@ -134,28 +145,34 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum NegativeBalanceLimitCurrency
         {
-    
             /// <summary>`currency` with a value of "AUD"</summary>
             [EnumMember(Value = "AUD")]
             AUD,
+
             /// <summary>`currency` with a value of "CAD"</summary>
             [EnumMember(Value = "CAD")]
             CAD,
+
             /// <summary>`currency` with a value of "DKK"</summary>
             [EnumMember(Value = "DKK")]
             DKK,
+
             /// <summary>`currency` with a value of "EUR"</summary>
             [EnumMember(Value = "EUR")]
             EUR,
+
             /// <summary>`currency` with a value of "GBP"</summary>
             [EnumMember(Value = "GBP")]
             GBP,
+
             /// <summary>`currency` with a value of "NZD"</summary>
             [EnumMember(Value = "NZD")]
             NZD,
+
             /// <summary>`currency` with a value of "SEK"</summary>
             [EnumMember(Value = "SEK")]
             SEK,
+
             /// <summary>`currency` with a value of "USD"</summary>
             [EnumMember(Value = "USD")]
             USD,
@@ -190,8 +207,10 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("negative_balance_limits")]
         public IReadOnlyList<NegativeBalanceLimit> NegativeBalanceLimits { get; private set; }
+
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }}
+        public Meta Meta { get; private set; }
+    }
 }

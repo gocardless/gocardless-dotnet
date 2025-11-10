@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +16,7 @@ namespace GoCardless.Services
     ///
     /// Verification details represent any information needed by GoCardless to
     /// verify a creditor.
-    /// 
+    ///
     /// <p class="restricted-notice"><strong>Restricted</strong>:
     ///   These endpoints are restricted to customers who want to collect their
     /// merchant's
@@ -28,7 +26,6 @@ namespace GoCardless.Services
     /// on your
     ///   account.</p>
     /// </summary>
-
     public class VerificationDetailService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -48,14 +45,24 @@ namespace GoCardless.Services
         /// <param name="request">An optional `VerificationDetailCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single verification detail resource</returns>
-        public Task<VerificationDetailResponse> CreateAsync(VerificationDetailCreateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<VerificationDetailResponse> CreateAsync(
+            VerificationDetailCreateRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new VerificationDetailCreateRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<VerificationDetailResponse>("POST", "/verification_details", urlParams, request, null, "verification_details", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<VerificationDetailResponse>(
+                "POST",
+                "/verification_details",
+                urlParams,
+                request,
+                null,
+                "verification_details",
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
@@ -64,21 +71,34 @@ namespace GoCardless.Services
         /// <param name="request">An optional `VerificationDetailListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of verification detail resources</returns>
-        public Task<VerificationDetailListResponse> ListAsync(VerificationDetailListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<VerificationDetailListResponse> ListAsync(
+            VerificationDetailListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new VerificationDetailListRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<VerificationDetailListResponse>("GET", "/verification_details", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<VerificationDetailListResponse>(
+                "GET",
+                "/verification_details",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Get a lazily enumerated list of verification details.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<VerificationDetail> All(VerificationDetailListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<VerificationDetail> All(
+            VerificationDetailListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new VerificationDetailListRequest();
 
@@ -100,7 +120,10 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of verification details.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Task<IReadOnlyList<VerificationDetail>>> AllAsync(VerificationDetailListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Task<IReadOnlyList<VerificationDetail>>> AllAsync(
+            VerificationDetailListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new VerificationDetailListRequest();
 
@@ -113,13 +136,11 @@ namespace GoCardless.Services
         }
     }
 
-        
     /// <summary>
     /// Creates a new verification detail
     /// </summary>
     public class VerificationDetailCreateRequest
     {
-
         /// <summary>
         /// The first line of the company's address.
         /// </summary>
@@ -161,54 +182,54 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("directors")]
         public VerificationDetailDirectors[] Directors { get; set; }
+
         /// <summary>
         /// A primary director of the company represented by the creditor.
         /// </summary>
         public class VerificationDetailDirectors
         {
-                
-                /// <summary>
-                            /// The city of the person's address.
-                /// </summary>
-                [JsonProperty("city")]
-                public string City { get; set; }
-                
-                /// <summary>
-                            /// [ISO 3166-1 alpha-2
+            /// <summary>
+            /// The city of the person's address.
+            /// </summary>
+            [JsonProperty("city")]
+            public string City { get; set; }
+
+            /// <summary>
+            /// [ISO 3166-1 alpha-2
             /// code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-                /// </summary>
-                [JsonProperty("country_code")]
-                public string CountryCode { get; set; }
-                
-                /// <summary>
-                            /// The person's date of birth.
-                /// </summary>
-                [JsonProperty("date_of_birth")]
-                public string DateOfBirth { get; set; }
-                
-                /// <summary>
-                            /// The person's family name.
-                /// </summary>
-                [JsonProperty("family_name")]
-                public string FamilyName { get; set; }
-                
-                /// <summary>
-                            /// The person's given name.
-                /// </summary>
-                [JsonProperty("given_name")]
-                public string GivenName { get; set; }
-                
-                /// <summary>
-                            /// The person's postal code.
-                /// </summary>
-                [JsonProperty("postal_code")]
-                public string PostalCode { get; set; }
-                
-                /// <summary>
-                            /// The street of the person's address.
-                /// </summary>
-                [JsonProperty("street")]
-                public string Street { get; set; }
+            /// </summary>
+            [JsonProperty("country_code")]
+            public string CountryCode { get; set; }
+
+            /// <summary>
+            /// The person's date of birth.
+            /// </summary>
+            [JsonProperty("date_of_birth")]
+            public string DateOfBirth { get; set; }
+
+            /// <summary>
+            /// The person's family name.
+            /// </summary>
+            [JsonProperty("family_name")]
+            public string FamilyName { get; set; }
+
+            /// <summary>
+            /// The person's given name.
+            /// </summary>
+            [JsonProperty("given_name")]
+            public string GivenName { get; set; }
+
+            /// <summary>
+            /// The person's postal code.
+            /// </summary>
+            [JsonProperty("postal_code")]
+            public string PostalCode { get; set; }
+
+            /// <summary>
+            /// The street of the person's address.
+            /// </summary>
+            [JsonProperty("street")]
+            public string Street { get; set; }
         }
 
         /// <summary>
@@ -216,17 +237,17 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("links")]
         public VerificationDetailLinks Links { get; set; }
+
         /// <summary>
         /// Linked resources for a VerificationDetail.
         /// </summary>
         public class VerificationDetailLinks
         {
-                
-                /// <summary>
-                            /// ID of the associated [creditor](#core-endpoints-creditors).
-                /// </summary>
-                [JsonProperty("creditor")]
-                public string Creditor { get; set; }
+            /// <summary>
+            /// ID of the associated [creditor](#core-endpoints-creditors).
+            /// </summary>
+            [JsonProperty("creditor")]
+            public string Creditor { get; set; }
         }
 
         /// <summary>
@@ -242,13 +263,11 @@ namespace GoCardless.Services
         public string PostalCode { get; set; }
     }
 
-        
     /// <summary>
     /// Returns a list of verification details belonging to a creditor.
     /// </summary>
     public class VerificationDetailListRequest
     {
-
         /// <summary>
         /// Cursor pointing to the start of the desired set.
         /// </summary>
@@ -296,8 +315,10 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("verification_details")]
         public IReadOnlyList<VerificationDetail> VerificationDetails { get; private set; }
+
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }}
+        public Meta Meta { get; private set; }
+    }
 }

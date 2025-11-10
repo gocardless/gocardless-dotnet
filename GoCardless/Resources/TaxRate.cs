@@ -1,18 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a tax rate resource.
     ///
     /// Tax rates from tax authority.
-    /// 
+    ///
     /// We also maintain a [static list of the tax rates for each
     /// jurisdiction](#appendix-tax-rates).
     /// </summary>
@@ -57,5 +56,4 @@ namespace GoCardless.Resources
         [JsonProperty("type")]
         public string Type { get; set; }
     }
-    
 }

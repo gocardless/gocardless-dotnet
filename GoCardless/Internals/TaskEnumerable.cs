@@ -26,11 +26,13 @@ namespace GoCardless.Internals
             {
                 var page = _getPage(after);
 
-                yield return page.ContinueWith((t) =>
-                {
-                    after = t.Result.Item2;
-                    return t.Result.Item1;
-                });
+                yield return page.ContinueWith(
+                    (t) =>
+                    {
+                        after = t.Result.Item2;
+                        return t.Result.Item1;
+                    }
+                );
             } while (after != null);
         }
 

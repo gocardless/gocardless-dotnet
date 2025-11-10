@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a transferred mandate resource.
     ///
@@ -43,7 +42,7 @@ namespace GoCardless.Resources
         [JsonProperty("public_key_id")]
         public string PublicKeyId { get; set; }
     }
-    
+
     /// <summary>
     /// Resources linked to this TransferredMandate
     /// </summary>
@@ -62,5 +61,4 @@ namespace GoCardless.Resources
         [JsonProperty("mandate")]
         public string Mandate { get; set; }
     }
-    
 }

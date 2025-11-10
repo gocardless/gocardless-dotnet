@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +18,11 @@ namespace GoCardless.Services
     /// numerous Billing Requests with similar attributes. They provide
     /// a no-code solution for generating various types of multi-user payment
     /// links.
-    /// 
+    ///
     /// Each template includes a reusable URL that can be embedded in a website
     /// or shared with customers via email. Every time the URL is opened,
     /// it generates a new Billing Request.
-    /// 
+    ///
     /// Billing Request Templates overcome the key limitation of the Billing
     /// Request:
     /// a Billing Request cannot be shared among multiple users because it is
@@ -32,7 +30,6 @@ namespace GoCardless.Services
     /// for single-use and is designed to cater to the unique needs of
     /// individual customers.
     /// </summary>
-
     public class BillingRequestTemplateService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -53,21 +50,34 @@ namespace GoCardless.Services
         /// <param name="request">An optional `BillingRequestTemplateListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of billing request template resources</returns>
-        public Task<BillingRequestTemplateListResponse> ListAsync(BillingRequestTemplateListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<BillingRequestTemplateListResponse> ListAsync(
+            BillingRequestTemplateListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BillingRequestTemplateListRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<BillingRequestTemplateListResponse>("GET", "/billing_request_templates", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BillingRequestTemplateListResponse>(
+                "GET",
+                "/billing_request_templates",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Get a lazily enumerated list of billing request templates.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<BillingRequestTemplate> All(BillingRequestTemplateListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<BillingRequestTemplate> All(
+            BillingRequestTemplateListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BillingRequestTemplateListRequest();
 
@@ -89,7 +99,10 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of billing request templates.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Task<IReadOnlyList<BillingRequestTemplate>>> AllAsync(BillingRequestTemplateListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Task<IReadOnlyList<BillingRequestTemplate>>> AllAsync(
+            BillingRequestTemplateListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BillingRequestTemplateListRequest();
 
@@ -103,70 +116,104 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Fetches a Billing Request Template
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "BRT".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "BRT".</param>
         /// <param name="request">An optional `BillingRequestTemplateGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request template resource</returns>
-        public Task<BillingRequestTemplateResponse> GetAsync(string identity, BillingRequestTemplateGetRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<BillingRequestTemplateResponse> GetAsync(
+            string identity,
+            BillingRequestTemplateGetRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BillingRequestTemplateGetRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<BillingRequestTemplateResponse>("GET", "/billing_request_templates/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BillingRequestTemplateResponse>(
+                "GET",
+                "/billing_request_templates/:identity",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="request">An optional `BillingRequestTemplateCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request template resource</returns>
-        public Task<BillingRequestTemplateResponse> CreateAsync(BillingRequestTemplateCreateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<BillingRequestTemplateResponse> CreateAsync(
+            BillingRequestTemplateCreateRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BillingRequestTemplateCreateRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<BillingRequestTemplateResponse>("POST", "/billing_request_templates", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "billing_request_templates", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BillingRequestTemplateResponse>(
+                "POST",
+                "/billing_request_templates",
+                urlParams,
+                request,
+                id => GetAsync(id, null, customiseRequestMessage),
+                "billing_request_templates",
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Updates a Billing Request Template, which will affect all future
         /// Billing Requests created by this template.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "BRT".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "BRT".</param>
         /// <param name="request">An optional `BillingRequestTemplateUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request template resource</returns>
-        public Task<BillingRequestTemplateResponse> UpdateAsync(string identity, BillingRequestTemplateUpdateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<BillingRequestTemplateResponse> UpdateAsync(
+            string identity,
+            BillingRequestTemplateUpdateRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BillingRequestTemplateUpdateRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<BillingRequestTemplateResponse>("PUT", "/billing_request_templates/:identity", urlParams, request, null, "billing_request_templates", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BillingRequestTemplateResponse>(
+                "PUT",
+                "/billing_request_templates/:identity",
+                urlParams,
+                request,
+                null,
+                "billing_request_templates",
+                customiseRequestMessage
+            );
         }
     }
 
-        
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// Billing Request Templates.
     /// </summary>
     public class BillingRequestTemplateListRequest
     {
-
         /// <summary>
         /// Cursor pointing to the start of the desired set.
         /// </summary>
@@ -198,38 +245,33 @@ namespace GoCardless.Services
         public string PaymentRequestScheme { get; set; }
     }
 
-        
     /// <summary>
     /// Fetches a Billing Request Template
     /// </summary>
-    public class BillingRequestTemplateGetRequest
-    {
-    }
+    public class BillingRequestTemplateGetRequest { }
 
-        
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class BillingRequestTemplateCreateRequest : IHasIdempotencyKey
     {
-
         /// <summary>
         /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
         public BillingRequestTemplateLinks Links { get; set; }
+
         /// <summary>
         /// Linked resources for a BillingRequestTemplate.
         /// </summary>
         public class BillingRequestTemplateLinks
         {
-                
-                /// <summary>
-                            /// ID of the associated [creditor](#core-endpoints-creditors). Only
+            /// <summary>
+            /// ID of the associated [creditor](#core-endpoints-creditors). Only
             /// required if your account manages multiple creditors.
-                /// </summary>
-                [JsonProperty("creditor")]
-                public string Creditor { get; set; }
+            /// </summary>
+            [JsonProperty("creditor")]
+            public string Creditor { get; set; }
         }
 
         /// <summary>
@@ -238,150 +280,155 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("mandate_request_constraints")]
         public BillingRequestTemplateMandateRequestConstraints MandateRequestConstraints { get; set; }
+
         /// <summary>
         /// Constraints that will apply to the mandate_request. (Optional)
         /// Specifically required for PayTo and VRP.
         /// </summary>
         public class BillingRequestTemplateMandateRequestConstraints
         {
-                
-                /// <summary>
-                            /// The latest date at which payments can be taken, must occur after
+            /// <summary>
+            /// The latest date at which payments can be taken, must occur after
             /// start_date if present
-            /// 
+            ///
             /// This is an optional field and if it is not supplied the
             /// agreement will be considered open and
             /// will not have an end date. Keep in mind the end date must take
             /// into account how long it will
             /// take the user to set up this agreement via the Billing Request.
-            /// 
-                /// </summary>
-                [JsonProperty("end_date")]
-                public string EndDate { get; set; }
-                
-                /// <summary>
-                            /// The maximum amount that can be charged for a single payment.
+            ///
+            /// </summary>
+            [JsonProperty("end_date")]
+            public string EndDate { get; set; }
+
+            /// <summary>
+            /// The maximum amount that can be charged for a single payment.
             /// Required for PayTo and VRP.
-                /// </summary>
-                [JsonProperty("max_amount_per_payment")]
-                public int? MaxAmountPerPayment { get; set; }
-                
-                /// <summary>
-                            /// A constraint where you can specify info (free text string) about
+            /// </summary>
+            [JsonProperty("max_amount_per_payment")]
+            public int? MaxAmountPerPayment { get; set; }
+
+            /// <summary>
+            /// A constraint where you can specify info (free text string) about
             /// how payments are calculated. _Note:_ This is only supported for
             /// ACH and PAD schemes.
-            /// 
-                /// </summary>
-                [JsonProperty("payment_method")]
-                public string PaymentMethod { get; set; }
-                
+            ///
+            /// </summary>
+            [JsonProperty("payment_method")]
+            public string PaymentMethod { get; set; }
+
+            /// <summary>
+            /// List of periodic limits and constraints which apply to them
+            /// </summary>
+            [JsonProperty("periodic_limits")]
+            public BillingRequestTemplatePeriodicLimits[] PeriodicLimits { get; set; }
+
+            /// <summary>
+            ///
+            /// </summary>
+            public class BillingRequestTemplatePeriodicLimits
+            {
                 /// <summary>
-                            /// List of periodic limits and constraints which apply to them
-                /// </summary>
-                [JsonProperty("periodic_limits")]
-                public BillingRequestTemplatePeriodicLimits[] PeriodicLimits { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public class BillingRequestTemplatePeriodicLimits
-        {
-                
-                /// <summary>
-                            /// The alignment of the period.
-            /// 
-            /// `calendar` - this will finish on the end of the current period.
-            /// For example this will expire on the Monday for the current week
-            /// or the January for the next year.
-            /// 
-            /// `creation_date` - this will finish on the next instance of the
-            /// current period. For example Monthly it will expire on the same
-            /// day of the next month, or yearly the same day of the next year.
-            /// 
+                /// The alignment of the period.
+                ///
+                /// `calendar` - this will finish on the end of the current period.
+                /// For example this will expire on the Monday for the current week
+                /// or the January for the next year.
+                ///
+                /// `creation_date` - this will finish on the next instance of the
+                /// current period. For example Monthly it will expire on the same
+                /// day of the next month, or yearly the same day of the next year.
+                ///
                 /// </summary>
                 [JsonProperty("alignment")]
                 public BillingRequestTemplateAlignment? Alignment { get; set; }
-        /// <summary>
-        /// The alignment of the period.
-        /// 
-        /// `calendar` - this will finish on the end of the current period. For
-        /// example this will expire on the Monday for the current week or the
-        /// January for the next year.
-        /// 
-        /// `creation_date` - this will finish on the next instance of the
-        /// current period. For example Monthly it will expire on the same day
-        /// of the next month, or yearly the same day of the next year.
-        /// 
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum BillingRequestTemplateAlignment
-        {
-    
-            /// <summary>`alignment` with a value of "calendar"</summary>
-            [EnumMember(Value = "calendar")]
-            Calendar,
-            /// <summary>`alignment` with a value of "creation_date"</summary>
-            [EnumMember(Value = "creation_date")]
-            CreationDate,
-        }
-                
+
                 /// <summary>
-                            /// (Optional) The maximum number of payments that can be collected
-            /// in this periodic limit.
+                /// The alignment of the period.
+                ///
+                /// `calendar` - this will finish on the end of the current period. For
+                /// example this will expire on the Monday for the current week or the
+                /// January for the next year.
+                ///
+                /// `creation_date` - this will finish on the next instance of the
+                /// current period. For example Monthly it will expire on the same day
+                /// of the next month, or yearly the same day of the next year.
+                ///
+                /// </summary>
+                [JsonConverter(typeof(StringEnumConverter))]
+                public enum BillingRequestTemplateAlignment
+                {
+                    /// <summary>`alignment` with a value of "calendar"</summary>
+                    [EnumMember(Value = "calendar")]
+                    Calendar,
+
+                    /// <summary>`alignment` with a value of "creation_date"</summary>
+                    [EnumMember(Value = "creation_date")]
+                    CreationDate,
+                }
+
+                /// <summary>
+                /// (Optional) The maximum number of payments that can be collected
+                /// in this periodic limit.
                 /// </summary>
                 [JsonProperty("max_payments")]
                 public int? MaxPayments { get; set; }
-                
+
                 /// <summary>
-                            /// The maximum total amount that can be charged for all payments in
-            /// this periodic limit.
-            /// Required for VRP.
-            /// 
+                /// The maximum total amount that can be charged for all payments in
+                /// this periodic limit.
+                /// Required for VRP.
+                ///
                 /// </summary>
                 [JsonProperty("max_total_amount")]
                 public int? MaxTotalAmount { get; set; }
-                
+
                 /// <summary>
-                            /// The repeating period for this mandate. Defaults to flexible for
-            /// PayTo if not specified.
+                /// The repeating period for this mandate. Defaults to flexible for
+                /// PayTo if not specified.
                 /// </summary>
                 [JsonProperty("period")]
                 public BillingRequestTemplatePeriod? Period { get; set; }
-        /// <summary>
-        /// The repeating period for this mandate. Defaults to flexible for
-        /// PayTo if not specified.
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum BillingRequestTemplatePeriod
-        {
-    
-            /// <summary>`period` with a value of "day"</summary>
-            [EnumMember(Value = "day")]
-            Day,
-            /// <summary>`period` with a value of "week"</summary>
-            [EnumMember(Value = "week")]
-            Week,
-            /// <summary>`period` with a value of "month"</summary>
-            [EnumMember(Value = "month")]
-            Month,
-            /// <summary>`period` with a value of "year"</summary>
-            [EnumMember(Value = "year")]
-            Year,
-            /// <summary>`period` with a value of "flexible"</summary>
-            [EnumMember(Value = "flexible")]
-            Flexible,
-        }
-        }
-                
+
                 /// <summary>
-                            /// The date from which payments can be taken.
-            /// 
+                /// The repeating period for this mandate. Defaults to flexible for
+                /// PayTo if not specified.
+                /// </summary>
+                [JsonConverter(typeof(StringEnumConverter))]
+                public enum BillingRequestTemplatePeriod
+                {
+                    /// <summary>`period` with a value of "day"</summary>
+                    [EnumMember(Value = "day")]
+                    Day,
+
+                    /// <summary>`period` with a value of "week"</summary>
+                    [EnumMember(Value = "week")]
+                    Week,
+
+                    /// <summary>`period` with a value of "month"</summary>
+                    [EnumMember(Value = "month")]
+                    Month,
+
+                    /// <summary>`period` with a value of "year"</summary>
+                    [EnumMember(Value = "year")]
+                    Year,
+
+                    /// <summary>`period` with a value of "flexible"</summary>
+                    [EnumMember(Value = "flexible")]
+                    Flexible,
+                }
+            }
+
+            /// <summary>
+            /// The date from which payments can be taken.
+            ///
             /// This is an optional field and if it is not supplied the start
             /// date will be set to the day
             /// authorisation happens.
-            /// 
-                /// </summary>
-                [JsonProperty("start_date")]
-                public string StartDate { get; set; }
+            ///
+            /// </summary>
+            [JsonProperty("start_date")]
+            public string StartDate { get; set; }
         }
 
         /// <summary>
@@ -394,7 +441,7 @@ namespace GoCardless.Services
         /// <summary>
         /// A human-readable description of the payment and/or mandate. This
         /// will be displayed to the payer when authorising the billing request.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("mandate_request_description")]
         public string MandateRequestDescription { get; set; }
@@ -430,25 +477,25 @@ namespace GoCardless.Services
         ///   <li>`always`: as `when_available`, but fail to create the Billing
         /// Request if a mechanism isn't available</li>
         /// </ul>
-        /// 
+        ///
         /// By default, all Billing Requests use the `recommended` verification
         /// preference. It uses GoCardless payment intelligence solution to
         /// determine if a payer is fraudulent or not. The verification
         /// mechanism is based on the response and the payer may be asked to
         /// verify themselves. If the feature is not available, `recommended`
         /// behaves like `minimum`.
-        /// 
+        ///
         /// If you never wish to take advantage of our reduced risk products and
         /// Verified Mandates as they are released in new schemes, please use
         /// the `minimum` verification preference.
-        /// 
+        ///
         /// See [Billing Requests: Creating Verified
         /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
         /// for more information.
         /// </summary>
         [JsonProperty("mandate_request_verify")]
         public BillingRequestTemplateMandateRequestVerify? MandateRequestVerify { get; set; }
-            
+
         /// <summary>
         /// Verification preference for the mandate. One of:
         /// <ul>
@@ -462,18 +509,18 @@ namespace GoCardless.Services
         ///   <li>`always`: as `when_available`, but fail to create the Billing
         /// Request if a mechanism isn't available</li>
         /// </ul>
-        /// 
+        ///
         /// By default, all Billing Requests use the `recommended` verification
         /// preference. It uses GoCardless payment intelligence solution to
         /// determine if a payer is fraudulent or not. The verification
         /// mechanism is based on the response and the payer may be asked to
         /// verify themselves. If the feature is not available, `recommended`
         /// behaves like `minimum`.
-        /// 
+        ///
         /// If you never wish to take advantage of our reduced risk products and
         /// Verified Mandates as they are released in new schemes, please use
         /// the `minimum` verification preference.
-        /// 
+        ///
         /// See [Billing Requests: Creating Verified
         /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
         /// for more information.
@@ -481,16 +528,18 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BillingRequestTemplateMandateRequestVerify
         {
-    
             /// <summary>`mandate_request_verify` with a value of "minimum"</summary>
             [EnumMember(Value = "minimum")]
             Minimum,
+
             /// <summary>`mandate_request_verify` with a value of "recommended"</summary>
             [EnumMember(Value = "recommended")]
             Recommended,
+
             /// <summary>`mandate_request_verify` with a value of "when_available"</summary>
             [EnumMember(Value = "when_available")]
             WhenAvailable,
+
             /// <summary>`mandate_request_verify` with a value of "always"</summary>
             [EnumMember(Value = "always")]
             Always,
@@ -529,7 +578,7 @@ namespace GoCardless.Services
         /// <summary>
         /// A human-readable description of the payment and/or mandate. This
         /// will be displayed to the payer when authorising the billing request.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("payment_request_description")]
         public string PaymentRequestDescription { get; set; }
@@ -570,164 +619,167 @@ namespace GoCardless.Services
         public string IdempotencyKey { get; set; }
     }
 
-        
     /// <summary>
     /// Updates a Billing Request Template, which will affect all future Billing
     /// Requests created by this template.
     /// </summary>
     public class BillingRequestTemplateUpdateRequest
     {
-
         /// <summary>
         /// Constraints that will apply to the mandate_request. (Optional)
         /// Specifically required for PayTo and VRP.
         /// </summary>
         [JsonProperty("mandate_request_constraints")]
         public BillingRequestTemplateMandateRequestConstraints MandateRequestConstraints { get; set; }
+
         /// <summary>
         /// Constraints that will apply to the mandate_request. (Optional)
         /// Specifically required for PayTo and VRP.
         /// </summary>
         public class BillingRequestTemplateMandateRequestConstraints
         {
-                
-                /// <summary>
-                            /// The latest date at which payments can be taken, must occur after
+            /// <summary>
+            /// The latest date at which payments can be taken, must occur after
             /// start_date if present
-            /// 
+            ///
             /// This is an optional field and if it is not supplied the
             /// agreement will be considered open and
             /// will not have an end date. Keep in mind the end date must take
             /// into account how long it will
             /// take the user to set up this agreement via the Billing Request.
-            /// 
-                /// </summary>
-                [JsonProperty("end_date")]
-                public string EndDate { get; set; }
-                
-                /// <summary>
-                            /// The maximum amount that can be charged for a single payment.
+            ///
+            /// </summary>
+            [JsonProperty("end_date")]
+            public string EndDate { get; set; }
+
+            /// <summary>
+            /// The maximum amount that can be charged for a single payment.
             /// Required for PayTo and VRP.
-                /// </summary>
-                [JsonProperty("max_amount_per_payment")]
-                public int? MaxAmountPerPayment { get; set; }
-                
-                /// <summary>
-                            /// A constraint where you can specify info (free text string) about
+            /// </summary>
+            [JsonProperty("max_amount_per_payment")]
+            public int? MaxAmountPerPayment { get; set; }
+
+            /// <summary>
+            /// A constraint where you can specify info (free text string) about
             /// how payments are calculated. _Note:_ This is only supported for
             /// ACH and PAD schemes.
-            /// 
-                /// </summary>
-                [JsonProperty("payment_method")]
-                public string PaymentMethod { get; set; }
-                
+            ///
+            /// </summary>
+            [JsonProperty("payment_method")]
+            public string PaymentMethod { get; set; }
+
+            /// <summary>
+            /// List of periodic limits and constraints which apply to them
+            /// </summary>
+            [JsonProperty("periodic_limits")]
+            public BillingRequestTemplatePeriodicLimits[] PeriodicLimits { get; set; }
+
+            /// <summary>
+            ///
+            /// </summary>
+            public class BillingRequestTemplatePeriodicLimits
+            {
                 /// <summary>
-                            /// List of periodic limits and constraints which apply to them
-                /// </summary>
-                [JsonProperty("periodic_limits")]
-                public BillingRequestTemplatePeriodicLimits[] PeriodicLimits { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public class BillingRequestTemplatePeriodicLimits
-        {
-                
-                /// <summary>
-                            /// The alignment of the period.
-            /// 
-            /// `calendar` - this will finish on the end of the current period.
-            /// For example this will expire on the Monday for the current week
-            /// or the January for the next year.
-            /// 
-            /// `creation_date` - this will finish on the next instance of the
-            /// current period. For example Monthly it will expire on the same
-            /// day of the next month, or yearly the same day of the next year.
-            /// 
+                /// The alignment of the period.
+                ///
+                /// `calendar` - this will finish on the end of the current period.
+                /// For example this will expire on the Monday for the current week
+                /// or the January for the next year.
+                ///
+                /// `creation_date` - this will finish on the next instance of the
+                /// current period. For example Monthly it will expire on the same
+                /// day of the next month, or yearly the same day of the next year.
+                ///
                 /// </summary>
                 [JsonProperty("alignment")]
                 public BillingRequestTemplateAlignment? Alignment { get; set; }
-        /// <summary>
-        /// The alignment of the period.
-        /// 
-        /// `calendar` - this will finish on the end of the current period. For
-        /// example this will expire on the Monday for the current week or the
-        /// January for the next year.
-        /// 
-        /// `creation_date` - this will finish on the next instance of the
-        /// current period. For example Monthly it will expire on the same day
-        /// of the next month, or yearly the same day of the next year.
-        /// 
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum BillingRequestTemplateAlignment
-        {
-    
-            /// <summary>`alignment` with a value of "calendar"</summary>
-            [EnumMember(Value = "calendar")]
-            Calendar,
-            /// <summary>`alignment` with a value of "creation_date"</summary>
-            [EnumMember(Value = "creation_date")]
-            CreationDate,
-        }
-                
+
                 /// <summary>
-                            /// (Optional) The maximum number of payments that can be collected
-            /// in this periodic limit.
+                /// The alignment of the period.
+                ///
+                /// `calendar` - this will finish on the end of the current period. For
+                /// example this will expire on the Monday for the current week or the
+                /// January for the next year.
+                ///
+                /// `creation_date` - this will finish on the next instance of the
+                /// current period. For example Monthly it will expire on the same day
+                /// of the next month, or yearly the same day of the next year.
+                ///
+                /// </summary>
+                [JsonConverter(typeof(StringEnumConverter))]
+                public enum BillingRequestTemplateAlignment
+                {
+                    /// <summary>`alignment` with a value of "calendar"</summary>
+                    [EnumMember(Value = "calendar")]
+                    Calendar,
+
+                    /// <summary>`alignment` with a value of "creation_date"</summary>
+                    [EnumMember(Value = "creation_date")]
+                    CreationDate,
+                }
+
+                /// <summary>
+                /// (Optional) The maximum number of payments that can be collected
+                /// in this periodic limit.
                 /// </summary>
                 [JsonProperty("max_payments")]
                 public int? MaxPayments { get; set; }
-                
+
                 /// <summary>
-                            /// The maximum total amount that can be charged for all payments in
-            /// this periodic limit.
-            /// Required for VRP.
-            /// 
+                /// The maximum total amount that can be charged for all payments in
+                /// this periodic limit.
+                /// Required for VRP.
+                ///
                 /// </summary>
                 [JsonProperty("max_total_amount")]
                 public int? MaxTotalAmount { get; set; }
-                
+
                 /// <summary>
-                            /// The repeating period for this mandate. Defaults to flexible for
-            /// PayTo if not specified.
+                /// The repeating period for this mandate. Defaults to flexible for
+                /// PayTo if not specified.
                 /// </summary>
                 [JsonProperty("period")]
                 public BillingRequestTemplatePeriod? Period { get; set; }
-        /// <summary>
-        /// The repeating period for this mandate. Defaults to flexible for
-        /// PayTo if not specified.
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum BillingRequestTemplatePeriod
-        {
-    
-            /// <summary>`period` with a value of "day"</summary>
-            [EnumMember(Value = "day")]
-            Day,
-            /// <summary>`period` with a value of "week"</summary>
-            [EnumMember(Value = "week")]
-            Week,
-            /// <summary>`period` with a value of "month"</summary>
-            [EnumMember(Value = "month")]
-            Month,
-            /// <summary>`period` with a value of "year"</summary>
-            [EnumMember(Value = "year")]
-            Year,
-            /// <summary>`period` with a value of "flexible"</summary>
-            [EnumMember(Value = "flexible")]
-            Flexible,
-        }
-        }
-                
+
                 /// <summary>
-                            /// The date from which payments can be taken.
-            /// 
+                /// The repeating period for this mandate. Defaults to flexible for
+                /// PayTo if not specified.
+                /// </summary>
+                [JsonConverter(typeof(StringEnumConverter))]
+                public enum BillingRequestTemplatePeriod
+                {
+                    /// <summary>`period` with a value of "day"</summary>
+                    [EnumMember(Value = "day")]
+                    Day,
+
+                    /// <summary>`period` with a value of "week"</summary>
+                    [EnumMember(Value = "week")]
+                    Week,
+
+                    /// <summary>`period` with a value of "month"</summary>
+                    [EnumMember(Value = "month")]
+                    Month,
+
+                    /// <summary>`period` with a value of "year"</summary>
+                    [EnumMember(Value = "year")]
+                    Year,
+
+                    /// <summary>`period` with a value of "flexible"</summary>
+                    [EnumMember(Value = "flexible")]
+                    Flexible,
+                }
+            }
+
+            /// <summary>
+            /// The date from which payments can be taken.
+            ///
             /// This is an optional field and if it is not supplied the start
             /// date will be set to the day
             /// authorisation happens.
-            /// 
-                /// </summary>
-                [JsonProperty("start_date")]
-                public string StartDate { get; set; }
+            ///
+            /// </summary>
+            [JsonProperty("start_date")]
+            public string StartDate { get; set; }
         }
 
         /// <summary>
@@ -740,7 +792,7 @@ namespace GoCardless.Services
         /// <summary>
         /// A human-readable description of the payment and/or mandate. This
         /// will be displayed to the payer when authorising the billing request.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("mandate_request_description")]
         public string MandateRequestDescription { get; set; }
@@ -776,25 +828,25 @@ namespace GoCardless.Services
         ///   <li>`always`: as `when_available`, but fail to create the Billing
         /// Request if a mechanism isn't available</li>
         /// </ul>
-        /// 
+        ///
         /// By default, all Billing Requests use the `recommended` verification
         /// preference. It uses GoCardless payment intelligence solution to
         /// determine if a payer is fraudulent or not. The verification
         /// mechanism is based on the response and the payer may be asked to
         /// verify themselves. If the feature is not available, `recommended`
         /// behaves like `minimum`.
-        /// 
+        ///
         /// If you never wish to take advantage of our reduced risk products and
         /// Verified Mandates as they are released in new schemes, please use
         /// the `minimum` verification preference.
-        /// 
+        ///
         /// See [Billing Requests: Creating Verified
         /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
         /// for more information.
         /// </summary>
         [JsonProperty("mandate_request_verify")]
         public BillingRequestTemplateMandateRequestVerify? MandateRequestVerify { get; set; }
-            
+
         /// <summary>
         /// Verification preference for the mandate. One of:
         /// <ul>
@@ -808,18 +860,18 @@ namespace GoCardless.Services
         ///   <li>`always`: as `when_available`, but fail to create the Billing
         /// Request if a mechanism isn't available</li>
         /// </ul>
-        /// 
+        ///
         /// By default, all Billing Requests use the `recommended` verification
         /// preference. It uses GoCardless payment intelligence solution to
         /// determine if a payer is fraudulent or not. The verification
         /// mechanism is based on the response and the payer may be asked to
         /// verify themselves. If the feature is not available, `recommended`
         /// behaves like `minimum`.
-        /// 
+        ///
         /// If you never wish to take advantage of our reduced risk products and
         /// Verified Mandates as they are released in new schemes, please use
         /// the `minimum` verification preference.
-        /// 
+        ///
         /// See [Billing Requests: Creating Verified
         /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
         /// for more information.
@@ -827,16 +879,18 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BillingRequestTemplateMandateRequestVerify
         {
-    
             /// <summary>`mandate_request_verify` with a value of "minimum"</summary>
             [EnumMember(Value = "minimum")]
             Minimum,
+
             /// <summary>`mandate_request_verify` with a value of "recommended"</summary>
             [EnumMember(Value = "recommended")]
             Recommended,
+
             /// <summary>`mandate_request_verify` with a value of "when_available"</summary>
             [EnumMember(Value = "when_available")]
             WhenAvailable,
+
             /// <summary>`mandate_request_verify` with a value of "always"</summary>
             [EnumMember(Value = "always")]
             Always,
@@ -875,7 +929,7 @@ namespace GoCardless.Services
         /// <summary>
         /// A human-readable description of the payment and/or mandate. This
         /// will be displayed to the payer when authorising the billing request.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("payment_request_description")]
         public string PaymentRequestDescription { get; set; }
@@ -930,8 +984,10 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("billing_request_templates")]
         public IReadOnlyList<BillingRequestTemplate> BillingRequestTemplates { get; private set; }
+
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }}
+        public Meta Meta { get; private set; }
+    }
 }

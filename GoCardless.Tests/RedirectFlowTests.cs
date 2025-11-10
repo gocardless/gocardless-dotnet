@@ -2,11 +2,11 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using FluentAssertions;
 using GoCardless.Resources;
 using GoCardless.Services;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using FluentAssertions;
 
 namespace GoCardless.Tests
 {
@@ -30,9 +30,9 @@ namespace GoCardless.Tests
             mockHttp.EnqueueResponse(201, responseFixture);
             var prefilledCustomer = new RedirectFlowCreateRequest.RedirectFlowPrefilledCustomer()
             {
-              Email = "frank.osborne@acmeplc.com",
-              GivenName = "Frank",
-              FamilyName = "Osborne"
+                Email = "frank.osborne@acmeplc.com",
+                GivenName = "Frank",
+                FamilyName = "Osborne",
             };
 
             var redirectFlowRequest = new RedirectFlowCreateRequest()
@@ -40,17 +40,22 @@ namespace GoCardless.Tests
                 Description = "Wine boxes",
                 SessionToken = "SESS_wSs0uGYMISxzqOBq",
                 SuccessRedirectUrl = "https://example.com/pay/confirm",
-                PrefilledCustomer = prefilledCustomer
+                PrefilledCustomer = prefilledCustomer,
             };
 
             var redirectFlowResponse = await client.RedirectFlows.CreateAsync(redirectFlowRequest);
 
-            TestHelpers.AssertResponseCanSerializeBackToFixture(redirectFlowResponse, responseFixture);
+            TestHelpers.AssertResponseCanSerializeBackToFixture(
+                redirectFlowResponse,
+                responseFixture
+            );
 
             var redirectFlow = redirectFlowResponse.RedirectFlow;
-            ClassicAssert.AreEqual("http://pay.gocardless.dev/flow/RE123", redirectFlow.RedirectUrl);
+            ClassicAssert.AreEqual(
+                "http://pay.gocardless.dev/flow/RE123",
+                redirectFlow.RedirectUrl
+            );
             mockHttp.AssertRequestMade("POST", "/redirect_flows");
         }
     }
 }
-

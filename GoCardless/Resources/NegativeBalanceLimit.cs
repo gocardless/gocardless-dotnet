@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a negative balance limit resource.
     ///
@@ -15,7 +14,7 @@ namespace GoCardless.Resources
     /// beyond which refunds are not permitted. The default limit is zero —
     /// refunds are not permitted if the creditor has a negative balance. The
     /// limit can be changed on a per-creditor basis.
-    /// 
+    ///
     /// </summary>
     public class NegativeBalanceLimit
     {
@@ -52,13 +51,14 @@ namespace GoCardless.Resources
         [JsonProperty("links")]
         public NegativeBalanceLimitLinks Links { get; set; }
     }
-    
+
     /// <summary>
     /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
     /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum NegativeBalanceLimitCurrency {
+    public enum NegativeBalanceLimitCurrency
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -66,24 +66,31 @@ namespace GoCardless.Resources
         /// <summary>`currency` with a value of "AUD"</summary>
         [EnumMember(Value = "AUD")]
         AUD,
+
         /// <summary>`currency` with a value of "CAD"</summary>
         [EnumMember(Value = "CAD")]
         CAD,
+
         /// <summary>`currency` with a value of "DKK"</summary>
         [EnumMember(Value = "DKK")]
         DKK,
+
         /// <summary>`currency` with a value of "EUR"</summary>
         [EnumMember(Value = "EUR")]
         EUR,
+
         /// <summary>`currency` with a value of "GBP"</summary>
         [EnumMember(Value = "GBP")]
         GBP,
+
         /// <summary>`currency` with a value of "NZD"</summary>
         [EnumMember(Value = "NZD")]
         NZD,
+
         /// <summary>`currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
+
         /// <summary>`currency` with a value of "USD"</summary>
         [EnumMember(Value = "USD")]
         USD,
@@ -107,5 +114,4 @@ namespace GoCardless.Resources
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
     }
-    
 }

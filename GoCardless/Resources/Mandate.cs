@@ -1,19 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a mandate resource.
     ///
     /// Mandates represent the Direct Debit mandate with a
     /// [customer](#core-endpoints-customers).
-    /// 
+    ///
     /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
     /// the status of a mandate changes.
     /// </summary>
@@ -22,7 +21,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// This field is ACH specific, sometimes referred to as [SEC
         /// code](https://www.moderntreasury.com/learn/sec-codes).
-        /// 
+        ///
         /// This is the way that the payer gives authorisation to the merchant.
         ///   web: Authorisation is Internet Initiated or via Mobile Entry (maps
         /// to SEC code: WEB)
@@ -30,7 +29,7 @@ namespace GoCardless.Resources
         /// to SEC code: TEL)
         ///   paper: Authorisation is provided in writing and signed, or
         /// similarly authenticated (maps to SEC code: PPD)
-        /// 
+        ///
         /// </summary>
         [JsonProperty("authorisation_source")]
         public MandateAuthorisationSource? AuthorisationSource { get; set; }
@@ -59,13 +58,13 @@ namespace GoCardless.Resources
         /// <summary>
         /// This field will decide how GoCardless handles settlement of funds
         /// from the customer.
-        /// 
+        ///
         /// - `managed` will be moved through GoCardless' account, batched, and
         /// payed out.
         /// - `direct` will be a direct transfer from the payer's account to the
         /// merchant where
         ///   invoicing will be handled separately.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("funds_settlement")]
         public MandateFundsSettlement? FundsSettlement { get; set; }
@@ -103,7 +102,7 @@ namespace GoCardless.Resources
         /// `charge_date` on any newly created payment to be charged through
         /// standard
         /// ACH, rather than Faster ACH. This value will change over time.
-        /// 
+        ///
         /// It is only present in the API response for ACH mandates.
         /// </summary>
         [JsonProperty("next_possible_standard_ach_charge_date")]
@@ -167,20 +166,21 @@ namespace GoCardless.Resources
         [JsonProperty("verified_at")]
         public string VerifiedAt { get; set; }
     }
-    
+
     /// <summary>
     /// This field is ACH specific, sometimes referred to as [SEC
     /// code](https://www.moderntreasury.com/learn/sec-codes).
-    /// 
+    ///
     /// This is the way that the payer gives authorisation to the merchant.
     ///   web: Authorisation is Internet Initiated or via Mobile Entry (maps to SEC code: WEB)
     ///   telephone: Authorisation is provided orally over telephone (maps to SEC code: TEL)
     ///   paper: Authorisation is provided in writing and signed, or similarly authenticated (maps
     /// to SEC code: PPD)
-    /// 
+    ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum MandateAuthorisationSource {
+    public enum MandateAuthorisationSource
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -188,9 +188,11 @@ namespace GoCardless.Resources
         /// <summary>`authorisation_source` with a value of "web"</summary>
         [EnumMember(Value = "web")]
         Web,
+
         /// <summary>`authorisation_source` with a value of "telephone"</summary>
         [EnumMember(Value = "telephone")]
         Telephone,
+
         /// <summary>`authorisation_source` with a value of "paper"</summary>
         [EnumMember(Value = "paper")]
         Paper,
@@ -241,12 +243,13 @@ namespace GoCardless.Resources
         [JsonProperty("start_date")]
         public string StartDate { get; set; }
     }
-    
+
     /// <summary>
     /// The repeating period for this mandate
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum MandateConsentParametersPeriod {
+    public enum MandateConsentParametersPeriod
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -254,15 +257,19 @@ namespace GoCardless.Resources
         /// <summary>`period` with a value of "day"</summary>
         [EnumMember(Value = "day")]
         Day,
+
         /// <summary>`period` with a value of "week"</summary>
         [EnumMember(Value = "week")]
         Week,
+
         /// <summary>`period` with a value of "month"</summary>
         [EnumMember(Value = "month")]
         Month,
+
         /// <summary>`period` with a value of "year"</summary>
         [EnumMember(Value = "year")]
         Year,
+
         /// <summary>`period` with a value of "flexible"</summary>
         [EnumMember(Value = "flexible")]
         Flexible,
@@ -273,7 +280,8 @@ namespace GoCardless.Resources
     /// be set to one-off, recurring or standing for ACH, or single, recurring and sporadic for PAD.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum MandateConsentType {
+    public enum MandateConsentType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -281,15 +289,19 @@ namespace GoCardless.Resources
         /// <summary>`consent_type` with a value of "one_off"</summary>
         [EnumMember(Value = "one_off")]
         OneOff,
+
         /// <summary>`consent_type` with a value of "single"</summary>
         [EnumMember(Value = "single")]
         Single,
+
         /// <summary>`consent_type` with a value of "recurring"</summary>
         [EnumMember(Value = "recurring")]
         Recurring,
+
         /// <summary>`consent_type` with a value of "standing"</summary>
         [EnumMember(Value = "standing")]
         Standing,
+
         /// <summary>`consent_type` with a value of "sporadic"</summary>
         [EnumMember(Value = "sporadic")]
         Sporadic,
@@ -297,14 +309,15 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// This field will decide how GoCardless handles settlement of funds from the customer.
-    /// 
+    ///
     /// - `managed` will be moved through GoCardless' account, batched, and payed out.
     /// - `direct` will be a direct transfer from the payer's account to the merchant where
     ///   invoicing will be handled separately.
-    /// 
+    ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum MandateFundsSettlement {
+    public enum MandateFundsSettlement
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -312,6 +325,7 @@ namespace GoCardless.Resources
         /// <summary>`funds_settlement` with a value of "managed"</summary>
         [EnumMember(Value = "managed")]
         Managed,
+
         /// <summary>`funds_settlement` with a value of "direct"</summary>
         [EnumMember(Value = "direct")]
         Direct,
@@ -348,7 +362,7 @@ namespace GoCardless.Resources
         [JsonProperty("new_mandate")]
         public string NewMandate { get; set; }
     }
-    
+
     /// <summary>
     /// One of:
     /// <ul>
@@ -368,7 +382,8 @@ namespace GoCardless.Resources
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum MandateStatus {
+    public enum MandateStatus
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -376,33 +391,41 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "pending_customer_approval"</summary>
         [EnumMember(Value = "pending_customer_approval")]
         PendingCustomerApproval,
+
         /// <summary>`status` with a value of "pending_submission"</summary>
         [EnumMember(Value = "pending_submission")]
         PendingSubmission,
+
         /// <summary>`status` with a value of "submitted"</summary>
         [EnumMember(Value = "submitted")]
         Submitted,
+
         /// <summary>`status` with a value of "active"</summary>
         [EnumMember(Value = "active")]
         Active,
+
         /// <summary>`status` with a value of "failed"</summary>
         [EnumMember(Value = "failed")]
         Failed,
+
         /// <summary>`status` with a value of "cancelled"</summary>
         [EnumMember(Value = "cancelled")]
         Cancelled,
+
         /// <summary>`status` with a value of "expired"</summary>
         [EnumMember(Value = "expired")]
         Expired,
+
         /// <summary>`status` with a value of "consumed"</summary>
         [EnumMember(Value = "consumed")]
         Consumed,
+
         /// <summary>`status` with a value of "blocked"</summary>
         [EnumMember(Value = "blocked")]
         Blocked,
+
         /// <summary>`status` with a value of "suspended_by_payer"</summary>
         [EnumMember(Value = "suspended_by_payer")]
         SuspendedByPayer,
     }
-
 }

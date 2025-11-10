@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,6 +6,7 @@ using System.Text;
 using GoCardless.Resources;
 using GoCardless.Services;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
 namespace GoCardless.Tests
@@ -48,14 +48,13 @@ namespace GoCardless.Tests
                 yield return $"different array lengths {left.Count} vs {right.Count}";
                 yield break;
             }
-            for(var i=0;i<left.Count;i++)
+            for (var i = 0; i < left.Count; i++)
             {
                 foreach (var error in GetDifferences(left[i], right[i]))
                 {
                     yield return $"[{i}] " + error;
                 }
             }
-
         }
 
         public static IEnumerable<string> GetDifferences(JObject left, JObject right)
@@ -63,18 +62,18 @@ namespace GoCardless.Tests
             var ld = left.ToObject<Dictionary<string, object>>();
             var rd = right.ToObject<Dictionary<string, object>>();
 
-            var missingFromRight = ld.Keys.Except(rd.Keys)
-                .Where(key => ld[key] != null)
-                .ToArray();
-            if (missingFromRight.Any()) yield return $"right is missing keys {string.Join(",", missingFromRight)}";
+            var missingFromRight = ld.Keys.Except(rd.Keys).Where(key => ld[key] != null).ToArray();
+            if (missingFromRight.Any())
+                yield return $"right is missing keys {string.Join(",", missingFromRight)}";
 
             var missingFromLeft = rd.Keys.Except(ld.Keys).Where(key => rd[key] != null).ToArray();
-            if (missingFromLeft.Any()) yield return $"left is missing keys {string.Join(",", missingFromLeft)}";
+            if (missingFromLeft.Any())
+                yield return $"left is missing keys {string.Join(",", missingFromLeft)}";
 
             var inBoth = ld.Keys.Intersect(rd.Keys);
-            foreach(var key in inBoth)
+            foreach (var key in inBoth)
             {
-                foreach(var error in GetDifferences(left[key], right[key]))
+                foreach (var error in GetDifferences(left[key], right[key]))
                 {
                     yield return $".{key} " + error;
                 }
@@ -87,17 +86,25 @@ namespace GoCardless.Tests
             {
                 var leftDate = left.Value<DateTime>();
                 var rightDate = right.Value<DateTime>();
-                if (leftDate != rightDate) yield return $"{leftDate.ToString("o")} is not equal to {right.ToString("o")}";
+                if (leftDate != rightDate)
+                    yield return $"{leftDate.ToString("o")} is not equal to {right.ToString("o")}";
             }
             else
             {
-                if (!left.Equals(right)) yield return $"{left} is not equal to {right}";
+                if (!left.Equals(right))
+                    yield return $"{left} is not equal to {right}";
             }
         }
 
-        public static void AssertResponseCanSerializeBackToFixture(object responseObject, string responseFixture)
+        public static void AssertResponseCanSerializeBackToFixture(
+            object responseObject,
+            string responseFixture
+        )
         {
-            var json = JsonConvert.SerializeObject(responseObject, new Internals.JsonSerializerSettings());
+            var json = JsonConvert.SerializeObject(
+                responseObject,
+                new Internals.JsonSerializerSettings()
+            );
             var response = JToken.Parse(json);
             var fixture = LoadJToken(File.ReadAllText(responseFixture));
             var errors = TestHelpers.GetDifferences(response, fixture).ToArray();
@@ -117,7 +124,6 @@ namespace GoCardless.Tests
             }
         }
 
-
         internal static MandateCreateRequest CreateMandateCreateRequest()
         {
             return new MandateCreateRequest()
@@ -125,15 +131,12 @@ namespace GoCardless.Tests
                 Scheme = "bacs",
                 Metadata = new Metadata
                 {
-                    {"internal_account_ref", "customer_xyz"},
-                    {"salesforceId", "000123"},
-                    {"12", "34"}
+                    { "internal_account_ref", "customer_xyz" },
+                    { "salesforceId", "000123" },
+                    { "12", "34" },
                 },
-                Links = new MandateCreateRequest.MandateLinks
-                {
-                    CustomerBankAccount = "BA000123"
-                },
-                IdempotencyKey = "12345"
+                Links = new MandateCreateRequest.MandateLinks { CustomerBankAccount = "BA000123" },
+                IdempotencyKey = "12345",
             };
         }
     }

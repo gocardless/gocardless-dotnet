@@ -1,30 +1,29 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a subscription resource.
     ///
     /// Subscriptions create [payments](#core-endpoints-payments) according to a
     /// schedule.
-    /// 
+    ///
     /// ### Recurrence Rules
-    /// 
+    ///
     /// The following rules apply when specifying recurrence:
-    /// 
+    ///
     /// - If `day_of_month` and `start_date` are not provided `start_date` will
     /// be the [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`
     /// and the subscription will then recur based on the `interval` &
     /// `interval_unit`
     /// - If `month` or `day_of_month` are present the following validations
     /// apply:
-    /// 
+    ///
     /// | __interval_unit__ | __month__                                      |
     /// __day_of_month__                           |
     /// | :---------------- | :--------------------------------------------- |
@@ -35,9 +34,9 @@ namespace GoCardless.Resources
     /// optional                                   |
     /// | weekly            | invalid                                        |
     /// invalid                                    |
-    /// 
+    ///
     /// Examples:
-    /// 
+    ///
     /// | __interval_unit__ | __interval__ | __month__ | __day_of_month__ |
     /// valid?                                             |
     /// | :---------------- | :----------- | :-------- | :--------------- |
@@ -58,12 +57,12 @@ namespace GoCardless.Resources
     /// invalid - `month` must be blank                    |
     /// | weekly            | 2            | october   | 10               |
     /// invalid - `month` and `day_of_month` must be blank |
-    /// 
+    ///
     /// ### Rolling dates
-    /// 
+    ///
     /// When a charge date falls on a non-business day, one of two things will
     /// happen:
-    /// 
+    ///
     /// - if the recurrence rule specified `-1` as the `day_of_month`, the
     /// charge date will be rolled __backwards__ to the previous business day
     /// (i.e., the last working day of the month).
@@ -177,7 +176,7 @@ namespace GoCardless.Resources
         /// Name of the month on which to charge a customer. Must be lowercase.
         /// Only applies
         /// when the interval_unit is `yearly`.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("month")]
         public SubscriptionMonth? Month { get; set; }
@@ -257,12 +256,13 @@ namespace GoCardless.Resources
         [JsonProperty("upcoming_payments")]
         public List<SubscriptionUpcomingPayment> UpcomingPayments { get; set; }
     }
-    
+
     /// <summary>
     /// The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum SubscriptionIntervalUnit {
+    public enum SubscriptionIntervalUnit
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -270,9 +270,11 @@ namespace GoCardless.Resources
         /// <summary>`interval_unit` with a value of "weekly"</summary>
         [EnumMember(Value = "weekly")]
         Weekly,
+
         /// <summary>`interval_unit` with a value of "monthly"</summary>
         [EnumMember(Value = "monthly")]
         Monthly,
+
         /// <summary>`interval_unit` with a value of "yearly"</summary>
         [EnumMember(Value = "yearly")]
         Yearly,
@@ -290,14 +292,15 @@ namespace GoCardless.Resources
         [JsonProperty("mandate")]
         public string Mandate { get; set; }
     }
-    
+
     /// <summary>
     /// Name of the month on which to charge a customer. Must be lowercase. Only applies
     /// when the interval_unit is `yearly`.
-    /// 
+    ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum SubscriptionMonth {
+    public enum SubscriptionMonth
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -305,36 +308,47 @@ namespace GoCardless.Resources
         /// <summary>`month` with a value of "january"</summary>
         [EnumMember(Value = "january")]
         January,
+
         /// <summary>`month` with a value of "february"</summary>
         [EnumMember(Value = "february")]
         February,
+
         /// <summary>`month` with a value of "march"</summary>
         [EnumMember(Value = "march")]
         March,
+
         /// <summary>`month` with a value of "april"</summary>
         [EnumMember(Value = "april")]
         April,
+
         /// <summary>`month` with a value of "may"</summary>
         [EnumMember(Value = "may")]
         May,
+
         /// <summary>`month` with a value of "june"</summary>
         [EnumMember(Value = "june")]
         June,
+
         /// <summary>`month` with a value of "july"</summary>
         [EnumMember(Value = "july")]
         July,
+
         /// <summary>`month` with a value of "august"</summary>
         [EnumMember(Value = "august")]
         August,
+
         /// <summary>`month` with a value of "september"</summary>
         [EnumMember(Value = "september")]
         September,
+
         /// <summary>`month` with a value of "october"</summary>
         [EnumMember(Value = "october")]
         October,
+
         /// <summary>`month` with a value of "november"</summary>
         [EnumMember(Value = "november")]
         November,
+
         /// <summary>`month` with a value of "december"</summary>
         [EnumMember(Value = "december")]
         December,
@@ -354,7 +368,8 @@ namespace GoCardless.Resources
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum SubscriptionStatus {
+    public enum SubscriptionStatus
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -362,18 +377,23 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "pending_customer_approval"</summary>
         [EnumMember(Value = "pending_customer_approval")]
         PendingCustomerApproval,
+
         /// <summary>`status` with a value of "customer_approval_denied"</summary>
         [EnumMember(Value = "customer_approval_denied")]
         CustomerApprovalDenied,
+
         /// <summary>`status` with a value of "active"</summary>
         [EnumMember(Value = "active")]
         Active,
+
         /// <summary>`status` with a value of "finished"</summary>
         [EnumMember(Value = "finished")]
         Finished,
+
         /// <summary>`status` with a value of "cancelled"</summary>
         [EnumMember(Value = "cancelled")]
         Cancelled,
+
         /// <summary>`status` with a value of "paused"</summary>
         [EnumMember(Value = "paused")]
         Paused,
@@ -397,5 +417,4 @@ namespace GoCardless.Resources
         [JsonProperty("charge_date")]
         public string ChargeDate { get; set; }
     }
-    
 }

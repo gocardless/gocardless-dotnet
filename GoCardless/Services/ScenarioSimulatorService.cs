@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +20,6 @@ namespace GoCardless.Services
     /// active in the
     /// sandbox environment.
     /// </summary>
-
     public class ScenarioSimulatorService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -38,7 +35,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Runs the specific scenario simulator against the specific resource
-        /// </summary>  
+        /// </summary>
         /// <param name="identity">The unique identifier of the simulator, used to initiate
         /// simulations. One of:
         /// <ul>
@@ -146,51 +143,62 @@ namespace GoCardless.Services
         /// fulfils it, and moves the associated payment to `paid_out`. The billing request must be
         /// in the `pending` state, with all actions completed except for `bank_authorisation`. Only
         /// billing requests with a `payment_request` are supported.</li>
-        /// </ul></param> 
+        /// </ul></param>
         /// <param name="request">An optional `ScenarioSimulatorRunRequest` representing the body for this run request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single scenario simulator resource</returns>
-        public Task<ScenarioSimulatorResponse> RunAsync(string identity, ScenarioSimulatorRunRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<ScenarioSimulatorResponse> RunAsync(
+            string identity,
+            ScenarioSimulatorRunRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new ScenarioSimulatorRunRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<ScenarioSimulatorResponse>("POST", "/scenario_simulators/:identity/actions/run", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<ScenarioSimulatorResponse>(
+                "POST",
+                "/scenario_simulators/:identity/actions/run",
+                urlParams,
+                request,
+                null,
+                "data",
+                customiseRequestMessage
+            );
         }
     }
 
-        
     /// <summary>
     /// Runs the specific scenario simulator against the specific resource
     /// </summary>
     public class ScenarioSimulatorRunRequest
     {
-
         /// <summary>
         /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
         public ScenarioSimulatorLinks Links { get; set; }
+
         /// <summary>
         /// Linked resources for a ScenarioSimulator.
         /// </summary>
         public class ScenarioSimulatorLinks
         {
-                
-                /// <summary>
-                            /// ID of the resource to run the simulation against.
+            /// <summary>
+            /// ID of the resource to run the simulation against.
             /// Must be same type of resource as the simulator that is being
             /// run.
             /// eg. Payment ID for `payment_failed`, Mandate ID for
             /// `mandate_activated` etc
-                /// </summary>
-                [JsonProperty("resource")]
-                public string Resource { get; set; }
+            /// </summary>
+            [JsonProperty("resource")]
+            public string Resource { get; set; }
         }
     }
 

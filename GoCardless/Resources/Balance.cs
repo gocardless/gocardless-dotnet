@@ -1,20 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a balance resource.
     ///
     /// Returns the balances for a creditor. These balances are the same as
     /// what’s shown in the dashboard with one exception (mentioned below under
     /// balance_type).
-    /// 
+    ///
     /// These balances will typically be 3-5 minutes old. The balance amounts
     /// likely won’t match what’s shown in the dashboard as the dashboard
     /// balances are updated much less frequently (once per day).
@@ -71,7 +70,7 @@ namespace GoCardless.Resources
         [JsonProperty("links")]
         public BalanceLinks Links { get; set; }
     }
-    
+
     /// <summary>
     /// Type of the balance. Could be one of
     /// <ul>
@@ -88,7 +87,8 @@ namespace GoCardless.Resources
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BalanceBalanceType {
+    public enum BalanceBalanceType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -96,9 +96,11 @@ namespace GoCardless.Resources
         /// <summary>`balance_type` with a value of "confirmed_funds"</summary>
         [EnumMember(Value = "confirmed_funds")]
         ConfirmedFunds,
+
         /// <summary>`balance_type` with a value of "pending_payouts"</summary>
         [EnumMember(Value = "pending_payouts")]
         PendingPayouts,
+
         /// <summary>`balance_type` with a value of "pending_payments_submitted"</summary>
         [EnumMember(Value = "pending_payments_submitted")]
         PendingPaymentsSubmitted,
@@ -109,7 +111,8 @@ namespace GoCardless.Resources
     /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BalanceCurrency {
+    public enum BalanceCurrency
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -117,24 +120,31 @@ namespace GoCardless.Resources
         /// <summary>`currency` with a value of "AUD"</summary>
         [EnumMember(Value = "AUD")]
         AUD,
+
         /// <summary>`currency` with a value of "CAD"</summary>
         [EnumMember(Value = "CAD")]
         CAD,
+
         /// <summary>`currency` with a value of "DKK"</summary>
         [EnumMember(Value = "DKK")]
         DKK,
+
         /// <summary>`currency` with a value of "EUR"</summary>
         [EnumMember(Value = "EUR")]
         EUR,
+
         /// <summary>`currency` with a value of "GBP"</summary>
         [EnumMember(Value = "GBP")]
         GBP,
+
         /// <summary>`currency` with a value of "NZD"</summary>
         [EnumMember(Value = "NZD")]
         NZD,
+
         /// <summary>`currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
+
         /// <summary>`currency` with a value of "USD"</summary>
         [EnumMember(Value = "USD")]
         USD,
@@ -151,5 +161,4 @@ namespace GoCardless.Resources
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
     }
-    
 }

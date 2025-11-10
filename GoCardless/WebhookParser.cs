@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
-using GoCardless.Resources;
 using GoCardless.Exceptions;
+using GoCardless.Resources;
 using GoCardless.Services;
 using Newtonsoft.Json;
 
@@ -24,7 +24,11 @@ namespace GoCardless
             verifySignature();
         }
 
-        public static IReadOnlyList<Event> Parse(string body, string webhookSecret, string signatureHeader)
+        public static IReadOnlyList<Event> Parse(
+            string body,
+            string webhookSecret,
+            string signatureHeader
+        )
         {
             var parser = new WebhookParser(body, webhookSecret, signatureHeader);
 
@@ -33,8 +37,10 @@ namespace GoCardless
 
         public IReadOnlyList<Event> Parse()
         {
-            var response = JsonConvert
-                .DeserializeObject<EventListResponse>(_body, new JsonSerializerSettings());
+            var response = JsonConvert.DeserializeObject<EventListResponse>(
+                _body,
+                new JsonSerializerSettings()
+            );
 
             return response.Events;
         }

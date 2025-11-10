@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a billing request template resource.
     ///
@@ -15,11 +14,11 @@ namespace GoCardless.Resources
     /// numerous Billing Requests with similar attributes. They provide
     /// a no-code solution for generating various types of multi-user payment
     /// links.
-    /// 
+    ///
     /// Each template includes a reusable URL that can be embedded in a website
     /// or shared with customers via email. Every time the URL is opened,
     /// it generates a new Billing Request.
-    /// 
+    ///
     /// Billing Request Templates overcome the key limitation of the Billing
     /// Request:
     /// a Billing Request cannot be shared among multiple users because it is
@@ -67,7 +66,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// A human-readable description of the payment and/or mandate. This
         /// will be displayed to the payer when authorising the billing request.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("mandate_request_description")]
         public string MandateRequestDescription { get; set; }
@@ -103,18 +102,18 @@ namespace GoCardless.Resources
         ///   <li>`always`: as `when_available`, but fail to create the Billing
         /// Request if a mechanism isn't available</li>
         /// </ul>
-        /// 
+        ///
         /// By default, all Billing Requests use the `recommended` verification
         /// preference. It uses GoCardless payment intelligence solution to
         /// determine if a payer is fraudulent or not. The verification
         /// mechanism is based on the response and the payer may be asked to
         /// verify themselves. If the feature is not available, `recommended`
         /// behaves like `minimum`.
-        /// 
+        ///
         /// If you never wish to take advantage of our reduced risk products and
         /// Verified Mandates as they are released in new schemes, please use
         /// the `minimum` verification preference.
-        /// 
+        ///
         /// See [Billing Requests: Creating Verified
         /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
         /// for more information.
@@ -155,7 +154,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// A human-readable description of the payment and/or mandate. This
         /// will be displayed to the payer when authorising the billing request.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("payment_request_description")]
         public string PaymentRequestDescription { get; set; }
@@ -194,7 +193,7 @@ namespace GoCardless.Resources
         [JsonProperty("updated_at")]
         public string UpdatedAt { get; set; }
     }
-    
+
     /// <summary>
     /// Represents a billing request template mandate request constraint resource.
     ///
@@ -206,13 +205,13 @@ namespace GoCardless.Resources
         /// <summary>
         /// The latest date at which payments can be taken, must occur after
         /// start_date if present
-        /// 
+        ///
         /// This is an optional field and if it is not supplied the agreement
         /// will be considered open and
         /// will not have an end date. Keep in mind the end date must take into
         /// account how long it will
         /// take the user to set up this agreement via the Billing Request.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("end_date")]
         public string EndDate { get; set; }
@@ -228,7 +227,7 @@ namespace GoCardless.Resources
         /// A constraint where you can specify info (free text string) about how
         /// payments are calculated. _Note:_ This is only supported for ACH and
         /// PAD schemes.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("payment_method")]
         public string PaymentMethod { get; set; }
@@ -241,16 +240,16 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// The date from which payments can be taken.
-        /// 
+        ///
         /// This is an optional field and if it is not supplied the start date
         /// will be set to the day
         /// authorisation happens.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("start_date")]
         public string StartDate { get; set; }
     }
-    
+
     /// <summary>
     /// List of periodic limits and constraints which apply to them
     /// </summary>
@@ -258,15 +257,15 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// The alignment of the period.
-        /// 
+        ///
         /// `calendar` - this will finish on the end of the current period. For
         /// example this will expire on the Monday for the current week or the
         /// January for the next year.
-        /// 
+        ///
         /// `creation_date` - this will finish on the next instance of the
         /// current period. For example Monthly it will expire on the same day
         /// of the next month, or yearly the same day of the next year.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("alignment")]
         public BillingRequestTemplateMandateRequestConstraintPeriodicLimitAlignment? Alignment { get; set; }
@@ -282,7 +281,7 @@ namespace GoCardless.Resources
         /// The maximum total amount that can be charged for all payments in
         /// this periodic limit.
         /// Required for VRP.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("max_total_amount")]
         public int? MaxTotalAmount { get; set; }
@@ -294,20 +293,21 @@ namespace GoCardless.Resources
         [JsonProperty("period")]
         public BillingRequestTemplateMandateRequestConstraintPeriodicLimitPeriod? Period { get; set; }
     }
-    
+
     /// <summary>
     /// The alignment of the period.
-    /// 
+    ///
     /// `calendar` - this will finish on the end of the current period. For example this will expire
     /// on the Monday for the current week or the January for the next year.
-    /// 
+    ///
     /// `creation_date` - this will finish on the next instance of the current period. For example
     /// Monthly it will expire on the same day of the next month, or yearly the same day of the next
     /// year.
-    /// 
+    ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestTemplateMandateRequestConstraintPeriodicLimitAlignment {
+    public enum BillingRequestTemplateMandateRequestConstraintPeriodicLimitAlignment
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -315,6 +315,7 @@ namespace GoCardless.Resources
         /// <summary>`alignment` with a value of "calendar"</summary>
         [EnumMember(Value = "calendar")]
         Calendar,
+
         /// <summary>`alignment` with a value of "creation_date"</summary>
         [EnumMember(Value = "creation_date")]
         CreationDate,
@@ -324,7 +325,8 @@ namespace GoCardless.Resources
     /// The repeating period for this mandate. Defaults to flexible for PayTo if not specified.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestTemplateMandateRequestConstraintPeriodicLimitPeriod {
+    public enum BillingRequestTemplateMandateRequestConstraintPeriodicLimitPeriod
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -332,15 +334,19 @@ namespace GoCardless.Resources
         /// <summary>`period` with a value of "day"</summary>
         [EnumMember(Value = "day")]
         Day,
+
         /// <summary>`period` with a value of "week"</summary>
         [EnumMember(Value = "week")]
         Week,
+
         /// <summary>`period` with a value of "month"</summary>
         [EnumMember(Value = "month")]
         Month,
+
         /// <summary>`period` with a value of "year"</summary>
         [EnumMember(Value = "year")]
         Year,
+
         /// <summary>`period` with a value of "flexible"</summary>
         [EnumMember(Value = "flexible")]
         Flexible,
@@ -356,21 +362,22 @@ namespace GoCardless.Resources
     ///   <li>`always`: as `when_available`, but fail to create the Billing Request if a mechanism
     /// isn't available</li>
     /// </ul>
-    /// 
+    ///
     /// By default, all Billing Requests use the `recommended` verification preference. It uses
     /// GoCardless payment intelligence solution to determine if a payer is fraudulent or not. The
     /// verification mechanism is based on the response and the payer may be asked to verify
     /// themselves. If the feature is not available, `recommended` behaves like `minimum`.
-    /// 
+    ///
     /// If you never wish to take advantage of our reduced risk products and Verified Mandates as
     /// they are released in new schemes, please use the `minimum` verification preference.
-    /// 
+    ///
     /// See [Billing Requests: Creating Verified
     /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
     /// for more information.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestTemplateMandateRequestVerify {
+    public enum BillingRequestTemplateMandateRequestVerify
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -378,15 +385,17 @@ namespace GoCardless.Resources
         /// <summary>`mandate_request_verify` with a value of "minimum"</summary>
         [EnumMember(Value = "minimum")]
         Minimum,
+
         /// <summary>`mandate_request_verify` with a value of "recommended"</summary>
         [EnumMember(Value = "recommended")]
         Recommended,
+
         /// <summary>`mandate_request_verify` with a value of "when_available"</summary>
         [EnumMember(Value = "when_available")]
         WhenAvailable,
+
         /// <summary>`mandate_request_verify` with a value of "always"</summary>
         [EnumMember(Value = "always")]
         Always,
     }
-
 }

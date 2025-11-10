@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +17,11 @@ namespace GoCardless.Services
     /// Returns the balances for a creditor. These balances are the same as
     /// what’s shown in the dashboard with one exception (mentioned below under
     /// balance_type).
-    /// 
+    ///
     /// These balances will typically be 3-5 minutes old. The balance amounts
     /// likely won’t match what’s shown in the dashboard as the dashboard
     /// balances are updated much less frequently (once per day).
     /// </summary>
-
     public class BalanceService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -46,21 +43,34 @@ namespace GoCardless.Services
         /// <param name="request">An optional `BalanceListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of balance resources</returns>
-        public Task<BalanceListResponse> ListAsync(BalanceListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<BalanceListResponse> ListAsync(
+            BalanceListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BalanceListRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<BalanceListResponse>("GET", "/balances", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<BalanceListResponse>(
+                "GET",
+                "/balances",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Get a lazily enumerated list of balances.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Balance> All(BalanceListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Balance> All(
+            BalanceListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BalanceListRequest();
 
@@ -82,7 +92,10 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of balances.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Task<IReadOnlyList<Balance>>> AllAsync(BalanceListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Task<IReadOnlyList<Balance>>> AllAsync(
+            BalanceListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new BalanceListRequest();
 
@@ -95,7 +108,6 @@ namespace GoCardless.Services
         }
     }
 
-        
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
     /// balances for a given creditor. This endpoint is rate limited to 60
@@ -103,7 +115,6 @@ namespace GoCardless.Services
     /// </summary>
     public class BalanceListRequest
     {
-
         /// <summary>
         /// Cursor pointing to the start of the desired set.
         /// </summary>
@@ -151,8 +162,10 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("balances")]
         public IReadOnlyList<Balance> Balances { get; private set; }
+
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }}
+        public Meta Meta { get; private set; }
+    }
 }

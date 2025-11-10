@@ -1,26 +1,25 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a creditor bank account resource.
     ///
     /// Creditor Bank Accounts hold the bank details of a
     /// [creditor](#core-endpoints-creditors). These are the bank accounts which
     /// your [payouts](#core-endpoints-payouts) will be sent to.
-    /// 
+    ///
     /// Note that creditor bank accounts must be unique, and so you will
     /// encounter a `bank_account_exists` error if you try to create a duplicate
     /// bank account. You may wish to handle this by updating the existing
     /// record instead, the ID of which will be provided as
     /// `links[creditor_bank_account]` in the error response.
-    /// 
+    ///
     /// <p class="restricted-notice"><strong>Restricted</strong>: This API is
     /// not available for partner integrations.</p>
     /// </summary>
@@ -113,14 +112,15 @@ namespace GoCardless.Resources
         [JsonProperty("verification_status")]
         public CreditorBankAccountVerificationStatus? VerificationStatus { get; set; }
     }
-    
+
     /// <summary>
     /// Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
     /// accounts in other currencies. See [local details](#local-bank-details-united-states) for
     /// more information.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum CreditorBankAccountAccountType {
+    public enum CreditorBankAccountAccountType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -128,6 +128,7 @@ namespace GoCardless.Resources
         /// <summary>`account_type` with a value of "savings"</summary>
         [EnumMember(Value = "savings")]
         Savings,
+
         /// <summary>`account_type` with a value of "checking"</summary>
         [EnumMember(Value = "checking")]
         Checking,
@@ -145,13 +146,14 @@ namespace GoCardless.Resources
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
     }
-    
+
     /// <summary>
     /// Verification status of the Bank Account. Can be one of `pending`, `in_review` or
     /// `successful`
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum CreditorBankAccountVerificationStatus {
+    public enum CreditorBankAccountVerificationStatus
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -159,15 +161,17 @@ namespace GoCardless.Resources
         /// <summary>`verification_status` with a value of "pending"</summary>
         [EnumMember(Value = "pending")]
         Pending,
+
         /// <summary>`verification_status` with a value of "in_review"</summary>
         [EnumMember(Value = "in_review")]
         InReview,
+
         /// <summary>`verification_status` with a value of "successful"</summary>
         [EnumMember(Value = "successful")]
         Successful,
+
         /// <summary>`verification_status` with a value of "could_not_verify"</summary>
         [EnumMember(Value = "could_not_verify")]
         CouldNotVerify,
     }
-
 }

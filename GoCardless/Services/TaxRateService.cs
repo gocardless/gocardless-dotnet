@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +15,10 @@ namespace GoCardless.Services
     /// Service class for working with tax rate resources.
     ///
     /// Tax rates from tax authority.
-    /// 
+    ///
     /// We also maintain a [static list of the tax rates for each
     /// jurisdiction](#appendix-tax-rates).
     /// </summary>
-
     public class TaxRateService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -42,21 +39,34 @@ namespace GoCardless.Services
         /// <param name="request">An optional `TaxRateListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of tax rate resources</returns>
-        public Task<TaxRateListResponse> ListAsync(TaxRateListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<TaxRateListResponse> ListAsync(
+            TaxRateListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new TaxRateListRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<TaxRateListResponse>("GET", "/tax_rates", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<TaxRateListResponse>(
+                "GET",
+                "/tax_rates",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Get a lazily enumerated list of tax rates.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<TaxRate> All(TaxRateListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<TaxRate> All(
+            TaxRateListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new TaxRateListRequest();
 
@@ -78,7 +88,10 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of tax rates.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Task<IReadOnlyList<TaxRate>>> AllAsync(TaxRateListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Task<IReadOnlyList<TaxRate>>> AllAsync(
+            TaxRateListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new TaxRateListRequest();
 
@@ -92,34 +105,45 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of a tax rate.
-        /// </summary>  
+        /// </summary>
         /// <param name="identity">The unique identifier created by the jurisdiction, tax type and
-        /// version</param> 
+        /// version</param>
         /// <param name="request">An optional `TaxRateGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single tax rate resource</returns>
-        public Task<TaxRateResponse> GetAsync(string identity, TaxRateGetRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<TaxRateResponse> GetAsync(
+            string identity,
+            TaxRateGetRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new TaxRateGetRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<TaxRateResponse>("GET", "/tax_rates/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<TaxRateResponse>(
+                "GET",
+                "/tax_rates/:identity",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
     }
 
-        
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of all
     /// tax rates.
     /// </summary>
     public class TaxRateListRequest
     {
-
         /// <summary>
         /// Cursor pointing to the start of the desired set.
         /// </summary>
@@ -145,13 +169,10 @@ namespace GoCardless.Services
         public int? Limit { get; set; }
     }
 
-        
     /// <summary>
     /// Retrieves the details of a tax rate.
     /// </summary>
-    public class TaxRateGetRequest
-    {
-    }
+    public class TaxRateGetRequest { }
 
     /// <summary>
     /// An API response for a request returning a single tax rate.
@@ -175,8 +196,10 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("tax_rates")]
         public IReadOnlyList<TaxRate> TaxRates { get; private set; }
+
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }}
+        public Meta Meta { get; private set; }
+    }
 }

@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a billing request flow resource.
     ///
@@ -82,10 +81,10 @@ namespace GoCardless.Resources
         /// If true, the payer will not be able to change their bank account
         /// within the flow. If the bank_account details are collected as part
         /// of bank_authorisation then GC will set this value to true mid flow.
-        /// 
+        ///
         /// You can only lock bank account if these have already been completed
         /// as a part of the billing request.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("lock_bank_account")]
         public bool? LockBankAccount { get; set; }
@@ -103,10 +102,10 @@ namespace GoCardless.Resources
         /// If true, the payer will not be able to edit their customer details
         /// within the flow. If the customer details are collected as part of
         /// bank_authorisation then GC will set this value to true mid flow.
-        /// 
+        ///
         /// You can only lock customer details if these have already been
         /// completed as a part of the billing request.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("lock_customer_details")]
         public bool? LockCustomerDetails { get; set; }
@@ -172,7 +171,7 @@ namespace GoCardless.Resources
         [JsonProperty("skip_success_screen")]
         public bool? SkipSuccessScreen { get; set; }
     }
-    
+
     /// <summary>
     /// Resources linked to this BillingRequestFlow
     /// </summary>
@@ -185,7 +184,7 @@ namespace GoCardless.Resources
         [JsonProperty("billing_request")]
         public string BillingRequest { get; set; }
     }
-    
+
     /// <summary>
     /// Represents a billing request flow prefilled bank account resource.
     ///
@@ -204,14 +203,15 @@ namespace GoCardless.Resources
         [JsonProperty("account_type")]
         public BillingRequestFlowPrefilledBankAccountAccountType? AccountType { get; set; }
     }
-    
+
     /// <summary>
     /// Bank account type for USD-denominated bank accounts. Must not be provided for bank accounts
     /// in other currencies. See [local details](#local-bank-details-united-states) for more
     /// information.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestFlowPrefilledBankAccountAccountType {
+    public enum BillingRequestFlowPrefilledBankAccountAccountType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -219,6 +219,7 @@ namespace GoCardless.Resources
         /// <summary>`account_type` with a value of "savings"</summary>
         [EnumMember(Value = "savings")]
         Savings,
+
         /// <summary>`account_type` with a value of "checking"</summary>
         [EnumMember(Value = "checking")]
         Checking,
@@ -316,5 +317,4 @@ namespace GoCardless.Resources
         [JsonProperty("swedish_identity_number")]
         public string SwedishIdentityNumber { get; set; }
     }
-    
 }

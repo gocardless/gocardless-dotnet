@@ -1,20 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a schemeentifier resource.
     ///
     /// This represents a scheme identifier (e.g. a SUN in Bacs or a CID in
     /// SEPA). Scheme identifiers are used to specify the beneficiary name that
     /// appears on customers' bank statements.
-    /// 
+    ///
     /// </summary>
     public class SchemeIdentifier
     {
@@ -85,7 +84,7 @@ namespace GoCardless.Resources
         /// The minimum interval, in working days, between the sending of a
         /// pre-notification to the customer, and the charge date of a payment
         /// using this scheme identifier.
-        /// 
+        ///
         /// By default, GoCardless sends these notifications automatically.
         /// Please see our [compliance
         /// requirements](#appendix-compliance-requirements) for more details.
@@ -138,12 +137,13 @@ namespace GoCardless.Resources
         [JsonProperty("status")]
         public SchemeIdentifierStatus? Status { get; set; }
     }
-    
+
     /// <summary>
     /// The currency of the scheme identifier.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum SchemeIdentifierCurrency {
+    public enum SchemeIdentifierCurrency
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -151,24 +151,31 @@ namespace GoCardless.Resources
         /// <summary>`currency` with a value of "AUD"</summary>
         [EnumMember(Value = "AUD")]
         AUD,
+
         /// <summary>`currency` with a value of "CAD"</summary>
         [EnumMember(Value = "CAD")]
         CAD,
+
         /// <summary>`currency` with a value of "DKK"</summary>
         [EnumMember(Value = "DKK")]
         DKK,
+
         /// <summary>`currency` with a value of "EUR"</summary>
         [EnumMember(Value = "EUR")]
         EUR,
+
         /// <summary>`currency` with a value of "GBP"</summary>
         [EnumMember(Value = "GBP")]
         GBP,
+
         /// <summary>`currency` with a value of "NZD"</summary>
         [EnumMember(Value = "NZD")]
         NZD,
+
         /// <summary>`currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
+
         /// <summary>`currency` with a value of "USD"</summary>
         [EnumMember(Value = "USD")]
         USD,
@@ -178,7 +185,8 @@ namespace GoCardless.Resources
     /// The scheme which this scheme identifier applies to.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum SchemeIdentifierScheme {
+    public enum SchemeIdentifierScheme
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -186,36 +194,47 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "ach"</summary>
         [EnumMember(Value = "ach")]
         Ach,
+
         /// <summary>`scheme` with a value of "autogiro"</summary>
         [EnumMember(Value = "autogiro")]
         Autogiro,
+
         /// <summary>`scheme` with a value of "bacs"</summary>
         [EnumMember(Value = "bacs")]
         Bacs,
+
         /// <summary>`scheme` with a value of "becs"</summary>
         [EnumMember(Value = "becs")]
         Becs,
+
         /// <summary>`scheme` with a value of "becs_nz"</summary>
         [EnumMember(Value = "becs_nz")]
         BecsNz,
+
         /// <summary>`scheme` with a value of "betalingsservice"</summary>
         [EnumMember(Value = "betalingsservice")]
         Betalingsservice,
+
         /// <summary>`scheme` with a value of "faster_payments"</summary>
         [EnumMember(Value = "faster_payments")]
         FasterPayments,
+
         /// <summary>`scheme` with a value of "pad"</summary>
         [EnumMember(Value = "pad")]
         Pad,
+
         /// <summary>`scheme` with a value of "pay_to"</summary>
         [EnumMember(Value = "pay_to")]
         PayTo,
+
         /// <summary>`scheme` with a value of "sepa"</summary>
         [EnumMember(Value = "sepa")]
         Sepa,
+
         /// <summary>`scheme` with a value of "sepa_credit_transfer"</summary>
         [EnumMember(Value = "sepa_credit_transfer")]
         SepaCreditTransfer,
+
         /// <summary>`scheme` with a value of "sepa_instant_credit_transfer"</summary>
         [EnumMember(Value = "sepa_instant_credit_transfer")]
         SepaInstantCreditTransfer,
@@ -226,7 +245,8 @@ namespace GoCardless.Resources
     /// creditor and used against payments.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum SchemeIdentifierStatus {
+    public enum SchemeIdentifierStatus
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -234,9 +254,9 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "pending"</summary>
         [EnumMember(Value = "pending")]
         Pending,
+
         /// <summary>`status` with a value of "active"</summary>
         [EnumMember(Value = "active")]
         Active,
     }
-
 }

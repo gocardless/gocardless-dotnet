@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,17 +17,16 @@ namespace GoCardless.Services
     /// Creditor Bank Accounts hold the bank details of a
     /// [creditor](#core-endpoints-creditors). These are the bank accounts which
     /// your [payouts](#core-endpoints-payouts) will be sent to.
-    /// 
+    ///
     /// Note that creditor bank accounts must be unique, and so you will
     /// encounter a `bank_account_exists` error if you try to create a duplicate
     /// bank account. You may wish to handle this by updating the existing
     /// record instead, the ID of which will be provided as
     /// `links[creditor_bank_account]` in the error response.
-    /// 
+    ///
     /// <p class="restricted-notice"><strong>Restricted</strong>: This API is
     /// not available for partner integrations.</p>
     /// </summary>
-
     public class CreditorBankAccountService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -49,14 +46,24 @@ namespace GoCardless.Services
         /// <param name="request">An optional `CreditorBankAccountCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor bank account resource</returns>
-        public Task<CreditorBankAccountResponse> CreateAsync(CreditorBankAccountCreateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CreditorBankAccountResponse> CreateAsync(
+            CreditorBankAccountCreateRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CreditorBankAccountCreateRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<CreditorBankAccountResponse>("POST", "/creditor_bank_accounts", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "creditor_bank_accounts", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CreditorBankAccountResponse>(
+                "POST",
+                "/creditor_bank_accounts",
+                urlParams,
+                request,
+                id => GetAsync(id, null, customiseRequestMessage),
+                "creditor_bank_accounts",
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
@@ -66,21 +73,34 @@ namespace GoCardless.Services
         /// <param name="request">An optional `CreditorBankAccountListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of creditor bank account resources</returns>
-        public Task<CreditorBankAccountListResponse> ListAsync(CreditorBankAccountListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CreditorBankAccountListResponse> ListAsync(
+            CreditorBankAccountListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CreditorBankAccountListRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<CreditorBankAccountListResponse>("GET", "/creditor_bank_accounts", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CreditorBankAccountListResponse>(
+                "GET",
+                "/creditor_bank_accounts",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Get a lazily enumerated list of creditor bank accounts.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<CreditorBankAccount> All(CreditorBankAccountListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<CreditorBankAccount> All(
+            CreditorBankAccountListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CreditorBankAccountListRequest();
 
@@ -102,7 +122,10 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of creditor bank accounts.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Task<IReadOnlyList<CreditorBankAccount>>> AllAsync(CreditorBankAccountListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Task<IReadOnlyList<CreditorBankAccount>>> AllAsync(
+            CreditorBankAccountListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CreditorBankAccountListRequest();
 
@@ -116,59 +139,83 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of an existing creditor bank account.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "BA".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "BA".</param>
         /// <param name="request">An optional `CreditorBankAccountGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor bank account resource</returns>
-        public Task<CreditorBankAccountResponse> GetAsync(string identity, CreditorBankAccountGetRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CreditorBankAccountResponse> GetAsync(
+            string identity,
+            CreditorBankAccountGetRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CreditorBankAccountGetRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CreditorBankAccountResponse>("GET", "/creditor_bank_accounts/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CreditorBankAccountResponse>(
+                "GET",
+                "/creditor_bank_accounts/:identity",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Immediately disables the bank account, no money can be paid out to a
         /// disabled account.
-        /// 
+        ///
         /// This will return a `disable_failed` error if the bank account has
         /// already been disabled.
-        /// 
+        ///
         /// A disabled bank account can be re-enabled by creating a new bank
         /// account resource with the same details.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "BA".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "BA".</param>
         /// <param name="request">An optional `CreditorBankAccountDisableRequest` representing the body for this disable request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor bank account resource</returns>
-        public Task<CreditorBankAccountResponse> DisableAsync(string identity, CreditorBankAccountDisableRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CreditorBankAccountResponse> DisableAsync(
+            string identity,
+            CreditorBankAccountDisableRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CreditorBankAccountDisableRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CreditorBankAccountResponse>("POST", "/creditor_bank_accounts/:identity/actions/disable", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CreditorBankAccountResponse>(
+                "POST",
+                "/creditor_bank_accounts/:identity/actions/disable",
+                urlParams,
+                request,
+                null,
+                "data",
+                customiseRequestMessage
+            );
         }
     }
 
-        
     /// <summary>
     /// Creates a new creditor bank account object.
     /// </summary>
     public class CreditorBankAccountCreateRequest : IHasIdempotencyKey
     {
-
         /// <summary>
         /// Name of the account holder, as known by the bank. Usually this is
         /// the same as the name stored with the linked
@@ -193,7 +240,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("account_type")]
         public CreditorBankAccountAccountType? AccountType { get; set; }
-            
+
         /// <summary>
         /// Bank account type. Required for USD-denominated bank accounts. Must
         /// not be provided for bank accounts in other currencies. See [local
@@ -202,10 +249,10 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CreditorBankAccountAccountType
         {
-    
             /// <summary>`account_type` with a value of "savings"</summary>
             [EnumMember(Value = "savings")]
             Savings,
+
             /// <summary>`account_type` with a value of "checking"</summary>
             [EnumMember(Value = "checking")]
             Checking,
@@ -256,18 +303,18 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("links")]
         public CreditorBankAccountLinks Links { get; set; }
+
         /// <summary>
         /// Linked resources for a CreditorBankAccount.
         /// </summary>
         public class CreditorBankAccountLinks
         {
-                
-                /// <summary>
-                            /// ID of the [creditor](#core-endpoints-creditors) that owns this
+            /// <summary>
+            /// ID of the [creditor](#core-endpoints-creditors) that owns this
             /// bank account.
-                /// </summary>
-                [JsonProperty("creditor")]
-                public string Creditor { get; set; }
+            /// </summary>
+            [JsonProperty("creditor")]
+            public string Creditor { get; set; }
         }
 
         /// <summary>
@@ -294,14 +341,12 @@ namespace GoCardless.Services
         public string IdempotencyKey { get; set; }
     }
 
-        
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// creditor bank accounts.
     /// </summary>
     public class CreditorBankAccountListRequest
     {
-
         /// <summary>
         /// Cursor pointing to the start of the desired set.
         /// </summary>
@@ -362,7 +407,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("enabled")]
         public bool? Enabled { get; set; }
-            
+
         /// <summary>
         /// If `true`, only return enabled bank accounts. If `false`, only
         /// return disabled bank accounts.
@@ -370,10 +415,10 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CreditorBankAccountEnabled
         {
-    
             /// <summary>`enabled` with a value of "true"</summary>
             [EnumMember(Value = "true")]
             True,
+
             /// <summary>`enabled` with a value of "false"</summary>
             [EnumMember(Value = "false")]
             False,
@@ -386,28 +431,22 @@ namespace GoCardless.Services
         public int? Limit { get; set; }
     }
 
-        
     /// <summary>
     /// Retrieves the details of an existing creditor bank account.
     /// </summary>
-    public class CreditorBankAccountGetRequest
-    {
-    }
+    public class CreditorBankAccountGetRequest { }
 
-        
     /// <summary>
     /// Immediately disables the bank account, no money can be paid out to a
     /// disabled account.
-    /// 
+    ///
     /// This will return a `disable_failed` error if the bank account has
     /// already been disabled.
-    /// 
+    ///
     /// A disabled bank account can be re-enabled by creating a new bank account
     /// resource with the same details.
     /// </summary>
-    public class CreditorBankAccountDisableRequest
-    {
-    }
+    public class CreditorBankAccountDisableRequest { }
 
     /// <summary>
     /// An API response for a request returning a single creditor bank account.
@@ -431,8 +470,10 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("creditor_bank_accounts")]
         public IReadOnlyList<CreditorBankAccount> CreditorBankAccounts { get; private set; }
+
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }}
+        public Meta Meta { get; private set; }
+    }
 }

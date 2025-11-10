@@ -15,7 +15,6 @@ namespace GoCardless
 
         public static Joiner @on(string joinString)
         {
-            
             return new Joiner(joinString);
         }
 

@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace GoCardless.Tests
 {
@@ -43,14 +43,13 @@ namespace GoCardless.Tests
                 yield return $"different array lengths {left.Count} vs {right.Count}";
                 yield break;
             }
-            for(var i=0;i<left.Count;i++)
+            for (var i = 0; i < left.Count; i++)
             {
                 foreach (var error in GetDifferences(left[i], right[i]))
                 {
                     yield return $"[{i}] " + error;
                 }
             }
-
         }
 
         public static IEnumerable<string> GetDifferences(JObject left, JObject right)
@@ -59,15 +58,17 @@ namespace GoCardless.Tests
             var rd = right.ToObject<Dictionary<string, object>>();
 
             var missingFromRight = ld.Keys.Except(rd.Keys).ToArray();
-            if (missingFromRight.Any()) yield return $"right is missing keys {string.Join(",", missingFromRight)}";
+            if (missingFromRight.Any())
+                yield return $"right is missing keys {string.Join(",", missingFromRight)}";
 
             var missingFromLeft = rd.Keys.Except(ld.Keys).ToArray();
-            if (missingFromLeft.Any()) yield return $"left is missing keys {string.Join(",", missingFromLeft)}";
+            if (missingFromLeft.Any())
+                yield return $"left is missing keys {string.Join(",", missingFromLeft)}";
 
             var inBoth = ld.Keys.Intersect(rd.Keys);
-            foreach(var key in inBoth)
+            foreach (var key in inBoth)
             {
-                foreach(var error in GetDifferences(left[key], right[key]))
+                foreach (var error in GetDifferences(left[key], right[key]))
                 {
                     yield return $".{key} " + error;
                 }
@@ -76,7 +77,8 @@ namespace GoCardless.Tests
 
         public static IEnumerable<string> GetDifferences(JValue left, JValue right)
         {
-            if (!left.Equals(right)) yield return $"{left} is not equal to ${right}";
+            if (!left.Equals(right))
+                yield return $"{left} is not equal to ${right}";
         }
     }
 }

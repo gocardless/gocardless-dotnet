@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +16,6 @@ namespace GoCardless.Services
     ///
     /// Currency exchange rates from our foreign exchange provider.
     /// </summary>
-
     public class CurrencyExchangeRateService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -39,21 +36,34 @@ namespace GoCardless.Services
         /// <param name="request">An optional `CurrencyExchangeRateListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of currency exchange rate resources</returns>
-        public Task<CurrencyExchangeRateListResponse> ListAsync(CurrencyExchangeRateListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CurrencyExchangeRateListResponse> ListAsync(
+            CurrencyExchangeRateListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CurrencyExchangeRateListRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<CurrencyExchangeRateListResponse>("GET", "/currency_exchange_rates", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CurrencyExchangeRateListResponse>(
+                "GET",
+                "/currency_exchange_rates",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Get a lazily enumerated list of currency exchange rates.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<CurrencyExchangeRate> All(CurrencyExchangeRateListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<CurrencyExchangeRate> All(
+            CurrencyExchangeRateListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CurrencyExchangeRateListRequest();
 
@@ -75,7 +85,10 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of currency exchange rates.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Task<IReadOnlyList<CurrencyExchangeRate>>> AllAsync(CurrencyExchangeRateListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Task<IReadOnlyList<CurrencyExchangeRate>>> AllAsync(
+            CurrencyExchangeRateListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CurrencyExchangeRateListRequest();
 
@@ -88,14 +101,12 @@ namespace GoCardless.Services
         }
     }
 
-        
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of all
     /// exchange rates.
     /// </summary>
     public class CurrencyExchangeRateListRequest
     {
-
         /// <summary>
         /// Cursor pointing to the start of the desired set.
         /// </summary>
@@ -149,8 +160,10 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("currency_exchange_rates")]
         public IReadOnlyList<CurrencyExchangeRate> CurrencyExchangeRates { get; private set; }
+
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }}
+        public Meta Meta { get; private set; }
+    }
 }

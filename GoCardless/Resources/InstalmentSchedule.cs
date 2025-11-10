@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a instalment schedule resource.
     ///
@@ -18,16 +17,16 @@ namespace GoCardless.Resources
     /// creation (similar to subscriptions) as well as explicit selection of
     /// differing payment
     /// amounts and charge dates.
-    /// 
+    ///
     /// Unlike subscriptions, the payments are created immediately, so the
     /// instalment schedule
     /// cannot be modified once submitted and instead can only be cancelled
     /// (which will cancel
     /// any of the payments which have not yet been submitted).
-    /// 
+    ///
     /// Customers will receive a single notification about the complete schedule
     /// of collection.
-    /// 
+    ///
     /// </summary>
     public class InstalmentSchedule
     {
@@ -80,7 +79,7 @@ namespace GoCardless.Resources
         /// failures from the individual payments, arranged by the index of the
         /// payment that
         /// failed.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("payment_errors")]
         public IDictionary<string, string> PaymentErrors { get; set; }
@@ -113,13 +112,14 @@ namespace GoCardless.Resources
         [JsonProperty("total_amount")]
         public int? TotalAmount { get; set; }
     }
-    
+
     /// <summary>
     /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
     /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum InstalmentScheduleCurrency {
+    public enum InstalmentScheduleCurrency
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -127,24 +127,31 @@ namespace GoCardless.Resources
         /// <summary>`currency` with a value of "AUD"</summary>
         [EnumMember(Value = "AUD")]
         AUD,
+
         /// <summary>`currency` with a value of "CAD"</summary>
         [EnumMember(Value = "CAD")]
         CAD,
+
         /// <summary>`currency` with a value of "DKK"</summary>
         [EnumMember(Value = "DKK")]
         DKK,
+
         /// <summary>`currency` with a value of "EUR"</summary>
         [EnumMember(Value = "EUR")]
         EUR,
+
         /// <summary>`currency` with a value of "GBP"</summary>
         [EnumMember(Value = "GBP")]
         GBP,
+
         /// <summary>`currency` with a value of "NZD"</summary>
         [EnumMember(Value = "NZD")]
         NZD,
+
         /// <summary>`currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
+
         /// <summary>`currency` with a value of "USD"</summary>
         [EnumMember(Value = "USD")]
         USD,
@@ -176,7 +183,7 @@ namespace GoCardless.Resources
         [JsonProperty("payments")]
         public List<string> Payments { get; set; }
     }
-    
+
     /// <summary>
     /// One of:
     /// <ul>
@@ -190,7 +197,8 @@ namespace GoCardless.Resources
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum InstalmentScheduleStatus {
+    public enum InstalmentScheduleStatus
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -198,21 +206,25 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "pending"</summary>
         [EnumMember(Value = "pending")]
         Pending,
+
         /// <summary>`status` with a value of "active"</summary>
         [EnumMember(Value = "active")]
         Active,
+
         /// <summary>`status` with a value of "creation_failed"</summary>
         [EnumMember(Value = "creation_failed")]
         CreationFailed,
+
         /// <summary>`status` with a value of "completed"</summary>
         [EnumMember(Value = "completed")]
         Completed,
+
         /// <summary>`status` with a value of "cancelled"</summary>
         [EnumMember(Value = "cancelled")]
         Cancelled,
+
         /// <summary>`status` with a value of "errored"</summary>
         [EnumMember(Value = "errored")]
         Errored,
     }
-
 }

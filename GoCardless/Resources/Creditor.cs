@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a creditor resource.
     ///
@@ -15,7 +14,7 @@ namespace GoCardless.Resources
     /// to a "creditor", to whom the payment is then paid out. In most cases
     /// your organisation will have a single "creditor", but the API also
     /// supports collecting payments on behalf of others.
-    /// 
+    ///
     /// Currently, for Anti Money Laundering reasons, any creditors you add must
     /// be directly related to your organisation.
     /// </summary>
@@ -45,9 +44,9 @@ namespace GoCardless.Resources
         /// the creditor's `bank_reference_prefix` was `ACME`, the bank
         /// reference of a payout
         /// sent to that creditor could be `ACME-8G7Q8`.
-        /// 
+        ///
         /// This prefix is also used for refunds in EUR and GBP.
-        /// 
+        ///
         /// </summary>
         [JsonProperty("bank_reference_prefix")]
         public string BankReferencePrefix { get; set; }
@@ -162,7 +161,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// An array of the scheme identifiers this creditor can create mandates
         /// against.
-        /// 
+        ///
         /// The support address, `phone_number` and `email` fields are for
         /// customers to contact the merchant for support purposes. They must be
         /// displayed on the payment page, please see our [compliance
@@ -195,13 +194,14 @@ namespace GoCardless.Resources
         [JsonProperty("verification_status")]
         public CreditorVerificationStatus? VerificationStatus { get; set; }
     }
-    
+
     /// <summary>
     /// The type of business of the creditor. Currently, `individual`, `company`, `charity`,
     /// `partnership`, and `trust` are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum CreditorCreditorType {
+    public enum CreditorCreditorType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -209,15 +209,19 @@ namespace GoCardless.Resources
         /// <summary>`creditor_type` with a value of "company"</summary>
         [EnumMember(Value = "company")]
         Company,
+
         /// <summary>`creditor_type` with a value of "individual"</summary>
         [EnumMember(Value = "individual")]
         Individual,
+
         /// <summary>`creditor_type` with a value of "charity"</summary>
         [EnumMember(Value = "charity")]
         Charity,
+
         /// <summary>`creditor_type` with a value of "partnership"</summary>
         [EnumMember(Value = "partnership")]
         Partnership,
+
         /// <summary>`creditor_type` with a value of "trust"</summary>
         [EnumMember(Value = "trust")]
         Trust,
@@ -230,7 +234,8 @@ namespace GoCardless.Resources
     /// were) made via foreign exchange.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum CreditorFxPayoutCurrency {
+    public enum CreditorFxPayoutCurrency
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -238,24 +243,31 @@ namespace GoCardless.Resources
         /// <summary>`fx_payout_currency` with a value of "AUD"</summary>
         [EnumMember(Value = "AUD")]
         AUD,
+
         /// <summary>`fx_payout_currency` with a value of "CAD"</summary>
         [EnumMember(Value = "CAD")]
         CAD,
+
         /// <summary>`fx_payout_currency` with a value of "DKK"</summary>
         [EnumMember(Value = "DKK")]
         DKK,
+
         /// <summary>`fx_payout_currency` with a value of "EUR"</summary>
         [EnumMember(Value = "EUR")]
         EUR,
+
         /// <summary>`fx_payout_currency` with a value of "GBP"</summary>
         [EnumMember(Value = "GBP")]
         GBP,
+
         /// <summary>`fx_payout_currency` with a value of "NZD"</summary>
         [EnumMember(Value = "NZD")]
         NZD,
+
         /// <summary>`fx_payout_currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
+
         /// <summary>`fx_payout_currency` with a value of "USD"</summary>
         [EnumMember(Value = "USD")]
         USD,
@@ -322,11 +334,11 @@ namespace GoCardless.Resources
         [JsonProperty("default_usd_payout_account")]
         public string DefaultUsdPayoutAccount { get; set; }
     }
-    
+
     /// <summary>
     /// An array of the scheme identifiers this creditor can create mandates
     /// against.
-    /// 
+    ///
     /// The support address, `phone_number` and `email` fields are for customers
     /// to contact the merchant for support purposes. They must be displayed on
     /// the payment page, please see our [compliance
@@ -401,7 +413,7 @@ namespace GoCardless.Resources
         /// The minimum interval, in working days, between the sending of a
         /// pre-notification to the customer, and the charge date of a payment
         /// using this scheme identifier.
-        /// 
+        ///
         /// By default, GoCardless sends these notifications automatically.
         /// Please see our [compliance
         /// requirements](#appendix-compliance-requirements) for more details.
@@ -454,12 +466,13 @@ namespace GoCardless.Resources
         [JsonProperty("status")]
         public CreditorSchemeIdentifierStatus? Status { get; set; }
     }
-    
+
     /// <summary>
     /// The currency of the scheme identifier.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum CreditorSchemeIdentifierCurrency {
+    public enum CreditorSchemeIdentifierCurrency
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -467,24 +480,31 @@ namespace GoCardless.Resources
         /// <summary>`currency` with a value of "AUD"</summary>
         [EnumMember(Value = "AUD")]
         AUD,
+
         /// <summary>`currency` with a value of "CAD"</summary>
         [EnumMember(Value = "CAD")]
         CAD,
+
         /// <summary>`currency` with a value of "DKK"</summary>
         [EnumMember(Value = "DKK")]
         DKK,
+
         /// <summary>`currency` with a value of "EUR"</summary>
         [EnumMember(Value = "EUR")]
         EUR,
+
         /// <summary>`currency` with a value of "GBP"</summary>
         [EnumMember(Value = "GBP")]
         GBP,
+
         /// <summary>`currency` with a value of "NZD"</summary>
         [EnumMember(Value = "NZD")]
         NZD,
+
         /// <summary>`currency` with a value of "SEK"</summary>
         [EnumMember(Value = "SEK")]
         SEK,
+
         /// <summary>`currency` with a value of "USD"</summary>
         [EnumMember(Value = "USD")]
         USD,
@@ -494,7 +514,8 @@ namespace GoCardless.Resources
     /// The scheme which this scheme identifier applies to.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum CreditorSchemeIdentifierScheme {
+    public enum CreditorSchemeIdentifierScheme
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -502,36 +523,47 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "ach"</summary>
         [EnumMember(Value = "ach")]
         Ach,
+
         /// <summary>`scheme` with a value of "autogiro"</summary>
         [EnumMember(Value = "autogiro")]
         Autogiro,
+
         /// <summary>`scheme` with a value of "bacs"</summary>
         [EnumMember(Value = "bacs")]
         Bacs,
+
         /// <summary>`scheme` with a value of "becs"</summary>
         [EnumMember(Value = "becs")]
         Becs,
+
         /// <summary>`scheme` with a value of "becs_nz"</summary>
         [EnumMember(Value = "becs_nz")]
         BecsNz,
+
         /// <summary>`scheme` with a value of "betalingsservice"</summary>
         [EnumMember(Value = "betalingsservice")]
         Betalingsservice,
+
         /// <summary>`scheme` with a value of "faster_payments"</summary>
         [EnumMember(Value = "faster_payments")]
         FasterPayments,
+
         /// <summary>`scheme` with a value of "pad"</summary>
         [EnumMember(Value = "pad")]
         Pad,
+
         /// <summary>`scheme` with a value of "pay_to"</summary>
         [EnumMember(Value = "pay_to")]
         PayTo,
+
         /// <summary>`scheme` with a value of "sepa"</summary>
         [EnumMember(Value = "sepa")]
         Sepa,
+
         /// <summary>`scheme` with a value of "sepa_credit_transfer"</summary>
         [EnumMember(Value = "sepa_credit_transfer")]
         SepaCreditTransfer,
+
         /// <summary>`scheme` with a value of "sepa_instant_credit_transfer"</summary>
         [EnumMember(Value = "sepa_instant_credit_transfer")]
         SepaInstantCreditTransfer,
@@ -542,7 +574,8 @@ namespace GoCardless.Resources
     /// creditor and used against payments.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum CreditorSchemeIdentifierStatus {
+    public enum CreditorSchemeIdentifierStatus
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -550,6 +583,7 @@ namespace GoCardless.Resources
         /// <summary>`status` with a value of "pending"</summary>
         [EnumMember(Value = "pending")]
         Pending,
+
         /// <summary>`status` with a value of "active"</summary>
         [EnumMember(Value = "active")]
         Active,
@@ -571,7 +605,8 @@ namespace GoCardless.Resources
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum CreditorVerificationStatus {
+    public enum CreditorVerificationStatus
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -579,12 +614,13 @@ namespace GoCardless.Resources
         /// <summary>`verification_status` with a value of "successful"</summary>
         [EnumMember(Value = "successful")]
         Successful,
+
         /// <summary>`verification_status` with a value of "in_review"</summary>
         [EnumMember(Value = "in_review")]
         InReview,
+
         /// <summary>`verification_status` with a value of "action_required"</summary>
         [EnumMember(Value = "action_required")]
         ActionRequired,
     }
-
 }

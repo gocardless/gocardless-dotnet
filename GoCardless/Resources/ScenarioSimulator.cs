@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a scenario simulator resource.
     ///
@@ -161,5 +160,4 @@ namespace GoCardless.Resources
         [JsonProperty("id")]
         public string Id { get; set; }
     }
-    
 }

@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +19,6 @@ namespace GoCardless.Services
     /// accounts](#core-endpoints-customer-bank-accounts), which in turn can
     /// have several Direct Debit [mandates](#core-endpoints-mandates).
     /// </summary>
-
     public class CustomerService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -41,14 +38,24 @@ namespace GoCardless.Services
         /// <param name="request">An optional `CustomerCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer resource</returns>
-        public Task<CustomerResponse> CreateAsync(CustomerCreateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CustomerResponse> CreateAsync(
+            CustomerCreateRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CustomerCreateRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<CustomerResponse>("POST", "/customers", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "customers", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerResponse>(
+                "POST",
+                "/customers",
+                urlParams,
+                request,
+                id => GetAsync(id, null, customiseRequestMessage),
+                "customers",
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
@@ -58,21 +65,34 @@ namespace GoCardless.Services
         /// <param name="request">An optional `CustomerListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of customer resources</returns>
-        public Task<CustomerListResponse> ListAsync(CustomerListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CustomerListResponse> ListAsync(
+            CustomerListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CustomerListRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<CustomerListResponse>("GET", "/customers", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerListResponse>(
+                "GET",
+                "/customers",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Get a lazily enumerated list of customers.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Customer> All(CustomerListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Customer> All(
+            CustomerListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CustomerListRequest();
 
@@ -94,7 +114,10 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of customers.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Task<IReadOnlyList<Customer>>> AllAsync(CustomerListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Task<IReadOnlyList<Customer>>> AllAsync(
+            CustomerListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CustomerListRequest();
 
@@ -108,43 +131,69 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of an existing customer.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "CU".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "CU".</param>
         /// <param name="request">An optional `CustomerGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer resource</returns>
-        public Task<CustomerResponse> GetAsync(string identity, CustomerGetRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CustomerResponse> GetAsync(
+            string identity,
+            CustomerGetRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CustomerGetRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CustomerResponse>("GET", "/customers/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerResponse>(
+                "GET",
+                "/customers/:identity",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Updates a customer object. Supports all of the fields supported when
         /// creating a customer.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "CU".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "CU".</param>
         /// <param name="request">An optional `CustomerUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer resource</returns>
-        public Task<CustomerResponse> UpdateAsync(string identity, CustomerUpdateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CustomerResponse> UpdateAsync(
+            string identity,
+            CustomerUpdateRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CustomerUpdateRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CustomerResponse>("PUT", "/customers/:identity", urlParams, request, null, "customers", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerResponse>(
+                "PUT",
+                "/customers/:identity",
+                urlParams,
+                request,
+                null,
+                "customers",
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
@@ -153,35 +202,46 @@ namespace GoCardless.Services
         /// or exports), and it will not be possible to load an individually
         /// removed customer by
         /// ID.
-        /// 
+        ///
         /// <p class="restricted-notice"><strong>The action of removing a
         /// customer cannot be reversed, so please use with care.</strong></p>
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "CU".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "CU".</param>
         /// <param name="request">An optional `CustomerRemoveRequest` representing the body for this remove request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer resource</returns>
-        public Task<CustomerResponse> RemoveAsync(string identity, CustomerRemoveRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CustomerResponse> RemoveAsync(
+            string identity,
+            CustomerRemoveRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CustomerRemoveRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CustomerResponse>("DELETE", "/customers/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerResponse>(
+                "DELETE",
+                "/customers/:identity",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
     }
 
-        
     /// <summary>
     /// Creates a new customer object.
     /// </summary>
     public class CustomerCreateRequest : IHasIdempotencyKey
     {
-
         /// <summary>
         /// The first line of the customer's address.
         /// </summary>
@@ -310,14 +370,12 @@ namespace GoCardless.Services
         public string IdempotencyKey { get; set; }
     }
 
-        
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// customers.
     /// </summary>
     public class CustomerListRequest
     {
-
         /// <summary>
         /// Cursor pointing to the start of the desired set.
         /// </summary>
@@ -373,7 +431,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("currency")]
         public CustomerCurrency? Currency { get; set; }
-            
+
         /// <summary>
         /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
@@ -382,28 +440,34 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CustomerCurrency
         {
-    
             /// <summary>`currency` with a value of "AUD"</summary>
             [EnumMember(Value = "AUD")]
             AUD,
+
             /// <summary>`currency` with a value of "CAD"</summary>
             [EnumMember(Value = "CAD")]
             CAD,
+
             /// <summary>`currency` with a value of "DKK"</summary>
             [EnumMember(Value = "DKK")]
             DKK,
+
             /// <summary>`currency` with a value of "EUR"</summary>
             [EnumMember(Value = "EUR")]
             EUR,
+
             /// <summary>`currency` with a value of "GBP"</summary>
             [EnumMember(Value = "GBP")]
             GBP,
+
             /// <summary>`currency` with a value of "NZD"</summary>
             [EnumMember(Value = "NZD")]
             NZD,
+
             /// <summary>`currency` with a value of "SEK"</summary>
             [EnumMember(Value = "SEK")]
             SEK,
+
             /// <summary>`currency` with a value of "USD"</summary>
             [EnumMember(Value = "USD")]
             USD,
@@ -425,7 +489,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("sort_direction")]
         public CustomerSortDirection? SortDirection { get; set; }
-            
+
         /// <summary>
         /// The direction to sort in.
         /// One of:
@@ -437,10 +501,10 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CustomerSortDirection
         {
-    
             /// <summary>`sort_direction` with a value of "asc"</summary>
             [EnumMember(Value = "asc")]
             Asc,
+
             /// <summary>`sort_direction` with a value of "desc"</summary>
             [EnumMember(Value = "desc")]
             Desc,
@@ -457,7 +521,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("sort_field")]
         public CustomerSortField? SortField { get; set; }
-            
+
         /// <summary>
         /// Field by which to sort records.
         /// One of:
@@ -470,35 +534,31 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CustomerSortField
         {
-    
             /// <summary>`sort_field` with a value of "name"</summary>
             [EnumMember(Value = "name")]
             Name,
+
             /// <summary>`sort_field` with a value of "company_name"</summary>
             [EnumMember(Value = "company_name")]
             CompanyName,
+
             /// <summary>`sort_field` with a value of "created_at"</summary>
             [EnumMember(Value = "created_at")]
             CreatedAt,
         }
     }
 
-        
     /// <summary>
     /// Retrieves the details of an existing customer.
     /// </summary>
-    public class CustomerGetRequest
-    {
-    }
+    public class CustomerGetRequest { }
 
-        
     /// <summary>
     /// Updates a customer object. Supports all of the fields supported when
     /// creating a customer.
     /// </summary>
     public class CustomerUpdateRequest
     {
-
         /// <summary>
         /// The first line of the customer's address.
         /// </summary>
@@ -619,20 +679,17 @@ namespace GoCardless.Services
         public string SwedishIdentityNumber { get; set; }
     }
 
-        
     /// <summary>
     /// Removed customers will not appear in search results or lists of
     /// customers (in our API
     /// or exports), and it will not be possible to load an individually removed
     /// customer by
     /// ID.
-    /// 
+    ///
     /// <p class="restricted-notice"><strong>The action of removing a customer
     /// cannot be reversed, so please use with care.</strong></p>
     /// </summary>
-    public class CustomerRemoveRequest
-    {
-    }
+    public class CustomerRemoveRequest { }
 
     /// <summary>
     /// An API response for a request returning a single customer.
@@ -656,8 +713,10 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("customers")]
         public IReadOnlyList<Customer> Customers { get; private set; }
+
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }}
+        public Meta Meta { get; private set; }
+    }
 }

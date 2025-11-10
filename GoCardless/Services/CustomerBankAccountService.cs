@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,13 +18,13 @@ namespace GoCardless.Services
     /// [customer](#core-endpoints-customers). They always belong to a
     /// [customer](#core-endpoints-customers), and may be linked to several
     /// Direct Debit [mandates](#core-endpoints-mandates).
-    /// 
+    ///
     /// Note that customer bank accounts must be unique, and so you will
     /// encounter a `bank_account_exists` error if you try to create a duplicate
     /// bank account. You may wish to handle this by updating the existing
     /// record instead, the ID of which will be provided as
     /// `links[customer_bank_account]` in the error response.
-    /// 
+    ///
     /// _Note:_ To ensure the customer's bank accounts are valid, verify them
     /// first
     /// using
@@ -34,7 +32,6 @@ namespace GoCardless.Services
     /// [bank_details_lookups](#bank-details-lookups-perform-a-bank-details-lookup),
     /// before proceeding with creating the accounts
     /// </summary>
-
     public class CustomerBankAccountService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -50,30 +47,40 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Creates a new customer bank account object.
-        /// 
+        ///
         /// There are three different ways to supply bank account details:
-        /// 
+        ///
         /// - [Local details](#appendix-local-bank-details)
-        /// 
+        ///
         /// - IBAN
-        /// 
+        ///
         /// - [Customer Bank Account
         /// Tokens](#javascript-flow-create-a-customer-bank-account-token)
-        /// 
+        ///
         /// For more information on the different fields required in each
         /// country, see [local bank details](#appendix-local-bank-details).
         /// </summary>
         /// <param name="request">An optional `CustomerBankAccountCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer bank account resource</returns>
-        public Task<CustomerBankAccountResponse> CreateAsync(CustomerBankAccountCreateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CustomerBankAccountResponse> CreateAsync(
+            CustomerBankAccountCreateRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CustomerBankAccountCreateRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<CustomerBankAccountResponse>("POST", "/customer_bank_accounts", urlParams, request, id => GetAsync(id, null, customiseRequestMessage), "customer_bank_accounts", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerBankAccountResponse>(
+                "POST",
+                "/customer_bank_accounts",
+                urlParams,
+                request,
+                id => GetAsync(id, null, customiseRequestMessage),
+                "customer_bank_accounts",
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
@@ -83,21 +90,34 @@ namespace GoCardless.Services
         /// <param name="request">An optional `CustomerBankAccountListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of customer bank account resources</returns>
-        public Task<CustomerBankAccountListResponse> ListAsync(CustomerBankAccountListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CustomerBankAccountListResponse> ListAsync(
+            CustomerBankAccountListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CustomerBankAccountListRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<CustomerBankAccountListResponse>("GET", "/customer_bank_accounts", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerBankAccountListResponse>(
+                "GET",
+                "/customer_bank_accounts",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Get a lazily enumerated list of customer bank accounts.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<CustomerBankAccount> All(CustomerBankAccountListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<CustomerBankAccount> All(
+            CustomerBankAccountListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CustomerBankAccountListRequest();
 
@@ -119,7 +139,10 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of customer bank accounts.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Task<IReadOnlyList<CustomerBankAccount>>> AllAsync(CustomerBankAccountListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Task<IReadOnlyList<CustomerBankAccount>>> AllAsync(
+            CustomerBankAccountListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CustomerBankAccountListRequest();
 
@@ -133,92 +156,129 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of an existing bank account.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "BA".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "BA".</param>
         /// <param name="request">An optional `CustomerBankAccountGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer bank account resource</returns>
-        public Task<CustomerBankAccountResponse> GetAsync(string identity, CustomerBankAccountGetRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CustomerBankAccountResponse> GetAsync(
+            string identity,
+            CustomerBankAccountGetRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CustomerBankAccountGetRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CustomerBankAccountResponse>("GET", "/customer_bank_accounts/:identity", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerBankAccountResponse>(
+                "GET",
+                "/customer_bank_accounts/:identity",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Updates a customer bank account object. Only the metadata parameter
         /// is allowed.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "BA".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "BA".</param>
         /// <param name="request">An optional `CustomerBankAccountUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer bank account resource</returns>
-        public Task<CustomerBankAccountResponse> UpdateAsync(string identity, CustomerBankAccountUpdateRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CustomerBankAccountResponse> UpdateAsync(
+            string identity,
+            CustomerBankAccountUpdateRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CustomerBankAccountUpdateRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CustomerBankAccountResponse>("PUT", "/customer_bank_accounts/:identity", urlParams, request, null, "customer_bank_accounts", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerBankAccountResponse>(
+                "PUT",
+                "/customer_bank_accounts/:identity",
+                urlParams,
+                request,
+                null,
+                "customer_bank_accounts",
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Immediately cancels all associated mandates and cancellable
         /// payments.
-        /// 
+        ///
         /// This will return a `disable_failed` error if the bank account has
         /// already been disabled.
-        /// 
+        ///
         /// A disabled bank account can be re-enabled by creating a new bank
         /// account resource with the same details.
-        /// </summary>  
-        /// <param name="identity">Unique identifier, beginning with "BA".</param> 
+        /// </summary>
+        /// <param name="identity">Unique identifier, beginning with "BA".</param>
         /// <param name="request">An optional `CustomerBankAccountDisableRequest` representing the body for this disable request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer bank account resource</returns>
-        public Task<CustomerBankAccountResponse> DisableAsync(string identity, CustomerBankAccountDisableRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<CustomerBankAccountResponse> DisableAsync(
+            string identity,
+            CustomerBankAccountDisableRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new CustomerBankAccountDisableRequest();
-            if (identity == null) throw new ArgumentException(nameof(identity));
+            if (identity == null)
+                throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
             {
                 new KeyValuePair<string, object>("identity", identity),
             };
 
-            return _goCardlessClient.ExecuteAsync<CustomerBankAccountResponse>("POST", "/customer_bank_accounts/:identity/actions/disable", urlParams, request, null, "data", customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<CustomerBankAccountResponse>(
+                "POST",
+                "/customer_bank_accounts/:identity/actions/disable",
+                urlParams,
+                request,
+                null,
+                "data",
+                customiseRequestMessage
+            );
         }
     }
 
-        
     /// <summary>
     /// Creates a new customer bank account object.
-    /// 
+    ///
     /// There are three different ways to supply bank account details:
-    /// 
+    ///
     /// - [Local details](#appendix-local-bank-details)
-    /// 
+    ///
     /// - IBAN
-    /// 
+    ///
     /// - [Customer Bank Account
     /// Tokens](#javascript-flow-create-a-customer-bank-account-token)
-    /// 
+    ///
     /// For more information on the different fields required in each country,
     /// see [local bank details](#appendix-local-bank-details).
     /// </summary>
     public class CustomerBankAccountCreateRequest : IHasIdempotencyKey
     {
-
         /// <summary>
         /// Name of the account holder, as known by the bank. This field will be
         /// transliterated, upcased and truncated to 18 characters. This field
@@ -243,7 +303,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("account_type")]
         public CustomerBankAccountAccountType? AccountType { get; set; }
-            
+
         /// <summary>
         /// Bank account type. Required for USD-denominated bank accounts. Must
         /// not be provided for bank accounts in other currencies. See [local
@@ -252,10 +312,10 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CustomerBankAccountAccountType
         {
-    
             /// <summary>`account_type` with a value of "savings"</summary>
             [EnumMember(Value = "savings")]
             Savings,
+
             /// <summary>`account_type` with a value of "checking"</summary>
             [EnumMember(Value = "checking")]
             Checking,
@@ -306,26 +366,26 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("links")]
         public CustomerBankAccountLinks Links { get; set; }
+
         /// <summary>
         /// Linked resources for a CustomerBankAccount.
         /// </summary>
         public class CustomerBankAccountLinks
         {
-                
-                /// <summary>
-                            /// ID of the [customer](#core-endpoints-customers) that owns this
+            /// <summary>
+            /// ID of the [customer](#core-endpoints-customers) that owns this
             /// bank account.
-                /// </summary>
-                [JsonProperty("customer")]
-                public string Customer { get; set; }
-                
-                /// <summary>
-                            /// ID of a [customer bank account
+            /// </summary>
+            [JsonProperty("customer")]
+            public string Customer { get; set; }
+
+            /// <summary>
+            /// ID of a [customer bank account
             /// token](#javascript-flow-customer-bank-account-tokens) to use in
             /// place of bank account parameters.
-                /// </summary>
-                [JsonProperty("customer_bank_account_token")]
-                public string CustomerBankAccountToken { get; set; }
+            /// </summary>
+            [JsonProperty("customer_bank_account_token")]
+            public string CustomerBankAccountToken { get; set; }
         }
 
         /// <summary>
@@ -344,14 +404,12 @@ namespace GoCardless.Services
         public string IdempotencyKey { get; set; }
     }
 
-        
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
     /// bank accounts.
     /// </summary>
     public class CustomerBankAccountListRequest
     {
-
         /// <summary>
         /// Cursor pointing to the start of the desired set.
         /// </summary>
@@ -411,17 +469,17 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("enabled")]
         public bool? Enabled { get; set; }
-            
+
         /// <summary>
         /// Get enabled or disabled customer bank accounts.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CustomerBankAccountEnabled
         {
-    
             /// <summary>`enabled` with a value of "true"</summary>
             [EnumMember(Value = "true")]
             True,
+
             /// <summary>`enabled` with a value of "false"</summary>
             [EnumMember(Value = "false")]
             False,
@@ -434,22 +492,17 @@ namespace GoCardless.Services
         public int? Limit { get; set; }
     }
 
-        
     /// <summary>
     /// Retrieves the details of an existing bank account.
     /// </summary>
-    public class CustomerBankAccountGetRequest
-    {
-    }
+    public class CustomerBankAccountGetRequest { }
 
-        
     /// <summary>
     /// Updates a customer bank account object. Only the metadata parameter is
     /// allowed.
     /// </summary>
     public class CustomerBankAccountUpdateRequest
     {
-
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
         /// names up to 50 characters and values up to 500 characters.
@@ -458,19 +511,16 @@ namespace GoCardless.Services
         public IDictionary<String, String> Metadata { get; set; }
     }
 
-        
     /// <summary>
     /// Immediately cancels all associated mandates and cancellable payments.
-    /// 
+    ///
     /// This will return a `disable_failed` error if the bank account has
     /// already been disabled.
-    /// 
+    ///
     /// A disabled bank account can be re-enabled by creating a new bank account
     /// resource with the same details.
     /// </summary>
-    public class CustomerBankAccountDisableRequest
-    {
-    }
+    public class CustomerBankAccountDisableRequest { }
 
     /// <summary>
     /// An API response for a request returning a single customer bank account.
@@ -494,8 +544,10 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("customer_bank_accounts")]
         public IReadOnlyList<CustomerBankAccount> CustomerBankAccounts { get; private set; }
+
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }}
+        public Meta Meta { get; private set; }
+    }
 }

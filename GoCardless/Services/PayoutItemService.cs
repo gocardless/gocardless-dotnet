@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,14 +21,14 @@ namespace GoCardless.Services
     /// we take any positive balance in your GoCardless account, and pay it out
     /// to your
     /// nominated bank account.
-    /// 
+    ///
     /// Other actions in your GoCardless account can also affect your balance.
     /// For example,
     /// if a customer charges back a payment, we'll deduct the payment's amount
     /// from your
     /// balance, but add any fees you paid for that payment back to your
     /// balance.
-    /// 
+    ///
     /// The Payout Items API allows you to view, on a per-payout basis, the
     /// credit and debit
     /// items that make up that payout's amount.  Payout items can only be
@@ -38,9 +36,8 @@ namespace GoCardless.Services
     /// created in the last 6 months. Requests for older payouts will return an
     /// HTTP status
     /// <code>410 Gone</code>.
-    /// 
+    ///
     /// </summary>
-
     public class PayoutItemService
     {
         private readonly GoCardlessClient _goCardlessClient;
@@ -57,30 +54,43 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
         /// items in the payout.
-        /// 
+        ///
         /// <strong>This endpoint only serves requests for payouts created in
         /// the last 6 months. Requests for older payouts will return an HTTP
         /// status <code>410 Gone</code>.</strong>
-        /// 
+        ///
         /// </summary>
         /// <param name="request">An optional `PayoutItemListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of payout item resources</returns>
-        public Task<PayoutItemListResponse> ListAsync(PayoutItemListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public Task<PayoutItemListResponse> ListAsync(
+            PayoutItemListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new PayoutItemListRequest();
 
-            var urlParams = new List<KeyValuePair<string, object>>
-            {};
+            var urlParams = new List<KeyValuePair<string, object>> { };
 
-            return _goCardlessClient.ExecuteAsync<PayoutItemListResponse>("GET", "/payout_items", urlParams, request, null, null, customiseRequestMessage);
+            return _goCardlessClient.ExecuteAsync<PayoutItemListResponse>(
+                "GET",
+                "/payout_items",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
         }
 
         /// <summary>
         /// Get a lazily enumerated list of payout items.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<PayoutItem> All(PayoutItemListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<PayoutItem> All(
+            PayoutItemListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new PayoutItemListRequest();
 
@@ -102,7 +112,10 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of payout items.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        public IEnumerable<Task<IReadOnlyList<PayoutItem>>> AllAsync(PayoutItemListRequest request = null, RequestSettings customiseRequestMessage = null)
+        public IEnumerable<Task<IReadOnlyList<PayoutItem>>> AllAsync(
+            PayoutItemListRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
         {
             request = request ?? new PayoutItemListRequest();
 
@@ -115,19 +128,17 @@ namespace GoCardless.Services
         }
     }
 
-        
     /// <summary>
     /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of items
     /// in the payout.
-    /// 
+    ///
     /// <strong>This endpoint only serves requests for payouts created in the
     /// last 6 months. Requests for older payouts will return an HTTP status
     /// <code>410 Gone</code>.</strong>
-    /// 
+    ///
     /// </summary>
     public class PayoutItemListRequest
     {
-
         /// <summary>
         /// Cursor pointing to the start of the desired set.
         /// </summary>
@@ -146,7 +157,7 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("include_2020_tax_cutover")]
         public PayoutItemInclude2020TaxCutover? Include2020TaxCutover { get; set; }
-            
+
         /// <summary>
         /// Boolean value indicating whether the API should return tax data for
         /// the cutover period of April to August 2020. Defaults to false.
@@ -154,10 +165,10 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PayoutItemInclude2020TaxCutover
         {
-    
             /// <summary>`include2020_tax_cutover` with a value of "true"</summary>
             [EnumMember(Value = "true")]
             True,
+
             /// <summary>`include2020_tax_cutover` with a value of "false"</summary>
             [EnumMember(Value = "false")]
             False,
@@ -198,8 +209,10 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("payout_items")]
         public IReadOnlyList<PayoutItem> PayoutItems { get; private set; }
+
         /// <summary>
         /// Response metadata (e.g. pagination cursors)
         /// </summary>
-        public Meta Meta { get; private set; }}
+        public Meta Meta { get; private set; }
+    }
 }

@@ -22,7 +22,6 @@ using JsonSerializerSettings = GoCardless.Internals.JsonSerializerSettings;
 
 namespace GoCardless
 {
-
     /// <summary>
     ///Entry point into the client.
     /// </summary>
@@ -52,7 +51,13 @@ namespace GoCardless
         /// </summary>
         public bool _testMode = false;
 
-        private GoCardlessClient(string accessToken, string baseUrl, HttpClient httpClient, bool errorOnIdempotencyConflict, RequestSigningSettings requestSigningSettings = default(RequestSigningSettings))
+        private GoCardlessClient(
+            string accessToken,
+            string baseUrl,
+            HttpClient httpClient,
+            bool errorOnIdempotencyConflict,
+            RequestSigningSettings requestSigningSettings = default(RequestSigningSettings)
+        )
         {
             this._httpClient = httpClient ?? DefaultHttpClient;
             // Disable ExpectContinue when using the Default Http Client
@@ -65,7 +70,6 @@ namespace GoCardless
             _errorOnIdempotencyConflict = errorOnIdempotencyConflict;
             _requestSigningSettings = requestSigningSettings;
         }
-
 
         /// <summary>
         ///Available environments for this client.
@@ -80,8 +84,7 @@ namespace GoCardless
             /// <summary>
             ///Sandbox environment (base URL https://api-sandbox.gocardless.com).
             /// </summary>
-            SANDBOX
-
+            SANDBOX,
         }
 
         /// <summary>
@@ -100,7 +103,11 @@ namespace GoCardless
         ///@param accessToken the access token
         ///@param environment the environment
         /// </summary>
-        public static GoCardlessClient Create(string accessToken, Environment environment, HttpClient httpClient = null)
+        public static GoCardlessClient Create(
+            string accessToken,
+            Environment environment,
+            HttpClient httpClient = null
+        )
         {
             return Create(accessToken, GetBaseUrl(environment), httpClient, false);
         }
@@ -111,7 +118,11 @@ namespace GoCardless
         ///@param accessToken the access token
         ///@param baseUrl the base URL of the API
         /// </summary>
-        public static GoCardlessClient Create(string accessToken, string baseUrl, HttpClient client = null)
+        public static GoCardlessClient Create(
+            string accessToken,
+            string baseUrl,
+            HttpClient client = null
+        )
         {
             return Create(accessToken, baseUrl, client, false);
         }
@@ -123,7 +134,12 @@ namespace GoCardless
         ///@param baseUrl the base URL of the API
         ///@param errorOnIdempotencyConflict the behaviour for Idemptency Key conflicts
         /// </summary>
-        public static GoCardlessClient Create(string accessToken, string baseUrl, HttpClient client = null, bool errorOnIdempotencyConflict = false)
+        public static GoCardlessClient Create(
+            string accessToken,
+            string baseUrl,
+            HttpClient client = null,
+            bool errorOnIdempotencyConflict = false
+        )
         {
             return new GoCardlessClient(accessToken, baseUrl, client, errorOnIdempotencyConflict);
         }
@@ -147,7 +163,13 @@ namespace GoCardless
         )
         {
             string url = baseUrl ?? GetBaseUrl(environment);
-            return new GoCardlessClient(accessToken, url, client, errorOnIdempotencyConflict, requestSigningSettings);
+            return new GoCardlessClient(
+                accessToken,
+                url,
+                client,
+                errorOnIdempotencyConflict,
+                requestSigningSettings
+            );
         }
 
         private static string GetBaseUrl(Environment env)
@@ -162,13 +184,21 @@ namespace GoCardless
             throw new ArgumentException("Unknown environment:" + env);
         }
 
-        internal async Task<T> ExecuteAsync<T>(string method, string path, List<KeyValuePair<string, object>> urlParams,
-            object requestParams, Func<string, Task<T>> fetchById, string payloadKey,
-            RequestSettings requestSettings)
+        internal async Task<T> ExecuteAsync<T>(
+            string method,
+            string path,
+            List<KeyValuePair<string, object>> urlParams,
+            object requestParams,
+            Func<string, Task<T>> fetchById,
+            string payloadKey,
+            RequestSettings requestSettings
+        )
             where T : ApiResponse
         {
-            var numberOfRetries = requestSettings?.NumberOfRetriesOnTimeout ?? DefaultNumberOfRetriesOnTimeout;
-            var waitBetweenRetries = requestSettings?.WaitBetweenRetries ?? DefaultWaitBetweenRetries;
+            var numberOfRetries =
+                requestSettings?.NumberOfRetriesOnTimeout ?? DefaultNumberOfRetriesOnTimeout;
+            var waitBetweenRetries =
+                requestSettings?.WaitBetweenRetries ?? DefaultWaitBetweenRetries;
 
             var cancellationTokenSource = new CancellationTokenSource();
 
@@ -176,13 +206,21 @@ namespace GoCardless
             {
                 try
                 {
-                    return await ExecuteAsyncInner<T>(method, path, urlParams, requestParams, payloadKey,
-                            requestSettings, cancellationTokenSource)
+                    return await ExecuteAsyncInner<T>(
+                            method,
+                            path,
+                            urlParams,
+                            requestParams,
+                            payloadKey,
+                            requestSettings,
+                            cancellationTokenSource
+                        )
                         .ConfigureAwait(false);
                 }
                 catch (InvalidStateException ex)
-                    when (ex.Errors.FirstOrDefault()?.Reason == "idempotent_creation_conflict" &&
-                          ex.Errors.First().Links?.ContainsKey("conflicting_resource_id") == true)
+                    when (ex.Errors.FirstOrDefault()?.Reason == "idempotent_creation_conflict"
+                        && ex.Errors.First().Links?.ContainsKey("conflicting_resource_id") == true
+                    )
                 {
                     if (_errorOnIdempotencyConflict)
                     {
@@ -190,8 +228,7 @@ namespace GoCardless
                     }
 
                     var conflictingResourceId = ex.Errors.First().Links.FirstOrDefault().Value;
-                    return await fetchById(conflictingResourceId)
-                        .ConfigureAwait(false);
+                    return await fetchById(conflictingResourceId).ConfigureAwait(false);
                 }
             };
             for (var i = 0; i < numberOfRetries; i++)
@@ -216,22 +253,42 @@ namespace GoCardless
                 }
             }
             return await execute().ConfigureAwait(false);
-
         }
 
-        private async Task<T> ExecuteAsyncInner<T>(string method, string path, List<KeyValuePair<string, object>> urlParams, object requestParams,
-            string payloadKey, RequestSettings requestSettings, CancellationTokenSource cancellationTokenSource) where T : ApiResponse
+        private async Task<T> ExecuteAsyncInner<T>(
+            string method,
+            string path,
+            List<KeyValuePair<string, object>> urlParams,
+            object requestParams,
+            string payloadKey,
+            RequestSettings requestSettings,
+            CancellationTokenSource cancellationTokenSource
+        )
+            where T : ApiResponse
         {
-            var requestMessage = BuildHttpRequestMessage<T>(method, path, urlParams, requestParams, payloadKey, requestSettings);
+            var requestMessage = BuildHttpRequestMessage<T>(
+                method,
+                path,
+                urlParams,
+                requestParams,
+                payloadKey,
+                requestSettings
+            );
 
-
-            var responseMessage = await _httpClient.SendAsync(requestMessage, cancellationTokenSource.Token).ConfigureAwait(false);
+            var responseMessage = await _httpClient
+                .SendAsync(requestMessage, cancellationTokenSource.Token)
+                .ConfigureAwait(false);
             try
             {
                 if (responseMessage.IsSuccessStatusCode)
                 {
-                    var json = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var result = JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings());
+                    var json = await responseMessage
+                        .Content.ReadAsStringAsync()
+                        .ConfigureAwait(false);
+                    var result = JsonConvert.DeserializeObject<T>(
+                        json,
+                        new JsonSerializerSettings()
+                    );
 
                     if (result == null)
                     {
@@ -243,8 +300,13 @@ namespace GoCardless
                 }
                 else
                 {
-                    var json = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    var result = JsonConvert.DeserializeObject<ApiErrorResponse>(json, new JsonSerializerSettings());
+                    var json = await responseMessage
+                        .Content.ReadAsStringAsync()
+                        .ConfigureAwait(false);
+                    var result = JsonConvert.DeserializeObject<ApiErrorResponse>(
+                        json,
+                        new JsonSerializerSettings()
+                    );
                     result.ResponseMessage = responseMessage;
 
                     switch (result.Error.Code)
@@ -264,20 +326,31 @@ namespace GoCardless
             }
             catch (JsonException)
             {
-                throw new ApiException(new ApiErrorResponse()
-                {
-                    ResponseMessage = responseMessage,
-                    Error = new ApiError()
+                throw new ApiException(
+                    new ApiErrorResponse()
                     {
-                        Code = (int)responseMessage.StatusCode,
-                        Type = ApiErrorType.GOCARDLESS,
-                        Message = "Something went wrong with this request. Please check the ResponseMessage property."
+                        ResponseMessage = responseMessage,
+                        Error = new ApiError()
+                        {
+                            Code = (int)responseMessage.StatusCode,
+                            Type = ApiErrorType.GOCARDLESS,
+                            Message =
+                                "Something went wrong with this request. Please check the ResponseMessage property.",
+                        },
                     }
-                });
+                );
             }
         }
 
-        private HttpRequestMessage BuildHttpRequestMessage<T>(string method, string path, List<KeyValuePair<string, object>> urlParams, object requestParams, string payloadKey, RequestSettings requestSettings) where T : ApiResponse
+        private HttpRequestMessage BuildHttpRequestMessage<T>(
+            string method,
+            string path,
+            List<KeyValuePair<string, object>> urlParams,
+            object requestParams,
+            string payloadKey,
+            RequestSettings requestSettings
+        )
+            where T : ApiResponse
         {
             //insert url arguments into template
             foreach (var arg in urlParams)
@@ -291,7 +364,10 @@ namespace GoCardless
                 var requestArguments = Helpers.ExtractQueryStringValuesFromObject(requestParams);
                 if (requestArguments.Count > 0)
                 {
-                    var queryString = String.Join("&", requestArguments.Select(Helpers.QueryStringArgument));
+                    var queryString = String.Join(
+                        "&",
+                        requestArguments.Select(Helpers.QueryStringArgument)
+                    );
                     path += "?" + queryString;
                 }
             }
@@ -304,14 +380,20 @@ namespace GoCardless
 
 #if (NETSTANDARD || NET)
             OSRunningOn = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
-            runtimeFrameworkInformation = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
+            runtimeFrameworkInformation = System
+                .Runtime
+                .InteropServices
+                .RuntimeInformation
+                .FrameworkDescription;
 #endif
 #if NETFRAMEWORK
             OSRunningOn = System.Environment.OSVersion.VersionString;
-            runtimeFrameworkInformation = System.Runtime.InteropServices.RuntimeEnvironment.GetSystemVersion();
+            runtimeFrameworkInformation =
+                System.Runtime.InteropServices.RuntimeEnvironment.GetSystemVersion();
 #endif
 
-            var userAgentInformation = $" gocardless-dotnet/9.2.2 {runtimeFrameworkInformation} {Helpers.CleanupOSDescriptionString(OSRunningOn)}";
+            var userAgentInformation =
+                $" gocardless-dotnet/9.2.2 {runtimeFrameworkInformation} {Helpers.CleanupOSDescriptionString(OSRunningOn)}";
 
             requestMessage.Headers.Add("User-Agent", userAgentInformation);
             requestMessage.Headers.Add("GoCardless-Version", "2015-07-06");
@@ -327,7 +409,7 @@ namespace GoCardless
                 var settings = new Newtonsoft.Json.JsonSerializerSettings
                 {
                     Formatting = Formatting.Indented,
-                    NullValueHandling = NullValueHandling.Ignore
+                    NullValueHandling = NullValueHandling.Ignore,
                 };
                 var serializer = JsonSerializer.Create(settings);
 
@@ -341,7 +423,11 @@ namespace GoCardless
                         jo[payloadKey] = JToken.Parse(sb.ToString());
                     }
                     content = jo.ToString(Formatting.Indented);
-                    requestMessage.Content = new StringContent(content, Encoding.UTF8, "application/json");
+                    requestMessage.Content = new StringContent(
+                        content,
+                        Encoding.UTF8,
+                        "application/json"
+                    );
                 }
             }
 
@@ -349,8 +435,12 @@ namespace GoCardless
 
             if (hasIdempotencyKey != null)
             {
-                hasIdempotencyKey.IdempotencyKey = hasIdempotencyKey.IdempotencyKey ?? Guid.NewGuid().ToString();
-                requestMessage.Headers.TryAddWithoutValidation("Idempotency-Key", hasIdempotencyKey.IdempotencyKey);
+                hasIdempotencyKey.IdempotencyKey =
+                    hasIdempotencyKey.IdempotencyKey ?? Guid.NewGuid().ToString();
+                requestMessage.Headers.TryAddWithoutValidation(
+                    "Idempotency-Key",
+                    hasIdempotencyKey.IdempotencyKey
+                );
             }
 
             if (requestSettings != null)
@@ -368,7 +458,12 @@ namespace GoCardless
 
             if (!_requestSigningSettings.Equals(default(RequestSigningSettings)))
             {
-                RequestSigningHelper.SignRequest(requestMessage, _requestSigningSettings, content, _testMode);
+                RequestSigningHelper.SignRequest(
+                    requestMessage,
+                    _requestSigningSettings,
+                    content,
+                    _testMode
+                );
             }
             requestSettings?.CustomiseRequestMessage?.Invoke(requestMessage);
             return requestMessage;
@@ -385,21 +480,30 @@ namespace GoCardless
                 var typeInfo = value.GetType().GetTypeInfo();
                 if (typeInfo.IsArray)
                 {
-                    return String.Join(WebUtility.UrlEncode(","), ((IEnumerable)value).Cast<object>().Select(Stringify));
+                    return String.Join(
+                        WebUtility.UrlEncode(","),
+                        ((IEnumerable)value).Cast<object>().Select(Stringify)
+                    );
                 }
                 if (typeInfo.IsEnum)
                 {
                     var memInfo = typeInfo.GetMember(value.ToString());
-                    var attr = memInfo[0].GetCustomAttributes(false).OfType<EnumMemberAttribute>().FirstOrDefault();
+                    var attr = memInfo[0]
+                        .GetCustomAttributes(false)
+                        .OfType<EnumMemberAttribute>()
+                        .FirstOrDefault();
                     return attr?.Value;
                 }
 
                 return WebUtility.UrlEncode(value.ToString());
             }
 
-            internal static List<KeyValuePair<string, object>> ExtractQueryStringValuesFromObject(object obj)
+            internal static List<KeyValuePair<string, object>> ExtractQueryStringValuesFromObject(
+                object obj
+            )
             {
-                if (obj == null) return Enumerable.Empty<KeyValuePair<string, object>>().ToList();
+                if (obj == null)
+                    return Enumerable.Empty<KeyValuePair<string, object>>().ToList();
 
                 var args = new List<KeyValuePair<string, object>>();
                 var propertyInfos = obj.GetType().GetTypeInfo().GetProperties();
@@ -413,13 +517,18 @@ namespace GoCardless
                         if (att != null)
                         {
                             var ti = propertyInfo.PropertyType.GetTypeInfo();
-                            var isParameterObject = !ti.IsArray && !ti.IsEnum && ti.Namespace.StartsWith("GoCardless");
+                            var isParameterObject =
+                                !ti.IsArray && !ti.IsEnum && ti.Namespace.StartsWith("GoCardless");
                             if (isParameterObject)
                             {
                                 foreach (var inner in ExtractQueryStringValuesFromObject(value))
                                 {
-                                    args.Add(new KeyValuePair<string, object>($"{att.PropertyName}[{inner.Key}]",
-                                        inner.Value));
+                                    args.Add(
+                                        new KeyValuePair<string, object>(
+                                            $"{att.PropertyName}[{inner.Key}]",
+                                            inner.Value
+                                        )
+                                    );
                                 }
                             }
                             else

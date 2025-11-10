@@ -1,41 +1,40 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using GoCardless.Internals;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using GoCardless.Internals;
 
 namespace GoCardless.Resources
 {
-
     /// <summary>
     /// Represents a block resource.
     ///
     /// Blocks are created to prevent certain customer details from being used
     /// when creating
     /// mandates.
-    /// 
+    ///
     /// The details used to create blocks can be exact matches, like a bank
     /// account or an email,
     /// or a more generic match such as an email domain or bank name. Please be
     /// careful when creating
     /// blocks for more generic matches as this may block legitimate payers from
     /// using your service.
-    /// 
+    ///
     /// New block types may be added over time.
-    /// 
+    ///
     /// A block is in essence a simple rule that is used to match against
     /// details in a newly
     /// created mandate. If there is a successful match then the mandate is
     /// transitioned to a
     /// "blocked" state.
-    /// 
+    ///
     /// Please note:
-    /// 
+    ///
     ///   - Payments and subscriptions cannot be created against a mandate in
     /// blocked state.
     ///   - A mandate can never be transitioned out of the blocked state.
-    /// 
+    ///
     /// The one exception to this is when blocking a 'bank_name'. This block
     /// will prevent bank
     /// accounts from being created for banks that match the given name. To
@@ -44,7 +43,7 @@ namespace GoCardless.Resources
     /// this block. Please
     /// be aware that we cannot always match a bank account to a given bank
     /// name.
-    /// 
+    ///
     /// <p class="notice">
     ///   This API is currently only available for GoCardless Protect+
     /// integrators - please <a href="mailto:help@gocardless.com">get in
@@ -127,13 +126,14 @@ namespace GoCardless.Resources
         [JsonProperty("updated_at")]
         public string UpdatedAt { get; set; }
     }
-    
+
     /// <summary>
     /// Type of entity we will seek to match against when blocking the mandate. This
     /// can currently be one of 'email', 'email_domain', 'bank_account', or 'bank_name'.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BlockBlockType {
+    public enum BlockBlockType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -141,12 +141,15 @@ namespace GoCardless.Resources
         /// <summary>`block_type` with a value of "email"</summary>
         [EnumMember(Value = "email")]
         Email,
+
         /// <summary>`block_type` with a value of "email_domain"</summary>
         [EnumMember(Value = "email_domain")]
         EmailDomain,
+
         /// <summary>`block_type` with a value of "bank_account"</summary>
         [EnumMember(Value = "bank_account")]
         BankAccount,
+
         /// <summary>`block_type` with a value of "bank_name"</summary>
         [EnumMember(Value = "bank_name")]
         BankName,
@@ -158,7 +161,8 @@ namespace GoCardless.Resources
     /// above then 'other' can be selected but you must provide a reason description.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BlockReasonType {
+    public enum BlockReasonType
+    {
         /// <summary>Unknown status</summary>
         [EnumMember(Value = "unknown")]
         Unknown = 0,
@@ -166,15 +170,17 @@ namespace GoCardless.Resources
         /// <summary>`reason_type` with a value of "identity_fraud"</summary>
         [EnumMember(Value = "identity_fraud")]
         IdentityFraud,
+
         /// <summary>`reason_type` with a value of "no_intent_to_pay"</summary>
         [EnumMember(Value = "no_intent_to_pay")]
         NoIntentToPay,
+
         /// <summary>`reason_type` with a value of "unfair_chargeback"</summary>
         [EnumMember(Value = "unfair_chargeback")]
         UnfairChargeback,
+
         /// <summary>`reason_type` with a value of "other"</summary>
         [EnumMember(Value = "other")]
         Other,
     }
-
 }
