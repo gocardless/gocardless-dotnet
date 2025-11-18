@@ -195,7 +195,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request template mandate request constraint resource.
+    /// Represents a billing request template mandate request constraint
+    /// resource.
     ///
     /// Constraints that will apply to the mandate_request. (Optional)
     /// Specifically required for PayTo and VRP.
@@ -251,6 +252,9 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
+    /// Represents a billing request template mandate request constraint
+    /// periodic limit resource.
+    ///
     /// List of periodic limits and constraints which apply to them
     /// </summary>
     public class BillingRequestTemplateMandateRequestConstraintPeriodicLimit

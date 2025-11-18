@@ -78,8 +78,9 @@ namespace GoCardless.Services
         private readonly GoCardlessClient _goCardlessClient;
 
         /// <summary>
-        /// Constructor. Users of this library should not call this. An instance of this
-        /// class can be accessed through an initialised GoCardlessClient.
+        /// Constructor. Users of this library should not call this.
+        /// An instance of this class can be accessed through an initialised
+        /// GoCardlessClient.
         /// </summary>
         public SubscriptionService(GoCardlessClient goCardlessClient)
         {
@@ -555,7 +556,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// Name of the month on which to charge a customer. Must be lowercase.
@@ -725,7 +726,7 @@ namespace GoCardless.Services
             public DateTimeOffset? LessThan { get; set; }
 
             /// <summary>
-            ///Limit to records created on or before the specified date-time.
+            /// Limit to records created on or before the specified date-time.
             /// </summary>
             [JsonProperty("lte")]
             public DateTimeOffset? LessThanOrEqual { get; set; }
@@ -763,7 +764,7 @@ namespace GoCardless.Services
         /// Omit entirely to include subscriptions in all states.
         /// </summary>
         [JsonProperty("status")]
-        public string[] Status { get; set; }
+        public string Status { get; set; }
 
         /// <summary>
         /// One of:
@@ -868,7 +869,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// Optional name for the subscription. This will be set as the
@@ -953,7 +954,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// The number of cycles to pause a subscription for. A cycle is one
@@ -996,7 +997,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
     }
 
     /// <summary>
@@ -1014,7 +1015,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
     }
 
     /// <summary>

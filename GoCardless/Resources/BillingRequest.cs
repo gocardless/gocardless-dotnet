@@ -10,10 +10,10 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a billing request resource.
     ///
-    ///  Billing Requests help create resources that require input or action
-    /// from a customer. An example of required input might be additional
-    /// customer billing details, while an action would be asking a customer to
-    /// authorise a payment using their mobile banking app.
+    /// Billing Requests help create resources that require input or action from
+    /// a customer. An example of required input might be additional customer
+    /// billing details, while an action would be asking a customer to authorise
+    /// a payment using their mobile banking app.
     ///
     /// See [Billing Requests:
     /// Overview](https://developer.gocardless.com/getting-started/billing-requests/overview/)
@@ -106,9 +106,6 @@ namespace GoCardless.Resources
         [JsonProperty("purpose_code")]
         public BillingRequestPurposeCode? PurposeCode { get; set; }
 
-        /// <summary>
-        ///
-        /// </summary>
         [JsonProperty("resources")]
         public BillingRequestResources Resources { get; set; }
 
@@ -136,6 +133,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
+    /// Represents a billing request action resource.
+    ///
     /// List of actions that can be performed before this billing request can be
     /// fulfilled.
     /// </summary>
@@ -299,24 +298,19 @@ namespace GoCardless.Resources
         [JsonProperty("default_country_code")]
         public string DefaultCountryCode { get; set; }
 
-        /// <summary>
-        ///
-        /// </summary>
         [JsonProperty("incomplete_fields")]
         public BillingRequestActionCollectCustomerDetailsIncompleteFields IncompleteFields { get; set; }
     }
 
+    /// <summary>
+    /// Represents a billing request action collect customer details incomplete
+    /// field resource.
+    /// </summary>
     public class BillingRequestActionCollectCustomerDetailsIncompleteFields
     {
-        /// <summary>
-        ///
-        /// </summary>
         [JsonProperty("customer")]
         public List<string> Customer { get; set; }
 
-        /// <summary>
-        ///
-        /// </summary>
         [JsonProperty("customer_billing_detail")]
         public List<string> CustomerBillingDetail { get; set; }
     }
@@ -516,6 +510,9 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
+    /// Represents a billing request instalment schedule request instalments
+    /// with date resource.
+    ///
     /// An explicit array of instalment payments, each specifying at least an
     /// `amount` and `charge_date`. See [create (with
     /// dates)](#instalment-schedules-create-with-dates)
@@ -549,14 +546,14 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request instalment schedule request instalments with schedule resource.
+    /// Represents a billing request instalment schedule request instalments
+    /// with schedule resource.
     ///
     /// Frequency of the payments you want to create, together with an array of
     /// payment
     /// amounts to be collected, with a specified start date for the first
     /// payment.
     /// See [create (with schedule)](#instalment-schedules-create-with-schedule)
-    ///
     /// </summary>
     public class BillingRequestInstalmentScheduleRequestInstalmentsWithSchedule
     {
@@ -975,6 +972,9 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
+    /// Represents a billing request mandate request constraint periodic limit
+    /// resource.
+    ///
     /// List of periodic limits and constraints which apply to them
     /// </summary>
     public class BillingRequestMandateRequestConstraintPeriodicLimit
@@ -1364,6 +1364,9 @@ namespace GoCardless.Resources
         Trade,
     }
 
+    /// <summary>
+    /// Represents a billing request resource resource.
+    /// </summary>
     public class BillingRequestResources
     {
         /// <summary>
@@ -1470,9 +1473,11 @@ namespace GoCardless.Resources
     public class BillingRequestResourcesCustomerBankAccount
     {
         /// <summary>
-        /// Name of the account holder, as known by the bank. This field will be
-        /// transliterated, upcased and truncated to 18 characters. This field
-        /// is required unless the request includes a [customer bank account
+        /// Name of the account holder, as known by the bank. The full name
+        /// provided when the customer is created is stored and is available via
+        /// the API, but is transliterated, upcased, and truncated to 18
+        /// characters in bank submissions. This field is required unless the
+        /// request includes a [customer bank account
         /// token](#javascript-flow-customer-bank-account-tokens).
         /// </summary>
         [JsonProperty("account_holder_name")]

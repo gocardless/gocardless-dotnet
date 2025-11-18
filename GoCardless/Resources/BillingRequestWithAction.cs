@@ -10,10 +10,10 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a billing request with action resource.
     ///
-    ///  Billing Requests help create resources that require input or action
-    /// from a customer. An example of required input might be additional
-    /// customer billing details, while an action would be asking a customer to
-    /// authorise a payment using their mobile banking app.
+    /// Billing Requests help create resources that require input or action from
+    /// a customer. An example of required input might be additional customer
+    /// billing details, while an action would be asking a customer to authorise
+    /// a payment using their mobile banking app.
     ///
     /// See [Billing Requests:
     /// Overview](https://developer.gocardless.com/getting-started/billing-requests/overview/)
@@ -203,10 +203,10 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a billing request with action billing request resource.
     ///
-    ///  Billing Requests help create resources that require input or action
-    /// from a customer. An example of required input might be additional
-    /// customer billing details, while an action would be asking a customer to
-    /// authorise a payment using their mobile banking app.
+    /// Billing Requests help create resources that require input or action from
+    /// a customer. An example of required input might be additional customer
+    /// billing details, while an action would be asking a customer to authorise
+    /// a payment using their mobile banking app.
     ///
     /// See [Billing Requests:
     /// Overview](https://developer.gocardless.com/getting-started/billing-requests/overview/)
@@ -299,9 +299,6 @@ namespace GoCardless.Resources
         [JsonProperty("purpose_code")]
         public BillingRequestWithActionBillingRequestsPurposeCode? PurposeCode { get; set; }
 
-        /// <summary>
-        ///
-        /// </summary>
         [JsonProperty("resources")]
         public BillingRequestWithActionBillingRequestsResources Resources { get; set; }
 
@@ -329,6 +326,9 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
+    /// Represents a billing request with action billing request action
+    /// resource.
+    ///
     /// List of actions that can be performed before this billing request can be
     /// fulfilled.
     /// </summary>
@@ -404,7 +404,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request with action billing request action bank authorisation resource.
+    /// Represents a billing request with action billing request action bank
+    /// authorisation resource.
     ///
     /// Describes the behaviour of bank authorisations, for the
     /// bank_authorisation action
@@ -478,7 +479,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request with action billing request action collect customer detail resource.
+    /// Represents a billing request with action billing request action collect
+    /// customer detail resource.
     ///
     /// Additional parameters to help complete the collect_customer_details
     /// action
@@ -492,24 +494,19 @@ namespace GoCardless.Resources
         [JsonProperty("default_country_code")]
         public string DefaultCountryCode { get; set; }
 
-        /// <summary>
-        ///
-        /// </summary>
         [JsonProperty("incomplete_fields")]
         public BillingRequestWithActionBillingRequestActionCollectCustomerDetailsIncompleteFields IncompleteFields { get; set; }
     }
 
+    /// <summary>
+    /// Represents a billing request with action billing request action collect
+    /// customer details incomplete field resource.
+    /// </summary>
     public class BillingRequestWithActionBillingRequestActionCollectCustomerDetailsIncompleteFields
     {
-        /// <summary>
-        ///
-        /// </summary>
         [JsonProperty("customer")]
         public List<string> Customer { get; set; }
 
-        /// <summary>
-        ///
-        /// </summary>
         [JsonProperty("customer_billing_detail")]
         public List<string> CustomerBillingDetail { get; set; }
     }
@@ -607,7 +604,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request with action billing requests instalment schedule request resource.
+    /// Represents a billing request with action billing requests instalment
+    /// schedule request resource.
     ///
     /// Request for an instalment schedule. Has to contain either
     /// `instalments_with_schedule` object or an array of
@@ -652,7 +650,8 @@ namespace GoCardless.Resources
         public BillingRequestWithActionBillingRequestsInstalmentScheduleRequestInstalmentsWithSchedule InstalmentsWithSchedule { get; set; }
 
         /// <summary>
-        /// Resources linked to this BillingRequestWithActionBillingRequestsInstalmentScheduleRequest.
+        /// Resources linked to this
+        /// BillingRequestWithActionBillingRequestsInstalmentScheduleRequest.
         /// </summary>
         [JsonProperty("links")]
         public BillingRequestWithActionBillingRequestsInstalmentScheduleRequestLinks Links { get; set; }
@@ -709,6 +708,9 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
+    /// Represents a billing request with action billing requests instalment
+    /// schedule request instalments with date resource.
+    ///
     /// An explicit array of instalment payments, each specifying at least an
     /// `amount` and `charge_date`. See [create (with
     /// dates)](#instalment-schedules-create-with-dates)
@@ -742,14 +744,14 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request with action billing requests instalment schedule request instalments with schedule resource.
+    /// Represents a billing request with action billing requests instalment
+    /// schedule request instalments with schedule resource.
     ///
     /// Frequency of the payments you want to create, together with an array of
     /// payment
     /// amounts to be collected, with a specified start date for the first
     /// payment.
     /// See [create (with schedule)](#instalment-schedules-create-with-schedule)
-    ///
     /// </summary>
     public class BillingRequestWithActionBillingRequestsInstalmentScheduleRequestInstalmentsWithSchedule
     {
@@ -814,7 +816,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Resources linked to this BillingRequestWithActionBillingRequestsInstalmentScheduleRequest
+    /// Resources linked to this
+    /// BillingRequestWithActionBillingRequestsInstalmentScheduleRequest
     /// </summary>
     public class BillingRequestWithActionBillingRequestsInstalmentScheduleRequestLinks
     {
@@ -935,7 +938,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request with action billing requests mandate request resource.
+    /// Represents a billing request with action billing requests mandate
+    /// request resource.
     ///
     /// Request for a mandate
     /// </summary>
@@ -1005,7 +1009,8 @@ namespace GoCardless.Resources
         public BillingRequestWithActionBillingRequestsMandateRequestFundsSettlement? FundsSettlement { get; set; }
 
         /// <summary>
-        /// Resources linked to this BillingRequestWithActionBillingRequestsMandateRequest.
+        /// Resources linked to this
+        /// BillingRequestWithActionBillingRequestsMandateRequest.
         /// </summary>
         [JsonProperty("links")]
         public BillingRequestWithActionBillingRequestsMandateRequestLinks Links { get; set; }
@@ -1112,7 +1117,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request with action billing requests mandate request constraint resource.
+    /// Represents a billing request with action billing requests mandate
+    /// request constraint resource.
     ///
     /// Constraints that will apply to the mandate_request. (Optional)
     /// Specifically required for PayTo and VRP.
@@ -1168,6 +1174,9 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
+    /// Represents a billing request with action billing requests mandate
+    /// request constraint periodic limit resource.
+    ///
     /// List of periodic limits and constraints which apply to them
     /// </summary>
     public class BillingRequestWithActionBillingRequestsMandateRequestConstraintPeriodicLimit
@@ -1294,7 +1303,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Resources linked to this BillingRequestWithActionBillingRequestsMandateRequest
+    /// Resources linked to this
+    /// BillingRequestWithActionBillingRequestsMandateRequest
     /// </summary>
     public class BillingRequestWithActionBillingRequestsMandateRequestLinks
     {
@@ -1355,7 +1365,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request with action billing requests payment request resource.
+    /// Represents a billing request with action billing requests payment
+    /// request resource.
     ///
     /// Request for a one-off strongly authorised payment
     /// </summary>
@@ -1408,7 +1419,8 @@ namespace GoCardless.Resources
         public BillingRequestWithActionBillingRequestsPaymentRequestFundsSettlement? FundsSettlement { get; set; }
 
         /// <summary>
-        /// Resources linked to this BillingRequestWithActionBillingRequestsPaymentRequest.
+        /// Resources linked to this
+        /// BillingRequestWithActionBillingRequestsPaymentRequest.
         /// </summary>
         [JsonProperty("links")]
         public BillingRequestWithActionBillingRequestsPaymentRequestLinks Links { get; set; }
@@ -1467,7 +1479,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Resources linked to this BillingRequestWithActionBillingRequestsPaymentRequest
+    /// Resources linked to this
+    /// BillingRequestWithActionBillingRequestsPaymentRequest
     /// </summary>
     public class BillingRequestWithActionBillingRequestsPaymentRequestLinks
     {
@@ -1557,6 +1570,10 @@ namespace GoCardless.Resources
         Trade,
     }
 
+    /// <summary>
+    /// Represents a billing request with action billing requests resource
+    /// resource.
+    /// </summary>
     public class BillingRequestWithActionBillingRequestsResources
     {
         /// <summary>
@@ -1579,7 +1596,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request with action billing requests resources customer resource.
+    /// Represents a billing request with action billing requests resources
+    /// customer resource.
     ///
     /// Embedded customer
     /// </summary>
@@ -1656,16 +1674,19 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request with action billing requests resources customer bank account resource.
+    /// Represents a billing request with action billing requests resources
+    /// customer bank account resource.
     ///
     /// Embedded customer bank account, only if a bank account is linked
     /// </summary>
     public class BillingRequestWithActionBillingRequestsResourcesCustomerBankAccount
     {
         /// <summary>
-        /// Name of the account holder, as known by the bank. This field will be
-        /// transliterated, upcased and truncated to 18 characters. This field
-        /// is required unless the request includes a [customer bank account
+        /// Name of the account holder, as known by the bank. The full name
+        /// provided when the customer is created is stored and is available via
+        /// the API, but is transliterated, upcased, and truncated to 18
+        /// characters in bank submissions. This field is required unless the
+        /// request includes a [customer bank account
         /// token](#javascript-flow-customer-bank-account-tokens).
         /// </summary>
         [JsonProperty("account_holder_name")]
@@ -1738,7 +1759,8 @@ namespace GoCardless.Resources
         public string Id { get; set; }
 
         /// <summary>
-        /// Resources linked to this BillingRequestWithActionBillingRequestsResourcesCustomerBankAccount.
+        /// Resources linked to this
+        /// BillingRequestWithActionBillingRequestsResourcesCustomerBankAccount.
         /// </summary>
         [JsonProperty("links")]
         public BillingRequestWithActionBillingRequestsResourcesCustomerBankAccountLinks Links { get; set; }
@@ -1773,7 +1795,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Resources linked to this BillingRequestWithActionBillingRequestsResourcesCustomerBankAccount
+    /// Resources linked to this
+    /// BillingRequestWithActionBillingRequestsResourcesCustomerBankAccount
     /// </summary>
     public class BillingRequestWithActionBillingRequestsResourcesCustomerBankAccountLinks
     {
@@ -1786,7 +1809,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request with action billing requests resources customer billing detail resource.
+    /// Represents a billing request with action billing requests resources
+    /// customer billing detail resource.
     ///
     /// Embedded customer billing detail
     /// </summary>
@@ -1927,7 +1951,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request with action billing requests subscription request resource.
+    /// Represents a billing request with action billing requests subscription
+    /// request resource.
     ///
     /// Request for a subscription
     /// </summary>
@@ -1986,7 +2011,8 @@ namespace GoCardless.Resources
         public BillingRequestWithActionBillingRequestsSubscriptionRequestIntervalUnit? IntervalUnit { get; set; }
 
         /// <summary>
-        /// Resources linked to this BillingRequestWithActionBillingRequestsSubscriptionRequest.
+        /// Resources linked to this
+        /// BillingRequestWithActionBillingRequestsSubscriptionRequest.
         /// </summary>
         [JsonProperty("links")]
         public BillingRequestWithActionBillingRequestsSubscriptionRequestLinks Links { get; set; }
@@ -2074,7 +2100,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Resources linked to this BillingRequestWithActionBillingRequestsSubscriptionRequest
+    /// Resources linked to this
+    /// BillingRequestWithActionBillingRequestsSubscriptionRequest
     /// </summary>
     public class BillingRequestWithActionBillingRequestsSubscriptionRequestLinks
     {

@@ -24,8 +24,9 @@ namespace GoCardless.Services
         private readonly GoCardlessClient _goCardlessClient;
 
         /// <summary>
-        /// Constructor. Users of this library should not call this. An instance of this
-        /// class can be accessed through an initialised GoCardlessClient.
+        /// Constructor. Users of this library should not call this.
+        /// An instance of this class can be accessed through an initialised
+        /// GoCardlessClient.
         /// </summary>
         public SchemeIdentifierService(GoCardlessClient goCardlessClient)
         {

@@ -62,8 +62,9 @@ namespace GoCardless.Services
         private readonly GoCardlessClient _goCardlessClient;
 
         /// <summary>
-        /// Constructor. Users of this library should not call this. An instance of this
-        /// class can be accessed through an initialised GoCardlessClient.
+        /// Constructor. Users of this library should not call this.
+        /// An instance of this class can be accessed through an initialised
+        /// GoCardlessClient.
         /// </summary>
         public MandateImportService(GoCardlessClient goCardlessClient)
         {
@@ -230,7 +231,7 @@ namespace GoCardless.Services
     public class MandateImportCreateRequest : IHasIdempotencyKey
     {
         /// <summary>
-        /// Related resources
+        /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
         public MandateImportLinks Links { get; set; }

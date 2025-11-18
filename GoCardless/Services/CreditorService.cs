@@ -27,8 +27,9 @@ namespace GoCardless.Services
         private readonly GoCardlessClient _goCardlessClient;
 
         /// <summary>
-        /// Constructor. Users of this library should not call this. An instance of this
-        /// class can be accessed through an initialised GoCardlessClient.
+        /// Constructor. Users of this library should not call this.
+        /// An instance of this class can be accessed through an initialised
+        /// GoCardlessClient.
         /// </summary>
         public CreditorService(GoCardlessClient goCardlessClient)
         {
@@ -264,7 +265,7 @@ namespace GoCardless.Services
         /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
-        public IDictionary<String, String> Links { get; set; }
+        public IDictionary<string, string> Links { get; set; }
 
         /// <summary>
         /// The creditor's trading name.
@@ -329,7 +330,7 @@ namespace GoCardless.Services
             public DateTimeOffset? LessThan { get; set; }
 
             /// <summary>
-            ///Limit to records created on or before the specified date-time.
+            /// Limit to records created on or before the specified date-time.
             /// </summary>
             [JsonProperty("lte")]
             public DateTimeOffset? LessThanOrEqual { get; set; }

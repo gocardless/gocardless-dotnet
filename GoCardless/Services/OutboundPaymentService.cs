@@ -32,8 +32,9 @@ namespace GoCardless.Services
         private readonly GoCardlessClient _goCardlessClient;
 
         /// <summary>
-        /// Constructor. Users of this library should not call this. An instance of this
-        /// class can be accessed through an initialised GoCardlessClient.
+        /// Constructor. Users of this library should not call this.
+        /// An instance of this class can be accessed through an initialised
+        /// GoCardlessClient.
         /// </summary>
         public OutboundPaymentService(GoCardlessClient goCardlessClient)
         {
@@ -340,6 +341,14 @@ namespace GoCardless.Services
         public class OutboundPaymentLinks
         {
             /// <summary>
+            /// ID of the app that created the outbound payment.
+            /// <br/>_Note_: this property will only be present if the payment
+            /// was created through an app.
+            /// </summary>
+            [JsonProperty("app")]
+            public string App { get; set; }
+
+            /// <summary>
             /// ID of the creditor who sends the outbound payment.
             /// </summary>
             [JsonProperty("creditor")]
@@ -358,7 +367,7 @@ namespace GoCardless.Services
         /// key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// An optional reference that will appear on your customer's bank
@@ -449,7 +458,7 @@ namespace GoCardless.Services
         /// key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// An optional reference that will appear on your customer's bank
@@ -496,7 +505,7 @@ namespace GoCardless.Services
         /// key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
     }
 
     /// <summary>
@@ -639,7 +648,7 @@ namespace GoCardless.Services
         /// key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
     }
 
     /// <summary>

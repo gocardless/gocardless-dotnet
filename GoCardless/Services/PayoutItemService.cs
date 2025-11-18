@@ -43,8 +43,9 @@ namespace GoCardless.Services
         private readonly GoCardlessClient _goCardlessClient;
 
         /// <summary>
-        /// Constructor. Users of this library should not call this. An instance of this
-        /// class can be accessed through an initialised GoCardlessClient.
+        /// Constructor. Users of this library should not call this.
+        /// An instance of this class can be accessed through an initialised
+        /// GoCardlessClient.
         /// </summary>
         public PayoutItemService(GoCardlessClient goCardlessClient)
         {
@@ -165,11 +166,11 @@ namespace GoCardless.Services
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PayoutItemInclude2020TaxCutover
         {
-            /// <summary>`include2020_tax_cutover` with a value of "true"</summary>
+            /// <summary>`include_2020_tax_cutover` with a value of "true"</summary>
             [EnumMember(Value = "true")]
             True,
 
-            /// <summary>`include2020_tax_cutover` with a value of "false"</summary>
+            /// <summary>`include_2020_tax_cutover` with a value of "false"</summary>
             [EnumMember(Value = "false")]
             False,
         }

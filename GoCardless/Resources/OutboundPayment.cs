@@ -268,7 +268,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a outbound payment verifications recipient bank account holder verification resource.
+    /// Represents a outbound payment verifications recipient bank account
+    /// holder verification resource.
     ///
     /// Checks if the recipient owns the provided bank account
     /// </summary>

@@ -72,9 +72,6 @@ namespace GoCardless.Resources
         [JsonProperty("deducted_fees")]
         public int? DeductedFees { get; set; }
 
-        /// <summary>
-        ///
-        /// </summary>
         [JsonProperty("fx")]
         public PayoutFx Fx { get; set; }
 
@@ -181,6 +178,9 @@ namespace GoCardless.Resources
         USD,
     }
 
+    /// <summary>
+    /// Represents a payout fx resource.
+    /// </summary>
     public class PayoutFx
     {
         /// <summary>

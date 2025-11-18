@@ -35,8 +35,9 @@ namespace GoCardless.Services
         private readonly GoCardlessClient _goCardlessClient;
 
         /// <summary>
-        /// Constructor. Users of this library should not call this. An instance of this
-        /// class can be accessed through an initialised GoCardlessClient.
+        /// Constructor. Users of this library should not call this.
+        /// An instance of this class can be accessed through an initialised
+        /// GoCardlessClient.
         /// </summary>
         public BillingRequestTemplateService(GoCardlessClient goCardlessClient)
         {
@@ -452,7 +453,7 @@ namespace GoCardless.Services
         /// with key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("mandate_request_metadata")]
-        public IDictionary<String, String> MandateRequestMetadata { get; set; }
+        public IDictionary<string, string> MandateRequestMetadata { get; set; }
 
         /// <summary>
         /// A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs",
@@ -550,7 +551,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// Name for the template. Provides a friendly human name for the
@@ -589,7 +590,7 @@ namespace GoCardless.Services
         /// with key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("payment_request_metadata")]
-        public IDictionary<String, String> PaymentRequestMetadata { get; set; }
+        public IDictionary<string, string> PaymentRequestMetadata { get; set; }
 
         /// <summary>
         /// (Optional) A scheme used for Open Banking payments. Currently
@@ -803,7 +804,7 @@ namespace GoCardless.Services
         /// with key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("mandate_request_metadata")]
-        public IDictionary<String, String> MandateRequestMetadata { get; set; }
+        public IDictionary<string, string> MandateRequestMetadata { get; set; }
 
         /// <summary>
         /// A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs",
@@ -901,7 +902,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// Name for the template. Provides a friendly human name for the
@@ -940,7 +941,7 @@ namespace GoCardless.Services
         /// with key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("payment_request_metadata")]
-        public IDictionary<String, String> PaymentRequestMetadata { get; set; }
+        public IDictionary<string, string> PaymentRequestMetadata { get; set; }
 
         /// <summary>
         /// (Optional) A scheme used for Open Banking payments. Currently

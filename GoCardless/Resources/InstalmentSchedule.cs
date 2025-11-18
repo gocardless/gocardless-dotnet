@@ -26,7 +26,6 @@ namespace GoCardless.Resources
     ///
     /// Customers will receive a single notification about the complete schedule
     /// of collection.
-    ///
     /// </summary>
     public class InstalmentSchedule
     {

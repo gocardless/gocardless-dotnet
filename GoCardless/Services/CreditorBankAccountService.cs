@@ -32,8 +32,9 @@ namespace GoCardless.Services
         private readonly GoCardlessClient _goCardlessClient;
 
         /// <summary>
-        /// Constructor. Users of this library should not call this. An instance of this
-        /// class can be accessed through an initialised GoCardlessClient.
+        /// Constructor. Users of this library should not call this.
+        /// An instance of this class can be accessed through an initialised
+        /// GoCardlessClient.
         /// </summary>
         public CreditorBankAccountService(GoCardlessClient goCardlessClient)
         {
@@ -322,7 +323,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// Defaults to `true`. When this is set to `true`, it will cause this
@@ -389,7 +390,7 @@ namespace GoCardless.Services
             public DateTimeOffset? LessThan { get; set; }
 
             /// <summary>
-            ///Limit to records created on or before the specified date-time.
+            /// Limit to records created on or before the specified date-time.
             /// </summary>
             [JsonProperty("lte")]
             public DateTimeOffset? LessThanOrEqual { get; set; }

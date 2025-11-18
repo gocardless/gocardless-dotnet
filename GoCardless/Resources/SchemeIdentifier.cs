@@ -8,12 +8,11 @@ using Newtonsoft.Json.Converters;
 namespace GoCardless.Resources
 {
     /// <summary>
-    /// Represents a schemeentifier resource.
+    /// Represents a scheme identifier resource.
     ///
     /// This represents a scheme identifier (e.g. a SUN in Bacs or a CID in
     /// SEPA). Scheme identifiers are used to specify the beneficiary name that
     /// appears on customers' bank statements.
-    ///
     /// </summary>
     public class SchemeIdentifier
     {

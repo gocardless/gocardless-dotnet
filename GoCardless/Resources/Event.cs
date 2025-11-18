@@ -44,9 +44,6 @@ namespace GoCardless.Resources
         [JsonProperty("customer_notifications")]
         public List<EventCustomerNotification> CustomerNotifications { get; set; }
 
-        /// <summary>
-        ///
-        /// </summary>
         [JsonProperty("details")]
         public EventDetails Details { get; set; }
 
@@ -112,12 +109,13 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
+    /// Represents a event customer notification resource.
+    ///
     /// Present only in webhooks when an integrator is authorised to send their
     /// own
     /// notifications. See
     /// [here](/getting-started/api/handling-customer-notifications/)
     /// for further information.
-    ///
     /// </summary>
     public class EventCustomerNotification
     {
@@ -147,6 +145,9 @@ namespace GoCardless.Resources
         public string Type { get; set; }
     }
 
+    /// <summary>
+    /// Represents a event detail resource.
+    /// </summary>
     public class EventDetails
     {
         /// <summary>
