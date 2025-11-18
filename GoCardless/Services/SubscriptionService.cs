@@ -764,7 +764,7 @@ namespace GoCardless.Services
         /// Omit entirely to include subscriptions in all states.
         /// </summary>
         [JsonProperty("status")]
-        public string Status { get; set; }
+        public string[] Status { get; set; }
 
         /// <summary>
         /// One of:
