@@ -32,7 +32,6 @@ namespace GoCardless.Resources
     /// created in the last 6 months. Requests for older payouts will return an
     /// HTTP status
     /// <code>410 Gone</code>.
-    ///
     /// </summary>
     public class PayoutItem
     {
@@ -133,6 +132,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
+    /// Represents a payout item taxis resource.
+    ///
     /// An array of tax items <em>beta</em>
     ///
     /// _Note_: VAT applies to transaction and surcharge fees for merchants

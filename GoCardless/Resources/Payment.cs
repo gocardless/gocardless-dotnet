@@ -78,9 +78,6 @@ namespace GoCardless.Resources
         [JsonProperty("faster_ach")]
         public bool? FasterAch { get; set; }
 
-        /// <summary>
-        ///
-        /// </summary>
         [JsonProperty("fx")]
         public PaymentFx Fx { get; set; }
 
@@ -213,6 +210,9 @@ namespace GoCardless.Resources
         USD,
     }
 
+    /// <summary>
+    /// Represents a payment fx resource.
+    /// </summary>
     public class PaymentFx
     {
         /// <summary>

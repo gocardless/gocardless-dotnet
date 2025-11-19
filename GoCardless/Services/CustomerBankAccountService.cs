@@ -37,8 +37,9 @@ namespace GoCardless.Services
         private readonly GoCardlessClient _goCardlessClient;
 
         /// <summary>
-        /// Constructor. Users of this library should not call this. An instance of this
-        /// class can be accessed through an initialised GoCardlessClient.
+        /// Constructor. Users of this library should not call this.
+        /// An instance of this class can be accessed through an initialised
+        /// GoCardlessClient.
         /// </summary>
         public CustomerBankAccountService(GoCardlessClient goCardlessClient)
         {
@@ -280,9 +281,11 @@ namespace GoCardless.Services
     public class CustomerBankAccountCreateRequest : IHasIdempotencyKey
     {
         /// <summary>
-        /// Name of the account holder, as known by the bank. This field will be
-        /// transliterated, upcased and truncated to 18 characters. This field
-        /// is required unless the request includes a [customer bank account
+        /// Name of the account holder, as known by the bank. The full name
+        /// provided when the customer is created is stored and is available via
+        /// the API, but is transliterated, upcased, and truncated to 18
+        /// characters in bank submissions. This field is required unless the
+        /// request includes a [customer bank account
         /// token](#javascript-flow-customer-bank-account-tokens).
         /// </summary>
         [JsonProperty("account_holder_name")]
@@ -393,7 +396,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
         /// A unique key to ensure that this request only succeeds once, allowing you to safely retry request errors such as network failures.
@@ -452,7 +455,7 @@ namespace GoCardless.Services
             public DateTimeOffset? LessThan { get; set; }
 
             /// <summary>
-            ///Limit to records created on or before the specified date-time.
+            /// Limit to records created on or before the specified date-time.
             /// </summary>
             [JsonProperty("lte")]
             public DateTimeOffset? LessThanOrEqual { get; set; }
@@ -508,7 +511,7 @@ namespace GoCardless.Services
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
-        public IDictionary<String, String> Metadata { get; set; }
+        public IDictionary<string, string> Metadata { get; set; }
     }
 
     /// <summary>

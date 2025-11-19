@@ -336,6 +336,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
+    /// Represents a creditor scheme identifier resource.
+    ///
     /// An array of the scheme identifiers this creditor can create mandates
     /// against.
     ///

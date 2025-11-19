@@ -88,7 +88,7 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a verification detail director resource.
     ///
-    /// A primary director of the company represented by the creditor.
+    /// The company's directors.
     /// </summary>
     public class VerificationDetailDirector
     {

@@ -400,6 +400,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
+    /// Represents a subscription upcoming payment resource.
+    ///
     /// Up to 10 upcoming payments with their amounts and charge dates.
     /// </summary>
     public class SubscriptionUpcomingPayment

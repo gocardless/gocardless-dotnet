@@ -41,9 +41,6 @@ namespace GoCardless.Resources
         [JsonProperty("currency")]
         public string Currency { get; set; }
 
-        /// <summary>
-        ///
-        /// </summary>
         [JsonProperty("fx")]
         public RefundFx Fx { get; set; }
 
@@ -108,6 +105,9 @@ namespace GoCardless.Resources
         public RefundStatus? Status { get; set; }
     }
 
+    /// <summary>
+    /// Represents a refund fx resource.
+    /// </summary>
     public class RefundFx
     {
         /// <summary>

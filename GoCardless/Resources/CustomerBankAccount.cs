@@ -31,9 +31,11 @@ namespace GoCardless.Resources
     public class CustomerBankAccount
     {
         /// <summary>
-        /// Name of the account holder, as known by the bank. This field will be
-        /// transliterated, upcased and truncated to 18 characters. This field
-        /// is required unless the request includes a [customer bank account
+        /// Name of the account holder, as known by the bank. The full name
+        /// provided when the customer is created is stored and is available via
+        /// the API, but is transliterated, upcased, and truncated to 18
+        /// characters in bank submissions. This field is required unless the
+        /// request includes a [customer bank account
         /// token](#javascript-flow-customer-bank-account-tokens).
         /// </summary>
         [JsonProperty("account_holder_name")]

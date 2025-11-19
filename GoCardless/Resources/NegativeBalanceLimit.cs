@@ -14,7 +14,6 @@ namespace GoCardless.Resources
     /// beyond which refunds are not permitted. The default limit is zero —
     /// refunds are not permitted if the creditor has a negative balance. The
     /// limit can be changed on a per-creditor basis.
-    ///
     /// </summary>
     public class NegativeBalanceLimit
     {
