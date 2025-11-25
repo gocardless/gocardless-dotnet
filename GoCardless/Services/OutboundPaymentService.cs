@@ -334,14 +334,6 @@ namespace GoCardless.Services
         public class OutboundPaymentLinks
         {
             /// <summary>
-            /// ID of the app that created the outbound payment.
-            /// <br/>_Note_: this property will only be present if the payment
-            /// was created through an app.
-            /// </summary>
-            [JsonProperty("app")]
-            public string App { get; set; }
-
-            /// <summary>
             /// ID of the creditor who sends the outbound payment.
             /// </summary>
             [JsonProperty("creditor")]
