@@ -159,6 +159,11 @@ namespace GoCardless
         public PaymentService Payments => new PaymentService(this);
 
         /// <summary>
+        ///A service for working with payment account resources.
+        /// </summary>
+        public PaymentAccountService PaymentAccounts => new PaymentAccountService(this);
+
+        /// <summary>
         ///A service for working with payment account transaction resources.
         /// </summary>
         public PaymentAccountTransactionService PaymentAccountTransactions => new PaymentAccountTransactionService(this);
