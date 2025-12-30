@@ -19,6 +19,11 @@ namespace GoCardless
         public BankAccountDetailService BankAccountDetails => new BankAccountDetailService(this);
 
         /// <summary>
+        ///A service for working with bank account holder verification resources.
+        /// </summary>
+        public BankAccountHolderVerificationService BankAccountHolderVerifications => new BankAccountHolderVerificationService(this);
+
+        /// <summary>
         ///A service for working with bank authorisation resources.
         /// </summary>
         public BankAuthorisationService BankAuthorisations => new BankAuthorisationService(this);
@@ -152,6 +157,11 @@ namespace GoCardless
         ///A service for working with payment resources.
         /// </summary>
         public PaymentService Payments => new PaymentService(this);
+
+        /// <summary>
+        ///A service for working with payment account resources.
+        /// </summary>
+        public PaymentAccountService PaymentAccounts => new PaymentAccountService(this);
 
         /// <summary>
         ///A service for working with payment account transaction resources.

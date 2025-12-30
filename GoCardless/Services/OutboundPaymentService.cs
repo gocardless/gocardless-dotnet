@@ -19,6 +19,17 @@ namespace GoCardless.Services
     ///
     /// GoCardless will notify you via a [webhook](#appendix-webhooks) when the
     /// status of the outbound payment [changes](#event-types-outbound-payment).
+    ///
+    /// ####Rate limiting
+    ///
+    /// Two rate limits apply to the Outbound Payments APIs:
+    /// - All POST Outbound Payment endpoints (create, withdraw, approve, cancel
+    /// and etc.) share a single rate-limit group of 300 requests per minute. As
+    /// initiating a payment typically requires two API calls (one to create the
+    /// payment and one to approve it), this allows you to add approximately 150
+    /// outbound payments per minute.
+    /// - All remaining Outbound Payment endpoints are limited to 500 requests
+    /// per minute.
     /// </summary>
     public class OutboundPaymentService
     {
@@ -295,6 +306,32 @@ namespace GoCardless.Services
                 customiseRequestMessage
             );
         }
+
+        /// <summary>
+        /// Retrieve aggregate statistics on outbound payments.
+        /// </summary>
+        /// <param name="request">An optional `OutboundPaymentStatsRequest` representing the query parameters for this stats request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single outbound payment resource</returns>
+        public Task<OutboundPaymentResponse> StatsAsync(
+            OutboundPaymentStatsRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
+        {
+            request = request ?? new OutboundPaymentStatsRequest();
+
+            var urlParams = new List<KeyValuePair<string, object>> { };
+
+            return _goCardlessClient.ExecuteAsync<OutboundPaymentResponse>(
+                "GET",
+                "/outbound_payments/stats",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
+        }
     }
 
     /// <summary>
@@ -333,14 +370,6 @@ namespace GoCardless.Services
         /// </summary>
         public class OutboundPaymentLinks
         {
-            /// <summary>
-            /// ID of the app that created the outbound payment.
-            /// <br/>_Note_: this property will only be present if the payment
-            /// was created through an app.
-            /// </summary>
-            [JsonProperty("app")]
-            public string App { get; set; }
-
             /// <summary>
             /// ID of the creditor who sends the outbound payment.
             /// </summary>
@@ -643,6 +672,11 @@ namespace GoCardless.Services
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
     }
+
+    /// <summary>
+    /// Retrieve aggregate statistics on outbound payments.
+    /// </summary>
+    public class OutboundPaymentStatsRequest { }
 
     /// <summary>
     /// An API response for a request returning a single outbound payment.
