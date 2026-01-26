@@ -1347,20 +1347,20 @@ namespace GoCardless.Resources
         [EnumMember(Value = "other")]
         Other,
 
-        /// <summary>`purpose_code` with a value of "Epayment"</summary>
-        [EnumMember(Value = "Epayment")]
+        /// <summary>`purpose_code` with a value of "epayment"</summary>
+        [EnumMember(Value = "epayment")]
         Epayment,
 
-        /// <summary>`purpose_code` with a value of "Commercial"</summary>
-        [EnumMember(Value = "Commercial")]
+        /// <summary>`purpose_code` with a value of "commercial"</summary>
+        [EnumMember(Value = "commercial")]
         Commercial,
 
-        /// <summary>`purpose_code` with a value of "OtherPayment"</summary>
-        [EnumMember(Value = "OtherPayment")]
+        /// <summary>`purpose_code` with a value of "other_payment"</summary>
+        [EnumMember(Value = "other_payment")]
         OtherPayment,
 
-        /// <summary>`purpose_code` with a value of "Trade"</summary>
-        [EnumMember(Value = "Trade")]
+        /// <summary>`purpose_code` with a value of "trade"</summary>
+        [EnumMember(Value = "trade")]
         Trade,
     }
 
