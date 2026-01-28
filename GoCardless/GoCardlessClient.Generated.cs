@@ -99,6 +99,11 @@ namespace GoCardless
         public ExportService Exports => new ExportService(this);
 
         /// <summary>
+        ///A service for working with funds availability resources.
+        /// </summary>
+        public FundsAvailabilityService FundsAvailabilities => new FundsAvailabilityService(this);
+
+        /// <summary>
         ///A service for working with instalment schedule resources.
         /// </summary>
         public InstalmentScheduleService InstalmentSchedules => new InstalmentScheduleService(this);
