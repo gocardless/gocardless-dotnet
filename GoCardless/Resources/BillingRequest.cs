@@ -91,17 +91,40 @@ namespace GoCardless.Resources
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
+        /// Specifies the context or scenario in which the payment is being
+        /// made. Defines whether the payment is for advance/arrears billing,
+        /// point of sale transactions, ecommerce, or account transfers. This
+        /// helps banks and payment processors understand the payment scenario
+        /// and apply appropriate processing rules and risk controls.
+        /// </summary>
+        [JsonProperty("payment_context_code")]
+        public BillingRequestPaymentContextCode? PaymentContextCode { get; set; }
+
+        /// <summary>
+        /// Specifies the underlying purpose of the payment. Defines the
+        /// specific reason or type of service/goods the payment relates to,
+        /// improving straight-through processing and compliance.
+        /// See [VRP Commercial Payment Purpose
+        /// Codes](https://developer.gocardless.com/vrp-commercial-payment-purpose-codes/)
+        /// for the complete list of valid codes.
+        /// </summary>
+        [JsonProperty("payment_purpose_code")]
+        public string PaymentPurposeCode { get; set; }
+
+        /// <summary>
         /// Request for a one-off strongly authorised payment
         /// </summary>
         [JsonProperty("payment_request")]
         public BillingRequestPaymentRequest PaymentRequest { get; set; }
 
         /// <summary>
-        /// Specifies the high-level purpose of a mandate and/or payment using a
-        /// set of pre-defined categories. Required for the PayTo scheme,
-        /// optional for all others. Currently `mortgage`, `utility`, `loan`,
-        /// `dependant_support`, `gambling`, `retail`, `salary`, `personal`,
-        /// `government`, `pension`, `tax` and `other` are supported.
+        /// Specifies the high-level purpose/category of a mandate and/or
+        /// payment using a set of pre-defined categories. Provides context on
+        /// the nature and reason for the payment to facilitate processing and
+        /// compliance.
+        /// See [Billing Request Purpose
+        /// Codes](https://developer.gocardless.com/billing-request-purpose-codes/)
+        /// for the complete list of valid codes.
         /// </summary>
         [JsonProperty("purpose_code")]
         public BillingRequestPurposeCode? PurposeCode { get; set; }
@@ -1162,6 +1185,44 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
+    /// Specifies the context or scenario in which the payment is being made. Defines whether the
+    /// payment is for advance/arrears billing, point of sale transactions, ecommerce, or account
+    /// transfers. This helps banks and payment processors understand the payment scenario and apply
+    /// appropriate processing rules and risk controls.
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestPaymentContextCode
+    {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`payment_context_code` with a value of "billing_goods_and_services_in_advance"</summary>
+        [EnumMember(Value = "billing_goods_and_services_in_advance")]
+        BillingGoodsAndServicesInAdvance,
+
+        /// <summary>`payment_context_code` with a value of "billing_goods_and_services_in_arrears"</summary>
+        [EnumMember(Value = "billing_goods_and_services_in_arrears")]
+        BillingGoodsAndServicesInArrears,
+
+        /// <summary>`payment_context_code` with a value of "face_to_face_point_of_sale"</summary>
+        [EnumMember(Value = "face_to_face_point_of_sale")]
+        FaceToFacePointOfSale,
+
+        /// <summary>`payment_context_code` with a value of "ecommerce_merchant_initiated_payment"</summary>
+        [EnumMember(Value = "ecommerce_merchant_initiated_payment")]
+        EcommerceMerchantInitiatedPayment,
+
+        /// <summary>`payment_context_code` with a value of "transfer_to_self"</summary>
+        [EnumMember(Value = "transfer_to_self")]
+        TransferToSelf,
+
+        /// <summary>`payment_context_code` with a value of "transfer_to_third_party"</summary>
+        [EnumMember(Value = "transfer_to_third_party")]
+        TransferToThirdParty,
+    }
+
+    /// <summary>
     /// Represents a billing request payment request resource.
     ///
     /// Request for a one-off strongly authorised payment
@@ -1287,10 +1348,12 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Specifies the high-level purpose of a mandate and/or payment using a set of pre-defined
-    /// categories. Required for the PayTo scheme, optional for all others. Currently `mortgage`,
-    /// `utility`, `loan`, `dependant_support`, `gambling`, `retail`, `salary`, `personal`,
-    /// `government`, `pension`, `tax` and `other` are supported.
+    /// Specifies the high-level purpose/category of a mandate and/or payment using a set of
+    /// pre-defined categories. Provides context on the nature and reason for the payment to
+    /// facilitate processing and compliance.
+    /// See [Billing Request Purpose
+    /// Codes](https://developer.gocardless.com/billing-request-purpose-codes/) for the complete
+    /// list of valid codes.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestPurposeCode
@@ -1347,21 +1410,177 @@ namespace GoCardless.Resources
         [EnumMember(Value = "other")]
         Other,
 
+        /// <summary>`purpose_code` with a value of "bonus_payment"</summary>
+        [EnumMember(Value = "bonus_payment")]
+        BonusPayment,
+
+        /// <summary>`purpose_code` with a value of "cash_management_transfer"</summary>
+        [EnumMember(Value = "cash_management_transfer")]
+        CashManagementTransfer,
+
+        /// <summary>`purpose_code` with a value of "card_bulk_clearing"</summary>
+        [EnumMember(Value = "card_bulk_clearing")]
+        CardBulkClearing,
+
+        /// <summary>`purpose_code` with a value of "credit_card_payment"</summary>
+        [EnumMember(Value = "credit_card_payment")]
+        CreditCardPayment,
+
+        /// <summary>`purpose_code` with a value of "trade_settlement_payment"</summary>
+        [EnumMember(Value = "trade_settlement_payment")]
+        TradeSettlementPayment,
+
+        /// <summary>`purpose_code` with a value of "debit_card_payment"</summary>
+        [EnumMember(Value = "debit_card_payment")]
+        DebitCardPayment,
+
+        /// <summary>`purpose_code` with a value of "dividend"</summary>
+        [EnumMember(Value = "dividend")]
+        Dividend,
+
+        /// <summary>`purpose_code` with a value of "deliver_against_payment"</summary>
+        [EnumMember(Value = "deliver_against_payment")]
+        DeliverAgainstPayment,
+
         /// <summary>`purpose_code` with a value of "epayment"</summary>
         [EnumMember(Value = "epayment")]
         Epayment,
+
+        /// <summary>`purpose_code` with a value of "fee_collection_and_interest"</summary>
+        [EnumMember(Value = "fee_collection_and_interest")]
+        FeeCollectionAndInterest,
+
+        /// <summary>`purpose_code` with a value of "fee_collection"</summary>
+        [EnumMember(Value = "fee_collection")]
+        FeeCollection,
+
+        /// <summary>`purpose_code` with a value of "person_to_person_payment"</summary>
+        [EnumMember(Value = "person_to_person_payment")]
+        PersonToPersonPayment,
+
+        /// <summary>`purpose_code` with a value of "government_payment"</summary>
+        [EnumMember(Value = "government_payment")]
+        GovernmentPayment,
+
+        /// <summary>`purpose_code` with a value of "hedging_transaction"</summary>
+        [EnumMember(Value = "hedging_transaction")]
+        HedgingTransaction,
+
+        /// <summary>`purpose_code` with a value of "irrevocable_credit_card_payment"</summary>
+        [EnumMember(Value = "irrevocable_credit_card_payment")]
+        IrrevocableCreditCardPayment,
+
+        /// <summary>`purpose_code` with a value of "irrevocable_debit_card_payment"</summary>
+        [EnumMember(Value = "irrevocable_debit_card_payment")]
+        IrrevocableDebitCardPayment,
+
+        /// <summary>`purpose_code` with a value of "intra_company_payment"</summary>
+        [EnumMember(Value = "intra_company_payment")]
+        IntraCompanyPayment,
+
+        /// <summary>`purpose_code` with a value of "interest"</summary>
+        [EnumMember(Value = "interest")]
+        Interest,
+
+        /// <summary>`purpose_code` with a value of "lockbox_transactions"</summary>
+        [EnumMember(Value = "lockbox_transactions")]
+        LockboxTransactions,
 
         /// <summary>`purpose_code` with a value of "commercial"</summary>
         [EnumMember(Value = "commercial")]
         Commercial,
 
+        /// <summary>`purpose_code` with a value of "consumer"</summary>
+        [EnumMember(Value = "consumer")]
+        Consumer,
+
         /// <summary>`purpose_code` with a value of "other_payment"</summary>
         [EnumMember(Value = "other_payment")]
         OtherPayment,
 
+        /// <summary>`purpose_code` with a value of "pension_payment"</summary>
+        [EnumMember(Value = "pension_payment")]
+        PensionPayment,
+
+        /// <summary>`purpose_code` with a value of "represented"</summary>
+        [EnumMember(Value = "represented")]
+        Represented,
+
+        /// <summary>`purpose_code` with a value of "reimbursement_received_credit_transfer"</summary>
+        [EnumMember(Value = "reimbursement_received_credit_transfer")]
+        ReimbursementReceivedCreditTransfer,
+
+        /// <summary>`purpose_code` with a value of "receive_against_payment"</summary>
+        [EnumMember(Value = "receive_against_payment")]
+        ReceiveAgainstPayment,
+
+        /// <summary>`purpose_code` with a value of "salary_payment"</summary>
+        [EnumMember(Value = "salary_payment")]
+        SalaryPayment,
+
+        /// <summary>`purpose_code` with a value of "securities"</summary>
+        [EnumMember(Value = "securities")]
+        Securities,
+
+        /// <summary>`purpose_code` with a value of "social_security_benefit"</summary>
+        [EnumMember(Value = "social_security_benefit")]
+        SocialSecurityBenefit,
+
+        /// <summary>`purpose_code` with a value of "supplier_payment"</summary>
+        [EnumMember(Value = "supplier_payment")]
+        SupplierPayment,
+
+        /// <summary>`purpose_code` with a value of "tax_payment"</summary>
+        [EnumMember(Value = "tax_payment")]
+        TaxPayment,
+
         /// <summary>`purpose_code` with a value of "trade"</summary>
         [EnumMember(Value = "trade")]
         Trade,
+
+        /// <summary>`purpose_code` with a value of "treasury_payment"</summary>
+        [EnumMember(Value = "treasury_payment")]
+        TreasuryPayment,
+
+        /// <summary>`purpose_code` with a value of "value_added_tax_payment"</summary>
+        [EnumMember(Value = "value_added_tax_payment")]
+        ValueAddedTaxPayment,
+
+        /// <summary>`purpose_code` with a value of "with_holding"</summary>
+        [EnumMember(Value = "with_holding")]
+        WithHolding,
+
+        /// <summary>`purpose_code` with a value of "cash_management_sweep_account"</summary>
+        [EnumMember(Value = "cash_management_sweep_account")]
+        CashManagementSweepAccount,
+
+        /// <summary>`purpose_code` with a value of "cash_management_top_account"</summary>
+        [EnumMember(Value = "cash_management_top_account")]
+        CashManagementTopAccount,
+
+        /// <summary>`purpose_code` with a value of "cash_management_zero_balance_account"</summary>
+        [EnumMember(Value = "cash_management_zero_balance_account")]
+        CashManagementZeroBalanceAccount,
+
+        /// <summary>`purpose_code` with a value of "crossborder_mi_payments"</summary>
+        [EnumMember(Value = "crossborder_mi_payments")]
+        CrossborderMiPayments,
+
+        /// <summary>`purpose_code` with a value of "foreign_currency_domestic_transfer"</summary>
+        [EnumMember(Value = "foreign_currency_domestic_transfer")]
+        ForeignCurrencyDomesticTransfer,
+
+        /// <summary>`purpose_code` with a value of "cash_in_pre_credit"</summary>
+        [EnumMember(Value = "cash_in_pre_credit")]
+        CashInPreCredit,
+
+        /// <summary>`purpose_code` with a value of "cash_out_notes_coins"</summary>
+        [EnumMember(Value = "cash_out_notes_coins")]
+        CashOutNotesCoins,
+
+        /// <summary>`purpose_code` with a value of "carrier_guarded_wholesale_valuables"</summary>
+        [EnumMember(Value = "carrier_guarded_wholesale_valuables")]
+        CarrierGuardedWholesaleValuables,
     }
 
     /// <summary>
