@@ -420,6 +420,43 @@ namespace GoCardless.Services
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
+        /// Indicates how a Variable Recurring Payment (VRP) is initiated, by or
+        /// on behalf of the payer.
+        /// <ul>
+        /// <li>`in_session`: The payer is actively participating in the payment
+        /// creation session.</li>
+        /// <li>`off_session`: The payer is not present during the transaction,
+        /// and the payment is initiated by the merchant based on an established
+        /// consent (e.g., a recurring subscription payment).</li>
+        /// </ul>
+        /// </summary>
+        [JsonProperty("psu_interaction_type")]
+        public PaymentPsuInteractionType? PsuInteractionType { get; set; }
+
+        /// <summary>
+        /// Indicates how a Variable Recurring Payment (VRP) is initiated, by or
+        /// on behalf of the payer.
+        /// <ul>
+        /// <li>`in_session`: The payer is actively participating in the payment
+        /// creation session.</li>
+        /// <li>`off_session`: The payer is not present during the transaction,
+        /// and the payment is initiated by the merchant based on an established
+        /// consent (e.g., a recurring subscription payment).</li>
+        /// </ul>
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum PaymentPsuInteractionType
+        {
+            /// <summary>`psu_interaction_type` with a value of "in_session"</summary>
+            [EnumMember(Value = "in_session")]
+            InSession,
+
+            /// <summary>`psu_interaction_type` with a value of "off_session"</summary>
+            [EnumMember(Value = "off_session")]
+            OffSession,
+        }
+
+        /// <summary>
         /// An optional reference that will appear on your customer's bank
         /// statement. The character limit for this reference is dependent on
         /// the scheme.<br /> <strong>ACH</strong> - 10 characters<br />

@@ -115,7 +115,8 @@ namespace GoCardless.Services
 
         /// <summary>
         /// URL that the payer can be taken to if there isn't a way to progress
-        /// ahead in flow.
+        /// ahead in flow, for example if the customer searches for a bank that
+        /// doesn't exist or isn't supported on the scheme.
         /// </summary>
         [JsonProperty("exit_uri")]
         public string ExitUri { get; set; }

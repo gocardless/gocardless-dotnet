@@ -437,6 +437,13 @@ namespace GoCardless.Resources
         public string Organisation { get; set; }
 
         /// <summary>
+        /// If `resource_type` is `outbound_payments`, this is the ID of the
+        /// outbound_payment which has been updated.
+        /// </summary>
+        [JsonProperty("outbound_payment")]
+        public string OutboundPayment { get; set; }
+
+        /// <summary>
         /// If this event was caused by another, this is the ID of the cause.
         /// For example, if a mandate is cancelled it automatically cancels all
         /// pending payments associated with it; in this case, the payment
