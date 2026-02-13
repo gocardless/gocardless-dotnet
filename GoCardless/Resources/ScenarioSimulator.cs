@@ -108,10 +108,9 @@ namespace GoCardless.Resources
         /// Autogiro, BECS NZ, and PAD mandates, which do not expire.</li>
         /// <li>`mandate_transferred`: Transitions a mandate through to
         /// `transferred`, having been submitted to the banks, set up
-        /// successfully and then moved to a new bank account due to the
-        /// customer using the UK's Current Account Switching Service (CASS). It
-        /// must start in the `pending_submission` state. Only compatible with
-        /// Bacs mandates.</li>
+        /// successfully and then moved to a new bank account due. It must start
+        /// in the `pending_submission` state. Only compatible with Bacs and
+        /// SEPA mandates.</li>
         /// <li>`mandate_transferred_with_resubmission`: Transitions a mandate
         /// through `transferred` and resubmits it to the banks, can be caused
         /// be the UK's Current Account Switching Service (CASS) or when a
