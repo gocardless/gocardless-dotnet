@@ -14,7 +14,8 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with transferred mandate resources.
     ///
-    /// Mandates that have been transferred using Current Account Switch Service
+    ///  Mandates that have been transferred using Current Account Switch
+    ///  Service
     /// </summary>
     public class TransferredMandateService
     {
@@ -31,11 +32,11 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns new customer bank details for a mandate that's been recently
-        /// transferred
+        ///  Returns new customer bank details for a mandate that's been
+        ///  recently transferred
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may
-        /// not apply to mandates created before 2016.</param>
+        ///  <param name="identity">Unique identifier, beginning with "MD". Note that this prefix
+        ///  may not apply to mandates created before 2016.</param>
         /// <param name="request">An optional `TransferredMandateTransferredMandatesRequest` representing the query parameters for this transferred_mandates request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single transferred mandate resource</returns>
@@ -67,8 +68,8 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns new customer bank details for a mandate that's been recently
-    /// transferred
+    ///  Returns new customer bank details for a mandate that's been recently
+    ///  transferred
     /// </summary>
     public class TransferredMandateTransferredMandatesRequest { }
 

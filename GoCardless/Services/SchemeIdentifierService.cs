@@ -14,9 +14,9 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with scheme identifier resources.
     ///
-    /// This represents a scheme identifier (e.g. a SUN in Bacs or a CID in
-    /// SEPA). Scheme identifiers are used to specify the beneficiary name that
-    /// appears on customers' bank statements.
+    ///  This represents a scheme identifier (e.g. a SUN in Bacs or a CID in
+    ///  SEPA). Scheme identifiers are used to specify the beneficiary name that
+    ///  appears on customers' bank statements.
     ///
     /// </summary>
     public class SchemeIdentifierService
@@ -34,45 +34,45 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Creates a new scheme identifier. The scheme identifier status will
-        /// be `pending` while GoCardless is
-        /// processing the request. Once the scheme identifier is ready to be
-        /// used the status will be updated to `active`.
-        /// At this point, GoCardless will emit a scheme identifier activated
-        /// event via webhook to notify you of this change.
-        /// In Bacs, it will take up to five working days for a scheme
-        /// identifier to become active. On other schemes, including SEPA,
-        /// this happens instantly.
+        ///  Creates a new scheme identifier. The scheme identifier status will
+        ///  be `pending` while GoCardless is
+        ///  processing the request. Once the scheme identifier is ready to be
+        ///  used the status will be updated to `active`.
+        ///  At this point, GoCardless will emit a scheme identifier activated
+        ///  event via webhook to notify you of this change.
+        ///  In Bacs, it will take up to five working days for a scheme
+        ///  identifier to become active. On other schemes, including SEPA,
+        ///  this happens instantly.
         ///
-        /// #### Scheme identifier name validations
+        ///  #### Scheme identifier name validations
         ///
-        /// The `name` field of a scheme identifier can contain alphanumeric
-        /// characters, spaces and
-        /// special characters.
+        ///  The `name` field of a scheme identifier can contain alphanumeric
+        ///  characters, spaces and
+        ///  special characters.
         ///
-        /// Its maximum length and the special characters it supports depend on
-        /// the scheme:
+        ///  Its maximum length and the special characters it supports depend on
+        ///  the scheme:
         ///
-        /// | __scheme__        | __maximum length__ | __special characters
-        /// allowed__                      |
-        /// | :---------------- | :----------------- |
-        /// :-------------------------------------------------- |
-        /// | `bacs`            | 18 characters      | `/` `.` `&` `-`
-        ///                           |
-        /// | `sepa`            | 70 characters      | `/` `?` `:` `(` `)` `.`
-        /// `,` `+` `&` `<` `>` `'` `"` |
-        /// | `ach`             | 16 characters      | `/` `?` `:` `(` `)` `.`
-        /// `,` `'` `+` `-`             |
-        /// | `faster_payments` | 18 characters      | `/` `?` `:` `(` `)` `.`
-        /// `,` `'` `+` `-`             |
+        ///  | __scheme__        | __maximum length__ | __special characters
+        ///  allowed__                      |
+        ///  | :---------------- | :----------------- |
+        ///  :-------------------------------------------------- |
+        ///  | `bacs`            | 18 characters      | `/` `.` `&` `-`
+        ///                             |
+        ///  | `sepa`            | 70 characters      | `/` `?` `:` `(` `)` `.`
+        ///  `,` `+` `&` `<` `>` `'` `"` |
+        ///  | `ach`             | 16 characters      | `/` `?` `:` `(` `)` `.`
+        ///  `,` `'` `+` `-`             |
+        ///  | `faster_payments` | 18 characters      | `/` `?` `:` `(` `)` `.`
+        ///  `,` `'` `+` `-`             |
         ///
-        /// The validation error that gets returned for an invalid name will
-        /// contain a suggested name
-        /// in the metadata that is guaranteed to pass name validations.
+        ///  The validation error that gets returned for an invalid name will
+        ///  contain a suggested name
+        ///  in the metadata that is guaranteed to pass name validations.
         ///
-        /// You should ensure that the name you set matches the legal name or
-        /// the trading name of
-        /// the creditor, otherwise, there is an increased risk of chargeback.
+        ///  You should ensure that the name you set matches the legal name or
+        ///  the trading name of
+        ///  the creditor, otherwise, there is an increased risk of chargeback.
         ///
         /// </summary>
         /// <param name="request">An optional `SchemeIdentifierCreateRequest` representing the body for this create request.</param>
@@ -99,8 +99,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your scheme identifiers.
+        ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+        ///  your scheme identifiers.
         /// </summary>
         /// <param name="request">An optional `SchemeIdentifierListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -170,9 +170,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Retrieves the details of an existing scheme identifier.
+        ///  Retrieves the details of an existing scheme identifier.
         /// </summary>
-        /// <param name="identity">Unique identifier, usually beginning with "SU".</param>
+        ///  <param name="identity">Unique identifier, usually beginning with "SU".</param>
         /// <param name="request">An optional `SchemeIdentifierGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single scheme identifier resource</returns>
@@ -204,63 +204,63 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Creates a new scheme identifier. The scheme identifier status will be
-    /// `pending` while GoCardless is
-    /// processing the request. Once the scheme identifier is ready to be used
-    /// the status will be updated to `active`.
-    /// At this point, GoCardless will emit a scheme identifier activated event
-    /// via webhook to notify you of this change.
-    /// In Bacs, it will take up to five working days for a scheme identifier to
-    /// become active. On other schemes, including SEPA,
-    /// this happens instantly.
+    ///  Creates a new scheme identifier. The scheme identifier status will be
+    ///  `pending` while GoCardless is
+    ///  processing the request. Once the scheme identifier is ready to be used
+    ///  the status will be updated to `active`.
+    ///  At this point, GoCardless will emit a scheme identifier activated event
+    ///  via webhook to notify you of this change.
+    ///  In Bacs, it will take up to five working days for a scheme identifier
+    ///  to become active. On other schemes, including SEPA,
+    ///  this happens instantly.
     ///
-    /// #### Scheme identifier name validations
+    ///  #### Scheme identifier name validations
     ///
-    /// The `name` field of a scheme identifier can contain alphanumeric
-    /// characters, spaces and
-    /// special characters.
+    ///  The `name` field of a scheme identifier can contain alphanumeric
+    ///  characters, spaces and
+    ///  special characters.
     ///
-    /// Its maximum length and the special characters it supports depend on the
-    /// scheme:
+    ///  Its maximum length and the special characters it supports depend on the
+    ///  scheme:
     ///
-    /// | __scheme__        | __maximum length__ | __special characters
-    /// allowed__                      |
-    /// | :---------------- | :----------------- |
-    /// :-------------------------------------------------- |
-    /// | `bacs`            | 18 characters      | `/` `.` `&` `-`
-    ///                       |
-    /// | `sepa`            | 70 characters      | `/` `?` `:` `(` `)` `.` `,`
-    /// `+` `&` `<` `>` `'` `"` |
-    /// | `ach`             | 16 characters      | `/` `?` `:` `(` `)` `.` `,`
-    /// `'` `+` `-`             |
-    /// | `faster_payments` | 18 characters      | `/` `?` `:` `(` `)` `.` `,`
-    /// `'` `+` `-`             |
+    ///  | __scheme__        | __maximum length__ | __special characters
+    ///  allowed__                      |
+    ///  | :---------------- | :----------------- |
+    ///  :-------------------------------------------------- |
+    ///  | `bacs`            | 18 characters      | `/` `.` `&` `-`
+    ///                         |
+    ///  | `sepa`            | 70 characters      | `/` `?` `:` `(` `)` `.` `,`
+    ///  `+` `&` `<` `>` `'` `"` |
+    ///  | `ach`             | 16 characters      | `/` `?` `:` `(` `)` `.` `,`
+    ///  `'` `+` `-`             |
+    ///  | `faster_payments` | 18 characters      | `/` `?` `:` `(` `)` `.` `,`
+    ///  `'` `+` `-`             |
     ///
-    /// The validation error that gets returned for an invalid name will contain
-    /// a suggested name
-    /// in the metadata that is guaranteed to pass name validations.
+    ///  The validation error that gets returned for an invalid name will
+    ///  contain a suggested name
+    ///  in the metadata that is guaranteed to pass name validations.
     ///
-    /// You should ensure that the name you set matches the legal name or the
-    /// trading name of
-    /// the creditor, otherwise, there is an increased risk of chargeback.
+    ///  You should ensure that the name you set matches the legal name or the
+    ///  trading name of
+    ///  the creditor, otherwise, there is an increased risk of chargeback.
     ///
     /// </summary>
     public class SchemeIdentifierCreateRequest : IHasIdempotencyKey
     {
         /// <summary>
-        /// Linked resources.
+        ///  Linked resources.
         /// </summary>
         [JsonProperty("links")]
         public SchemeIdentifierLinks Links { get; set; }
 
         /// <summary>
-        /// Linked resources for a SchemeIdentifier.
+        ///  Linked resources for a SchemeIdentifier.
         /// </summary>
         public class SchemeIdentifierLinks
         {
             /// <summary>
-            /// <em>required</em> ID of the associated
-            /// [creditor](#core-endpoints-creditors).
+            ///  <em>required</em> ID of the associated
+            ///  [creditor](#core-endpoints-creditors).
             ///
             /// </summary>
             [JsonProperty("creditor")]
@@ -268,20 +268,20 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// The name which appears on customers' bank statements. This should
-        /// usually be the merchant's trading name.
+        ///  The name which appears on customers' bank statements. This should
+        ///  usually be the merchant's trading name.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// The scheme which this scheme identifier applies to.
+        ///  The scheme which this scheme identifier applies to.
         /// </summary>
         [JsonProperty("scheme")]
         public SchemeIdentifierScheme? Scheme { get; set; }
 
         /// <summary>
-        /// The scheme which this scheme identifier applies to.
+        ///  The scheme which this scheme identifier applies to.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum SchemeIdentifierScheme
@@ -345,38 +345,38 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// scheme identifiers.
+    ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    ///  scheme identifiers.
     /// </summary>
     public class SchemeIdentifierListRequest
     {
         /// <summary>
-        /// Cursor pointing to the start of the desired set.
+        ///  Cursor pointing to the start of the desired set.
         /// </summary>
         [JsonProperty("after")]
         public string After { get; set; }
 
         /// <summary>
-        /// Cursor pointing to the end of the desired set.
+        ///  Cursor pointing to the end of the desired set.
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
 
         /// <summary>
-        /// Unique identifier, beginning with "CR".
+        ///  Unique identifier, beginning with "CR".
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
 
         /// <summary>
-        /// Number of records to return.
+        ///  Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
     }
 
     /// <summary>
-    /// Retrieves the details of an existing scheme identifier.
+    ///  Retrieves the details of an existing scheme identifier.
     /// </summary>
     public class SchemeIdentifierGetRequest { }
 

@@ -8,52 +8,52 @@ using Newtonsoft.Json.Converters;
 namespace GoCardless.Resources
 {
     /// <summary>
-    /// Represents a negative balance limit resource.
+    ///  Represents a negative balance limit resource.
     ///
-    /// The negative balance limit is a threshold for the creditor balance
-    /// beyond which refunds are not permitted. The default limit is zero —
-    /// refunds are not permitted if the creditor has a negative balance. The
-    /// limit can be changed on a per-creditor basis.
+    ///  The negative balance limit is a threshold for the creditor balance
+    ///  beyond which refunds are not permitted. The default limit is zero —
+    ///  refunds are not permitted if the creditor has a negative balance. The
+    ///  limit can be changed on a per-creditor basis.
     /// </summary>
     public class NegativeBalanceLimit
     {
         /// <summary>
-        /// The limit amount in pence (e.g. 10000 for a -100 GBP limit).
+        ///  The limit amount in pence (e.g. 10000 for a -100 GBP limit).
         /// </summary>
         [JsonProperty("balance_limit")]
         public int? BalanceLimit { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// limit was created.
+        ///  Fixed [timestamp](#api-usage-dates-and-times), recording when this
+        ///  limit was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        ///  [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        ///  currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        ///  "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public NegativeBalanceLimitCurrency? Currency { get; set; }
 
         /// <summary>
-        /// Unique identifier, beginning with "NBL".
+        ///  Unique identifier, beginning with "NBL".
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
 
         /// <summary>
-        /// Resources linked to this NegativeBalanceLimit.
+        ///  Resources linked to this NegativeBalanceLimit.
         /// </summary>
         [JsonProperty("links")]
         public NegativeBalanceLimitLinks Links { get; set; }
     }
 
     /// <summary>
-    /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-    /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+    ///  [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+    ///  "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum NegativeBalanceLimitCurrency
@@ -96,19 +96,19 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Resources linked to this NegativeBalanceLimit
+    ///  Resources linked to this NegativeBalanceLimit
     /// </summary>
     public class NegativeBalanceLimitLinks
     {
         /// <summary>
-        /// ID of the creator_user who created this limit
+        ///  ID of the creator_user who created this limit
         /// </summary>
         [JsonProperty("creator_user")]
         public string CreatorUser { get; set; }
 
         /// <summary>
-        /// ID of [creditor](#core-endpoints-creditors) which this limit relates
-        /// to
+        ///  ID of [creditor](#core-endpoints-creditors) which this limit
+        ///  relates to
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
