@@ -14,17 +14,17 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with verification detail resources.
     ///
-    /// Verification details represent any information needed by GoCardless to
-    /// verify a creditor.
+    ///  Verification details represent any information needed by GoCardless to
+    ///  verify a creditor.
     ///
-    /// <p class="restricted-notice"><strong>Restricted</strong>:
-    ///   These endpoints are restricted to customers who want to collect their
-    /// merchant's
-    ///   verification details and pass them to GoCardless via our API. Please
-    /// [get in
-    ///   touch](mailto:help@gocardless.com) if you wish to enable this feature
-    /// on your
-    ///   account.</p>
+    ///  <p class="restricted-notice"><strong>Restricted</strong>:
+    ///    These endpoints are restricted to customers who want to collect their
+    ///  merchant's
+    ///    verification details and pass them to GoCardless via our API. Please
+    ///  [get in
+    ///    touch](mailto:help@gocardless.com) if you wish to enable this feature
+    ///  on your
+    ///    account.</p>
     /// </summary>
     public class VerificationDetailService
     {
@@ -41,7 +41,7 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Creates a new verification detail
+        ///  Creates a new verification detail
         /// </summary>
         /// <param name="request">An optional `VerificationDetailCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -67,7 +67,7 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a list of verification details belonging to a creditor.
+        ///  Returns a list of verification details belonging to a creditor.
         /// </summary>
         /// <param name="request">An optional `VerificationDetailListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -138,157 +138,157 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Creates a new verification detail
+    ///  Creates a new verification detail
     /// </summary>
     public class VerificationDetailCreateRequest
     {
         /// <summary>
-        /// The first line of the company's address.
+        ///  The first line of the company's address.
         /// </summary>
         [JsonProperty("address_line1")]
         public string AddressLine1 { get; set; }
 
         /// <summary>
-        /// The second line of the company's address.
+        ///  The second line of the company's address.
         /// </summary>
         [JsonProperty("address_line2")]
         public string AddressLine2 { get; set; }
 
         /// <summary>
-        /// The third line of the company's address.
+        ///  The third line of the company's address.
         /// </summary>
         [JsonProperty("address_line3")]
         public string AddressLine3 { get; set; }
 
         /// <summary>
-        /// The city of the company's address.
+        ///  The city of the company's address.
         /// </summary>
         [JsonProperty("city")]
         public string City { get; set; }
 
         /// <summary>
-        /// The company's registration number.
+        ///  The company's registration number.
         /// </summary>
         [JsonProperty("company_number")]
         public string CompanyNumber { get; set; }
 
         /// <summary>
-        /// A summary describing what the company does.
+        ///  A summary describing what the company does.
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
 
         /// <summary>
-        /// The company's directors.
+        ///  The company's directors.
         /// </summary>
         [JsonProperty("directors")]
         public VerificationDetailDirectors[] Directors { get; set; }
 
         /// <summary>
-        /// A primary director of the company represented by the creditor.
+        ///  A primary director of the company represented by the creditor.
         /// </summary>
         public class VerificationDetailDirectors
         {
             /// <summary>
-            /// The city of the person's address.
+            ///  The city of the person's address.
             /// </summary>
             [JsonProperty("city")]
             public string City { get; set; }
 
             /// <summary>
-            /// [ISO 3166-1 alpha-2
-            /// code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+            ///  [ISO 3166-1 alpha-2
+            ///  code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
             /// </summary>
             [JsonProperty("country_code")]
             public string CountryCode { get; set; }
 
             /// <summary>
-            /// The person's date of birth.
+            ///  The person's date of birth.
             /// </summary>
             [JsonProperty("date_of_birth")]
             public string DateOfBirth { get; set; }
 
             /// <summary>
-            /// The person's family name.
+            ///  The person's family name.
             /// </summary>
             [JsonProperty("family_name")]
             public string FamilyName { get; set; }
 
             /// <summary>
-            /// The person's given name.
+            ///  The person's given name.
             /// </summary>
             [JsonProperty("given_name")]
             public string GivenName { get; set; }
 
             /// <summary>
-            /// The person's postal code.
+            ///  The person's postal code.
             /// </summary>
             [JsonProperty("postal_code")]
             public string PostalCode { get; set; }
 
             /// <summary>
-            /// The street of the person's address.
+            ///  The street of the person's address.
             /// </summary>
             [JsonProperty("street")]
             public string Street { get; set; }
         }
 
         /// <summary>
-        /// Linked resources.
+        ///  Linked resources.
         /// </summary>
         [JsonProperty("links")]
         public VerificationDetailLinks Links { get; set; }
 
         /// <summary>
-        /// Linked resources for a VerificationDetail.
+        ///  Linked resources for a VerificationDetail.
         /// </summary>
         public class VerificationDetailLinks
         {
             /// <summary>
-            /// ID of the associated [creditor](#core-endpoints-creditors).
+            ///  ID of the associated [creditor](#core-endpoints-creditors).
             /// </summary>
             [JsonProperty("creditor")]
             public string Creditor { get; set; }
         }
 
         /// <summary>
-        /// The company's legal name.
+        ///  The company's legal name.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// The company's postal code.
+        ///  The company's postal code.
         /// </summary>
         [JsonProperty("postal_code")]
         public string PostalCode { get; set; }
     }
 
     /// <summary>
-    /// Returns a list of verification details belonging to a creditor.
+    ///  Returns a list of verification details belonging to a creditor.
     /// </summary>
     public class VerificationDetailListRequest
     {
         /// <summary>
-        /// Cursor pointing to the start of the desired set.
+        ///  Cursor pointing to the start of the desired set.
         /// </summary>
         [JsonProperty("after")]
         public string After { get; set; }
 
         /// <summary>
-        /// Cursor pointing to the end of the desired set.
+        ///  Cursor pointing to the end of the desired set.
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
 
         /// <summary>
-        /// Unique identifier, beginning with "CR".
+        ///  Unique identifier, beginning with "CR".
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
 
         /// <summary>
-        /// Number of records to return.
+        ///  Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }

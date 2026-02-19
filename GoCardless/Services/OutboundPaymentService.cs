@@ -14,22 +14,23 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with outbound payment resources.
     ///
-    /// Outbound Payments represent payments sent from
-    /// [creditors](#core-endpoints-creditors).
+    ///  Outbound Payments represent payments sent from
+    ///  [creditors](#core-endpoints-creditors).
     ///
-    /// GoCardless will notify you via a [webhook](#appendix-webhooks) when the
-    /// status of the outbound payment [changes](#event-types-outbound-payment).
+    ///  GoCardless will notify you via a [webhook](#appendix-webhooks) when the
+    ///  status of the outbound payment
+    ///  [changes](#event-types-outbound-payment).
     ///
-    /// ####Rate limiting
+    ///  ####Rate limiting
     ///
-    /// Two rate limits apply to the Outbound Payments APIs:
-    /// - All POST Outbound Payment endpoints (create, withdraw, approve, cancel
-    /// and etc.) share a single rate-limit group of 300 requests per minute. As
-    /// initiating a payment typically requires two API calls (one to create the
-    /// payment and one to approve it), this allows you to add approximately 150
-    /// outbound payments per minute.
-    /// - All remaining Outbound Payment endpoints are limited to 500 requests
-    /// per minute.
+    ///  Two rate limits apply to the Outbound Payments APIs:
+    ///  - All POST Outbound Payment endpoints (create, withdraw, approve,
+    ///  cancel and etc.) share a single rate-limit group of 300 requests per
+    ///  minute. As initiating a payment typically requires two API calls (one
+    ///  to create the payment and one to approve it), this allows you to add
+    ///  approximately 150 outbound payments per minute.
+    ///  - All remaining Outbound Payment endpoints are limited to 500 requests
+    ///  per minute.
     /// </summary>
     public class OutboundPaymentService
     {
@@ -72,8 +73,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Creates an outbound payment to your verified business bank account
-        /// as the recipient.
+        ///  Creates an outbound payment to your verified business bank account
+        ///  as the recipient.
         /// </summary>
         /// <param name="request">An optional `OutboundPaymentWithdrawRequest` representing the body for this withdraw request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -99,13 +100,13 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Cancels an outbound payment. Only outbound payments with either
-        /// `verifying`, `pending_approval`, or `scheduled` status can be
-        /// cancelled.
-        /// Once an outbound payment is `executing`, the money moving process
-        /// has begun and cannot be reversed.
+        ///  Cancels an outbound payment. Only outbound payments with either
+        ///  `verifying`, `pending_approval`, or `scheduled` status can be
+        ///  cancelled.
+        ///  Once an outbound payment is `executing`, the money moving process
+        ///  has begun and cannot be reversed.
         /// </summary>
-        /// <param name="identity">Unique identifier of the outbound payment.</param>
+        ///  <param name="identity">Unique identifier of the outbound payment.</param>
         /// <param name="request">An optional `OutboundPaymentCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single outbound payment resource</returns>
@@ -136,10 +137,10 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Approves an outbound payment. Only outbound payments with the
-        /// “pending_approval” status can be approved.
+        ///  Approves an outbound payment. Only outbound payments with the
+        ///  “pending_approval” status can be approved.
         /// </summary>
-        /// <param name="identity">Unique identifier of the outbound payment.</param>
+        ///  <param name="identity">Unique identifier of the outbound payment.</param>
         /// <param name="request">An optional `OutboundPaymentApproveRequest` representing the body for this approve request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single outbound payment resource</returns>
@@ -170,9 +171,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Fetches an outbound_payment by ID
+        ///  Fetches an outbound_payment by ID
         /// </summary>
-        /// <param name="identity">Unique identifier of the outbound payment.</param>
+        ///  <param name="identity">Unique identifier of the outbound payment.</param>
         /// <param name="request">An optional `OutboundPaymentGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single outbound payment resource</returns>
@@ -203,8 +204,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// outbound payments.
+        ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+        ///  outbound payments.
         /// </summary>
         /// <param name="request">An optional `OutboundPaymentListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -274,10 +275,10 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Updates an outbound payment object. This accepts only the metadata
-        /// parameter.
+        ///  Updates an outbound payment object. This accepts only the metadata
+        ///  parameter.
         /// </summary>
-        /// <param name="identity">Unique identifier of the outbound payment.</param>
+        ///  <param name="identity">Unique identifier of the outbound payment.</param>
         /// <param name="request">An optional `OutboundPaymentUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single outbound payment resource</returns>
@@ -308,7 +309,7 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Retrieve aggregate statistics on outbound payments.
+        ///  Retrieve aggregate statistics on outbound payments.
         /// </summary>
         /// <param name="request">An optional `OutboundPaymentStatsRequest` representing the query parameters for this stats request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -340,79 +341,79 @@ namespace GoCardless.Services
     public class OutboundPaymentCreateRequest : IHasIdempotencyKey
     {
         /// <summary>
-        /// Amount, in the lowest denomination for the currency (e.g. pence in
-        /// GBP, cents in EUR).
+        ///  Amount, in the lowest denomination for the currency (e.g. pence in
+        ///  GBP, cents in EUR).
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
 
         /// <summary>
-        /// A human-readable description of the outbound payment
+        ///  A human-readable description of the outbound payment
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
 
         /// <summary>
-        /// A future date on which the outbound payment should be sent.
-        /// If not specified, the payment will be sent as soon as possible.
+        ///  A future date on which the outbound payment should be sent.
+        ///  If not specified, the payment will be sent as soon as possible.
         /// </summary>
         [JsonProperty("execution_date")]
         public string ExecutionDate { get; set; }
 
         /// <summary>
-        /// Linked resources.
+        ///  Linked resources.
         /// </summary>
         [JsonProperty("links")]
         public OutboundPaymentLinks Links { get; set; }
 
         /// <summary>
-        /// Linked resources for a OutboundPayment.
+        ///  Linked resources for a OutboundPayment.
         /// </summary>
         public class OutboundPaymentLinks
         {
             /// <summary>
-            /// ID of the creditor who sends the outbound payment.
+            ///  ID of the creditor who sends the outbound payment.
             /// </summary>
             [JsonProperty("creditor")]
             public string Creditor { get; set; }
 
             /// <summary>
-            /// ID of the customer bank account which receives the outbound
-            /// payment.
+            ///  ID of the customer bank account which receives the outbound
+            ///  payment.
             /// </summary>
             [JsonProperty("recipient_bank_account")]
             public string RecipientBankAccount { get; set; }
         }
 
         /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with
-        /// key names up to 50 characters and values up to 500 characters.
+        ///  Key-value store of custom data. Up to 3 keys are permitted, with
+        ///  key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// An optional reference that will appear on your customer's bank
-        /// statement.
-        /// The character limit for this reference is dependent on the
-        /// scheme.<br />
-        /// <strong>Faster Payments</strong> - 18 characters, including:
-        /// "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
-        /// &-./"<br />
+        ///  An optional reference that will appear on your customer's bank
+        ///  statement.
+        ///  The character limit for this reference is dependent on the
+        ///  scheme.<br />
+        ///  <strong>Faster Payments</strong> - 18 characters, including:
+        ///  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
+        ///  &-./"<br />
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
 
         /// <summary>
-        /// Bank payment scheme to process the outbound payment. Currently only
-        /// "faster_payments" (GBP) is supported.
+        ///  Bank payment scheme to process the outbound payment. Currently only
+        ///  "faster_payments" (GBP) is supported.
         /// </summary>
         [JsonProperty("scheme")]
         public OutboundPaymentScheme? Scheme { get; set; }
 
         /// <summary>
-        /// Bank payment scheme to process the outbound payment. Currently only
-        /// "faster_payments" (GBP) is supported.
+        ///  Bank payment scheme to process the outbound payment. Currently only
+        ///  "faster_payments" (GBP) is supported.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum OutboundPaymentScheme
@@ -432,78 +433,78 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Creates an outbound payment to your verified business bank account as
-    /// the recipient.
+    ///  Creates an outbound payment to your verified business bank account as
+    ///  the recipient.
     /// </summary>
     public class OutboundPaymentWithdrawRequest
     {
         /// <summary>
-        /// Amount, in the lowest denomination for the currency (e.g. pence in
-        /// GBP, cents in EUR).
+        ///  Amount, in the lowest denomination for the currency (e.g. pence in
+        ///  GBP, cents in EUR).
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
 
         /// <summary>
-        /// A human-readable description of the outbound payment
+        ///  A human-readable description of the outbound payment
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
 
         /// <summary>
-        /// A future date on which the outbound payment should be sent.
-        /// If not specified, the payment will be sent as soon as possible.
+        ///  A future date on which the outbound payment should be sent.
+        ///  If not specified, the payment will be sent as soon as possible.
         /// </summary>
         [JsonProperty("execution_date")]
         public string ExecutionDate { get; set; }
 
         /// <summary>
-        /// Linked resources.
+        ///  Linked resources.
         /// </summary>
         [JsonProperty("links")]
         public OutboundPaymentLinks Links { get; set; }
 
         /// <summary>
-        /// Linked resources for a OutboundPayment.
+        ///  Linked resources for a OutboundPayment.
         /// </summary>
         public class OutboundPaymentLinks
         {
             /// <summary>
-            /// ID of the creditor who sends the outbound payment.
+            ///  ID of the creditor who sends the outbound payment.
             /// </summary>
             [JsonProperty("creditor")]
             public string Creditor { get; set; }
         }
 
         /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with
-        /// key names up to 50 characters and values up to 500 characters.
+        ///  Key-value store of custom data. Up to 3 keys are permitted, with
+        ///  key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// An optional reference that will appear on your customer's bank
-        /// statement.
-        /// The character limit for this reference is dependent on the
-        /// scheme.<br />
-        /// <strong>Faster Payments</strong> - 18 characters, including:
-        /// "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
-        /// &-./"<br />
+        ///  An optional reference that will appear on your customer's bank
+        ///  statement.
+        ///  The character limit for this reference is dependent on the
+        ///  scheme.<br />
+        ///  <strong>Faster Payments</strong> - 18 characters, including:
+        ///  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
+        ///  &-./"<br />
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
 
         /// <summary>
-        /// Bank payment scheme to process the outbound payment. Currently only
-        /// "faster_payments" (GBP) is supported.
+        ///  Bank payment scheme to process the outbound payment. Currently only
+        ///  "faster_payments" (GBP) is supported.
         /// </summary>
         [JsonProperty("scheme")]
         public OutboundPaymentScheme? Scheme { get; set; }
 
         /// <summary>
-        /// Bank payment scheme to process the outbound payment. Currently only
-        /// "faster_payments" (GBP) is supported.
+        ///  Bank payment scheme to process the outbound payment. Currently only
+        ///  "faster_payments" (GBP) is supported.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum OutboundPaymentScheme
@@ -515,116 +516,117 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Cancels an outbound payment. Only outbound payments with either
-    /// `verifying`, `pending_approval`, or `scheduled` status can be cancelled.
-    /// Once an outbound payment is `executing`, the money moving process has
-    /// begun and cannot be reversed.
+    ///  Cancels an outbound payment. Only outbound payments with either
+    ///  `verifying`, `pending_approval`, or `scheduled` status can be
+    ///  cancelled.
+    ///  Once an outbound payment is `executing`, the money moving process has
+    ///  begun and cannot be reversed.
     /// </summary>
     public class OutboundPaymentCancelRequest
     {
         /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with
-        /// key names up to 50 characters and values up to 500 characters.
+        ///  Key-value store of custom data. Up to 3 keys are permitted, with
+        ///  key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
     }
 
     /// <summary>
-    /// Approves an outbound payment. Only outbound payments with the
-    /// “pending_approval” status can be approved.
+    ///  Approves an outbound payment. Only outbound payments with the
+    ///  “pending_approval” status can be approved.
     /// </summary>
     public class OutboundPaymentApproveRequest { }
 
     /// <summary>
-    /// Fetches an outbound_payment by ID
+    ///  Fetches an outbound_payment by ID
     /// </summary>
     public class OutboundPaymentGetRequest { }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-    /// outbound payments.
+    ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+    ///  outbound payments.
     /// </summary>
     public class OutboundPaymentListRequest
     {
         /// <summary>
-        /// Cursor pointing to the start of the desired set.
+        ///  Cursor pointing to the start of the desired set.
         /// </summary>
         [JsonProperty("after")]
         public string After { get; set; }
 
         /// <summary>
-        /// Cursor pointing to the end of the desired set.
+        ///  Cursor pointing to the end of the desired set.
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
 
         /// <summary>
-        /// The beginning of query period
+        ///  The beginning of query period
         /// </summary>
         [JsonProperty("created_from")]
         public string CreatedFrom { get; set; }
 
         /// <summary>
-        /// The end of query period
+        ///  The end of query period
         /// </summary>
         [JsonProperty("created_to")]
         public string CreatedTo { get; set; }
 
         /// <summary>
-        /// Number of records to return.
+        ///  Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
 
         /// <summary>
-        /// One of:
-        /// <ul>
-        /// <li>`verifying`: The payment has been
-        /// [created](#outbound-payments-create-an-outbound-payment) and the
-        /// verification process has begun.</li>
-        /// <li>`pending_approval`: The payment is awaiting
-        /// [approval](#outbound-payments-approve-an-outbound-payment).</li>
-        /// <li>`scheduled`: The payment has passed verification &
-        /// [approval](#outbound-payments-approve-an-outbound-payment), but
-        /// processing has not yet begun.</li>
-        /// <li>`executing`: The execution date has arrived and the payment has
-        /// been placed in queue for processing.</li>
-        /// <li>`executed`: The payment has been accepted by the scheme and is
-        /// now on its way to the recipient.</li>
-        /// <li>`cancelled`: The payment has been
-        /// [cancelled](#outbound-payments-cancel-an-outbound-payment) or was
-        /// not [approved](#outbound-payments-approve-an-outbound-payment) on
-        /// time.</li>
-        /// <li>`failed`: The payment was not sent, usually due to an error
-        /// while or after executing.</li>
-        /// </ul>
+        ///  One of:
+        ///  <ul>
+        ///  <li>`verifying`: The payment has been
+        ///  [created](#outbound-payments-create-an-outbound-payment) and the
+        ///  verification process has begun.</li>
+        ///  <li>`pending_approval`: The payment is awaiting
+        ///  [approval](#outbound-payments-approve-an-outbound-payment).</li>
+        ///  <li>`scheduled`: The payment has passed verification &
+        ///  [approval](#outbound-payments-approve-an-outbound-payment), but
+        ///  processing has not yet begun.</li>
+        ///  <li>`executing`: The execution date has arrived and the payment has
+        ///  been placed in queue for processing.</li>
+        ///  <li>`executed`: The payment has been accepted by the scheme and is
+        ///  now on its way to the recipient.</li>
+        ///  <li>`cancelled`: The payment has been
+        ///  [cancelled](#outbound-payments-cancel-an-outbound-payment) or was
+        ///  not [approved](#outbound-payments-approve-an-outbound-payment) on
+        ///  time.</li>
+        ///  <li>`failed`: The payment was not sent, usually due to an error
+        ///  while or after executing.</li>
+        ///  </ul>
         /// </summary>
         [JsonProperty("status")]
         public OutboundPaymentStatus? Status { get; set; }
 
         /// <summary>
-        /// One of:
-        /// <ul>
-        /// <li>`verifying`: The payment has been
-        /// [created](#outbound-payments-create-an-outbound-payment) and the
-        /// verification process has begun.</li>
-        /// <li>`pending_approval`: The payment is awaiting
-        /// [approval](#outbound-payments-approve-an-outbound-payment).</li>
-        /// <li>`scheduled`: The payment has passed verification &
-        /// [approval](#outbound-payments-approve-an-outbound-payment), but
-        /// processing has not yet begun.</li>
-        /// <li>`executing`: The execution date has arrived and the payment has
-        /// been placed in queue for processing.</li>
-        /// <li>`executed`: The payment has been accepted by the scheme and is
-        /// now on its way to the recipient.</li>
-        /// <li>`cancelled`: The payment has been
-        /// [cancelled](#outbound-payments-cancel-an-outbound-payment) or was
-        /// not [approved](#outbound-payments-approve-an-outbound-payment) on
-        /// time.</li>
-        /// <li>`failed`: The payment was not sent, usually due to an error
-        /// while or after executing.</li>
-        /// </ul>
+        ///  One of:
+        ///  <ul>
+        ///  <li>`verifying`: The payment has been
+        ///  [created](#outbound-payments-create-an-outbound-payment) and the
+        ///  verification process has begun.</li>
+        ///  <li>`pending_approval`: The payment is awaiting
+        ///  [approval](#outbound-payments-approve-an-outbound-payment).</li>
+        ///  <li>`scheduled`: The payment has passed verification &
+        ///  [approval](#outbound-payments-approve-an-outbound-payment), but
+        ///  processing has not yet begun.</li>
+        ///  <li>`executing`: The execution date has arrived and the payment has
+        ///  been placed in queue for processing.</li>
+        ///  <li>`executed`: The payment has been accepted by the scheme and is
+        ///  now on its way to the recipient.</li>
+        ///  <li>`cancelled`: The payment has been
+        ///  [cancelled](#outbound-payments-cancel-an-outbound-payment) or was
+        ///  not [approved](#outbound-payments-approve-an-outbound-payment) on
+        ///  time.</li>
+        ///  <li>`failed`: The payment was not sent, usually due to an error
+        ///  while or after executing.</li>
+        ///  </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum OutboundPaymentStatus
@@ -660,21 +662,21 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Updates an outbound payment object. This accepts only the metadata
-    /// parameter.
+    ///  Updates an outbound payment object. This accepts only the metadata
+    ///  parameter.
     /// </summary>
     public class OutboundPaymentUpdateRequest
     {
         /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with
-        /// key names up to 50 characters and values up to 500 characters.
+        ///  Key-value store of custom data. Up to 3 keys are permitted, with
+        ///  key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
     }
 
     /// <summary>
-    /// Retrieve aggregate statistics on outbound payments.
+    ///  Retrieve aggregate statistics on outbound payments.
     /// </summary>
     public class OutboundPaymentStatsRequest { }
 

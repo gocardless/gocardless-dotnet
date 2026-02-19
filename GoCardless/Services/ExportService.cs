@@ -14,7 +14,7 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with export resources.
     ///
-    /// File-based exports of data
+    ///  File-based exports of data
     /// </summary>
     public class ExportService
     {
@@ -31,9 +31,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a single export.
+        ///  Returns a single export.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "EX".</param>
+        ///  <param name="identity">Unique identifier, beginning with "EX".</param>
         /// <param name="request">An optional `ExportGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single export resource</returns>
@@ -64,7 +64,7 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a list of exports which are available for download.
+        ///  Returns a list of exports which are available for download.
         /// </summary>
         /// <param name="request">An optional `ExportListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -135,29 +135,29 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a single export.
+    ///  Returns a single export.
     /// </summary>
     public class ExportGetRequest { }
 
     /// <summary>
-    /// Returns a list of exports which are available for download.
+    ///  Returns a list of exports which are available for download.
     /// </summary>
     public class ExportListRequest
     {
         /// <summary>
-        /// Cursor pointing to the start of the desired set.
+        ///  Cursor pointing to the start of the desired set.
         /// </summary>
         [JsonProperty("after")]
         public string After { get; set; }
 
         /// <summary>
-        /// Cursor pointing to the end of the desired set.
+        ///  Cursor pointing to the end of the desired set.
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
 
         /// <summary>
-        /// Number of records to return.
+        ///  Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }

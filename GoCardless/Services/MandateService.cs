@@ -14,11 +14,11 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with mandate resources.
     ///
-    /// Mandates represent the Direct Debit mandate with a
-    /// [customer](#core-endpoints-customers).
+    ///  Mandates represent the Direct Debit mandate with a
+    ///  [customer](#core-endpoints-customers).
     ///
-    /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
-    /// the status of a mandate changes.
+    ///  GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
+    ///  the status of a mandate changes.
     /// </summary>
     public class MandateService
     {
@@ -35,7 +35,7 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Creates a new mandate object.
+        ///  Creates a new mandate object.
         /// </summary>
         /// <param name="request">An optional `MandateCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -61,8 +61,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your mandates.
+        ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+        ///  your mandates.
         /// </summary>
         /// <param name="request">An optional `MandateListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -132,10 +132,10 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Retrieves the details of an existing mandate.
+        ///  Retrieves the details of an existing mandate.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may
-        /// not apply to mandates created before 2016.</param>
+        ///  <param name="identity">Unique identifier, beginning with "MD". Note that this prefix
+        ///  may not apply to mandates created before 2016.</param>
         /// <param name="request">An optional `MandateGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
@@ -166,10 +166,10 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Updates a mandate object. This accepts only the metadata parameter.
+        ///  Updates a mandate object. This accepts only the metadata parameter.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may
-        /// not apply to mandates created before 2016.</param>
+        ///  <param name="identity">Unique identifier, beginning with "MD". Note that this prefix
+        ///  may not apply to mandates created before 2016.</param>
         /// <param name="request">An optional `MandateUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
@@ -200,15 +200,15 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Immediately cancels a mandate and all associated cancellable
-        /// payments. Any metadata supplied to this endpoint will be stored on
-        /// the mandate cancellation event it causes.
+        ///  Immediately cancels a mandate and all associated cancellable
+        ///  payments. Any metadata supplied to this endpoint will be stored on
+        ///  the mandate cancellation event it causes.
         ///
-        /// This will fail with a `cancellation_failed` error if the mandate is
-        /// already cancelled.
+        ///  This will fail with a `cancellation_failed` error if the mandate is
+        ///  already cancelled.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may
-        /// not apply to mandates created before 2016.</param>
+        ///  <param name="identity">Unique identifier, beginning with "MD". Note that this prefix
+        ///  may not apply to mandates created before 2016.</param>
         /// <param name="request">An optional `MandateCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
@@ -239,21 +239,22 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// <a name="mandate_not_inactive"></a>Reinstates a cancelled or expired
-        /// mandate to the banks. You will receive a `resubmission_requested`
-        /// webhook, but after that reinstating the mandate follows the same
-        /// process as its initial creation, so you will receive a `submitted`
-        /// webhook, followed by a `reinstated` or `failed` webhook up to two
-        /// working days later. Any metadata supplied to this endpoint will be
-        /// stored on the `resubmission_requested` event it causes.
+        ///  <a name="mandate_not_inactive"></a>Reinstates a cancelled or
+        ///  expired mandate to the banks. You will receive a
+        ///  `resubmission_requested` webhook, but after that reinstating the
+        ///  mandate follows the same process as its initial creation, so you
+        ///  will receive a `submitted` webhook, followed by a `reinstated` or
+        ///  `failed` webhook up to two working days later. Any metadata
+        ///  supplied to this endpoint will be stored on the
+        ///  `resubmission_requested` event it causes.
         ///
-        /// This will fail with a `mandate_not_inactive` error if the mandate is
-        /// already being submitted, or is active.
+        ///  This will fail with a `mandate_not_inactive` error if the mandate
+        ///  is already being submitted, or is active.
         ///
-        /// Mandates can be resubmitted up to 10 times.
+        ///  Mandates can be resubmitted up to 10 times.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may
-        /// not apply to mandates created before 2016.</param>
+        ///  <param name="identity">Unique identifier, beginning with "MD". Note that this prefix
+        ///  may not apply to mandates created before 2016.</param>
         /// <param name="request">An optional `MandateReinstateRequest` representing the body for this reinstate request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
@@ -285,37 +286,37 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Creates a new mandate object.
+    ///  Creates a new mandate object.
     /// </summary>
     public class MandateCreateRequest : IHasIdempotencyKey
     {
         /// <summary>
-        /// This field is ACH specific, sometimes referred to as [SEC
-        /// code](https://www.moderntreasury.com/learn/sec-codes).
+        ///  This field is ACH specific, sometimes referred to as [SEC
+        ///  code](https://www.moderntreasury.com/learn/sec-codes).
         ///
-        /// This is the way that the payer gives authorisation to the merchant.
-        ///   web: Authorisation is Internet Initiated or via Mobile Entry (maps
-        /// to SEC code: WEB)
-        ///   telephone: Authorisation is provided orally over telephone (maps
-        /// to SEC code: TEL)
-        ///   paper: Authorisation is provided in writing and signed, or
-        /// similarly authenticated (maps to SEC code: PPD)
+        ///  This is the way that the payer gives authorisation to the merchant.
+        ///    web: Authorisation is Internet Initiated or via Mobile Entry
+        ///  (maps to SEC code: WEB)
+        ///    telephone: Authorisation is provided orally over telephone (maps
+        ///  to SEC code: TEL)
+        ///    paper: Authorisation is provided in writing and signed, or
+        ///  similarly authenticated (maps to SEC code: PPD)
         ///
         /// </summary>
         [JsonProperty("authorisation_source")]
         public MandateAuthorisationSource? AuthorisationSource { get; set; }
 
         /// <summary>
-        /// This field is ACH specific, sometimes referred to as [SEC
-        /// code](https://www.moderntreasury.com/learn/sec-codes).
+        ///  This field is ACH specific, sometimes referred to as [SEC
+        ///  code](https://www.moderntreasury.com/learn/sec-codes).
         ///
-        /// This is the way that the payer gives authorisation to the merchant.
-        ///   web: Authorisation is Internet Initiated or via Mobile Entry (maps
-        /// to SEC code: WEB)
-        ///   telephone: Authorisation is provided orally over telephone (maps
-        /// to SEC code: TEL)
-        ///   paper: Authorisation is provided in writing and signed, or
-        /// similarly authenticated (maps to SEC code: PPD)
+        ///  This is the way that the payer gives authorisation to the merchant.
+        ///    web: Authorisation is Internet Initiated or via Mobile Entry
+        ///  (maps to SEC code: WEB)
+        ///    telephone: Authorisation is provided orally over telephone (maps
+        ///  to SEC code: TEL)
+        ///    paper: Authorisation is provided in writing and signed, or
+        ///  similarly authenticated (maps to SEC code: PPD)
         ///
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -335,65 +336,65 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Linked resources.
+        ///  Linked resources.
         /// </summary>
         [JsonProperty("links")]
         public MandateLinks Links { get; set; }
 
         /// <summary>
-        /// Linked resources for a Mandate.
+        ///  Linked resources for a Mandate.
         /// </summary>
         public class MandateLinks
         {
             /// <summary>
-            /// ID of the associated [creditor](#core-endpoints-creditors). Only
-            /// required if your account manages multiple creditors.
+            ///  ID of the associated [creditor](#core-endpoints-creditors).
+            ///  Only required if your account manages multiple creditors.
             /// </summary>
             [JsonProperty("creditor")]
             public string Creditor { get; set; }
 
             /// <summary>
-            /// ID of the associated [customer bank
-            /// account](#core-endpoints-customer-bank-accounts) which the
-            /// mandate is created and submits payments against.
+            ///  ID of the associated [customer bank
+            ///  account](#core-endpoints-customer-bank-accounts) which the
+            ///  mandate is created and submits payments against.
             /// </summary>
             [JsonProperty("customer_bank_account")]
             public string CustomerBankAccount { get; set; }
         }
 
         /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
+        ///  Key-value store of custom data. Up to 3 keys are permitted, with
+        ///  key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// For ACH customers only. Required for ACH customers. A string
-        /// containing the IP address of the payer to whom the mandate belongs
-        /// (i.e. as a result of their completion of a mandate setup flow in
-        /// their browser).
+        ///  For ACH customers only. Required for ACH customers. A string
+        ///  containing the IP address of the payer to whom the mandate belongs
+        ///  (i.e. as a result of their completion of a mandate setup flow in
+        ///  their browser).
         ///
-        /// Not required for creating offline mandates where
-        /// `authorisation_source` is set to telephone or paper.
+        ///  Not required for creating offline mandates where
+        ///  `authorisation_source` is set to telephone or paper.
         ///
         /// </summary>
         [JsonProperty("payer_ip_address")]
         public string PayerIpAddress { get; set; }
 
         /// <summary>
-        /// Unique reference. Different schemes have different length and
-        /// [character set](#appendix-character-sets) requirements. GoCardless
-        /// will generate a unique reference satisfying the different scheme
-        /// requirements if this field is left blank.
+        ///  Unique reference. Different schemes have different length and
+        ///  [character set](#appendix-character-sets) requirements. GoCardless
+        ///  will generate a unique reference satisfying the different scheme
+        ///  requirements if this field is left blank.
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
 
         /// <summary>
-        /// <a name="mandates_scheme"></a>Bank payment scheme to which this
-        /// mandate and associated payments are submitted. Can be supplied or
-        /// automatically detected from the customer's bank account.
+        ///  <a name="mandates_scheme"></a>Bank payment scheme to which this
+        ///  mandate and associated payments are submitted. Can be supplied or
+        ///  automatically detected from the customer's bank account.
         /// </summary>
         [JsonProperty("scheme")]
         public string Scheme { get; set; }
@@ -408,25 +409,25 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// mandates.
+    ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    ///  mandates.
     /// </summary>
     public class MandateListRequest
     {
         /// <summary>
-        /// Cursor pointing to the start of the desired set.
+        ///  Cursor pointing to the start of the desired set.
         /// </summary>
         [JsonProperty("after")]
         public string After { get; set; }
 
         /// <summary>
-        /// Cursor pointing to the end of the desired set.
+        ///  Cursor pointing to the end of the desired set.
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
 
         /// <summary>
-        /// Limit to records created within certain times.
+        ///  Limit to records created within certain times.
         /// </summary>
         [JsonProperty("created_at")]
         public CreatedAtParam CreatedAt { get; set; }
@@ -462,85 +463,85 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// ID of a [creditor](#core-endpoints-creditors). If specified, this
-        /// endpoint will return all mandates for the given creditor. Cannot be
-        /// used in conjunction with `customer` or `customer_bank_account`
+        ///  ID of a [creditor](#core-endpoints-creditors). If specified, this
+        ///  endpoint will return all mandates for the given creditor. Cannot be
+        ///  used in conjunction with `customer` or `customer_bank_account`
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
 
         /// <summary>
-        /// ID of a [customer](#core-endpoints-customers). If specified, this
-        /// endpoint will return all mandates for the given customer. Cannot be
-        /// used in conjunction with `customer_bank_account` or `creditor`
+        ///  ID of a [customer](#core-endpoints-customers). If specified, this
+        ///  endpoint will return all mandates for the given customer. Cannot be
+        ///  used in conjunction with `customer_bank_account` or `creditor`
         /// </summary>
         [JsonProperty("customer")]
         public string Customer { get; set; }
 
         /// <summary>
-        /// ID of a [customer bank
-        /// account](#core-endpoints-customer-bank-accounts). If specified, this
-        /// endpoint will return all mandates for the given bank account. Cannot
-        /// be used in conjunction with `customer` or `creditor`
+        ///  ID of a [customer bank
+        ///  account](#core-endpoints-customer-bank-accounts). If specified,
+        ///  this endpoint will return all mandates for the given bank account.
+        ///  Cannot be used in conjunction with `customer` or `creditor`
         /// </summary>
         [JsonProperty("customer_bank_account")]
         public string CustomerBankAccount { get; set; }
 
         /// <summary>
-        /// Number of records to return.
+        ///  Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
 
         /// <summary>
-        /// Mandate type
+        ///  Mandate type
         /// </summary>
         [JsonProperty("mandate_type")]
         public string MandateType { get; set; }
 
         /// <summary>
-        /// Unique reference. Different schemes have different length and
-        /// [character set](#appendix-character-sets) requirements. GoCardless
-        /// will generate a unique reference satisfying the different scheme
-        /// requirements if this field is left blank.
+        ///  Unique reference. Different schemes have different length and
+        ///  [character set](#appendix-character-sets) requirements. GoCardless
+        ///  will generate a unique reference satisfying the different scheme
+        ///  requirements if this field is left blank.
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
 
         /// <summary>
-        /// Scheme you'd like to retrieve mandates for
+        ///  Scheme you'd like to retrieve mandates for
         /// </summary>
         [JsonProperty("scheme")]
         public string[] Scheme { get; set; }
 
         /// <summary>
-        /// One or more valid statuses
+        ///  One or more valid statuses
         /// </summary>
         [JsonProperty("status")]
         public MandateStatus[] Status { get; set; }
 
         /// <summary>
-        /// One of:
-        /// <ul>
-        /// <li>`pending_customer_approval`: the mandate has not yet been signed
-        /// by the second customer</li>
-        /// <li>`pending_submission`: the mandate has not yet been submitted to
-        /// the customer's bank</li>
-        /// <li>`submitted`: the mandate has been submitted to the customer's
-        /// bank but has not been processed yet</li>
-        /// <li>`active`: the mandate has been successfully set up by the
-        /// customer's bank</li>
-        /// <li>`suspended_by_payer`: the mandate has been suspended by
-        /// payer</li>
-        /// <li>`failed`: the mandate could not be created</li>
-        /// <li>`cancelled`: the mandate has been cancelled</li>
-        /// <li>`expired`: the mandate has expired due to dormancy</li>
-        /// <li>`consumed`: the mandate has been consumed and cannot be reused
-        /// (note that this only applies to schemes that are per-payment
-        /// authorised)</li>
-        /// <li>`blocked`: the mandate has been blocked and payments cannot be
-        /// created</li>
-        /// </ul>
+        ///  One of:
+        ///  <ul>
+        ///  <li>`pending_customer_approval`: the mandate has not yet been
+        ///  signed by the second customer</li>
+        ///  <li>`pending_submission`: the mandate has not yet been submitted to
+        ///  the customer's bank</li>
+        ///  <li>`submitted`: the mandate has been submitted to the customer's
+        ///  bank but has not been processed yet</li>
+        ///  <li>`active`: the mandate has been successfully set up by the
+        ///  customer's bank</li>
+        ///  <li>`suspended_by_payer`: the mandate has been suspended by
+        ///  payer</li>
+        ///  <li>`failed`: the mandate could not be created</li>
+        ///  <li>`cancelled`: the mandate has been cancelled</li>
+        ///  <li>`expired`: the mandate has expired due to dormancy</li>
+        ///  <li>`consumed`: the mandate has been consumed and cannot be reused
+        ///  (note that this only applies to schemes that are per-payment
+        ///  authorised)</li>
+        ///  <li>`blocked`: the mandate has been blocked and payments cannot be
+        ///  created</li>
+        ///  </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum MandateStatus
@@ -588,60 +589,60 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Retrieves the details of an existing mandate.
+    ///  Retrieves the details of an existing mandate.
     /// </summary>
     public class MandateGetRequest { }
 
     /// <summary>
-    /// Updates a mandate object. This accepts only the metadata parameter.
+    ///  Updates a mandate object. This accepts only the metadata parameter.
     /// </summary>
     public class MandateUpdateRequest
     {
         /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
+        ///  Key-value store of custom data. Up to 3 keys are permitted, with
+        ///  key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
     }
 
     /// <summary>
-    /// Immediately cancels a mandate and all associated cancellable payments.
-    /// Any metadata supplied to this endpoint will be stored on the mandate
-    /// cancellation event it causes.
+    ///  Immediately cancels a mandate and all associated cancellable payments.
+    ///  Any metadata supplied to this endpoint will be stored on the mandate
+    ///  cancellation event it causes.
     ///
-    /// This will fail with a `cancellation_failed` error if the mandate is
-    /// already cancelled.
+    ///  This will fail with a `cancellation_failed` error if the mandate is
+    ///  already cancelled.
     /// </summary>
     public class MandateCancelRequest
     {
         /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
+        ///  Key-value store of custom data. Up to 3 keys are permitted, with
+        ///  key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
     }
 
     /// <summary>
-    /// <a name="mandate_not_inactive"></a>Reinstates a cancelled or expired
-    /// mandate to the banks. You will receive a `resubmission_requested`
-    /// webhook, but after that reinstating the mandate follows the same process
-    /// as its initial creation, so you will receive a `submitted` webhook,
-    /// followed by a `reinstated` or `failed` webhook up to two working days
-    /// later. Any metadata supplied to this endpoint will be stored on the
-    /// `resubmission_requested` event it causes.
+    ///  <a name="mandate_not_inactive"></a>Reinstates a cancelled or expired
+    ///  mandate to the banks. You will receive a `resubmission_requested`
+    ///  webhook, but after that reinstating the mandate follows the same
+    ///  process as its initial creation, so you will receive a `submitted`
+    ///  webhook, followed by a `reinstated` or `failed` webhook up to two
+    ///  working days later. Any metadata supplied to this endpoint will be
+    ///  stored on the `resubmission_requested` event it causes.
     ///
-    /// This will fail with a `mandate_not_inactive` error if the mandate is
-    /// already being submitted, or is active.
+    ///  This will fail with a `mandate_not_inactive` error if the mandate is
+    ///  already being submitted, or is active.
     ///
-    /// Mandates can be resubmitted up to 10 times.
+    ///  Mandates can be resubmitted up to 10 times.
     /// </summary>
     public class MandateReinstateRequest
     {
         /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
+        ///  Key-value store of custom data. Up to 3 keys are permitted, with
+        ///  key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }

@@ -14,28 +14,28 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with payout item resources.
     ///
-    /// When we collect a payment on your behalf, we add the money you've
-    /// collected to your
-    /// GoCardless balance, minus any fees paid. Periodically (usually every
-    /// working day),
-    /// we take any positive balance in your GoCardless account, and pay it out
-    /// to your
-    /// nominated bank account.
+    ///  When we collect a payment on your behalf, we add the money you've
+    ///  collected to your
+    ///  GoCardless balance, minus any fees paid. Periodically (usually every
+    ///  working day),
+    ///  we take any positive balance in your GoCardless account, and pay it out
+    ///  to your
+    ///  nominated bank account.
     ///
-    /// Other actions in your GoCardless account can also affect your balance.
-    /// For example,
-    /// if a customer charges back a payment, we'll deduct the payment's amount
-    /// from your
-    /// balance, but add any fees you paid for that payment back to your
-    /// balance.
+    ///  Other actions in your GoCardless account can also affect your balance.
+    ///  For example,
+    ///  if a customer charges back a payment, we'll deduct the payment's amount
+    ///  from your
+    ///  balance, but add any fees you paid for that payment back to your
+    ///  balance.
     ///
-    /// The Payout Items API allows you to view, on a per-payout basis, the
-    /// credit and debit
-    /// items that make up that payout's amount.  Payout items can only be
-    /// retrieved for payouts
-    /// created in the last 6 months. Requests for older payouts will return an
-    /// HTTP status
-    /// <code>410 Gone</code>.
+    ///  The Payout Items API allows you to view, on a per-payout basis, the
+    ///  credit and debit
+    ///  items that make up that payout's amount.  Payout items can only be
+    ///  retrieved for payouts
+    ///  created in the last 6 months. Requests for older payouts will return an
+    ///  HTTP status
+    ///  <code>410 Gone</code>.
     ///
     /// </summary>
     public class PayoutItemService
@@ -53,12 +53,12 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// items in the payout.
+        ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+        ///  items in the payout.
         ///
-        /// <strong>This endpoint only serves requests for payouts created in
-        /// the last 6 months. Requests for older payouts will return an HTTP
-        /// status <code>410 Gone</code>.</strong>
+        ///  <strong>This endpoint only serves requests for payouts created in
+        ///  the last 6 months. Requests for older payouts will return an HTTP
+        ///  status <code>410 Gone</code>.</strong>
         ///
         /// </summary>
         /// <param name="request">An optional `PayoutItemListRequest` representing the query parameters for this list request.</param>
@@ -130,38 +130,38 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of items
-    /// in the payout.
+    ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+    ///  items in the payout.
     ///
-    /// <strong>This endpoint only serves requests for payouts created in the
-    /// last 6 months. Requests for older payouts will return an HTTP status
-    /// <code>410 Gone</code>.</strong>
+    ///  <strong>This endpoint only serves requests for payouts created in the
+    ///  last 6 months. Requests for older payouts will return an HTTP status
+    ///  <code>410 Gone</code>.</strong>
     ///
     /// </summary>
     public class PayoutItemListRequest
     {
         /// <summary>
-        /// Cursor pointing to the start of the desired set.
+        ///  Cursor pointing to the start of the desired set.
         /// </summary>
         [JsonProperty("after")]
         public string After { get; set; }
 
         /// <summary>
-        /// Cursor pointing to the end of the desired set.
+        ///  Cursor pointing to the end of the desired set.
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
 
         /// <summary>
-        /// Boolean value indicating whether the API should return tax data for
-        /// the cutover period of April to August 2020. Defaults to false.
+        ///  Boolean value indicating whether the API should return tax data for
+        ///  the cutover period of April to August 2020. Defaults to false.
         /// </summary>
         [JsonProperty("include_2020_tax_cutover")]
         public PayoutItemInclude2020TaxCutover? Include2020TaxCutover { get; set; }
 
         /// <summary>
-        /// Boolean value indicating whether the API should return tax data for
-        /// the cutover period of April to August 2020. Defaults to false.
+        ///  Boolean value indicating whether the API should return tax data for
+        ///  the cutover period of April to August 2020. Defaults to false.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PayoutItemInclude2020TaxCutover
@@ -176,13 +176,13 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Number of records to return.
+        ///  Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
 
         /// <summary>
-        /// Unique identifier, beginning with "PO".
+        ///  Unique identifier, beginning with "PO".
         /// </summary>
         [JsonProperty("payout")]
         public string Payout { get; set; }

@@ -14,12 +14,12 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with event resources.
     ///
-    /// Events are stored for all webhooks. An event refers to a resource which
-    /// has been updated, for example a payment which has been collected, or a
-    /// mandate which has been transferred. Event creation is an asynchronous
-    /// process, so it can take some time between an action occurring and its
-    /// corresponding event getting included in API responses. See
-    /// [here](#event-types) for a complete list of event types.
+    ///  Events are stored for all webhooks. An event refers to a resource which
+    ///  has been updated, for example a payment which has been collected, or a
+    ///  mandate which has been transferred. Event creation is an asynchronous
+    ///  process, so it can take some time between an action occurring and its
+    ///  corresponding event getting included in API responses. See
+    ///  [here](#event-types) for a complete list of event types.
     /// </summary>
     public class EventService
     {
@@ -36,8 +36,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your events.
+        ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+        ///  your events.
         /// </summary>
         /// <param name="request">An optional `EventListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -107,9 +107,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Retrieves the details of a single event.
+        ///  Retrieves the details of a single event.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "EV".</param>
+        ///  <param name="identity">Unique identifier, beginning with "EV".</param>
         /// <param name="request">An optional `EventGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single event resource</returns>
@@ -141,39 +141,39 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// events.
+    ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    ///  events.
     /// </summary>
     public class EventListRequest
     {
         /// <summary>
-        /// Limit to events with a given `action`.
+        ///  Limit to events with a given `action`.
         /// </summary>
         [JsonProperty("action")]
         public string Action { get; set; }
 
         /// <summary>
-        /// Cursor pointing to the start of the desired set.
+        ///  Cursor pointing to the start of the desired set.
         /// </summary>
         [JsonProperty("after")]
         public string After { get; set; }
 
         /// <summary>
-        /// Cursor pointing to the end of the desired set.
+        ///  Cursor pointing to the end of the desired set.
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
 
         /// <summary>
-        /// ID of a [billing request](#billing-requests-billing-requests). If
-        /// specified, this endpoint will return all events for the given
-        /// billing request.
+        ///  ID of a [billing request](#billing-requests-billing-requests). If
+        ///  specified, this endpoint will return all events for the given
+        ///  billing request.
         /// </summary>
         [JsonProperty("billing_request")]
         public string BillingRequest { get; set; }
 
         /// <summary>
-        /// Limit to records created within certain times.
+        ///  Limit to records created within certain times.
         /// </summary>
         [JsonProperty("created_at")]
         public CreatedAtParam CreatedAt { get; set; }
@@ -209,55 +209,55 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// ID of an [creditor](#core-endpoints-creditors). If specified, this
-        /// endpoint will return all events for the given creditor.
+        ///  ID of an [creditor](#core-endpoints-creditors). If specified, this
+        ///  endpoint will return all events for the given creditor.
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
 
         /// <summary>
-        /// ID of an export. If specified, this endpoint will return all events
-        /// for the given export.
+        ///  ID of an export. If specified, this endpoint will return all events
+        ///  for the given export.
         /// </summary>
         [JsonProperty("export")]
         public string Export { get; set; }
 
         /// <summary>
-        /// Includes linked resources in the response. Must be used with the
-        /// `resource_type` parameter specified. The include should be one of:
-        /// <ul>
-        /// <li>`billing_request`</li>
-        /// <li>`creditor`</li>
-        /// <li>`instalment_schedule`</li>
-        /// <li>`mandate`</li>
-        /// <li>`payer_authorisation`</li>
-        /// <li>`payment`</li>
-        /// <li>`payout`</li>
-        /// <li>`refund`</li>
-        /// <li>`scheme_identifier`</li>
-        /// <li>`subscription`</li>
-        /// <li>`outbound_payment`</li>
-        /// </ul>
+        ///  Includes linked resources in the response. Must be used with the
+        ///  `resource_type` parameter specified. The include should be one of:
+        ///  <ul>
+        ///  <li>`billing_request`</li>
+        ///  <li>`creditor`</li>
+        ///  <li>`instalment_schedule`</li>
+        ///  <li>`mandate`</li>
+        ///  <li>`payer_authorisation`</li>
+        ///  <li>`payment`</li>
+        ///  <li>`payout`</li>
+        ///  <li>`refund`</li>
+        ///  <li>`scheme_identifier`</li>
+        ///  <li>`subscription`</li>
+        ///  <li>`outbound_payment`</li>
+        ///  </ul>
         /// </summary>
         [JsonProperty("include")]
         public EventInclude? Include { get; set; }
 
         /// <summary>
-        /// Includes linked resources in the response. Must be used with the
-        /// `resource_type` parameter specified. The include should be one of:
-        /// <ul>
-        /// <li>`billing_request`</li>
-        /// <li>`creditor`</li>
-        /// <li>`instalment_schedule`</li>
-        /// <li>`mandate`</li>
-        /// <li>`payer_authorisation`</li>
-        /// <li>`payment`</li>
-        /// <li>`payout`</li>
-        /// <li>`refund`</li>
-        /// <li>`scheme_identifier`</li>
-        /// <li>`subscription`</li>
-        /// <li>`outbound_payment`</li>
-        /// </ul>
+        ///  Includes linked resources in the response. Must be used with the
+        ///  `resource_type` parameter specified. The include should be one of:
+        ///  <ul>
+        ///  <li>`billing_request`</li>
+        ///  <li>`creditor`</li>
+        ///  <li>`instalment_schedule`</li>
+        ///  <li>`mandate`</li>
+        ///  <li>`payer_authorisation`</li>
+        ///  <li>`payment`</li>
+        ///  <li>`payout`</li>
+        ///  <li>`refund`</li>
+        ///  <li>`scheme_identifier`</li>
+        ///  <li>`subscription`</li>
+        ///  <li>`outbound_payment`</li>
+        ///  </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum EventInclude
@@ -312,114 +312,115 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// ID of an [instalment
-        /// schedule](#core-endpoints-instalment-schedules). If specified, this
-        /// endpoint will return all events for the given instalment schedule.
+        ///  ID of an [instalment
+        ///  schedule](#core-endpoints-instalment-schedules). If specified, this
+        ///  endpoint will return all events for the given instalment schedule.
         /// </summary>
         [JsonProperty("instalment_schedule")]
         public string InstalmentSchedule { get; set; }
 
         /// <summary>
-        /// Number of records to return.
+        ///  Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
 
         /// <summary>
-        /// ID of a [mandate](#core-endpoints-mandates). If specified, this
-        /// endpoint will return all events for the given mandate.
+        ///  ID of a [mandate](#core-endpoints-mandates). If specified, this
+        ///  endpoint will return all events for the given mandate.
         /// </summary>
         [JsonProperty("mandate")]
         public string Mandate { get; set; }
 
         /// <summary>
-        /// ID of an [outbound_payment](#core-endpoints-outbound-payments). If
-        /// specified, this endpoint will return all events for the given
-        /// payment.
+        ///  ID of an [outbound_payment](#core-endpoints-outbound-payments). If
+        ///  specified, this endpoint will return all events for the given
+        ///  payment.
         /// </summary>
         [JsonProperty("outbound_payment")]
         public string OutboundPayment { get; set; }
 
         /// <summary>
-        /// ID of an event. If specified, this endpoint will return all events
-        /// whose parent_event is the given event ID.
+        ///  ID of an event. If specified, this endpoint will return all events
+        ///  whose parent_event is the given event ID.
         /// </summary>
         [JsonProperty("parent_event")]
         public string ParentEvent { get; set; }
 
         /// <summary>
-        /// ID of a [payer authorisation](#core-endpoints-payer-authorisations).
+        ///  ID of a [payer
+        ///  authorisation](#core-endpoints-payer-authorisations).
         /// </summary>
         [JsonProperty("payer_authorisation")]
         public string PayerAuthorisation { get; set; }
 
         /// <summary>
-        /// ID of a [payment](#core-endpoints-payments). If specified, this
-        /// endpoint will return all events for the given payment.
+        ///  ID of a [payment](#core-endpoints-payments). If specified, this
+        ///  endpoint will return all events for the given payment.
         /// </summary>
         [JsonProperty("payment")]
         public string Payment { get; set; }
 
         /// <summary>
-        /// ID of a [payout](#core-endpoints-payouts). If specified, this
-        /// endpoint will return all events for the given payout.
+        ///  ID of a [payout](#core-endpoints-payouts). If specified, this
+        ///  endpoint will return all events for the given payout.
         /// </summary>
         [JsonProperty("payout")]
         public string Payout { get; set; }
 
         /// <summary>
-        /// ID of a [refund](#core-endpoints-refunds). If specified, this
-        /// endpoint will return all events for the given refund.
+        ///  ID of a [refund](#core-endpoints-refunds). If specified, this
+        ///  endpoint will return all events for the given refund.
         /// </summary>
         [JsonProperty("refund")]
         public string Refund { get; set; }
 
         /// <summary>
-        /// Type of resource that you'd like to get all events for.
-        /// Cannot be used together with the `billing_request`, `creditor`,
-        /// `export`,`instalment_schedule`, `mandate`, `payer_authorisation`,
-        /// `payment`, `payout`, `refund`, `scheme_identifier`, `subscription`
-        /// or `outbound_payment` parameters.
-        /// The type can be one of:
-        /// <ul>
-        /// <li>`billing_requests`</li>
-        /// <li>`creditors`</li>
-        /// <li>`exports`</li>
-        /// <li>`instalment_schedules`</li>
-        /// <li>`mandates`</li>
-        /// <li>`payer_authorisations`</li>
-        /// <li>`payments`</li>
-        /// <li>`payouts`</li>
-        /// <li>`refunds`</li>
-        /// <li>`scheme_identifiers`</li>
-        /// <li>`subscriptions`</li>
-        /// <li>`outbound_payments`</li>
-        /// </ul>
+        ///  Type of resource that you'd like to get all events for.
+        ///  Cannot be used together with the `billing_request`, `creditor`,
+        ///  `export`,`instalment_schedule`, `mandate`, `payer_authorisation`,
+        ///  `payment`, `payout`, `refund`, `scheme_identifier`, `subscription`
+        ///  or `outbound_payment` parameters.
+        ///  The type can be one of:
+        ///  <ul>
+        ///  <li>`billing_requests`</li>
+        ///  <li>`creditors`</li>
+        ///  <li>`exports`</li>
+        ///  <li>`instalment_schedules`</li>
+        ///  <li>`mandates`</li>
+        ///  <li>`payer_authorisations`</li>
+        ///  <li>`payments`</li>
+        ///  <li>`payouts`</li>
+        ///  <li>`refunds`</li>
+        ///  <li>`scheme_identifiers`</li>
+        ///  <li>`subscriptions`</li>
+        ///  <li>`outbound_payments`</li>
+        ///  </ul>
         /// </summary>
         [JsonProperty("resource_type")]
         public EventResourceType? ResourceType { get; set; }
 
         /// <summary>
-        /// Type of resource that you'd like to get all events for.
-        /// Cannot be used together with the `billing_request`, `creditor`,
-        /// `export`,`instalment_schedule`, `mandate`, `payer_authorisation`,
-        /// `payment`, `payout`, `refund`, `scheme_identifier`, `subscription`
-        /// or `outbound_payment` parameters.
-        /// The type can be one of:
-        /// <ul>
-        /// <li>`billing_requests`</li>
-        /// <li>`creditors`</li>
-        /// <li>`exports`</li>
-        /// <li>`instalment_schedules`</li>
-        /// <li>`mandates`</li>
-        /// <li>`payer_authorisations`</li>
-        /// <li>`payments`</li>
-        /// <li>`payouts`</li>
-        /// <li>`refunds`</li>
-        /// <li>`scheme_identifiers`</li>
-        /// <li>`subscriptions`</li>
-        /// <li>`outbound_payments`</li>
-        /// </ul>
+        ///  Type of resource that you'd like to get all events for.
+        ///  Cannot be used together with the `billing_request`, `creditor`,
+        ///  `export`,`instalment_schedule`, `mandate`, `payer_authorisation`,
+        ///  `payment`, `payout`, `refund`, `scheme_identifier`, `subscription`
+        ///  or `outbound_payment` parameters.
+        ///  The type can be one of:
+        ///  <ul>
+        ///  <li>`billing_requests`</li>
+        ///  <li>`creditors`</li>
+        ///  <li>`exports`</li>
+        ///  <li>`instalment_schedules`</li>
+        ///  <li>`mandates`</li>
+        ///  <li>`payer_authorisations`</li>
+        ///  <li>`payments`</li>
+        ///  <li>`payouts`</li>
+        ///  <li>`refunds`</li>
+        ///  <li>`scheme_identifiers`</li>
+        ///  <li>`subscriptions`</li>
+        ///  <li>`outbound_payments`</li>
+        ///  </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum EventResourceType
@@ -482,23 +483,24 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// ID of a [scheme identifier](#core-endpoints-scheme-identifiers). If
-        /// specified, this endpoint will return all events for the given scheme
-        /// identifier.
+        ///  ID of a [scheme identifier](#core-endpoints-scheme-identifiers). If
+        ///  specified, this endpoint will return all events for the given
+        ///  scheme identifier.
         /// </summary>
         [JsonProperty("scheme_identifier")]
         public string SchemeIdentifier { get; set; }
 
         /// <summary>
-        /// ID of a [subscription](#core-endpoints-subscriptions). If specified,
-        /// this endpoint will return all events for the given subscription.
+        ///  ID of a [subscription](#core-endpoints-subscriptions). If
+        ///  specified, this endpoint will return all events for the given
+        ///  subscription.
         /// </summary>
         [JsonProperty("subscription")]
         public string Subscription { get; set; }
     }
 
     /// <summary>
-    /// Retrieves the details of a single event.
+    ///  Retrieves the details of a single event.
     /// </summary>
     public class EventGetRequest { }
 

@@ -14,7 +14,7 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with webhook resources.
     ///
-    /// Basic description of a webhook
+    ///  Basic description of a webhook
     /// </summary>
     public class WebhookService
     {
@@ -31,8 +31,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your webhooks.
+        ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+        ///  your webhooks.
         /// </summary>
         /// <param name="request">An optional `WebhookListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -102,9 +102,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Retrieves the details of an existing webhook.
+        ///  Retrieves the details of an existing webhook.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "WB".</param>
+        ///  <param name="identity">Unique identifier, beginning with "WB".</param>
         /// <param name="request">An optional `WebhookGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single webhook resource</returns>
@@ -135,9 +135,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Requests for a previous webhook to be sent again
+        ///  Requests for a previous webhook to be sent again
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "WB".</param>
+        ///  <param name="identity">Unique identifier, beginning with "WB".</param>
         /// <param name="request">An optional `WebhookRetryRequest` representing the body for this retry request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single webhook resource</returns>
@@ -169,25 +169,25 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// webhooks.
+    ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    ///  webhooks.
     /// </summary>
     public class WebhookListRequest
     {
         /// <summary>
-        /// Cursor pointing to the start of the desired set.
+        ///  Cursor pointing to the start of the desired set.
         /// </summary>
         [JsonProperty("after")]
         public string After { get; set; }
 
         /// <summary>
-        /// Cursor pointing to the end of the desired set.
+        ///  Cursor pointing to the end of the desired set.
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
 
         /// <summary>
-        /// Limit to records created within certain times.
+        ///  Limit to records created within certain times.
         /// </summary>
         [JsonProperty("created_at")]
         public CreatedAtParam CreatedAt { get; set; }
@@ -223,13 +223,13 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Show only test/non test webhooks
+        ///  Show only test/non test webhooks
         /// </summary>
         [JsonProperty("is_test")]
         public bool? IsTest { get; set; }
 
         /// <summary>
-        /// Show only test/non test webhooks
+        ///  Show only test/non test webhooks
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum WebhookIsTest
@@ -244,19 +244,19 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Number of records to return.
+        ///  Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
 
         /// <summary>
-        /// Show only successful/failed webhooks
+        ///  Show only successful/failed webhooks
         /// </summary>
         [JsonProperty("successful")]
         public bool? Successful { get; set; }
 
         /// <summary>
-        /// Show only successful/failed webhooks
+        ///  Show only successful/failed webhooks
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum WebhookSuccessful
@@ -272,12 +272,12 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Retrieves the details of an existing webhook.
+    ///  Retrieves the details of an existing webhook.
     /// </summary>
     public class WebhookGetRequest { }
 
     /// <summary>
-    /// Requests for a previous webhook to be sent again
+    ///  Requests for a previous webhook to be sent again
     /// </summary>
     public class WebhookRetryRequest { }
 

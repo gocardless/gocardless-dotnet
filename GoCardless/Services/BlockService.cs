@@ -14,45 +14,45 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with block resources.
     ///
-    /// Blocks are created to prevent certain customer details from being used
-    /// when creating
-    /// mandates.
+    ///  Blocks are created to prevent certain customer details from being used
+    ///  when creating
+    ///  mandates.
     ///
-    /// The details used to create blocks can be exact matches, like a bank
-    /// account or an email,
-    /// or a more generic match such as an email domain or bank name. Please be
-    /// careful when creating
-    /// blocks for more generic matches as this may block legitimate payers from
-    /// using your service.
+    ///  The details used to create blocks can be exact matches, like a bank
+    ///  account or an email,
+    ///  or a more generic match such as an email domain or bank name. Please be
+    ///  careful when creating
+    ///  blocks for more generic matches as this may block legitimate payers
+    ///  from using your service.
     ///
-    /// New block types may be added over time.
+    ///  New block types may be added over time.
     ///
-    /// A block is in essence a simple rule that is used to match against
-    /// details in a newly
-    /// created mandate. If there is a successful match then the mandate is
-    /// transitioned to a
-    /// "blocked" state.
+    ///  A block is in essence a simple rule that is used to match against
+    ///  details in a newly
+    ///  created mandate. If there is a successful match then the mandate is
+    ///  transitioned to a
+    ///  "blocked" state.
     ///
-    /// Please note:
+    ///  Please note:
     ///
-    ///   - Payments and subscriptions cannot be created against a mandate in
-    /// blocked state.
-    ///   - A mandate can never be transitioned out of the blocked state.
+    ///    - Payments and subscriptions cannot be created against a mandate in
+    ///  blocked state.
+    ///    - A mandate can never be transitioned out of the blocked state.
     ///
-    /// The one exception to this is when blocking a 'bank_name'. This block
-    /// will prevent bank
-    /// accounts from being created for banks that match the given name. To
-    /// ensure we match
-    /// bank names correctly an existing bank account must be used when creating
-    /// this block. Please
-    /// be aware that we cannot always match a bank account to a given bank
-    /// name.
+    ///  The one exception to this is when blocking a 'bank_name'. This block
+    ///  will prevent bank
+    ///  accounts from being created for banks that match the given name. To
+    ///  ensure we match
+    ///  bank names correctly an existing bank account must be used when
+    ///  creating this block. Please
+    ///  be aware that we cannot always match a bank account to a given bank
+    ///  name.
     ///
-    /// <p class="notice">
-    ///   This API is currently only available for GoCardless Protect+
-    /// integrators - please <a href="mailto:help@gocardless.com">get in
-    /// touch</a> if you would like to use this API.
-    /// </p>
+    ///  <p class="notice">
+    ///    This API is currently only available for GoCardless Protect+
+    ///  integrators - please <a href="mailto:help@gocardless.com">get in
+    ///  touch</a> if you would like to use this API.
+    ///  </p>
     /// </summary>
     public class BlockService
     {
@@ -69,7 +69,7 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Creates a new Block of a given type. By default it will be active.
+        ///  Creates a new Block of a given type. By default it will be active.
         /// </summary>
         /// <param name="request">An optional `BlockCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -95,9 +95,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Retrieves the details of an existing block.
+        ///  Retrieves the details of an existing block.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "BLC".</param>
+        ///  <param name="identity">Unique identifier, beginning with "BLC".</param>
         /// <param name="request">An optional `BlockGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single block resource</returns>
@@ -128,8 +128,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your blocks.
+        ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+        ///  your blocks.
         /// </summary>
         /// <param name="request">An optional `BlockListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -199,9 +199,10 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Disables a block so that it no longer will prevent mandate creation.
+        ///  Disables a block so that it no longer will prevent mandate
+        ///  creation.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "BLC".</param>
+        ///  <param name="identity">Unique identifier, beginning with "BLC".</param>
         /// <param name="request">An optional `BlockDisableRequest` representing the body for this disable request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single block resource</returns>
@@ -232,10 +233,10 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Enables a previously disabled block so that it will prevent mandate
-        /// creation
+        ///  Enables a previously disabled block so that it will prevent mandate
+        ///  creation
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "BLC".</param>
+        ///  <param name="identity">Unique identifier, beginning with "BLC".</param>
         /// <param name="request">An optional `BlockEnableRequest` representing the body for this enable request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single block resource</returns>
@@ -266,11 +267,11 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Creates new blocks for a given reference. By default blocks will be
-        /// active.
-        /// Returns 201 if at least one block was created. Returns 200 if there
-        /// were no new
-        /// blocks created.
+        ///  Creates new blocks for a given reference. By default blocks will be
+        ///  active.
+        ///  Returns 201 if at least one block was created. Returns 200 if there
+        ///  were no new
+        ///  blocks created.
         /// </summary>
         /// <param name="request">An optional `BlockBlockByRefRequest` representing the body for this block_by_ref request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -297,32 +298,32 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Creates a new Block of a given type. By default it will be active.
+    ///  Creates a new Block of a given type. By default it will be active.
     /// </summary>
     public class BlockCreateRequest : IHasIdempotencyKey
     {
         /// <summary>
-        /// Shows if the block is active or disabled. Only active blocks will be
-        /// used when deciding
-        /// if a mandate should be blocked.
+        ///  Shows if the block is active or disabled. Only active blocks will
+        ///  be used when deciding
+        ///  if a mandate should be blocked.
         /// </summary>
         [JsonProperty("active")]
         public bool? Active { get; set; }
 
         /// <summary>
-        /// Type of entity we will seek to match against when blocking the
-        /// mandate. This
-        /// can currently be one of 'email', 'email_domain', 'bank_account', or
-        /// 'bank_name'.
+        ///  Type of entity we will seek to match against when blocking the
+        ///  mandate. This
+        ///  can currently be one of 'email', 'email_domain', 'bank_account', or
+        ///  'bank_name'.
         /// </summary>
         [JsonProperty("block_type")]
         public string BlockType { get; set; }
 
         /// <summary>
-        /// Type of entity we will seek to match against when blocking the
-        /// mandate. This
-        /// can currently be one of 'email', 'email_domain', 'bank_account', or
-        /// 'bank_name'.
+        ///  Type of entity we will seek to match against when blocking the
+        ///  mandate. This
+        ///  can currently be one of 'email', 'email_domain', 'bank_account', or
+        ///  'bank_name'.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BlockBlockType
@@ -345,35 +346,35 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// This field is required if the reason_type is other. It should be a
-        /// description of
-        /// the reason for why you wish to block this payer and why it does not
-        /// align with the
-        /// given reason_types. This is intended to help us improve our
-        /// knowledge of types of
-        /// fraud.
+        ///  This field is required if the reason_type is other. It should be a
+        ///  description of
+        ///  the reason for why you wish to block this payer and why it does not
+        ///  align with the
+        ///  given reason_types. This is intended to help us improve our
+        ///  knowledge of types of
+        ///  fraud.
         /// </summary>
         [JsonProperty("reason_description")]
         public string ReasonDescription { get; set; }
 
         /// <summary>
-        /// The reason you wish to block this payer, can currently be one of
-        /// 'identity_fraud',
-        /// 'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't
-        /// captured by one of the
-        /// above then 'other' can be selected but you must provide a reason
-        /// description.
+        ///  The reason you wish to block this payer, can currently be one of
+        ///  'identity_fraud',
+        ///  'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't
+        ///  captured by one of the
+        ///  above then 'other' can be selected but you must provide a reason
+        ///  description.
         /// </summary>
         [JsonProperty("reason_type")]
         public string ReasonType { get; set; }
 
         /// <summary>
-        /// The reason you wish to block this payer, can currently be one of
-        /// 'identity_fraud',
-        /// 'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't
-        /// captured by one of the
-        /// above then 'other' can be selected but you must provide a reason
-        /// description.
+        ///  The reason you wish to block this payer, can currently be one of
+        ///  'identity_fraud',
+        ///  'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't
+        ///  captured by one of the
+        ///  above then 'other' can be selected but you must provide a reason
+        ///  description.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BlockReasonType
@@ -396,15 +397,15 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// This field is a reference to the value you wish to block. This may
-        /// be the raw value
-        /// (in the case of emails or email domains) or the ID of the resource
-        /// (in the case of
-        /// bank accounts and bank names). This means in order to block a
-        /// specific bank account
-        /// (even if you wish to block generically by name) it must already have
-        /// been created as
-        /// a resource.
+        ///  This field is a reference to the value you wish to block. This may
+        ///  be the raw value
+        ///  (in the case of emails or email domains) or the ID of the resource
+        ///  (in the case of
+        ///  bank accounts and bank names). This means in order to block a
+        ///  specific bank account
+        ///  (even if you wish to block generically by name) it must already
+        ///  have been created as
+        ///  a resource.
         /// </summary>
         [JsonProperty("resource_reference")]
         public string ResourceReference { get; set; }
@@ -419,48 +420,48 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Retrieves the details of an existing block.
+    ///  Retrieves the details of an existing block.
     /// </summary>
     public class BlockGetRequest { }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// blocks.
+    ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    ///  blocks.
     /// </summary>
     public class BlockListRequest
     {
         /// <summary>
-        /// Cursor pointing to the start of the desired set.
+        ///  Cursor pointing to the start of the desired set.
         /// </summary>
         [JsonProperty("after")]
         public string After { get; set; }
 
         /// <summary>
-        /// Cursor pointing to the end of the desired set.
+        ///  Cursor pointing to the end of the desired set.
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
 
         /// <summary>
-        /// ID of a [Block](#core-endpoints-blocks).
+        ///  ID of a [Block](#core-endpoints-blocks).
         /// </summary>
         [JsonProperty("block")]
         public string Block { get; set; }
 
         /// <summary>
-        /// Type of entity we will seek to match against when blocking the
-        /// mandate. This
-        /// can currently be one of 'email', 'email_domain', 'bank_account', or
-        /// 'bank_name'.
+        ///  Type of entity we will seek to match against when blocking the
+        ///  mandate. This
+        ///  can currently be one of 'email', 'email_domain', 'bank_account', or
+        ///  'bank_name'.
         /// </summary>
         [JsonProperty("block_type")]
         public string BlockType { get; set; }
 
         /// <summary>
-        /// Type of entity we will seek to match against when blocking the
-        /// mandate. This
-        /// can currently be one of 'email', 'email_domain', 'bank_account', or
-        /// 'bank_name'.
+        ///  Type of entity we will seek to match against when blocking the
+        ///  mandate. This
+        ///  can currently be one of 'email', 'email_domain', 'bank_account', or
+        ///  'bank_name'.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BlockBlockType
@@ -483,8 +484,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        ///  Fixed [timestamp](#api-usage-dates-and-times), recording when this
+        ///  resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public CreatedAtParam CreatedAt { get; set; }
@@ -520,29 +521,29 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Number of records to return.
+        ///  Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
 
         /// <summary>
-        /// The reason you wish to block this payer, can currently be one of
-        /// 'identity_fraud',
-        /// 'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't
-        /// captured by one of the
-        /// above then 'other' can be selected but you must provide a reason
-        /// description.
+        ///  The reason you wish to block this payer, can currently be one of
+        ///  'identity_fraud',
+        ///  'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't
+        ///  captured by one of the
+        ///  above then 'other' can be selected but you must provide a reason
+        ///  description.
         /// </summary>
         [JsonProperty("reason_type")]
         public string ReasonType { get; set; }
 
         /// <summary>
-        /// The reason you wish to block this payer, can currently be one of
-        /// 'identity_fraud',
-        /// 'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't
-        /// captured by one of the
-        /// above then 'other' can be selected but you must provide a reason
-        /// description.
+        ///  The reason you wish to block this payer, can currently be one of
+        ///  'identity_fraud',
+        ///  'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't
+        ///  captured by one of the
+        ///  above then 'other' can be selected but you must provide a reason
+        ///  description.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BlockReasonType
@@ -565,71 +566,71 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was updated.
+        ///  Fixed [timestamp](#api-usage-dates-and-times), recording when this
+        ///  resource was updated.
         /// </summary>
         [JsonProperty("updated_at")]
         public string UpdatedAt { get; set; }
     }
 
     /// <summary>
-    /// Disables a block so that it no longer will prevent mandate creation.
+    ///  Disables a block so that it no longer will prevent mandate creation.
     /// </summary>
     public class BlockDisableRequest { }
 
     /// <summary>
-    /// Enables a previously disabled block so that it will prevent mandate
-    /// creation
+    ///  Enables a previously disabled block so that it will prevent mandate
+    ///  creation
     /// </summary>
     public class BlockEnableRequest { }
 
     /// <summary>
-    /// Creates new blocks for a given reference. By default blocks will be
-    /// active.
-    /// Returns 201 if at least one block was created. Returns 200 if there were
-    /// no new
-    /// blocks created.
+    ///  Creates new blocks for a given reference. By default blocks will be
+    ///  active.
+    ///  Returns 201 if at least one block was created. Returns 200 if there
+    ///  were no new
+    ///  blocks created.
     /// </summary>
     public class BlockBlockByRefRequest
     {
         /// <summary>
-        /// Shows if the block is active or disabled. Only active blocks will be
-        /// used when deciding
-        /// if a mandate should be blocked.
+        ///  Shows if the block is active or disabled. Only active blocks will
+        ///  be used when deciding
+        ///  if a mandate should be blocked.
         /// </summary>
         [JsonProperty("active")]
         public bool? Active { get; set; }
 
         /// <summary>
-        /// This field is required if the reason_type is other. It should be a
-        /// description of
-        /// the reason for why you wish to block this payer and why it does not
-        /// align with the
-        /// given reason_types. This is intended to help us improve our
-        /// knowledge of types of
-        /// fraud.
+        ///  This field is required if the reason_type is other. It should be a
+        ///  description of
+        ///  the reason for why you wish to block this payer and why it does not
+        ///  align with the
+        ///  given reason_types. This is intended to help us improve our
+        ///  knowledge of types of
+        ///  fraud.
         /// </summary>
         [JsonProperty("reason_description")]
         public string ReasonDescription { get; set; }
 
         /// <summary>
-        /// The reason you wish to block this payer, can currently be one of
-        /// 'identity_fraud',
-        /// 'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't
-        /// captured by one of the
-        /// above then 'other' can be selected but you must provide a reason
-        /// description.
+        ///  The reason you wish to block this payer, can currently be one of
+        ///  'identity_fraud',
+        ///  'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't
+        ///  captured by one of the
+        ///  above then 'other' can be selected but you must provide a reason
+        ///  description.
         /// </summary>
         [JsonProperty("reason_type")]
         public string ReasonType { get; set; }
 
         /// <summary>
-        /// The reason you wish to block this payer, can currently be one of
-        /// 'identity_fraud',
-        /// 'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't
-        /// captured by one of the
-        /// above then 'other' can be selected but you must provide a reason
-        /// description.
+        ///  The reason you wish to block this payer, can currently be one of
+        ///  'identity_fraud',
+        ///  'no_intent_to_pay', 'unfair_chargeback'. If the reason isn't
+        ///  captured by one of the
+        ///  above then 'other' can be selected but you must provide a reason
+        ///  description.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BlockReasonType
@@ -652,19 +653,19 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Type of entity we will seek to get the associated emails and bank
-        /// accounts to
-        /// create blocks from. This can currently be one of 'customer' or
-        /// 'mandate'.
+        ///  Type of entity we will seek to get the associated emails and bank
+        ///  accounts to
+        ///  create blocks from. This can currently be one of 'customer' or
+        ///  'mandate'.
         /// </summary>
         [JsonProperty("reference_type")]
         public string ReferenceType { get; set; }
 
         /// <summary>
-        /// Type of entity we will seek to get the associated emails and bank
-        /// accounts to
-        /// create blocks from. This can currently be one of 'customer' or
-        /// 'mandate'.
+        ///  Type of entity we will seek to get the associated emails and bank
+        ///  accounts to
+        ///  create blocks from. This can currently be one of 'customer' or
+        ///  'mandate'.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BlockReferenceType
@@ -679,13 +680,13 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// This field is a reference to the entity you wish to block based on
-        /// its emails
-        /// and bank accounts. This may be the ID of a customer or a mandate.
-        /// This means in
-        /// order to block by reference the entity must have already been
-        /// created as a
-        /// resource.
+        ///  This field is a reference to the entity you wish to block based on
+        ///  its emails
+        ///  and bank accounts. This may be the ID of a customer or a mandate.
+        ///  This means in
+        ///  order to block by reference the entity must have already been
+        ///  created as a
+        ///  resource.
         /// </summary>
         [JsonProperty("reference_value")]
         public string ReferenceValue { get; set; }

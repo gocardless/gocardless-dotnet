@@ -8,123 +8,123 @@ using Newtonsoft.Json.Converters;
 namespace GoCardless.Resources
 {
     /// <summary>
-    /// Represents a billing request resource.
+    ///  Represents a billing request resource.
     ///
-    /// Billing Requests help create resources that require input or action from
-    /// a customer. An example of required input might be additional customer
-    /// billing details, while an action would be asking a customer to authorise
-    /// a payment using their mobile banking app.
+    ///  Billing Requests help create resources that require input or action
+    ///  from a customer. An example of required input might be additional
+    ///  customer billing details, while an action would be asking a customer to
+    ///  authorise a payment using their mobile banking app.
     ///
-    /// See [Billing Requests:
-    /// Overview](https://developer.gocardless.com/getting-started/billing-requests/overview/)
-    /// for how-to's, explanations and tutorials. <p
-    /// class="notice"><strong>Important</strong>: All properties associated
-    /// with `subscription_request` and `instalment_schedule_request` are only
-    /// supported for ACH and PAD schemes.</p>
+    ///  See [Billing Requests:
+    ///  Overview](https://developer.gocardless.com/getting-started/billing-requests/overview/)
+    ///  for how-to's, explanations and tutorials. <p
+    ///  class="notice"><strong>Important</strong>: All properties associated
+    ///  with `subscription_request` and `instalment_schedule_request` are only
+    ///  supported for ACH and PAD schemes.</p>
     /// </summary>
     public class BillingRequest
     {
         /// <summary>
-        /// List of actions that can be performed before this billing request
-        /// can be fulfilled.
+        ///  List of actions that can be performed before this billing request
+        ///  can be fulfilled.
         /// </summary>
         [JsonProperty("actions")]
         public List<BillingRequestAction> Actions { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        ///  Fixed [timestamp](#api-usage-dates-and-times), recording when this
+        ///  resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        /// (Optional) If true, this billing request can fallback from instant
-        /// payment to direct debit.
-        /// Should not be set if GoCardless payment intelligence feature is
-        /// used.
+        ///  (Optional) If true, this billing request can fallback from instant
+        ///  payment to direct debit.
+        ///  Should not be set if GoCardless payment intelligence feature is
+        ///  used.
         ///
-        /// See [Billing Requests: Retain customers with
-        /// Fallbacks](https://developer.gocardless.com/billing-requests/retain-customers-with-fallbacks/)
-        /// for more information.
+        ///  See [Billing Requests: Retain customers with
+        ///  Fallbacks](https://developer.gocardless.com/billing-requests/retain-customers-with-fallbacks/)
+        ///  for more information.
         /// </summary>
         [JsonProperty("fallback_enabled")]
         public bool? FallbackEnabled { get; set; }
 
         /// <summary>
-        /// True if the billing request was completed with direct debit.
+        ///  True if the billing request was completed with direct debit.
         /// </summary>
         [JsonProperty("fallback_occurred")]
         public bool? FallbackOccurred { get; set; }
 
         /// <summary>
-        /// Unique identifier, beginning with "BRQ".
+        ///  Unique identifier, beginning with "BRQ".
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
 
         /// <summary>
-        /// Request for an instalment schedule. Has to contain either
-        /// `instalments_with_schedule` object or an array of
-        /// `instalments_with_dates` objects
+        ///  Request for an instalment schedule. Has to contain either
+        ///  `instalments_with_schedule` object or an array of
+        ///  `instalments_with_dates` objects
         /// </summary>
         [JsonProperty("instalment_schedule_request")]
         public BillingRequestInstalmentScheduleRequest InstalmentScheduleRequest { get; set; }
 
         /// <summary>
-        /// Resources linked to this BillingRequest.
+        ///  Resources linked to this BillingRequest.
         /// </summary>
         [JsonProperty("links")]
         public BillingRequestLinks Links { get; set; }
 
         /// <summary>
-        /// Request for a mandate
+        ///  Request for a mandate
         /// </summary>
         [JsonProperty("mandate_request")]
         public BillingRequestMandateRequest MandateRequest { get; set; }
 
         /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
+        ///  Key-value store of custom data. Up to 3 keys are permitted, with
+        ///  key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// Specifies the context or scenario in which the payment is being
-        /// made. Defines whether the payment is for advance/arrears billing,
-        /// point of sale transactions, ecommerce, or account transfers. This
-        /// helps banks and payment processors understand the payment scenario
-        /// and apply appropriate processing rules and risk controls.
+        ///  Specifies the context or scenario in which the payment is being
+        ///  made. Defines whether the payment is for advance/arrears billing,
+        ///  point of sale transactions, ecommerce, or account transfers. This
+        ///  helps banks and payment processors understand the payment scenario
+        ///  and apply appropriate processing rules and risk controls.
         /// </summary>
         [JsonProperty("payment_context_code")]
         public BillingRequestPaymentContextCode? PaymentContextCode { get; set; }
 
         /// <summary>
-        /// Specifies the underlying purpose of the payment. Defines the
-        /// specific reason or type of service/goods the payment relates to,
-        /// improving straight-through processing and compliance.
-        /// See [VRP Commercial Payment Purpose
-        /// Codes](https://developer.gocardless.com/vrp-commercial-payment-purpose-codes/)
-        /// for the complete list of valid codes.
+        ///  Specifies the underlying purpose of the payment. Defines the
+        ///  specific reason or type of service/goods the payment relates to,
+        ///  improving straight-through processing and compliance.
+        ///  See [VRP Commercial Payment Purpose
+        ///  Codes](https://developer.gocardless.com/vrp-commercial-payment-purpose-codes/)
+        ///  for the complete list of valid codes.
         /// </summary>
         [JsonProperty("payment_purpose_code")]
         public string PaymentPurposeCode { get; set; }
 
         /// <summary>
-        /// Request for a one-off strongly authorised payment
+        ///  Request for a one-off strongly authorised payment
         /// </summary>
         [JsonProperty("payment_request")]
         public BillingRequestPaymentRequest PaymentRequest { get; set; }
 
         /// <summary>
-        /// Specifies the high-level purpose/category of a mandate and/or
-        /// payment using a set of pre-defined categories. Provides context on
-        /// the nature and reason for the payment to facilitate processing and
-        /// compliance.
-        /// See [Billing Request Purpose
-        /// Codes](https://developer.gocardless.com/billing-request-purpose-codes/)
-        /// for the complete list of valid codes.
+        ///  Specifies the high-level purpose/category of a mandate and/or
+        ///  payment using a set of pre-defined categories. Provides context on
+        ///  the nature and reason for the payment to facilitate processing and
+        ///  compliance.
+        ///  See [Billing Request Purpose
+        ///  Codes](https://developer.gocardless.com/billing-request-purpose-codes/)
+        ///  for the complete list of valid codes.
         /// </summary>
         [JsonProperty("purpose_code")]
         public BillingRequestPurposeCode? PurposeCode { get; set; }
@@ -133,131 +133,131 @@ namespace GoCardless.Resources
         public BillingRequestResources Resources { get; set; }
 
         /// <summary>
-        /// One of:
-        /// <ul>
-        /// <li>`pending`: the billing request is pending and can be used</li>
-        /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
-        /// <li>`fulfilling`: the billing request is currently undergoing
-        /// fulfilment</li>
-        /// <li>`fulfilled`: the billing request has been fulfilled and a
-        /// payment created</li>
-        /// <li>`cancelled`: the billing request has been cancelled and cannot
-        /// be used</li>
-        /// </ul>
+        ///  One of:
+        ///  <ul>
+        ///  <li>`pending`: the billing request is pending and can be used</li>
+        ///  <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
+        ///  <li>`fulfilling`: the billing request is currently undergoing
+        ///  fulfilment</li>
+        ///  <li>`fulfilled`: the billing request has been fulfilled and a
+        ///  payment created</li>
+        ///  <li>`cancelled`: the billing request has been cancelled and cannot
+        ///  be used</li>
+        ///  </ul>
         /// </summary>
         [JsonProperty("status")]
         public string Status { get; set; }
 
         /// <summary>
-        /// Request for a subscription
+        ///  Request for a subscription
         /// </summary>
         [JsonProperty("subscription_request")]
         public BillingRequestSubscriptionRequest SubscriptionRequest { get; set; }
     }
 
     /// <summary>
-    /// Represents a billing request action resource.
+    ///  Represents a billing request action resource.
     ///
-    /// List of actions that can be performed before this billing request can be
-    /// fulfilled.
+    ///  List of actions that can be performed before this billing request can
+    ///  be fulfilled.
     /// </summary>
     public class BillingRequestAction
     {
         /// <summary>
-        /// List of currencies the current mandate supports
+        ///  List of currencies the current mandate supports
         /// </summary>
         [JsonProperty("available_currencies")]
         public List<string> AvailableCurrencies { get; set; }
 
         /// <summary>
-        /// Describes the behaviour of bank authorisations, for the
-        /// bank_authorisation action
+        ///  Describes the behaviour of bank authorisations, for the
+        ///  bank_authorisation action
         /// </summary>
         [JsonProperty("bank_authorisation")]
         public BillingRequestActionBankAuthorisation BankAuthorisation { get; set; }
 
         /// <summary>
-        /// Additional parameters to help complete the collect_customer_details
-        /// action
+        ///  Additional parameters to help complete the collect_customer_details
+        ///  action
         /// </summary>
         [JsonProperty("collect_customer_details")]
         public BillingRequestActionCollectCustomerDetails CollectCustomerDetails { get; set; }
 
         /// <summary>
-        /// Which other action types this action can complete.
+        ///  Which other action types this action can complete.
         /// </summary>
         [JsonProperty("completes_actions")]
         public List<string> CompletesActions { get; set; }
 
         /// <summary>
-        /// Describes whether we inferred the institution from the provided bank
-        /// account details. One of:
-        /// - `not_needed`: we won't attempt to infer the institution as it is
-        /// not needed. Either because it was manually selected or the billing
-        /// request does not support this feature
-        /// - `pending`: we are waiting on the bank details in order to infer
-        /// the institution
-        /// - `failed`: we weren't able to infer the institution
-        /// - `success`: we inferred the institution and added it to the
-        /// resources of a Billing Request
+        ///  Describes whether we inferred the institution from the provided
+        ///  bank account details. One of:
+        ///  - `not_needed`: we won't attempt to infer the institution as it is
+        ///  not needed. Either because it was manually selected or the billing
+        ///  request does not support this feature
+        ///  - `pending`: we are waiting on the bank details in order to infer
+        ///  the institution
+        ///  - `failed`: we weren't able to infer the institution
+        ///  - `success`: we inferred the institution and added it to the
+        ///  resources of a Billing Request
         ///
         /// </summary>
         [JsonProperty("institution_guess_status")]
         public string InstitutionGuessStatus { get; set; }
 
         /// <summary>
-        /// Informs you whether the action is required to fulfil the billing
-        /// request or not.
+        ///  Informs you whether the action is required to fulfil the billing
+        ///  request or not.
         /// </summary>
         [JsonProperty("required")]
         public bool? Required { get; set; }
 
         /// <summary>
-        /// Requires completing these actions before this action can be
-        /// completed.
+        ///  Requires completing these actions before this action can be
+        ///  completed.
         /// </summary>
         [JsonProperty("requires_actions")]
         public List<string> RequiresActions { get; set; }
 
         /// <summary>
-        /// Status of the action
+        ///  Status of the action
         /// </summary>
         [JsonProperty("status")]
         public string Status { get; set; }
 
         /// <summary>
-        /// Unique identifier for the action.
+        ///  Unique identifier for the action.
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; }
     }
 
     /// <summary>
-    /// Represents a billing request action bank authorisation resource.
+    ///  Represents a billing request action bank authorisation resource.
     ///
-    /// Describes the behaviour of bank authorisations, for the
-    /// bank_authorisation action
+    ///  Describes the behaviour of bank authorisations, for the
+    ///  bank_authorisation action
     /// </summary>
     public class BillingRequestActionBankAuthorisation
     {
         /// <summary>
-        /// Which authorisation adapter will be used to power these
-        /// authorisations (GoCardless internal use only)
+        ///  Which authorisation adapter will be used to power these
+        ///  authorisations (GoCardless internal use only)
         /// </summary>
         [JsonProperty("adapter")]
         public string Adapter { get; set; }
 
         /// <summary>
-        /// What type of bank authorisations are supported on this billing
-        /// request
+        ///  What type of bank authorisations are supported on this billing
+        ///  request
         /// </summary>
         [JsonProperty("authorisation_type")]
         public string AuthorisationType { get; set; }
     }
 
     /// <summary>
-    /// Which authorisation adapter will be used to power these authorisations (GoCardless internal
-    /// use only)
+    ///  Which authorisation adapter will be used to power these authorisations (GoCardless internal
+    ///  use only)
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestActionBankAuthorisationAdapter
@@ -288,7 +288,7 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// What type of bank authorisations are supported on this billing request
+    ///  What type of bank authorisations are supported on this billing request
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestActionBankAuthorisationAuthorisationType
@@ -307,16 +307,16 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request action collect customer detail resource.
+    ///  Represents a billing request action collect customer detail resource.
     ///
-    /// Additional parameters to help complete the collect_customer_details
-    /// action
+    ///  Additional parameters to help complete the collect_customer_details
+    ///  action
     /// </summary>
     public class BillingRequestActionCollectCustomerDetails
     {
         /// <summary>
-        /// Default customer country code, as determined by scheme and payer
-        /// location
+        ///  Default customer country code, as determined by scheme and payer
+        ///  location
         /// </summary>
         [JsonProperty("default_country_code")]
         public string DefaultCountryCode { get; set; }
@@ -326,8 +326,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request action collect customer details incomplete
-    /// field resource.
+    ///  Represents a billing request action collect customer details incomplete
+    ///  field resource.
     /// </summary>
     public class BillingRequestActionCollectCustomerDetailsIncompleteFields
     {
@@ -339,13 +339,13 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Describes whether we inferred the institution from the provided bank account details. One
-    /// of:
-    /// - `not_needed`: we won't attempt to infer the institution as it is not needed. Either
-    /// because it was manually selected or the billing request does not support this feature
-    /// - `pending`: we are waiting on the bank details in order to infer the institution
-    /// - `failed`: we weren't able to infer the institution
-    /// - `success`: we inferred the institution and added it to the resources of a Billing Request
+    ///  Describes whether we inferred the institution from the provided bank account details. One
+    ///  of:
+    ///  - `not_needed`: we won't attempt to infer the institution as it is not needed. Either
+    ///  because it was manually selected or the billing request does not support this feature
+    ///  - `pending`: we are waiting on the bank details in order to infer the institution
+    ///  - `failed`: we weren't able to infer the institution
+    ///  - `success`: we inferred the institution and added it to the resources of a Billing Request
     ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
@@ -373,7 +373,7 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Status of the action
+    ///  Status of the action
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestActionStatus
@@ -392,7 +392,7 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Unique identifier for the action.
+    ///  Unique identifier for the action.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestActionType
@@ -431,194 +431,196 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request instalment schedule request resource.
+    ///  Represents a billing request instalment schedule request resource.
     ///
-    /// Request for an instalment schedule. Has to contain either
-    /// `instalments_with_schedule` object or an array of
-    /// `instalments_with_dates` objects
+    ///  Request for an instalment schedule. Has to contain either
+    ///  `instalments_with_schedule` object or an array of
+    ///  `instalments_with_dates` objects
     /// </summary>
     public class BillingRequestInstalmentScheduleRequest
     {
         /// <summary>
-        /// The amount to be deducted from each payment as an app fee, to be
-        /// paid to the partner integration which created the subscription, in
-        /// the lowest denomination for the currency (e.g. pence in GBP, cents
-        /// in EUR).
+        ///  The amount to be deducted from each payment as an app fee, to be
+        ///  paid to the partner integration which created the subscription, in
+        ///  the lowest denomination for the currency (e.g. pence in GBP, cents
+        ///  in EUR).
         /// </summary>
         [JsonProperty("app_fee")]
         public int? AppFee { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "USD" and "CAD" are supported.
+        ///  [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        ///  currency code. Currently "USD" and "CAD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
 
         /// <summary>
-        /// An explicit array of instalment payments, each specifying at least
-        /// an `amount` and `charge_date`. See [create (with
-        /// dates)](#instalment-schedules-create-with-dates)
+        ///  An explicit array of instalment payments, each specifying at least
+        ///  an `amount` and `charge_date`. See [create (with
+        ///  dates)](#instalment-schedules-create-with-dates)
         /// </summary>
         [JsonProperty("instalments_with_dates")]
         public List<BillingRequestInstalmentScheduleRequestInstalmentsWithDate> InstalmentsWithDates { get; set; }
 
         /// <summary>
-        /// Frequency of the payments you want to create, together with an array
-        /// of payment
-        /// amounts to be collected, with a specified start date for the first
-        /// payment.
-        /// See [create (with
-        /// schedule)](#instalment-schedules-create-with-schedule)
+        ///  Frequency of the payments you want to create, together with an
+        ///  array of payment
+        ///  amounts to be collected, with a specified start date for the first
+        ///  payment.
+        ///  See [create (with
+        ///  schedule)](#instalment-schedules-create-with-schedule)
         ///
         /// </summary>
         [JsonProperty("instalments_with_schedule")]
         public BillingRequestInstalmentScheduleRequestInstalmentsWithSchedule InstalmentsWithSchedule { get; set; }
 
         /// <summary>
-        /// Resources linked to this BillingRequestInstalmentScheduleRequest.
+        ///  Resources linked to this BillingRequestInstalmentScheduleRequest.
         /// </summary>
         [JsonProperty("links")]
         public BillingRequestInstalmentScheduleRequestLinks Links { get; set; }
 
         /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
+        ///  Key-value store of custom data. Up to 3 keys are permitted, with
+        ///  key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// Name of the instalment schedule, up to 100 chars. This name will
-        /// also be
-        /// copied to the payments of the instalment schedule if you use
-        /// schedule-based creation.
+        ///  Name of the instalment schedule, up to 100 chars. This name will
+        ///  also be
+        ///  copied to the payments of the instalment schedule if you use
+        ///  schedule-based creation.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// An optional payment reference. This will be set as the reference on
-        /// each payment
-        /// created and will appear on your customer's bank statement. See the
-        /// documentation for
-        /// the [create payment endpoint](#payments-create-a-payment) for more
-        /// details.
-        /// <br />
+        ///  An optional payment reference. This will be set as the reference on
+        ///  each payment
+        ///  created and will appear on your customer's bank statement. See the
+        ///  documentation for
+        ///  the [create payment endpoint](#payments-create-a-payment) for more
+        ///  details.
+        ///  <br />
         /// </summary>
         [JsonProperty("payment_reference")]
         public string PaymentReference { get; set; }
 
         /// <summary>
-        /// On failure, automatically retry payments using [intelligent
-        /// retries](/success-plus/overview). Default is `false`. <p
-        /// class="notice"><strong>Important</strong>: To be able to use
-        /// intelligent retries, Success+ needs to be enabled in [GoCardless
-        /// dashboard](https://manage.gocardless.com/success-plus). </p>
+        ///  On failure, automatically retry payments using [intelligent
+        ///  retries](/success-plus/overview). Default is `false`. <p
+        ///  class="notice"><strong>Important</strong>: To be able to use
+        ///  intelligent retries, Success+ needs to be enabled in [GoCardless
+        ///  dashboard](https://manage.gocardless.com/success-plus). </p>
         /// </summary>
         [JsonProperty("retry_if_possible")]
         public bool? RetryIfPossible { get; set; }
 
         /// <summary>
-        /// The total amount of the instalment schedule, defined as the sum of
-        /// all individual
-        /// payments, in the lowest denomination for the currency (e.g. pence in
-        /// GBP, cents in
-        /// EUR). If the requested payment amounts do not sum up correctly, a
-        /// validation error
-        /// will be returned.
+        ///  The total amount of the instalment schedule, defined as the sum of
+        ///  all individual
+        ///  payments, in the lowest denomination for the currency (e.g. pence
+        ///  in GBP, cents in
+        ///  EUR). If the requested payment amounts do not sum up correctly, a
+        ///  validation error
+        ///  will be returned.
         /// </summary>
         [JsonProperty("total_amount")]
         public int? TotalAmount { get; set; }
     }
 
     /// <summary>
-    /// Represents a billing request instalment schedule request instalments
-    /// with date resource.
+    ///  Represents a billing request instalment schedule request instalments
+    ///  with date resource.
     ///
-    /// An explicit array of instalment payments, each specifying at least an
-    /// `amount` and `charge_date`. See [create (with
-    /// dates)](#instalment-schedules-create-with-dates)
+    ///  An explicit array of instalment payments, each specifying at least an
+    ///  `amount` and `charge_date`. See [create (with
+    ///  dates)](#instalment-schedules-create-with-dates)
     /// </summary>
     public class BillingRequestInstalmentScheduleRequestInstalmentsWithDate
     {
         /// <summary>
-        /// Amount, in the lowest denomination for the currency (e.g. pence in
-        /// GBP, cents in EUR).
+        ///  Amount, in the lowest denomination for the currency (e.g. pence in
+        ///  GBP, cents in EUR).
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
 
         /// <summary>
-        /// A future date on which the payment should be collected. If the date
-        /// is before the next_possible_charge_date on the
-        /// [mandate](#core-endpoints-mandates), it will be automatically rolled
-        /// forwards to that date.
+        ///  A future date on which the payment should be collected. If the date
+        ///  is before the next_possible_charge_date on the
+        ///  [mandate](#core-endpoints-mandates), it will be automatically
+        ///  rolled
+        ///  forwards to that date.
         /// </summary>
         [JsonProperty("charge_date")]
         public string ChargeDate { get; set; }
 
         /// <summary>
-        /// A human-readable description of the payment. This will be included
-        /// in the notification email GoCardless sends to your customer if your
-        /// organisation does not send its own notifications (see [compliance
-        /// requirements](#appendix-compliance-requirements)).
+        ///  A human-readable description of the payment. This will be included
+        ///  in the notification email GoCardless sends to your customer if your
+        ///  organisation does not send its own notifications (see [compliance
+        ///  requirements](#appendix-compliance-requirements)).
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
     }
 
     /// <summary>
-    /// Represents a billing request instalment schedule request instalments
-    /// with schedule resource.
+    ///  Represents a billing request instalment schedule request instalments
+    ///  with schedule resource.
     ///
-    /// Frequency of the payments you want to create, together with an array of
-    /// payment
-    /// amounts to be collected, with a specified start date for the first
-    /// payment.
-    /// See [create (with schedule)](#instalment-schedules-create-with-schedule)
+    ///  Frequency of the payments you want to create, together with an array of
+    ///  payment
+    ///  amounts to be collected, with a specified start date for the first
+    ///  payment.
+    ///  See [create (with
+    ///  schedule)](#instalment-schedules-create-with-schedule)
     /// </summary>
     public class BillingRequestInstalmentScheduleRequestInstalmentsWithSchedule
     {
         /// <summary>
-        /// List of amounts of each instalment, in the lowest denomination for
-        /// the
-        /// currency (e.g. cents in USD).
+        ///  List of amounts of each instalment, in the lowest denomination for
+        ///  the
+        ///  currency (e.g. cents in USD).
         ///
         /// </summary>
         [JsonProperty("amounts")]
         public List<int?> Amounts { get; set; }
 
         /// <summary>
-        /// Number of `interval_units` between charge dates. Must be greater
-        /// than or
-        /// equal to `1`.
+        ///  Number of `interval_units` between charge dates. Must be greater
+        ///  than or
+        ///  equal to `1`.
         ///
         /// </summary>
         [JsonProperty("interval")]
         public int? Interval { get; set; }
 
         /// <summary>
-        /// The unit of time between customer charge dates. One of `weekly`,
-        /// `monthly` or `yearly`.
+        ///  The unit of time between customer charge dates. One of `weekly`,
+        ///  `monthly` or `yearly`.
         /// </summary>
         [JsonProperty("interval_unit")]
         public BillingRequestInstalmentScheduleRequestInstalmentsWithScheduleIntervalUnit? IntervalUnit { get; set; }
 
         /// <summary>
-        /// The date on which the first payment should be charged. Must be on or
-        /// after the [mandate](#core-endpoints-mandates)'s
-        /// `next_possible_charge_date`. When left blank and `month` or
-        /// `day_of_month` are provided, this will be set to the date of the
-        /// first payment. If created without `month` or `day_of_month` this
-        /// will be set as the mandate's `next_possible_charge_date`
+        ///  The date on which the first payment should be charged. Must be on
+        ///  or after the [mandate](#core-endpoints-mandates)'s
+        ///  `next_possible_charge_date`. When left blank and `month` or
+        ///  `day_of_month` are provided, this will be set to the date of the
+        ///  first payment. If created without `month` or `day_of_month` this
+        ///  will be set as the mandate's `next_possible_charge_date`
         /// </summary>
         [JsonProperty("start_date")]
         public string StartDate { get; set; }
     }
 
     /// <summary>
-    /// The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
+    ///  The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestInstalmentScheduleRequestInstalmentsWithScheduleIntervalUnit
@@ -641,14 +643,14 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Resources linked to this BillingRequestInstalmentScheduleRequest
+    ///  Resources linked to this BillingRequestInstalmentScheduleRequest
     /// </summary>
     public class BillingRequestInstalmentScheduleRequestLinks
     {
         /// <summary>
-        /// (Optional) ID of the
-        /// [instalment_schedule](#core-endpoints-instalment-schedules) that was
-        /// created from this instalment schedule request.
+        ///  (Optional) ID of the
+        ///  [instalment_schedule](#core-endpoints-instalment-schedules) that
+        ///  was created from this instalment schedule request.
         ///
         /// </summary>
         [JsonProperty("instalment_schedule")]
@@ -656,266 +658,268 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Resources linked to this BillingRequest
+    ///  Resources linked to this BillingRequest
     /// </summary>
     public class BillingRequestLinks
     {
         /// <summary>
-        /// (Optional) ID of the [bank
-        /// authorisation](#billing-requests-bank-authorisations) that was used
-        /// to verify this request.
+        ///  (Optional) ID of the [bank
+        ///  authorisation](#billing-requests-bank-authorisations) that was used
+        ///  to verify this request.
         /// </summary>
         [JsonProperty("bank_authorisation")]
         public string BankAuthorisation { get; set; }
 
         /// <summary>
-        /// ID of the associated [creditor](#core-endpoints-creditors).
+        ///  ID of the associated [creditor](#core-endpoints-creditors).
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
 
         /// <summary>
-        /// ID of the [customer](#core-endpoints-customers) that will be used
-        /// for this request
+        ///  ID of the [customer](#core-endpoints-customers) that will be used
+        ///  for this request
         /// </summary>
         [JsonProperty("customer")]
         public string Customer { get; set; }
 
         /// <summary>
-        /// (Optional) ID of the
-        /// [customer_bank_account](#core-endpoints-customer-bank-accounts) that
-        /// will be used for this request
+        ///  (Optional) ID of the
+        ///  [customer_bank_account](#core-endpoints-customer-bank-accounts)
+        ///  that will be used for this request
         /// </summary>
         [JsonProperty("customer_bank_account")]
         public string CustomerBankAccount { get; set; }
 
         /// <summary>
-        /// ID of the customer billing detail that will be used for this request
+        ///  ID of the customer billing detail that will be used for this
+        ///  request
         /// </summary>
         [JsonProperty("customer_billing_detail")]
         public string CustomerBillingDetail { get; set; }
 
         /// <summary>
-        /// (Optional) ID of the associated instalment schedule request
+        ///  (Optional) ID of the associated instalment schedule request
         /// </summary>
         [JsonProperty("instalment_schedule_request")]
         public string InstalmentScheduleRequest { get; set; }
 
         /// <summary>
-        /// (Optional) ID of the
-        /// [instalment_schedule](#core-endpoints-instalment-schedules) that was
-        /// created from this instalment schedule request.
+        ///  (Optional) ID of the
+        ///  [instalment_schedule](#core-endpoints-instalment-schedules) that
+        ///  was created from this instalment schedule request.
         /// </summary>
         [JsonProperty("instalment_schedule_request_instalment_schedule")]
         public string InstalmentScheduleRequestInstalmentSchedule { get; set; }
 
         /// <summary>
-        /// (Optional) ID of the associated mandate request
+        ///  (Optional) ID of the associated mandate request
         /// </summary>
         [JsonProperty("mandate_request")]
         public string MandateRequest { get; set; }
 
         /// <summary>
-        /// (Optional) ID of the [mandate](#core-endpoints-mandates) that was
-        /// created from this mandate request. this mandate request.
+        ///  (Optional) ID of the [mandate](#core-endpoints-mandates) that was
+        ///  created from this mandate request. this mandate request.
         /// </summary>
         [JsonProperty("mandate_request_mandate")]
         public string MandateRequestMandate { get; set; }
 
         /// <summary>
-        /// ID of the associated organisation.
+        ///  ID of the associated organisation.
         /// </summary>
         [JsonProperty("organisation")]
         public string Organisation { get; set; }
 
         /// <summary>
-        /// (Optional) ID of the associated payment provider
+        ///  (Optional) ID of the associated payment provider
         /// </summary>
         [JsonProperty("payment_provider")]
         public string PaymentProvider { get; set; }
 
         /// <summary>
-        /// (Optional) ID of the associated payment request
+        ///  (Optional) ID of the associated payment request
         /// </summary>
         [JsonProperty("payment_request")]
         public string PaymentRequest { get; set; }
 
         /// <summary>
-        /// (Optional) ID of the [payment](#core-endpoints-payments) that was
-        /// created from this payment request.
+        ///  (Optional) ID of the [payment](#core-endpoints-payments) that was
+        ///  created from this payment request.
         /// </summary>
         [JsonProperty("payment_request_payment")]
         public string PaymentRequestPayment { get; set; }
 
         /// <summary>
-        /// (Optional) ID of the associated subscription request
+        ///  (Optional) ID of the associated subscription request
         /// </summary>
         [JsonProperty("subscription_request")]
         public string SubscriptionRequest { get; set; }
 
         /// <summary>
-        /// (Optional) ID of the [subscription](#core-endpoints-subscriptions)
-        /// that was created from this subscription request.
+        ///  (Optional) ID of the [subscription](#core-endpoints-subscriptions)
+        ///  that was created from this subscription request.
         /// </summary>
         [JsonProperty("subscription_request_subscription")]
         public string SubscriptionRequestSubscription { get; set; }
     }
 
     /// <summary>
-    /// Represents a billing request mandate request resource.
+    ///  Represents a billing request mandate request resource.
     ///
-    /// Request for a mandate
+    ///  Request for a mandate
     /// </summary>
     public class BillingRequestMandateRequest
     {
         /// <summary>
-        /// This field is ACH specific, sometimes referred to as [SEC
-        /// code](https://www.moderntreasury.com/learn/sec-codes).
+        ///  This field is ACH specific, sometimes referred to as [SEC
+        ///  code](https://www.moderntreasury.com/learn/sec-codes).
         ///
-        /// This is the way that the payer gives authorisation to the merchant.
-        ///   web: Authorisation is Internet Initiated or via Mobile Entry (maps
-        /// to SEC code: WEB)
-        ///   telephone: Authorisation is provided orally over telephone (maps
-        /// to SEC code: TEL)
-        ///   paper: Authorisation is provided in writing and signed, or
-        /// similarly authenticated (maps to SEC code: PPD)
+        ///  This is the way that the payer gives authorisation to the merchant.
+        ///    web: Authorisation is Internet Initiated or via Mobile Entry
+        ///  (maps to SEC code: WEB)
+        ///    telephone: Authorisation is provided orally over telephone (maps
+        ///  to SEC code: TEL)
+        ///    paper: Authorisation is provided in writing and signed, or
+        ///  similarly authenticated (maps to SEC code: PPD)
         ///
         /// </summary>
         [JsonProperty("authorisation_source")]
         public BillingRequestMandateRequestAuthorisationSource? AuthorisationSource { get; set; }
 
         /// <summary>
-        /// This attribute represents the authorisation type between the payer
-        /// and merchant. It can be set to `one_off`,
-        /// `recurring` or `standing` for ACH scheme. And `single`, `recurring`
-        /// and `sporadic` for PAD scheme. _Note:_ This is only supported for
-        /// ACH and PAD schemes.
+        ///  This attribute represents the authorisation type between the payer
+        ///  and merchant. It can be set to `one_off`,
+        ///  `recurring` or `standing` for ACH scheme. And `single`, `recurring`
+        ///  and `sporadic` for PAD scheme. _Note:_ This is only supported for
+        ///  ACH and PAD schemes.
         ///
         /// </summary>
         [JsonProperty("consent_type")]
         public string ConsentType { get; set; }
 
         /// <summary>
-        /// Constraints that will apply to the mandate_request. (Optional)
-        /// Specifically required for PayTo and VRP.
+        ///  Constraints that will apply to the mandate_request. (Optional)
+        ///  Specifically required for PayTo and VRP.
         /// </summary>
         [JsonProperty("constraints")]
         public BillingRequestMandateRequestConstraints Constraints { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code.
+        ///  [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        ///  currency code.
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
 
         /// <summary>
-        /// A human-readable description of the payment and/or mandate. This
-        /// will be displayed to the payer when authorising the billing request.
+        ///  A human-readable description of the payment and/or mandate. This
+        ///  will be displayed to the payer when authorising the billing
+        ///  request.
         ///
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
 
         /// <summary>
-        /// This field will decide how GoCardless handles settlement of funds
-        /// from the customer.
+        ///  This field will decide how GoCardless handles settlement of funds
+        ///  from the customer.
         ///
-        /// - `managed` will be moved through GoCardless' account, batched, and
-        /// payed out.
-        /// - `direct` will be a direct transfer from the payer's account to the
-        /// merchant where
-        ///   invoicing will be handled separately.
+        ///  - `managed` will be moved through GoCardless' account, batched, and
+        ///  payed out.
+        ///  - `direct` will be a direct transfer from the payer's account to
+        ///  the merchant where
+        ///    invoicing will be handled separately.
         ///
         /// </summary>
         [JsonProperty("funds_settlement")]
         public BillingRequestMandateRequestFundsSettlement? FundsSettlement { get; set; }
 
         /// <summary>
-        /// Resources linked to this BillingRequestMandateRequest.
+        ///  Resources linked to this BillingRequestMandateRequest.
         /// </summary>
         [JsonProperty("links")]
         public BillingRequestMandateRequestLinks Links { get; set; }
 
         /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
+        ///  Key-value store of custom data. Up to 3 keys are permitted, with
+        ///  key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// This attribute can be set to true if the payer has indicated that
-        /// multiple signatures are required for the mandate. As long as every
-        /// other Billing Request actions have been completed, the payer will
-        /// receive an email notification containing instructions on how to
-        /// complete the additional signature. The dual signature flow can only
-        /// be completed using GoCardless branded pages.
+        ///  This attribute can be set to true if the payer has indicated that
+        ///  multiple signatures are required for the mandate. As long as every
+        ///  other Billing Request actions have been completed, the payer will
+        ///  receive an email notification containing instructions on how to
+        ///  complete the additional signature. The dual signature flow can only
+        ///  be completed using GoCardless branded pages.
         /// </summary>
         [JsonProperty("payer_requested_dual_signature")]
         public bool? PayerRequestedDualSignature { get; set; }
 
         /// <summary>
-        /// A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs",
-        /// "becs_nz", "betalingsservice", "faster_payments", "pad", "pay_to"
-        /// and "sepa_core" are supported. Optional for mandate only requests -
-        /// if left blank, the payer will be able to select the currency/scheme
-        /// to pay with from a list of your available schemes.
+        ///  A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs",
+        ///  "becs_nz", "betalingsservice", "faster_payments", "pad", "pay_to"
+        ///  and "sepa_core" are supported. Optional for mandate only requests -
+        ///  if left blank, the payer will be able to select the currency/scheme
+        ///  to pay with from a list of your available schemes.
         /// </summary>
         [JsonProperty("scheme")]
         public string Scheme { get; set; }
 
         /// <summary>
-        /// If true, this billing request would be used to set up a mandate
-        /// solely for moving (or sweeping) money from one account owned by the
-        /// payer to another account that the payer also owns. This is required
-        /// for Faster Payments
+        ///  If true, this billing request would be used to set up a mandate
+        ///  solely for moving (or sweeping) money from one account owned by the
+        ///  payer to another account that the payer also owns. This is required
+        ///  for Faster Payments
         /// </summary>
         [JsonProperty("sweeping")]
         public bool? Sweeping { get; set; }
 
         /// <summary>
-        /// Verification preference for the mandate. One of:
-        /// <ul>
-        ///   <li>`minimum`: only verify if absolutely required, such as when
-        /// part of scheme rules</li>
-        ///   <li>`recommended`: in addition to `minimum`, use the GoCardless
-        /// payment intelligence solution to decide if a payer should be
-        /// verified</li>
-        ///   <li>`when_available`: if verification mechanisms are available,
-        /// use them</li>
-        ///   <li>`always`: as `when_available`, but fail to create the Billing
-        /// Request if a mechanism isn't available</li>
-        /// </ul>
+        ///  Verification preference for the mandate. One of:
+        ///  <ul>
+        ///    <li>`minimum`: only verify if absolutely required, such as when
+        ///  part of scheme rules</li>
+        ///    <li>`recommended`: in addition to `minimum`, use the GoCardless
+        ///  payment intelligence solution to decide if a payer should be
+        ///  verified</li>
+        ///    <li>`when_available`: if verification mechanisms are available,
+        ///  use them</li>
+        ///    <li>`always`: as `when_available`, but fail to create the Billing
+        ///  Request if a mechanism isn't available</li>
+        ///  </ul>
         ///
-        /// By default, all Billing Requests use the `recommended` verification
-        /// preference. It uses GoCardless payment intelligence solution to
-        /// determine if a payer is fraudulent or not. The verification
-        /// mechanism is based on the response and the payer may be asked to
-        /// verify themselves. If the feature is not available, `recommended`
-        /// behaves like `minimum`.
+        ///  By default, all Billing Requests use the `recommended` verification
+        ///  preference. It uses GoCardless payment intelligence solution to
+        ///  determine if a payer is fraudulent or not. The verification
+        ///  mechanism is based on the response and the payer may be asked to
+        ///  verify themselves. If the feature is not available, `recommended`
+        ///  behaves like `minimum`.
         ///
-        /// If you never wish to take advantage of our reduced risk products and
-        /// Verified Mandates as they are released in new schemes, please use
-        /// the `minimum` verification preference.
+        ///  If you never wish to take advantage of our reduced risk products
+        ///  and Verified Mandates as they are released in new schemes, please
+        ///  use the `minimum` verification preference.
         ///
-        /// See [Billing Requests: Creating Verified
-        /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
-        /// for more information.
+        ///  See [Billing Requests: Creating Verified
+        ///  Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
+        ///  for more information.
         /// </summary>
         [JsonProperty("verify")]
         public BillingRequestMandateRequestVerify? Verify { get; set; }
     }
 
     /// <summary>
-    /// This field is ACH specific, sometimes referred to as [SEC
-    /// code](https://www.moderntreasury.com/learn/sec-codes).
+    ///  This field is ACH specific, sometimes referred to as [SEC
+    ///  code](https://www.moderntreasury.com/learn/sec-codes).
     ///
-    /// This is the way that the payer gives authorisation to the merchant.
-    ///   web: Authorisation is Internet Initiated or via Mobile Entry (maps to SEC code: WEB)
-    ///   telephone: Authorisation is provided orally over telephone (maps to SEC code: TEL)
-    ///   paper: Authorisation is provided in writing and signed, or similarly authenticated (maps
-    /// to SEC code: PPD)
+    ///  This is the way that the payer gives authorisation to the merchant.
+    ///    web: Authorisation is Internet Initiated or via Mobile Entry (maps to SEC code: WEB)
+    ///    telephone: Authorisation is provided orally over telephone (maps to SEC code: TEL)
+    ///    paper: Authorisation is provided in writing and signed, or similarly authenticated (maps
+    ///  to SEC code: PPD)
     ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
@@ -939,55 +943,55 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request mandate request constraint resource.
+    ///  Represents a billing request mandate request constraint resource.
     ///
-    /// Constraints that will apply to the mandate_request. (Optional)
-    /// Specifically required for PayTo and VRP.
+    ///  Constraints that will apply to the mandate_request. (Optional)
+    ///  Specifically required for PayTo and VRP.
     /// </summary>
     public class BillingRequestMandateRequestConstraints
     {
         /// <summary>
-        /// The latest date at which payments can be taken, must occur after
-        /// start_date if present
+        ///  The latest date at which payments can be taken, must occur after
+        ///  start_date if present
         ///
-        /// This is an optional field and if it is not supplied the agreement
-        /// will be considered open and
-        /// will not have an end date. Keep in mind the end date must take into
-        /// account how long it will
-        /// take the user to set up this agreement via the Billing Request.
+        ///  This is an optional field and if it is not supplied the agreement
+        ///  will be considered open and
+        ///  will not have an end date. Keep in mind the end date must take into
+        ///  account how long it will
+        ///  take the user to set up this agreement via the Billing Request.
         ///
         /// </summary>
         [JsonProperty("end_date")]
         public string EndDate { get; set; }
 
         /// <summary>
-        /// The maximum amount that can be charged for a single payment.
-        /// Required for PayTo and VRP.
+        ///  The maximum amount that can be charged for a single payment.
+        ///  Required for PayTo and VRP.
         /// </summary>
         [JsonProperty("max_amount_per_payment")]
         public int? MaxAmountPerPayment { get; set; }
 
         /// <summary>
-        /// A constraint where you can specify info (free text string) about how
-        /// payments are calculated. _Note:_ This is only supported for ACH and
-        /// PAD schemes.
+        ///  A constraint where you can specify info (free text string) about
+        ///  how payments are calculated. _Note:_ This is only supported for ACH
+        ///  and PAD schemes.
         ///
         /// </summary>
         [JsonProperty("payment_method")]
         public string PaymentMethod { get; set; }
 
         /// <summary>
-        /// List of periodic limits and constraints which apply to them
+        ///  List of periodic limits and constraints which apply to them
         /// </summary>
         [JsonProperty("periodic_limits")]
         public List<BillingRequestMandateRequestConstraintPeriodicLimit> PeriodicLimits { get; set; }
 
         /// <summary>
-        /// The date from which payments can be taken.
+        ///  The date from which payments can be taken.
         ///
-        /// This is an optional field and if it is not supplied the start date
-        /// will be set to the day
-        /// authorisation happens.
+        ///  This is an optional field and if it is not supplied the start date
+        ///  will be set to the day
+        ///  authorisation happens.
         ///
         /// </summary>
         [JsonProperty("start_date")]
@@ -995,61 +999,61 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request mandate request constraint periodic limit
-    /// resource.
+    ///  Represents a billing request mandate request constraint periodic limit
+    ///  resource.
     ///
-    /// List of periodic limits and constraints which apply to them
+    ///  List of periodic limits and constraints which apply to them
     /// </summary>
     public class BillingRequestMandateRequestConstraintPeriodicLimit
     {
         /// <summary>
-        /// The alignment of the period.
+        ///  The alignment of the period.
         ///
-        /// `calendar` - this will finish on the end of the current period. For
-        /// example this will expire on the Monday for the current week or the
-        /// January for the next year.
+        ///  `calendar` - this will finish on the end of the current period. For
+        ///  example this will expire on the Monday for the current week or the
+        ///  January for the next year.
         ///
-        /// `creation_date` - this will finish on the next instance of the
-        /// current period. For example Monthly it will expire on the same day
-        /// of the next month, or yearly the same day of the next year.
+        ///  `creation_date` - this will finish on the next instance of the
+        ///  current period. For example Monthly it will expire on the same day
+        ///  of the next month, or yearly the same day of the next year.
         ///
         /// </summary>
         [JsonProperty("alignment")]
         public BillingRequestMandateRequestConstraintPeriodicLimitAlignment? Alignment { get; set; }
 
         /// <summary>
-        /// (Optional) The maximum number of payments that can be collected in
-        /// this periodic limit.
+        ///  (Optional) The maximum number of payments that can be collected in
+        ///  this periodic limit.
         /// </summary>
         [JsonProperty("max_payments")]
         public int? MaxPayments { get; set; }
 
         /// <summary>
-        /// The maximum total amount that can be charged for all payments in
-        /// this periodic limit.
-        /// Required for VRP.
+        ///  The maximum total amount that can be charged for all payments in
+        ///  this periodic limit.
+        ///  Required for VRP.
         ///
         /// </summary>
         [JsonProperty("max_total_amount")]
         public int? MaxTotalAmount { get; set; }
 
         /// <summary>
-        /// The repeating period for this mandate. Defaults to flexible for
-        /// PayTo if not specified.
+        ///  The repeating period for this mandate. Defaults to flexible for
+        ///  PayTo if not specified.
         /// </summary>
         [JsonProperty("period")]
         public BillingRequestMandateRequestConstraintPeriodicLimitPeriod? Period { get; set; }
     }
 
     /// <summary>
-    /// The alignment of the period.
+    ///  The alignment of the period.
     ///
-    /// `calendar` - this will finish on the end of the current period. For example this will expire
-    /// on the Monday for the current week or the January for the next year.
+    ///  `calendar` - this will finish on the end of the current period. For example this will
+    ///  expire on the Monday for the current week or the January for the next year.
     ///
-    /// `creation_date` - this will finish on the next instance of the current period. For example
-    /// Monthly it will expire on the same day of the next month, or yearly the same day of the next
-    /// year.
+    ///  `creation_date` - this will finish on the next instance of the current period. For example
+    ///  Monthly it will expire on the same day of the next month, or yearly the same day of the
+    ///  next year.
     ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
@@ -1069,7 +1073,7 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// The repeating period for this mandate. Defaults to flexible for PayTo if not specified.
+    ///  The repeating period for this mandate. Defaults to flexible for PayTo if not specified.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestMandateRequestConstraintPeriodicLimitPeriod
@@ -1100,11 +1104,11 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// This field will decide how GoCardless handles settlement of funds from the customer.
+    ///  This field will decide how GoCardless handles settlement of funds from the customer.
     ///
-    /// - `managed` will be moved through GoCardless' account, batched, and payed out.
-    /// - `direct` will be a direct transfer from the payer's account to the merchant where
-    ///   invoicing will be handled separately.
+    ///  - `managed` will be moved through GoCardless' account, batched, and payed out.
+    ///  - `direct` will be a direct transfer from the payer's account to the merchant where
+    ///    invoicing will be handled separately.
     ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
@@ -1124,13 +1128,13 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Resources linked to this BillingRequestMandateRequest
+    ///  Resources linked to this BillingRequestMandateRequest
     /// </summary>
     public class BillingRequestMandateRequestLinks
     {
         /// <summary>
-        /// (Optional) ID of the [mandate](#core-endpoints-mandates) that was
-        /// created from this mandate request. this mandate request.
+        ///  (Optional) ID of the [mandate](#core-endpoints-mandates) that was
+        ///  created from this mandate request. this mandate request.
         ///
         /// </summary>
         [JsonProperty("mandate")]
@@ -1138,27 +1142,27 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Verification preference for the mandate. One of:
-    /// <ul>
-    ///   <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
-    ///   <li>`recommended`: in addition to `minimum`, use the GoCardless payment intelligence
-    /// solution to decide if a payer should be verified</li>
-    ///   <li>`when_available`: if verification mechanisms are available, use them</li>
-    ///   <li>`always`: as `when_available`, but fail to create the Billing Request if a mechanism
-    /// isn't available</li>
-    /// </ul>
+    ///  Verification preference for the mandate. One of:
+    ///  <ul>
+    ///    <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
+    ///    <li>`recommended`: in addition to `minimum`, use the GoCardless payment intelligence
+    ///  solution to decide if a payer should be verified</li>
+    ///    <li>`when_available`: if verification mechanisms are available, use them</li>
+    ///    <li>`always`: as `when_available`, but fail to create the Billing Request if a mechanism
+    ///  isn't available</li>
+    ///  </ul>
     ///
-    /// By default, all Billing Requests use the `recommended` verification preference. It uses
-    /// GoCardless payment intelligence solution to determine if a payer is fraudulent or not. The
-    /// verification mechanism is based on the response and the payer may be asked to verify
-    /// themselves. If the feature is not available, `recommended` behaves like `minimum`.
+    ///  By default, all Billing Requests use the `recommended` verification preference. It uses
+    ///  GoCardless payment intelligence solution to determine if a payer is fraudulent or not. The
+    ///  verification mechanism is based on the response and the payer may be asked to verify
+    ///  themselves. If the feature is not available, `recommended` behaves like `minimum`.
     ///
-    /// If you never wish to take advantage of our reduced risk products and Verified Mandates as
-    /// they are released in new schemes, please use the `minimum` verification preference.
+    ///  If you never wish to take advantage of our reduced risk products and Verified Mandates as
+    ///  they are released in new schemes, please use the `minimum` verification preference.
     ///
-    /// See [Billing Requests: Creating Verified
-    /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
-    /// for more information.
+    ///  See [Billing Requests: Creating Verified
+    ///  Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
+    ///  for more information.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestMandateRequestVerify
@@ -1185,10 +1189,10 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Specifies the context or scenario in which the payment is being made. Defines whether the
-    /// payment is for advance/arrears billing, point of sale transactions, ecommerce, or account
-    /// transfers. This helps banks and payment processors understand the payment scenario and apply
-    /// appropriate processing rules and risk controls.
+    ///  Specifies the context or scenario in which the payment is being made. Defines whether the
+    ///  payment is for advance/arrears billing, point of sale transactions, ecommerce, or account
+    ///  transfers. This helps banks and payment processors understand the payment scenario and
+    ///  apply appropriate processing rules and risk controls.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestPaymentContextCode
@@ -1223,99 +1227,100 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request payment request resource.
+    ///  Represents a billing request payment request resource.
     ///
-    /// Request for a one-off strongly authorised payment
+    ///  Request for a one-off strongly authorised payment
     /// </summary>
     public class BillingRequestPaymentRequest
     {
         /// <summary>
-        /// Amount in minor unit (e.g. pence in GBP, cents in EUR).
+        ///  Amount in minor unit (e.g. pence in GBP, cents in EUR).
         /// </summary>
         [JsonProperty("amount")]
         public string Amount { get; set; }
 
         /// <summary>
-        /// The amount to be deducted from the payment as an app fee, to be paid
-        /// to the partner integration which created the billing request, in the
-        /// lowest denomination for the currency (e.g. pence in GBP, cents in
-        /// EUR).
+        ///  The amount to be deducted from the payment as an app fee, to be
+        ///  paid to the partner integration which created the billing request,
+        ///  in the lowest denomination for the currency (e.g. pence in GBP,
+        ///  cents in EUR).
         /// </summary>
         [JsonProperty("app_fee")]
         public int? AppFee { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. `GBP` and `EUR` supported; `GBP` with your customers
-        /// in the UK and for `EUR` with your customers in supported Eurozone
-        /// countries only.
+        ///  [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        ///  currency code. `GBP` and `EUR` supported; `GBP` with your customers
+        ///  in the UK and for `EUR` with your customers in supported Eurozone
+        ///  countries only.
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
 
         /// <summary>
-        /// A human-readable description of the payment and/or mandate. This
-        /// will be displayed to the payer when authorising the billing request.
+        ///  A human-readable description of the payment and/or mandate. This
+        ///  will be displayed to the payer when authorising the billing
+        ///  request.
         ///
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
 
         /// <summary>
-        /// This field will decide how GoCardless handles settlement of funds
-        /// from the customer.
+        ///  This field will decide how GoCardless handles settlement of funds
+        ///  from the customer.
         ///
-        /// - `managed` will be moved through GoCardless' account, batched, and
-        /// payed out.
-        /// - `direct` will be a direct transfer from the payer's account to the
-        /// merchant where
-        ///   invoicing will be handled separately.
+        ///  - `managed` will be moved through GoCardless' account, batched, and
+        ///  payed out.
+        ///  - `direct` will be a direct transfer from the payer's account to
+        ///  the merchant where
+        ///    invoicing will be handled separately.
         ///
         /// </summary>
         [JsonProperty("funds_settlement")]
         public BillingRequestPaymentRequestFundsSettlement? FundsSettlement { get; set; }
 
         /// <summary>
-        /// Resources linked to this BillingRequestPaymentRequest.
+        ///  Resources linked to this BillingRequestPaymentRequest.
         /// </summary>
         [JsonProperty("links")]
         public BillingRequestPaymentRequestLinks Links { get; set; }
 
         /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
+        ///  Key-value store of custom data. Up to 3 keys are permitted, with
+        ///  key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// A custom payment reference defined by the merchant. It is only
-        /// available for payments on the PayTo scheme or payments using the
-        /// Direct Funds settlement model on the Faster Payments scheme.
+        ///  A custom payment reference defined by the merchant. It is only
+        ///  available for payments on the PayTo scheme or payments using the
+        ///  Direct Funds settlement model on the Faster Payments scheme.
         ///
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
 
         /// <summary>
-        /// (Optional) A scheme used for Open Banking payments. Currently
-        /// `faster_payments` is supported in the UK (GBP) and
-        /// `sepa_credit_transfer` and `sepa_instant_credit_transfer` are
-        /// supported in supported Eurozone countries (EUR). For Eurozone
-        /// countries, `sepa_credit_transfer` is used as the default. Please be
-        /// aware that `sepa_instant_credit_transfer` may incur an additional
-        /// fee for your customer.
+        ///  (Optional) A scheme used for Open Banking payments. Currently
+        ///  `faster_payments` is supported in the UK (GBP) and
+        ///  `sepa_credit_transfer` and `sepa_instant_credit_transfer` are
+        ///  supported in supported Eurozone countries (EUR). For Eurozone
+        ///  countries, `sepa_credit_transfer` is used as the default. Please be
+        ///  aware that `sepa_instant_credit_transfer` may incur an additional
+        ///  fee for your customer.
         /// </summary>
         [JsonProperty("scheme")]
         public string Scheme { get; set; }
     }
 
     /// <summary>
-    /// This field will decide how GoCardless handles settlement of funds from the customer.
+    ///  This field will decide how GoCardless handles settlement of funds from the customer.
     ///
-    /// - `managed` will be moved through GoCardless' account, batched, and payed out.
-    /// - `direct` will be a direct transfer from the payer's account to the merchant where
-    ///   invoicing will be handled separately.
+    ///  - `managed` will be moved through GoCardless' account, batched, and payed out.
+    ///  - `direct` will be a direct transfer from the payer's account to the merchant where
+    ///    invoicing will be handled separately.
     ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
@@ -1335,25 +1340,25 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Resources linked to this BillingRequestPaymentRequest
+    ///  Resources linked to this BillingRequestPaymentRequest
     /// </summary>
     public class BillingRequestPaymentRequestLinks
     {
         /// <summary>
-        /// (Optional) ID of the [payment](#core-endpoints-payments) that was
-        /// created from this payment request.
+        ///  (Optional) ID of the [payment](#core-endpoints-payments) that was
+        ///  created from this payment request.
         /// </summary>
         [JsonProperty("payment")]
         public string Payment { get; set; }
     }
 
     /// <summary>
-    /// Specifies the high-level purpose/category of a mandate and/or payment using a set of
-    /// pre-defined categories. Provides context on the nature and reason for the payment to
-    /// facilitate processing and compliance.
-    /// See [Billing Request Purpose
-    /// Codes](https://developer.gocardless.com/billing-request-purpose-codes/) for the complete
-    /// list of valid codes.
+    ///  Specifies the high-level purpose/category of a mandate and/or payment using a set of
+    ///  pre-defined categories. Provides context on the nature and reason for the payment to
+    ///  facilitate processing and compliance.
+    ///  See [Billing Request Purpose
+    ///  Codes](https://developer.gocardless.com/billing-request-purpose-codes/) for the complete
+    ///  list of valid codes.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestPurposeCode
@@ -1584,208 +1589,210 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request resource resource.
+    ///  Represents a billing request resource resource.
     /// </summary>
     public class BillingRequestResources
     {
         /// <summary>
-        /// Embedded customer
+        ///  Embedded customer
         /// </summary>
         [JsonProperty("customer")]
         public BillingRequestResourcesCustomer Customer { get; set; }
 
         /// <summary>
-        /// Embedded customer bank account, only if a bank account is linked
+        ///  Embedded customer bank account, only if a bank account is linked
         /// </summary>
         [JsonProperty("customer_bank_account")]
         public BillingRequestResourcesCustomerBankAccount CustomerBankAccount { get; set; }
 
         /// <summary>
-        /// Embedded customer billing detail
+        ///  Embedded customer billing detail
         /// </summary>
         [JsonProperty("customer_billing_detail")]
         public BillingRequestResourcesCustomerBillingDetail CustomerBillingDetail { get; set; }
     }
 
     /// <summary>
-    /// Represents a billing request resources customer resource.
+    ///  Represents a billing request resources customer resource.
     ///
-    /// Embedded customer
+    ///  Embedded customer
     /// </summary>
     public class BillingRequestResourcesCustomer
     {
         /// <summary>
-        /// Customer's company name. Required unless a `given_name` and
-        /// `family_name` are provided. For Canadian customers, the use of a
-        /// `company_name` value will mean that any mandate created from this
-        /// customer will be considered to be a "Business PAD" (otherwise, any
-        /// mandate will be considered to be a "Personal PAD").
+        ///  Customer's company name. Required unless a `given_name` and
+        ///  `family_name` are provided. For Canadian customers, the use of a
+        ///  `company_name` value will mean that any mandate created from this
+        ///  customer will be considered to be a "Business PAD" (otherwise, any
+        ///  mandate will be considered to be a "Personal PAD").
         /// </summary>
         [JsonProperty("company_name")]
         public string CompanyName { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        ///  Fixed [timestamp](#api-usage-dates-and-times), recording when this
+        ///  resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        /// Customer's email address. Required in most cases, as this allows
-        /// GoCardless to send notifications to this customer.
+        ///  Customer's email address. Required in most cases, as this allows
+        ///  GoCardless to send notifications to this customer.
         /// </summary>
         [JsonProperty("email")]
         public string Email { get; set; }
 
         /// <summary>
-        /// Customer's surname. Required unless a `company_name` is provided.
+        ///  Customer's surname. Required unless a `company_name` is provided.
         /// </summary>
         [JsonProperty("family_name")]
         public string FamilyName { get; set; }
 
         /// <summary>
-        /// Customer's first name. Required unless a `company_name` is provided.
+        ///  Customer's first name. Required unless a `company_name` is
+        ///  provided.
         /// </summary>
         [JsonProperty("given_name")]
         public string GivenName { get; set; }
 
         /// <summary>
-        /// Unique identifier, beginning with "CU".
+        ///  Unique identifier, beginning with "CU".
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
 
         /// <summary>
-        /// [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-        /// code. Used as the language for notification emails sent by
-        /// GoCardless if your organisation does not send its own (see
-        /// [compliance requirements](#appendix-compliance-requirements)).
-        /// Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb",
-        /// "sl", "sv" are supported. If this is not provided, the language will
-        /// be chosen based on the `country_code` (if supplied) or default to
-        /// "en".
+        ///  [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+        ///  code. Used as the language for notification emails sent by
+        ///  GoCardless if your organisation does not send its own (see
+        ///  [compliance requirements](#appendix-compliance-requirements)).
+        ///  Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da",
+        ///  "nb", "sl", "sv" are supported. If this is not provided, the
+        ///  language will be chosen based on the `country_code` (if supplied)
+        ///  or default to "en".
         /// </summary>
         [JsonProperty("language")]
         public string Language { get; set; }
 
         /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
+        ///  Key-value store of custom data. Up to 3 keys are permitted, with
+        ///  key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone
-        /// number, including country code.
+        ///  [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone
+        ///  number, including country code.
         /// </summary>
         [JsonProperty("phone_number")]
         public string PhoneNumber { get; set; }
     }
 
     /// <summary>
-    /// Represents a billing request resources customer bank account resource.
+    ///  Represents a billing request resources customer bank account resource.
     ///
-    /// Embedded customer bank account, only if a bank account is linked
+    ///  Embedded customer bank account, only if a bank account is linked
     /// </summary>
     public class BillingRequestResourcesCustomerBankAccount
     {
         /// <summary>
-        /// Name of the account holder, as known by the bank. The full name
-        /// provided when the customer is created is stored and is available via
-        /// the API, but is transliterated, upcased, and truncated to 18
-        /// characters in bank submissions. This field is required unless the
-        /// request includes a [customer bank account
-        /// token](#javascript-flow-customer-bank-account-tokens).
+        ///  Name of the account holder, as known by the bank. The full name
+        ///  provided when the customer is created is stored and is available
+        ///  via the API, but is transliterated, upcased, and truncated to 18
+        ///  characters in bank submissions. This field is required unless the
+        ///  request includes a [customer bank account
+        ///  token](#javascript-flow-customer-bank-account-tokens).
         /// </summary>
         [JsonProperty("account_holder_name")]
         public string AccountHolderName { get; set; }
 
         /// <summary>
-        /// The last few digits of the account number. Currently 4 digits for
-        /// NZD bank accounts and 2 digits for other currencies.
+        ///  The last few digits of the account number. Currently 4 digits for
+        ///  NZD bank accounts and 2 digits for other currencies.
         /// </summary>
         [JsonProperty("account_number_ending")]
         public string AccountNumberEnding { get; set; }
 
         /// <summary>
-        /// Bank account type. Required for USD-denominated bank accounts. Must
-        /// not be provided for bank accounts in other currencies. See [local
-        /// details](#local-bank-details-united-states) for more information.
+        ///  Bank account type. Required for USD-denominated bank accounts. Must
+        ///  not be provided for bank accounts in other currencies. See [local
+        ///  details](#local-bank-details-united-states) for more information.
         /// </summary>
         [JsonProperty("account_type")]
         public BillingRequestResourcesCustomerBankAccountAccountType? AccountType { get; set; }
 
         /// <summary>
-        /// A token to uniquely refer to a set of bank account details. This
-        /// feature is still in early access and is only available for certain
-        /// organisations.
+        ///  A token to uniquely refer to a set of bank account details. This
+        ///  feature is still in early access and is only available for certain
+        ///  organisations.
         /// </summary>
         [JsonProperty("bank_account_token")]
         public string BankAccountToken { get; set; }
 
         /// <summary>
-        /// Name of bank, taken from the bank details.
+        ///  Name of bank, taken from the bank details.
         /// </summary>
         [JsonProperty("bank_name")]
         public string BankName { get; set; }
 
         /// <summary>
-        /// [ISO 3166-1 alpha-2
-        /// code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-        /// Defaults to the country code of the `iban` if supplied, otherwise is
-        /// required.
+        ///  [ISO 3166-1 alpha-2
+        ///  code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+        ///  Defaults to the country code of the `iban` if supplied, otherwise
+        ///  is required.
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        ///  Fixed [timestamp](#api-usage-dates-and-times), recording when this
+        ///  resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        ///  [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        ///  currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        ///  "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
 
         /// <summary>
-        /// Boolean value showing whether the bank account is enabled or
-        /// disabled.
+        ///  Boolean value showing whether the bank account is enabled or
+        ///  disabled.
         /// </summary>
         [JsonProperty("enabled")]
         public bool? Enabled { get; set; }
 
         /// <summary>
-        /// Unique identifier, beginning with "BA".
+        ///  Unique identifier, beginning with "BA".
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
 
         /// <summary>
-        /// Resources linked to this BillingRequestResourcesCustomerBankAccount.
+        ///  Resources linked to this
+        ///  BillingRequestResourcesCustomerBankAccount.
         /// </summary>
         [JsonProperty("links")]
         public BillingRequestResourcesCustomerBankAccountLinks Links { get; set; }
 
         /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
+        ///  Key-value store of custom data. Up to 3 keys are permitted, with
+        ///  key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
     }
 
     /// <summary>
-    /// Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
-    /// accounts in other currencies. See [local details](#local-bank-details-united-states) for
-    /// more information.
+    ///  Bank account type. Required for USD-denominated bank accounts. Must not be provided for
+    ///  bank accounts in other currencies. See [local details](#local-bank-details-united-states)
+    ///  for more information.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestResourcesCustomerBankAccountAccountType
@@ -1804,130 +1811,131 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Resources linked to this BillingRequestResourcesCustomerBankAccount
+    ///  Resources linked to this BillingRequestResourcesCustomerBankAccount
     /// </summary>
     public class BillingRequestResourcesCustomerBankAccountLinks
     {
         /// <summary>
-        /// ID of the [customer](#core-endpoints-customers) that owns this bank
-        /// account.
+        ///  ID of the [customer](#core-endpoints-customers) that owns this bank
+        ///  account.
         /// </summary>
         [JsonProperty("customer")]
         public string Customer { get; set; }
     }
 
     /// <summary>
-    /// Represents a billing request resources customer billing detail resource.
+    ///  Represents a billing request resources customer billing detail
+    ///  resource.
     ///
-    /// Embedded customer billing detail
+    ///  Embedded customer billing detail
     /// </summary>
     public class BillingRequestResourcesCustomerBillingDetail
     {
         /// <summary>
-        /// The first line of the customer's address.
+        ///  The first line of the customer's address.
         /// </summary>
         [JsonProperty("address_line1")]
         public string AddressLine1 { get; set; }
 
         /// <summary>
-        /// The second line of the customer's address.
+        ///  The second line of the customer's address.
         /// </summary>
         [JsonProperty("address_line2")]
         public string AddressLine2 { get; set; }
 
         /// <summary>
-        /// The third line of the customer's address.
+        ///  The third line of the customer's address.
         /// </summary>
         [JsonProperty("address_line3")]
         public string AddressLine3 { get; set; }
 
         /// <summary>
-        /// The city of the customer's address.
+        ///  The city of the customer's address.
         /// </summary>
         [JsonProperty("city")]
         public string City { get; set; }
 
         /// <summary>
-        /// [ISO 3166-1 alpha-2
-        /// code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+        ///  [ISO 3166-1 alpha-2
+        ///  code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        ///  Fixed [timestamp](#api-usage-dates-and-times), recording when this
+        ///  resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        /// For Danish customers only. The civic/company number (CPR or CVR) of
-        /// the customer. Must be supplied if the customer's bank account is
-        /// denominated in Danish krone (DKK).
+        ///  For Danish customers only. The civic/company number (CPR or CVR) of
+        ///  the customer. Must be supplied if the customer's bank account is
+        ///  denominated in Danish krone (DKK).
         /// </summary>
         [JsonProperty("danish_identity_number")]
         public string DanishIdentityNumber { get; set; }
 
         /// <summary>
-        /// Unique identifier, beginning with "CU".
+        ///  Unique identifier, beginning with "CU".
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
 
         /// <summary>
-        /// For ACH customers only. Required for ACH customers. A string
-        /// containing the IP address of the payer to whom the mandate belongs
-        /// (i.e. as a result of their completion of a mandate setup flow in
-        /// their browser).
+        ///  For ACH customers only. Required for ACH customers. A string
+        ///  containing the IP address of the payer to whom the mandate belongs
+        ///  (i.e. as a result of their completion of a mandate setup flow in
+        ///  their browser).
         ///
-        /// Not required for creating offline mandates where
-        /// `authorisation_source` is set to telephone or paper.
+        ///  Not required for creating offline mandates where
+        ///  `authorisation_source` is set to telephone or paper.
         ///
         /// </summary>
         [JsonProperty("ip_address")]
         public string IpAddress { get; set; }
 
         /// <summary>
-        /// The customer's postal code.
+        ///  The customer's postal code.
         /// </summary>
         [JsonProperty("postal_code")]
         public string PostalCode { get; set; }
 
         /// <summary>
-        /// The customer's address region, county or department. For US
-        /// customers a 2 letter
-        /// [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state
-        /// code is required (e.g. `CA` for California).
+        ///  The customer's address region, county or department. For US
+        ///  customers a 2 letter
+        ///  [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state
+        ///  code is required (e.g. `CA` for California).
         /// </summary>
         [JsonProperty("region")]
         public string Region { get; set; }
 
         /// <summary>
-        /// The schemes associated with this customer billing detail
+        ///  The schemes associated with this customer billing detail
         /// </summary>
         [JsonProperty("schemes")]
         public List<string> Schemes { get; set; }
 
         /// <summary>
-        /// For Swedish customers only. The civic/company number (personnummer,
-        /// samordningsnummer, or organisationsnummer) of the customer. Must be
-        /// supplied if the customer's bank account is denominated in Swedish
-        /// krona (SEK). This field cannot be changed once it has been set.
+        ///  For Swedish customers only. The civic/company number (personnummer,
+        ///  samordningsnummer, or organisationsnummer) of the customer. Must be
+        ///  supplied if the customer's bank account is denominated in Swedish
+        ///  krona (SEK). This field cannot be changed once it has been set.
         /// </summary>
         [JsonProperty("swedish_identity_number")]
         public string SwedishIdentityNumber { get; set; }
     }
 
     /// <summary>
-    /// One of:
-    /// <ul>
-    /// <li>`pending`: the billing request is pending and can be used</li>
-    /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
-    /// <li>`fulfilling`: the billing request is currently undergoing fulfilment</li>
-    /// <li>`fulfilled`: the billing request has been fulfilled and a payment created</li>
-    /// <li>`cancelled`: the billing request has been cancelled and cannot be used</li>
-    /// </ul>
+    ///  One of:
+    ///  <ul>
+    ///  <li>`pending`: the billing request is pending and can be used</li>
+    ///  <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
+    ///  <li>`fulfilling`: the billing request is currently undergoing fulfilment</li>
+    ///  <li>`fulfilled`: the billing request has been fulfilled and a payment created</li>
+    ///  <li>`cancelled`: the billing request has been cancelled and cannot be used</li>
+    ///  </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestStatus
@@ -1958,123 +1966,124 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Represents a billing request subscription request resource.
+    ///  Represents a billing request subscription request resource.
     ///
-    /// Request for a subscription
+    ///  Request for a subscription
     /// </summary>
     public class BillingRequestSubscriptionRequest
     {
         /// <summary>
-        /// Amount in the lowest denomination for the currency (e.g. pence in
-        /// GBP, cents in EUR).
+        ///  Amount in the lowest denomination for the currency (e.g. pence in
+        ///  GBP, cents in EUR).
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
 
         /// <summary>
-        /// The amount to be deducted from each payment as an app fee, to be
-        /// paid to the partner integration which created the subscription, in
-        /// the lowest denomination for the currency (e.g. pence in GBP, cents
-        /// in EUR).
+        ///  The amount to be deducted from each payment as an app fee, to be
+        ///  paid to the partner integration which created the subscription, in
+        ///  the lowest denomination for the currency (e.g. pence in GBP, cents
+        ///  in EUR).
         /// </summary>
         [JsonProperty("app_fee")]
         public int? AppFee { get; set; }
 
         /// <summary>
-        /// The total number of payments that should be taken by this
-        /// subscription.
+        ///  The total number of payments that should be taken by this
+        ///  subscription.
         /// </summary>
         [JsonProperty("count")]
         public int? Count { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "USD" and "CAD" are supported.
+        ///  [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        ///  currency code. Currently "USD" and "CAD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
 
         /// <summary>
-        /// As per RFC 2445. The day of the month to charge customers on.
-        /// `1`-`28` or `-1` to indicate the last day of the month.
+        ///  As per RFC 2445. The day of the month to charge customers on.
+        ///  `1`-`28` or `-1` to indicate the last day of the month.
         /// </summary>
         [JsonProperty("day_of_month")]
         public int? DayOfMonth { get; set; }
 
         /// <summary>
-        /// Number of `interval_units` between customer charge dates. Must be
-        /// greater than or equal to `1`. Must result in at least one charge
-        /// date per year. Defaults to `1`.
+        ///  Number of `interval_units` between customer charge dates. Must be
+        ///  greater than or equal to `1`. Must result in at least one charge
+        ///  date per year. Defaults to `1`.
         /// </summary>
         [JsonProperty("interval")]
         public int? Interval { get; set; }
 
         /// <summary>
-        /// The unit of time between customer charge dates. One of `weekly`,
-        /// `monthly` or `yearly`.
+        ///  The unit of time between customer charge dates. One of `weekly`,
+        ///  `monthly` or `yearly`.
         /// </summary>
         [JsonProperty("interval_unit")]
         public BillingRequestSubscriptionRequestIntervalUnit? IntervalUnit { get; set; }
 
         /// <summary>
-        /// Resources linked to this BillingRequestSubscriptionRequest.
+        ///  Resources linked to this BillingRequestSubscriptionRequest.
         /// </summary>
         [JsonProperty("links")]
         public BillingRequestSubscriptionRequestLinks Links { get; set; }
 
         /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
+        ///  Key-value store of custom data. Up to 3 keys are permitted, with
+        ///  key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// Name of the month on which to charge a customer. Must be lowercase.
-        /// Only applies
-        /// when the interval_unit is `yearly`.
+        ///  Name of the month on which to charge a customer. Must be lowercase.
+        ///  Only applies
+        ///  when the interval_unit is `yearly`.
         ///
         /// </summary>
         [JsonProperty("month")]
         public BillingRequestSubscriptionRequestMonth? Month { get; set; }
 
         /// <summary>
-        /// Optional name for the subscription. This will be set as the
-        /// description on each payment created. Must not exceed 255 characters.
+        ///  Optional name for the subscription. This will be set as the
+        ///  description on each payment created. Must not exceed 255
+        ///  characters.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// An optional payment reference. This will be set as the reference on
-        /// each payment
-        /// created and will appear on your customer's bank statement. See the
-        /// documentation for
-        /// the [create payment endpoint](#payments-create-a-payment) for more
-        /// details.
-        /// <br />
+        ///  An optional payment reference. This will be set as the reference on
+        ///  each payment
+        ///  created and will appear on your customer's bank statement. See the
+        ///  documentation for
+        ///  the [create payment endpoint](#payments-create-a-payment) for more
+        ///  details.
+        ///  <br />
         /// </summary>
         [JsonProperty("payment_reference")]
         public string PaymentReference { get; set; }
 
         /// <summary>
-        /// On failure, automatically retry payments using [intelligent
-        /// retries](/success-plus/overview). Default is `false`. <p
-        /// class="notice"><strong>Important</strong>: To be able to use
-        /// intelligent retries, Success+ needs to be enabled in [GoCardless
-        /// dashboard](https://manage.gocardless.com/success-plus). </p>
+        ///  On failure, automatically retry payments using [intelligent
+        ///  retries](/success-plus/overview). Default is `false`. <p
+        ///  class="notice"><strong>Important</strong>: To be able to use
+        ///  intelligent retries, Success+ needs to be enabled in [GoCardless
+        ///  dashboard](https://manage.gocardless.com/success-plus). </p>
         /// </summary>
         [JsonProperty("retry_if_possible")]
         public bool? RetryIfPossible { get; set; }
 
         /// <summary>
-        /// The date on which the first payment should be charged. If fulfilled
-        /// after this date, this will be set as the mandate's
-        /// `next_possible_charge_date`.
-        /// When left blank and `month` or `day_of_month` are provided, this
-        /// will be set to the date of the first payment.
-        /// If created without `month` or `day_of_month` this will be set as the
-        /// mandate's `next_possible_charge_date`.
+        ///  The date on which the first payment should be charged. If fulfilled
+        ///  after this date, this will be set as the mandate's
+        ///  `next_possible_charge_date`.
+        ///  When left blank and `month` or `day_of_month` are provided, this
+        ///  will be set to the date of the first payment.
+        ///  If created without `month` or `day_of_month` this will be set as
+        ///  the mandate's `next_possible_charge_date`.
         ///
         /// </summary>
         [JsonProperty("start_date")]
@@ -2082,7 +2091,7 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
+    ///  The unit of time between customer charge dates. One of `weekly`, `monthly` or `yearly`.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestSubscriptionRequestIntervalUnit
@@ -2105,13 +2114,13 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Resources linked to this BillingRequestSubscriptionRequest
+    ///  Resources linked to this BillingRequestSubscriptionRequest
     /// </summary>
     public class BillingRequestSubscriptionRequestLinks
     {
         /// <summary>
-        /// (Optional) ID of the [subscription](#core-endpoints-subscriptions)
-        /// that was created from this subscription request.
+        ///  (Optional) ID of the [subscription](#core-endpoints-subscriptions)
+        ///  that was created from this subscription request.
         ///
         /// </summary>
         [JsonProperty("subscription")]
@@ -2119,8 +2128,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// Name of the month on which to charge a customer. Must be lowercase. Only applies
-    /// when the interval_unit is `yearly`.
+    ///  Name of the month on which to charge a customer. Must be lowercase. Only applies
+    ///  when the interval_unit is `yearly`.
     ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]

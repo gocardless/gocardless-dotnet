@@ -14,18 +14,18 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with creditor bank account resources.
     ///
-    /// Creditor Bank Accounts hold the bank details of a
-    /// [creditor](#core-endpoints-creditors). These are the bank accounts which
-    /// your [payouts](#core-endpoints-payouts) will be sent to.
+    ///  Creditor Bank Accounts hold the bank details of a
+    ///  [creditor](#core-endpoints-creditors). These are the bank accounts
+    ///  which your [payouts](#core-endpoints-payouts) will be sent to.
     ///
-    /// Note that creditor bank accounts must be unique, and so you will
-    /// encounter a `bank_account_exists` error if you try to create a duplicate
-    /// bank account. You may wish to handle this by updating the existing
-    /// record instead, the ID of which will be provided as
-    /// `links[creditor_bank_account]` in the error response.
+    ///  Note that creditor bank accounts must be unique, and so you will
+    ///  encounter a `bank_account_exists` error if you try to create a
+    ///  duplicate bank account. You may wish to handle this by updating the
+    ///  existing record instead, the ID of which will be provided as
+    ///  `links[creditor_bank_account]` in the error response.
     ///
-    /// <p class="restricted-notice"><strong>Restricted</strong>: This API is
-    /// not available for partner integrations.</p>
+    ///  <p class="restricted-notice"><strong>Restricted</strong>: This API is
+    ///  not available for partner integrations.</p>
     /// </summary>
     public class CreditorBankAccountService
     {
@@ -42,7 +42,7 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Creates a new creditor bank account object.
+        ///  Creates a new creditor bank account object.
         /// </summary>
         /// <param name="request">An optional `CreditorBankAccountCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -68,8 +68,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your creditor bank accounts.
+        ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+        ///  your creditor bank accounts.
         /// </summary>
         /// <param name="request">An optional `CreditorBankAccountListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -139,9 +139,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Retrieves the details of an existing creditor bank account.
+        ///  Retrieves the details of an existing creditor bank account.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "BA".</param>
+        ///  <param name="identity">Unique identifier, beginning with "BA".</param>
         /// <param name="request">An optional `CreditorBankAccountGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor bank account resource</returns>
@@ -172,16 +172,16 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Immediately disables the bank account, no money can be paid out to a
-        /// disabled account.
+        ///  Immediately disables the bank account, no money can be paid out to
+        ///  a disabled account.
         ///
-        /// This will return a `disable_failed` error if the bank account has
-        /// already been disabled.
+        ///  This will return a `disable_failed` error if the bank account has
+        ///  already been disabled.
         ///
-        /// A disabled bank account can be re-enabled by creating a new bank
-        /// account resource with the same details.
+        ///  A disabled bank account can be re-enabled by creating a new bank
+        ///  account resource with the same details.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "BA".</param>
+        ///  <param name="identity">Unique identifier, beginning with "BA".</param>
         /// <param name="request">An optional `CreditorBankAccountDisableRequest` representing the body for this disable request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor bank account resource</returns>
@@ -213,39 +213,39 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Creates a new creditor bank account object.
+    ///  Creates a new creditor bank account object.
     /// </summary>
     public class CreditorBankAccountCreateRequest : IHasIdempotencyKey
     {
         /// <summary>
-        /// Name of the account holder, as known by the bank. Usually this is
-        /// the same as the name stored with the linked
-        /// [creditor](#core-endpoints-creditors). This field will be
-        /// transliterated, upcased and truncated to 18 characters.
+        ///  Name of the account holder, as known by the bank. Usually this is
+        ///  the same as the name stored with the linked
+        ///  [creditor](#core-endpoints-creditors). This field will be
+        ///  transliterated, upcased and truncated to 18 characters.
         /// </summary>
         [JsonProperty("account_holder_name")]
         public string AccountHolderName { get; set; }
 
         /// <summary>
-        /// Bank account number - see [local
-        /// details](#appendix-local-bank-details) for more information.
-        /// Alternatively you can provide an `iban`.
+        ///  Bank account number - see [local
+        ///  details](#appendix-local-bank-details) for more information.
+        ///  Alternatively you can provide an `iban`.
         /// </summary>
         [JsonProperty("account_number")]
         public string AccountNumber { get; set; }
 
         /// <summary>
-        /// Bank account type. Required for USD-denominated bank accounts. Must
-        /// not be provided for bank accounts in other currencies. See [local
-        /// details](#local-bank-details-united-states) for more information.
+        ///  Bank account type. Required for USD-denominated bank accounts. Must
+        ///  not be provided for bank accounts in other currencies. See [local
+        ///  details](#local-bank-details-united-states) for more information.
         /// </summary>
         [JsonProperty("account_type")]
         public CreditorBankAccountAccountType? AccountType { get; set; }
 
         /// <summary>
-        /// Bank account type. Required for USD-denominated bank accounts. Must
-        /// not be provided for bank accounts in other currencies. See [local
-        /// details](#local-bank-details-united-states) for more information.
+        ///  Bank account type. Required for USD-denominated bank accounts. Must
+        ///  not be provided for bank accounts in other currencies. See [local
+        ///  details](#local-bank-details-united-states) for more information.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CreditorBankAccountAccountType
@@ -260,75 +260,75 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Bank code - see [local details](#appendix-local-bank-details) for
-        /// more information. Alternatively you can provide an `iban`.
+        ///  Bank code - see [local details](#appendix-local-bank-details) for
+        ///  more information. Alternatively you can provide an `iban`.
         /// </summary>
         [JsonProperty("bank_code")]
         public string BankCode { get; set; }
 
         /// <summary>
-        /// Branch code - see [local details](#appendix-local-bank-details) for
-        /// more information. Alternatively you can provide an `iban`.
+        ///  Branch code - see [local details](#appendix-local-bank-details) for
+        ///  more information. Alternatively you can provide an `iban`.
         /// </summary>
         [JsonProperty("branch_code")]
         public string BranchCode { get; set; }
 
         /// <summary>
-        /// [ISO 3166-1 alpha-2
-        /// code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-        /// Defaults to the country code of the `iban` if supplied, otherwise is
-        /// required.
+        ///  [ISO 3166-1 alpha-2
+        ///  code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+        ///  Defaults to the country code of the `iban` if supplied, otherwise
+        ///  is required.
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        ///  [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        ///  currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        ///  "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
 
         /// <summary>
-        /// International Bank Account Number. Alternatively you can provide
-        /// [local details](#appendix-local-bank-details). IBANs are not
-        /// accepted for Swedish bank accounts denominated in SEK - you must
-        /// supply [local details](#local-bank-details-sweden).
+        ///  International Bank Account Number. Alternatively you can provide
+        ///  [local details](#appendix-local-bank-details). IBANs are not
+        ///  accepted for Swedish bank accounts denominated in SEK - you must
+        ///  supply [local details](#local-bank-details-sweden).
         /// </summary>
         [JsonProperty("iban")]
         public string Iban { get; set; }
 
         /// <summary>
-        /// Linked resources.
+        ///  Linked resources.
         /// </summary>
         [JsonProperty("links")]
         public CreditorBankAccountLinks Links { get; set; }
 
         /// <summary>
-        /// Linked resources for a CreditorBankAccount.
+        ///  Linked resources for a CreditorBankAccount.
         /// </summary>
         public class CreditorBankAccountLinks
         {
             /// <summary>
-            /// ID of the [creditor](#core-endpoints-creditors) that owns this
-            /// bank account.
+            ///  ID of the [creditor](#core-endpoints-creditors) that owns this
+            ///  bank account.
             /// </summary>
             [JsonProperty("creditor")]
             public string Creditor { get; set; }
         }
 
         /// <summary>
-        /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters.
+        ///  Key-value store of custom data. Up to 3 keys are permitted, with
+        ///  key names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// Defaults to `true`. When this is set to `true`, it will cause this
-        /// bank account to be set as the account that GoCardless will pay out
-        /// to.
+        ///  Defaults to `true`. When this is set to `true`, it will cause this
+        ///  bank account to be set as the account that GoCardless will pay out
+        ///  to.
         /// </summary>
         [JsonProperty("set_as_default_payout_account")]
         public bool? SetAsDefaultPayoutAccount { get; set; }
@@ -343,25 +343,25 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// creditor bank accounts.
+    ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    ///  creditor bank accounts.
     /// </summary>
     public class CreditorBankAccountListRequest
     {
         /// <summary>
-        /// Cursor pointing to the start of the desired set.
+        ///  Cursor pointing to the start of the desired set.
         /// </summary>
         [JsonProperty("after")]
         public string After { get; set; }
 
         /// <summary>
-        /// Cursor pointing to the end of the desired set.
+        ///  Cursor pointing to the end of the desired set.
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
 
         /// <summary>
-        /// Limit to records created within certain times.
+        ///  Limit to records created within certain times.
         /// </summary>
         [JsonProperty("created_at")]
         public CreatedAtParam CreatedAt { get; set; }
@@ -397,21 +397,21 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Unique identifier, beginning with "CR".
+        ///  Unique identifier, beginning with "CR".
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
 
         /// <summary>
-        /// If `true`, only return enabled bank accounts. If `false`, only
-        /// return disabled bank accounts.
+        ///  If `true`, only return enabled bank accounts. If `false`, only
+        ///  return disabled bank accounts.
         /// </summary>
         [JsonProperty("enabled")]
         public bool? Enabled { get; set; }
 
         /// <summary>
-        /// If `true`, only return enabled bank accounts. If `false`, only
-        /// return disabled bank accounts.
+        ///  If `true`, only return enabled bank accounts. If `false`, only
+        ///  return disabled bank accounts.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CreditorBankAccountEnabled
@@ -426,26 +426,26 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Number of records to return.
+        ///  Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
     }
 
     /// <summary>
-    /// Retrieves the details of an existing creditor bank account.
+    ///  Retrieves the details of an existing creditor bank account.
     /// </summary>
     public class CreditorBankAccountGetRequest { }
 
     /// <summary>
-    /// Immediately disables the bank account, no money can be paid out to a
-    /// disabled account.
+    ///  Immediately disables the bank account, no money can be paid out to a
+    ///  disabled account.
     ///
-    /// This will return a `disable_failed` error if the bank account has
-    /// already been disabled.
+    ///  This will return a `disable_failed` error if the bank account has
+    ///  already been disabled.
     ///
-    /// A disabled bank account can be re-enabled by creating a new bank account
-    /// resource with the same details.
+    ///  A disabled bank account can be re-enabled by creating a new bank
+    ///  account resource with the same details.
     /// </summary>
     public class CreditorBankAccountDisableRequest { }
 

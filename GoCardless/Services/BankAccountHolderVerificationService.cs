@@ -14,7 +14,7 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with bank account holder verification resources.
     ///
-    /// Create a bank account holder verification for a bank account.
+    ///  Create a bank account holder verification for a bank account.
     /// </summary>
     public class BankAccountHolderVerificationService
     {
@@ -31,10 +31,11 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Verify the account holder of the bank account. A complete
-        /// verification can be attached when creating an outbound payment. This
-        /// endpoint allows partner merchants to create Confirmation of Payee
-        /// checks on customer bank accounts before sending outbound payments.
+        ///  Verify the account holder of the bank account. A complete
+        ///  verification can be attached when creating an outbound payment.
+        ///  This endpoint allows partner merchants to create Confirmation of
+        ///  Payee checks on customer bank accounts before sending outbound
+        ///  payments.
         /// </summary>
         /// <param name="request">An optional `BankAccountHolderVerificationCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -60,10 +61,10 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Fetches a bank account holder verification by ID.
+        ///  Fetches a bank account holder verification by ID.
         /// </summary>
-        /// <param name="identity">The unique identifier for the bank account holder verification
-        /// resource, e.g. "BAHV123".</param>
+        ///  <param name="identity">The unique identifier for the bank account holder verification
+        ///  resource, e.g. "BAHV123".</param>
         /// <param name="request">An optional `BankAccountHolderVerificationGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single bank account holder verification resource</returns>
@@ -95,43 +96,43 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Verify the account holder of the bank account. A complete verification
-    /// can be attached when creating an outbound payment. This endpoint allows
-    /// partner merchants to create Confirmation of Payee checks on customer
-    /// bank accounts before sending outbound payments.
+    ///  Verify the account holder of the bank account. A complete verification
+    ///  can be attached when creating an outbound payment. This endpoint allows
+    ///  partner merchants to create Confirmation of Payee checks on customer
+    ///  bank accounts before sending outbound payments.
     /// </summary>
     public class BankAccountHolderVerificationCreateRequest : IHasIdempotencyKey
     {
         /// <summary>
-        /// Linked resources.
+        ///  Linked resources.
         /// </summary>
         [JsonProperty("links")]
         public BankAccountHolderVerificationLinks Links { get; set; }
 
         /// <summary>
-        /// Linked resources for a BankAccountHolderVerification.
+        ///  Linked resources for a BankAccountHolderVerification.
         /// </summary>
         public class BankAccountHolderVerificationLinks
         {
             /// <summary>
-            /// The ID of the bank account to verify, e.g. "BA123".
+            ///  The ID of the bank account to verify, e.g. "BA123".
             /// </summary>
             [JsonProperty("bank_account")]
             public string BankAccount { get; set; }
         }
 
         /// <summary>
-        /// Type of the verification that has been performed
-        /// eg. [Confirmation of
-        /// Payee](https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/)
+        ///  Type of the verification that has been performed
+        ///  eg. [Confirmation of
+        ///  Payee](https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/)
         /// </summary>
         [JsonProperty("type")]
         public BankAccountHolderVerificationType? Type { get; set; }
 
         /// <summary>
-        /// Type of the verification that has been performed
-        /// eg. [Confirmation of
-        /// Payee](https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/)
+        ///  Type of the verification that has been performed
+        ///  eg. [Confirmation of
+        ///  Payee](https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/)
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BankAccountHolderVerificationType
@@ -151,7 +152,7 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Fetches a bank account holder verification by ID.
+    ///  Fetches a bank account holder verification by ID.
     /// </summary>
     public class BankAccountHolderVerificationGetRequest { }
 
