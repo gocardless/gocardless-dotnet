@@ -115,7 +115,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new WebhookGetRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -148,7 +148,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new WebhookRetryRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>

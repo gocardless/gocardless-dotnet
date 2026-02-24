@@ -97,7 +97,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new BillingRequestCollectCustomerDetailsRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -158,7 +158,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new BillingRequestCollectBankAccountRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -194,7 +194,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new BillingRequestConfirmPayerDetailsRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -229,7 +229,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new BillingRequestFulfilRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -264,7 +264,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new BillingRequestCancelRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -368,7 +368,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new BillingRequestGetRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -406,7 +406,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new BillingRequestNotifyRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -440,7 +440,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new BillingRequestFallbackRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -479,7 +479,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new BillingRequestChooseCurrencyRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -513,7 +513,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new BillingRequestSelectInstitutionRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>

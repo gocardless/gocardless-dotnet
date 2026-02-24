@@ -218,7 +218,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new InstalmentScheduleGetRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -252,7 +252,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new InstalmentScheduleUpdateRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -289,7 +289,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new InstalmentScheduleCancelRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
