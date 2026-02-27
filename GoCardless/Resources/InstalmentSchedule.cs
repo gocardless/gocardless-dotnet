@@ -8,113 +8,113 @@ using Newtonsoft.Json.Converters;
 namespace GoCardless.Resources
 {
     /// <summary>
-    ///  Represents a instalment schedule resource.
+    /// Represents a instalment schedule resource.
     ///
-    ///  Instalment schedules are objects which represent a collection of
-    ///  related payments, with the
-    ///  intention to collect the `total_amount` specified. The API supports
-    ///  both schedule-based
-    ///  creation (similar to subscriptions) as well as explicit selection of
-    ///  differing payment
-    ///  amounts and charge dates.
+    /// Instalment schedules are objects which represent a collection of related
+    /// payments, with the
+    /// intention to collect the `total_amount` specified. The API supports both
+    /// schedule-based
+    /// creation (similar to subscriptions) as well as explicit selection of
+    /// differing payment
+    /// amounts and charge dates.
     ///
-    ///  Unlike subscriptions, the payments are created immediately, so the
-    ///  instalment schedule
-    ///  cannot be modified once submitted and instead can only be cancelled
-    ///  (which will cancel
-    ///  any of the payments which have not yet been submitted).
+    /// Unlike subscriptions, the payments are created immediately, so the
+    /// instalment schedule
+    /// cannot be modified once submitted and instead can only be cancelled
+    /// (which will cancel
+    /// any of the payments which have not yet been submitted).
     ///
-    ///  Customers will receive a single notification about the complete
-    ///  schedule of collection.
+    /// Customers will receive a single notification about the complete schedule
+    /// of collection.
     /// </summary>
     public class InstalmentSchedule
     {
         /// <summary>
-        ///  Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        ///  resource was created.
+        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
+        /// resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        ///  [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        ///  currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        ///  "SEK" and "USD" are supported.
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        /// "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public InstalmentScheduleCurrency? Currency { get; set; }
 
         /// <summary>
-        ///  Unique identifier, beginning with "IS".
+        /// Unique identifier, beginning with "IS".
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
 
         /// <summary>
-        ///  Resources linked to this InstalmentSchedule.
+        /// Resources linked to this InstalmentSchedule.
         /// </summary>
         [JsonProperty("links")]
         public InstalmentScheduleLinks Links { get; set; }
 
         /// <summary>
-        ///  Key-value store of custom data. Up to 3 keys are permitted, with
-        ///  key names up to 50 characters and values up to 500 characters.
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        ///  Name of the instalment schedule, up to 100 chars. This name will
-        ///  also be
-        ///  copied to the payments of the instalment schedule if you use
-        ///  schedule-based creation.
+        /// Name of the instalment schedule, up to 100 chars. This name will
+        /// also be
+        /// copied to the payments of the instalment schedule if you use
+        /// schedule-based creation.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
-        ///  If the status is `creation_failed`, this property will be populated
-        ///  with validation
-        ///  failures from the individual payments, arranged by the index of the
-        ///  payment that
-        ///  failed.
+        /// If the status is `creation_failed`, this property will be populated
+        /// with validation
+        /// failures from the individual payments, arranged by the index of the
+        /// payment that
+        /// failed.
         ///
         /// </summary>
         [JsonProperty("payment_errors")]
         public IDictionary<string, string> PaymentErrors { get; set; }
 
         /// <summary>
-        ///  One of:
-        ///  <ul>
-        ///  <li>`pending`: we're waiting for GC to create the payments</li>
-        ///  <li>`active`: the payments have been created, and the schedule is
-        ///  active</li>
-        ///  <li>`creation_failed`: payment creation failed</li>
-        ///  <li>`completed`: we have passed the date of the final payment and
-        ///  all payments have been collected</li>
-        ///  <li>`cancelled`: the schedule has been cancelled</li>
-        ///  <li>`errored`: one or more payments have failed</li>
-        ///  </ul>
+        /// One of:
+        /// <ul>
+        /// <li>`pending`: we're waiting for GC to create the payments</li>
+        /// <li>`active`: the payments have been created, and the schedule is
+        /// active</li>
+        /// <li>`creation_failed`: payment creation failed</li>
+        /// <li>`completed`: we have passed the date of the final payment and
+        /// all payments have been collected</li>
+        /// <li>`cancelled`: the schedule has been cancelled</li>
+        /// <li>`errored`: one or more payments have failed</li>
+        /// </ul>
         /// </summary>
         [JsonProperty("status")]
         public InstalmentScheduleStatus? Status { get; set; }
 
         /// <summary>
-        ///  The total amount of the instalment schedule, defined as the sum of
-        ///  all individual
-        ///  payments, in the lowest denomination for the currency (e.g. pence
-        ///  in GBP, cents in
-        ///  EUR). If the requested payment amounts do not sum up correctly, a
-        ///  validation error
-        ///  will be returned.
+        /// The total amount of the instalment schedule, defined as the sum of
+        /// all individual
+        /// payments, in the lowest denomination for the currency (e.g. pence in
+        /// GBP, cents in
+        /// EUR). If the requested payment amounts do not sum up correctly, a
+        /// validation error
+        /// will be returned.
         /// </summary>
         [JsonProperty("total_amount")]
         public int? TotalAmount { get; set; }
     }
 
     /// <summary>
-    ///  [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-    ///  "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+    /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+    /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum InstalmentScheduleCurrency
@@ -157,43 +157,43 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    ///  Represents a instalment schedule link resource.
+    /// Represents a instalment schedule link resource.
     ///
-    ///  Links to associated objects
+    /// Links to associated objects
     /// </summary>
     public class InstalmentScheduleLinks
     {
         /// <summary>
-        ///  ID of the associated [customer](#core-endpoints-customers).
+        /// ID of the associated [customer](#core-endpoints-customers).
         /// </summary>
         [JsonProperty("customer")]
         public string Customer { get; set; }
 
         /// <summary>
-        ///  ID of the associated [mandate](#core-endpoints-mandates) which the
-        ///  instalment schedule will create payments against.
+        /// ID of the associated [mandate](#core-endpoints-mandates) which the
+        /// instalment schedule will create payments against.
         /// </summary>
         [JsonProperty("mandate")]
         public string Mandate { get; set; }
 
         /// <summary>
-        ///  Array of IDs of the associated [payments](#core-endpoints-payments)
+        /// Array of IDs of the associated [payments](#core-endpoints-payments)
         /// </summary>
         [JsonProperty("payments")]
         public List<string> Payments { get; set; }
     }
 
     /// <summary>
-    ///  One of:
-    ///  <ul>
-    ///  <li>`pending`: we're waiting for GC to create the payments</li>
-    ///  <li>`active`: the payments have been created, and the schedule is active</li>
-    ///  <li>`creation_failed`: payment creation failed</li>
-    ///  <li>`completed`: we have passed the date of the final payment and all payments have been
-    ///  collected</li>
-    ///  <li>`cancelled`: the schedule has been cancelled</li>
-    ///  <li>`errored`: one or more payments have failed</li>
-    ///  </ul>
+    /// One of:
+    /// <ul>
+    /// <li>`pending`: we're waiting for GC to create the payments</li>
+    /// <li>`active`: the payments have been created, and the schedule is active</li>
+    /// <li>`creation_failed`: payment creation failed</li>
+    /// <li>`completed`: we have passed the date of the final payment and all payments have been
+    /// collected</li>
+    /// <li>`cancelled`: the schedule has been cancelled</li>
+    /// <li>`errored`: one or more payments have failed</li>
+    /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum InstalmentScheduleStatus

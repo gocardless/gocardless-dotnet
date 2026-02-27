@@ -8,83 +8,83 @@ using Newtonsoft.Json.Converters;
 namespace GoCardless.Resources
 {
     /// <summary>
-    ///  Represents a balance resource.
+    /// Represents a balance resource.
     ///
-    ///  Returns the balances for a creditor. These balances are the same as
-    ///  what’s shown in the dashboard with one exception (mentioned below under
-    ///  balance_type).
+    /// Returns the balances for a creditor. These balances are the same as
+    /// what’s shown in the dashboard with one exception (mentioned below under
+    /// balance_type).
     ///
-    ///  These balances will typically be 3-5 minutes old. The balance amounts
-    ///  likely won’t match what’s shown in the dashboard as the dashboard
-    ///  balances are updated much less frequently (once per day).
+    /// These balances will typically be 3-5 minutes old. The balance amounts
+    /// likely won’t match what’s shown in the dashboard as the dashboard
+    /// balances are updated much less frequently (once per day).
     /// </summary>
     public class Balance
     {
         /// <summary>
-        ///  The total amount in the balance, defined as the sum of all debits
-        ///  subtracted from the sum of all credits,
-        ///  in the lowest denomination for the currency (e.g. pence in GBP,
-        ///  cents in EUR).
+        /// The total amount in the balance, defined as the sum of all debits
+        /// subtracted from the sum of all credits,
+        /// in the lowest denomination for the currency (e.g. pence in GBP,
+        /// cents in EUR).
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
 
         /// <summary>
-        ///  Type of the balance. Could be one of
-        ///  <ul>
-        ///  <li>pending_payments_submitted: Payments we have submitted to the
-        ///  scheme but not yet confirmed. This does not exactly correspond to
-        ///  <i>Pending payments</i> in the dashboard, because this balance does
-        ///  not include payments that are pending submission.</li>
-        ///  <li>confirmed_funds: Payments that have been confirmed minus fees
-        ///  and unclaimed debits for refunds, failures and chargebacks. These
-        ///  funds have not yet been moved into a payout.</li>
-        ///  <li>pending_payouts: Confirmed payments that have been moved into a
-        ///  payout. This is the total due to be paid into your bank account in
-        ///  the next payout run (payouts happen once every business day).
-        ///  pending_payouts will only be non-zero while we are generating and
-        ///  submitting the payouts to our partner bank.</li>
-        ///  </ul>
+        /// Type of the balance. Could be one of
+        /// <ul>
+        /// <li>pending_payments_submitted: Payments we have submitted to the
+        /// scheme but not yet confirmed. This does not exactly correspond to
+        /// <i>Pending payments</i> in the dashboard, because this balance does
+        /// not include payments that are pending submission.</li>
+        /// <li>confirmed_funds: Payments that have been confirmed minus fees
+        /// and unclaimed debits for refunds, failures and chargebacks. These
+        /// funds have not yet been moved into a payout.</li>
+        /// <li>pending_payouts: Confirmed payments that have been moved into a
+        /// payout. This is the total due to be paid into your bank account in
+        /// the next payout run (payouts happen once every business day).
+        /// pending_payouts will only be non-zero while we are generating and
+        /// submitting the payouts to our partner bank.</li>
+        /// </ul>
         /// </summary>
         [JsonProperty("balance_type")]
         public BalanceBalanceType? BalanceType { get; set; }
 
         /// <summary>
-        ///  [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        ///  currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        ///  "SEK" and "USD" are supported.
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        /// "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public BalanceCurrency? Currency { get; set; }
 
         /// <summary>
-        ///  Dynamic [timestamp](#api-usage-dates-and-times) recording when this
-        ///  resource was last updated.
+        /// Dynamic [timestamp](#api-usage-dates-and-times) recording when this
+        /// resource was last updated.
         /// </summary>
         [JsonProperty("last_updated_at")]
         public string LastUpdatedAt { get; set; }
 
         /// <summary>
-        ///  Resources linked to this Balance.
+        /// Resources linked to this Balance.
         /// </summary>
         [JsonProperty("links")]
         public BalanceLinks Links { get; set; }
     }
 
     /// <summary>
-    ///  Type of the balance. Could be one of
-    ///  <ul>
-    ///  <li>pending_payments_submitted: Payments we have submitted to the scheme but not yet
-    ///  confirmed. This does not exactly correspond to <i>Pending payments</i> in the dashboard,
-    ///  because this balance does not include payments that are pending submission.</li>
-    ///  <li>confirmed_funds: Payments that have been confirmed minus fees and unclaimed debits for
-    ///  refunds, failures and chargebacks. These funds have not yet been moved into a payout.</li>
-    ///  <li>pending_payouts: Confirmed payments that have been moved into a payout. This is the
-    ///  total due to be paid into your bank account in the next payout run (payouts happen once
-    ///  every business day).
-    ///  pending_payouts will only be non-zero while we are generating and submitting the payouts to
-    ///  our partner bank.</li>
-    ///  </ul>
+    /// Type of the balance. Could be one of
+    /// <ul>
+    /// <li>pending_payments_submitted: Payments we have submitted to the scheme but not yet
+    /// confirmed. This does not exactly correspond to <i>Pending payments</i> in the dashboard,
+    /// because this balance does not include payments that are pending submission.</li>
+    /// <li>confirmed_funds: Payments that have been confirmed minus fees and unclaimed debits for
+    /// refunds, failures and chargebacks. These funds have not yet been moved into a payout.</li>
+    /// <li>pending_payouts: Confirmed payments that have been moved into a payout. This is the
+    /// total due to be paid into your bank account in the next payout run (payouts happen once
+    /// every business day).
+    /// pending_payouts will only be non-zero while we are generating and submitting the payouts to
+    /// our partner bank.</li>
+    /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BalanceBalanceType
@@ -107,8 +107,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    ///  [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-    ///  "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+    /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
+    /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BalanceCurrency
@@ -151,12 +151,12 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    ///  Resources linked to this Balance
+    /// Resources linked to this Balance
     /// </summary>
     public class BalanceLinks
     {
         /// <summary>
-        ///  ID of the associated [creditor](#core-endpoints-creditors).
+        /// ID of the associated [creditor](#core-endpoints-creditors).
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }

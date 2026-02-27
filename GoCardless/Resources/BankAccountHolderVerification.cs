@@ -8,77 +8,77 @@ using Newtonsoft.Json.Converters;
 namespace GoCardless.Resources
 {
     /// <summary>
-    ///  Represents a bank account holder verification resource.
+    /// Represents a bank account holder verification resource.
     ///
-    ///  Create a bank account holder verification for a bank account.
+    /// Create a bank account holder verification for a bank account.
     /// </summary>
     public class BankAccountHolderVerification
     {
         /// <summary>
-        ///  The actual account name returned by the recipient's bank, populated
-        ///  only in the case of a partial match.
+        /// The actual account name returned by the recipient's bank, populated
+        /// only in the case of a partial match.
         /// </summary>
         [JsonProperty("actual_account_name")]
         public string ActualAccountName { get; set; }
 
         /// <summary>
-        ///  The unique identifier for the bank account holder verification
-        ///  resource, e.g. "BAHV123".
+        /// The unique identifier for the bank account holder verification
+        /// resource, e.g. "BAHV123".
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
 
         /// <summary>
-        ///  Result of the verification, could be one of
-        ///  <ul>
-        ///    <li>`full_match`: The verification has confirmed that the account
-        ///  name exactly matches the details provided.</li>
-        ///    <li>`partial_match`:  The verification has confirmed that the
-        ///  account name is similar but does not match to the details provided.
-        ///  </li>
-        ///    <li>`no_match`: The verification concludes the provided name does
-        ///  not match the account details.</li>
-        ///    <li>`unable_to_match`: The verification could not be performed
-        ///  due to recipient bank issues or technical issues </li>
-        ///  </ul>
+        /// Result of the verification, could be one of
+        /// <ul>
+        ///   <li>`full_match`: The verification has confirmed that the account
+        /// name exactly matches the details provided.</li>
+        ///   <li>`partial_match`:  The verification has confirmed that the
+        /// account name is similar but does not match to the details provided.
+        /// </li>
+        ///   <li>`no_match`: The verification concludes the provided name does
+        /// not match the account details.</li>
+        ///   <li>`unable_to_match`: The verification could not be performed due
+        /// to recipient bank issues or technical issues </li>
+        /// </ul>
         /// </summary>
         [JsonProperty("result")]
         public BankAccountHolderVerificationResult? Result { get; set; }
 
         /// <summary>
-        ///  The status of the bank account holder verification.
-        ///  <ul>
-        ///    <li>`pending`: We have triggered the verification, but the result
-        ///  has not come back yet.</li>
-        ///    <li>`completed`: The verification is complete and is ready to be
-        ///  used.</li>
-        ///  </ul>
+        /// The status of the bank account holder verification.
+        /// <ul>
+        ///   <li>`pending`: We have triggered the verification, but the result
+        /// has not come back yet.</li>
+        ///   <li>`completed`: The verification is complete and is ready to be
+        /// used.</li>
+        /// </ul>
         ///
         /// </summary>
         [JsonProperty("status")]
         public BankAccountHolderVerificationStatus? Status { get; set; }
 
         /// <summary>
-        ///  Type of the verification that has been performed
-        ///  eg. [Confirmation of
-        ///  Payee](https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/)
+        /// Type of the verification that has been performed
+        /// eg. [Confirmation of
+        /// Payee](https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/)
         /// </summary>
         [JsonProperty("type")]
         public BankAccountHolderVerificationType? Type { get; set; }
     }
 
     /// <summary>
-    ///  Result of the verification, could be one of
-    ///  <ul>
-    ///    <li>`full_match`: The verification has confirmed that the account name exactly matches
-    ///  the details provided.</li>
-    ///    <li>`partial_match`:  The verification has confirmed that the account name is similar but
-    ///  does not match to the details provided. </li>
-    ///    <li>`no_match`: The verification concludes the provided name does not match the account
-    ///  details.</li>
-    ///    <li>`unable_to_match`: The verification could not be performed due to recipient bank
-    ///  issues or technical issues </li>
-    ///  </ul>
+    /// Result of the verification, could be one of
+    /// <ul>
+    ///   <li>`full_match`: The verification has confirmed that the account name exactly matches the
+    /// details provided.</li>
+    ///   <li>`partial_match`:  The verification has confirmed that the account name is similar but
+    /// does not match to the details provided. </li>
+    ///   <li>`no_match`: The verification concludes the provided name does not match the account
+    /// details.</li>
+    ///   <li>`unable_to_match`: The verification could not be performed due to recipient bank
+    /// issues or technical issues </li>
+    /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BankAccountHolderVerificationResult
@@ -105,12 +105,12 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    ///  The status of the bank account holder verification.
-    ///  <ul>
-    ///    <li>`pending`: We have triggered the verification, but the result has not come back
-    ///  yet.</li>
-    ///    <li>`completed`: The verification is complete and is ready to be used.</li>
-    ///  </ul>
+    /// The status of the bank account holder verification.
+    /// <ul>
+    ///   <li>`pending`: We have triggered the verification, but the result has not come back
+    /// yet.</li>
+    ///   <li>`completed`: The verification is complete and is ready to be used.</li>
+    /// </ul>
     ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
@@ -130,9 +130,9 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    ///  Type of the verification that has been performed
-    ///  eg. [Confirmation of
-    ///  Payee](https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/)
+    /// Type of the verification that has been performed
+    /// eg. [Confirmation of
+    /// Payee](https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/)
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BankAccountHolderVerificationType

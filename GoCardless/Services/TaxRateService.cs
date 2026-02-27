@@ -14,10 +14,10 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with tax rate resources.
     ///
-    ///  Tax rates from tax authority.
+    /// Tax rates from tax authority.
     ///
-    ///  We also maintain a [static list of the tax rates for each
-    ///  jurisdiction](#appendix-tax-rates).
+    /// We also maintain a [static list of the tax rates for each
+    /// jurisdiction](#appendix-tax-rates).
     /// </summary>
     public class TaxRateService
     {
@@ -34,8 +34,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        ///  all tax rates.
+        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+        /// all tax rates.
         /// </summary>
         /// <param name="request">An optional `TaxRateListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -105,10 +105,10 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Retrieves the details of a tax rate.
+        /// Retrieves the details of a tax rate.
         /// </summary>
-        ///  <param name="identity">The unique identifier created by the jurisdiction, tax type and
-        ///  version</param>
+        /// <param name="identity">The unique identifier created by the jurisdiction, tax type and
+        /// version</param>
         /// <param name="request">An optional `TaxRateGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single tax rate resource</returns>
@@ -140,38 +140,38 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of all
-    ///  tax rates.
+    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of all
+    /// tax rates.
     /// </summary>
     public class TaxRateListRequest
     {
         /// <summary>
-        ///  Cursor pointing to the start of the desired set.
+        /// Cursor pointing to the start of the desired set.
         /// </summary>
         [JsonProperty("after")]
         public string After { get; set; }
 
         /// <summary>
-        ///  Cursor pointing to the end of the desired set.
+        /// Cursor pointing to the end of the desired set.
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
 
         /// <summary>
-        ///  The jurisdiction this tax rate applies to
+        /// The jurisdiction this tax rate applies to
         /// </summary>
         [JsonProperty("jurisdiction")]
         public string Jurisdiction { get; set; }
 
         /// <summary>
-        ///  Number of records to return.
+        /// Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
     }
 
     /// <summary>
-    ///  Retrieves the details of a tax rate.
+    /// Retrieves the details of a tax rate.
     /// </summary>
     public class TaxRateGetRequest { }
 

@@ -14,12 +14,12 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with payout resources.
     ///
-    ///  Payouts represent transfers from GoCardless to a
-    ///  [creditor](#core-endpoints-creditors). Each payout contains the funds
-    ///  collected from one or many [payments](#core-endpoints-payments). All
-    ///  the payments in a payout will have been collected in the same currency.
-    ///  Payouts are created automatically after a payment has been successfully
-    ///  collected.
+    /// Payouts represent transfers from GoCardless to a
+    /// [creditor](#core-endpoints-creditors). Each payout contains the funds
+    /// collected from one or many [payments](#core-endpoints-payments). All the
+    /// payments in a payout will have been collected in the same currency.
+    /// Payouts are created automatically after a payment has been successfully
+    /// collected.
     /// </summary>
     public class PayoutService
     {
@@ -36,8 +36,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        ///  your payouts.
+        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+        /// your payouts.
         /// </summary>
         /// <param name="request">An optional `PayoutListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -107,11 +107,11 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Retrieves the details of a single payout. For an example of how to
-        ///  reconcile the transactions in a payout, see [this
-        ///  guide](#events-reconciling-payouts-with-events).
+        /// Retrieves the details of a single payout. For an example of how to
+        /// reconcile the transactions in a payout, see [this
+        /// guide](#events-reconciling-payouts-with-events).
         /// </summary>
-        ///  <param name="identity">Unique identifier, beginning with "PO".</param>
+        /// <param name="identity">Unique identifier, beginning with "PO".</param>
         /// <param name="request">An optional `PayoutGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payout resource</returns>
@@ -142,9 +142,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Updates a payout object. This accepts only the metadata parameter.
+        /// Updates a payout object. This accepts only the metadata parameter.
         /// </summary>
-        ///  <param name="identity">Unique identifier, beginning with "PO".</param>
+        /// <param name="identity">Unique identifier, beginning with "PO".</param>
         /// <param name="request">An optional `PayoutUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payout resource</returns>
@@ -176,25 +176,25 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    ///  payouts.
+    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    /// payouts.
     /// </summary>
     public class PayoutListRequest
     {
         /// <summary>
-        ///  Cursor pointing to the start of the desired set.
+        /// Cursor pointing to the start of the desired set.
         /// </summary>
         [JsonProperty("after")]
         public string After { get; set; }
 
         /// <summary>
-        ///  Cursor pointing to the end of the desired set.
+        /// Cursor pointing to the end of the desired set.
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
 
         /// <summary>
-        ///  Limit to records created within certain times.
+        /// Limit to records created within certain times.
         /// </summary>
         [JsonProperty("created_at")]
         public CreatedAtParam CreatedAt { get; set; }
@@ -230,29 +230,29 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Unique identifier, beginning with "CR".
+        /// Unique identifier, beginning with "CR".
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
 
         /// <summary>
-        ///  Unique identifier, beginning with "BA".
+        /// Unique identifier, beginning with "BA".
         /// </summary>
         [JsonProperty("creditor_bank_account")]
         public string CreditorBankAccount { get; set; }
 
         /// <summary>
-        ///  [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        ///  currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        ///  "SEK" and "USD" are supported.
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        /// "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public PayoutCurrency? Currency { get; set; }
 
         /// <summary>
-        ///  [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        ///  currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        ///  "SEK" and "USD" are supported.
+        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
+        /// "SEK" and "USD" are supported.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PayoutCurrency
@@ -291,27 +291,27 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Number of records to return.
+        /// Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
 
         /// <summary>
-        ///  Key-value store of custom data. Up to 3 keys are permitted, with
-        ///  key names up to 50 characters and values up to 500 characters.
-        ///  _Note:_ This should not be used for storing PII data.
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters. _Note:_
+        /// This should not be used for storing PII data.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        ///  Whether a payout contains merchant revenue or partner fees.
+        /// Whether a payout contains merchant revenue or partner fees.
         /// </summary>
         [JsonProperty("payout_type")]
         public PayoutPayoutType? PayoutType { get; set; }
 
         /// <summary>
-        ///  Whether a payout contains merchant revenue or partner fees.
+        /// Whether a payout contains merchant revenue or partner fees.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PayoutPayoutType
@@ -326,39 +326,39 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Reference which appears on the creditor's bank statement.
+        /// Reference which appears on the creditor's bank statement.
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
 
         /// <summary>
-        ///  One of:
-        ///  <ul>
-        ///  <li>`pending`: the payout has been created, but not yet sent to
-        ///  your bank or it is in the process of being exchanged through our FX
-        ///  provider.</li>
-        ///  <li>`paid`: the payout has been sent to the your bank. FX payouts
-        ///  will become `paid` after we emit the `fx_rate_confirmed`
-        ///  webhook.</li>
-        ///  <li>`bounced`: the payout bounced when sent, the payout can be
-        ///  retried.</li>
-        ///  </ul>
+        /// One of:
+        /// <ul>
+        /// <li>`pending`: the payout has been created, but not yet sent to your
+        /// bank or it is in the process of being exchanged through our FX
+        /// provider.</li>
+        /// <li>`paid`: the payout has been sent to the your bank. FX payouts
+        /// will become `paid` after we emit the `fx_rate_confirmed`
+        /// webhook.</li>
+        /// <li>`bounced`: the payout bounced when sent, the payout can be
+        /// retried.</li>
+        /// </ul>
         /// </summary>
         [JsonProperty("status")]
         public PayoutStatus? Status { get; set; }
 
         /// <summary>
-        ///  One of:
-        ///  <ul>
-        ///  <li>`pending`: the payout has been created, but not yet sent to
-        ///  your bank or it is in the process of being exchanged through our FX
-        ///  provider.</li>
-        ///  <li>`paid`: the payout has been sent to the your bank. FX payouts
-        ///  will become `paid` after we emit the `fx_rate_confirmed`
-        ///  webhook.</li>
-        ///  <li>`bounced`: the payout bounced when sent, the payout can be
-        ///  retried.</li>
-        ///  </ul>
+        /// One of:
+        /// <ul>
+        /// <li>`pending`: the payout has been created, but not yet sent to your
+        /// bank or it is in the process of being exchanged through our FX
+        /// provider.</li>
+        /// <li>`paid`: the payout has been sent to the your bank. FX payouts
+        /// will become `paid` after we emit the `fx_rate_confirmed`
+        /// webhook.</li>
+        /// <li>`bounced`: the payout bounced when sent, the payout can be
+        /// retried.</li>
+        /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PayoutStatus
@@ -378,20 +378,20 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    ///  Retrieves the details of a single payout. For an example of how to
-    ///  reconcile the transactions in a payout, see [this
-    ///  guide](#events-reconciling-payouts-with-events).
+    /// Retrieves the details of a single payout. For an example of how to
+    /// reconcile the transactions in a payout, see [this
+    /// guide](#events-reconciling-payouts-with-events).
     /// </summary>
     public class PayoutGetRequest { }
 
     /// <summary>
-    ///  Updates a payout object. This accepts only the metadata parameter.
+    /// Updates a payout object. This accepts only the metadata parameter.
     /// </summary>
     public class PayoutUpdateRequest
     {
         /// <summary>
-        ///  Key-value store of custom data. Up to 3 keys are permitted, with
-        ///  key names up to 50 characters and values up to 500 characters.
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }

@@ -14,13 +14,13 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with creditor resources.
     ///
-    ///  Each [payment](#core-endpoints-payments) taken through the API is
-    ///  linked to a "creditor", to whom the payment is then paid out. In most
-    ///  cases your organisation will have a single "creditor", but the API also
-    ///  supports collecting payments on behalf of others.
+    /// Each [payment](#core-endpoints-payments) taken through the API is linked
+    /// to a "creditor", to whom the payment is then paid out. In most cases
+    /// your organisation will have a single "creditor", but the API also
+    /// supports collecting payments on behalf of others.
     ///
-    ///  Currently, for Anti Money Laundering reasons, any creditors you add
-    ///  must be directly related to your organisation.
+    /// Currently, for Anti Money Laundering reasons, any creditors you add must
+    /// be directly related to your organisation.
     /// </summary>
     public class CreditorService
     {
@@ -37,7 +37,7 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Creates a new creditor.
+        /// Creates a new creditor.
         /// </summary>
         /// <param name="request">An optional `CreditorCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -63,8 +63,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        ///  your creditors.
+        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+        /// your creditors.
         /// </summary>
         /// <param name="request">An optional `CreditorListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -134,9 +134,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Retrieves the details of an existing creditor.
+        /// Retrieves the details of an existing creditor.
         /// </summary>
-        ///  <param name="identity">Unique identifier, beginning with "CR".</param>
+        /// <param name="identity">Unique identifier, beginning with "CR".</param>
         /// <param name="request">An optional `CreditorGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor resource</returns>
@@ -167,10 +167,10 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Updates a creditor object. Supports all of the fields supported
-        ///  when creating a creditor.
+        /// Updates a creditor object. Supports all of the fields supported when
+        /// creating a creditor.
         /// </summary>
-        ///  <param name="identity">Unique identifier, beginning with "CR".</param>
+        /// <param name="identity">Unique identifier, beginning with "CR".</param>
         /// <param name="request">An optional `CreditorUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor resource</returns>
@@ -202,40 +202,40 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    ///  Creates a new creditor.
+    /// Creates a new creditor.
     /// </summary>
     public class CreditorCreateRequest : IHasIdempotencyKey
     {
         /// <summary>
-        ///  Prefix for the bank reference of payouts sent to this creditor. For
-        ///  instance, if
-        ///  the creditor's `bank_reference_prefix` was `ACME`, the bank
-        ///  reference of a payout
-        ///  sent to that creditor could be `ACME-8G7Q8`.
+        /// Prefix for the bank reference of payouts sent to this creditor. For
+        /// instance, if
+        /// the creditor's `bank_reference_prefix` was `ACME`, the bank
+        /// reference of a payout
+        /// sent to that creditor could be `ACME-8G7Q8`.
         ///
-        ///  This prefix is also used for refunds in EUR and GBP.
+        /// This prefix is also used for refunds in EUR and GBP.
         ///
         /// </summary>
         [JsonProperty("bank_reference_prefix")]
         public string BankReferencePrefix { get; set; }
 
         /// <summary>
-        ///  [ISO 3166-1 alpha-2
-        ///  code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+        /// [ISO 3166-1 alpha-2
+        /// code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
 
         /// <summary>
-        ///  The type of business of the creditor. Currently, `individual`,
-        ///  `company`, `charity`, `partnership`, and `trust` are supported.
+        /// The type of business of the creditor. Currently, `individual`,
+        /// `company`, `charity`, `partnership`, and `trust` are supported.
         /// </summary>
         [JsonProperty("creditor_type")]
         public CreditorCreditorType? CreditorType { get; set; }
 
         /// <summary>
-        ///  The type of business of the creditor. Currently, `individual`,
-        ///  `company`, `charity`, `partnership`, and `trust` are supported.
+        /// The type of business of the creditor. Currently, `individual`,
+        /// `company`, `charity`, `partnership`, and `trust` are supported.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CreditorCreditorType
@@ -262,13 +262,13 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Linked resources.
+        /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
         public IDictionary<string, string> Links { get; set; }
 
         /// <summary>
-        ///  The creditor's trading name.
+        /// The creditor's trading name.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -283,25 +283,25 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    ///  creditors.
+    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    /// creditors.
     /// </summary>
     public class CreditorListRequest
     {
         /// <summary>
-        ///  Cursor pointing to the start of the desired set.
+        /// Cursor pointing to the start of the desired set.
         /// </summary>
         [JsonProperty("after")]
         public string After { get; set; }
 
         /// <summary>
-        ///  Cursor pointing to the end of the desired set.
+        /// Cursor pointing to the end of the desired set.
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
 
         /// <summary>
-        ///  Limit to records created within certain times.
+        /// Limit to records created within certain times.
         /// </summary>
         [JsonProperty("created_at")]
         public CreatedAtParam CreatedAt { get; set; }
@@ -337,157 +337,149 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Number of records to return.
+        /// Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
     }
 
     /// <summary>
-    ///  Retrieves the details of an existing creditor.
+    /// Retrieves the details of an existing creditor.
     /// </summary>
     public class CreditorGetRequest { }
 
     /// <summary>
-    ///  Updates a creditor object. Supports all of the fields supported when
-    ///  creating a creditor.
+    /// Updates a creditor object. Supports all of the fields supported when
+    /// creating a creditor.
     /// </summary>
     public class CreditorUpdateRequest
     {
         /// <summary>
-        ///  The first line of the creditor's address.
+        /// The first line of the creditor's address.
         /// </summary>
         [JsonProperty("address_line1")]
         public string AddressLine1 { get; set; }
 
         /// <summary>
-        ///  The second line of the creditor's address.
+        /// The second line of the creditor's address.
         /// </summary>
         [JsonProperty("address_line2")]
         public string AddressLine2 { get; set; }
 
         /// <summary>
-        ///  The third line of the creditor's address.
+        /// The third line of the creditor's address.
         /// </summary>
         [JsonProperty("address_line3")]
         public string AddressLine3 { get; set; }
 
         /// <summary>
-        ///  Prefix for the bank reference of payouts sent to this creditor. For
-        ///  instance, if
-        ///  the creditor's `bank_reference_prefix` was `ACME`, the bank
-        ///  reference of a payout
-        ///  sent to that creditor could be `ACME-8G7Q8`.
+        /// Prefix for the bank reference of payouts sent to this creditor. For
+        /// instance, if
+        /// the creditor's `bank_reference_prefix` was `ACME`, the bank
+        /// reference of a payout
+        /// sent to that creditor could be `ACME-8G7Q8`.
         ///
-        ///  This prefix is also used for refunds in EUR and GBP.
+        /// This prefix is also used for refunds in EUR and GBP.
         ///
         /// </summary>
         [JsonProperty("bank_reference_prefix")]
         public string BankReferencePrefix { get; set; }
 
         /// <summary>
-        ///  The city of the creditor's address.
+        /// The city of the creditor's address.
         /// </summary>
         [JsonProperty("city")]
         public string City { get; set; }
 
         /// <summary>
-        ///  [ISO 3166-1 alpha-2
-        ///  code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+        /// [ISO 3166-1 alpha-2
+        /// code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
 
         /// <summary>
-        ///  Linked resources.
+        /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
         public CreditorLinks Links { get; set; }
 
         /// <summary>
-        ///  Linked resources for a Creditor.
+        /// Linked resources for a Creditor.
         /// </summary>
         public class CreditorLinks
         {
             /// <summary>
-            ///  ID of the [bank
-            ///  account](#core-endpoints-creditor-bank-accounts) which is set
-            ///  up to receive payouts in AUD.
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// which is set up to receive payouts in AUD.
             /// </summary>
             [JsonProperty("default_aud_payout_account")]
             public string DefaultAudPayoutAccount { get; set; }
 
             /// <summary>
-            ///  ID of the [bank
-            ///  account](#core-endpoints-creditor-bank-accounts) which is set
-            ///  up to receive payouts in CAD.
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// which is set up to receive payouts in CAD.
             /// </summary>
             [JsonProperty("default_cad_payout_account")]
             public string DefaultCadPayoutAccount { get; set; }
 
             /// <summary>
-            ///  ID of the [bank
-            ///  account](#core-endpoints-creditor-bank-accounts) which is set
-            ///  up to receive payouts in DKK.
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// which is set up to receive payouts in DKK.
             /// </summary>
             [JsonProperty("default_dkk_payout_account")]
             public string DefaultDkkPayoutAccount { get; set; }
 
             /// <summary>
-            ///  ID of the [bank
-            ///  account](#core-endpoints-creditor-bank-accounts) which is set
-            ///  up to receive payouts in EUR.
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// which is set up to receive payouts in EUR.
             /// </summary>
             [JsonProperty("default_eur_payout_account")]
             public string DefaultEurPayoutAccount { get; set; }
 
             /// <summary>
-            ///  ID of the [bank
-            ///  account](#core-endpoints-creditor-bank-accounts) which is set
-            ///  up to receive payouts in GBP.
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// which is set up to receive payouts in GBP.
             /// </summary>
             [JsonProperty("default_gbp_payout_account")]
             public string DefaultGbpPayoutAccount { get; set; }
 
             /// <summary>
-            ///  ID of the [bank
-            ///  account](#core-endpoints-creditor-bank-accounts) which is set
-            ///  up to receive payouts in NZD.
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// which is set up to receive payouts in NZD.
             /// </summary>
             [JsonProperty("default_nzd_payout_account")]
             public string DefaultNzdPayoutAccount { get; set; }
 
             /// <summary>
-            ///  ID of the [bank
-            ///  account](#core-endpoints-creditor-bank-accounts) which is set
-            ///  up to receive payouts in SEK.
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// which is set up to receive payouts in SEK.
             /// </summary>
             [JsonProperty("default_sek_payout_account")]
             public string DefaultSekPayoutAccount { get; set; }
 
             /// <summary>
-            ///  ID of the [bank
-            ///  account](#core-endpoints-creditor-bank-accounts) which is set
-            ///  up to receive payouts in USD.
+            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
+            /// which is set up to receive payouts in USD.
             /// </summary>
             [JsonProperty("default_usd_payout_account")]
             public string DefaultUsdPayoutAccount { get; set; }
         }
 
         /// <summary>
-        ///  The creditor's trading name.
+        /// The creditor's trading name.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
-        ///  The creditor's postal code.
+        /// The creditor's postal code.
         /// </summary>
         [JsonProperty("postal_code")]
         public string PostalCode { get; set; }
 
         /// <summary>
-        ///  The creditor's address region, county or department.
+        /// The creditor's address region, county or department.
         /// </summary>
         [JsonProperty("region")]
         public string Region { get; set; }

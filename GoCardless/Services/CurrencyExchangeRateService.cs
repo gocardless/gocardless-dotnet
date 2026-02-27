@@ -14,7 +14,7 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with currency exchange rate resources.
     ///
-    ///  Currency exchange rates from our foreign exchange provider.
+    /// Currency exchange rates from our foreign exchange provider.
     /// </summary>
     public class CurrencyExchangeRateService
     {
@@ -31,8 +31,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        ///  all exchange rates.
+        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+        /// all exchange rates.
         /// </summary>
         /// <param name="request">An optional `CurrencyExchangeRateListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -103,37 +103,37 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of all
-    ///  exchange rates.
+    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of all
+    /// exchange rates.
     /// </summary>
     public class CurrencyExchangeRateListRequest
     {
         /// <summary>
-        ///  Cursor pointing to the start of the desired set.
+        /// Cursor pointing to the start of the desired set.
         /// </summary>
         [JsonProperty("after")]
         public string After { get; set; }
 
         /// <summary>
-        ///  Cursor pointing to the end of the desired set.
+        /// Cursor pointing to the end of the desired set.
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
 
         /// <summary>
-        ///  Number of records to return.
+        /// Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
 
         /// <summary>
-        ///  Source currency
+        /// Source currency
         /// </summary>
         [JsonProperty("source")]
         public string Source { get; set; }
 
         /// <summary>
-        ///  Target currency
+        /// Target currency
         /// </summary>
         [JsonProperty("target")]
         public string Target { get; set; }

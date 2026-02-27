@@ -14,13 +14,13 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with balance resources.
     ///
-    ///  Returns the balances for a creditor. These balances are the same as
-    ///  what’s shown in the dashboard with one exception (mentioned below under
-    ///  balance_type).
+    /// Returns the balances for a creditor. These balances are the same as
+    /// what’s shown in the dashboard with one exception (mentioned below under
+    /// balance_type).
     ///
-    ///  These balances will typically be 3-5 minutes old. The balance amounts
-    ///  likely won’t match what’s shown in the dashboard as the dashboard
-    ///  balances are updated much less frequently (once per day).
+    /// These balances will typically be 3-5 minutes old. The balance amounts
+    /// likely won’t match what’s shown in the dashboard as the dashboard
+    /// balances are updated much less frequently (once per day).
     /// </summary>
     public class BalanceService
     {
@@ -37,9 +37,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        ///  balances for a given creditor. This endpoint is rate limited to 60
-        ///  requests per minute.
+        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+        /// balances for a given creditor. This endpoint is rate limited to 60
+        /// requests per minute.
         /// </summary>
         /// <param name="request">An optional `BalanceListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -110,32 +110,32 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-    ///  balances for a given creditor. This endpoint is rate limited to 60
-    ///  requests per minute.
+    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+    /// balances for a given creditor. This endpoint is rate limited to 60
+    /// requests per minute.
     /// </summary>
     public class BalanceListRequest
     {
         /// <summary>
-        ///  Cursor pointing to the start of the desired set.
+        /// Cursor pointing to the start of the desired set.
         /// </summary>
         [JsonProperty("after")]
         public string After { get; set; }
 
         /// <summary>
-        ///  Cursor pointing to the end of the desired set.
+        /// Cursor pointing to the end of the desired set.
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
 
         /// <summary>
-        ///  ID of a [creditor](#core-endpoints-creditors).
+        /// ID of a [creditor](#core-endpoints-creditors).
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
 
         /// <summary>
-        ///  Number of records to return.
+        /// Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }

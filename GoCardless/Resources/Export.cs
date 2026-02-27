@@ -8,46 +8,46 @@ using Newtonsoft.Json.Converters;
 namespace GoCardless.Resources
 {
     /// <summary>
-    ///  Represents a export resource.
+    /// Represents a export resource.
     ///
-    ///  File-based exports of data
+    /// File-based exports of data
     /// </summary>
     public class Export
     {
         /// <summary>
-        ///  Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        ///  resource was created.
+        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
+        /// resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        ///  The currency of the export (if applicable)
+        /// The currency of the export (if applicable)
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
 
         /// <summary>
-        ///  Download url for the export file. Subject to expiry.
+        /// Download url for the export file. Subject to expiry.
         /// </summary>
         [JsonProperty("download_url")]
         public string DownloadUrl { get; set; }
 
         /// <summary>
-        ///  The type of the export
+        /// The type of the export
         /// </summary>
         [JsonProperty("export_type")]
         public ExportExportType? ExportType { get; set; }
 
         /// <summary>
-        ///  Unique identifier, beginning with "EX".
+        /// Unique identifier, beginning with "EX".
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
     }
 
     /// <summary>
-    ///  The type of the export
+    /// The type of the export
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum ExportExportType

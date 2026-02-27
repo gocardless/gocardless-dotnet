@@ -14,13 +14,13 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with refund resources.
     ///
-    ///  Refund objects represent (partial) refunds of a
-    ///  [payment](#core-endpoints-payments) back to the
-    ///  [customer](#core-endpoints-customers).
+    /// Refund objects represent (partial) refunds of a
+    /// [payment](#core-endpoints-payments) back to the
+    /// [customer](#core-endpoints-customers).
     ///
-    ///  GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
-    ///  a refund is created, and will update the `amount_refunded` property of
-    ///  the payment.
+    /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
+    /// a refund is created, and will update the `amount_refunded` property of
+    /// the payment.
     /// </summary>
     public class RefundService
     {
@@ -37,20 +37,20 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Creates a new refund object.
+        /// Creates a new refund object.
         ///
-        ///  This fails with:<a name="total_amount_confirmation_invalid"></a><a
-        ///  name="number_of_refunds_exceeded"></a><a
-        ///  name="available_refund_amount_insufficient"></a>
+        /// This fails with:<a name="total_amount_confirmation_invalid"></a><a
+        /// name="number_of_refunds_exceeded"></a><a
+        /// name="available_refund_amount_insufficient"></a>
         ///
-        ///  - `total_amount_confirmation_invalid` if the confirmation amount
-        ///  doesn't match the total amount refunded for the payment. This
-        ///  safeguard is there to prevent two processes from creating refunds
-        ///  without awareness of each other.
+        /// - `total_amount_confirmation_invalid` if the confirmation amount
+        /// doesn't match the total amount refunded for the payment. This
+        /// safeguard is there to prevent two processes from creating refunds
+        /// without awareness of each other.
         ///
-        ///  - `available_refund_amount_insufficient` if the creditor does not
-        ///  have sufficient balance for refunds available to cover the cost of
-        ///  the requested refund.
+        /// - `available_refund_amount_insufficient` if the creditor does not
+        /// have sufficient balance for refunds available to cover the cost of
+        /// the requested refund.
         ///
         /// </summary>
         /// <param name="request">An optional `RefundCreateRequest` representing the body for this create request.</param>
@@ -77,8 +77,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        ///  your refunds.
+        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+        /// your refunds.
         /// </summary>
         /// <param name="request">An optional `RefundListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -148,9 +148,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Retrieves all details for a single refund
+        /// Retrieves all details for a single refund
         /// </summary>
-        ///  <param name="identity">Unique identifier, beginning with "RF".</param>
+        /// <param name="identity">Unique identifier, beginning with "RF".</param>
         /// <param name="request">An optional `RefundGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single refund resource</returns>
@@ -181,9 +181,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Updates a refund object.
+        /// Updates a refund object.
         /// </summary>
-        ///  <param name="identity">Unique identifier, beginning with "RF".</param>
+        /// <param name="identity">Unique identifier, beginning with "RF".</param>
         /// <param name="request">An optional `RefundUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single refund resource</returns>
@@ -215,102 +215,102 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    ///  Creates a new refund object.
+    /// Creates a new refund object.
     ///
-    ///  This fails with:<a name="total_amount_confirmation_invalid"></a><a
-    ///  name="number_of_refunds_exceeded"></a><a
-    ///  name="available_refund_amount_insufficient"></a>
+    /// This fails with:<a name="total_amount_confirmation_invalid"></a><a
+    /// name="number_of_refunds_exceeded"></a><a
+    /// name="available_refund_amount_insufficient"></a>
     ///
-    ///  - `total_amount_confirmation_invalid` if the confirmation amount
-    ///  doesn't match the total amount refunded for the payment. This safeguard
-    ///  is there to prevent two processes from creating refunds without
-    ///  awareness of each other.
+    /// - `total_amount_confirmation_invalid` if the confirmation amount doesn't
+    /// match the total amount refunded for the payment. This safeguard is there
+    /// to prevent two processes from creating refunds without awareness of each
+    /// other.
     ///
-    ///  - `available_refund_amount_insufficient` if the creditor does not have
-    ///  sufficient balance for refunds available to cover the cost of the
-    ///  requested refund.
+    /// - `available_refund_amount_insufficient` if the creditor does not have
+    /// sufficient balance for refunds available to cover the cost of the
+    /// requested refund.
     ///
     /// </summary>
     public class RefundCreateRequest : IHasIdempotencyKey
     {
         /// <summary>
-        ///  Amount in minor unit (e.g. pence in GBP, cents in EUR).
+        /// Amount in minor unit (e.g. pence in GBP, cents in EUR).
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
 
         /// <summary>
-        ///  Linked resources.
+        /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
         public RefundLinks Links { get; set; }
 
         /// <summary>
-        ///  Linked resources for a Refund.
+        /// Linked resources for a Refund.
         /// </summary>
         public class RefundLinks
         {
             /// <summary>
-            ///   ID of the [mandate](#core-endpoints-mandates) against which
-            ///  the refund is being made. <br /> <p
-            ///  class="restricted-notice"><strong>Restricted</strong>: You must
-            ///  request access to Mandate Refunds by contacting <a
-            ///  href="mailto:support@gocardless.com">our support team</a>.</p>
+            ///  ID of the [mandate](#core-endpoints-mandates) against which the
+            /// refund is being made. <br /> <p
+            /// class="restricted-notice"><strong>Restricted</strong>: You must
+            /// request access to Mandate Refunds by contacting <a
+            /// href="mailto:support@gocardless.com">our support team</a>.</p>
             /// </summary>
             [JsonProperty("mandate")]
             public string Mandate { get; set; }
 
             /// <summary>
-            ///  ID of the [payment](#core-endpoints-payments) against which the
-            ///  refund is being made.
+            /// ID of the [payment](#core-endpoints-payments) against which the
+            /// refund is being made.
             /// </summary>
             [JsonProperty("payment")]
             public string Payment { get; set; }
         }
 
         /// <summary>
-        ///  Key-value store of custom data. Up to 3 keys are permitted, with
-        ///  key names up to 50 characters and values up to 500 characters.
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        ///  An optional reference that will appear on your customer's bank
-        ///  statement. The character limit for this reference is dependent on
-        ///  the scheme.<br /> <strong>ACH</strong> - 10 characters<br />
-        ///  <strong>Autogiro</strong> - 11 characters<br />
-        ///  <strong>Bacs</strong> - 10 characters<br /> <strong>BECS</strong> -
-        ///  30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
-        ///  <strong>Betalingsservice</strong> - 30 characters<br />
-        ///  <strong>Faster Payments</strong> - 18 characters<br />
-        ///  <strong>PAD</strong> - scheme doesn't offer references<br />
-        ///  <strong>PayTo</strong> - 18 characters<br /> <strong>SEPA</strong>
-        ///  - 140 characters<br /> Note that this reference must be unique (for
-        ///  each merchant) for the BECS scheme as it is a scheme requirement.
-        ///  <p class='restricted-notice'><strong>Restricted</strong>: You can
-        ///  only specify a payment reference for Bacs payments (that is, when
-        ///  collecting from the UK) if you're on the <a
-        ///  href='https://gocardless.com/pricing'>GoCardless Plus, Pro or
-        ///  Enterprise packages</a>.</p> <p
-        ///  class='restricted-notice'><strong>Restricted</strong>: You can not
-        ///  specify a payment reference for Faster Payments.</p>
+        /// An optional reference that will appear on your customer's bank
+        /// statement. The character limit for this reference is dependent on
+        /// the scheme.<br /> <strong>ACH</strong> - 10 characters<br />
+        /// <strong>Autogiro</strong> - 11 characters<br />
+        /// <strong>Bacs</strong> - 10 characters<br /> <strong>BECS</strong> -
+        /// 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
+        /// <strong>Betalingsservice</strong> - 30 characters<br />
+        /// <strong>Faster Payments</strong> - 18 characters<br />
+        /// <strong>PAD</strong> - scheme doesn't offer references<br />
+        /// <strong>PayTo</strong> - 18 characters<br /> <strong>SEPA</strong> -
+        /// 140 characters<br /> Note that this reference must be unique (for
+        /// each merchant) for the BECS scheme as it is a scheme requirement. <p
+        /// class='restricted-notice'><strong>Restricted</strong>: You can only
+        /// specify a payment reference for Bacs payments (that is, when
+        /// collecting from the UK) if you're on the <a
+        /// href='https://gocardless.com/pricing'>GoCardless Plus, Pro or
+        /// Enterprise packages</a>.</p> <p
+        /// class='restricted-notice'><strong>Restricted</strong>: You can not
+        /// specify a payment reference for Faster Payments.</p>
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
 
         /// <summary>
-        ///  Total expected refunded amount in minor unit (e.g.
-        ///  pence/cents/öre). If there are
-        ///  other partial refunds against this payment, this value should be
-        ///  the sum of the
-        ///  existing refunds plus the amount of the refund being created.
-        ///  <br />
-        ///  Must be supplied if `links[payment]` is present.
-        ///  <p class="notice">It is possible to opt out of requiring
-        ///  `total_amount_confirmation`, please contact <a
-        ///  href="mailto:support@gocardless.com">our support team</a> for more
-        ///  information.</p>
+        /// Total expected refunded amount in minor unit (e.g. pence/cents/öre).
+        /// If there are
+        /// other partial refunds against this payment, this value should be the
+        /// sum of the
+        /// existing refunds plus the amount of the refund being created.
+        /// <br />
+        /// Must be supplied if `links[payment]` is present.
+        /// <p class="notice">It is possible to opt out of requiring
+        /// `total_amount_confirmation`, please contact <a
+        /// href="mailto:support@gocardless.com">our support team</a> for more
+        /// information.</p>
         /// </summary>
         [JsonProperty("total_amount_confirmation")]
         public int? TotalAmountConfirmation { get; set; }
@@ -325,25 +325,25 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    ///  refunds.
+    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    /// refunds.
     /// </summary>
     public class RefundListRequest
     {
         /// <summary>
-        ///  Cursor pointing to the start of the desired set.
+        /// Cursor pointing to the start of the desired set.
         /// </summary>
         [JsonProperty("after")]
         public string After { get; set; }
 
         /// <summary>
-        ///  Cursor pointing to the end of the desired set.
+        /// Cursor pointing to the end of the desired set.
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
 
         /// <summary>
-        ///  Limit to records created within certain times.
+        /// Limit to records created within certain times.
         /// </summary>
         [JsonProperty("created_at")]
         public CreatedAtParam CreatedAt { get; set; }
@@ -379,42 +379,42 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Number of records to return.
+        /// Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
 
         /// <summary>
-        ///  Unique identifier, beginning with "MD". Note that this prefix may
-        ///  not apply to mandates created before 2016.
+        /// Unique identifier, beginning with "MD". Note that this prefix may
+        /// not apply to mandates created before 2016.
         /// </summary>
         [JsonProperty("mandate")]
         public string Mandate { get; set; }
 
         /// <summary>
-        ///  Unique identifier, beginning with "PM".
+        /// Unique identifier, beginning with "PM".
         /// </summary>
         [JsonProperty("payment")]
         public string Payment { get; set; }
 
         /// <summary>
-        ///  Whether a refund was issued against a mandate or a payment. One of:
-        ///  <ul>
-        ///    <li>`payment`: <em>default</em> returns refunds created against
-        ///  payments only</li>
-        ///    <li>`mandate`: returns refunds created against mandates only</li>
-        ///  </ul>
+        /// Whether a refund was issued against a mandate or a payment. One of:
+        /// <ul>
+        ///   <li>`payment`: <em>default</em> returns refunds created against
+        /// payments only</li>
+        ///   <li>`mandate`: returns refunds created against mandates only</li>
+        /// </ul>
         /// </summary>
         [JsonProperty("refund_type")]
         public RefundRefundType? RefundType { get; set; }
 
         /// <summary>
-        ///  Whether a refund was issued against a mandate or a payment. One of:
-        ///  <ul>
-        ///    <li>`payment`: <em>default</em> returns refunds created against
-        ///  payments only</li>
-        ///    <li>`mandate`: returns refunds created against mandates only</li>
-        ///  </ul>
+        /// Whether a refund was issued against a mandate or a payment. One of:
+        /// <ul>
+        ///   <li>`payment`: <em>default</em> returns refunds created against
+        /// payments only</li>
+        ///   <li>`mandate`: returns refunds created against mandates only</li>
+        /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum RefundRefundType
@@ -430,18 +430,18 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    ///  Retrieves all details for a single refund
+    /// Retrieves all details for a single refund
     /// </summary>
     public class RefundGetRequest { }
 
     /// <summary>
-    ///  Updates a refund object.
+    /// Updates a refund object.
     /// </summary>
     public class RefundUpdateRequest
     {
         /// <summary>
-        ///  Key-value store of custom data. Up to 3 keys are permitted, with
-        ///  key names up to 50 characters and values up to 500 characters.
+        /// Key-value store of custom data. Up to 3 keys are permitted, with key
+        /// names up to 50 characters and values up to 500 characters.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }

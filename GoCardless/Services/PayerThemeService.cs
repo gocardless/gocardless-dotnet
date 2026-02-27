@@ -14,7 +14,7 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with payer theme resources.
     ///
-    ///  Custom colour themes for payment pages and customer notifications.
+    /// Custom colour themes for payment pages and customer notifications.
     /// </summary>
     public class PayerThemeService
     {
@@ -31,9 +31,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Creates a new payer theme associated with a creditor. If a creditor
-        ///  already has payer themes, this will update the existing payer theme
-        ///  linked to the creditor.
+        /// Creates a new payer theme associated with a creditor. If a creditor
+        /// already has payer themes, this will update the existing payer theme
+        /// linked to the creditor.
         /// </summary>
         /// <param name="request">An optional `PayerThemeCreateForCreditorRequest` representing the body for this create_for_creditor request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -60,49 +60,49 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    ///  Creates a new payer theme associated with a creditor. If a creditor
-    ///  already has payer themes, this will update the existing payer theme
-    ///  linked to the creditor.
+    /// Creates a new payer theme associated with a creditor. If a creditor
+    /// already has payer themes, this will update the existing payer theme
+    /// linked to the creditor.
     /// </summary>
     public class PayerThemeCreateForCreditorRequest
     {
         /// <summary>
-        ///  Colour for buttons background (hexcode)
+        /// Colour for buttons background (hexcode)
         /// </summary>
         [JsonProperty("button_background_colour")]
         public string ButtonBackgroundColour { get; set; }
 
         /// <summary>
-        ///  Colour for content box border (hexcode)
+        /// Colour for content box border (hexcode)
         /// </summary>
         [JsonProperty("content_box_border_colour")]
         public string ContentBoxBorderColour { get; set; }
 
         /// <summary>
-        ///  Colour for header background (hexcode)
+        /// Colour for header background (hexcode)
         /// </summary>
         [JsonProperty("header_background_colour")]
         public string HeaderBackgroundColour { get; set; }
 
         /// <summary>
-        ///  Colour for text links (hexcode)
+        /// Colour for text links (hexcode)
         /// </summary>
         [JsonProperty("link_text_colour")]
         public string LinkTextColour { get; set; }
 
         /// <summary>
-        ///  Linked resources.
+        /// Linked resources.
         /// </summary>
         [JsonProperty("links")]
         public PayerThemeLinks Links { get; set; }
 
         /// <summary>
-        ///  Linked resources for a PayerTheme.
+        /// Linked resources for a PayerTheme.
         /// </summary>
         public class PayerThemeLinks
         {
             /// <summary>
-            ///  ID of the creditor the payer theme belongs to
+            /// ID of the creditor the payer theme belongs to
             /// </summary>
             [JsonProperty("creditor")]
             public string Creditor { get; set; }

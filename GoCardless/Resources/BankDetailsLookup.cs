@@ -8,40 +8,40 @@ using Newtonsoft.Json.Converters;
 namespace GoCardless.Resources
 {
     /// <summary>
-    ///  Represents a bank details lookup resource.
+    /// Represents a bank details lookup resource.
     ///
-    ///  Look up the name and reachability of a bank account.
+    /// Look up the name and reachability of a bank account.
     /// </summary>
     public class BankDetailsLookup
     {
         /// <summary>
-        ///  Array of [schemes](#mandates_scheme) supported for this bank
-        ///  account. This will be an empty array if the bank account is not
-        ///  reachable by any schemes.
+        /// Array of [schemes](#mandates_scheme) supported for this bank
+        /// account. This will be an empty array if the bank account is not
+        /// reachable by any schemes.
         /// </summary>
         [JsonProperty("available_debit_schemes")]
         public List<BankDetailsLookupAvailableDebitScheme?> AvailableDebitSchemes { get; set; }
 
         /// <summary>
-        ///  The name of the bank with which the account is held (if available).
+        /// The name of the bank with which the account is held (if available).
         /// </summary>
         [JsonProperty("bank_name")]
         public string BankName { get; set; }
 
         /// <summary>
-        ///  ISO 9362 SWIFT BIC of the bank with which the account is held.
+        /// ISO 9362 SWIFT BIC of the bank with which the account is held.
         ///
-        ///  <p class="notice">Even if no BIC is returned for an account,
-        ///  GoCardless may still be able to collect payments from it - you
-        ///  should refer to the `available_debit_schemes` attribute to
-        ///  determine reachability.</p>
+        /// <p class="notice">Even if no BIC is returned for an account,
+        /// GoCardless may still be able to collect payments from it - you
+        /// should refer to the `available_debit_schemes` attribute to determine
+        /// reachability.</p>
         /// </summary>
         [JsonProperty("bic")]
         public string Bic { get; set; }
     }
 
     /// <summary>
-    ///  A bank payment scheme for this bank account.
+    /// A bank payment scheme for this bank account.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BankDetailsLookupAvailableDebitScheme

@@ -14,9 +14,9 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with funds availability resources.
     ///
-    ///  Checks if the payer's current balance is sufficient to cover the amount
-    ///  the merchant wants to charge within the consent parameters defined on
-    ///  the mandate.
+    /// Checks if the payer's current balance is sufficient to cover the amount
+    /// the merchant wants to charge within the consent parameters defined on
+    /// the mandate.
     /// </summary>
     public class FundsAvailabilityService
     {
@@ -33,13 +33,13 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Checks if the payer's current balance is sufficient to cover the
-        ///  amount
-        ///  the merchant wants to charge within the consent parameters defined
-        ///  on the mandate.
+        /// Checks if the payer's current balance is sufficient to cover the
+        /// amount
+        /// the merchant wants to charge within the consent parameters defined
+        /// on the mandate.
         /// </summary>
-        ///  <param name="identity">Unique identifier, beginning with "MD". Note that this prefix
-        ///  may not apply to mandates created before 2016.</param>
+        /// <param name="identity">Unique identifier, beginning with "MD". Note that this prefix may
+        /// not apply to mandates created before 2016.</param>
         /// <param name="request">An optional `FundsAvailabilityCheckRequest` representing the query parameters for this check request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single funds availability resource</returns>
@@ -71,14 +71,14 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    ///  Checks if the payer's current balance is sufficient to cover the amount
-    ///  the merchant wants to charge within the consent parameters defined on
-    ///  the mandate.
+    /// Checks if the payer's current balance is sufficient to cover the amount
+    /// the merchant wants to charge within the consent parameters defined on
+    /// the mandate.
     /// </summary>
     public class FundsAvailabilityCheckRequest
     {
         /// <summary>
-        ///  The amount of the payment
+        /// The amount of the payment
         /// </summary>
         [JsonProperty("amount")]
         public string Amount { get; set; }

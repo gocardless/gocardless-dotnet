@@ -14,9 +14,8 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with payment account resources.
     ///
-    ///  Access the details of bank accounts provided for you by GoCardless that
-    ///  are used to fund [Outbound
-    ///  Payments](#core-endpoints-outbound-payments).
+    /// Access the details of bank accounts provided for you by GoCardless that
+    /// are used to fund [Outbound Payments](#core-endpoints-outbound-payments).
     /// </summary>
     public class PaymentAccountService
     {
@@ -33,9 +32,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Retrieves the details of an existing payment account.
+        /// Retrieves the details of an existing payment account.
         /// </summary>
-        ///  <param name="identity">Unique identifier, beginning with "BA".</param>
+        /// <param name="identity">Unique identifier, beginning with "BA".</param>
         /// <param name="request">An optional `PaymentAccountGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment account resource</returns>
@@ -66,8 +65,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        ///  your payment accounts.
+        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
+        /// your payment accounts.
         /// </summary>
         /// <param name="request">An optional `PaymentAccountListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -138,30 +137,30 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    ///  Retrieves the details of an existing payment account.
+    /// Retrieves the details of an existing payment account.
     /// </summary>
     public class PaymentAccountGetRequest { }
 
     /// <summary>
-    ///  Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    ///  payment accounts.
+    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
+    /// payment accounts.
     /// </summary>
     public class PaymentAccountListRequest
     {
         /// <summary>
-        ///  Cursor pointing to the start of the desired set.
+        /// Cursor pointing to the start of the desired set.
         /// </summary>
         [JsonProperty("after")]
         public string After { get; set; }
 
         /// <summary>
-        ///  Cursor pointing to the end of the desired set.
+        /// Cursor pointing to the end of the desired set.
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
 
         /// <summary>
-        ///  Number of records to return.
+        /// Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; set; }
