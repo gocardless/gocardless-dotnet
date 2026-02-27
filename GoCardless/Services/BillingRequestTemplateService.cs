@@ -129,7 +129,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new BillingRequestTemplateGetRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -189,7 +189,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new BillingRequestTemplateUpdateRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>

@@ -242,6 +242,14 @@ namespace GoCardless.Tests
             );
         }
 
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase(" ")]
+        public void GetAsyncShouldRejectInvalidIdentity(string identity)
+        {
+            Assert.ThrowsAsync<ArgumentException>(() => client.Mandates.GetAsync(identity));
+        }
+
         [Test]
         public async Task ShouldCreateAMandate()
         {

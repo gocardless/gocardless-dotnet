@@ -108,7 +108,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new BlockGetRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -212,7 +212,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new BlockDisableRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -246,7 +246,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new BlockEnableRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>

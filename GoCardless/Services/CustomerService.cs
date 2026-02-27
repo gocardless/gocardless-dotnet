@@ -144,7 +144,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new CustomerGetRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -178,7 +178,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new CustomerUpdateRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -218,7 +218,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new CustomerRemoveRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -377,6 +377,27 @@ namespace GoCardless.Services
     /// </summary>
     public class CustomerListRequest
     {
+        /// <summary>
+        /// Boolean indicating whether the customer has any actions required.
+        /// </summary>
+        [JsonProperty("action_required")]
+        public CustomerActionRequired? ActionRequired { get; set; }
+
+        /// <summary>
+        /// Boolean indicating whether the customer has any actions required.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum CustomerActionRequired
+        {
+            /// <summary>`action_required` with a value of "true"</summary>
+            [EnumMember(Value = "true")]
+            True,
+
+            /// <summary>`action_required` with a value of "false"</summary>
+            [EnumMember(Value = "false")]
+            False,
+        }
+
         /// <summary>
         /// Cursor pointing to the start of the desired set.
         /// </summary>

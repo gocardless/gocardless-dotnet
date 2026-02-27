@@ -116,7 +116,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new OutboundPaymentCancelRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -150,7 +150,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new OutboundPaymentApproveRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -183,7 +183,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new OutboundPaymentGetRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -288,7 +288,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new OutboundPaymentUpdateRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>

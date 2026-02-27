@@ -146,7 +146,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new MandateGetRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -180,7 +180,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new MandateUpdateRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -219,7 +219,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new MandateCancelRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>
@@ -264,7 +264,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new MandateReinstateRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>

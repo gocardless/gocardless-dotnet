@@ -48,7 +48,7 @@ namespace GoCardless.Services
         )
         {
             request = request ?? new PaymentAccountTransactionListRequest();
-            if (identity == null)
+            if (string.IsNullOrWhiteSpace(identity))
                 throw new ArgumentException(nameof(identity));
 
             var urlParams = new List<KeyValuePair<string, object>>

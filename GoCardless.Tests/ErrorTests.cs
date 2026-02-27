@@ -167,6 +167,25 @@ namespace GoCardless.Tests
         }
 
         [Test]
+        public async Task WhenErrorIsAString_ShouldWrapInApiException()
+        {
+            var responseFixture = "fixtures/string_error.json";
+            mockHttp.EnqueueResponse(400, responseFixture);
+            try
+            {
+                await MakeSomeRequest();
+            }
+            catch (ApiException ex)
+            {
+                ClassicAssert.AreEqual(400, ex.Code);
+                ClassicAssert.AreEqual(ApiErrorType.GOCARDLESS, ex.Type);
+                ClassicAssert.AreEqual("bank_authorisation_expired", ex.Message);
+                return;
+            }
+            Assert.Fail("Exception was not thrown");
+        }
+
+        [Test]
         public async Task WhenAuthenticationError_ShouldShowSpecificError()
         {
             //Authentication Errors should throw a specific more contextual type rather than generic invalid_api_usage

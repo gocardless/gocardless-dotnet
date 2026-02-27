@@ -303,10 +303,29 @@ namespace GoCardless
                     var json = await responseMessage
                         .Content.ReadAsStringAsync()
                         .ConfigureAwait(false);
-                    var result = JsonConvert.DeserializeObject<ApiErrorResponse>(
-                        json,
-                        new JsonSerializerSettings()
-                    );
+
+                    ApiErrorResponse result;
+                    var parsed = JObject.Parse(json);
+                    if (parsed["error"]?.Type == JTokenType.String)
+                    {
+                        result = new ApiErrorResponse
+                        {
+                            Error = new ApiError
+                            {
+                                Message = parsed["error"].ToString(),
+                                Code = (int)responseMessage.StatusCode,
+                                Type = ApiErrorType.GOCARDLESS,
+                            },
+                        };
+                    }
+                    else
+                    {
+                        result = JsonConvert.DeserializeObject<ApiErrorResponse>(
+                            json,
+                            new JsonSerializerSettings()
+                        );
+                    }
+
                     result.ResponseMessage = responseMessage;
 
                     switch (result.Error.Code)
