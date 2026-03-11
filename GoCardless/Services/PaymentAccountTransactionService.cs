@@ -33,6 +33,41 @@ namespace GoCardless.Services
         }
 
         /// <summary>
+        /// Retrieves the details of an existing payment account transaction.
+        /// </summary>
+        /// <param name="identity">The unique ID of the [bank
+        /// account](#core-endpoints-creditor-bank-accounts) which happens to be the payment
+        /// account.</param>
+        /// <param name="request">An optional `PaymentAccountTransactionGetRequest` representing the query parameters for this get request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
+        /// <returns>A single payment account transaction resource</returns>
+        public Task<PaymentAccountTransactionResponse> GetAsync(
+            string identity,
+            PaymentAccountTransactionGetRequest request = null,
+            RequestSettings customiseRequestMessage = null
+        )
+        {
+            request = request ?? new PaymentAccountTransactionGetRequest();
+            if (string.IsNullOrWhiteSpace(identity))
+                throw new ArgumentException(nameof(identity));
+
+            var urlParams = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("identity", identity),
+            };
+
+            return _goCardlessClient.ExecuteAsync<PaymentAccountTransactionResponse>(
+                "GET",
+                "/payment_account_transactions/:identity",
+                urlParams,
+                request,
+                null,
+                null,
+                customiseRequestMessage
+            );
+        }
+
+        /// <summary>
         /// List transactions for a given payment account.
         /// </summary>
         /// <param name="identity">The unique ID of the [bank
@@ -123,6 +158,11 @@ namespace GoCardless.Services
             );
         }
     }
+
+    /// <summary>
+    /// Retrieves the details of an existing payment account transaction.
+    /// </summary>
+    public class PaymentAccountTransactionGetRequest { }
 
     /// <summary>
     /// List transactions for a given payment account.
