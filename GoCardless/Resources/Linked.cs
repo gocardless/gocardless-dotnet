@@ -26,6 +26,9 @@ namespace GoCardless.Resources
         [JsonProperty("payer_authorisations")]
         public List<PayerAuthorisation> PayerAuthorisations { get; private set; }
 
+        [JsonProperty("payment_account_transactions")]
+        public List<PaymentAccountTransaction> PaymentAccountTransactions { get; private set; }
+
         [JsonProperty("payments")]
         public List<Payment> Payments { get; private set; }
 

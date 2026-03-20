@@ -96,6 +96,7 @@ namespace GoCardless.Resources
         /// <li>`scheme_identifiers`</li>
         /// <li>`subscriptions`</li>
         /// <li>`outbound_payments`</li>
+        /// <li>`payment_account_transactions`</li>
         /// </ul>
         /// </summary>
         [JsonProperty("resource_type")]
@@ -467,6 +468,13 @@ namespace GoCardless.Resources
         public string Payment { get; set; }
 
         /// <summary>
+        /// If `resource_type` is `payment_account_transaction`, this is the ID
+        /// of a transaction which has been recorded on the payment account.
+        /// </summary>
+        [JsonProperty("payment_account_transaction")]
+        public string PaymentAccountTransaction { get; set; }
+
+        /// <summary>
         /// If `resource_type` is `billing_requests`, this is the ID of the
         /// [payment](#core-endpoints-payments) which has been created for
         /// Instant Bank Payment.
@@ -529,6 +537,7 @@ namespace GoCardless.Resources
     /// <li>`scheme_identifiers`</li>
     /// <li>`subscriptions`</li>
     /// <li>`outbound_payments`</li>
+    /// <li>`payment_account_transactions`</li>
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
@@ -577,6 +586,10 @@ namespace GoCardless.Resources
         /// <summary>`resource_type` with a value of "payments"</summary>
         [EnumMember(Value = "payments")]
         Payments,
+
+        /// <summary>`resource_type` with a value of "payment_account_transactions"</summary>
+        [EnumMember(Value = "payment_account_transactions")]
+        PaymentAccountTransactions,
 
         /// <summary>`resource_type` with a value of "payouts"</summary>
         [EnumMember(Value = "payouts")]
