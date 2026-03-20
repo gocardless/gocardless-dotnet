@@ -377,6 +377,13 @@ namespace GoCardless.Services
             public string Creditor { get; set; }
 
             /// <summary>
+            /// ID of the outbound payment import that created this outbound
+            /// payment.
+            /// </summary>
+            [JsonProperty("outbound_payment_import")]
+            public string OutboundPaymentImport { get; set; }
+
+            /// <summary>
             /// ID of the customer bank account which receives the outbound
             /// payment.
             /// </summary>
