@@ -270,10 +270,6 @@ namespace GoCardless.Resources
         [EnumMember(Value = "open_banking_gateway_pis")]
         OpenBankingGatewayPis,
 
-        /// <summary>`adapter` with a value of "plaid_ais"</summary>
-        [EnumMember(Value = "plaid_ais")]
-        PlaidAis,
-
         /// <summary>`adapter` with a value of "open_banking_gateway_ais"</summary>
         [EnumMember(Value = "open_banking_gateway_ais")]
         OpenBankingGatewayAis,
