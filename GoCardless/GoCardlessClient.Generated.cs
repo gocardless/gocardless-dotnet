@@ -149,6 +149,16 @@ namespace GoCardless
         public OutboundPaymentService OutboundPayments => new OutboundPaymentService(this);
 
         /// <summary>
+        ///A service for working with outbound payment import resources.
+        /// </summary>
+        public OutboundPaymentImportService OutboundPaymentImports => new OutboundPaymentImportService(this);
+
+        /// <summary>
+        ///A service for working with outbound payment import entry resources.
+        /// </summary>
+        public OutboundPaymentImportEntryService OutboundPaymentImportEntries => new OutboundPaymentImportEntryService(this);
+
+        /// <summary>
         ///A service for working with payer authorisation resources.
         /// </summary>
         public PayerAuthorisationService PayerAuthorisations => new PayerAuthorisationService(this);

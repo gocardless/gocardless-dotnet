@@ -237,6 +237,7 @@ namespace GoCardless.Services
         /// <li>`scheme_identifier`</li>
         /// <li>`subscription`</li>
         /// <li>`outbound_payment`</li>
+        /// <li>`payment_account_transaction`</li>
         /// </ul>
         /// </summary>
         [JsonProperty("include")]
@@ -257,6 +258,7 @@ namespace GoCardless.Services
         /// <li>`scheme_identifier`</li>
         /// <li>`subscription`</li>
         /// <li>`outbound_payment`</li>
+        /// <li>`payment_account_transaction`</li>
         /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -293,6 +295,10 @@ namespace GoCardless.Services
             /// <summary>`include` with a value of "payment"</summary>
             [EnumMember(Value = "payment")]
             Payment,
+
+            /// <summary>`include` with a value of "payment_account_transaction"</summary>
+            [EnumMember(Value = "payment_account_transaction")]
+            PaymentAccountTransaction,
 
             /// <summary>`include` with a value of "payout"</summary>
             [EnumMember(Value = "payout")]
@@ -361,6 +367,13 @@ namespace GoCardless.Services
         public string Payment { get; set; }
 
         /// <summary>
+        /// ID of a payment account transaction. If specified, this endpoint
+        /// will return all events for the given transaction.
+        /// </summary>
+        [JsonProperty("payment_account_transaction")]
+        public string PaymentAccountTransaction { get; set; }
+
+        /// <summary>
         /// ID of a [payout](#core-endpoints-payouts). If specified, this
         /// endpoint will return all events for the given payout.
         /// </summary>
@@ -378,8 +391,8 @@ namespace GoCardless.Services
         /// Type of resource that you'd like to get all events for.
         /// Cannot be used together with the `billing_request`, `creditor`,
         /// `export`,`instalment_schedule`, `mandate`, `payer_authorisation`,
-        /// `payment`, `payout`, `refund`, `scheme_identifier`, `subscription`
-        /// or `outbound_payment` parameters.
+        /// `payment`, `payout`, `refund`, `scheme_identifier`, `subscription`,
+        /// `outbound_payment` or `payment_account_transaction` parameters.
         /// The type can be one of:
         /// <ul>
         /// <li>`billing_requests`</li>
@@ -394,6 +407,7 @@ namespace GoCardless.Services
         /// <li>`scheme_identifiers`</li>
         /// <li>`subscriptions`</li>
         /// <li>`outbound_payments`</li>
+        /// <li>`payment_account_transactions`</li>
         /// </ul>
         /// </summary>
         [JsonProperty("resource_type")]
@@ -403,8 +417,8 @@ namespace GoCardless.Services
         /// Type of resource that you'd like to get all events for.
         /// Cannot be used together with the `billing_request`, `creditor`,
         /// `export`,`instalment_schedule`, `mandate`, `payer_authorisation`,
-        /// `payment`, `payout`, `refund`, `scheme_identifier`, `subscription`
-        /// or `outbound_payment` parameters.
+        /// `payment`, `payout`, `refund`, `scheme_identifier`, `subscription`,
+        /// `outbound_payment` or `payment_account_transaction` parameters.
         /// The type can be one of:
         /// <ul>
         /// <li>`billing_requests`</li>
@@ -419,6 +433,7 @@ namespace GoCardless.Services
         /// <li>`scheme_identifiers`</li>
         /// <li>`subscriptions`</li>
         /// <li>`outbound_payments`</li>
+        /// <li>`payment_account_transactions`</li>
         /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -463,6 +478,10 @@ namespace GoCardless.Services
             /// <summary>`resource_type` with a value of "payments"</summary>
             [EnumMember(Value = "payments")]
             Payments,
+
+            /// <summary>`resource_type` with a value of "payment_account_transactions"</summary>
+            [EnumMember(Value = "payment_account_transactions")]
+            PaymentAccountTransactions,
 
             /// <summary>`resource_type` with a value of "payouts"</summary>
             [EnumMember(Value = "payouts")]

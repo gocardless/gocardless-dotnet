@@ -34,6 +34,12 @@ namespace GoCardless.Resources
         public string DownloadUrl { get; set; }
 
         /// <summary>
+        /// Error message if the export encountered an error during processing.
+        /// </summary>
+        [JsonProperty("error_message")]
+        public string ErrorMessage { get; set; }
+
+        /// <summary>
         /// The type of the export
         /// </summary>
         [JsonProperty("export_type")]
