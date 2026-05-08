@@ -257,7 +257,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "data",
+                "customer_bank_accounts",
                 customiseRequestMessage
             );
         }

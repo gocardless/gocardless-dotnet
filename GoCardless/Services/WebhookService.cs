@@ -162,7 +162,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "data",
+                "webhooks",
                 customiseRequestMessage
             );
         }

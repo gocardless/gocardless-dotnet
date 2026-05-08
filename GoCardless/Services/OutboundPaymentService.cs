@@ -93,7 +93,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "data",
+                "outbound_payments",
                 customiseRequestMessage
             );
         }
@@ -130,7 +130,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "data",
+                "outbound_payments",
                 customiseRequestMessage
             );
         }
@@ -164,7 +164,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "data",
+                "outbound_payments",
                 customiseRequestMessage
             );
         }

@@ -227,7 +227,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "data",
+                "payer_authorisations",
                 customiseRequestMessage
             );
         }
@@ -271,7 +271,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "data",
+                "payer_authorisations",
                 customiseRequestMessage
             );
         }
