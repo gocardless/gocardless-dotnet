@@ -348,7 +348,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "data",
+                "subscriptions",
                 customiseRequestMessage
             );
         }
@@ -397,7 +397,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "data",
+                "subscriptions",
                 customiseRequestMessage
             );
         }
@@ -435,7 +435,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "data",
+                "subscriptions",
                 customiseRequestMessage
             );
         }
