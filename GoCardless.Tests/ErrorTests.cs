@@ -84,6 +84,7 @@ namespace GoCardless.Tests
                     ex.Errors[0].Message
                 );
                 ClassicAssert.AreEqual("/mandates/scheme", ex.Errors[0].RequestPointer);
+                ClassicAssert.AreEqual("BA000123", ex.Errors[2].Links["customer_bank_account"]);
                 ClassicAssert.AreEqual(
                     "https://developer.gocardless.com/api-reference#validation_failed",
                     ex.DocumentationUrl

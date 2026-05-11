@@ -15,7 +15,10 @@
       {
         "field": "customer_bank_account",
         "message": "can't be blank",
-        "request_pointer": "/mandates/customer_bank_account"
+        "request_pointer": "/mandates/customer_bank_account",
+        "links": {
+          "customer_bank_account": "BA000123"
+        }
       }
     ],
     "documentation_url": "https://developer.gocardless.com/api-reference#validation_failed",
