@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using GoCardless.Errors;
 
 namespace GoCardless.Exceptions
@@ -11,8 +9,5 @@ namespace GoCardless.Exceptions
     {
         internal ValidationFailedException(ApiErrorResponse apiErrorResponse)
             : base(apiErrorResponse) { }
-
-        public new IReadOnlyList<Error.IValidationError> Errors =>
-            base.Errors.Cast<Error.IValidationError>().ToList().AsReadOnly();
     }
 }
