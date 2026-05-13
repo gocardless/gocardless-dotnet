@@ -119,6 +119,14 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
+
+        /// <summary>
+        /// Whether this customer bank account is registered as a trusted
+        /// recipient for Outbound Payments. Only present when the feature is
+        /// enabled for the organisation.
+        /// </summary>
+        [JsonProperty("trusted_recipient")]
+        public bool? TrustedRecipient { get; set; }
     }
 
     /// <summary>
