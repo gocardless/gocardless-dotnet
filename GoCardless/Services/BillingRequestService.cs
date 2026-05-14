@@ -945,8 +945,7 @@ namespace GoCardless.Services
                     /// The maximum number of payments that can be collected in this
                     /// periodic limit.
                     /// _Note:_ Only supported for the PayTo scheme, where it is
-                    /// required. Providing this field for other VRP schemes will result
-                    /// in a validation error.
+                    /// required.
                     ///
                     /// </summary>
                     [JsonProperty("max_payments")]
