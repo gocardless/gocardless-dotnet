@@ -137,7 +137,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Approves an outbound payment. Only outbound payments with the
-        /// “pending_approval” status can be approved.
+        /// "pending_approval" status can be approved.
         /// </summary>
         /// <param name="identity">Unique identifier of the outbound payment.</param>
         /// <param name="request">An optional `OutboundPaymentApproveRequest` representing the body for this approve request.</param>
@@ -539,7 +539,7 @@ namespace GoCardless.Services
 
     /// <summary>
     /// Approves an outbound payment. Only outbound payments with the
-    /// “pending_approval” status can be approved.
+    /// "pending_approval" status can be approved.
     /// </summary>
     public class OutboundPaymentApproveRequest { }
 

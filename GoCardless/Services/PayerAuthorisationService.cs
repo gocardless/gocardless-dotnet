@@ -382,7 +382,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// [ISO 3166-1 alpha-2
-            /// code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+            /// code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
             /// Defaults to the country code of the `iban` if supplied,
             /// otherwise is required.
             /// </summary>
@@ -390,7 +390,7 @@ namespace GoCardless.Services
             public string CountryCode { get; set; }
 
             /// <summary>
-            /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+            /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
             /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
             /// "NZD", "SEK" and "USD" are supported.
             /// </summary>
@@ -464,7 +464,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// [ISO 3166-1 alpha-2
-            /// code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+            /// code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
             /// </summary>
             [JsonProperty("country_code")]
             public string CountryCode { get; set; }
@@ -751,7 +751,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// [ISO 3166-1 alpha-2
-            /// code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+            /// code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
             /// Defaults to the country code of the `iban` if supplied,
             /// otherwise is required.
             /// </summary>
@@ -759,7 +759,7 @@ namespace GoCardless.Services
             public string CountryCode { get; set; }
 
             /// <summary>
-            /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+            /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
             /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
             /// "NZD", "SEK" and "USD" are supported.
             /// </summary>
@@ -833,7 +833,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// [ISO 3166-1 alpha-2
-            /// code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+            /// code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
             /// </summary>
             [JsonProperty("country_code")]
             public string CountryCode { get; set; }

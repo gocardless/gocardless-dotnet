@@ -112,7 +112,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// [ISO
-        /// 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+        /// 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
         /// alpha-2 code. The country code of the institution. If nothing is
         /// provided, institutions with the country code 'GB' are returned by
         /// default.
@@ -147,7 +147,7 @@ namespace GoCardless.Services
     {
         /// <summary>
         /// [ISO
-        /// 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+        /// 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
         /// alpha-2 code. The country code of the institution. If nothing is
         /// provided, institutions with the country code 'GB' are returned by
         /// default.

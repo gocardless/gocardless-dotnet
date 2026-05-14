@@ -445,7 +445,7 @@ namespace GoCardless.Resources
         public int? AppFee { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code. Currently "USD" and "CAD" are supported.
         /// </summary>
         [JsonProperty("currency")]
@@ -799,7 +799,7 @@ namespace GoCardless.Resources
         public BillingRequestMandateRequestConstraints Constraints { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code.
         /// </summary>
         [JsonProperty("currency")]
@@ -1014,8 +1014,12 @@ namespace GoCardless.Resources
         public BillingRequestMandateRequestConstraintPeriodicLimitAlignment? Alignment { get; set; }
 
         /// <summary>
-        /// (Optional) The maximum number of payments that can be collected in
-        /// this periodic limit.
+        /// The maximum number of payments that can be collected in this
+        /// periodic limit.
+        /// _Note:_ Only supported for the PayTo scheme, where it is required.
+        /// Providing this field for other VRP schemes will result in a
+        /// validation error.
+        ///
         /// </summary>
         [JsonProperty("max_payments")]
         public int? MaxPayments { get; set; }
@@ -1241,7 +1245,7 @@ namespace GoCardless.Resources
         public int? AppFee { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code. `GBP` and `EUR` supported; `GBP` with your customers
         /// in the UK and for `EUR` with your customers in supported Eurozone
         /// countries only.
@@ -1653,7 +1657,7 @@ namespace GoCardless.Resources
         public string Id { get; set; }
 
         /// <summary>
-        /// [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+        /// [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
         /// code. Used as the language for notification emails sent by
         /// GoCardless if your organisation does not send its own (see
         /// [compliance requirements](#appendix-compliance-requirements)).
@@ -1729,7 +1733,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// [ISO 3166-1 alpha-2
-        /// code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
+        /// code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
         /// Defaults to the country code of the `iban` if supplied, otherwise is
         /// required.
         /// </summary>
@@ -1744,7 +1748,7 @@ namespace GoCardless.Resources
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
         /// "SEK" and "USD" are supported.
         /// </summary>
@@ -1845,7 +1849,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// [ISO 3166-1 alpha-2
-        /// code.](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+        /// code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
@@ -1984,7 +1988,7 @@ namespace GoCardless.Resources
         public int? Count { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code. Currently "USD" and "CAD" are supported.
         /// </summary>
         [JsonProperty("currency")]
