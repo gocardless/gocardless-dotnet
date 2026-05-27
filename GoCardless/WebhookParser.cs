@@ -9,6 +9,18 @@ using Newtonsoft.Json;
 
 namespace GoCardless
 {
+    public class WebhookParseResult
+    {
+        public IReadOnlyList<Event> Events { get; }
+        public string WebhookId { get; }
+
+        internal WebhookParseResult(IReadOnlyList<Event> events, string webhookId)
+        {
+            Events = events;
+            WebhookId = webhookId;
+        }
+    }
+
     public class WebhookParser
     {
         private readonly string _body;
@@ -35,6 +47,17 @@ namespace GoCardless
             return parser.Parse();
         }
 
+        public static WebhookParseResult ParseWithMeta(
+            string body,
+            string webhookSecret,
+            string signatureHeader
+        )
+        {
+            var parser = new WebhookParser(body, webhookSecret, signatureHeader);
+
+            return parser.ParseWithMetaInternal();
+        }
+
         public IReadOnlyList<Event> Parse()
         {
             var response = JsonConvert.DeserializeObject<EventListResponse>(
@@ -43,6 +66,31 @@ namespace GoCardless
             );
 
             return response.Events;
+        }
+
+        private WebhookParseResult ParseWithMetaInternal()
+        {
+            var response = JsonConvert.DeserializeObject<WebhookResponse>(
+                _body,
+                new JsonSerializerSettings()
+            );
+
+            return new WebhookParseResult(response.Events, response.Meta?.WebhookId);
+        }
+
+        private class WebhookResponse
+        {
+            [JsonProperty("events")]
+            public IReadOnlyList<Event> Events { get; set; }
+
+            [JsonProperty("meta")]
+            public WebhookMeta Meta { get; set; }
+        }
+
+        private class WebhookMeta
+        {
+            [JsonProperty("webhook_id")]
+            public string WebhookId { get; set; }
         }
 
         private void verifySignature()

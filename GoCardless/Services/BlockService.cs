@@ -226,7 +226,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "blocks",
+                "data",
                 customiseRequestMessage
             );
         }
@@ -260,7 +260,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "blocks",
+                "data",
                 customiseRequestMessage
             );
         }
@@ -290,7 +290,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "blocks",
+                "data",
                 customiseRequestMessage
             );
         }

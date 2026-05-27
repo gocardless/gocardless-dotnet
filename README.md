@@ -13,7 +13,7 @@ For full details of the GoCardless API, see the [API docs](https://developer.goc
 
 To install `GoCardless`, run the following command in the [Package Manager Console](https://docs.microsoft.com/en-us/nuget/tools/package-manager-console)
 
-`Install-Package GoCardless -Version 9.5.0`
+`Install-Package GoCardless -Version 9.6.0`
 
 
 ## Usage
@@ -208,3 +208,60 @@ When the API returns an `invalid_state` error due to an `idempotent_creation_con
 automatically retrieve the existing record which was created using the same idempotency key.
 
 If a timeout occurs, and the request being made is idempotent, the library will automatically retry the request up to 2 more times.
+
+### Handling webhooks
+
+GoCardless supports webhooks, allowing you to receive real-time notifications when things happen in your account, so you can take automatic actions in response, for example:
+
+* When a customer cancels their mandate with the bank, suspend their club membership
+* When a payment fails due to lack of funds, mark their invoice as unpaid
+* When a customer's subscription generates a new payment, log it in their "past payments" list
+
+The client allows you to validate that a webhook you receive is genuinely from GoCardless, and to parse it into `Event` objects which are easy to work with:
+
+```cs
+// When you create a webhook endpoint, you can specify a secret. When GoCardless sends
+// you a webhook, it will sign the body using that secret. Since only you and GoCardless
+// know the secret, you can check the signature and ensure that the webhook is truly
+// from GoCardless.
+var webhookEndpointSecret = Environment.GetEnvironmentVariable("GOCARDLESS_WEBHOOK_ENDPOINT_SECRET");
+
+// In your webhook handler
+[HttpPost("/webhooks")]
+public IActionResult HandleWebhook()
+{
+    var requestBody = new StreamReader(Request.Body).ReadToEnd();
+    var signatureHeader = Request.Headers["Webhook-Signature"];
+
+    try
+    {
+        var events = WebhookParser.Parse(requestBody, webhookEndpointSecret, signatureHeader);
+
+        foreach (var webhookEvent in events)
+        {
+            Console.WriteLine(webhookEvent.Id);
+        }
+
+        return Ok();
+    }
+    catch (InvalidSignatureException)
+    {
+        // The webhook doesn't appear to be genuinely from GoCardless
+        return StatusCode(498);
+    }
+}
+```
+
+#### Accessing the webhook ID
+
+If you need to access the webhook ID for debugging purposes, you can use `ParseWithMeta` instead:
+
+```cs
+var result = WebhookParser.ParseWithMeta(requestBody, webhookEndpointSecret, signatureHeader);
+var events = result.Events;
+var webhookId = result.WebhookId;  // e.g. "WB123" - useful for debugging
+```
+
+Note: The webhook ID is intended for debugging and logging purposes only. It should not be used for deduplication - instead, use the event IDs to deduplicate, as each event has a unique ID that remains consistent if the same event is sent multiple times.
+
+For more details on working with webhooks, see our ["Getting started" guide](https://developer.gocardless.com/getting-started/api/introduction/).

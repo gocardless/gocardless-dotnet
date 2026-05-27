@@ -44,7 +44,7 @@ namespace GoCardless.Services
         /// To generate a PDF mandate in another language, set the
         /// `Accept-Language` header when creating the PDF mandate to the
         /// relevant [ISO
-        /// 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+        /// 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
         /// language code supported for the scheme.
         ///
         /// | Scheme           | Supported languages
@@ -113,7 +113,7 @@ namespace GoCardless.Services
     ///
     /// To generate a PDF mandate in another language, set the `Accept-Language`
     /// header when creating the PDF mandate to the relevant [ISO
-    /// 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language
+    /// 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language
     /// code supported for the scheme.
     ///
     /// | Scheme           | Supported languages
@@ -244,7 +244,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// [ISO
-        /// 3166-1](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+        /// 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
         /// alpha-2 code. Required if providing local details.
         /// </summary>
         [JsonProperty("country_code")]

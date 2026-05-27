@@ -1,5 +1,5 @@
 {
-    "mandates": {
+    "data": {
         "metadata": {
             "foo": "bar"
         }

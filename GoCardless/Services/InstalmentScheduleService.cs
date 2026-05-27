@@ -302,7 +302,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "instalment_schedules",
+                "data",
                 customiseRequestMessage
             );
         }
@@ -342,7 +342,7 @@ namespace GoCardless.Services
         public int? AppFee { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
         /// "SEK" and "USD" are supported.
         /// </summary>
@@ -350,7 +350,7 @@ namespace GoCardless.Services
         public InstalmentScheduleCurrency? Currency { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
         /// "SEK" and "USD" are supported.
         /// </summary>
@@ -552,7 +552,7 @@ namespace GoCardless.Services
         public int? AppFee { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
         /// "SEK" and "USD" are supported.
         /// </summary>
@@ -560,7 +560,7 @@ namespace GoCardless.Services
         public InstalmentScheduleCurrency? Currency { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
         /// "SEK" and "USD" are supported.
         /// </summary>

@@ -57,7 +57,7 @@ namespace GoCardless.Resources
         public BillingRequestTemplateMandateRequestConstraints MandateRequestConstraints { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code.
         /// </summary>
         [JsonProperty("mandate_request_currency")]
@@ -143,7 +143,7 @@ namespace GoCardless.Resources
         public string PaymentRequestAmount { get; set; }
 
         /// <summary>
-        /// [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217#Active_codes)
+        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
         /// currency code. `GBP` and `EUR` supported; `GBP` with your customers
         /// in the UK and for `EUR` with your customers in supported Eurozone
         /// countries only.
@@ -275,8 +275,11 @@ namespace GoCardless.Resources
         public BillingRequestTemplateMandateRequestConstraintPeriodicLimitAlignment? Alignment { get; set; }
 
         /// <summary>
-        /// (Optional) The maximum number of payments that can be collected in
-        /// this periodic limit.
+        /// The maximum number of payments that can be collected in this
+        /// periodic limit.
+        /// _Note:_ This is only supported for the PayTo scheme, where it is
+        /// required.
+        ///
         /// </summary>
         [JsonProperty("max_payments")]
         public int? MaxPayments { get; set; }
