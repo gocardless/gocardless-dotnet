@@ -165,7 +165,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "redirect_flows",
+                "data",
                 customiseRequestMessage
             );
         }

@@ -233,7 +233,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "mandates",
+                "data",
                 customiseRequestMessage
             );
         }
@@ -278,7 +278,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "mandates",
+                "data",
                 customiseRequestMessage
             );
         }

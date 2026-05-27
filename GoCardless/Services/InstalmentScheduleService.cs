@@ -302,7 +302,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "instalment_schedules",
+                "data",
                 customiseRequestMessage
             );
         }

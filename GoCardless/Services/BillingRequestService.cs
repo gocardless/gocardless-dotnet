@@ -110,7 +110,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "billing_requests",
+                "data",
                 customiseRequestMessage
             );
         }
@@ -171,7 +171,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "billing_requests",
+                "data",
                 customiseRequestMessage
             );
         }
@@ -207,7 +207,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "billing_requests",
+                "data",
                 customiseRequestMessage
             );
         }
@@ -242,7 +242,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "billing_requests",
+                "data",
                 customiseRequestMessage
             );
         }
@@ -277,7 +277,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "billing_requests",
+                "data",
                 customiseRequestMessage
             );
         }
@@ -419,7 +419,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "billing_requests",
+                "data",
                 customiseRequestMessage
             );
         }
@@ -453,7 +453,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "billing_requests",
+                "data",
                 customiseRequestMessage
             );
         }
@@ -492,7 +492,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "billing_requests",
+                "data",
                 customiseRequestMessage
             );
         }
@@ -525,7 +525,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "billing_requests",
+                "data",
                 customiseRequestMessage
             );
         }

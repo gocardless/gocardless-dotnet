@@ -88,7 +88,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "billing_request_flows",
+                "data",
                 customiseRequestMessage
             );
         }

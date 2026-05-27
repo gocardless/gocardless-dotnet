@@ -79,7 +79,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "customer_notifications",
+                "data",
                 customiseRequestMessage
             );
         }

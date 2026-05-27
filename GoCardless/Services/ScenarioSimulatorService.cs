@@ -169,7 +169,7 @@ namespace GoCardless.Services
                 urlParams,
                 request,
                 null,
-                "scenario_simulators",
+                "data",
                 customiseRequestMessage
             );
         }
