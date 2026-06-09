@@ -1034,7 +1034,7 @@ namespace GoCardless.Services
             /// intelligent retries, Success+ needs to be enabled in [GoCardless
             /// dashboard](https://manage.gocardless.com/success-plus). </p> <p
             /// class="notice"><strong>Important</strong>: This is not
-            /// applicable to IBP and VRP payments. </p>
+            /// applicable to Pay by Bank and VRP payments. </p>
             /// </summary>
             [JsonProperty("retry_if_possible")]
             public bool? RetryIfPossible { get; set; }

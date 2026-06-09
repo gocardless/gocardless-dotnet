@@ -391,8 +391,8 @@ namespace GoCardless.Services
         /// authorise it.
         /// Currently, the customer can only be notified by email.
         ///
-        /// This endpoint is currently supported only for Instant Bank Pay
-        /// Billing Requests.
+        /// This endpoint is currently supported only for Pay by Bank Billing
+        /// Requests.
         /// </summary>
         /// <param name="identity">Unique identifier, beginning with "BRQ".</param>
         /// <param name="request">An optional `BillingRequestNotifyRequest` representing the body for this notify request.</param>
@@ -1343,7 +1343,7 @@ namespace GoCardless.Services
             /// intelligent retries, Success+ needs to be enabled in [GoCardless
             /// dashboard](https://manage.gocardless.com/success-plus). </p> <p
             /// class="notice"><strong>Important</strong>: This is not
-            /// applicable to IBP and VRP payments. </p>
+            /// applicable to Pay by Bank and VRP payments. </p>
             /// </summary>
             [JsonProperty("retry_if_possible")]
             public bool? RetryIfPossible { get; set; }
@@ -2311,7 +2311,7 @@ namespace GoCardless.Services
     /// authorise it.
     /// Currently, the customer can only be notified by email.
     ///
-    /// This endpoint is currently supported only for Instant Bank Pay Billing
+    /// This endpoint is currently supported only for Pay by Bank Billing
     /// Requests.
     /// </summary>
     public class BillingRequestNotifyRequest

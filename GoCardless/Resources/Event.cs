@@ -476,8 +476,8 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// If `resource_type` is `billing_requests`, this is the ID of the
-        /// [payment](#core-endpoints-payments) which has been created for
-        /// Instant Bank Payment.
+        /// [payment](#core-endpoints-payments) which has been created for Pay
+        /// by Bank.
         /// </summary>
         [JsonProperty("payment_request_payment")]
         public string PaymentRequestPayment { get; set; }

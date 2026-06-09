@@ -499,6 +499,33 @@ namespace GoCardless.Services
         public string MandateType { get; set; }
 
         /// <summary>
+        /// Mandate type
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum MandateMandateType
+        {
+            /// <summary>`mandate_type` with a value of "bank_debit"</summary>
+            [EnumMember(Value = "bank_debit")]
+            BankDebit,
+
+            /// <summary>`mandate_type` with a value of "instant"</summary>
+            [EnumMember(Value = "instant")]
+            Instant,
+
+            /// <summary>`mandate_type` with a value of "recurring"</summary>
+            [EnumMember(Value = "recurring")]
+            Recurring,
+
+            /// <summary>`mandate_type` with a value of "vrp_commercial"</summary>
+            [EnumMember(Value = "vrp_commercial")]
+            VrpCommercial,
+
+            /// <summary>`mandate_type` with a value of "vrp_sweeping"</summary>
+            [EnumMember(Value = "vrp_sweeping")]
+            VrpSweeping,
+        }
+
+        /// <summary>
         /// Unique reference. Different schemes have different length and
         /// [character set](#appendix-character-sets) requirements. GoCardless
         /// will generate a unique reference satisfying the different scheme

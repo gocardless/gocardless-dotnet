@@ -83,6 +83,12 @@ namespace GoCardless.Resources
         public MandateLinks Links { get; set; }
 
         /// <summary>
+        /// Mandate type
+        /// </summary>
+        [JsonProperty("mandate_type")]
+        public MandateMandateType? MandateType { get; set; }
+
+        /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
@@ -361,6 +367,37 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("new_mandate")]
         public string NewMandate { get; set; }
+    }
+
+    /// <summary>
+    /// Mandate type
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum MandateMandateType
+    {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`mandate_type` with a value of "bank_debit"</summary>
+        [EnumMember(Value = "bank_debit")]
+        BankDebit,
+
+        /// <summary>`mandate_type` with a value of "instant"</summary>
+        [EnumMember(Value = "instant")]
+        Instant,
+
+        /// <summary>`mandate_type` with a value of "recurring"</summary>
+        [EnumMember(Value = "recurring")]
+        Recurring,
+
+        /// <summary>`mandate_type` with a value of "vrp_commercial"</summary>
+        [EnumMember(Value = "vrp_commercial")]
+        VrpCommercial,
+
+        /// <summary>`mandate_type` with a value of "vrp_sweeping"</summary>
+        [EnumMember(Value = "vrp_sweeping")]
+        VrpSweeping,
     }
 
     /// <summary>
