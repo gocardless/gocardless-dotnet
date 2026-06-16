@@ -469,85 +469,10 @@ namespace GoCardless.Services
         public string MandateRequestScheme { get; set; }
 
         /// <summary>
-        /// Verification preference for the mandate. One of:
-        /// <ul>
-        ///   <li>`minimum`: only verify if absolutely required, such as when
-        /// part of scheme rules</li>
-        ///   <li>`recommended`: in addition to `minimum`, use the GoCardless
-        /// payment intelligence solution to decide if a payer should be
-        /// verified</li>
-        ///   <li>`when_available`: if verification mechanisms are available,
-        /// use them</li>
-        ///   <li>`always`: as `when_available`, but fail to create the Billing
-        /// Request if a mechanism isn't available</li>
-        /// </ul>
-        ///
-        /// By default, all Billing Requests use the `recommended` verification
-        /// preference. It uses GoCardless payment intelligence solution to
-        /// determine if a payer is fraudulent or not. The verification
-        /// mechanism is based on the response and the payer may be asked to
-        /// verify themselves. If the feature is not available, `recommended`
-        /// behaves like `minimum`.
-        ///
-        /// If you never wish to take advantage of our reduced risk products and
-        /// Verified Mandates as they are released in new schemes, please use
-        /// the `minimum` verification preference.
-        ///
-        /// See [Billing Requests: Creating Verified
-        /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
-        /// for more information.
+        /// Verification preference for the mandate.
         /// </summary>
         [JsonProperty("mandate_request_verify")]
-        public BillingRequestTemplateMandateRequestVerify? MandateRequestVerify { get; set; }
-
-        /// <summary>
-        /// Verification preference for the mandate. One of:
-        /// <ul>
-        ///   <li>`minimum`: only verify if absolutely required, such as when
-        /// part of scheme rules</li>
-        ///   <li>`recommended`: in addition to `minimum`, use the GoCardless
-        /// payment intelligence solution to decide if a payer should be
-        /// verified</li>
-        ///   <li>`when_available`: if verification mechanisms are available,
-        /// use them</li>
-        ///   <li>`always`: as `when_available`, but fail to create the Billing
-        /// Request if a mechanism isn't available</li>
-        /// </ul>
-        ///
-        /// By default, all Billing Requests use the `recommended` verification
-        /// preference. It uses GoCardless payment intelligence solution to
-        /// determine if a payer is fraudulent or not. The verification
-        /// mechanism is based on the response and the payer may be asked to
-        /// verify themselves. If the feature is not available, `recommended`
-        /// behaves like `minimum`.
-        ///
-        /// If you never wish to take advantage of our reduced risk products and
-        /// Verified Mandates as they are released in new schemes, please use
-        /// the `minimum` verification preference.
-        ///
-        /// See [Billing Requests: Creating Verified
-        /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
-        /// for more information.
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum BillingRequestTemplateMandateRequestVerify
-        {
-            /// <summary>`mandate_request_verify` with a value of "minimum"</summary>
-            [EnumMember(Value = "minimum")]
-            Minimum,
-
-            /// <summary>`mandate_request_verify` with a value of "recommended"</summary>
-            [EnumMember(Value = "recommended")]
-            Recommended,
-
-            /// <summary>`mandate_request_verify` with a value of "when_available"</summary>
-            [EnumMember(Value = "when_available")]
-            WhenAvailable,
-
-            /// <summary>`mandate_request_verify` with a value of "always"</summary>
-            [EnumMember(Value = "always")]
-            Always,
-        }
+        public string MandateRequestVerify { get; set; }
 
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
@@ -823,85 +748,10 @@ namespace GoCardless.Services
         public string MandateRequestScheme { get; set; }
 
         /// <summary>
-        /// Verification preference for the mandate. One of:
-        /// <ul>
-        ///   <li>`minimum`: only verify if absolutely required, such as when
-        /// part of scheme rules</li>
-        ///   <li>`recommended`: in addition to `minimum`, use the GoCardless
-        /// payment intelligence solution to decide if a payer should be
-        /// verified</li>
-        ///   <li>`when_available`: if verification mechanisms are available,
-        /// use them</li>
-        ///   <li>`always`: as `when_available`, but fail to create the Billing
-        /// Request if a mechanism isn't available</li>
-        /// </ul>
-        ///
-        /// By default, all Billing Requests use the `recommended` verification
-        /// preference. It uses GoCardless payment intelligence solution to
-        /// determine if a payer is fraudulent or not. The verification
-        /// mechanism is based on the response and the payer may be asked to
-        /// verify themselves. If the feature is not available, `recommended`
-        /// behaves like `minimum`.
-        ///
-        /// If you never wish to take advantage of our reduced risk products and
-        /// Verified Mandates as they are released in new schemes, please use
-        /// the `minimum` verification preference.
-        ///
-        /// See [Billing Requests: Creating Verified
-        /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
-        /// for more information.
+        /// Verification preference for the mandate.
         /// </summary>
         [JsonProperty("mandate_request_verify")]
-        public BillingRequestTemplateMandateRequestVerify? MandateRequestVerify { get; set; }
-
-        /// <summary>
-        /// Verification preference for the mandate. One of:
-        /// <ul>
-        ///   <li>`minimum`: only verify if absolutely required, such as when
-        /// part of scheme rules</li>
-        ///   <li>`recommended`: in addition to `minimum`, use the GoCardless
-        /// payment intelligence solution to decide if a payer should be
-        /// verified</li>
-        ///   <li>`when_available`: if verification mechanisms are available,
-        /// use them</li>
-        ///   <li>`always`: as `when_available`, but fail to create the Billing
-        /// Request if a mechanism isn't available</li>
-        /// </ul>
-        ///
-        /// By default, all Billing Requests use the `recommended` verification
-        /// preference. It uses GoCardless payment intelligence solution to
-        /// determine if a payer is fraudulent or not. The verification
-        /// mechanism is based on the response and the payer may be asked to
-        /// verify themselves. If the feature is not available, `recommended`
-        /// behaves like `minimum`.
-        ///
-        /// If you never wish to take advantage of our reduced risk products and
-        /// Verified Mandates as they are released in new schemes, please use
-        /// the `minimum` verification preference.
-        ///
-        /// See [Billing Requests: Creating Verified
-        /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
-        /// for more information.
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum BillingRequestTemplateMandateRequestVerify
-        {
-            /// <summary>`mandate_request_verify` with a value of "minimum"</summary>
-            [EnumMember(Value = "minimum")]
-            Minimum,
-
-            /// <summary>`mandate_request_verify` with a value of "recommended"</summary>
-            [EnumMember(Value = "recommended")]
-            Recommended,
-
-            /// <summary>`mandate_request_verify` with a value of "when_available"</summary>
-            [EnumMember(Value = "when_available")]
-            WhenAvailable,
-
-            /// <summary>`mandate_request_verify` with a value of "always"</summary>
-            [EnumMember(Value = "always")]
-            Always,
-        }
+        public string MandateRequestVerify { get; set; }
 
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
