@@ -55,6 +55,12 @@ namespace GoCardless.Resources
         public string CompanyNumber { get; set; }
 
         /// <summary>
+        /// The country code of the company's address.
+        /// </summary>
+        [JsonProperty("country_code")]
+        public string CountryCode { get; set; }
+
+        /// <summary>
         /// A summary describing what the company does.
         /// </summary>
         [JsonProperty("description")]
@@ -83,6 +89,12 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("postal_code")]
         public string PostalCode { get; set; }
+
+        /// <summary>
+        /// The region of the company's address.
+        /// </summary>
+        [JsonProperty("region")]
+        public string Region { get; set; }
     }
 
     /// <summary>
