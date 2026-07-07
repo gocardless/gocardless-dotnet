@@ -302,6 +302,10 @@ namespace GoCardless.Services
         /// <summary>
         /// Amount, in the lowest denomination for the currency (e.g. pence in
         /// GBP, cents in EUR).
+        ///
+        /// For Variable Recurring Payments (VRP), this must not exceed the
+        /// mandate's `max_amount_per_payment`
+        /// constraint.
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
