@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using FluentAssertions;
 using GoCardless.Resources;
 using GoCardless.Services;
 using NUnit.Framework;

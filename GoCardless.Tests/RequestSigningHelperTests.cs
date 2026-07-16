@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using FluentAssertions;
 using GoCardless.Internals;
 using GoCardless.Resources;
 using GoCardless.Resources;

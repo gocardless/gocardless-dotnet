@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using FluentAssertions;
 using GoCardless.Resources;
 using GoCardless.Services;
 using NUnit.Framework;
@@ -62,8 +61,8 @@ namespace GoCardless.Tests
             mockHttp.AssertRequestMade("POST", "/blocks/block_by_ref");
             TestHelpers.AssertResponseCanSerializeBackToFixture(resp, responseFixture);
 
-            resp.Meta.Cursors.Before.Should().BeNull();
-            resp.Meta.Cursors.After.Should().BeNull();
+            ClassicAssert.IsNull(resp.Meta.Cursors.Before);
+            ClassicAssert.IsNull(resp.Meta.Cursors.After);
 
             IReadOnlyList<GoCardless.Resources.Block> blocks = resp.Blocks;
             ClassicAssert.AreEqual(blocks[0].Id, "BLC123");

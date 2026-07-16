@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using FluentAssertions;
 using GoCardless.Internals;
 using GoCardless.Services;
 using NUnit.Framework;
@@ -35,7 +34,7 @@ namespace GoCardless.Tests
             var listResponse = client.Mandates.ListAsync(mandateListRequest).Result;
             //When the responseMessage attached to the response is inspected
             //Then the responseMessage content can be read
-            listResponse.ResponseMessage.Should().NotBeNull();
+            ClassicAssert.IsNotNull(listResponse.ResponseMessage);
             var content = await listResponse.ResponseMessage.Content.ReadAsStringAsync();
             ClassicAssert.AreEqual(
                 File.ReadAllText("fixtures/client/list_mandates_for_a_customer.json"),
