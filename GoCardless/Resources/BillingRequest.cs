@@ -1835,6 +1835,23 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
+
+        /// <summary>
+        /// The result of the payer name verification check performed when the
+        /// bank account was created. Only present if a check was performed.
+        ///
+        /// - `full`: The name provided matches the name held by the bank.
+        /// - `close`: The name provided is a close but not exact match to the
+        /// name held by the bank.
+        /// - `cannot_perform_verification`: A verification was attempted but
+        /// could not be completed. This can happen for a number of reasons,
+        /// including the account holder's bank not participating in the
+        /// verification scheme, the account not being eligible for verification
+        /// (e.g. the account holder has opted out), or the bank details not
+        /// being resolvable, among others.
+        /// </summary>
+        [JsonProperty("payer_name_verification_result")]
+        public BillingRequestResourcesCustomerBankAccountPayerNameVerificationResult? PayerNameVerificationResult { get; set; }
     }
 
     /// <summary>
@@ -1869,6 +1886,38 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("customer")]
         public string Customer { get; set; }
+    }
+
+    /// <summary>
+    /// The result of the payer name verification check performed when the bank account was created.
+    /// Only present if a check was performed.
+    ///
+    /// - `full`: The name provided matches the name held by the bank.
+    /// - `close`: The name provided is a close but not exact match to the name held by the bank.
+    /// - `cannot_perform_verification`: A verification was attempted but could not be completed.
+    /// This can happen for a number of reasons, including the account holder's bank not
+    /// participating in the verification scheme, the account not being eligible for verification
+    /// (e.g. the account holder has opted out), or the bank details not being resolvable, among
+    /// others.
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestResourcesCustomerBankAccountPayerNameVerificationResult
+    {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`payer_name_verification_result` with a value of "full"</summary>
+        [EnumMember(Value = "full")]
+        Full,
+
+        /// <summary>`payer_name_verification_result` with a value of "close"</summary>
+        [EnumMember(Value = "close")]
+        Close,
+
+        /// <summary>`payer_name_verification_result` with a value of "cannot_perform_verification"</summary>
+        [EnumMember(Value = "cannot_perform_verification")]
+        CannotPerformVerification,
     }
 
     /// <summary>
