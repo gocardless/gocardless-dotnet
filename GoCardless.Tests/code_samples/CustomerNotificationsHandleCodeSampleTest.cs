@@ -53,7 +53,7 @@ namespace GoCardless.Tests
             try
             {
                 var customerNotificationResponse = await client.CustomerNotifications.HandleAsync(
-                    "PCN123"
+                    "EV1D18JEXAMPLE"
                 );
                 GoCardless.Resources.CustomerNotification customerNotification =
                     customerNotificationResponse.CustomerNotification;
