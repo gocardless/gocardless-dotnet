@@ -844,17 +844,16 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Verification preference for the mandate. One of:
-            /// <ul>
-            ///   <li>`minimum`: only verify if absolutely required, such as
-            /// when part of scheme rules</li>
-            ///   <li>`recommended`: in addition to `minimum`, use the
-            /// GoCardless payment intelligence solution to decide if a payer
-            /// should be verified</li>
-            ///   <li>`when_available`: if verification mechanisms are
-            /// available, use them</li>
-            ///   <li>`always`: as `when_available`, but fail to create the
-            /// Billing Request if a mechanism isn't available</li>
-            /// </ul>
+            ///
+            /// - `minimum`: only verify if absolutely required, such as when
+            /// part of scheme rules
+            /// - `recommended`: in addition to `minimum`, use the GoCardless
+            /// payment intelligence solution to decide if a payer should be
+            /// verified
+            /// - `when_available`: if verification mechanisms are available,
+            /// use them
+            /// - `always`: as `when_available`, but fail to create the Billing
+            /// Request if a mechanism isn't available
             ///
             /// By default, all Billing Requests use the `recommended`
             /// verification preference. It uses GoCardless payment intelligence
@@ -876,17 +875,16 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Verification preference for the mandate. One of:
-            /// <ul>
-            ///   <li>`minimum`: only verify if absolutely required, such as when
-            /// part of scheme rules</li>
-            ///   <li>`recommended`: in addition to `minimum`, use the GoCardless
+            ///
+            /// - `minimum`: only verify if absolutely required, such as when part
+            /// of scheme rules
+            /// - `recommended`: in addition to `minimum`, use the GoCardless
             /// payment intelligence solution to decide if a payer should be
-            /// verified</li>
-            ///   <li>`when_available`: if verification mechanisms are available,
-            /// use them</li>
-            ///   <li>`always`: as `when_available`, but fail to create the Billing
-            /// Request if a mechanism isn't available</li>
-            /// </ul>
+            /// verified
+            /// - `when_available`: if verification mechanisms are available, use
+            /// them
+            /// - `always`: as `when_available`, but fail to create the Billing
+            /// Request if a mechanism isn't available
             ///
             /// By default, all Billing Requests use the `recommended` verification
             /// preference. It uses GoCardless payment intelligence solution to

@@ -192,18 +192,16 @@ namespace GoCardless.Services
         /// Please refer to that documentation for more information on the
         /// requirements for these fields.
         ///
-        /// <b>Required</b>:
-        /// <ul>
-        /// <li>`amount`</li>
-        /// <li>`scheme`</li>
-        /// <li>`recipient_bank_account_id`</li>
-        /// </ul>
+        /// **Required**:
+        ///
+        /// - `amount`
+        /// - `scheme`
+        /// - `recipient_bank_account_id`
         ///
         /// Additional supported fields:
-        /// <ul>
-        /// <li>`reference`</li>
-        /// <li>`metadata`</li>
-        /// </ul>
+        ///
+        /// - `reference`
+        /// - `metadata`
         ///
         /// </summary>
         public class OutboundPaymentImportEntryItems
@@ -356,36 +354,34 @@ namespace GoCardless.Services
 
         /// <summary>
         /// The status of the outbound payment import.
-        /// <ul>
-        /// <li>`created`: The initial state of a new import.</li>
-        /// <li>`validating`: Import validation in progress.</li>
-        /// <li>`invalid`: Import validation failed.</li>
-        /// <li>`valid`: Import validation succeeded.</li>
-        /// <li>`processing`: Authorisation received; payments are being
-        /// generated.</li>
-        /// <li>`processed`: All entries have been successfully converted into
-        /// outbound payments.</li>
-        /// <li>`cancelled`: The import was cancelled by a user or automatically
-        /// expired by the system.</li>
-        /// </ul>
+        ///
+        /// - `created`: The initial state of a new import.
+        /// - `validating`: Import validation in progress.
+        /// - `invalid`: Import validation failed.
+        /// - `valid`: Import validation succeeded.
+        /// - `processing`: Authorisation received; payments are being
+        /// generated.
+        /// - `processed`: All entries have been successfully converted into
+        /// outbound payments.
+        /// - `cancelled`: The import was cancelled by a user or automatically
+        /// expired by the system.
         /// </summary>
         [JsonProperty("status")]
         public OutboundPaymentImportStatus? Status { get; set; }
 
         /// <summary>
         /// The status of the outbound payment import.
-        /// <ul>
-        /// <li>`created`: The initial state of a new import.</li>
-        /// <li>`validating`: Import validation in progress.</li>
-        /// <li>`invalid`: Import validation failed.</li>
-        /// <li>`valid`: Import validation succeeded.</li>
-        /// <li>`processing`: Authorisation received; payments are being
-        /// generated.</li>
-        /// <li>`processed`: All entries have been successfully converted into
-        /// outbound payments.</li>
-        /// <li>`cancelled`: The import was cancelled by a user or automatically
-        /// expired by the system.</li>
-        /// </ul>
+        ///
+        /// - `created`: The initial state of a new import.
+        /// - `validating`: Import validation in progress.
+        /// - `invalid`: Import validation failed.
+        /// - `valid`: Import validation succeeded.
+        /// - `processing`: Authorisation received; payments are being
+        /// generated.
+        /// - `processed`: All entries have been successfully converted into
+        /// outbound payments.
+        /// - `cancelled`: The import was cancelled by a user or automatically
+        /// expired by the system.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum OutboundPaymentImportStatus

@@ -585,24 +585,22 @@ namespace GoCardless.Services
 
         /// <summary>
         /// One of:
-        /// <ul>
-        /// <li>`sucessfully_processed`: the entry has been imported and the
-        /// associated records created.</li>
-        /// <li>`unsuccessfully_processed`: the entry could not be processed due
-        /// to an error, see the 'processing_errors' value</li>
-        /// </ul>
+        ///
+        /// - `sucessfully_processed`: the entry has been imported and the
+        /// associated records created.
+        /// - `unsuccessfully_processed`: the entry could not be processed due
+        /// to an error, see the 'processing_errors' value
         /// </summary>
         [JsonProperty("status")]
         public MandateImportEntryStatus? Status { get; set; }
 
         /// <summary>
         /// One of:
-        /// <ul>
-        /// <li>`sucessfully_processed`: the entry has been imported and the
-        /// associated records created.</li>
-        /// <li>`unsuccessfully_processed`: the entry could not be processed due
-        /// to an error, see the 'processing_errors' value</li>
-        /// </ul>
+        ///
+        /// - `sucessfully_processed`: the entry has been imported and the
+        /// associated records created.
+        /// - `unsuccessfully_processed`: the entry could not be processed due
+        /// to an error, see the 'processing_errors' value
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum MandateImportEntryStatus

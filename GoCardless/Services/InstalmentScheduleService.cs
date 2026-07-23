@@ -859,16 +859,15 @@ namespace GoCardless.Services
 
         /// <summary>
         /// One of:
-        /// <ul>
-        /// <li>`pending`: we're waiting for GC to create the payments</li>
-        /// <li>`active`: the payments have been created, and the schedule is
-        /// active</li>
-        /// <li>`creation_failed`: payment creation failed</li>
-        /// <li>`completed`: we have passed the date of the final payment and
-        /// all payments have been collected</li>
-        /// <li>`cancelled`: the schedule has been cancelled</li>
-        /// <li>`errored`: one or more payments have failed</li>
-        /// </ul>
+        ///
+        /// - `pending`: we're waiting for GC to create the payments
+        /// - `active`: the payments have been created, and the schedule is
+        /// active
+        /// - `creation_failed`: payment creation failed
+        /// - `completed`: we have passed the date of the final payment and all
+        /// payments have been collected
+        /// - `cancelled`: the schedule has been cancelled
+        /// - `errored`: one or more payments have failed
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum InstalmentScheduleStatus

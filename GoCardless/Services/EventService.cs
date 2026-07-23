@@ -241,20 +241,19 @@ namespace GoCardless.Services
         /// <summary>
         /// Includes linked resources in the response. Must be used with the
         /// `resource_type` parameter specified. The include should be one of:
-        /// <ul>
-        /// <li>`billing_request`</li>
-        /// <li>`creditor`</li>
-        /// <li>`instalment_schedule`</li>
-        /// <li>`mandate`</li>
-        /// <li>`payer_authorisation`</li>
-        /// <li>`payment`</li>
-        /// <li>`payout`</li>
-        /// <li>`refund`</li>
-        /// <li>`scheme_identifier`</li>
-        /// <li>`subscription`</li>
-        /// <li>`outbound_payment`</li>
-        /// <li>`payment_account_transaction`</li>
-        /// </ul>
+        ///
+        /// - `billing_request`
+        /// - `creditor`
+        /// - `instalment_schedule`
+        /// - `mandate`
+        /// - `payer_authorisation`
+        /// - `payment`
+        /// - `payout`
+        /// - `refund`
+        /// - `scheme_identifier`
+        /// - `subscription`
+        /// - `outbound_payment`
+        /// - `payment_account_transaction`
         /// </summary>
         [JsonProperty("include")]
         public EventInclude? Include { get; set; }
@@ -262,20 +261,19 @@ namespace GoCardless.Services
         /// <summary>
         /// Includes linked resources in the response. Must be used with the
         /// `resource_type` parameter specified. The include should be one of:
-        /// <ul>
-        /// <li>`billing_request`</li>
-        /// <li>`creditor`</li>
-        /// <li>`instalment_schedule`</li>
-        /// <li>`mandate`</li>
-        /// <li>`payer_authorisation`</li>
-        /// <li>`payment`</li>
-        /// <li>`payout`</li>
-        /// <li>`refund`</li>
-        /// <li>`scheme_identifier`</li>
-        /// <li>`subscription`</li>
-        /// <li>`outbound_payment`</li>
-        /// <li>`payment_account_transaction`</li>
-        /// </ul>
+        ///
+        /// - `billing_request`
+        /// - `creditor`
+        /// - `instalment_schedule`
+        /// - `mandate`
+        /// - `payer_authorisation`
+        /// - `payment`
+        /// - `payout`
+        /// - `refund`
+        /// - `scheme_identifier`
+        /// - `subscription`
+        /// - `outbound_payment`
+        /// - `payment_account_transaction`
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum EventInclude
@@ -410,21 +408,20 @@ namespace GoCardless.Services
         /// `payment`, `payout`, `refund`, `scheme_identifier`, `subscription`,
         /// `outbound_payment` or `payment_account_transaction` parameters.
         /// The type can be one of:
-        /// <ul>
-        /// <li>`billing_requests`</li>
-        /// <li>`creditors`</li>
-        /// <li>`exports`</li>
-        /// <li>`instalment_schedules`</li>
-        /// <li>`mandates`</li>
-        /// <li>`payer_authorisations`</li>
-        /// <li>`payments`</li>
-        /// <li>`payouts`</li>
-        /// <li>`refunds`</li>
-        /// <li>`scheme_identifiers`</li>
-        /// <li>`subscriptions`</li>
-        /// <li>`outbound_payments`</li>
-        /// <li>`payment_account_transactions`</li>
-        /// </ul>
+        ///
+        /// - `billing_requests`
+        /// - `creditors`
+        /// - `exports`
+        /// - `instalment_schedules`
+        /// - `mandates`
+        /// - `payer_authorisations`
+        /// - `payments`
+        /// - `payouts`
+        /// - `refunds`
+        /// - `scheme_identifiers`
+        /// - `subscriptions`
+        /// - `outbound_payments`
+        /// - `payment_account_transactions`
         /// </summary>
         [JsonProperty("resource_type")]
         public EventResourceType? ResourceType { get; set; }
@@ -436,21 +433,20 @@ namespace GoCardless.Services
         /// `payment`, `payout`, `refund`, `scheme_identifier`, `subscription`,
         /// `outbound_payment` or `payment_account_transaction` parameters.
         /// The type can be one of:
-        /// <ul>
-        /// <li>`billing_requests`</li>
-        /// <li>`creditors`</li>
-        /// <li>`exports`</li>
-        /// <li>`instalment_schedules`</li>
-        /// <li>`mandates`</li>
-        /// <li>`payer_authorisations`</li>
-        /// <li>`payments`</li>
-        /// <li>`payouts`</li>
-        /// <li>`refunds`</li>
-        /// <li>`scheme_identifiers`</li>
-        /// <li>`subscriptions`</li>
-        /// <li>`outbound_payments`</li>
-        /// <li>`payment_account_transactions`</li>
-        /// </ul>
+        ///
+        /// - `billing_requests`
+        /// - `creditors`
+        /// - `exports`
+        /// - `instalment_schedules`
+        /// - `mandates`
+        /// - `payer_authorisations`
+        /// - `payments`
+        /// - `payouts`
+        /// - `refunds`
+        /// - `scheme_identifiers`
+        /// - `subscriptions`
+        /// - `outbound_payments`
+        /// - `payment_account_transactions`
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum EventResourceType

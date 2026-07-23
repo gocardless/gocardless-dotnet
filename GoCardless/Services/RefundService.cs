@@ -308,7 +308,7 @@ namespace GoCardless.Services
         /// <br />
         /// Must be supplied if `links[payment]` is present.
         /// <p class="notice">It is possible to opt out of requiring
-        /// `total_amount_confirmation`, please contact <a
+        /// <code>total_amount_confirmation</code>, please contact <a
         /// href="mailto:support@gocardless.com">our support team</a> for more
         /// information.</p>
         /// </summary>
@@ -399,22 +399,20 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Whether a refund was issued against a mandate or a payment. One of:
-        /// <ul>
-        ///   <li>`payment`: <em>default</em> returns refunds created against
-        /// payments only</li>
-        ///   <li>`mandate`: returns refunds created against mandates only</li>
-        /// </ul>
+        ///
+        /// - `payment`: <em>default</em> returns refunds created against
+        /// payments only
+        /// - `mandate`: returns refunds created against mandates only
         /// </summary>
         [JsonProperty("refund_type")]
         public RefundRefundType? RefundType { get; set; }
 
         /// <summary>
         /// Whether a refund was issued against a mandate or a payment. One of:
-        /// <ul>
-        ///   <li>`payment`: <em>default</em> returns refunds created against
-        /// payments only</li>
-        ///   <li>`mandate`: returns refunds created against mandates only</li>
-        /// </ul>
+        ///
+        /// - `payment`: <em>default</em> returns refunds created against
+        /// payments only
+        /// - `mandate`: returns refunds created against mandates only
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum RefundRefundType

@@ -132,8 +132,8 @@ namespace GoCardless.Resources
         /// subscription will continue forever.
         /// <br />
         /// <p class="deprecated-notice"><strong>Deprecated</strong>: This field
-        /// will be removed in a future API version. Use `count` to specify a
-        /// number of payments instead.</p>
+        /// will be removed in a future API version. Use <code>count</code> to
+        /// specify a number of payments instead.</p>
         /// </summary>
         [JsonProperty("end_date")]
         public string EndDate { get; set; }
@@ -232,20 +232,19 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// One of:
-        /// <ul>
-        /// <li>`pending_customer_approval`: the subscription is waiting for
-        /// customer approval before becoming active</li>
-        /// <li>`customer_approval_denied`: the customer did not approve the
-        /// subscription</li>
-        /// <li>`active`: the subscription is currently active and will continue
-        /// to create payments</li>
-        /// <li>`finished`: all of the payments scheduled for creation under
-        /// this subscription have been created</li>
-        /// <li>`cancelled`: the subscription has been cancelled and will no
-        /// longer create payments</li>
-        /// <li>`paused`: the subscription has been paused and will not create
-        /// payments</li>
-        /// </ul>
+        ///
+        /// - `pending_customer_approval`: the subscription is waiting for
+        /// customer approval before becoming active
+        /// - `customer_approval_denied`: the customer did not approve the
+        /// subscription
+        /// - `active`: the subscription is currently active and will continue
+        /// to create payments
+        /// - `finished`: all of the payments scheduled for creation under this
+        /// subscription have been created
+        /// - `cancelled`: the subscription has been cancelled and will no
+        /// longer create payments
+        /// - `paused`: the subscription has been paused and will not create
+        /// payments
         /// </summary>
         [JsonProperty("status")]
         public string Status { get; set; }
@@ -356,16 +355,15 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// One of:
-    /// <ul>
-    /// <li>`pending_customer_approval`: the subscription is waiting for customer approval before
-    /// becoming active</li>
-    /// <li>`customer_approval_denied`: the customer did not approve the subscription</li>
-    /// <li>`active`: the subscription is currently active and will continue to create payments</li>
-    /// <li>`finished`: all of the payments scheduled for creation under this subscription have been
-    /// created</li>
-    /// <li>`cancelled`: the subscription has been cancelled and will no longer create payments</li>
-    /// <li>`paused`: the subscription has been paused and will not create payments</li>
-    /// </ul>
+    ///
+    /// - `pending_customer_approval`: the subscription is waiting for customer approval before
+    /// becoming active
+    /// - `customer_approval_denied`: the customer did not approve the subscription
+    /// - `active`: the subscription is currently active and will continue to create payments
+    /// - `finished`: all of the payments scheduled for creation under this subscription have been
+    /// created
+    /// - `cancelled`: the subscription has been cancelled and will no longer create payments
+    /// - `paused`: the subscription has been paused and will not create payments
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum SubscriptionStatus

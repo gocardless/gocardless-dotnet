@@ -327,16 +327,15 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// One of:
-        /// <ul>
-        /// <li>`pending`: the billing request is pending and can be used</li>
-        /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
-        /// <li>`fulfilling`: the billing request is currently undergoing
-        /// fulfilment</li>
-        /// <li>`fulfilled`: the billing request has been fulfilled and a
-        /// payment created</li>
-        /// <li>`cancelled`: the billing request has been cancelled and cannot
-        /// be used</li>
-        /// </ul>
+        ///
+        /// - `pending`: the billing request is pending and can be used
+        /// - `ready_to_fulfil`: the billing request is ready to fulfil
+        /// - `fulfilling`: the billing request is currently undergoing
+        /// fulfilment
+        /// - `fulfilled`: the billing request has been fulfilled and a payment
+        /// created
+        /// - `cancelled`: the billing request has been cancelled and cannot be
+        /// used
         /// </summary>
         [JsonProperty("status")]
         public string Status { get; set; }
@@ -1081,17 +1080,16 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Verification preference for the mandate. One of:
-        /// <ul>
-        ///   <li>`minimum`: only verify if absolutely required, such as when
-        /// part of scheme rules</li>
-        ///   <li>`recommended`: in addition to `minimum`, use the GoCardless
+        ///
+        /// - `minimum`: only verify if absolutely required, such as when part
+        /// of scheme rules
+        /// - `recommended`: in addition to `minimum`, use the GoCardless
         /// payment intelligence solution to decide if a payer should be
-        /// verified</li>
-        ///   <li>`when_available`: if verification mechanisms are available,
-        /// use them</li>
-        ///   <li>`always`: as `when_available`, but fail to create the Billing
-        /// Request if a mechanism isn't available</li>
-        /// </ul>
+        /// verified
+        /// - `when_available`: if verification mechanisms are available, use
+        /// them
+        /// - `always`: as `when_available`, but fail to create the Billing
+        /// Request if a mechanism isn't available
         ///
         /// By default, all Billing Requests use the `recommended` verification
         /// preference. It uses GoCardless payment intelligence solution to
@@ -1401,14 +1399,13 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// Verification preference for the mandate. One of:
-    /// <ul>
-    ///   <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
-    ///   <li>`recommended`: in addition to `minimum`, use the GoCardless payment intelligence
-    /// solution to decide if a payer should be verified</li>
-    ///   <li>`when_available`: if verification mechanisms are available, use them</li>
-    ///   <li>`always`: as `when_available`, but fail to create the Billing Request if a mechanism
-    /// isn't available</li>
-    /// </ul>
+    ///
+    /// - `minimum`: only verify if absolutely required, such as when part of scheme rules
+    /// - `recommended`: in addition to `minimum`, use the GoCardless payment intelligence solution
+    /// to decide if a payer should be verified
+    /// - `when_available`: if verification mechanisms are available, use them
+    /// - `always`: as `when_available`, but fail to create the Billing Request if a mechanism isn't
+    /// available
     ///
     /// By default, all Billing Requests use the `recommended` verification preference. It uses
     /// GoCardless payment intelligence solution to determine if a payer is fraudulent or not. The
@@ -2241,13 +2238,12 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// One of:
-    /// <ul>
-    /// <li>`pending`: the billing request is pending and can be used</li>
-    /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
-    /// <li>`fulfilling`: the billing request is currently undergoing fulfilment</li>
-    /// <li>`fulfilled`: the billing request has been fulfilled and a payment created</li>
-    /// <li>`cancelled`: the billing request has been cancelled and cannot be used</li>
-    /// </ul>
+    ///
+    /// - `pending`: the billing request is pending and can be used
+    /// - `ready_to_fulfil`: the billing request is ready to fulfil
+    /// - `fulfilling`: the billing request is currently undergoing fulfilment
+    /// - `fulfilled`: the billing request has been fulfilled and a payment created
+    /// - `cancelled`: the billing request has been cancelled and cannot be used
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestWithActionBillingRequestsStatus

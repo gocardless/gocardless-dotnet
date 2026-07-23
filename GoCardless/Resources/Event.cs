@@ -89,21 +89,20 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// The resource type for this event. One of:
-        /// <ul>
-        /// <li>`billing_requests`</li>
-        /// <li>`creditors`</li>
-        /// <li>`exports`</li>
-        /// <li>`instalment_schedules`</li>
-        /// <li>`mandates`</li>
-        /// <li>`payer_authorisations`</li>
-        /// <li>`payments`</li>
-        /// <li>`payouts`</li>
-        /// <li>`refunds`</li>
-        /// <li>`scheme_identifiers`</li>
-        /// <li>`subscriptions`</li>
-        /// <li>`outbound_payments`</li>
-        /// <li>`payment_account_transactions`</li>
-        /// </ul>
+        ///
+        /// - `billing_requests`
+        /// - `creditors`
+        /// - `exports`
+        /// - `instalment_schedules`
+        /// - `mandates`
+        /// - `payer_authorisations`
+        /// - `payments`
+        /// - `payouts`
+        /// - `refunds`
+        /// - `scheme_identifiers`
+        /// - `subscriptions`
+        /// - `outbound_payments`
+        /// - `payment_account_transactions`
         /// </summary>
         [JsonProperty("resource_type")]
         public EventResourceType? ResourceType { get; set; }
@@ -194,28 +193,23 @@ namespace GoCardless.Resources
         /// <summary>
         /// When will_attempt_retry is set to false, this field will contain
         /// the reason the payment was not retried. This can be one of:
-        /// <ul>
-        /// <li>`failure_filter_applied`: The payment won't be intelligently
-        /// retried as
-        ///   there is a high likelihood of failure on retry.</li>
-        /// <li>`other`: The payment won't be intelligently retried due to any
-        /// other
-        ///   reason.</li>
-        /// </ul>
+        ///
+        /// - `failure_filter_applied`: The payment won't be intelligently
+        /// retried as there is a high likelihood of failure on retry.
+        /// - `other`: The payment won't be intelligently retried due to any
+        /// other reason.
         /// </summary>
         [JsonProperty("not_retried_reason")]
         public string NotRetriedReason { get; set; }
 
         /// <summary>
         /// Who initiated the event. One of:
-        /// <ul>
-        /// <li>`bank`: this event was triggered by a report from the banks</li>
-        /// <li>`gocardless`: this event was performed by GoCardless
-        /// automatically</li>
-        /// <li>`api`: this event was triggered by an API endpoint</li>
-        /// <li>`customer`: this event was triggered by a Customer</li>
-        /// <li>`payer`: this event was triggered by a Payer</li>
-        /// </ul>
+        ///
+        /// - `bank`: this event was triggered by a report from the banks
+        /// - `gocardless`: this event was performed by GoCardless automatically
+        /// - `api`: this event was triggered by an API endpoint
+        /// - `customer`: this event was triggered by a Customer
+        /// - `payer`: this event was triggered by a Payer
         /// </summary>
         [JsonProperty("origin")]
         public EventDetailsOrigin? Origin { get; set; }
@@ -255,13 +249,12 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// Who initiated the event. One of:
-    /// <ul>
-    /// <li>`bank`: this event was triggered by a report from the banks</li>
-    /// <li>`gocardless`: this event was performed by GoCardless automatically</li>
-    /// <li>`api`: this event was triggered by an API endpoint</li>
-    /// <li>`customer`: this event was triggered by a Customer</li>
-    /// <li>`payer`: this event was triggered by a Payer</li>
-    /// </ul>
+    ///
+    /// - `bank`: this event was triggered by a report from the banks
+    /// - `gocardless`: this event was performed by GoCardless automatically
+    /// - `api`: this event was triggered by an API endpoint
+    /// - `customer`: this event was triggered by a Customer
+    /// - `payer`: this event was triggered by a Payer
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum EventDetailsOrigin
@@ -530,21 +523,20 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// The resource type for this event. One of:
-    /// <ul>
-    /// <li>`billing_requests`</li>
-    /// <li>`creditors`</li>
-    /// <li>`exports`</li>
-    /// <li>`instalment_schedules`</li>
-    /// <li>`mandates`</li>
-    /// <li>`payer_authorisations`</li>
-    /// <li>`payments`</li>
-    /// <li>`payouts`</li>
-    /// <li>`refunds`</li>
-    /// <li>`scheme_identifiers`</li>
-    /// <li>`subscriptions`</li>
-    /// <li>`outbound_payments`</li>
-    /// <li>`payment_account_transactions`</li>
-    /// </ul>
+    ///
+    /// - `billing_requests`
+    /// - `creditors`
+    /// - `exports`
+    /// - `instalment_schedules`
+    /// - `mandates`
+    /// - `payer_authorisations`
+    /// - `payments`
+    /// - `payouts`
+    /// - `refunds`
+    /// - `scheme_identifiers`
+    /// - `subscriptions`
+    /// - `outbound_payments`
+    /// - `payment_account_transactions`
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum EventResourceType

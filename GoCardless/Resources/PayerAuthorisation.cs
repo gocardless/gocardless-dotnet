@@ -55,14 +55,16 @@ namespace GoCardless.Resources
     /// </ol>
     ///
     /// <p class="notice">
-    ///   Note that the `create` and `update` endpoints behave differently than
-    ///   other existing `create` and `update` endpoints. The Payer
-    /// Authorisation is still saved if incomplete data is provided.
-    ///   We return the list of incomplete data in the `incomplete_fields` along
-    /// with the resources in the body of the response.
+    ///   Note that the <code>create</code> and <code>update</code> endpoints
+    /// behave differently than
+    ///   other existing <code>create</code> and <code>update</code> endpoints.
+    /// The Payer Authorisation is still saved if incomplete data is provided.
+    ///   We return the list of incomplete data in the
+    /// <code>incomplete_fields</code> along with the resources in the body of
+    /// the response.
     ///   The bank account details(account_number, bank_code & branch_code) must
     /// be sent together rather than splitting across different request for both
-    /// `create` and `update` endpoints.
+    /// <code>create</code> and <code>update</code> endpoints.
     ///   <br><br>
     ///   The API is designed to be flexible and allows you to collect
     /// information in multiple steps without storing any sensitive data in the
@@ -120,17 +122,16 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// One of:
-        /// <ul>
-        /// <li>`created`: The PayerAuthorisation has been created, and not been
-        /// confirmed yet</li>
-        /// <li>`submitted`: The payer information has been submitted</li>
-        /// <li>`confirmed`: PayerAuthorisation is confirmed and resources are
-        /// ready to be created</li>
-        /// <li>`completed`: The PayerAuthorisation has been completed and
-        /// customer, bank_account and mandate has been created</li>
-        /// <li>`failed`: The PayerAuthorisation has failed and customer,
-        /// bank_account and mandate is not created</li>
-        /// </ul>
+        ///
+        /// - `created`: The PayerAuthorisation has been created, and not been
+        /// confirmed yet
+        /// - `submitted`: The payer information has been submitted
+        /// - `confirmed`: PayerAuthorisation is confirmed and resources are
+        /// ready to be created
+        /// - `completed`: The PayerAuthorisation has been completed and
+        /// customer, bank_account and mandate has been created
+        /// - `failed`: The PayerAuthorisation has failed and customer,
+        /// bank_account and mandate is not created
         /// </summary>
         [JsonProperty("status")]
         public PayerAuthorisationStatus? Status { get; set; }
@@ -527,15 +528,14 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// One of:
-    /// <ul>
-    /// <li>`created`: The PayerAuthorisation has been created, and not been confirmed yet</li>
-    /// <li>`submitted`: The payer information has been submitted</li>
-    /// <li>`confirmed`: PayerAuthorisation is confirmed and resources are ready to be created</li>
-    /// <li>`completed`: The PayerAuthorisation has been completed and customer, bank_account and
-    /// mandate has been created</li>
-    /// <li>`failed`: The PayerAuthorisation has failed and customer, bank_account and mandate is
-    /// not created</li>
-    /// </ul>
+    ///
+    /// - `created`: The PayerAuthorisation has been created, and not been confirmed yet
+    /// - `submitted`: The payer information has been submitted
+    /// - `confirmed`: PayerAuthorisation is confirmed and resources are ready to be created
+    /// - `completed`: The PayerAuthorisation has been completed and customer, bank_account and
+    /// mandate has been created
+    /// - `failed`: The PayerAuthorisation has failed and customer, bank_account and mandate is not
+    /// created
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum PayerAuthorisationStatus

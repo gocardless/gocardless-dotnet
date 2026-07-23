@@ -430,13 +430,12 @@ namespace GoCardless.Services
         /// <summary>
         /// Indicates how a Variable Recurring Payment (VRP) is initiated, by or
         /// on behalf of the payer.
-        /// <ul>
-        /// <li>`in_session`: The payer is actively participating in the payment
-        /// creation session.</li>
-        /// <li>`off_session`: The payer is not present during the transaction,
+        ///
+        /// - `in_session`: The payer is actively participating in the payment
+        /// creation session.
+        /// - `off_session`: The payer is not present during the transaction,
         /// and the payment is initiated by the merchant based on an established
-        /// consent (e.g., a recurring subscription payment).</li>
-        /// </ul>
+        /// consent (e.g., a recurring subscription payment).
         /// </summary>
         [JsonProperty("psu_interaction_type")]
         public PaymentPsuInteractionType? PsuInteractionType { get; set; }
@@ -444,13 +443,12 @@ namespace GoCardless.Services
         /// <summary>
         /// Indicates how a Variable Recurring Payment (VRP) is initiated, by or
         /// on behalf of the payer.
-        /// <ul>
-        /// <li>`in_session`: The payer is actively participating in the payment
-        /// creation session.</li>
-        /// <li>`off_session`: The payer is not present during the transaction,
+        ///
+        /// - `in_session`: The payer is actively participating in the payment
+        /// creation session.
+        /// - `off_session`: The payer is not present during the transaction,
         /// and the payment is initiated by the merchant based on an established
-        /// consent (e.g., a recurring subscription payment).</li>
-        /// </ul>
+        /// consent (e.g., a recurring subscription payment).
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentPsuInteractionType
@@ -686,10 +684,9 @@ namespace GoCardless.Services
         /// <summary>
         /// The direction to sort in.
         /// One of:
-        /// <ul>
-        /// <li>`asc`</li>
-        /// <li>`desc`</li>
-        /// </ul>
+        ///
+        /// - `asc`
+        /// - `desc`
         /// </summary>
         [JsonProperty("sort_direction")]
         public PaymentSortDirection? SortDirection { get; set; }
@@ -697,10 +694,9 @@ namespace GoCardless.Services
         /// <summary>
         /// The direction to sort in.
         /// One of:
-        /// <ul>
-        /// <li>`asc`</li>
-        /// <li>`desc`</li>
-        /// </ul>
+        ///
+        /// - `asc`
+        /// - `desc`
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentSortDirection
@@ -717,10 +713,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Field by which to sort records.
         /// One of:
-        /// <ul>
-        /// <li>`charge_date`</li>
-        /// <li>`amount`</li>
-        /// </ul>
+        ///
+        /// - `charge_date`
+        /// - `amount`
         /// </summary>
         [JsonProperty("sort_field")]
         public PaymentSortField? SortField { get; set; }
@@ -728,10 +723,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Field by which to sort records.
         /// One of:
-        /// <ul>
-        /// <li>`charge_date`</li>
-        /// <li>`amount`</li>
-        /// </ul>
+        ///
+        /// - `charge_date`
+        /// - `amount`
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentSortField
@@ -747,46 +741,44 @@ namespace GoCardless.Services
 
         /// <summary>
         /// One of:
-        /// <ul>
-        /// <li>`pending_customer_approval`: we're waiting for the customer to
-        /// approve this payment</li>
-        /// <li>`pending_submission`: the payment has been created, but not yet
-        /// submitted to the banks</li>
-        /// <li>`submitted`: the payment has been submitted to the banks</li>
-        /// <li>`confirmed`: the payment has been confirmed as collected</li>
-        /// <li>`paid_out`:  the payment has been included in a
-        /// [payout](#core-endpoints-payouts)</li>
-        /// <li>`cancelled`: the payment has been cancelled</li>
-        /// <li>`customer_approval_denied`: the customer has denied approval for
-        /// the payment. You should contact the customer directly</li>
-        /// <li>`failed`: the payment failed to be processed. Note that payments
+        ///
+        /// - `pending_customer_approval`: we're waiting for the customer to
+        /// approve this payment
+        /// - `pending_submission`: the payment has been created, but not yet
+        /// submitted to the banks
+        /// - `submitted`: the payment has been submitted to the banks
+        /// - `confirmed`: the payment has been confirmed as collected
+        /// - `paid_out`: the payment has been included in a
+        /// [payout](#core-endpoints-payouts)
+        /// - `cancelled`: the payment has been cancelled
+        /// - `customer_approval_denied`: the customer has denied approval for
+        /// the payment. You should contact the customer directly
+        /// - `failed`: the payment failed to be processed. Note that payments
         /// can fail after being confirmed if the failure message is sent late
-        /// by the banks.</li>
-        /// <li>`charged_back`: the payment has been charged back</li>
-        /// </ul>
+        /// by the banks.
+        /// - `charged_back`: the payment has been charged back
         /// </summary>
         [JsonProperty("status")]
         public PaymentStatus? Status { get; set; }
 
         /// <summary>
         /// One of:
-        /// <ul>
-        /// <li>`pending_customer_approval`: we're waiting for the customer to
-        /// approve this payment</li>
-        /// <li>`pending_submission`: the payment has been created, but not yet
-        /// submitted to the banks</li>
-        /// <li>`submitted`: the payment has been submitted to the banks</li>
-        /// <li>`confirmed`: the payment has been confirmed as collected</li>
-        /// <li>`paid_out`:  the payment has been included in a
-        /// [payout](#core-endpoints-payouts)</li>
-        /// <li>`cancelled`: the payment has been cancelled</li>
-        /// <li>`customer_approval_denied`: the customer has denied approval for
-        /// the payment. You should contact the customer directly</li>
-        /// <li>`failed`: the payment failed to be processed. Note that payments
+        ///
+        /// - `pending_customer_approval`: we're waiting for the customer to
+        /// approve this payment
+        /// - `pending_submission`: the payment has been created, but not yet
+        /// submitted to the banks
+        /// - `submitted`: the payment has been submitted to the banks
+        /// - `confirmed`: the payment has been confirmed as collected
+        /// - `paid_out`: the payment has been included in a
+        /// [payout](#core-endpoints-payouts)
+        /// - `cancelled`: the payment has been cancelled
+        /// - `customer_approval_denied`: the customer has denied approval for
+        /// the payment. You should contact the customer directly
+        /// - `failed`: the payment failed to be processed. Note that payments
         /// can fail after being confirmed if the failure message is sent late
-        /// by the banks.</li>
-        /// <li>`charged_back`: the payment has been charged back</li>
-        /// </ul>
+        /// by the banks.
+        /// - `charged_back`: the payment has been charged back
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentStatus

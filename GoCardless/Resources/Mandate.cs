@@ -141,26 +141,24 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// One of:
-        /// <ul>
-        /// <li>`pending_customer_approval`: the mandate has not yet been signed
-        /// by the second customer</li>
-        /// <li>`pending_submission`: the mandate has not yet been submitted to
-        /// the customer's bank</li>
-        /// <li>`submitted`: the mandate has been submitted to the customer's
-        /// bank but has not been processed yet</li>
-        /// <li>`active`: the mandate has been successfully set up by the
-        /// customer's bank</li>
-        /// <li>`suspended_by_payer`: the mandate has been suspended by
-        /// payer</li>
-        /// <li>`failed`: the mandate could not be created</li>
-        /// <li>`cancelled`: the mandate has been cancelled</li>
-        /// <li>`expired`: the mandate has expired due to dormancy</li>
-        /// <li>`consumed`: the mandate has been consumed and cannot be reused
+        ///
+        /// - `pending_customer_approval`: the mandate has not yet been signed
+        /// by the second customer
+        /// - `pending_submission`: the mandate has not yet been submitted to
+        /// the customer's bank
+        /// - `submitted`: the mandate has been submitted to the customer's bank
+        /// but has not been processed yet
+        /// - `active`: the mandate has been successfully set up by the
+        /// customer's bank
+        /// - `suspended_by_payer`: the mandate has been suspended by payer
+        /// - `failed`: the mandate could not be created
+        /// - `cancelled`: the mandate has been cancelled
+        /// - `expired`: the mandate has expired due to dormancy
+        /// - `consumed`: the mandate has been consumed and cannot be reused
         /// (note that this only applies to schemes that are per-payment
-        /// authorised)</li>
-        /// <li>`blocked`: the mandate has been blocked and payments cannot be
-        /// created</li>
-        /// </ul>
+        /// authorised)
+        /// - `blocked`: the mandate has been blocked and payments cannot be
+        /// created
         /// </summary>
         [JsonProperty("status")]
         public MandateStatus? Status { get; set; }
@@ -402,21 +400,19 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// One of:
-    /// <ul>
-    /// <li>`pending_customer_approval`: the mandate has not yet been signed by the second
-    /// customer</li>
-    /// <li>`pending_submission`: the mandate has not yet been submitted to the customer's bank</li>
-    /// <li>`submitted`: the mandate has been submitted to the customer's bank but has not been
-    /// processed yet</li>
-    /// <li>`active`: the mandate has been successfully set up by the customer's bank</li>
-    /// <li>`suspended_by_payer`: the mandate has been suspended by payer</li>
-    /// <li>`failed`: the mandate could not be created</li>
-    /// <li>`cancelled`: the mandate has been cancelled</li>
-    /// <li>`expired`: the mandate has expired due to dormancy</li>
-    /// <li>`consumed`: the mandate has been consumed and cannot be reused (note that this only
-    /// applies to schemes that are per-payment authorised)</li>
-    /// <li>`blocked`: the mandate has been blocked and payments cannot be created</li>
-    /// </ul>
+    ///
+    /// - `pending_customer_approval`: the mandate has not yet been signed by the second customer
+    /// - `pending_submission`: the mandate has not yet been submitted to the customer's bank
+    /// - `submitted`: the mandate has been submitted to the customer's bank but has not been
+    /// processed yet
+    /// - `active`: the mandate has been successfully set up by the customer's bank
+    /// - `suspended_by_payer`: the mandate has been suspended by payer
+    /// - `failed`: the mandate could not be created
+    /// - `cancelled`: the mandate has been cancelled
+    /// - `expired`: the mandate has expired due to dormancy
+    /// - `consumed`: the mandate has been consumed and cannot be reused (note that this only
+    /// applies to schemes that are per-payment authorised)
+    /// - `blocked`: the mandate has been blocked and payments cannot be created
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum MandateStatus

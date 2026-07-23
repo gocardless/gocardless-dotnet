@@ -20,7 +20,7 @@ namespace GoCardless.Services
     /// GoCardless will notify you via a [webhook](#appendix-webhooks) when the
     /// status of the outbound payment [changes](#event-types-outbound-payment).
     ///
-    /// ####Rate limiting
+    /// #### Rate limiting
     ///
     /// Two rate limits apply to the Outbound Payments APIs:
     /// - All POST Outbound Payment endpoints (create, withdraw, approve, cancel
@@ -586,52 +586,50 @@ namespace GoCardless.Services
 
         /// <summary>
         /// One of:
-        /// <ul>
-        /// <li>`verifying`: The payment has been
+        ///
+        /// - `verifying`: The payment has been
         /// [created](#outbound-payments-create-an-outbound-payment) and the
-        /// verification process has begun.</li>
-        /// <li>`pending_approval`: The payment is awaiting
-        /// [approval](#outbound-payments-approve-an-outbound-payment).</li>
-        /// <li>`scheduled`: The payment has passed verification &
+        /// verification process has begun.
+        /// - `pending_approval`: The payment is awaiting
+        /// [approval](#outbound-payments-approve-an-outbound-payment).
+        /// - `scheduled`: The payment has passed verification &
         /// [approval](#outbound-payments-approve-an-outbound-payment), but
-        /// processing has not yet begun.</li>
-        /// <li>`executing`: The execution date has arrived and the payment has
-        /// been placed in queue for processing.</li>
-        /// <li>`executed`: The payment has been accepted by the scheme and is
-        /// now on its way to the recipient.</li>
-        /// <li>`cancelled`: The payment has been
+        /// processing has not yet begun.
+        /// - `executing`: The execution date has arrived and the payment has
+        /// been placed in queue for processing.
+        /// - `executed`: The payment has been accepted by the scheme and is now
+        /// on its way to the recipient.
+        /// - `cancelled`: The payment has been
         /// [cancelled](#outbound-payments-cancel-an-outbound-payment) or was
         /// not [approved](#outbound-payments-approve-an-outbound-payment) on
-        /// time.</li>
-        /// <li>`failed`: The payment was not sent, usually due to an error
-        /// while or after executing.</li>
-        /// </ul>
+        /// time.
+        /// - `failed`: The payment was not sent, usually due to an error while
+        /// or after executing.
         /// </summary>
         [JsonProperty("status")]
         public OutboundPaymentStatus? Status { get; set; }
 
         /// <summary>
         /// One of:
-        /// <ul>
-        /// <li>`verifying`: The payment has been
+        ///
+        /// - `verifying`: The payment has been
         /// [created](#outbound-payments-create-an-outbound-payment) and the
-        /// verification process has begun.</li>
-        /// <li>`pending_approval`: The payment is awaiting
-        /// [approval](#outbound-payments-approve-an-outbound-payment).</li>
-        /// <li>`scheduled`: The payment has passed verification &
+        /// verification process has begun.
+        /// - `pending_approval`: The payment is awaiting
+        /// [approval](#outbound-payments-approve-an-outbound-payment).
+        /// - `scheduled`: The payment has passed verification &
         /// [approval](#outbound-payments-approve-an-outbound-payment), but
-        /// processing has not yet begun.</li>
-        /// <li>`executing`: The execution date has arrived and the payment has
-        /// been placed in queue for processing.</li>
-        /// <li>`executed`: The payment has been accepted by the scheme and is
-        /// now on its way to the recipient.</li>
-        /// <li>`cancelled`: The payment has been
+        /// processing has not yet begun.
+        /// - `executing`: The execution date has arrived and the payment has
+        /// been placed in queue for processing.
+        /// - `executed`: The payment has been accepted by the scheme and is now
+        /// on its way to the recipient.
+        /// - `cancelled`: The payment has been
         /// [cancelled](#outbound-payments-cancel-an-outbound-payment) or was
         /// not [approved](#outbound-payments-approve-an-outbound-payment) on
-        /// time.</li>
-        /// <li>`failed`: The payment was not sent, usually due to an error
-        /// while or after executing.</li>
-        /// </ul>
+        /// time.
+        /// - `failed`: The payment was not sent, usually due to an error while
+        /// or after executing.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum OutboundPaymentStatus

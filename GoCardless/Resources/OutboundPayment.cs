@@ -16,7 +16,7 @@ namespace GoCardless.Resources
     /// GoCardless will notify you via a [webhook](#appendix-webhooks) when the
     /// status of the outbound payment [changes](#event-types-outbound-payment).
     ///
-    /// ####Rate limiting
+    /// #### Rate limiting
     ///
     /// Two rate limits apply to the Outbound Payments APIs:
     /// - All POST Outbound Payment endpoints (create, withdraw, approve, cancel
@@ -110,26 +110,25 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// One of:
-        /// <ul>
-        /// <li>`verifying`: The payment has been
+        ///
+        /// - `verifying`: The payment has been
         /// [created](#outbound-payments-create-an-outbound-payment) and the
-        /// verification process has begun.</li>
-        /// <li>`pending_approval`: The payment is awaiting
-        /// [approval](#outbound-payments-approve-an-outbound-payment).</li>
-        /// <li>`scheduled`: The payment has passed verification &
+        /// verification process has begun.
+        /// - `pending_approval`: The payment is awaiting
+        /// [approval](#outbound-payments-approve-an-outbound-payment).
+        /// - `scheduled`: The payment has passed verification &
         /// [approval](#outbound-payments-approve-an-outbound-payment), but
-        /// processing has not yet begun.</li>
-        /// <li>`executing`: The execution date has arrived and the payment has
-        /// been placed in queue for processing.</li>
-        /// <li>`executed`: The payment has been accepted by the scheme and is
-        /// now on its way to the recipient.</li>
-        /// <li>`cancelled`: The payment has been
+        /// processing has not yet begun.
+        /// - `executing`: The execution date has arrived and the payment has
+        /// been placed in queue for processing.
+        /// - `executed`: The payment has been accepted by the scheme and is now
+        /// on its way to the recipient.
+        /// - `cancelled`: The payment has been
         /// [cancelled](#outbound-payments-cancel-an-outbound-payment) or was
         /// not [approved](#outbound-payments-approve-an-outbound-payment) on
-        /// time.</li>
-        /// <li>`failed`: The payment was not sent, usually due to an error
-        /// while or after executing.</li>
-        /// </ul>
+        /// time.
+        /// - `failed`: The payment was not sent, usually due to an error while
+        /// or after executing.
         /// </summary>
         [JsonProperty("status")]
         public OutboundPaymentStatus? Status { get; set; }
@@ -208,25 +207,22 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// One of:
-    /// <ul>
-    /// <li>`verifying`: The payment has been
-    /// [created](#outbound-payments-create-an-outbound-payment) and the verification process has
-    /// begun.</li>
-    /// <li>`pending_approval`: The payment is awaiting
-    /// [approval](#outbound-payments-approve-an-outbound-payment).</li>
-    /// <li>`scheduled`: The payment has passed verification &
+    ///
+    /// - `verifying`: The payment has been [created](#outbound-payments-create-an-outbound-payment)
+    /// and the verification process has begun.
+    /// - `pending_approval`: The payment is awaiting
+    /// [approval](#outbound-payments-approve-an-outbound-payment).
+    /// - `scheduled`: The payment has passed verification &
     /// [approval](#outbound-payments-approve-an-outbound-payment), but processing has not yet
-    /// begun.</li>
-    /// <li>`executing`: The execution date has arrived and the payment has been placed in queue for
-    /// processing.</li>
-    /// <li>`executed`: The payment has been accepted by the scheme and is now on its way to the
-    /// recipient.</li>
-    /// <li>`cancelled`: The payment has been
+    /// begun.
+    /// - `executing`: The execution date has arrived and the payment has been placed in queue for
+    /// processing.
+    /// - `executed`: The payment has been accepted by the scheme and is now on its way to the
+    /// recipient.
+    /// - `cancelled`: The payment has been
     /// [cancelled](#outbound-payments-cancel-an-outbound-payment) or was not
-    /// [approved](#outbound-payments-approve-an-outbound-payment) on time.</li>
-    /// <li>`failed`: The payment was not sent, usually due to an error while or after
-    /// executing.</li>
-    /// </ul>
+    /// [approved](#outbound-payments-approve-an-outbound-payment) on time.
+    /// - `failed`: The payment was not sent, usually due to an error while or after executing.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum OutboundPaymentStatus
@@ -295,17 +291,15 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Result of the verification, could be one of
-        /// <ul>
-        ///   <li>`full_match`: The verification has confirmed that the account
-        /// name exactly matches the details provided.</li>
-        ///   <li>`partial_match`:  The verification has confirmed that the
-        /// account name is similar but does not match to the details provided.
-        /// </li>
-        ///   <li>`no_match`: The verification concludes the provided name does
-        /// not match the account details.</li>
-        ///   <li>`unable_to_match`: The verification could not be performed due
-        /// to recipient bank issues or technical issues </li>
-        /// </ul>
+        ///
+        /// - `full_match`: The verification has confirmed that the account name
+        /// exactly matches the details provided.
+        /// - `partial_match`: The verification has confirmed that the account
+        /// name is similar but does not match to the details provided.
+        /// - `no_match`: The verification concludes the provided name does not
+        /// match the account details.
+        /// - `unable_to_match`: The verification could not be performed due to
+        /// recipient bank issues or technical issues
         /// </summary>
         [JsonProperty("result")]
         public OutboundPaymentVerificationsRecipientBankAccountHolderVerificationResult? Result { get; set; }
@@ -321,16 +315,15 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// Result of the verification, could be one of
-    /// <ul>
-    ///   <li>`full_match`: The verification has confirmed that the account name exactly matches the
-    /// details provided.</li>
-    ///   <li>`partial_match`:  The verification has confirmed that the account name is similar but
-    /// does not match to the details provided. </li>
-    ///   <li>`no_match`: The verification concludes the provided name does not match the account
-    /// details.</li>
-    ///   <li>`unable_to_match`: The verification could not be performed due to recipient bank
-    /// issues or technical issues </li>
-    /// </ul>
+    ///
+    /// - `full_match`: The verification has confirmed that the account name exactly matches the
+    /// details provided.
+    /// - `partial_match`: The verification has confirmed that the account name is similar but does
+    /// not match to the details provided.
+    /// - `no_match`: The verification concludes the provided name does not match the account
+    /// details.
+    /// - `unable_to_match`: The verification could not be performed due to recipient bank issues or
+    /// technical issues
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum OutboundPaymentVerificationsRecipientBankAccountHolderVerificationResult

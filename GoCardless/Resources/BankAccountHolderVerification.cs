@@ -30,29 +30,25 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Result of the verification, could be one of
-        /// <ul>
-        ///   <li>`full_match`: The verification has confirmed that the account
-        /// name exactly matches the details provided.</li>
-        ///   <li>`partial_match`:  The verification has confirmed that the
-        /// account name is similar but does not match to the details provided.
-        /// </li>
-        ///   <li>`no_match`: The verification concludes the provided name does
-        /// not match the account details.</li>
-        ///   <li>`unable_to_match`: The verification could not be performed due
-        /// to recipient bank issues or technical issues </li>
-        /// </ul>
+        ///
+        /// - `full_match`: The verification has confirmed that the account name
+        /// exactly matches the details provided.
+        /// - `partial_match`: The verification has confirmed that the account
+        /// name is similar but does not match to the details provided.
+        /// - `no_match`: The verification concludes the provided name does not
+        /// match the account details.
+        /// - `unable_to_match`: The verification could not be performed due to
+        /// recipient bank issues or technical issues
         /// </summary>
         [JsonProperty("result")]
         public BankAccountHolderVerificationResult? Result { get; set; }
 
         /// <summary>
         /// The status of the bank account holder verification.
-        /// <ul>
-        ///   <li>`pending`: We have triggered the verification, but the result
-        /// has not come back yet.</li>
-        ///   <li>`completed`: The verification is complete and is ready to be
-        /// used.</li>
-        /// </ul>
+        ///
+        /// - `pending`: We have triggered the verification, but the result has
+        /// not come back yet.
+        /// - `completed`: The verification is complete and is ready to be used.
         ///
         /// </summary>
         [JsonProperty("status")]
@@ -69,16 +65,15 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// Result of the verification, could be one of
-    /// <ul>
-    ///   <li>`full_match`: The verification has confirmed that the account name exactly matches the
-    /// details provided.</li>
-    ///   <li>`partial_match`:  The verification has confirmed that the account name is similar but
-    /// does not match to the details provided. </li>
-    ///   <li>`no_match`: The verification concludes the provided name does not match the account
-    /// details.</li>
-    ///   <li>`unable_to_match`: The verification could not be performed due to recipient bank
-    /// issues or technical issues </li>
-    /// </ul>
+    ///
+    /// - `full_match`: The verification has confirmed that the account name exactly matches the
+    /// details provided.
+    /// - `partial_match`: The verification has confirmed that the account name is similar but does
+    /// not match to the details provided.
+    /// - `no_match`: The verification concludes the provided name does not match the account
+    /// details.
+    /// - `unable_to_match`: The verification could not be performed due to recipient bank issues or
+    /// technical issues
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BankAccountHolderVerificationResult
@@ -106,11 +101,9 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// The status of the bank account holder verification.
-    /// <ul>
-    ///   <li>`pending`: We have triggered the verification, but the result has not come back
-    /// yet.</li>
-    ///   <li>`completed`: The verification is complete and is ready to be used.</li>
-    /// </ul>
+    ///
+    /// - `pending`: We have triggered the verification, but the result has not come back yet.
+    /// - `completed`: The verification is complete and is ready to be used.
     ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]

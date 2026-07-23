@@ -65,16 +65,15 @@ namespace GoCardless.Resources
         /// <summary>
         /// The type of notification the customer shall receive.
         /// One of:
-        /// <ul>
-        /// <li>`payment_created`</li>
-        /// <li>`payment_cancelled`</li>
-        /// <li>`mandate_created`</li>
-        /// <li>`mandate_blocked`</li>
-        /// <li>`subscription_created`</li>
-        /// <li>`subscription_cancelled`</li>
-        /// <li>`instalment_schedule_created`</li>
-        /// <li>`instalment_schedule_cancelled`</li>
-        /// </ul>
+        ///
+        /// - `payment_created`
+        /// - `payment_cancelled`
+        /// - `mandate_created`
+        /// - `mandate_blocked`
+        /// - `subscription_created`
+        /// - `subscription_cancelled`
+        /// - `instalment_schedule_created`
+        /// - `instalment_schedule_cancelled`
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; }
@@ -142,16 +141,15 @@ namespace GoCardless.Resources
     /// <summary>
     /// The type of notification the customer shall receive.
     /// One of:
-    /// <ul>
-    /// <li>`payment_created`</li>
-    /// <li>`payment_cancelled`</li>
-    /// <li>`mandate_created`</li>
-    /// <li>`mandate_blocked`</li>
-    /// <li>`subscription_created`</li>
-    /// <li>`subscription_cancelled`</li>
-    /// <li>`instalment_schedule_created`</li>
-    /// <li>`instalment_schedule_cancelled`</li>
-    /// </ul>
+    ///
+    /// - `payment_created`
+    /// - `payment_cancelled`
+    /// - `mandate_created`
+    /// - `mandate_blocked`
+    /// - `subscription_created`
+    /// - `subscription_cancelled`
+    /// - `instalment_schedule_created`
+    /// - `instalment_schedule_cancelled`
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum CustomerNotificationType

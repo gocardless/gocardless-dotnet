@@ -21,9 +21,8 @@ namespace GoCardless.Services
     ///   These endpoints are restricted to customers who want to collect their
     /// merchant's
     ///   verification details and pass them to GoCardless via our API. Please
-    /// [get in
-    ///   touch](mailto:help@gocardless.com) if you wish to enable this feature
-    /// on your
+    /// <a href="mailto:help@gocardless.com">get in
+    ///   touch</a> if you wish to enable this feature on your
     ///   account.</p>
     /// </summary>
     public class VerificationDetailService

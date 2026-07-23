@@ -176,20 +176,18 @@ namespace GoCardless.Resources
         /// partner, see our ["Helping your users get verified"
         /// guide](/getting-started/partners/helping-your-users-get-verified/).
         /// One of:
-        /// <ul>
-        /// <li>`successful`: The creditor's account is fully verified, and they
+        ///
+        /// - `successful`: The creditor's account is fully verified, and they
         /// can receive payouts. Once a creditor has been successfully verified,
         /// they may in the future require further verification - for example,
         /// if they change their payout bank account, we will have to check that
-        /// they own the new bank account before they can receive payouts
-        /// again.</li>
-        /// <li>`in_review`: The creditor has provided all of the information
+        /// they own the new bank account before they can receive payouts again.
+        /// - `in_review`: The creditor has provided all of the information
         /// currently requested, and it is awaiting review by GoCardless before
-        /// they can be verified and receive payouts.</li>
-        /// <li>`action_required`: The creditor needs to provide further
+        /// they can be verified and receive payouts.
+        /// - `action_required`: The creditor needs to provide further
         /// information to verify their account so they can receive payouts, and
-        /// should visit the verification flow.</li>
-        /// </ul>
+        /// should visit the verification flow.
         /// </summary>
         [JsonProperty("verification_status")]
         public CreditorVerificationStatus? VerificationStatus { get; set; }
@@ -595,16 +593,15 @@ namespace GoCardless.Resources
     /// The creditor's verification status, indicating whether they can yet receive payouts. For
     /// more details on handling verification as a partner, see our ["Helping your users get
     /// verified" guide](/getting-started/partners/helping-your-users-get-verified/). One of:
-    /// <ul>
-    /// <li>`successful`: The creditor's account is fully verified, and they can receive payouts.
-    /// Once a creditor has been successfully verified, they may in the future require further
+    ///
+    /// - `successful`: The creditor's account is fully verified, and they can receive payouts. Once
+    /// a creditor has been successfully verified, they may in the future require further
     /// verification - for example, if they change their payout bank account, we will have to check
-    /// that they own the new bank account before they can receive payouts again.</li>
-    /// <li>`in_review`: The creditor has provided all of the information currently requested, and
-    /// it is awaiting review by GoCardless before they can be verified and receive payouts.</li>
-    /// <li>`action_required`: The creditor needs to provide further information to verify their
-    /// account so they can receive payouts, and should visit the verification flow.</li>
-    /// </ul>
+    /// that they own the new bank account before they can receive payouts again.
+    /// - `in_review`: The creditor has provided all of the information currently requested, and it
+    /// is awaiting review by GoCardless before they can be verified and receive payouts.
+    /// - `action_required`: The creditor needs to provide further information to verify their
+    /// account so they can receive payouts, and should visit the verification flow.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum CreditorVerificationStatus

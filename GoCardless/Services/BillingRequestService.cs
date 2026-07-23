@@ -42,9 +42,9 @@ namespace GoCardless.Services
 
         /// <summary>
         /// <p class="notice"><strong>Important</strong>: All properties
-        /// associated with `subscription_request` and
-        /// `instalment_schedule_request` are only supported for ACH and PAD
-        /// schemes.</p>
+        /// associated with <code>subscription_request</code> and
+        /// <code>instalment_schedule_request</code> are only supported for ACH
+        /// and PAD schemes.</p>
         /// </summary>
         /// <param name="request">An optional `BillingRequestCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -533,8 +533,9 @@ namespace GoCardless.Services
 
     /// <summary>
     /// <p class="notice"><strong>Important</strong>: All properties associated
-    /// with `subscription_request` and `instalment_schedule_request` are only
-    /// supported for ACH and PAD schemes.</p>
+    /// with <code>subscription_request</code> and
+    /// <code>instalment_schedule_request</code> are only supported for ACH and
+    /// PAD schemes.</p>
     /// </summary>
     public class BillingRequestCreateRequest : IHasIdempotencyKey
     {
@@ -1161,17 +1162,16 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Verification preference for the mandate. One of:
-            /// <ul>
-            ///   <li>`minimum`: only verify if absolutely required, such as
-            /// when part of scheme rules</li>
-            ///   <li>`recommended`: in addition to `minimum`, use the
-            /// GoCardless payment intelligence solution to decide if a payer
-            /// should be verified</li>
-            ///   <li>`when_available`: if verification mechanisms are
-            /// available, use them</li>
-            ///   <li>`always`: as `when_available`, but fail to create the
-            /// Billing Request if a mechanism isn't available</li>
-            /// </ul>
+            ///
+            /// - `minimum`: only verify if absolutely required, such as when
+            /// part of scheme rules
+            /// - `recommended`: in addition to `minimum`, use the GoCardless
+            /// payment intelligence solution to decide if a payer should be
+            /// verified
+            /// - `when_available`: if verification mechanisms are available,
+            /// use them
+            /// - `always`: as `when_available`, but fail to create the Billing
+            /// Request if a mechanism isn't available
             ///
             /// By default, all Billing Requests use the `recommended`
             /// verification preference. It uses GoCardless payment intelligence
@@ -1193,17 +1193,16 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Verification preference for the mandate. One of:
-            /// <ul>
-            ///   <li>`minimum`: only verify if absolutely required, such as when
-            /// part of scheme rules</li>
-            ///   <li>`recommended`: in addition to `minimum`, use the GoCardless
+            ///
+            /// - `minimum`: only verify if absolutely required, such as when part
+            /// of scheme rules
+            /// - `recommended`: in addition to `minimum`, use the GoCardless
             /// payment intelligence solution to decide if a payer should be
-            /// verified</li>
-            ///   <li>`when_available`: if verification mechanisms are available,
-            /// use them</li>
-            ///   <li>`always`: as `when_available`, but fail to create the Billing
-            /// Request if a mechanism isn't available</li>
-            /// </ul>
+            /// verified
+            /// - `when_available`: if verification mechanisms are available, use
+            /// them
+            /// - `always`: as `when_available`, but fail to create the Billing
+            /// Request if a mechanism isn't available
             ///
             /// By default, all Billing Requests use the `recommended` verification
             /// preference. It uses GoCardless payment intelligence solution to
@@ -2311,32 +2310,30 @@ namespace GoCardless.Services
 
         /// <summary>
         /// One of:
-        /// <ul>
-        /// <li>`pending`: the billing request is pending and can be used</li>
-        /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
-        /// <li>`fulfilling`: the billing request is currently undergoing
-        /// fulfilment</li>
-        /// <li>`fulfilled`: the billing request has been fulfilled and a
-        /// payment created</li>
-        /// <li>`cancelled`: the billing request has been cancelled and cannot
-        /// be used</li>
-        /// </ul>
+        ///
+        /// - `pending`: the billing request is pending and can be used
+        /// - `ready_to_fulfil`: the billing request is ready to fulfil
+        /// - `fulfilling`: the billing request is currently undergoing
+        /// fulfilment
+        /// - `fulfilled`: the billing request has been fulfilled and a payment
+        /// created
+        /// - `cancelled`: the billing request has been cancelled and cannot be
+        /// used
         /// </summary>
         [JsonProperty("status")]
         public string Status { get; set; }
 
         /// <summary>
         /// One of:
-        /// <ul>
-        /// <li>`pending`: the billing request is pending and can be used</li>
-        /// <li>`ready_to_fulfil`: the billing request is ready to fulfil</li>
-        /// <li>`fulfilling`: the billing request is currently undergoing
-        /// fulfilment</li>
-        /// <li>`fulfilled`: the billing request has been fulfilled and a
-        /// payment created</li>
-        /// <li>`cancelled`: the billing request has been cancelled and cannot
-        /// be used</li>
-        /// </ul>
+        ///
+        /// - `pending`: the billing request is pending and can be used
+        /// - `ready_to_fulfil`: the billing request is ready to fulfil
+        /// - `fulfilling`: the billing request is currently undergoing
+        /// fulfilment
+        /// - `fulfilled`: the billing request has been fulfilled and a payment
+        /// created
+        /// - `cancelled`: the billing request has been cancelled and cannot be
+        /// used
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BillingRequestStatus

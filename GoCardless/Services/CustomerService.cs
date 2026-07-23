@@ -504,10 +504,9 @@ namespace GoCardless.Services
         /// <summary>
         /// The direction to sort in.
         /// One of:
-        /// <ul>
-        /// <li>`asc`</li>
-        /// <li>`desc`</li>
-        /// </ul>
+        ///
+        /// - `asc`
+        /// - `desc`
         /// </summary>
         [JsonProperty("sort_direction")]
         public CustomerSortDirection? SortDirection { get; set; }
@@ -515,10 +514,9 @@ namespace GoCardless.Services
         /// <summary>
         /// The direction to sort in.
         /// One of:
-        /// <ul>
-        /// <li>`asc`</li>
-        /// <li>`desc`</li>
-        /// </ul>
+        ///
+        /// - `asc`
+        /// - `desc`
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CustomerSortDirection
@@ -535,11 +533,10 @@ namespace GoCardless.Services
         /// <summary>
         /// Field by which to sort records.
         /// One of:
-        /// <ul>
-        /// <li>`name`</li>
-        /// <li>`company_name`</li>
-        /// <li>`created_at`</li>
-        /// </ul>
+        ///
+        /// - `name`
+        /// - `company_name`
+        /// - `created_at`
         /// </summary>
         [JsonProperty("sort_field")]
         public CustomerSortField? SortField { get; set; }
@@ -547,11 +544,10 @@ namespace GoCardless.Services
         /// <summary>
         /// Field by which to sort records.
         /// One of:
-        /// <ul>
-        /// <li>`name`</li>
-        /// <li>`company_name`</li>
-        /// <li>`created_at`</li>
-        /// </ul>
+        ///
+        /// - `name`
+        /// - `company_name`
+        /// - `created_at`
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CustomerSortField
