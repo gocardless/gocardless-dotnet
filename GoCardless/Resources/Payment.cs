@@ -23,6 +23,14 @@ namespace GoCardless.Resources
         /// <summary>
         /// Amount, in the lowest denomination for the currency (e.g. pence in
         /// GBP, cents in EUR).
+        ///
+        /// Minimum and maximum amounts vary by payment scheme. For more
+        /// information, see [Transaction
+        /// limits](https://support.gocardless.com/hc/en-gb/articles/115000309245-Transaction-limits)
+        ///
+        /// For Variable Recurring Payments (VRP), this must not exceed the
+        /// mandate's `max_amount_per_payment`
+        /// constraint.
         /// </summary>
         [JsonProperty("amount")]
         public int? Amount { get; set; }
@@ -136,8 +144,9 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// A bank payment scheme. Currently "ach", "autogiro", "bacs", "becs",
-        /// "becs_nz", "betalingsservice", "faster_payments", "pad", "pay_to"
-        /// and "sepa_core" are supported.
+        /// "becs_nz", "betalingsservice", "faster_payments", "pad", "pay_to",
+        /// "sepa_core", "sepa_credit_transfer" and
+        /// "sepa_instant_credit_transfer" are supported.
         /// </summary>
         [JsonProperty("scheme")]
         public string Scheme { get; set; }

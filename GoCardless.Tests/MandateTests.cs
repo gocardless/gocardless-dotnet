@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using FluentAssertions;
 using GoCardless.Resources;
 using GoCardless.Services;
 using NUnit.Framework;
@@ -171,12 +170,12 @@ namespace GoCardless.Tests
         {
             mockHttp.EnqueueResponse(200, "fixtures/client/list_mandates_page_1.json");
             var page1 = client.Mandates.ListAsync(new MandateListRequest() { Limit = 2 }).Result;
-            page1.Mandates.Should().HaveCount(2);
-            page1.Mandates[0].Id.Should().Be("MD00001PEYCSQF");
-            page1.Mandates[1].Id.Should().Be("MD00001P57AN84");
-            page1.Meta.Cursors.Before.Should().BeNull();
-            page1.Meta.Cursors.After.Should().NotBeNullOrEmpty();
-            page1.Meta.Limit.Should().Be(2);
+            ClassicAssert.AreEqual(2, page1.Mandates.Count);
+            ClassicAssert.AreEqual(page1.Mandates[0].Id, "MD00001PEYCSQF");
+            ClassicAssert.AreEqual(page1.Mandates[1].Id, "MD00001P57AN84");
+            ClassicAssert.IsNull(page1.Meta.Cursors.Before);
+            ClassicAssert.False(string.IsNullOrEmpty(page1.Meta.Cursors.After));
+            ClassicAssert.AreEqual(page1.Meta.Limit, 2);
             mockHttp.AssertRequestMade("GET", "/mandates?limit=2");
             mockHttp.EnqueueResponse(200, "fixtures/client/list_mandates_page_2.json");
             var page2 = client
@@ -184,11 +183,11 @@ namespace GoCardless.Tests
                     new MandateListRequest { Limit = 2, After = page1.Meta.Cursors.After }
                 )
                 .Result;
-            page2.Mandates.Should().HaveCount(1);
-            page2.Mandates[0].Id.Should().Be("MD00001P1KTRNY");
-            page2.Meta.Cursors.Before.Should().NotBe(null);
-            page2.Meta.Cursors.After.Should().Be(null);
-            page2.Meta.Limit.Should().Be(2);
+            ClassicAssert.AreEqual(1, page2.Mandates.Count);
+            ClassicAssert.AreEqual(page2.Mandates[0].Id, "MD00001P1KTRNY");
+            ClassicAssert.IsNotNull(page2.Meta.Cursors.Before);
+            ClassicAssert.IsNull(page2.Meta.Cursors.After);
+            ClassicAssert.AreEqual(page2.Meta.Limit, 2);
             mockHttp.AssertRequestMade("GET", "/mandates?after=MD00001P57AN84&limit=2");
         }
 
@@ -198,7 +197,7 @@ namespace GoCardless.Tests
             mockHttp.EnqueueResponse(200, "fixtures/client/list_mandates_page_1.json");
             mockHttp.EnqueueResponse(200, "fixtures/client/list_mandates_page_2.json");
             var mandates = client.Mandates.All(new MandateListRequest { Limit = 2 }).ToArray();
-            mandates.Count().Should().Be(3);
+            ClassicAssert.AreEqual(mandates.Count(), 3);
             ClassicAssert.AreEqual(mandates[0].Id, "MD00001PEYCSQF");
             ClassicAssert.AreEqual(mandates[1].Id, "MD00001P57AN84");
             ClassicAssert.AreEqual(mandates[2].Id, "MD00001P1KTRNY");
@@ -215,7 +214,7 @@ namespace GoCardless.Tests
                 .Mandates.AllAsync(new MandateListRequest { Limit = 2 })
                 .SelectMany(t => t.Result)
                 .ToArray();
-            mandates.Count().Should().Be(3);
+            ClassicAssert.AreEqual(mandates.Count(), 3);
             ClassicAssert.AreEqual(mandates[0].Id, "MD00001PEYCSQF");
             ClassicAssert.AreEqual(mandates[1].Id, "MD00001P57AN84");
             ClassicAssert.AreEqual(mandates[2].Id, "MD00001P1KTRNY");
@@ -234,7 +233,7 @@ namespace GoCardless.Tests
             );
             TestHelpers.AssertResponseCanSerializeBackToFixture(mandateResponse, responseFixture);
             var mandate = mandateResponse.Mandate;
-            mandate.NextPossibleChargeDate.Should().BeNull();
+            ClassicAssert.IsNull(mandate.NextPossibleChargeDate);
             mockHttp.AssertRequestMade(
                 "POST",
                 "/mandates/MD00001P1KTRNY/actions/cancel",

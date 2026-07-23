@@ -16,6 +16,12 @@ namespace GoCardless.Resources
     /// process, so it can take some time between an action occurring and its
     /// corresponding event getting included in API responses. See
     /// [here](#event-types) for a complete list of event types.
+    /// <p class="notice"><strong>Important</strong>: Events older than 18
+    /// months will be archived and no longer accessible via the API or exports.
+    /// Archival will begin no sooner than 1 August 2026 in sandbox
+    /// environments, and no sooner than 1 October 2026 in live environments.
+    /// Events within the 18-month window are unaffected. If you need archived
+    /// data, contact GoCardless support.</p>
     /// </summary>
     public class Event
     {
@@ -476,8 +482,8 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// If `resource_type` is `billing_requests`, this is the ID of the
-        /// [payment](#core-endpoints-payments) which has been created for
-        /// Instant Bank Payment.
+        /// [payment](#core-endpoints-payments) which has been created for Pay
+        /// by Bank.
         /// </summary>
         [JsonProperty("payment_request_payment")]
         public string PaymentRequestPayment { get; set; }

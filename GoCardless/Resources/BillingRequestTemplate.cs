@@ -90,36 +90,10 @@ namespace GoCardless.Resources
         public string MandateRequestScheme { get; set; }
 
         /// <summary>
-        /// Verification preference for the mandate. One of:
-        /// <ul>
-        ///   <li>`minimum`: only verify if absolutely required, such as when
-        /// part of scheme rules</li>
-        ///   <li>`recommended`: in addition to `minimum`, use the GoCardless
-        /// payment intelligence solution to decide if a payer should be
-        /// verified</li>
-        ///   <li>`when_available`: if verification mechanisms are available,
-        /// use them</li>
-        ///   <li>`always`: as `when_available`, but fail to create the Billing
-        /// Request if a mechanism isn't available</li>
-        /// </ul>
-        ///
-        /// By default, all Billing Requests use the `recommended` verification
-        /// preference. It uses GoCardless payment intelligence solution to
-        /// determine if a payer is fraudulent or not. The verification
-        /// mechanism is based on the response and the payer may be asked to
-        /// verify themselves. If the feature is not available, `recommended`
-        /// behaves like `minimum`.
-        ///
-        /// If you never wish to take advantage of our reduced risk products and
-        /// Verified Mandates as they are released in new schemes, please use
-        /// the `minimum` verification preference.
-        ///
-        /// See [Billing Requests: Creating Verified
-        /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
-        /// for more information.
+        /// Verification preference for the mandate.
         /// </summary>
         [JsonProperty("mandate_request_verify")]
-        public BillingRequestTemplateMandateRequestVerify? MandateRequestVerify { get; set; }
+        public string MandateRequestVerify { get; set; }
 
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
@@ -218,23 +192,34 @@ namespace GoCardless.Resources
         public string EndDate { get; set; }
 
         /// <summary>
-        /// The maximum amount that can be charged for a single payment.
-        /// Required for PayTo and VRP.
+        /// The maximum amount that can be charged for a single payment in the
+        /// lowest denomination for the currency (e.g. pence in GBP, cents in
+        /// EUR). _Note:_ Required for PayTo and VRP.
         /// </summary>
         [JsonProperty("max_amount_per_payment")]
         public int? MaxAmountPerPayment { get; set; }
 
         /// <summary>
         /// A constraint where you can specify info (free text string) about how
-        /// payments are calculated. _Note:_ This is only supported for ACH and
-        /// PAD schemes.
+        /// payments are calculated. For use when payments vary and cannot be
+        /// expressed as a fixed amount and frequency. _Note:_ This is only
+        /// supported for ACH and PAD schemes.
         ///
         /// </summary>
         [JsonProperty("payment_method")]
         public string PaymentMethod { get; set; }
 
         /// <summary>
-        /// List of periodic limits and constraints which apply to them
+        /// Caps on the total amount and/or number of payments that can be
+        /// collected within a
+        /// repeating period (e.g. no more than a set amount per month), as
+        /// opposed to
+        /// `max_amount_per_payment` which caps a single payment.
+        ///
+        /// _Note:_ Required for VRP, where exactly one periodic limit must be
+        /// provided. Optional for
+        /// PayTo.
+        ///
         /// </summary>
         [JsonProperty("periodic_limits")]
         public List<BillingRequestTemplateMandateRequestConstraintPeriodicLimit> PeriodicLimits { get; set; }
@@ -255,20 +240,43 @@ namespace GoCardless.Resources
     /// Represents a billing request template mandate request constraint
     /// periodic limit resource.
     ///
-    /// List of periodic limits and constraints which apply to them
+    /// Caps on the total amount and/or number of payments that can be collected
+    /// within a
+    /// repeating period (e.g. no more than a set amount per month), as opposed
+    /// to
+    /// `max_amount_per_payment` which caps a single payment.
+    ///
+    /// _Note:_ Required for VRP, where exactly one periodic limit must be
+    /// provided. Optional for
+    /// PayTo.
     /// </summary>
     public class BillingRequestTemplateMandateRequestConstraintPeriodicLimit
     {
         /// <summary>
-        /// The alignment of the period.
+        /// The alignment of the period. Defaults to `creation_date` if not
+        /// specified.
         ///
-        /// `calendar` - this will finish on the end of the current period. For
-        /// example this will expire on the Monday for the current week or the
-        /// January for the next year.
+        /// `calendar` - the period follows fixed calendar boundaries, the same
+        /// for every mandate:
+        /// `week` runs Monday to Sunday, `month` runs from the 1st to the last
+        /// day of the calendar
+        /// month, and `year` runs from 1 January to 31 December. If the mandate
+        /// starts partway
+        /// through a period, the limit for that first period is reduced
+        /// proportionally to the days
+        /// remaining (e.g. a monthly limit starting on the 15th gives roughly
+        /// half the limit for
+        /// that first month).
         ///
-        /// `creation_date` - this will finish on the next instance of the
-        /// current period. For example Monthly it will expire on the same day
-        /// of the next month, or yearly the same day of the next year.
+        /// `creation_date` - the period follows the mandate's own start date
+        /// rather than the
+        /// calendar. For example, if the mandate starts on the 15th, each
+        /// monthly period runs from
+        /// the 15th to the 14th of the following month. The first period is a
+        /// full period, not
+        /// reduced proportionally.
+        ///
+        /// _Note:_ Has no effect when period is `flexible`.
         ///
         /// </summary>
         [JsonProperty("alignment")]
@@ -277,8 +285,8 @@ namespace GoCardless.Resources
         /// <summary>
         /// The maximum number of payments that can be collected in this
         /// periodic limit.
-        /// _Note:_ This is only supported for the PayTo scheme, where it is
-        /// required.
+        ///
+        /// _Note:_ Only supported for the PayTo scheme, where it is optional.
         ///
         /// </summary>
         [JsonProperty("max_payments")]
@@ -286,30 +294,45 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// The maximum total amount that can be charged for all payments in
-        /// this periodic limit.
-        /// Required for VRP.
+        /// this periodic limit,
+        /// in the lowest denomination for the currency (e.g. pence in GBP,
+        /// cents in EUR).
+        ///
+        /// _Note:_ Required for VRP. This is not permitted for the PayTo
+        /// scheme.
         ///
         /// </summary>
         [JsonProperty("max_total_amount")]
         public int? MaxTotalAmount { get; set; }
 
         /// <summary>
-        /// The repeating period for this mandate. Defaults to flexible for
-        /// PayTo if not specified.
+        /// The repeating period for this mandate. Required whenever a periodic
+        /// limit is provided
+        /// (for both VRP and PayTo). If periodic_limits is omitted entirely for
+        /// PayTo, this
+        /// defaults to flexible.
+        ///
         /// </summary>
         [JsonProperty("period")]
         public BillingRequestTemplateMandateRequestConstraintPeriodicLimitPeriod? Period { get; set; }
     }
 
     /// <summary>
-    /// The alignment of the period.
+    /// The alignment of the period. Defaults to `creation_date` if not specified.
     ///
-    /// `calendar` - this will finish on the end of the current period. For example this will expire
-    /// on the Monday for the current week or the January for the next year.
+    /// `calendar` - the period follows fixed calendar boundaries, the same for every mandate:
+    /// `week` runs Monday to Sunday, `month` runs from the 1st to the last day of the calendar
+    /// month, and `year` runs from 1 January to 31 December. If the mandate starts partway
+    /// through a period, the limit for that first period is reduced proportionally to the days
+    /// remaining (e.g. a monthly limit starting on the 15th gives roughly half the limit for
+    /// that first month).
     ///
-    /// `creation_date` - this will finish on the next instance of the current period. For example
-    /// Monthly it will expire on the same day of the next month, or yearly the same day of the next
-    /// year.
+    /// `creation_date` - the period follows the mandate's own start date rather than the
+    /// calendar. For example, if the mandate starts on the 15th, each monthly period runs from
+    /// the 15th to the 14th of the following month. The first period is a full period, not
+    /// reduced proportionally.
+    ///
+    /// _Note:_ Has no effect when period is `flexible`.
     ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
@@ -329,7 +352,10 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// The repeating period for this mandate. Defaults to flexible for PayTo if not specified.
+    /// The repeating period for this mandate. Required whenever a periodic limit is provided
+    /// (for both VRP and PayTo). If periodic_limits is omitted entirely for PayTo, this
+    /// defaults to flexible.
+    ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum BillingRequestTemplateMandateRequestConstraintPeriodicLimitPeriod
@@ -357,52 +383,5 @@ namespace GoCardless.Resources
         /// <summary>`period` with a value of "flexible"</summary>
         [EnumMember(Value = "flexible")]
         Flexible,
-    }
-
-    /// <summary>
-    /// Verification preference for the mandate. One of:
-    /// <ul>
-    ///   <li>`minimum`: only verify if absolutely required, such as when part of scheme rules</li>
-    ///   <li>`recommended`: in addition to `minimum`, use the GoCardless payment intelligence
-    /// solution to decide if a payer should be verified</li>
-    ///   <li>`when_available`: if verification mechanisms are available, use them</li>
-    ///   <li>`always`: as `when_available`, but fail to create the Billing Request if a mechanism
-    /// isn't available</li>
-    /// </ul>
-    ///
-    /// By default, all Billing Requests use the `recommended` verification preference. It uses
-    /// GoCardless payment intelligence solution to determine if a payer is fraudulent or not. The
-    /// verification mechanism is based on the response and the payer may be asked to verify
-    /// themselves. If the feature is not available, `recommended` behaves like `minimum`.
-    ///
-    /// If you never wish to take advantage of our reduced risk products and Verified Mandates as
-    /// they are released in new schemes, please use the `minimum` verification preference.
-    ///
-    /// See [Billing Requests: Creating Verified
-    /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
-    /// for more information.
-    /// </summary>
-    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum BillingRequestTemplateMandateRequestVerify
-    {
-        /// <summary>Unknown status</summary>
-        [EnumMember(Value = "unknown")]
-        Unknown = 0,
-
-        /// <summary>`mandate_request_verify` with a value of "minimum"</summary>
-        [EnumMember(Value = "minimum")]
-        Minimum,
-
-        /// <summary>`mandate_request_verify` with a value of "recommended"</summary>
-        [EnumMember(Value = "recommended")]
-        Recommended,
-
-        /// <summary>`mandate_request_verify` with a value of "when_available"</summary>
-        [EnumMember(Value = "when_available")]
-        WhenAvailable,
-
-        /// <summary>`mandate_request_verify` with a value of "always"</summary>
-        [EnumMember(Value = "always")]
-        Always,
     }
 }

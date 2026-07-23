@@ -68,6 +68,13 @@ namespace GoCardless.Resources
         public string Name { get; set; }
 
         /// <summary>
+        /// The roles assigned to this institution, representing the open
+        /// banking features it supports.
+        /// </summary>
+        [JsonProperty("roles")]
+        public List<string> Roles { get; set; }
+
+        /// <summary>
         /// The status of the institution
         /// </summary>
         [JsonProperty("status")]

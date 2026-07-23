@@ -23,7 +23,7 @@ using NUnit.Framework;
 
 namespace GoCardless.Tests
 {
-    public class CustomerNotificationsHandleCodeSampleTest
+    public class BillingRequestsFallbackCodeSampleTest
     {
         private GoCardlessClient client;
         private MockHttpForCodeSamples http;
@@ -37,10 +37,10 @@ namespace GoCardless.Tests
         }
 
         [Test]
-        public async Task HandleCodeSampleExecutesWithoutError()
+        public async Task FallbackCodeSampleExecutesWithoutError()
         {
             // Mock response - enqueue multiple times to handle code samples with multiple API calls
-            string responseBody = "{ \"customer_notifications\": {} }";
+            string responseBody = "{ \"billing_requests\": {} }";
             for (int i = 0; i < 5; i++)
             {
                 http.EnqueueStringResponse(200, responseBody);
@@ -52,11 +52,7 @@ namespace GoCardless.Tests
 
             try
             {
-                var customerNotificationResponse = await client.CustomerNotifications.HandleAsync(
-                    "EV1D18JEXAMPLE"
-                );
-                GoCardless.Resources.CustomerNotification customerNotification =
-                    customerNotificationResponse.CustomerNotification;
+                var resp = await client.BillingRequests.FallbackAsync("BR123");
             }
             finally
             {
