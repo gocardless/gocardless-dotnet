@@ -14,13 +14,15 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with refund resources.
     ///
-    /// Refund objects represent (partial) refunds of a
-    /// [payment](#core-endpoints-payments) back to the
-    /// [customer](#core-endpoints-customers).
+    /// Refund objects represent (partial) refunds of a <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+    /// back to the <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
     ///
-    /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
-    /// a refund is created, and will update the `amount_refunded` property of
-    /// the payment.
+    /// GoCardless will notify you via a <a
+    /// href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a>
+    /// whenever a refund is created, and will update the <c>amount_refunded</c>
+    /// property of the payment.
     /// </summary>
     public class RefundService
     {
@@ -43,15 +45,17 @@ namespace GoCardless.Services
         /// name="number_of_refunds_exceeded"></a><a
         /// name="available_refund_amount_insufficient"></a>
         ///
-        /// - `total_amount_confirmation_invalid` if the confirmation amount
+        /// <ul>
+        /// <li>
+        /// <c>total_amount_confirmation_invalid</c> if the confirmation amount
         /// doesn't match the total amount refunded for the payment. This
         /// safeguard is there to prevent two processes from creating refunds
-        /// without awareness of each other.
-        ///
-        /// - `available_refund_amount_insufficient` if the creditor does not
+        /// without awareness of each other.</li>
+        /// <li>
+        /// <c>available_refund_amount_insufficient</c> if the creditor does not
         /// have sufficient balance for refunds available to cover the cost of
-        /// the requested refund.
-        ///
+        /// the requested refund.</li>
+        /// </ul>
         /// </summary>
         /// <param name="request">An optional `RefundCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -77,8 +81,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your refunds.
+        /// Returns a <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// list of your refunds.
         /// </summary>
         /// <param name="request">An optional `RefundListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -150,7 +155,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves all details for a single refund
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "RF".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "RF".
         /// <param name="request">An optional `RefundGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single refund resource</returns>
@@ -183,7 +188,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Updates a refund object.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "RF".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "RF".
         /// <param name="request">An optional `RefundUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single refund resource</returns>
@@ -221,15 +226,17 @@ namespace GoCardless.Services
     /// name="number_of_refunds_exceeded"></a><a
     /// name="available_refund_amount_insufficient"></a>
     ///
-    /// - `total_amount_confirmation_invalid` if the confirmation amount doesn't
-    /// match the total amount refunded for the payment. This safeguard is there
-    /// to prevent two processes from creating refunds without awareness of each
-    /// other.
-    ///
-    /// - `available_refund_amount_insufficient` if the creditor does not have
-    /// sufficient balance for refunds available to cover the cost of the
-    /// requested refund.
-    ///
+    /// <ul>
+    /// <li>
+    /// <c>total_amount_confirmation_invalid</c> if the confirmation amount
+    /// doesn't match the total amount refunded for the payment. This safeguard
+    /// is there to prevent two processes from creating refunds without
+    /// awareness of each other.</li>
+    /// <li>
+    /// <c>available_refund_amount_insufficient</c> if the creditor does not
+    /// have sufficient balance for refunds available to cover the cost of the
+    /// requested refund.</li>
+    /// </ul>
     /// </summary>
     public class RefundCreateRequest : IHasIdempotencyKey
     {
@@ -251,18 +258,20 @@ namespace GoCardless.Services
         public class RefundLinks
         {
             /// <summary>
-            ///  ID of the [mandate](#core-endpoints-mandates) against which the
-            /// refund is being made. <br /> <p
-            /// class="restricted-notice"><strong>Restricted</strong>: You must
-            /// request access to Mandate Refunds by contacting <a
+            /// ID of the <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+            /// against which the refund is being made. <br></br> <p
+            /// class="restricted-notice">Restricted: You must request access to
+            /// Mandate Refunds by contacting <a
             /// href="mailto:support@gocardless.com">our support team</a>.</p>
             /// </summary>
             [JsonProperty("mandate")]
             public string Mandate { get; set; }
 
             /// <summary>
-            /// ID of the [payment](#core-endpoints-payments) against which the
-            /// refund is being made.
+            /// ID of the <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+            /// against which the refund is being made.
             /// </summary>
             [JsonProperty("payment")]
             public string Payment { get; set; }
@@ -278,23 +287,34 @@ namespace GoCardless.Services
         /// <summary>
         /// An optional reference that will appear on your customer's bank
         /// statement. The character limit for this reference is dependent on
-        /// the scheme.<br /> <strong>ACH</strong> - 10 characters<br />
-        /// <strong>Autogiro</strong> - 11 characters<br />
-        /// <strong>Bacs</strong> - 10 characters<br /> <strong>BECS</strong> -
-        /// 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
-        /// <strong>Betalingsservice</strong> - 30 characters<br />
-        /// <strong>Faster Payments</strong> - 18 characters<br />
-        /// <strong>PAD</strong> - scheme doesn't offer references<br />
-        /// <strong>PayTo</strong> - 18 characters<br /> <strong>SEPA</strong> -
-        /// 140 characters<br /> Note that this reference must be unique (for
-        /// each merchant) for the BECS scheme as it is a scheme requirement. <p
-        /// class='restricted-notice'><strong>Restricted</strong>: You can only
-        /// specify a payment reference for Bacs payments (that is, when
-        /// collecting from the UK) if you're on the <a
-        /// href='https://gocardless.com/pricing'>GoCardless Plus, Pro or
-        /// Enterprise packages</a>.</p> <p
-        /// class='restricted-notice'><strong>Restricted</strong>: You can not
-        /// specify a payment reference for Faster Payments.</p>
+        /// the scheme.<br></br> ACH <ul>
+        /// <li>10 characters</li>
+        /// </ul><br></br> Autogiro <ul>
+        /// <li>11 characters</li>
+        /// </ul><br></br> Bacs <ul>
+        /// <li>10 characters</li>
+        /// </ul><br></br> BECS <ul>
+        /// <li>30 characters</li>
+        /// </ul><br></br> BECS NZ <ul>
+        /// <li>12 characters</li>
+        /// </ul><br></br> Betalingsservice <ul>
+        /// <li>30 characters</li>
+        /// </ul><br></br> Faster Payments <ul>
+        /// <li>18 characters</li>
+        /// </ul><br></br> PAD <ul>
+        /// <li>scheme doesn't offer references</li>
+        /// </ul><br></br> PayTo <ul>
+        /// <li>18 characters</li>
+        /// </ul><br></br> SEPA <ul>
+        /// <li>140 characters</li>
+        /// </ul><br></br> Note that this reference must be unique (for each
+        /// merchant) for the BECS scheme as it is a scheme requirement. <p
+        /// class="restricted-notice">Restricted: You can only specify a payment
+        /// reference for Bacs payments (that is, when collecting from the UK)
+        /// if you're on the <a href="https://gocardless.com/pricing">GoCardless
+        /// Plus, Pro or Enterprise packages</a>.</p> <p
+        /// class="restricted-notice">Restricted: You can not specify a payment
+        /// reference for Faster Payments.</p>
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
@@ -305,8 +325,9 @@ namespace GoCardless.Services
         /// other partial refunds against this payment, this value should be the
         /// sum of the
         /// existing refunds plus the amount of the refund being created.
-        /// <br />
-        /// Must be supplied if `links[payment]` is present.
+        /// <br></br>
+        /// Must be supplied if <c>links[payment]</c> is present.
+        ///
         /// <p class="notice">It is possible to opt out of requiring
         /// <code>total_amount_confirmation</code>, please contact <a
         /// href="mailto:support@gocardless.com">our support team</a> for more
@@ -325,8 +346,9 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// refunds.
+    /// Returns a <a
+    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// list of your refunds.
     /// </summary>
     public class RefundListRequest
     {
@@ -400,9 +422,12 @@ namespace GoCardless.Services
         /// <summary>
         /// Whether a refund was issued against a mandate or a payment. One of:
         ///
-        /// - `payment`: <em>default</em> returns refunds created against
-        /// payments only
-        /// - `mandate`: returns refunds created against mandates only
+        /// <ul>
+        /// <li><c>payment</c>: default returns refunds created against payments
+        /// only</li>
+        /// <li><c>mandate</c>: returns refunds created against mandates
+        /// only</li>
+        /// </ul>
         /// </summary>
         [JsonProperty("refund_type")]
         public RefundRefundType? RefundType { get; set; }
@@ -410,9 +435,12 @@ namespace GoCardless.Services
         /// <summary>
         /// Whether a refund was issued against a mandate or a payment. One of:
         ///
-        /// - `payment`: <em>default</em> returns refunds created against
-        /// payments only
-        /// - `mandate`: returns refunds created against mandates only
+        /// <ul>
+        /// <li><c>payment</c>: default returns refunds created against payments
+        /// only</li>
+        /// <li><c>mandate</c>: returns refunds created against mandates
+        /// only</li>
+        /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum RefundRefundType

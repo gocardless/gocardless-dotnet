@@ -23,8 +23,9 @@ namespace GoCardless.Resources
         public int? Amount { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        /// Fixed <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
@@ -49,8 +50,9 @@ namespace GoCardless.Resources
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// entry was processed.
+        /// Fixed <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// recording when this entry was processed.
         /// </summary>
         [JsonProperty("processed_at")]
         public string ProcessedAt { get; set; }

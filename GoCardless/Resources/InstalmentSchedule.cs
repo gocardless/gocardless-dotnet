@@ -12,8 +12,8 @@ namespace GoCardless.Resources
     ///
     /// Instalment schedules are objects which represent a collection of related
     /// payments, with the
-    /// intention to collect the `total_amount` specified. The API supports both
-    /// schedule-based
+    /// intention to collect the <c>total_amount</c> specified. The API supports
+    /// both schedule-based
     /// creation (similar to subscriptions) as well as explicit selection of
     /// differing payment
     /// amounts and charge dates.
@@ -30,16 +30,17 @@ namespace GoCardless.Resources
     public class InstalmentSchedule
     {
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        /// Fixed <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+        /// "NZD", "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public InstalmentScheduleCurrency? Currency { get; set; }
@@ -73,12 +74,11 @@ namespace GoCardless.Resources
         public string Name { get; set; }
 
         /// <summary>
-        /// If the status is `creation_failed`, this property will be populated
-        /// with validation
+        /// If the status is <c>creation_failed</c>, this property will be
+        /// populated with validation
         /// failures from the individual payments, arranged by the index of the
         /// payment that
         /// failed.
-        ///
         /// </summary>
         [JsonProperty("payment_errors")]
         public IDictionary<string, string> PaymentErrors { get; set; }
@@ -86,14 +86,16 @@ namespace GoCardless.Resources
         /// <summary>
         /// One of:
         ///
-        /// - `pending`: we're waiting for GC to create the payments
-        /// - `active`: the payments have been created, and the schedule is
-        /// active
-        /// - `creation_failed`: payment creation failed
-        /// - `completed`: we have passed the date of the final payment and all
-        /// payments have been collected
-        /// - `cancelled`: the schedule has been cancelled
-        /// - `errored`: one or more payments have failed
+        /// <ul>
+        /// <li><c>pending</c>: we're waiting for GC to create the payments</li>
+        /// <li><c>active</c>: the payments have been created, and the schedule
+        /// is active</li>
+        /// <li><c>creation_failed</c>: payment creation failed</li>
+        /// <li><c>completed</c>: we have passed the date of the final payment
+        /// and all payments have been collected</li>
+        /// <li><c>cancelled</c>: the schedule has been cancelled</li>
+        /// <li><c>errored</c>: one or more payments have failed</li>
+        /// </ul>
         /// </summary>
         [JsonProperty("status")]
         public InstalmentScheduleStatus? Status { get; set; }
@@ -112,8 +114,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-    /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+    /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+    /// Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum InstalmentScheduleCurrency
@@ -163,20 +165,23 @@ namespace GoCardless.Resources
     public class InstalmentScheduleLinks
     {
         /// <summary>
-        /// ID of the associated [customer](#core-endpoints-customers).
+        /// ID of the associated <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
         /// </summary>
         [JsonProperty("customer")]
         public string Customer { get; set; }
 
         /// <summary>
-        /// ID of the associated [mandate](#core-endpoints-mandates) which the
-        /// instalment schedule will create payments against.
+        /// ID of the associated <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+        /// which the instalment schedule will create payments against.
         /// </summary>
         [JsonProperty("mandate")]
         public string Mandate { get; set; }
 
         /// <summary>
-        /// Array of IDs of the associated [payments](#core-endpoints-payments)
+        /// Array of IDs of the associated <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payments</a>
         /// </summary>
         [JsonProperty("payments")]
         public List<string> Payments { get; set; }
@@ -185,13 +190,15 @@ namespace GoCardless.Resources
     /// <summary>
     /// One of:
     ///
-    /// - `pending`: we're waiting for GC to create the payments
-    /// - `active`: the payments have been created, and the schedule is active
-    /// - `creation_failed`: payment creation failed
-    /// - `completed`: we have passed the date of the final payment and all payments have been
-    /// collected
-    /// - `cancelled`: the schedule has been cancelled
-    /// - `errored`: one or more payments have failed
+    /// <ul>
+    /// <li><c>pending</c>: we're waiting for GC to create the payments</li>
+    /// <li><c>active</c>: the payments have been created, and the schedule is active</li>
+    /// <li><c>creation_failed</c>: payment creation failed</li>
+    /// <li><c>completed</c>: we have passed the date of the final payment and all payments have
+    /// been collected</li>
+    /// <li><c>cancelled</c>: the schedule has been cancelled</li>
+    /// <li><c>errored</c>: one or more payments have failed</li>
+    /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum InstalmentScheduleStatus

@@ -14,13 +14,16 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with payment resources.
     ///
-    /// Payment objects represent payments from a
-    /// [customer](#core-endpoints-customers) to a
-    /// [creditor](#core-endpoints-creditors), taken against a Direct Debit
-    /// [mandate](#core-endpoints-mandates).
+    /// Payment objects represent payments from a <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+    /// to a <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>,
+    /// taken against a Direct Debit <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>.
     ///
-    /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
-    /// the state of a payment changes.
+    /// GoCardless will notify you via a <a
+    /// href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a>
+    /// whenever the state of a payment changes.
     /// </summary>
     public class PaymentService
     {
@@ -39,11 +42,11 @@ namespace GoCardless.Services
         /// <summary>
         /// <a name="mandate_is_inactive"></a>Creates a new payment object.
         ///
-        /// This fails with a `mandate_is_inactive` error if the linked
-        /// [mandate](#core-endpoints-mandates) is cancelled or has failed.
-        /// Payments can be created against mandates with status of:
-        /// `pending_customer_approval`, `pending_submission`, `submitted`, and
-        /// `active`.
+        /// This fails with a <c>mandate_is_inactive</c> error if the linked <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+        /// is cancelled or has failed. Payments can be created against mandates
+        /// with status of: <c>pending_customer_approval</c>,
+        /// <c>pending_submission</c>, <c>submitted</c>, and <c>active</c>.
         /// </summary>
         /// <param name="request">An optional `PaymentCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -69,8 +72,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your payments.
+        /// Returns a <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// list of your payments.
         /// </summary>
         /// <param name="request">An optional `PaymentListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -142,7 +146,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of a single existing payment.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PM".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "PM".
         /// <param name="request">An optional `PaymentGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment resource</returns>
@@ -175,7 +179,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Updates a payment object. This accepts only the metadata parameter.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PM".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "PM".
         /// <param name="request">An optional `PaymentUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment resource</returns>
@@ -210,10 +214,10 @@ namespace GoCardless.Services
         /// banks. Any metadata supplied to this endpoint will be stored on the
         /// payment cancellation event it causes.
         ///
-        /// This will fail with a `cancellation_failed` error unless the
-        /// payment's status is `pending_submission`.
+        /// This will fail with a <c>cancellation_failed</c> error unless the
+        /// payment's status is <c>pending_submission</c>.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PM".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "PM".
         /// <param name="request">An optional `PaymentCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment resource</returns>
@@ -246,18 +250,19 @@ namespace GoCardless.Services
         /// <summary>
         /// <a name="retry_failed"></a>Retries a failed payment if the
         /// underlying mandate is active. You will receive a
-        /// `resubmission_requested` webhook, but after that retrying the
+        /// <c>resubmission_requested</c> webhook, but after that retrying the
         /// payment follows the same process as its initial creation, so you
-        /// will receive a `submitted` webhook, followed by a `confirmed` or
-        /// `failed` event. Any metadata supplied to this endpoint will be
-        /// stored against the payment submission event it causes.
+        /// will receive a <c>submitted</c> webhook, followed by a
+        /// <c>confirmed</c> or <c>failed</c> event. Any metadata supplied to
+        /// this endpoint will be stored against the payment submission event it
+        /// causes.
         ///
-        /// This will return a `retry_failed` error if the payment has not
+        /// This will return a <c>retry_failed</c> error if the payment has not
         /// failed.
         ///
         /// Payments can be retried up to 3 times.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PM".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "PM".
         /// <param name="request">An optional `PaymentRetryRequest` representing the body for this retry request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment resource</returns>
@@ -291,11 +296,11 @@ namespace GoCardless.Services
     /// <summary>
     /// <a name="mandate_is_inactive"></a>Creates a new payment object.
     ///
-    /// This fails with a `mandate_is_inactive` error if the linked
-    /// [mandate](#core-endpoints-mandates) is cancelled or has failed. Payments
-    /// can be created against mandates with status of:
-    /// `pending_customer_approval`, `pending_submission`, `submitted`, and
-    /// `active`.
+    /// This fails with a <c>mandate_is_inactive</c> error if the linked <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+    /// is cancelled or has failed. Payments can be created against mandates
+    /// with status of: <c>pending_customer_approval</c>,
+    /// <c>pending_submission</c>, <c>submitted</c>, and <c>active</c>.
     /// </summary>
     public class PaymentCreateRequest : IHasIdempotencyKey
     {
@@ -304,11 +309,12 @@ namespace GoCardless.Services
         /// GBP, cents in EUR).
         ///
         /// Minimum and maximum amounts vary by payment scheme. For more
-        /// information, see [Transaction
-        /// limits](https://support.gocardless.com/hc/en-gb/articles/115000309245-Transaction-limits)
+        /// information, see <a
+        /// href="https://support.gocardless.com/hc/en-gb/articles/115000309245-Transaction-limits">Transaction
+        /// limits</a>
         ///
         /// For Variable Recurring Payments (VRP), this must not exceed the
-        /// mandate's `max_amount_per_payment`
+        /// mandate's <c>max_amount_per_payment</c>
         /// constraint.
         /// </summary>
         [JsonProperty("amount")]
@@ -325,25 +331,27 @@ namespace GoCardless.Services
         /// <summary>
         /// A future date on which the payment should be collected. If not
         /// specified, the payment will be collected as soon as possible. If the
-        /// value is before the [mandate](#core-endpoints-mandates)'s
-        /// `next_possible_charge_date` creation will fail. If the value is not
-        /// a working day it will be rolled forwards to the next available one.
+        /// value is before the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+        /// <c>next_possible_charge_date</c> creation will fail. If the value is
+        /// not a working day it will be rolled forwards to the next available
+        /// one.
         /// </summary>
         [JsonProperty("charge_date")]
         public string ChargeDate { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+        /// "NZD", "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public PaymentCurrency? Currency { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+        /// "NZD", "SEK" and "USD" are supported.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentCurrency
@@ -384,8 +392,9 @@ namespace GoCardless.Services
         /// <summary>
         /// A human-readable description of the payment. This will be included
         /// in the notification email GoCardless sends to your customer if your
-        /// organisation does not send its own notifications (see [compliance
-        /// requirements](#appendix-compliance-requirements)).
+        /// organisation does not send its own notifications (see <a
+        /// href="https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+        /// requirements</a>).
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
@@ -413,8 +422,9 @@ namespace GoCardless.Services
         public class PaymentLinks
         {
             /// <summary>
-            /// ID of the [mandate](#core-endpoints-mandates) against which this
-            /// payment should be collected.
+            /// ID of the <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+            /// against which this payment should be collected.
             /// </summary>
             [JsonProperty("mandate")]
             public string Mandate { get; set; }
@@ -431,11 +441,14 @@ namespace GoCardless.Services
         /// Indicates how a Variable Recurring Payment (VRP) is initiated, by or
         /// on behalf of the payer.
         ///
-        /// - `in_session`: The payer is actively participating in the payment
-        /// creation session.
-        /// - `off_session`: The payer is not present during the transaction,
-        /// and the payment is initiated by the merchant based on an established
-        /// consent (e.g., a recurring subscription payment).
+        /// <ul>
+        /// <li><c>in_session</c>: The payer is actively participating in the
+        /// payment creation session.</li>
+        /// <li><c>off_session</c>: The payer is not present during the
+        /// transaction, and the payment is initiated by the merchant based on
+        /// an established consent (e.g., a recurring subscription
+        /// payment).</li>
+        /// </ul>
         /// </summary>
         [JsonProperty("psu_interaction_type")]
         public PaymentPsuInteractionType? PsuInteractionType { get; set; }
@@ -444,11 +457,14 @@ namespace GoCardless.Services
         /// Indicates how a Variable Recurring Payment (VRP) is initiated, by or
         /// on behalf of the payer.
         ///
-        /// - `in_session`: The payer is actively participating in the payment
-        /// creation session.
-        /// - `off_session`: The payer is not present during the transaction,
-        /// and the payment is initiated by the merchant based on an established
-        /// consent (e.g., a recurring subscription payment).
+        /// <ul>
+        /// <li><c>in_session</c>: The payer is actively participating in the
+        /// payment creation session.</li>
+        /// <li><c>off_session</c>: The payer is not present during the
+        /// transaction, and the payment is initiated by the merchant based on
+        /// an established consent (e.g., a recurring subscription
+        /// payment).</li>
+        /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentPsuInteractionType
@@ -465,33 +481,45 @@ namespace GoCardless.Services
         /// <summary>
         /// An optional reference that will appear on your customer's bank
         /// statement. The character limit for this reference is dependent on
-        /// the scheme.<br /> <strong>ACH</strong> - 10 characters<br />
-        /// <strong>Autogiro</strong> - 11 characters<br />
-        /// <strong>Bacs</strong> - 10 characters<br /> <strong>BECS</strong> -
-        /// 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
-        /// <strong>Betalingsservice</strong> - 30 characters<br />
-        /// <strong>Faster Payments</strong> - 18 characters<br />
-        /// <strong>PAD</strong> - scheme doesn't offer references<br />
-        /// <strong>PayTo</strong> - 18 characters<br /> <strong>SEPA</strong> -
-        /// 140 characters<br /> Note that this reference must be unique (for
-        /// each merchant) for the BECS scheme as it is a scheme requirement. <p
-        /// class='restricted-notice'><strong>Restricted</strong>: You can only
-        /// specify a payment reference for Bacs payments (that is, when
-        /// collecting from the UK) if you're on the <a
-        /// href='https://gocardless.com/pricing'>GoCardless Plus, Pro or
-        /// Enterprise packages</a>.</p> <p
-        /// class='restricted-notice'><strong>Restricted</strong>: You can not
-        /// specify a payment reference for Faster Payments.</p>
+        /// the scheme.<br></br> ACH <ul>
+        /// <li>10 characters</li>
+        /// </ul><br></br> Autogiro <ul>
+        /// <li>11 characters</li>
+        /// </ul><br></br> Bacs <ul>
+        /// <li>10 characters</li>
+        /// </ul><br></br> BECS <ul>
+        /// <li>30 characters</li>
+        /// </ul><br></br> BECS NZ <ul>
+        /// <li>12 characters</li>
+        /// </ul><br></br> Betalingsservice <ul>
+        /// <li>30 characters</li>
+        /// </ul><br></br> Faster Payments <ul>
+        /// <li>18 characters</li>
+        /// </ul><br></br> PAD <ul>
+        /// <li>scheme doesn't offer references</li>
+        /// </ul><br></br> PayTo <ul>
+        /// <li>18 characters</li>
+        /// </ul><br></br> SEPA <ul>
+        /// <li>140 characters</li>
+        /// </ul><br></br> Note that this reference must be unique (for each
+        /// merchant) for the BECS scheme as it is a scheme requirement. <p
+        /// class="restricted-notice">Restricted: You can only specify a payment
+        /// reference for Bacs payments (that is, when collecting from the UK)
+        /// if you're on the <a href="https://gocardless.com/pricing">GoCardless
+        /// Plus, Pro or Enterprise packages</a>.</p> <p
+        /// class="restricted-notice">Restricted: You can not specify a payment
+        /// reference for Faster Payments.</p>
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
 
         /// <summary>
-        /// On failure, automatically retry the payment using [intelligent
-        /// retries](/success-plus/overview). Default is `false`. <p
-        /// class="notice"><strong>Important</strong>: To be able to use
-        /// intelligent retries, Success+ needs to be enabled in [GoCardless
-        /// dashboard](https://manage.gocardless.com/success-plus). </p>
+        /// On failure, automatically retry the payment using <a
+        /// href="https://developer.gocardless.com/success-plus/overview">intelligent
+        /// retries</a>. Default is <c>false</c>. <p class="notice">Important:
+        /// To be able to use intelligent retries, Success+ needs to be enabled
+        /// in <a href="https://manage.gocardless.com/success-plus">GoCardless
+        /// dashboard</a>. </p>
         /// </summary>
         [JsonProperty("retry_if_possible")]
         public bool? RetryIfPossible { get; set; }
@@ -506,8 +534,9 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// payments.
+    /// Returns a <a
+    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// list of your payments.
     /// </summary>
     public class PaymentListRequest
     {
@@ -598,23 +627,23 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of a creditor to filter payments by. If you pass this parameter,
-        /// you cannot also pass `customer`.
+        /// you cannot also pass <c>customer</c>.
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+        /// "NZD", "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public PaymentCurrency? Currency { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+        /// "NZD", "SEK" and "USD" are supported.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentCurrency
@@ -654,7 +683,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of a customer to filter payments by. If you pass this parameter,
-        /// you cannot also pass `creditor`.
+        /// you cannot also pass <c>creditor</c>.
         /// </summary>
         [JsonProperty("customer")]
         public string Customer { get; set; }
@@ -685,8 +714,10 @@ namespace GoCardless.Services
         /// The direction to sort in.
         /// One of:
         ///
-        /// - `asc`
-        /// - `desc`
+        /// <ul>
+        /// <li><c>asc</c></li>
+        /// <li><c>desc</c></li>
+        /// </ul>
         /// </summary>
         [JsonProperty("sort_direction")]
         public PaymentSortDirection? SortDirection { get; set; }
@@ -695,8 +726,10 @@ namespace GoCardless.Services
         /// The direction to sort in.
         /// One of:
         ///
-        /// - `asc`
-        /// - `desc`
+        /// <ul>
+        /// <li><c>asc</c></li>
+        /// <li><c>desc</c></li>
+        /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentSortDirection
@@ -714,8 +747,10 @@ namespace GoCardless.Services
         /// Field by which to sort records.
         /// One of:
         ///
-        /// - `charge_date`
-        /// - `amount`
+        /// <ul>
+        /// <li><c>charge_date</c></li>
+        /// <li><c>amount</c></li>
+        /// </ul>
         /// </summary>
         [JsonProperty("sort_field")]
         public PaymentSortField? SortField { get; set; }
@@ -724,8 +759,10 @@ namespace GoCardless.Services
         /// Field by which to sort records.
         /// One of:
         ///
-        /// - `charge_date`
-        /// - `amount`
+        /// <ul>
+        /// <li><c>charge_date</c></li>
+        /// <li><c>amount</c></li>
+        /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentSortField
@@ -742,21 +779,26 @@ namespace GoCardless.Services
         /// <summary>
         /// One of:
         ///
-        /// - `pending_customer_approval`: we're waiting for the customer to
-        /// approve this payment
-        /// - `pending_submission`: the payment has been created, but not yet
-        /// submitted to the banks
-        /// - `submitted`: the payment has been submitted to the banks
-        /// - `confirmed`: the payment has been confirmed as collected
-        /// - `paid_out`: the payment has been included in a
-        /// [payout](#core-endpoints-payouts)
-        /// - `cancelled`: the payment has been cancelled
-        /// - `customer_approval_denied`: the customer has denied approval for
-        /// the payment. You should contact the customer directly
-        /// - `failed`: the payment failed to be processed. Note that payments
-        /// can fail after being confirmed if the failure message is sent late
-        /// by the banks.
-        /// - `charged_back`: the payment has been charged back
+        /// <ul>
+        /// <li><c>pending_customer_approval</c>: we're waiting for the customer
+        /// to approve this payment</li>
+        /// <li><c>pending_submission</c>: the payment has been created, but not
+        /// yet submitted to the banks</li>
+        /// <li><c>submitted</c>: the payment has been submitted to the
+        /// banks</li>
+        /// <li><c>confirmed</c>: the payment has been confirmed as
+        /// collected</li>
+        /// <li><c>paid_out</c>: the payment has been included in a <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a></li>
+        /// <li><c>cancelled</c>: the payment has been cancelled</li>
+        /// <li><c>customer_approval_denied</c>: the customer has denied
+        /// approval for the payment. You should contact the customer
+        /// directly</li>
+        /// <li><c>failed</c>: the payment failed to be processed. Note that
+        /// payments can fail after being confirmed if the failure message is
+        /// sent late by the banks.</li>
+        /// <li><c>charged_back</c>: the payment has been charged back</li>
+        /// </ul>
         /// </summary>
         [JsonProperty("status")]
         public PaymentStatus? Status { get; set; }
@@ -764,21 +806,26 @@ namespace GoCardless.Services
         /// <summary>
         /// One of:
         ///
-        /// - `pending_customer_approval`: we're waiting for the customer to
-        /// approve this payment
-        /// - `pending_submission`: the payment has been created, but not yet
-        /// submitted to the banks
-        /// - `submitted`: the payment has been submitted to the banks
-        /// - `confirmed`: the payment has been confirmed as collected
-        /// - `paid_out`: the payment has been included in a
-        /// [payout](#core-endpoints-payouts)
-        /// - `cancelled`: the payment has been cancelled
-        /// - `customer_approval_denied`: the customer has denied approval for
-        /// the payment. You should contact the customer directly
-        /// - `failed`: the payment failed to be processed. Note that payments
-        /// can fail after being confirmed if the failure message is sent late
-        /// by the banks.
-        /// - `charged_back`: the payment has been charged back
+        /// <ul>
+        /// <li><c>pending_customer_approval</c>: we're waiting for the customer
+        /// to approve this payment</li>
+        /// <li><c>pending_submission</c>: the payment has been created, but not
+        /// yet submitted to the banks</li>
+        /// <li><c>submitted</c>: the payment has been submitted to the
+        /// banks</li>
+        /// <li><c>confirmed</c>: the payment has been confirmed as
+        /// collected</li>
+        /// <li><c>paid_out</c>: the payment has been included in a <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a></li>
+        /// <li><c>cancelled</c>: the payment has been cancelled</li>
+        /// <li><c>customer_approval_denied</c>: the customer has denied
+        /// approval for the payment. You should contact the customer
+        /// directly</li>
+        /// <li><c>failed</c>: the payment failed to be processed. Note that
+        /// payments can fail after being confirmed if the failure message is
+        /// sent late by the banks.</li>
+        /// <li><c>charged_back</c>: the payment has been charged back</li>
+        /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PaymentStatus
@@ -845,11 +892,12 @@ namespace GoCardless.Services
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// On failure, automatically retry the payment using [intelligent
-        /// retries](/success-plus/overview). Default is `false`. <p
-        /// class="notice"><strong>Important</strong>: To be able to use
-        /// intelligent retries, Success+ needs to be enabled in [GoCardless
-        /// dashboard](https://manage.gocardless.com/success-plus). </p>
+        /// On failure, automatically retry the payment using <a
+        /// href="https://developer.gocardless.com/success-plus/overview">intelligent
+        /// retries</a>. Default is <c>false</c>. <p class="notice">Important:
+        /// To be able to use intelligent retries, Success+ needs to be enabled
+        /// in <a href="https://manage.gocardless.com/success-plus">GoCardless
+        /// dashboard</a>. </p>
         /// </summary>
         [JsonProperty("retry_if_possible")]
         public bool? RetryIfPossible { get; set; }
@@ -860,8 +908,8 @@ namespace GoCardless.Services
     /// Any metadata supplied to this endpoint will be stored on the payment
     /// cancellation event it causes.
     ///
-    /// This will fail with a `cancellation_failed` error unless the payment's
-    /// status is `pending_submission`.
+    /// This will fail with a <c>cancellation_failed</c> error unless the
+    /// payment's status is <c>pending_submission</c>.
     /// </summary>
     public class PaymentCancelRequest
     {
@@ -875,13 +923,15 @@ namespace GoCardless.Services
 
     /// <summary>
     /// <a name="retry_failed"></a>Retries a failed payment if the underlying
-    /// mandate is active. You will receive a `resubmission_requested` webhook,
-    /// but after that retrying the payment follows the same process as its
-    /// initial creation, so you will receive a `submitted` webhook, followed by
-    /// a `confirmed` or `failed` event. Any metadata supplied to this endpoint
-    /// will be stored against the payment submission event it causes.
+    /// mandate is active. You will receive a <c>resubmission_requested</c>
+    /// webhook, but after that retrying the payment follows the same process as
+    /// its initial creation, so you will receive a <c>submitted</c> webhook,
+    /// followed by a <c>confirmed</c> or <c>failed</c> event. Any metadata
+    /// supplied to this endpoint will be stored against the payment submission
+    /// event it causes.
     ///
-    /// This will return a `retry_failed` error if the payment has not failed.
+    /// This will return a <c>retry_failed</c> error if the payment has not
+    /// failed.
     ///
     /// Payments can be retried up to 3 times.
     /// </summary>
@@ -890,9 +940,11 @@ namespace GoCardless.Services
         /// <summary>
         /// A future date on which the payment should be collected. If not
         /// specified, the payment will be collected as soon as possible. If the
-        /// value is before the [mandate](#core-endpoints-mandates)'s
-        /// `next_possible_charge_date` creation will fail. If the value is not
-        /// a working day it will be rolled forwards to the next available one.
+        /// value is before the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+        /// <c>next_possible_charge_date</c> creation will fail. If the value is
+        /// not a working day it will be rolled forwards to the next available
+        /// one.
         /// </summary>
         [JsonProperty("charge_date")]
         public string ChargeDate { get; set; }

@@ -69,7 +69,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Get a single bank authorisation.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "BAU".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "BAU".
         /// <param name="request">An optional `BankAuthorisationGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single bank authorisation resource</returns>
@@ -117,8 +117,9 @@ namespace GoCardless.Services
         public class BankAuthorisationLinks
         {
             /// <summary>
-            /// ID of the [billing request](#billing-requests-billing-requests)
-            /// against which this authorisation was created.
+            /// ID of the <a
+            /// href="https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">billing
+            /// request</a> against which this authorisation was created.
             /// </summary>
             [JsonProperty("billing_request")]
             public string BillingRequest { get; set; }
@@ -129,26 +130,29 @@ namespace GoCardless.Services
         /// payment.
         ///
         /// On completion of bank authorisation, the query parameter of either
-        /// `outcome=success` or `outcome=failure` will be
-        /// appended to the `redirect_uri` to indicate the result of the bank
-        /// authorisation. If the bank authorisation is
-        /// expired, the query parameter `outcome=timeout` will be appended to
-        /// the `redirect_uri`, in which case you should
+        /// <c>outcome=success</c> or <c>outcome=failure</c> will be
+        /// appended to the <c>redirect_uri</c> to indicate the result of the
+        /// bank authorisation. If the bank authorisation is
+        /// expired, the query parameter <c>outcome=timeout</c> will be appended
+        /// to the <c>redirect_uri</c>, in which case you should
         /// prompt the user to try the bank authorisation step again.
         ///
         /// Please note: bank authorisations can still fail despite an
-        /// `outcome=success` on the `redirect_uri`. It is therefore recommended
-        /// to wait for the relevant bank authorisation event, such as
-        /// [`BANK_AUTHORISATION_AUTHORISED`](#billing-request-bankauthorisationauthorised),
-        /// [`BANK_AUTHORISATION_DENIED`](#billing-request-bankauthorisationdenied),
-        /// or
-        /// [`BANK_AUTHORISATION_FAILED`](#billing-request-bankauthorisationfailed)
+        /// <c>outcome=success</c> on the <c>redirect_uri</c>. It is therefore
+        /// recommended to wait for the relevant bank authorisation event, such
+        /// as <a
+        /// href="https://developer.gocardless.com/api-reference/#billing-request-bankauthorisationauthorised"><c>BANK_AUTHORISATION_AUTHORISED</c></a>,
+        /// <a
+        /// href="https://developer.gocardless.com/api-reference/#billing-request-bankauthorisationdenied"><c>BANK_AUTHORISATION_DENIED</c></a>,
+        /// or <a
+        /// href="https://developer.gocardless.com/api-reference/#billing-request-bankauthorisationfailed"><c>BANK_AUTHORISATION_FAILED</c></a>
         /// in order to show the correct outcome to the user.
         ///
         /// The BillingRequestFlow ID will also be appended to the
-        /// `redirect_uri` as query parameter `id=BRF123`.
+        /// <c>redirect_uri</c> as query parameter <c>id=BRF123</c>.
         ///
-        /// Defaults to `https://pay.gocardless.com/billing/static/thankyou`.
+        /// Defaults to
+        /// <c>https://pay.gocardless.com/billing/static/thankyou</c>.
         /// </summary>
         [JsonProperty("redirect_uri")]
         public string RedirectUri { get; set; }

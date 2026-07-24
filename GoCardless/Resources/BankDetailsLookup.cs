@@ -15,9 +15,10 @@ namespace GoCardless.Resources
     public class BankDetailsLookup
     {
         /// <summary>
-        /// Array of [schemes](#mandates_scheme) supported for this bank
-        /// account. This will be an empty array if the bank account is not
-        /// reachable by any schemes.
+        /// Array of <a
+        /// href="https://developer.gocardless.com/api-reference/#mandates_scheme">schemes</a>
+        /// supported for this bank account. This will be an empty array if the
+        /// bank account is not reachable by any schemes.
         /// </summary>
         [JsonProperty("available_debit_schemes")]
         public List<BankDetailsLookupAvailableDebitScheme?> AvailableDebitSchemes { get; set; }

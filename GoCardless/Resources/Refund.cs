@@ -10,13 +10,15 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a refund resource.
     ///
-    /// Refund objects represent (partial) refunds of a
-    /// [payment](#core-endpoints-payments) back to the
-    /// [customer](#core-endpoints-customers).
+    /// Refund objects represent (partial) refunds of a <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+    /// back to the <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
     ///
-    /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
-    /// a refund is created, and will update the `amount_refunded` property of
-    /// the payment.
+    /// GoCardless will notify you via a <a
+    /// href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a>
+    /// whenever a refund is created, and will update the <c>amount_refunded</c>
+    /// property of the payment.
     /// </summary>
     public class Refund
     {
@@ -27,16 +29,18 @@ namespace GoCardless.Resources
         public int? Amount { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        /// Fixed <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. This is set to the currency of the refund's
-        /// [payment](#core-endpoints-payments).
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. This is set to the currency of the refund's
+        /// <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>.
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
@@ -66,23 +70,34 @@ namespace GoCardless.Resources
         /// <summary>
         /// An optional reference that will appear on your customer's bank
         /// statement. The character limit for this reference is dependent on
-        /// the scheme.<br /> <strong>ACH</strong> - 10 characters<br />
-        /// <strong>Autogiro</strong> - 11 characters<br />
-        /// <strong>Bacs</strong> - 10 characters<br /> <strong>BECS</strong> -
-        /// 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
-        /// <strong>Betalingsservice</strong> - 30 characters<br />
-        /// <strong>Faster Payments</strong> - 18 characters<br />
-        /// <strong>PAD</strong> - scheme doesn't offer references<br />
-        /// <strong>PayTo</strong> - 18 characters<br /> <strong>SEPA</strong> -
-        /// 140 characters<br /> Note that this reference must be unique (for
-        /// each merchant) for the BECS scheme as it is a scheme requirement. <p
-        /// class='restricted-notice'><strong>Restricted</strong>: You can only
-        /// specify a payment reference for Bacs payments (that is, when
-        /// collecting from the UK) if you're on the <a
-        /// href='https://gocardless.com/pricing'>GoCardless Plus, Pro or
-        /// Enterprise packages</a>.</p> <p
-        /// class='restricted-notice'><strong>Restricted</strong>: You can not
-        /// specify a payment reference for Faster Payments.</p>
+        /// the scheme.<br></br> ACH <ul>
+        /// <li>10 characters</li>
+        /// </ul><br></br> Autogiro <ul>
+        /// <li>11 characters</li>
+        /// </ul><br></br> Bacs <ul>
+        /// <li>10 characters</li>
+        /// </ul><br></br> BECS <ul>
+        /// <li>30 characters</li>
+        /// </ul><br></br> BECS NZ <ul>
+        /// <li>12 characters</li>
+        /// </ul><br></br> Betalingsservice <ul>
+        /// <li>30 characters</li>
+        /// </ul><br></br> Faster Payments <ul>
+        /// <li>18 characters</li>
+        /// </ul><br></br> PAD <ul>
+        /// <li>scheme doesn't offer references</li>
+        /// </ul><br></br> PayTo <ul>
+        /// <li>18 characters</li>
+        /// </ul><br></br> SEPA <ul>
+        /// <li>140 characters</li>
+        /// </ul><br></br> Note that this reference must be unique (for each
+        /// merchant) for the BECS scheme as it is a scheme requirement. <p
+        /// class="restricted-notice">Restricted: You can only specify a payment
+        /// reference for Bacs payments (that is, when collecting from the UK)
+        /// if you're on the <a href="https://gocardless.com/pricing">GoCardless
+        /// Plus, Pro or Enterprise packages</a>.</p> <p
+        /// class="restricted-notice">Restricted: You can not specify a payment
+        /// reference for Faster Payments.</p>
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
@@ -90,15 +105,19 @@ namespace GoCardless.Resources
         /// <summary>
         /// One of:
         ///
-        /// - `created`: the refund has been created
-        /// - `pending_submission`: the refund has been created, but not yet
-        /// submitted to the banks
-        /// - `submitted`: the refund has been submitted to the banks
-        /// - `paid`:  the refund has been included in a
-        /// [payout](#core-endpoints-payouts)
-        /// - `cancelled`: the refund has been cancelled
-        /// - `bounced`: the refund has failed to be paid
-        /// - `funds_returned`: the refund has had its funds returned
+        /// <ul>
+        /// <li><c>created</c>: the refund has been created</li>
+        /// <li><c>pending_submission</c>: the refund has been created, but not
+        /// yet submitted to the banks</li>
+        /// <li><c>submitted</c>: the refund has been submitted to the
+        /// banks</li>
+        /// <li><c>paid</c>:  the refund has been included in a <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a></li>
+        /// <li><c>cancelled</c>: the refund has been cancelled</li>
+        /// <li><c>bounced</c>: the refund has failed to be paid</li>
+        /// <li><c>funds_returned</c>: the refund has had its funds
+        /// returned</li>
+        /// </ul>
         /// </summary>
         [JsonProperty("status")]
         public RefundStatus? Status { get; set; }
@@ -111,7 +130,7 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// Estimated rate that will be used in the foreign exchange of the
-        /// `amount` into the `fx_currency`.
+        /// <c>amount</c> into the <c>fx_currency</c>.
         /// This will vary based on the prevailing market rate until the moment
         /// that it is paid out.
         /// Present only before a resource is paid out. Has up to 10 decimal
@@ -121,8 +140,8 @@ namespace GoCardless.Resources
         public string EstimatedExchangeRate { get; set; }
 
         /// <summary>
-        /// Rate used in the foreign exchange of the `amount` into the
-        /// `fx_currency`.
+        /// Rate used in the foreign exchange of the <c>amount</c> into the
+        /// <c>fx_currency</c>.
         /// Present only after a resource is paid out. Has up to 10 decimal
         /// places.
         /// </summary>
@@ -130,7 +149,7 @@ namespace GoCardless.Resources
         public string ExchangeRate { get; set; }
 
         /// <summary>
-        /// Amount that was paid out in the `fx_currency` after foreign
+        /// Amount that was paid out in the <c>fx_currency</c> after foreign
         /// exchange.
         /// Present only after the resource has been paid out.
         /// </summary>
@@ -138,21 +157,21 @@ namespace GoCardless.Resources
         public int? FxAmount { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) code
-        /// for the currency in which amounts will be paid out (after foreign
-        /// exchange). Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK"
-        /// and "USD" are supported. Present only if payouts will be (or were)
-        /// made via foreign exchange.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> code for the currency in which amounts will be paid out
+        /// (after foreign exchange). Currently "AUD", "CAD", "DKK", "EUR",
+        /// "GBP", "NZD", "SEK" and "USD" are supported. Present only if payouts
+        /// will be (or were) made via foreign exchange.
         /// </summary>
         [JsonProperty("fx_currency")]
         public RefundFxFxCurrency? FxCurrency { get; set; }
     }
 
     /// <summary>
-    /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) code for the currency in
-    /// which amounts will be paid out (after foreign exchange). Currently "AUD", "CAD", "DKK",
-    /// "EUR", "GBP", "NZD", "SEK" and "USD" are supported. Present only if payouts will be (or
-    /// were) made via foreign exchange.
+    /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> code for the
+    /// currency in which amounts will be paid out (after foreign exchange). Currently "AUD", "CAD",
+    /// "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported. Present only if payouts will be
+    /// (or were) made via foreign exchange.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum RefundFxFxCurrency
@@ -200,15 +219,17 @@ namespace GoCardless.Resources
     public class RefundLinks
     {
         /// <summary>
-        /// ID of the [mandate](#core-endpoints-mandates) against which the
-        /// refund is being made.
+        /// ID of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+        /// against which the refund is being made.
         /// </summary>
         [JsonProperty("mandate")]
         public string Mandate { get; set; }
 
         /// <summary>
-        /// ID of the [payment](#core-endpoints-payments) against which the
-        /// refund is being made.
+        /// ID of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+        /// against which the refund is being made.
         /// </summary>
         [JsonProperty("payment")]
         public string Payment { get; set; }
@@ -217,13 +238,17 @@ namespace GoCardless.Resources
     /// <summary>
     /// One of:
     ///
-    /// - `created`: the refund has been created
-    /// - `pending_submission`: the refund has been created, but not yet submitted to the banks
-    /// - `submitted`: the refund has been submitted to the banks
-    /// - `paid`:  the refund has been included in a [payout](#core-endpoints-payouts)
-    /// - `cancelled`: the refund has been cancelled
-    /// - `bounced`: the refund has failed to be paid
-    /// - `funds_returned`: the refund has had its funds returned
+    /// <ul>
+    /// <li><c>created</c>: the refund has been created</li>
+    /// <li><c>pending_submission</c>: the refund has been created, but not yet submitted to the
+    /// banks</li>
+    /// <li><c>submitted</c>: the refund has been submitted to the banks</li>
+    /// <li><c>paid</c>:  the refund has been included in a <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a></li>
+    /// <li><c>cancelled</c>: the refund has been cancelled</li>
+    /// <li><c>bounced</c>: the refund has failed to be paid</li>
+    /// <li><c>funds_returned</c>: the refund has had its funds returned</li>
+    /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum RefundStatus

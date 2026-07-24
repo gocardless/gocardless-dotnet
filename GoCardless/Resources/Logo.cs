@@ -11,8 +11,9 @@ namespace GoCardless.Resources
     /// Represents a logo resource.
     ///
     /// Logos are image uploads that, when associated with a creditor, are shown
-    /// on the [billing request flow](#billing-requests-billing-request-flows)
-    /// payment pages.
+    /// on the <a
+    /// href="https://developer.gocardless.com/api-reference/#billing-requests-billing-request-flows">billing
+    /// request flow</a> payment pages.
     /// </summary>
     public class Logo
     {

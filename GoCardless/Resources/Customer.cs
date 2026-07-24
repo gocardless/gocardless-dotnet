@@ -11,9 +11,10 @@ namespace GoCardless.Resources
     /// Represents a customer resource.
     ///
     /// Customer objects hold the contact details for a customer. A customer can
-    /// have several [customer bank
-    /// accounts](#core-endpoints-customer-bank-accounts), which in turn can
-    /// have several Direct Debit [mandates](#core-endpoints-mandates).
+    /// have several <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+    /// bank accounts</a>, which in turn can have several Direct Debit <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandates</a>.
     /// </summary>
     public class Customer
     {
@@ -42,25 +43,27 @@ namespace GoCardless.Resources
         public string City { get; set; }
 
         /// <summary>
-        /// Customer's company name. Required unless a `given_name` and
-        /// `family_name` are provided. For Canadian customers, the use of a
-        /// `company_name` value will mean that any mandate created from this
-        /// customer will be considered to be a "Business PAD" (otherwise, any
-        /// mandate will be considered to be a "Personal PAD").
+        /// Customer's company name. Required unless a <c>given_name</c> and
+        /// <c>family_name</c> are provided. For Canadian customers, the use of
+        /// a <c>company_name</c> value will mean that any mandate created from
+        /// this customer will be considered to be a "Business PAD" (otherwise,
+        /// any mandate will be considered to be a "Personal PAD").
         /// </summary>
         [JsonProperty("company_name")]
         public string CompanyName { get; set; }
 
         /// <summary>
-        /// [ISO 3166-1 alpha-2
-        /// code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+        /// <a
+        /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+        /// 3166-1 alpha-2 code.</a>
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        /// Fixed <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
@@ -81,13 +84,15 @@ namespace GoCardless.Resources
         public string Email { get; set; }
 
         /// <summary>
-        /// Customer's surname. Required unless a `company_name` is provided.
+        /// Customer's surname. Required unless a <c>company_name</c> is
+        /// provided.
         /// </summary>
         [JsonProperty("family_name")]
         public string FamilyName { get; set; }
 
         /// <summary>
-        /// Customer's first name. Required unless a `company_name` is provided.
+        /// Customer's first name. Required unless a <c>company_name</c> is
+        /// provided.
         /// </summary>
         [JsonProperty("given_name")]
         public string GivenName { get; set; }
@@ -99,14 +104,14 @@ namespace GoCardless.Resources
         public string Id { get; set; }
 
         /// <summary>
-        /// [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-        /// code. Used as the language for notification emails sent by
-        /// GoCardless if your organisation does not send its own (see
-        /// [compliance requirements](#appendix-compliance-requirements)).
-        /// Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da", "nb",
-        /// "sl", "sv" are supported. If this is not provided, the language will
-        /// be chosen based on the `country_code` (if supplied) or default to
-        /// "en".
+        /// <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO
+        /// 639-1</a> code. Used as the language for notification emails sent by
+        /// GoCardless if your organisation does not send its own (see <a
+        /// href="https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+        /// requirements</a>). Currently only "en", "fr", "de", "pt", "es",
+        /// "it", "nl", "da", "nb", "sl", "sv" are supported. If this is not
+        /// provided, the language will be chosen based on the
+        /// <c>country_code</c> (if supplied) or default to "en".
         /// </summary>
         [JsonProperty("language")]
         public string Language { get; set; }
@@ -119,8 +124,8 @@ namespace GoCardless.Resources
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone
-        /// number, including country code.
+        /// <a href="https://en.wikipedia.org/wiki/E.123">ITU E.123</a>
+        /// formatted phone number, including country code.
         /// </summary>
         [JsonProperty("phone_number")]
         public string PhoneNumber { get; set; }
@@ -133,9 +138,9 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// The customer's address region, county or department. For US
-        /// customers a 2 letter
-        /// [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US) state
-        /// code is required (e.g. `CA` for California).
+        /// customers a 2 letter <a
+        /// href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO3166-2:US</a>
+        /// state code is required (e.g. <c>CA</c> for California).
         /// </summary>
         [JsonProperty("region")]
         public string Region { get; set; }

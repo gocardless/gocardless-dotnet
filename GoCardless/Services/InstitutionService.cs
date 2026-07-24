@@ -14,9 +14,9 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with institution resources.
     ///
-    /// Institutions that are supported when creating [Bank
-    /// Authorisations](#billing-requests-bank-authorisations) for a particular
-    /// country or purpose.
+    /// Institutions that are supported when creating <a
+    /// href="https://developer.gocardless.com/api-reference/#billing-requests-bank-authorisations">Bank
+    /// Authorisations</a> for a particular country or purpose.
     ///
     /// Not all institutions support both Payment Initiation (PIS) and Account
     /// Information (AIS) services.
@@ -66,7 +66,7 @@ namespace GoCardless.Services
         ///
         /// This endpoint is currently supported only for FasterPayments.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "BRQ".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "BRQ".
         /// <param name="request">An optional `InstitutionListForBillingRequestRequest` representing the query parameters for this list_for_billing_request request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of institution resources</returns>
@@ -111,28 +111,28 @@ namespace GoCardless.Services
         public string BranchCode { get; set; }
 
         /// <summary>
-        /// [ISO
-        /// 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-        /// alpha-2 code. The country code of the institution. If nothing is
-        /// provided, institutions with the country code 'GB' are returned by
-        /// default.
+        /// <a
+        /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+        /// 3166-1</a> alpha-2 code. The country code of the institution. If
+        /// nothing is provided, institutions with the country code 'GB' are
+        /// returned by default.
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
 
         /// <summary>
         /// The feature that institutions support. The available options include
-        /// `pis`, and `vrp_sweeping`. If nothing is provided, institutions
-        /// supporting 'pis' are returned by default.
+        /// <c>pis</c>, and <c>vrp_sweeping</c>. If nothing is provided,
+        /// institutions supporting 'pis' are returned by default.
         /// </summary>
         [JsonProperty("feature")]
         public string Feature { get; set; }
 
         /// <summary>
         /// The scheme that institutions support. The available options include
-        /// `faster_payments`, `sepa_credit_transfer`, and
-        /// `sepa_instant_credit_transfer`. If nothing is provided, institutions
-        /// supporting 'faster_payments' are returned by default.
+        /// <c>faster_payments</c>, <c>sepa_credit_transfer</c>, and
+        /// <c>sepa_instant_credit_transfer</c>. If nothing is provided,
+        /// institutions supporting 'faster_payments' are returned by default.
         /// </summary>
         [JsonProperty("scheme")]
         public string Scheme { get; set; }
@@ -146,11 +146,11 @@ namespace GoCardless.Services
     public class InstitutionListForBillingRequestRequest
     {
         /// <summary>
-        /// [ISO
-        /// 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-        /// alpha-2 code. The country code of the institution. If nothing is
-        /// provided, institutions with the country code 'GB' are returned by
-        /// default.
+        /// <a
+        /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+        /// 3166-1</a> alpha-2 code. The country code of the institution. If
+        /// nothing is provided, institutions with the country code 'GB' are
+        /// returned by default.
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
@@ -167,7 +167,6 @@ namespace GoCardless.Services
         /// the response.
         /// If not provided or set to false, only enabled institutions will be
         /// returned.
-        ///
         /// </summary>
         [JsonProperty("include_disabled")]
         public bool? IncludeDisabled { get; set; }
@@ -177,7 +176,6 @@ namespace GoCardless.Services
         /// the response.
         /// If not provided or set to false, only enabled institutions will be
         /// returned.
-        ///
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum InstitutionIncludeDisabled

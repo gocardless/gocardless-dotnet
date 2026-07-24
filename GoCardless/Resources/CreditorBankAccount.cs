@@ -10,26 +10,29 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a creditor bank account resource.
     ///
-    /// Creditor Bank Accounts hold the bank details of a
-    /// [creditor](#core-endpoints-creditors). These are the bank accounts which
-    /// your [payouts](#core-endpoints-payouts) will be sent to.
+    /// Creditor Bank Accounts hold the bank details of a <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+    /// These are the bank accounts which your <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payouts</a>
+    /// will be sent to.
     ///
     /// Note that creditor bank accounts must be unique, and so you will
-    /// encounter a `bank_account_exists` error if you try to create a duplicate
-    /// bank account. You may wish to handle this by updating the existing
-    /// record instead, the ID of which will be provided as
-    /// `links[creditor_bank_account]` in the error response.
+    /// encounter a <c>bank_account_exists</c> error if you try to create a
+    /// duplicate bank account. You may wish to handle this by updating the
+    /// existing record instead, the ID of which will be provided as
+    /// <c>links[creditor_bank_account]</c> in the error response.
     ///
-    /// <p class="restricted-notice"><strong>Restricted</strong>: This API is
-    /// not available for partner integrations.</p>
+    /// <p class="restricted-notice">Restricted: This API is not available for
+    /// partner integrations.</p>
     /// </summary>
     public class CreditorBankAccount
     {
         /// <summary>
         /// Name of the account holder, as known by the bank. Usually this is
-        /// the same as the name stored with the linked
-        /// [creditor](#core-endpoints-creditors). This field will be
-        /// transliterated, upcased and truncated to 18 characters.
+        /// the same as the name stored with the linked <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+        /// This field will be transliterated, upcased and truncated to 18
+        /// characters.
         /// </summary>
         [JsonProperty("account_holder_name")]
         public string AccountHolderName { get; set; }
@@ -43,8 +46,9 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Bank account type. Required for USD-denominated bank accounts. Must
-        /// not be provided for bank accounts in other currencies. See [local
-        /// details](#local-bank-details-united-states) for more information.
+        /// not be provided for bank accounts in other currencies. See <a
+        /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+        /// details</a> for more information.
         /// </summary>
         [JsonProperty("account_type")]
         public CreditorBankAccountAccountType? AccountType { get; set; }
@@ -56,25 +60,26 @@ namespace GoCardless.Resources
         public string BankName { get; set; }
 
         /// <summary>
-        /// [ISO 3166-1 alpha-2
-        /// code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-        /// Defaults to the country code of the `iban` if supplied, otherwise is
-        /// required.
+        /// <a
+        /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+        /// 3166-1 alpha-2 code</a>. Defaults to the country code of the
+        /// <c>iban</c> if supplied, otherwise is required.
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        /// Fixed <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+        /// "NZD", "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
@@ -106,8 +111,8 @@ namespace GoCardless.Resources
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// Verification status of the Bank Account. Can be one of `pending`,
-        /// `in_review` or `successful`
+        /// Verification status of the Bank Account. Can be one of
+        /// <c>pending</c>, <c>in_review</c> or <c>successful</c>
         /// </summary>
         [JsonProperty("verification_status")]
         public CreditorBankAccountVerificationStatus? VerificationStatus { get; set; }
@@ -115,8 +120,9 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
-    /// accounts in other currencies. See [local details](#local-bank-details-united-states) for
-    /// more information.
+    /// accounts in other currencies. See <a
+    /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+    /// details</a> for more information.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum CreditorBankAccountAccountType
@@ -140,16 +146,17 @@ namespace GoCardless.Resources
     public class CreditorBankAccountLinks
     {
         /// <summary>
-        /// ID of the [creditor](#core-endpoints-creditors) that owns this bank
-        /// account.
+        /// ID of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+        /// that owns this bank account.
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
     }
 
     /// <summary>
-    /// Verification status of the Bank Account. Can be one of `pending`, `in_review` or
-    /// `successful`
+    /// Verification status of the Bank Account. Can be one of <c>pending</c>, <c>in_review</c> or
+    /// <c>successful</c>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum CreditorBankAccountVerificationStatus

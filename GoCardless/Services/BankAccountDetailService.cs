@@ -34,12 +34,12 @@ namespace GoCardless.Services
         /// Returns bank account details in the flattened JSON Web Encryption
         /// format described in RFC 7516.
         ///
-        /// You must specify a `Gc-Key-Id` header when using this endpoint. See
-        /// [Public Key
-        /// Setup](https://developer.gocardless.com/gc-embed/bank-details-access#public_key_setup)
-        /// for more details.
+        /// You must specify a <c>Gc-Key-Id</c> header when using this endpoint.
+        /// See <a
+        /// href="https://developer.gocardless.com/gc-embed/bank-details-access#public_key_setup">Public
+        /// Key Setup</a> for more details.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "BA".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "BA".
         /// <param name="request">An optional `BankAccountDetailGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single bank account detail resource</returns>
@@ -74,10 +74,10 @@ namespace GoCardless.Services
     /// Returns bank account details in the flattened JSON Web Encryption format
     /// described in RFC 7516.
     ///
-    /// You must specify a `Gc-Key-Id` header when using this endpoint. See
-    /// [Public Key
-    /// Setup](https://developer.gocardless.com/gc-embed/bank-details-access#public_key_setup)
-    /// for more details.
+    /// You must specify a <c>Gc-Key-Id</c> header when using this endpoint. See
+    /// <a
+    /// href="https://developer.gocardless.com/gc-embed/bank-details-access#public_key_setup">Public
+    /// Key Setup</a> for more details.
     /// </summary>
     public class BankAccountDetailGetRequest { }
 

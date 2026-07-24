@@ -18,12 +18,14 @@ namespace GoCardless.Services
     /// single API call.
     ///
     /// The Workflow:
-    /// 1. Create the outbound payment import.
-    /// 2. Retrieve an authorisation link from the response.
-    /// 3. Redirect the user to the link to authorise the import.
-    /// 4. Once the user authorises the import, the individual outbound payments
-    /// are automatically submitted.
     ///
+    /// <ol>
+    /// <li>Create the outbound payment import.</li>
+    /// <li>Retrieve an authorisation link from the response.</li>
+    /// <li>Redirect the user to the link to authorise the import.</li>
+    /// <li>Once the user authorises the import, the individual outbound
+    /// payments are automatically submitted.</li>
+    /// </ol>
     /// Import entries are not processed as actual payments until they are
     /// reviewed and authorised in GoCardless Dashboard.
     /// Upon approval, a unique outbound payment is generated for every entry in
@@ -76,7 +78,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns a single outbound payment import.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "IM".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "IM".
         /// <param name="request">An optional `OutboundPaymentImportGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single outbound payment import resource</returns>
@@ -107,8 +109,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your outbound payment imports.
+        /// Returns a <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// list of your outbound payment imports.
         /// </summary>
         /// <param name="request">An optional `OutboundPaymentImportListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -187,22 +190,25 @@ namespace GoCardless.Services
         public OutboundPaymentImportEntryItems[] EntryItems { get; set; }
 
         /// <summary>
-        /// The entry items contain attributes required to [Create an outbound
-        /// payment](#outbound-payments-create-an-outbound-payment).
+        /// The entry items contain attributes required to <a
+        /// href="https://developer.gocardless.com/api-reference/#outbound-payments-create-an-outbound-payment">Create
+        /// an outbound payment</a>.
         /// Please refer to that documentation for more information on the
         /// requirements for these fields.
         ///
-        /// **Required**:
+        /// Required:
         ///
-        /// - `amount`
-        /// - `scheme`
-        /// - `recipient_bank_account_id`
-        ///
+        /// <ul>
+        /// <li><c>amount</c></li>
+        /// <li><c>scheme</c></li>
+        /// <li><c>recipient_bank_account_id</c></li>
+        /// </ul>
         /// Additional supported fields:
         ///
-        /// - `reference`
-        /// - `metadata`
-        ///
+        /// <ul>
+        /// <li><c>reference</c></li>
+        /// <li><c>metadata</c></li>
+        /// </ul>
         /// </summary>
         public class OutboundPaymentImportEntryItems
         {
@@ -231,10 +237,12 @@ namespace GoCardless.Services
             /// An optional reference that will appear on your customer's bank
             /// statement.
             /// The character limit for this reference is dependent on the
-            /// scheme.<br />
-            /// <strong>Faster Payments</strong> - 18 characters, including:
+            /// scheme.<br></br>
+            /// Faster Payments <ul>
+            /// <li>18 characters, including:
             /// "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
-            /// &-./"<br />
+            /// &amp;-./"</li>
+            /// </ul><br></br>
             /// </summary>
             [JsonProperty("reference")]
             public string Reference { get; set; }
@@ -293,8 +301,9 @@ namespace GoCardless.Services
     public class OutboundPaymentImportGetRequest { }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// outbound payment imports.
+    /// Returns a <a
+    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// list of your outbound payment imports.
     /// </summary>
     public class OutboundPaymentImportListRequest
     {
@@ -355,16 +364,18 @@ namespace GoCardless.Services
         /// <summary>
         /// The status of the outbound payment import.
         ///
-        /// - `created`: The initial state of a new import.
-        /// - `validating`: Import validation in progress.
-        /// - `invalid`: Import validation failed.
-        /// - `valid`: Import validation succeeded.
-        /// - `processing`: Authorisation received; payments are being
-        /// generated.
-        /// - `processed`: All entries have been successfully converted into
-        /// outbound payments.
-        /// - `cancelled`: The import was cancelled by a user or automatically
-        /// expired by the system.
+        /// <ul>
+        /// <li><c>created</c>: The initial state of a new import.</li>
+        /// <li><c>validating</c>: Import validation in progress.</li>
+        /// <li><c>invalid</c>: Import validation failed.</li>
+        /// <li><c>valid</c>: Import validation succeeded.</li>
+        /// <li><c>processing</c>: Authorisation received; payments are being
+        /// generated.</li>
+        /// <li><c>processed</c>: All entries have been successfully converted
+        /// into outbound payments.</li>
+        /// <li><c>cancelled</c>: The import was cancelled by a user or
+        /// automatically expired by the system.</li>
+        /// </ul>
         /// </summary>
         [JsonProperty("status")]
         public OutboundPaymentImportStatus? Status { get; set; }
@@ -372,16 +383,18 @@ namespace GoCardless.Services
         /// <summary>
         /// The status of the outbound payment import.
         ///
-        /// - `created`: The initial state of a new import.
-        /// - `validating`: Import validation in progress.
-        /// - `invalid`: Import validation failed.
-        /// - `valid`: Import validation succeeded.
-        /// - `processing`: Authorisation received; payments are being
-        /// generated.
-        /// - `processed`: All entries have been successfully converted into
-        /// outbound payments.
-        /// - `cancelled`: The import was cancelled by a user or automatically
-        /// expired by the system.
+        /// <ul>
+        /// <li><c>created</c>: The initial state of a new import.</li>
+        /// <li><c>validating</c>: Import validation in progress.</li>
+        /// <li><c>invalid</c>: Import validation failed.</li>
+        /// <li><c>valid</c>: Import validation succeeded.</li>
+        /// <li><c>processing</c>: Authorisation received; payments are being
+        /// generated.</li>
+        /// <li><c>processed</c>: All entries have been successfully converted
+        /// into outbound payments.</li>
+        /// <li><c>cancelled</c>: The import was cancelled by a user or
+        /// automatically expired by the system.</li>
+        /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum OutboundPaymentImportStatus

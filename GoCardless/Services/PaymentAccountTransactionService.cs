@@ -16,7 +16,9 @@ namespace GoCardless.Services
     ///
     /// Payment account transactions represent movements of funds on a given
     /// payment account. The payment account is provisioned by GoCardless and is
-    /// used to fund [outbound payments](#core-endpoints-outbound-payments).
+    /// used to fund <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-outbound-payments">outbound
+    /// payments</a>.
     /// </summary>
     public class PaymentAccountTransactionService
     {
@@ -35,9 +37,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of an existing payment account transaction.
         /// </summary>
-        /// <param name="identity">The unique ID of the [bank
-        /// account](#core-endpoints-creditor-bank-accounts) which happens to be the payment
-        /// account.</param>
+        /// <param name="identity"></param>The unique ID of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+        /// account</a> which happens to be the payment account.
         /// <param name="request">An optional `PaymentAccountTransactionGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment account transaction resource</returns>
@@ -70,9 +72,9 @@ namespace GoCardless.Services
         /// <summary>
         /// List transactions for a given payment account.
         /// </summary>
-        /// <param name="identity">The unique ID of the [bank
-        /// account](#core-endpoints-creditor-bank-accounts) which happens to be the payment
-        /// account.</param>
+        /// <param name="identity"></param>The unique ID of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+        /// account</a> which happens to be the payment account.
         /// <param name="request">An optional `PaymentAccountTransactionListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of payment account transaction resources</returns>
@@ -106,9 +108,9 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of payment account transactions.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        /// <param name="identity">The unique ID of the [bank
-        /// account](#core-endpoints-creditor-bank-accounts) which happens to be the payment
-        /// account.</param>
+        /// <param name="identity"></param>The unique ID of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+        /// account</a> which happens to be the payment account.
         public IEnumerable<PaymentAccountTransaction> All(
             string identity,
             PaymentAccountTransactionListRequest request = null,
@@ -137,9 +139,9 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of payment account transactions.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
-        /// <param name="identity">The unique ID of the [bank
-        /// account](#core-endpoints-creditor-bank-accounts) which happens to be the payment
-        /// account.</param>
+        /// <param name="identity"></param>The unique ID of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+        /// account</a> which happens to be the payment account.
         public IEnumerable<Task<IReadOnlyList<PaymentAccountTransaction>>> AllAsync(
             string identity,
             PaymentAccountTransactionListRequest request = null,

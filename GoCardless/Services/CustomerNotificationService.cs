@@ -18,14 +18,14 @@ namespace GoCardless.Services
     /// sent to a customer
     /// after an event has happened. The event, the resource and the customer to
     /// be notified
-    /// are all identified in the `links` property.
+    /// are all identified in the <c>links</c> property.
     ///
     /// Note that these are ephemeral records - once the notification has been
     /// actioned in some
     /// way, it is no longer visible using this API.
     ///
-    /// <p class="restricted-notice"><strong>Restricted</strong>: This API is
-    /// currently only available for approved integrators - please <a
+    /// <p class="restricted-notice">Restricted: This API is currently only
+    /// available for approved integrators - please <a
     /// href="mailto:help@gocardless.com">get in touch</a> if you would like to
     /// use this API.</p>
     /// </summary>
@@ -49,12 +49,11 @@ namespace GoCardless.Services
         /// don't want GoCardless to send it).
         /// If the notification has already been actioned, or the deadline to
         /// notify has passed,
-        /// this endpoint will return an `already_actioned` error and you should
-        /// not take
+        /// this endpoint will return an <c>already_actioned</c> error and you
+        /// should not take
         /// further action. This endpoint takes no additional parameters.
-        ///
         /// </summary>
-        /// <param name="identity">The id of the notification.</param>
+        /// <param name="identity"></param>The id of the notification.
         /// <param name="request">An optional `CustomerNotificationHandleRequest` representing the body for this handle request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer notification resource</returns>
@@ -91,10 +90,9 @@ namespace GoCardless.Services
     /// don't want GoCardless to send it).
     /// If the notification has already been actioned, or the deadline to notify
     /// has passed,
-    /// this endpoint will return an `already_actioned` error and you should not
-    /// take
+    /// this endpoint will return an <c>already_actioned</c> error and you
+    /// should not take
     /// further action. This endpoint takes no additional parameters.
-    ///
     /// </summary>
     public class CustomerNotificationHandleRequest { }
 
