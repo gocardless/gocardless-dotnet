@@ -493,37 +493,7 @@ namespace GoCardless.Services
         /// resource was created.
         /// </summary>
         [JsonProperty("created_at")]
-        public CreatedAtParam CreatedAt { get; set; }
-
-        /// <summary>
-        /// Specify filters to limit records by creation time.
-        /// </summary>
-        public class CreatedAtParam
-        {
-            /// <summary>
-            /// Limit to records created after the specified date-time.
-            /// </summary>
-            [JsonProperty("gt")]
-            public DateTimeOffset? GreaterThan { get; set; }
-
-            /// <summary>
-            /// Limit to records created on or after the specified date-time.
-            /// </summary>
-            [JsonProperty("gte")]
-            public DateTimeOffset? GreaterThanOrEqual { get; set; }
-
-            /// <summary>
-            /// Limit to records created before the specified date-time.
-            /// </summary>
-            [JsonProperty("lt")]
-            public DateTimeOffset? LessThan { get; set; }
-
-            /// <summary>
-            /// Limit to records created on or before the specified date-time.
-            /// </summary>
-            [JsonProperty("lte")]
-            public DateTimeOffset? LessThanOrEqual { get; set; }
-        }
+        public string CreatedAt { get; set; }
 
         /// <summary>
         /// Number of records to return.
