@@ -445,13 +445,6 @@ namespace GoCardless.Services
         public string Before { get; set; }
 
         /// <summary>
-        /// ID of a <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-blocks">Block</a>.
-        /// </summary>
-        [JsonProperty("block")]
-        public string Block { get; set; }
-
-        /// <summary>
         /// Type of entity we will seek to match against when blocking the
         /// mandate. This
         /// can currently be one of 'email', 'email_domain', 'bank_account', or
@@ -487,13 +480,40 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
-        /// recording when this
-        /// resource was created.
+        /// Limit to records created within certain times.
         /// </summary>
         [JsonProperty("created_at")]
-        public string CreatedAt { get; set; }
+        public CreatedAtParam CreatedAt { get; set; }
+
+        /// <summary>
+        /// Specify filters to limit records by creation time.
+        /// </summary>
+        public class CreatedAtParam
+        {
+            /// <summary>
+            /// Limit to records created after the specified date-time.
+            /// </summary>
+            [JsonProperty("gt")]
+            public DateTimeOffset? GreaterThan { get; set; }
+
+            /// <summary>
+            /// Limit to records created on or after the specified date-time.
+            /// </summary>
+            [JsonProperty("gte")]
+            public DateTimeOffset? GreaterThanOrEqual { get; set; }
+
+            /// <summary>
+            /// Limit to records created before the specified date-time.
+            /// </summary>
+            [JsonProperty("lt")]
+            public DateTimeOffset? LessThan { get; set; }
+
+            /// <summary>
+            /// Limit to records created on or before the specified date-time.
+            /// </summary>
+            [JsonProperty("lte")]
+            public DateTimeOffset? LessThanOrEqual { get; set; }
+        }
 
         /// <summary>
         /// Number of records to return.
@@ -539,15 +559,6 @@ namespace GoCardless.Services
             [EnumMember(Value = "other")]
             Other,
         }
-
-        /// <summary>
-        /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
-        /// recording when this
-        /// resource was updated.
-        /// </summary>
-        [JsonProperty("updated_at")]
-        public string UpdatedAt { get; set; }
     }
 
     /// <summary>

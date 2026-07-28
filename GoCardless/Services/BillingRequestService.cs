@@ -2292,14 +2292,6 @@ namespace GoCardless.Services
         public string Before { get; set; }
 
         /// <summary>
-        /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
-        /// recording when this resource was created.
-        /// </summary>
-        [JsonProperty("created_at")]
-        public string CreatedAt { get; set; }
-
-        /// <summary>
         /// ID of a <a
         /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
         /// If specified, this endpoint will return all requests for the given
