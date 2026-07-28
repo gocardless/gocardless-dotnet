@@ -14,14 +14,14 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with billing request with action resources.
     ///
-    ///  Billing Requests help create resources that require input or action
-    /// from a customer. An example of required input might be additional
-    /// customer billing details, while an action would be asking a customer to
-    /// authorise a payment using their mobile banking app.
+    /// Billing Requests help create resources that require input or action from
+    /// a customer. An example of required input might be additional customer
+    /// billing details, while an action would be asking a customer to authorise
+    /// a payment using their mobile banking app.
     ///
-    /// See [Billing Requests:
-    /// Overview](https://developer.gocardless.com/getting-started/billing-requests/overview/)
-    /// for how-to's, explanations and tutorials.
+    /// See <a
+    /// href="https://developer.gocardless.com/getting-started/billing-requests/overview/">Billing
+    /// Requests: Overview</a> for how-to's, explanations and tutorials.
     /// </summary>
     public class BillingRequestWithActionService
     {
@@ -110,24 +110,27 @@ namespace GoCardless.Services
                 /// provided when the customer is created is stored and is available
                 /// via the API, but is transliterated, upcased, and truncated to 18
                 /// characters in bank submissions. This field is required unless
-                /// the request includes a [customer bank account
-                /// token](#javascript-flow-customer-bank-account-tokens).
+                /// the request includes a <a
+                /// href="https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+                /// bank account token</a>.
                 /// </summary>
                 [JsonProperty("account_holder_name")]
                 public string AccountHolderName { get; set; }
 
                 /// <summary>
-                /// Bank account number - see [local
-                /// details](#appendix-local-bank-details) for more information.
-                /// Alternatively you can provide an `iban`.
+                /// Bank account number - see <a
+                /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+                /// details</a> for more information. Alternatively you can provide
+                /// an <c>iban</c>.
                 /// </summary>
                 [JsonProperty("account_number")]
                 public string AccountNumber { get; set; }
 
                 /// <summary>
                 /// Account number suffix (only for bank accounts denominated in
-                /// NZD) - see [local details](#local-bank-details-new-zealand) for
-                /// more information.
+                /// NZD) - see <a
+                /// href="https://developer.gocardless.com/api-reference/#local-bank-details-new-zealand">local
+                /// details</a> for more information.
                 /// </summary>
                 [JsonProperty("account_number_suffix")]
                 public string AccountNumberSuffix { get; set; }
@@ -135,16 +138,18 @@ namespace GoCardless.Services
                 /// <summary>
                 /// Bank account type. Required for USD-denominated bank accounts.
                 /// Must not be provided for bank accounts in other currencies. See
-                /// [local details](#local-bank-details-united-states) for more
-                /// information.
+                /// <a
+                /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+                /// details</a> for more information.
                 /// </summary>
                 [JsonProperty("account_type")]
                 public BillingRequestWithActionAccountType? AccountType { get; set; }
 
                 /// <summary>
                 /// Bank account type. Required for USD-denominated bank accounts. Must
-                /// not be provided for bank accounts in other currencies. See [local
-                /// details](#local-bank-details-united-states) for more information.
+                /// not be provided for bank accounts in other currencies. See <a
+                /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+                /// details</a> for more information.
                 /// </summary>
                 [JsonConverter(typeof(StringEnumConverter))]
                 public enum BillingRequestWithActionAccountType
@@ -159,41 +164,49 @@ namespace GoCardless.Services
                 }
 
                 /// <summary>
-                /// Bank code - see [local details](#appendix-local-bank-details)
-                /// for more information. Alternatively you can provide an `iban`.
+                /// Bank code - see <a
+                /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+                /// details</a> for more information. Alternatively you can provide
+                /// an <c>iban</c>.
                 /// </summary>
                 [JsonProperty("bank_code")]
                 public string BankCode { get; set; }
 
                 /// <summary>
-                /// Branch code - see [local details](#appendix-local-bank-details)
-                /// for more information. Alternatively you can provide an `iban`.
+                /// Branch code - see <a
+                /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+                /// details</a> for more information. Alternatively you can provide
+                /// an <c>iban</c>.
                 /// </summary>
                 [JsonProperty("branch_code")]
                 public string BranchCode { get; set; }
 
                 /// <summary>
-                /// [ISO 3166-1 alpha-2
-                /// code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-                /// Defaults to the country code of the `iban` if supplied,
-                /// otherwise is required.
+                /// <a
+                /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+                /// 3166-1 alpha-2 code</a>. Defaults to the country code of the
+                /// <c>iban</c> if supplied, otherwise is required.
                 /// </summary>
                 [JsonProperty("country_code")]
                 public string CountryCode { get; set; }
 
                 /// <summary>
-                /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-                /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
-                /// "NZD", "SEK" and "USD" are supported.
+                /// <a
+                /// href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+                /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR",
+                /// "GBP", "NZD", "SEK" and "USD" are supported.
                 /// </summary>
                 [JsonProperty("currency")]
                 public string Currency { get; set; }
 
                 /// <summary>
                 /// International Bank Account Number. Alternatively you can provide
-                /// [local details](#appendix-local-bank-details). IBANs are not
-                /// accepted for Swedish bank accounts denominated in SEK - you must
-                /// supply [local details](#local-bank-details-sweden).
+                /// <a
+                /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+                /// details</a>. IBANs are not accepted for Swedish bank accounts
+                /// denominated in SEK - you must supply <a
+                /// href="https://developer.gocardless.com/api-reference/#local-bank-details-sweden">local
+                /// details</a>.
                 /// </summary>
                 [JsonProperty("iban")]
                 public string Iban { get; set; }
@@ -230,12 +243,12 @@ namespace GoCardless.Services
                 public class BillingRequestWithActionCustomer
                 {
                     /// <summary>
-                    /// Customer's company name. Required unless a `given_name` and
-                    /// `family_name` are provided. For Canadian customers, the use of a
-                    /// `company_name` value will mean that any mandate created from
-                    /// this customer will be considered to be a "Business PAD"
-                    /// (otherwise, any mandate will be considered to be a "Personal
-                    /// PAD").
+                    /// Customer's company name. Required unless a <c>given_name</c> and
+                    /// <c>family_name</c> are provided. For Canadian customers, the use
+                    /// of a <c>company_name</c> value will mean that any mandate
+                    /// created from this customer will be considered to be a "Business
+                    /// PAD" (otherwise, any mandate will be considered to be a
+                    /// "Personal PAD").
                     /// </summary>
                     [JsonProperty("company_name")]
                     public string CompanyName { get; set; }
@@ -248,30 +261,31 @@ namespace GoCardless.Services
                     public string Email { get; set; }
 
                     /// <summary>
-                    /// Customer's surname. Required unless a `company_name` is
+                    /// Customer's surname. Required unless a <c>company_name</c> is
                     /// provided.
                     /// </summary>
                     [JsonProperty("family_name")]
                     public string FamilyName { get; set; }
 
                     /// <summary>
-                    /// Customer's first name. Required unless a `company_name` is
+                    /// Customer's first name. Required unless a <c>company_name</c> is
                     /// provided.
                     /// </summary>
                     [JsonProperty("given_name")]
                     public string GivenName { get; set; }
 
                     /// <summary>
-                    ///  [ISO
-                    /// 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-                    /// code. Used as the language for notification emails sent by
-                    /// GoCardless if your organisation does not send its own (see
-                    /// [compliance requirements](#appendix-compliance-requirements)).
-                    /// Currently only "en", "fr", "de", "pt", "es", "it", "nl", "da",
-                    /// "nb", "sl", "sv" are supported. If this is not provided and a
-                    /// customer was linked during billing request creation, the linked
-                    /// customer language will be used. Otherwise, the language is
-                    /// default to "en".
+                    /// <a
+                    /// href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO
+                    /// 639-1</a> code. Used as the language for notification emails
+                    /// sent by GoCardless if your organisation does not send its own
+                    /// (see <a
+                    /// href="https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+                    /// requirements</a>). Currently only "en", "fr", "de", "pt", "es",
+                    /// "it", "nl", "da", "nb", "sl", "sv" are supported. If this is not
+                    /// provided and a customer was linked during billing request
+                    /// creation, the linked customer language will be used. Otherwise,
+                    /// the language is default to "en".
                     /// </summary>
                     [JsonProperty("language")]
                     public string Language { get; set; }
@@ -284,8 +298,8 @@ namespace GoCardless.Services
                     public IDictionary<string, string> Metadata { get; set; }
 
                     /// <summary>
-                    /// [ITU E.123](https://en.wikipedia.org/wiki/E.123) formatted phone
-                    /// number, including country code.
+                    /// <a href="https://en.wikipedia.org/wiki/E.123">ITU E.123</a>
+                    /// formatted phone number, including country code.
                     /// </summary>
                     [JsonProperty("phone_number")]
                     public string PhoneNumber { get; set; }
@@ -324,8 +338,9 @@ namespace GoCardless.Services
                     public string City { get; set; }
 
                     /// <summary>
-                    /// [ISO 3166-1 alpha-2
-                    /// code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+                    /// <a
+                    /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+                    /// 3166-1 alpha-2 code.</a>
                     /// </summary>
                     [JsonProperty("country_code")]
                     public string CountryCode { get; set; }
@@ -345,8 +360,7 @@ namespace GoCardless.Services
                     /// flow in their browser).
                     ///
                     /// Not required for creating offline mandates where
-                    /// `authorisation_source` is set to telephone or paper.
-                    ///
+                    /// <c>authorisation_source</c> is set to telephone or paper.
                     /// </summary>
                     [JsonProperty("ip_address")]
                     public string IpAddress { get; set; }
@@ -359,9 +373,9 @@ namespace GoCardless.Services
 
                     /// <summary>
                     /// The customer's address region, county or department. For US
-                    /// customers a 2 letter
-                    /// [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US)
-                    /// state code is required (e.g. `CA` for California).
+                    /// customers a 2 letter <a
+                    /// href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO3166-2:US</a>
+                    /// state code is required (e.g. <c>CA</c> for California).
                     /// </summary>
                     [JsonProperty("region")]
                     public string Region { get; set; }
@@ -420,11 +434,11 @@ namespace GoCardless.Services
             public class BillingRequestWithActionSelectInstitution
             {
                 /// <summary>
-                /// [ISO
-                /// 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
-                /// alpha-2 code. The country code of the institution. If nothing is
-                /// provided, institutions with the country code 'GB' are returned
-                /// by default.
+                /// <a
+                /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+                /// 3166-1</a> alpha-2 code. The country code of the institution. If
+                /// nothing is provided, institutions with the country code 'GB' are
+                /// returned by default.
                 /// </summary>
                 [JsonProperty("country_code")]
                 public string CountryCode { get; set; }
@@ -443,8 +457,9 @@ namespace GoCardless.Services
         /// Should not be set if GoCardless payment intelligence feature is
         /// used.
         ///
-        /// See [Billing Requests: Retain customers with
-        /// Fallbacks](https://developer.gocardless.com/billing-requests/retain-customers-with-fallbacks/)
+        /// See <a
+        /// href="https://developer.gocardless.com/billing-requests/retain-customers-with-fallbacks/">Billing
+        /// Requests: Retain customers with Fallbacks</a>
         /// for more information.
         /// </summary>
         [JsonProperty("fallback_enabled")]
@@ -462,24 +477,25 @@ namespace GoCardless.Services
         public class BillingRequestWithActionLinks
         {
             /// <summary>
-            /// ID of the associated [creditor](#core-endpoints-creditors). Only
-            /// required if your account manages multiple creditors.
+            /// ID of the associated <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+            /// Only required if your account manages multiple creditors.
             /// </summary>
             [JsonProperty("creditor")]
             public string Creditor { get; set; }
 
             /// <summary>
-            /// ID of the [customer](#core-endpoints-customers) against which
-            /// this request should be made.
+            /// ID of the <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+            /// against which this request should be made.
             /// </summary>
             [JsonProperty("customer")]
             public string Customer { get; set; }
 
             /// <summary>
-            /// (Optional) ID of the
-            /// [customer_bank_account](#core-endpoints-customer-bank-accounts)
+            /// (Optional) ID of the <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer_bank_account</a>
             /// against which this request should be made.
-            ///
             /// </summary>
             [JsonProperty("customer_bank_account")]
             public string CustomerBankAccount { get; set; }
@@ -494,34 +510,33 @@ namespace GoCardless.Services
         public class BillingRequestWithActionMandateRequest
         {
             /// <summary>
-            /// This field is ACH specific, sometimes referred to as [SEC
-            /// code](https://www.moderntreasury.com/learn/sec-codes).
+            /// This field is ACH specific, sometimes referred to as <a
+            /// href="https://www.moderntreasury.com/learn/sec-codes">SEC
+            /// code</a>.
             ///
             /// This is the way that the payer gives authorisation to the
             /// merchant.
-            ///   web: Authorisation is Internet Initiated or via Mobile Entry
+            /// web: Authorisation is Internet Initiated or via Mobile Entry
             /// (maps to SEC code: WEB)
-            ///   telephone: Authorisation is provided orally over telephone
-            /// (maps to SEC code: TEL)
-            ///   paper: Authorisation is provided in writing and signed, or
+            /// telephone: Authorisation is provided orally over telephone (maps
+            /// to SEC code: TEL)
+            /// paper: Authorisation is provided in writing and signed, or
             /// similarly authenticated (maps to SEC code: PPD)
-            ///
             /// </summary>
             [JsonProperty("authorisation_source")]
             public BillingRequestWithActionAuthorisationSource? AuthorisationSource { get; set; }
 
             /// <summary>
-            /// This field is ACH specific, sometimes referred to as [SEC
-            /// code](https://www.moderntreasury.com/learn/sec-codes).
+            /// This field is ACH specific, sometimes referred to as <a
+            /// href="https://www.moderntreasury.com/learn/sec-codes">SEC code</a>.
             ///
             /// This is the way that the payer gives authorisation to the merchant.
-            ///   web: Authorisation is Internet Initiated or via Mobile Entry (maps
+            /// web: Authorisation is Internet Initiated or via Mobile Entry (maps
             /// to SEC code: WEB)
-            ///   telephone: Authorisation is provided orally over telephone (maps
-            /// to SEC code: TEL)
-            ///   paper: Authorisation is provided in writing and signed, or
-            /// similarly authenticated (maps to SEC code: PPD)
-            ///
+            /// telephone: Authorisation is provided orally over telephone (maps to
+            /// SEC code: TEL)
+            /// paper: Authorisation is provided in writing and signed, or similarly
+            /// authenticated (maps to SEC code: PPD)
             /// </summary>
             [JsonConverter(typeof(StringEnumConverter))]
             public enum BillingRequestWithActionAuthorisationSource
@@ -561,7 +576,6 @@ namespace GoCardless.Services
                 /// will not have an end date. Keep in mind the end date must take
                 /// into account how long it will
                 /// take the user to set up this agreement via the Billing Request.
-                ///
                 /// </summary>
                 [JsonProperty("end_date")]
                 public string EndDate { get; set; }
@@ -569,7 +583,7 @@ namespace GoCardless.Services
                 /// <summary>
                 /// The maximum amount that can be charged for a single payment in
                 /// the lowest denomination for the currency (e.g. pence in GBP,
-                /// cents in EUR). _Note:_ Required for PayTo and VRP.
+                /// cents in EUR). Note: Required for PayTo and VRP.
                 /// </summary>
                 [JsonProperty("max_amount_per_payment")]
                 public int? MaxAmountPerPayment { get; set; }
@@ -577,9 +591,8 @@ namespace GoCardless.Services
                 /// <summary>
                 /// A constraint where you can specify info (free text string) about
                 /// how payments are calculated. For use when payments vary and
-                /// cannot be expressed as a fixed amount and frequency. _Note:_
-                /// This is only supported for ACH and PAD schemes.
-                ///
+                /// cannot be expressed as a fixed amount and frequency. Note: This
+                /// is only supported for ACH and PAD schemes.
                 /// </summary>
                 [JsonProperty("payment_method")]
                 public string PaymentMethod { get; set; }
@@ -589,12 +602,11 @@ namespace GoCardless.Services
                 /// collected within a
                 /// repeating period (e.g. no more than a set amount per month), as
                 /// opposed to
-                /// `max_amount_per_payment` which caps a single payment.
+                /// <c>max_amount_per_payment</c> which caps a single payment.
                 ///
-                /// _Note:_ Required for VRP, where exactly one periodic limit must
-                /// be provided. Optional for
+                /// Note: Required for VRP, where exactly one periodic limit must be
+                /// provided. Optional for
                 /// PayTo.
-                ///
                 /// </summary>
                 [JsonProperty("periodic_limits")]
                 public BillingRequestWithActionPeriodicLimits[] PeriodicLimits { get; set; }
@@ -605,61 +617,64 @@ namespace GoCardless.Services
                 public class BillingRequestWithActionPeriodicLimits
                 {
                     /// <summary>
-                    /// The alignment of the period. Defaults to `creation_date` if not
-                    /// specified.
+                    /// The alignment of the period. Defaults to <c>creation_date</c> if
+                    /// not specified.
                     ///
-                    /// `calendar` - the period follows fixed calendar boundaries, the
-                    /// same for every mandate:
-                    /// `week` runs Monday to Sunday, `month` runs from the 1st to the
-                    /// last day of the calendar
-                    /// month, and `year` runs from 1 January to 31 December. If the
-                    /// mandate starts partway
+                    /// <c>calendar</c> <ul>
+                    /// <li>the period follows fixed calendar boundaries, the same for
+                    /// every mandate:</li>
+                    /// </ul>
+                    /// <c>week</c> runs Monday to Sunday, <c>month</c> runs from the
+                    /// 1st to the last day of the calendar
+                    /// month, and <c>year</c> runs from 1 January to 31 December. If
+                    /// the mandate starts partway
                     /// through a period, the limit for that first period is reduced
                     /// proportionally to the days
                     /// remaining (e.g. a monthly limit starting on the 15th gives
                     /// roughly half the limit for
                     /// that first month).
                     ///
-                    /// `creation_date` - the period follows the mandate's own start
-                    /// date rather than the
+                    /// <c>creation_date</c> <ul>
+                    /// <li>the period follows the mandate's own start date rather than
+                    /// the
                     /// calendar. For example, if the mandate starts on the 15th, each
                     /// monthly period runs from
                     /// the 15th to the 14th of the following month. The first period is
                     /// a full period, not
-                    /// reduced proportionally.
-                    ///
-                    /// _Note:_ Has no effect when period is `flexible`.
-                    ///
+                    /// reduced proportionally.</li>
+                    /// </ul>
+                    /// Note: Has no effect when period is <c>flexible</c>.
                     /// </summary>
                     [JsonProperty("alignment")]
                     public BillingRequestWithActionAlignment? Alignment { get; set; }
 
                     /// <summary>
-                    /// The alignment of the period. Defaults to `creation_date` if not
+                    /// The alignment of the period. Defaults to <c>creation_date</c> if not
                     /// specified.
                     ///
-                    /// `calendar` - the period follows fixed calendar boundaries, the same
-                    /// for every mandate:
-                    /// `week` runs Monday to Sunday, `month` runs from the 1st to the last
-                    /// day of the calendar
-                    /// month, and `year` runs from 1 January to 31 December. If the mandate
-                    /// starts partway
+                    /// <c>calendar</c> <ul>
+                    /// <li>the period follows fixed calendar boundaries, the same for every
+                    /// mandate:</li>
+                    /// </ul>
+                    /// <c>week</c> runs Monday to Sunday, <c>month</c> runs from the 1st to
+                    /// the last day of the calendar
+                    /// month, and <c>year</c> runs from 1 January to 31 December. If the
+                    /// mandate starts partway
                     /// through a period, the limit for that first period is reduced
                     /// proportionally to the days
                     /// remaining (e.g. a monthly limit starting on the 15th gives roughly
                     /// half the limit for
                     /// that first month).
                     ///
-                    /// `creation_date` - the period follows the mandate's own start date
-                    /// rather than the
+                    /// <c>creation_date</c> <ul>
+                    /// <li>the period follows the mandate's own start date rather than the
                     /// calendar. For example, if the mandate starts on the 15th, each
                     /// monthly period runs from
                     /// the 15th to the 14th of the following month. The first period is a
                     /// full period, not
-                    /// reduced proportionally.
-                    ///
-                    /// _Note:_ Has no effect when period is `flexible`.
-                    ///
+                    /// reduced proportionally.</li>
+                    /// </ul>
+                    /// Note: Has no effect when period is <c>flexible</c>.
                     /// </summary>
                     [JsonConverter(typeof(StringEnumConverter))]
                     public enum BillingRequestWithActionAlignment
@@ -677,9 +692,7 @@ namespace GoCardless.Services
                     /// The maximum number of payments that can be collected in this
                     /// periodic limit.
                     ///
-                    /// _Note:_ Only supported for the PayTo scheme, where it is
-                    /// optional.
-                    ///
+                    /// Note: Only supported for the PayTo scheme, where it is optional.
                     /// </summary>
                     [JsonProperty("max_payments")]
                     public int? MaxPayments { get; set; }
@@ -690,9 +703,8 @@ namespace GoCardless.Services
                     /// in the lowest denomination for the currency (e.g. pence in GBP,
                     /// cents in EUR).
                     ///
-                    /// _Note:_ Required for VRP. This is not permitted for the PayTo
+                    /// Note: Required for VRP. This is not permitted for the PayTo
                     /// scheme.
-                    ///
                     /// </summary>
                     [JsonProperty("max_total_amount")]
                     public int? MaxTotalAmount { get; set; }
@@ -703,7 +715,6 @@ namespace GoCardless.Services
                     /// (for both VRP and PayTo). If periodic_limits is omitted entirely
                     /// for PayTo, this
                     /// defaults to flexible.
-                    ///
                     /// </summary>
                     [JsonProperty("period")]
                     public BillingRequestWithActionPeriod? Period { get; set; }
@@ -714,7 +725,6 @@ namespace GoCardless.Services
                     /// (for both VRP and PayTo). If periodic_limits is omitted entirely for
                     /// PayTo, this
                     /// defaults to flexible.
-                    ///
                     /// </summary>
                     [JsonConverter(typeof(StringEnumConverter))]
                     public enum BillingRequestWithActionPeriod
@@ -747,15 +757,15 @@ namespace GoCardless.Services
                 /// This is an optional field and if it is not supplied the start
                 /// date will be set to the day
                 /// authorisation happens.
-                ///
                 /// </summary>
                 [JsonProperty("start_date")]
                 public string StartDate { get; set; }
             }
 
             /// <summary>
-            /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-            /// currency code.
+            /// <a
+            /// href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+            /// 4217</a> currency code.
             /// </summary>
             [JsonProperty("currency")]
             public string Currency { get; set; }
@@ -764,7 +774,6 @@ namespace GoCardless.Services
             /// A human-readable description of the payment and/or mandate. This
             /// will be displayed to the payer when authorising the billing
             /// request.
-            ///
             /// </summary>
             [JsonProperty("description")]
             public string Description { get; set; }
@@ -773,12 +782,13 @@ namespace GoCardless.Services
             /// This field will decide how GoCardless handles settlement of
             /// funds from the customer.
             ///
-            /// - `managed` will be moved through GoCardless' account, batched,
-            /// and payed out.
-            /// - `direct` will be a direct transfer from the payer's account to
-            /// the merchant where
-            ///   invoicing will be handled separately.
-            ///
+            /// <ul>
+            /// <li><c>managed</c> will be moved through GoCardless' account,
+            /// batched, and payed out.</li>
+            /// <li><c>direct</c> will be a direct transfer from the payer's
+            /// account to the merchant where
+            /// invoicing will be handled separately.</li>
+            /// </ul>
             /// </summary>
             [JsonProperty("funds_settlement")]
             public BillingRequestWithActionFundsSettlement? FundsSettlement { get; set; }
@@ -787,12 +797,13 @@ namespace GoCardless.Services
             /// This field will decide how GoCardless handles settlement of funds
             /// from the customer.
             ///
-            /// - `managed` will be moved through GoCardless' account, batched, and
-            /// payed out.
-            /// - `direct` will be a direct transfer from the payer's account to the
-            /// merchant where
-            ///   invoicing will be handled separately.
-            ///
+            /// <ul>
+            /// <li><c>managed</c> will be moved through GoCardless' account,
+            /// batched, and payed out.</li>
+            /// <li><c>direct</c> will be a direct transfer from the payer's account
+            /// to the merchant where
+            /// invoicing will be handled separately.</li>
+            /// </ul>
             /// </summary>
             [JsonConverter(typeof(StringEnumConverter))]
             public enum BillingRequestWithActionFundsSettlement
@@ -814,10 +825,11 @@ namespace GoCardless.Services
             public IDictionary<string, string> Metadata { get; set; }
 
             /// <summary>
-            /// Unique reference. Different schemes have different length and
-            /// [character set](#appendix-character-sets) requirements.
-            /// GoCardless will generate a unique reference satisfying the
-            /// different scheme requirements if this field is left blank.
+            /// Unique reference. Different schemes have different length and <a
+            /// href="https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+            /// set</a> requirements. GoCardless will generate a unique
+            /// reference satisfying the different scheme requirements if this
+            /// field is left blank.
             /// </summary>
             [JsonProperty("reference")]
             public string Reference { get; set; }
@@ -844,31 +856,32 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Verification preference for the mandate. One of:
+            ///
             /// <ul>
-            ///   <li>`minimum`: only verify if absolutely required, such as
+            /// <li><c>minimum</c>: only verify if absolutely required, such as
             /// when part of scheme rules</li>
-            ///   <li>`recommended`: in addition to `minimum`, use the
+            /// <li><c>recommended</c>: in addition to <c>minimum</c>, use the
             /// GoCardless payment intelligence solution to decide if a payer
             /// should be verified</li>
-            ///   <li>`when_available`: if verification mechanisms are
+            /// <li><c>when_available</c>: if verification mechanisms are
             /// available, use them</li>
-            ///   <li>`always`: as `when_available`, but fail to create the
-            /// Billing Request if a mechanism isn't available</li>
+            /// <li><c>always</c>: as <c>when_available</c>, but fail to create
+            /// the Billing Request if a mechanism isn't available</li>
             /// </ul>
-            ///
-            /// By default, all Billing Requests use the `recommended`
+            /// By default, all Billing Requests use the <c>recommended</c>
             /// verification preference. It uses GoCardless payment intelligence
             /// solution to determine if a payer is fraudulent or not. The
             /// verification mechanism is based on the response and the payer
             /// may be asked to verify themselves. If the feature is not
-            /// available, `recommended` behaves like `minimum`.
+            /// available, <c>recommended</c> behaves like <c>minimum</c>.
             ///
             /// If you never wish to take advantage of our reduced risk products
             /// and Verified Mandates as they are released in new schemes,
-            /// please use the `minimum` verification preference.
+            /// please use the <c>minimum</c> verification preference.
             ///
-            /// See [Billing Requests: Creating Verified
-            /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
+            /// See <a
+            /// href="https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/">Billing
+            /// Requests: Creating Verified Mandates</a>
             /// for more information.
             /// </summary>
             [JsonProperty("verify")]
@@ -876,31 +889,32 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Verification preference for the mandate. One of:
-            /// <ul>
-            ///   <li>`minimum`: only verify if absolutely required, such as when
-            /// part of scheme rules</li>
-            ///   <li>`recommended`: in addition to `minimum`, use the GoCardless
-            /// payment intelligence solution to decide if a payer should be
-            /// verified</li>
-            ///   <li>`when_available`: if verification mechanisms are available,
-            /// use them</li>
-            ///   <li>`always`: as `when_available`, but fail to create the Billing
-            /// Request if a mechanism isn't available</li>
-            /// </ul>
             ///
-            /// By default, all Billing Requests use the `recommended` verification
-            /// preference. It uses GoCardless payment intelligence solution to
-            /// determine if a payer is fraudulent or not. The verification
-            /// mechanism is based on the response and the payer may be asked to
-            /// verify themselves. If the feature is not available, `recommended`
-            /// behaves like `minimum`.
+            /// <ul>
+            /// <li><c>minimum</c>: only verify if absolutely required, such as when
+            /// part of scheme rules</li>
+            /// <li><c>recommended</c>: in addition to <c>minimum</c>, use the
+            /// GoCardless payment intelligence solution to decide if a payer should
+            /// be verified</li>
+            /// <li><c>when_available</c>: if verification mechanisms are available,
+            /// use them</li>
+            /// <li><c>always</c>: as <c>when_available</c>, but fail to create the
+            /// Billing Request if a mechanism isn't available</li>
+            /// </ul>
+            /// By default, all Billing Requests use the <c>recommended</c>
+            /// verification preference. It uses GoCardless payment intelligence
+            /// solution to determine if a payer is fraudulent or not. The
+            /// verification mechanism is based on the response and the payer may be
+            /// asked to verify themselves. If the feature is not available,
+            /// <c>recommended</c> behaves like <c>minimum</c>.
             ///
             /// If you never wish to take advantage of our reduced risk products and
             /// Verified Mandates as they are released in new schemes, please use
-            /// the `minimum` verification preference.
+            /// the <c>minimum</c> verification preference.
             ///
-            /// See [Billing Requests: Creating Verified
-            /// Mandates](https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/)
+            /// See <a
+            /// href="https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/">Billing
+            /// Requests: Creating Verified Mandates</a>
             /// for more information.
             /// </summary>
             [JsonConverter(typeof(StringEnumConverter))]
@@ -980,9 +994,10 @@ namespace GoCardless.Services
         /// Specifies the underlying purpose of the payment. Defines the
         /// specific reason or type of service/goods the payment relates to,
         /// improving straight-through processing and compliance.
-        /// See [VRP Commercial Payment Purpose
-        /// Codes](https://developer.gocardless.com/vrp-commercial-payment-purpose-codes/)
-        /// for the complete list of valid codes.
+        /// See <a
+        /// href="https://developer.gocardless.com/vrp-commercial-payment-purpose-codes/">VRP
+        /// Commercial Payment Purpose Codes</a> for the complete list of valid
+        /// codes.
         /// </summary>
         [JsonProperty("payment_purpose_code")]
         public string PaymentPurposeCode { get; set; }
@@ -1011,10 +1026,11 @@ namespace GoCardless.Services
             public int? AppFee { get; set; }
 
             /// <summary>
-            /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-            /// currency code. `GBP` and `EUR` supported; `GBP` with your
-            /// customers in the UK and for `EUR` with your customers in
-            /// supported Eurozone countries only.
+            /// <a
+            /// href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+            /// 4217</a> currency code. <c>GBP</c> and <c>EUR</c> supported;
+            /// <c>GBP</c> with your customers in the UK and for <c>EUR</c> with
+            /// your customers in supported Eurozone countries only.
             /// </summary>
             [JsonProperty("currency")]
             public string Currency { get; set; }
@@ -1023,7 +1039,6 @@ namespace GoCardless.Services
             /// A human-readable description of the payment and/or mandate. This
             /// will be displayed to the payer when authorising the billing
             /// request.
-            ///
             /// </summary>
             [JsonProperty("description")]
             public string Description { get; set; }
@@ -1032,12 +1047,13 @@ namespace GoCardless.Services
             /// This field will decide how GoCardless handles settlement of
             /// funds from the customer.
             ///
-            /// - `managed` will be moved through GoCardless' account, batched,
-            /// and payed out.
-            /// - `direct` will be a direct transfer from the payer's account to
-            /// the merchant where
-            ///   invoicing will be handled separately.
-            ///
+            /// <ul>
+            /// <li><c>managed</c> will be moved through GoCardless' account,
+            /// batched, and payed out.</li>
+            /// <li><c>direct</c> will be a direct transfer from the payer's
+            /// account to the merchant where
+            /// invoicing will be handled separately.</li>
+            /// </ul>
             /// </summary>
             [JsonProperty("funds_settlement")]
             public BillingRequestWithActionFundsSettlement? FundsSettlement { get; set; }
@@ -1046,12 +1062,13 @@ namespace GoCardless.Services
             /// This field will decide how GoCardless handles settlement of funds
             /// from the customer.
             ///
-            /// - `managed` will be moved through GoCardless' account, batched, and
-            /// payed out.
-            /// - `direct` will be a direct transfer from the payer's account to the
-            /// merchant where
-            ///   invoicing will be handled separately.
-            ///
+            /// <ul>
+            /// <li><c>managed</c> will be moved through GoCardless' account,
+            /// batched, and payed out.</li>
+            /// <li><c>direct</c> will be a direct transfer from the payer's account
+            /// to the merchant where
+            /// invoicing will be handled separately.</li>
+            /// </ul>
             /// </summary>
             [JsonConverter(typeof(StringEnumConverter))]
             public enum BillingRequestWithActionFundsSettlement
@@ -1076,18 +1093,18 @@ namespace GoCardless.Services
             /// A custom payment reference defined by the merchant. It is only
             /// available for payments on the PayTo scheme or payments using the
             /// Direct Funds settlement model on the Faster Payments scheme.
-            ///
             /// </summary>
             [JsonProperty("reference")]
             public string Reference { get; set; }
 
             /// <summary>
-            /// On failure, automatically retry payments using [intelligent
-            /// retries](/success-plus/overview). Default is `false`. <p
-            /// class="notice"><strong>Important</strong>: To be able to use
-            /// intelligent retries, Success+ needs to be enabled in [GoCardless
-            /// dashboard](https://manage.gocardless.com/success-plus). </p> <p
-            /// class="notice"><strong>Important</strong>: This is not
+            /// On failure, automatically retry payments using <a
+            /// href="https://developer.gocardless.com/success-plus/overview">intelligent
+            /// retries</a>. Default is <c>false</c>. <p
+            /// class="notice">Important: To be able to use intelligent retries,
+            /// Success+ needs to be enabled in <a
+            /// href="https://manage.gocardless.com/success-plus">GoCardless
+            /// dashboard</a>. </p> <p class="notice">Important: This is not
             /// applicable to Pay by Bank and VRP payments. </p>
             /// </summary>
             [JsonProperty("retry_if_possible")]
@@ -1095,11 +1112,12 @@ namespace GoCardless.Services
 
             /// <summary>
             /// (Optional) A scheme used for Open Banking payments. Currently
-            /// `faster_payments` is supported in the UK (GBP) and
-            /// `sepa_credit_transfer` and `sepa_instant_credit_transfer` are
-            /// supported in supported Eurozone countries (EUR). For Eurozone
-            /// countries, `sepa_credit_transfer` is used as the default. Please
-            /// be aware that `sepa_instant_credit_transfer` may incur an
+            /// <c>faster_payments</c> is supported in the UK (GBP) and
+            /// <c>sepa_credit_transfer</c> and
+            /// <c>sepa_instant_credit_transfer</c> are supported in supported
+            /// Eurozone countries (EUR). For Eurozone countries,
+            /// <c>sepa_credit_transfer</c> is used as the default. Please be
+            /// aware that <c>sepa_instant_credit_transfer</c> may incur an
             /// additional fee for your customer.
             /// </summary>
             [JsonProperty("scheme")]
@@ -1111,9 +1129,9 @@ namespace GoCardless.Services
         /// payment using a set of pre-defined categories. Provides context on
         /// the nature and reason for the payment to facilitate processing and
         /// compliance.
-        /// See [Billing Request Purpose
-        /// Codes](https://developer.gocardless.com/billing-request-purpose-codes/)
-        /// for the complete list of valid codes.
+        /// See <a
+        /// href="https://developer.gocardless.com/billing-request-purpose-codes/">Billing
+        /// Request Purpose Codes</a> for the complete list of valid codes.
         /// </summary>
         [JsonProperty("purpose_code")]
         public BillingRequestWithActionPurposeCode? PurposeCode { get; set; }
@@ -1123,9 +1141,9 @@ namespace GoCardless.Services
         /// payment using a set of pre-defined categories. Provides context on
         /// the nature and reason for the payment to facilitate processing and
         /// compliance.
-        /// See [Billing Request Purpose
-        /// Codes](https://developer.gocardless.com/billing-request-purpose-codes/)
-        /// for the complete list of valid codes.
+        /// See <a
+        /// href="https://developer.gocardless.com/billing-request-purpose-codes/">Billing
+        /// Request Purpose Codes</a> for the complete list of valid codes.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BillingRequestWithActionPurposeCode

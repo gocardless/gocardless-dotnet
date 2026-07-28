@@ -14,10 +14,12 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with creditor resources.
     ///
-    /// Each [payment](#core-endpoints-payments) taken through the API is linked
-    /// to a "creditor", to whom the payment is then paid out. In most cases
-    /// your organisation will have a single "creditor", but the API also
-    /// supports collecting payments on behalf of others.
+    /// Each <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+    /// taken through the API is linked to a "creditor", to whom the payment is
+    /// then paid out. In most cases your organisation will have a single
+    /// "creditor", but the API also supports collecting payments on behalf of
+    /// others.
     ///
     /// Currently, for Anti Money Laundering reasons, any creditors you add must
     /// be directly related to your organisation.
@@ -63,8 +65,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your creditors.
+        /// Returns a <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// list of your creditors.
         /// </summary>
         /// <param name="request">An optional `CreditorListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -136,7 +139,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of an existing creditor.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "CR".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "CR".
         /// <param name="request">An optional `CreditorGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor resource</returns>
@@ -170,7 +173,7 @@ namespace GoCardless.Services
         /// Updates a creditor object. Supports all of the fields supported when
         /// creating a creditor.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "CR".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "CR".
         /// <param name="request">An optional `CreditorUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single creditor resource</returns>
@@ -209,33 +212,35 @@ namespace GoCardless.Services
         /// <summary>
         /// Prefix for the bank reference of payouts sent to this creditor. For
         /// instance, if
-        /// the creditor's `bank_reference_prefix` was `ACME`, the bank
-        /// reference of a payout
-        /// sent to that creditor could be `ACME-8G7Q8`.
+        /// the creditor's <c>bank_reference_prefix</c> was <c>ACME</c>, the
+        /// bank reference of a payout
+        /// sent to that creditor could be <c>ACME-8G7Q8</c>.
         ///
         /// This prefix is also used for refunds in EUR and GBP.
-        ///
         /// </summary>
         [JsonProperty("bank_reference_prefix")]
         public string BankReferencePrefix { get; set; }
 
         /// <summary>
-        /// [ISO 3166-1 alpha-2
-        /// code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+        /// <a
+        /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+        /// 3166-1 alpha-2 code.</a>
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
 
         /// <summary>
-        /// The type of business of the creditor. Currently, `individual`,
-        /// `company`, `charity`, `partnership`, and `trust` are supported.
+        /// The type of business of the creditor. Currently, <c>individual</c>,
+        /// <c>company</c>, <c>charity</c>, <c>partnership</c>, and <c>trust</c>
+        /// are supported.
         /// </summary>
         [JsonProperty("creditor_type")]
         public CreditorCreditorType? CreditorType { get; set; }
 
         /// <summary>
-        /// The type of business of the creditor. Currently, `individual`,
-        /// `company`, `charity`, `partnership`, and `trust` are supported.
+        /// The type of business of the creditor. Currently, <c>individual</c>,
+        /// <c>company</c>, <c>charity</c>, <c>partnership</c>, and <c>trust</c>
+        /// are supported.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum CreditorCreditorType
@@ -283,8 +288,9 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// creditors.
+    /// Returns a <a
+    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// list of your creditors.
     /// </summary>
     public class CreditorListRequest
     {
@@ -375,12 +381,11 @@ namespace GoCardless.Services
         /// <summary>
         /// Prefix for the bank reference of payouts sent to this creditor. For
         /// instance, if
-        /// the creditor's `bank_reference_prefix` was `ACME`, the bank
-        /// reference of a payout
-        /// sent to that creditor could be `ACME-8G7Q8`.
+        /// the creditor's <c>bank_reference_prefix</c> was <c>ACME</c>, the
+        /// bank reference of a payout
+        /// sent to that creditor could be <c>ACME-8G7Q8</c>.
         ///
         /// This prefix is also used for refunds in EUR and GBP.
-        ///
         /// </summary>
         [JsonProperty("bank_reference_prefix")]
         public string BankReferencePrefix { get; set; }
@@ -392,8 +397,9 @@ namespace GoCardless.Services
         public string City { get; set; }
 
         /// <summary>
-        /// [ISO 3166-1 alpha-2
-        /// code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+        /// <a
+        /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+        /// 3166-1 alpha-2 code.</a>
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
@@ -410,57 +416,65 @@ namespace GoCardless.Services
         public class CreditorLinks
         {
             /// <summary>
-            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
-            /// which is set up to receive payouts in AUD.
+            /// ID of the <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+            /// account</a> which is set up to receive payouts in AUD.
             /// </summary>
             [JsonProperty("default_aud_payout_account")]
             public string DefaultAudPayoutAccount { get; set; }
 
             /// <summary>
-            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
-            /// which is set up to receive payouts in CAD.
+            /// ID of the <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+            /// account</a> which is set up to receive payouts in CAD.
             /// </summary>
             [JsonProperty("default_cad_payout_account")]
             public string DefaultCadPayoutAccount { get; set; }
 
             /// <summary>
-            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
-            /// which is set up to receive payouts in DKK.
+            /// ID of the <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+            /// account</a> which is set up to receive payouts in DKK.
             /// </summary>
             [JsonProperty("default_dkk_payout_account")]
             public string DefaultDkkPayoutAccount { get; set; }
 
             /// <summary>
-            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
-            /// which is set up to receive payouts in EUR.
+            /// ID of the <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+            /// account</a> which is set up to receive payouts in EUR.
             /// </summary>
             [JsonProperty("default_eur_payout_account")]
             public string DefaultEurPayoutAccount { get; set; }
 
             /// <summary>
-            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
-            /// which is set up to receive payouts in GBP.
+            /// ID of the <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+            /// account</a> which is set up to receive payouts in GBP.
             /// </summary>
             [JsonProperty("default_gbp_payout_account")]
             public string DefaultGbpPayoutAccount { get; set; }
 
             /// <summary>
-            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
-            /// which is set up to receive payouts in NZD.
+            /// ID of the <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+            /// account</a> which is set up to receive payouts in NZD.
             /// </summary>
             [JsonProperty("default_nzd_payout_account")]
             public string DefaultNzdPayoutAccount { get; set; }
 
             /// <summary>
-            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
-            /// which is set up to receive payouts in SEK.
+            /// ID of the <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+            /// account</a> which is set up to receive payouts in SEK.
             /// </summary>
             [JsonProperty("default_sek_payout_account")]
             public string DefaultSekPayoutAccount { get; set; }
 
             /// <summary>
-            /// ID of the [bank account](#core-endpoints-creditor-bank-accounts)
-            /// which is set up to receive payouts in USD.
+            /// ID of the <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+            /// account</a> which is set up to receive payouts in USD.
             /// </summary>
             [JsonProperty("default_usd_payout_account")]
             public string DefaultUsdPayoutAccount { get; set; }

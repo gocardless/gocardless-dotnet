@@ -15,9 +15,10 @@ namespace GoCardless.Resources
     public class BankDetailsLookup
     {
         /// <summary>
-        /// Array of [schemes](#mandates_scheme) supported for this bank
-        /// account. This will be an empty array if the bank account is not
-        /// reachable by any schemes.
+        /// Array of <a
+        /// href="https://developer.gocardless.com/api-reference/#mandates_scheme">schemes</a>
+        /// supported for this bank account. This will be an empty array if the
+        /// bank account is not reachable by any schemes.
         /// </summary>
         [JsonProperty("available_debit_schemes")]
         public List<BankDetailsLookupAvailableDebitScheme?> AvailableDebitSchemes { get; set; }
@@ -33,8 +34,8 @@ namespace GoCardless.Resources
         ///
         /// <p class="notice">Even if no BIC is returned for an account,
         /// GoCardless may still be able to collect payments from it - you
-        /// should refer to the `available_debit_schemes` attribute to determine
-        /// reachability.</p>
+        /// should refer to the <code>available_debit_schemes</code> attribute
+        /// to determine reachability.</p>
         /// </summary>
         [JsonProperty("bic")]
         public string Bic { get; set; }

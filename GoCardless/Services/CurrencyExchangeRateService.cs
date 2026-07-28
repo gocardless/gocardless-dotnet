@@ -31,8 +31,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// all exchange rates.
+        /// Returns a <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// list of all exchange rates.
         /// </summary>
         /// <param name="request">An optional `CurrencyExchangeRateListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -103,8 +104,9 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of all
-    /// exchange rates.
+    /// Returns a <a
+    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// list of all exchange rates.
     /// </summary>
     public class CurrencyExchangeRateListRequest
     {

@@ -62,8 +62,8 @@ namespace GoCardless.Services
         /// <summary>
         /// Fetches a bank account holder verification by ID.
         /// </summary>
-        /// <param name="identity">The unique identifier for the bank account holder verification
-        /// resource, e.g. "BAHV123".</param>
+        /// <param name="identity"></param>The unique identifier for the bank account holder
+        /// verification resource, e.g. "BAHV123".
         /// <param name="request">An optional `BankAccountHolderVerificationGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single bank account holder verification resource</returns>
@@ -122,16 +122,18 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Type of the verification that has been performed
-        /// eg. [Confirmation of
-        /// Payee](https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/)
+        /// eg. <a
+        /// href="https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/">Confirmation
+        /// of Payee</a>
         /// </summary>
         [JsonProperty("type")]
         public BankAccountHolderVerificationType? Type { get; set; }
 
         /// <summary>
         /// Type of the verification that has been performed
-        /// eg. [Confirmation of
-        /// Payee](https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/)
+        /// eg. <a
+        /// href="https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/">Confirmation
+        /// of Payee</a>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum BankAccountHolderVerificationType

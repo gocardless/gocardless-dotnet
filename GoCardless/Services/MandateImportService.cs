@@ -20,17 +20,22 @@ namespace GoCardless.Services
     ///
     /// The process is as follows:
     ///
-    ///   1. [Create a mandate
-    /// import](#mandate-imports-create-a-new-mandate-import)
-    ///   2. [Add entries](#mandate-import-entries-add-a-mandate-import-entry)
-    /// to the import
-    ///   3. [Submit](#mandate-imports-submit-a-mandate-import) the import
-    ///   4. Wait until a member of the GoCardless team approves the import, at
-    /// which point the mandates will be created
-    ///   5. [Link up the
-    /// mandates](#mandate-import-entries-list-all-mandate-import-entries) in
-    /// your system
-    ///
+    /// <ol>
+    /// <li><a
+    /// href="https://developer.gocardless.com/api-reference/#mandate-imports-create-a-new-mandate-import">Create
+    /// a mandate import</a></li>
+    /// <li><a
+    /// href="https://developer.gocardless.com/api-reference/#mandate-import-entries-add-a-mandate-import-entry">Add
+    /// entries</a> to the import</li>
+    /// <li><a
+    /// href="https://developer.gocardless.com/api-reference/#mandate-imports-submit-a-mandate-import">Submit</a>
+    /// the import</li>
+    /// <li>Wait until a member of the GoCardless team approves the import, at
+    /// which point the mandates will be created</li>
+    /// <li><a
+    /// href="https://developer.gocardless.com/api-reference/#mandate-import-entries-list-all-mandate-import-entries">Link
+    /// up the mandates</a> in your system</li>
+    /// </ol>
     /// When you add entries to your mandate import, they are not turned into
     /// actual mandates
     /// until the mandate import is submitted by you via the API, and then
@@ -38,22 +43,24 @@ namespace GoCardless.Services
     /// of the GoCardless team. When that happens, a mandate will be created for
     /// each entry in the import.
     ///
-    /// We will issue a `mandate_created` webhook for each entry, which will be
-    /// the same as the webhooks
-    /// triggered when [ creating a mandate ](#mandates-create-a-mandate) using
-    /// the mandates API. Once these
+    /// We will issue a <c>mandate_created</c> webhook for each entry, which
+    /// will be the same as the webhooks
+    /// triggered when <a
+    /// href="https://developer.gocardless.com/api-reference/#mandates-create-a-mandate">
+    /// creating a mandate </a> using the mandates API. Once these
     /// webhooks start arriving, any reconciliation can now be accomplished by
-    /// [checking the current status](#mandate-imports-get-a-mandate-import) of
-    /// the mandate import and
-    /// [linking up the mandates to your
-    /// system](#mandate-import-entries-list-all-mandate-import-entries).
+    /// <a
+    /// href="https://developer.gocardless.com/api-reference/#mandate-imports-get-a-mandate-import">checking
+    /// the current status</a> of the mandate import and
+    /// <a
+    /// href="https://developer.gocardless.com/api-reference/#mandate-import-entries-list-all-mandate-import-entries">linking
+    /// up the mandates to your system</a>.
     ///
     /// <p class="notice">Note that all Mandate Imports have an upper limit of
     /// 30,000 entries, so we recommend you split your import into several
     /// smaller imports if you're planning to exceed this threshold.</p>
-    ///
-    /// <p class="restricted-notice"><strong>Restricted</strong>: This API is
-    /// currently only available for approved integrators - please <a
+    /// <p class="restricted-notice">Restricted: This API is currently only
+    /// available for approved integrators - please <a
     /// href="mailto:help@gocardless.com">get in touch</a> if you would like to
     /// use this API.</p>
     /// </summary>
@@ -77,7 +84,9 @@ namespace GoCardless.Services
         /// this endpoint merely signals the start of the import process. Once
         /// you've finished
         /// adding entries to an import, you should
-        /// [submit](#mandate-imports-submit-a-mandate-import) it.
+        /// <a
+        /// href="https://developer.gocardless.com/api-reference/#mandate-imports-submit-a-mandate-import">submit</a>
+        /// it.
         /// </summary>
         /// <param name="request">An optional `MandateImportCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -105,7 +114,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns a single mandate import.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "IM".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "IM".
         /// <param name="request">An optional `MandateImportGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate import resource</returns>
@@ -150,7 +159,7 @@ namespace GoCardless.Services
         /// confirm the
         /// processing has begun.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "IM".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "IM".
         /// <param name="request">An optional `MandateImportSubmitRequest` representing the body for this submit request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate import resource</returns>
@@ -189,7 +198,7 @@ namespace GoCardless.Services
         /// submitted or processed
         /// cannot be cancelled.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "IM".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "IM".
         /// <param name="request">An optional `MandateImportCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate import resource</returns>
@@ -226,7 +235,9 @@ namespace GoCardless.Services
     /// this endpoint merely signals the start of the import process. Once
     /// you've finished
     /// adding entries to an import, you should
-    /// [submit](#mandate-imports-submit-a-mandate-import) it.
+    /// <a
+    /// href="https://developer.gocardless.com/api-reference/#mandate-imports-submit-a-mandate-import">submit</a>
+    /// it.
     /// </summary>
     public class MandateImportCreateRequest : IHasIdempotencyKey
     {

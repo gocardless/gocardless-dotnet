@@ -16,8 +16,8 @@ namespace GoCardless.Services
     ///
     /// Instalment schedules are objects which represent a collection of related
     /// payments, with the
-    /// intention to collect the `total_amount` specified. The API supports both
-    /// schedule-based
+    /// intention to collect the <c>total_amount</c> specified. The API supports
+    /// both schedule-based
     /// creation (similar to subscriptions) as well as explicit selection of
     /// differing payment
     /// amounts and charge dates.
@@ -30,7 +30,6 @@ namespace GoCardless.Services
     ///
     /// Customers will receive a single notification about the complete schedule
     /// of collection.
-    ///
     /// </summary>
     public class InstalmentScheduleService
     {
@@ -51,20 +50,21 @@ namespace GoCardless.Services
         /// payments. This
         /// API is recommended if you know the specific dates you wish to
         /// charge. Otherwise,
-        /// please check out the [scheduling
-        /// version](#instalment-schedules-create-with-schedule).
+        /// please check out the <a
+        /// href="https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule">scheduling
+        /// version</a>.
         ///
-        /// The `instalments` property is an array of payment properties
-        /// (`amount` and
-        /// `charge_date`).
+        /// The <c>instalments</c> property is an array of payment properties
+        /// (<c>amount</c> and
+        /// <c>charge_date</c>).
         ///
         /// It can take quite a while to create the associated payments, so the
         /// API will return
-        /// the status as `pending` initially. When processing has completed, a
-        /// subsequent GET
+        /// the status as <c>pending</c> initially. When processing has
+        /// completed, a subsequent GET
         /// request for the instalment schedule will either have the status
-        /// `success` and link
-        /// to the created payments, or the status `error` and detailed
+        /// <c>success</c> and link
+        /// to the created payments, or the status <c>error</c> and detailed
         /// information about the
         /// failures.
         /// </summary>
@@ -96,17 +96,18 @@ namespace GoCardless.Services
         /// payments. This
         /// API is recommended if you wish to use the GoCardless scheduling
         /// logic. For finer
-        /// control over the individual dates, please check out the [alternative
-        /// version](#instalment-schedules-create-with-dates).
+        /// control over the individual dates, please check out the <a
+        /// href="https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates">alternative
+        /// version</a>.
         ///
         /// It can take quite a while to create the associated payments, so the
         /// API will return
-        /// the status as `pending` initially. When processing has completed, a
-        /// subsequent
+        /// the status as <c>pending</c> initially. When processing has
+        /// completed, a subsequent
         /// GET request for the instalment schedule will either have the status
-        /// `success` and link to
-        /// the created payments, or the status `error` and detailed information
-        /// about the
+        /// <c>success</c> and link to
+        /// the created payments, or the status <c>error</c> and detailed
+        /// information about the
         /// failures.
         /// </summary>
         /// <param name="request">An optional `InstalmentScheduleCreateWithScheduleRequest` representing the body for this create_with_schedule request.</param>
@@ -133,8 +134,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your instalment schedules.
+        /// Returns a <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// list of your instalment schedules.
         /// </summary>
         /// <param name="request">An optional `InstalmentScheduleListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -206,7 +208,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of an existing instalment schedule.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "IS".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "IS".
         /// <param name="request">An optional `InstalmentScheduleGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single instalment schedule resource</returns>
@@ -240,7 +242,7 @@ namespace GoCardless.Services
         /// Updates an instalment schedule. This accepts only the metadata
         /// parameter.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "IS".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "IS".
         /// <param name="request">An optional `InstalmentScheduleUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single instalment schedule resource</returns>
@@ -274,10 +276,10 @@ namespace GoCardless.Services
         /// Immediately cancels an instalment schedule; no further payments will
         /// be collected for it.
         ///
-        /// This will fail with a `cancellation_failed` error if the instalment
-        /// schedule is already cancelled or has completed.
+        /// This will fail with a <c>cancellation_failed</c> error if the
+        /// instalment schedule is already cancelled or has completed.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "IS".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "IS".
         /// <param name="request">An optional `InstalmentScheduleCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single instalment schedule resource</returns>
@@ -313,21 +315,22 @@ namespace GoCardless.Services
     /// payments. This
     /// API is recommended if you know the specific dates you wish to charge.
     /// Otherwise,
-    /// please check out the [scheduling
-    /// version](#instalment-schedules-create-with-schedule).
+    /// please check out the <a
+    /// href="https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule">scheduling
+    /// version</a>.
     ///
-    /// The `instalments` property is an array of payment properties (`amount`
-    /// and
-    /// `charge_date`).
+    /// The <c>instalments</c> property is an array of payment properties
+    /// (<c>amount</c> and
+    /// <c>charge_date</c>).
     ///
     /// It can take quite a while to create the associated payments, so the API
     /// will return
-    /// the status as `pending` initially. When processing has completed, a
+    /// the status as <c>pending</c> initially. When processing has completed, a
     /// subsequent GET
     /// request for the instalment schedule will either have the status
-    /// `success` and link
-    /// to the created payments, or the status `error` and detailed information
-    /// about the
+    /// <c>success</c> and link
+    /// to the created payments, or the status <c>error</c> and detailed
+    /// information about the
     /// failures.
     /// </summary>
     public class InstalmentScheduleCreateWithDatesRequest : IHasIdempotencyKey
@@ -342,17 +345,17 @@ namespace GoCardless.Services
         public int? AppFee { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+        /// "NZD", "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public InstalmentScheduleCurrency? Currency { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+        /// "NZD", "SEK" and "USD" are supported.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum InstalmentScheduleCurrency
@@ -392,8 +395,9 @@ namespace GoCardless.Services
 
         /// <summary>
         /// An explicit array of instalment payments, each specifying at least
-        /// an `amount` and `charge_date`. See [create (with
-        /// dates)](#instalment-schedules-create-with-dates)
+        /// an <c>amount</c> and <c>charge_date</c>. See <a
+        /// href="https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates">create
+        /// (with dates)</a>
         /// </summary>
         [JsonProperty("instalments")]
         public InstalmentScheduleInstalments[] Instalments { get; set; }
@@ -408,11 +412,12 @@ namespace GoCardless.Services
             /// in GBP, cents in EUR).
             ///
             /// Minimum and maximum amounts vary by payment scheme. For more
-            /// information, see [Transaction
-            /// limits](https://support.gocardless.com/hc/en-gb/articles/115000309245-Transaction-limits)
+            /// information, see <a
+            /// href="https://support.gocardless.com/hc/en-gb/articles/115000309245-Transaction-limits">Transaction
+            /// limits</a>
             ///
             /// For Variable Recurring Payments (VRP), this must not exceed the
-            /// mandate's `max_amount_per_payment`
+            /// mandate's <c>max_amount_per_payment</c>
             /// constraint.
             /// </summary>
             [JsonProperty("amount")]
@@ -422,8 +427,9 @@ namespace GoCardless.Services
             /// A future date on which the payment should be collected. If the
             /// date
             /// is before the next_possible_charge_date on the
-            /// [mandate](#core-endpoints-mandates), it will be automatically
-            /// rolled
+            /// <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>,
+            /// it will be automatically rolled
             /// forwards to that date.
             /// </summary>
             [JsonProperty("charge_date")]
@@ -433,8 +439,9 @@ namespace GoCardless.Services
             /// A human-readable description of the payment. This will be
             /// included in the notification email GoCardless sends to your
             /// customer if your organisation does not send its own
-            /// notifications (see [compliance
-            /// requirements](#appendix-compliance-requirements)).
+            /// notifications (see <a
+            /// href="https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+            /// requirements</a>).
             /// </summary>
             [JsonProperty("description")]
             public string Description { get; set; }
@@ -452,8 +459,9 @@ namespace GoCardless.Services
         public class InstalmentScheduleLinks
         {
             /// <summary>
-            /// ID of the associated [mandate](#core-endpoints-mandates) which
-            /// the instalment schedule will create payments against.
+            /// ID of the associated <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+            /// which the instalment schedule will create payments against.
             /// </summary>
             [JsonProperty("mandate")]
             public string Mandate { get; set; }
@@ -478,33 +486,45 @@ namespace GoCardless.Services
         /// <summary>
         /// An optional reference that will appear on your customer's bank
         /// statement. The character limit for this reference is dependent on
-        /// the scheme.<br /> <strong>ACH</strong> - 10 characters<br />
-        /// <strong>Autogiro</strong> - 11 characters<br />
-        /// <strong>Bacs</strong> - 10 characters<br /> <strong>BECS</strong> -
-        /// 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
-        /// <strong>Betalingsservice</strong> - 30 characters<br />
-        /// <strong>Faster Payments</strong> - 18 characters<br />
-        /// <strong>PAD</strong> - scheme doesn't offer references<br />
-        /// <strong>PayTo</strong> - 18 characters<br /> <strong>SEPA</strong> -
-        /// 140 characters<br /> Note that this reference must be unique (for
-        /// each merchant) for the BECS scheme as it is a scheme requirement. <p
-        /// class='restricted-notice'><strong>Restricted</strong>: You can only
-        /// specify a payment reference for Bacs payments (that is, when
-        /// collecting from the UK) if you're on the <a
-        /// href='https://gocardless.com/pricing'>GoCardless Plus, Pro or
-        /// Enterprise packages</a>.</p> <p
-        /// class='restricted-notice'><strong>Restricted</strong>: You can not
-        /// specify a payment reference for Faster Payments.</p>
+        /// the scheme.<br></br> ACH <ul>
+        /// <li>10 characters</li>
+        /// </ul><br></br> Autogiro <ul>
+        /// <li>11 characters</li>
+        /// </ul><br></br> Bacs <ul>
+        /// <li>10 characters</li>
+        /// </ul><br></br> BECS <ul>
+        /// <li>30 characters</li>
+        /// </ul><br></br> BECS NZ <ul>
+        /// <li>12 characters</li>
+        /// </ul><br></br> Betalingsservice <ul>
+        /// <li>30 characters</li>
+        /// </ul><br></br> Faster Payments <ul>
+        /// <li>18 characters</li>
+        /// </ul><br></br> PAD <ul>
+        /// <li>scheme doesn't offer references</li>
+        /// </ul><br></br> PayTo <ul>
+        /// <li>18 characters</li>
+        /// </ul><br></br> SEPA <ul>
+        /// <li>140 characters</li>
+        /// </ul><br></br> Note that this reference must be unique (for each
+        /// merchant) for the BECS scheme as it is a scheme requirement. <p
+        /// class="restricted-notice">Restricted: You can only specify a payment
+        /// reference for Bacs payments (that is, when collecting from the UK)
+        /// if you're on the <a href="https://gocardless.com/pricing">GoCardless
+        /// Plus, Pro or Enterprise packages</a>.</p> <p
+        /// class="restricted-notice">Restricted: You can not specify a payment
+        /// reference for Faster Payments.</p>
         /// </summary>
         [JsonProperty("payment_reference")]
         public string PaymentReference { get; set; }
 
         /// <summary>
-        /// On failure, automatically retry payments using [intelligent
-        /// retries](/success-plus/overview). Default is `false`. <p
-        /// class="notice"><strong>Important</strong>: To be able to use
-        /// intelligent retries, Success+ needs to be enabled in [GoCardless
-        /// dashboard](https://manage.gocardless.com/success-plus). </p>
+        /// On failure, automatically retry payments using <a
+        /// href="https://developer.gocardless.com/success-plus/overview">intelligent
+        /// retries</a>. Default is <c>false</c>. <p class="notice">Important:
+        /// To be able to use intelligent retries, Success+ needs to be enabled
+        /// in <a href="https://manage.gocardless.com/success-plus">GoCardless
+        /// dashboard</a>. </p>
         /// </summary>
         [JsonProperty("retry_if_possible")]
         public bool? RetryIfPossible { get; set; }
@@ -535,17 +555,18 @@ namespace GoCardless.Services
     /// payments. This
     /// API is recommended if you wish to use the GoCardless scheduling logic.
     /// For finer
-    /// control over the individual dates, please check out the [alternative
-    /// version](#instalment-schedules-create-with-dates).
+    /// control over the individual dates, please check out the <a
+    /// href="https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates">alternative
+    /// version</a>.
     ///
     /// It can take quite a while to create the associated payments, so the API
     /// will return
-    /// the status as `pending` initially. When processing has completed, a
+    /// the status as <c>pending</c> initially. When processing has completed, a
     /// subsequent
     /// GET request for the instalment schedule will either have the status
-    /// `success` and link to
-    /// the created payments, or the status `error` and detailed information
-    /// about the
+    /// <c>success</c> and link to
+    /// the created payments, or the status <c>error</c> and detailed
+    /// information about the
     /// failures.
     /// </summary>
     public class InstalmentScheduleCreateWithScheduleRequest : IHasIdempotencyKey
@@ -560,17 +581,17 @@ namespace GoCardless.Services
         public int? AppFee { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+        /// "NZD", "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public InstalmentScheduleCurrency? Currency { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+        /// "NZD", "SEK" and "USD" are supported.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum InstalmentScheduleCurrency
@@ -613,9 +634,9 @@ namespace GoCardless.Services
         /// of payment
         /// amounts to be collected, with a specified start date for the first
         /// payment.
-        /// See [create (with
-        /// schedule)](#instalment-schedules-create-with-schedule)
-        ///
+        /// See <a
+        /// href="https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule">create
+        /// (with schedule)</a>
         /// </summary>
         [JsonProperty("instalments")]
         public InstalmentScheduleInstalments Instalments { get; set; }
@@ -625,9 +646,9 @@ namespace GoCardless.Services
         /// of payment
         /// amounts to be collected, with a specified start date for the first
         /// payment.
-        /// See [create (with
-        /// schedule)](#instalment-schedules-create-with-schedule)
-        ///
+        /// See <a
+        /// href="https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule">create
+        /// (with schedule)</a>
         /// </summary>
         public class InstalmentScheduleInstalments
         {
@@ -635,30 +656,28 @@ namespace GoCardless.Services
             /// List of amounts of each instalment, in the lowest denomination
             /// for the
             /// currency (e.g. pence in GBP, cents in EUR).
-            ///
             /// </summary>
             [JsonProperty("amounts")]
             public int?[] Amounts { get; set; }
 
             /// <summary>
-            /// Number of `interval_units` between charge dates. Must be greater
-            /// than or
-            /// equal to `1`.
-            ///
+            /// Number of <c>interval_units</c> between charge dates. Must be
+            /// greater than or
+            /// equal to <c>1</c>.
             /// </summary>
             [JsonProperty("interval")]
             public int? Interval { get; set; }
 
             /// <summary>
-            /// The unit of time between customer charge dates. One of `weekly`,
-            /// `monthly` or `yearly`.
+            /// The unit of time between customer charge dates. One of
+            /// <c>weekly</c>, <c>monthly</c> or <c>yearly</c>.
             /// </summary>
             [JsonProperty("interval_unit")]
             public InstalmentScheduleIntervalUnit? IntervalUnit { get; set; }
 
             /// <summary>
-            /// The unit of time between customer charge dates. One of `weekly`,
-            /// `monthly` or `yearly`.
+            /// The unit of time between customer charge dates. One of
+            /// <c>weekly</c>, <c>monthly</c> or <c>yearly</c>.
             /// </summary>
             [JsonConverter(typeof(StringEnumConverter))]
             public enum InstalmentScheduleIntervalUnit
@@ -678,11 +697,13 @@ namespace GoCardless.Services
 
             /// <summary>
             /// The date on which the first payment should be charged. Must be
-            /// on or after the [mandate](#core-endpoints-mandates)'s
-            /// `next_possible_charge_date`. When left blank and `month` or
-            /// `day_of_month` are provided, this will be set to the date of the
-            /// first payment. If created without `month` or `day_of_month` this
-            /// will be set as the mandate's `next_possible_charge_date`
+            /// on or after the <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+            /// <c>next_possible_charge_date</c>. When left blank and
+            /// <c>month</c> or <c>day_of_month</c> are provided, this will be
+            /// set to the date of the first payment. If created without
+            /// <c>month</c> or <c>day_of_month</c> this will be set as the
+            /// mandate's <c>next_possible_charge_date</c>
             /// </summary>
             [JsonProperty("start_date")]
             public string StartDate { get; set; }
@@ -700,8 +721,9 @@ namespace GoCardless.Services
         public class InstalmentScheduleLinks
         {
             /// <summary>
-            /// ID of the associated [mandate](#core-endpoints-mandates) which
-            /// the instalment schedule will create payments against.
+            /// ID of the associated <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+            /// which the instalment schedule will create payments against.
             /// </summary>
             [JsonProperty("mandate")]
             public string Mandate { get; set; }
@@ -726,33 +748,45 @@ namespace GoCardless.Services
         /// <summary>
         /// An optional reference that will appear on your customer's bank
         /// statement. The character limit for this reference is dependent on
-        /// the scheme.<br /> <strong>ACH</strong> - 10 characters<br />
-        /// <strong>Autogiro</strong> - 11 characters<br />
-        /// <strong>Bacs</strong> - 10 characters<br /> <strong>BECS</strong> -
-        /// 30 characters<br /> <strong>BECS NZ</strong> - 12 characters<br />
-        /// <strong>Betalingsservice</strong> - 30 characters<br />
-        /// <strong>Faster Payments</strong> - 18 characters<br />
-        /// <strong>PAD</strong> - scheme doesn't offer references<br />
-        /// <strong>PayTo</strong> - 18 characters<br /> <strong>SEPA</strong> -
-        /// 140 characters<br /> Note that this reference must be unique (for
-        /// each merchant) for the BECS scheme as it is a scheme requirement. <p
-        /// class='restricted-notice'><strong>Restricted</strong>: You can only
-        /// specify a payment reference for Bacs payments (that is, when
-        /// collecting from the UK) if you're on the <a
-        /// href='https://gocardless.com/pricing'>GoCardless Plus, Pro or
-        /// Enterprise packages</a>.</p> <p
-        /// class='restricted-notice'><strong>Restricted</strong>: You can not
-        /// specify a payment reference for Faster Payments.</p>
+        /// the scheme.<br></br> ACH <ul>
+        /// <li>10 characters</li>
+        /// </ul><br></br> Autogiro <ul>
+        /// <li>11 characters</li>
+        /// </ul><br></br> Bacs <ul>
+        /// <li>10 characters</li>
+        /// </ul><br></br> BECS <ul>
+        /// <li>30 characters</li>
+        /// </ul><br></br> BECS NZ <ul>
+        /// <li>12 characters</li>
+        /// </ul><br></br> Betalingsservice <ul>
+        /// <li>30 characters</li>
+        /// </ul><br></br> Faster Payments <ul>
+        /// <li>18 characters</li>
+        /// </ul><br></br> PAD <ul>
+        /// <li>scheme doesn't offer references</li>
+        /// </ul><br></br> PayTo <ul>
+        /// <li>18 characters</li>
+        /// </ul><br></br> SEPA <ul>
+        /// <li>140 characters</li>
+        /// </ul><br></br> Note that this reference must be unique (for each
+        /// merchant) for the BECS scheme as it is a scheme requirement. <p
+        /// class="restricted-notice">Restricted: You can only specify a payment
+        /// reference for Bacs payments (that is, when collecting from the UK)
+        /// if you're on the <a href="https://gocardless.com/pricing">GoCardless
+        /// Plus, Pro or Enterprise packages</a>.</p> <p
+        /// class="restricted-notice">Restricted: You can not specify a payment
+        /// reference for Faster Payments.</p>
         /// </summary>
         [JsonProperty("payment_reference")]
         public string PaymentReference { get; set; }
 
         /// <summary>
-        /// On failure, automatically retry payments using [intelligent
-        /// retries](/success-plus/overview). Default is `false`. <p
-        /// class="notice"><strong>Important</strong>: To be able to use
-        /// intelligent retries, Success+ needs to be enabled in [GoCardless
-        /// dashboard](https://manage.gocardless.com/success-plus). </p>
+        /// On failure, automatically retry payments using <a
+        /// href="https://developer.gocardless.com/success-plus/overview">intelligent
+        /// retries</a>. Default is <c>false</c>. <p class="notice">Important:
+        /// To be able to use intelligent retries, Success+ needs to be enabled
+        /// in <a href="https://manage.gocardless.com/success-plus">GoCardless
+        /// dashboard</a>. </p>
         /// </summary>
         [JsonProperty("retry_if_possible")]
         public bool? RetryIfPossible { get; set; }
@@ -779,8 +813,9 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// instalment schedules.
+    /// Returns a <a
+    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// list of your instalment schedules.
     /// </summary>
     public class InstalmentScheduleListRequest
     {
@@ -833,7 +868,8 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// ID of the associated [customer](#core-endpoints-customers).
+        /// ID of the associated <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
         /// </summary>
         [JsonProperty("customer")]
         public string Customer { get; set; }
@@ -845,8 +881,9 @@ namespace GoCardless.Services
         public int? Limit { get; set; }
 
         /// <summary>
-        /// ID of the associated [mandate](#core-endpoints-mandates) which the
-        /// instalment schedule will create payments against.
+        /// ID of the associated <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+        /// which the instalment schedule will create payments against.
         /// </summary>
         [JsonProperty("mandate")]
         public string Mandate { get; set; }
@@ -859,15 +896,16 @@ namespace GoCardless.Services
 
         /// <summary>
         /// One of:
+        ///
         /// <ul>
-        /// <li>`pending`: we're waiting for GC to create the payments</li>
-        /// <li>`active`: the payments have been created, and the schedule is
-        /// active</li>
-        /// <li>`creation_failed`: payment creation failed</li>
-        /// <li>`completed`: we have passed the date of the final payment and
-        /// all payments have been collected</li>
-        /// <li>`cancelled`: the schedule has been cancelled</li>
-        /// <li>`errored`: one or more payments have failed</li>
+        /// <li><c>pending</c>: we're waiting for GC to create the payments</li>
+        /// <li><c>active</c>: the payments have been created, and the schedule
+        /// is active</li>
+        /// <li><c>creation_failed</c>: payment creation failed</li>
+        /// <li><c>completed</c>: we have passed the date of the final payment
+        /// and all payments have been collected</li>
+        /// <li><c>cancelled</c>: the schedule has been cancelled</li>
+        /// <li><c>errored</c>: one or more payments have failed</li>
         /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -922,7 +960,7 @@ namespace GoCardless.Services
     /// Immediately cancels an instalment schedule; no further payments will be
     /// collected for it.
     ///
-    /// This will fail with a `cancellation_failed` error if the instalment
+    /// This will fail with a <c>cancellation_failed</c> error if the instalment
     /// schedule is already cancelled or has completed.
     /// </summary>
     public class InstalmentScheduleCancelRequest { }

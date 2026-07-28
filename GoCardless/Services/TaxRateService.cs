@@ -16,8 +16,9 @@ namespace GoCardless.Services
     ///
     /// Tax rates from tax authority.
     ///
-    /// We also maintain a [static list of the tax rates for each
-    /// jurisdiction](#appendix-tax-rates).
+    /// We also maintain a <a
+    /// href="https://developer.gocardless.com/api-reference/#appendix-tax-rates">static
+    /// list of the tax rates for each jurisdiction</a>.
     /// </summary>
     public class TaxRateService
     {
@@ -34,8 +35,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// all tax rates.
+        /// Returns a <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// list of all tax rates.
         /// </summary>
         /// <param name="request">An optional `TaxRateListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -107,8 +109,8 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of a tax rate.
         /// </summary>
-        /// <param name="identity">The unique identifier created by the jurisdiction, tax type and
-        /// version</param>
+        /// <param name="identity"></param>The unique identifier created by the jurisdiction, tax
+        /// type and version
         /// <param name="request">An optional `TaxRateGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single tax rate resource</returns>
@@ -140,8 +142,9 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of all
-    /// tax rates.
+    /// Returns a <a
+    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// list of all tax rates.
     /// </summary>
     public class TaxRateListRequest
     {

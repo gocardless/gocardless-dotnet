@@ -14,14 +14,14 @@ namespace GoCardless.Resources
     /// sent to a customer
     /// after an event has happened. The event, the resource and the customer to
     /// be notified
-    /// are all identified in the `links` property.
+    /// are all identified in the <c>links</c> property.
     ///
     /// Note that these are ephemeral records - once the notification has been
     /// actioned in some
     /// way, it is no longer visible using this API.
     ///
-    /// <p class="restricted-notice"><strong>Restricted</strong>: This API is
-    /// currently only available for approved integrators - please <a
+    /// <p class="restricted-notice">Restricted: This API is currently only
+    /// available for approved integrators - please <a
     /// href="mailto:help@gocardless.com">get in touch</a> if you would like to
     /// use this API.</p>
     /// </summary>
@@ -29,15 +29,16 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// The action that was taken on the notification. Currently this can
-        /// only be `handled`,
+        /// only be <c>handled</c>,
         /// which means the integrator sent the notification themselves.
-        ///
         /// </summary>
         [JsonProperty("action_taken")]
         public string ActionTaken { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
+        /// Fixed <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// recording when this
         /// action was taken.
         /// </summary>
         [JsonProperty("action_taken_at")]
@@ -65,15 +66,16 @@ namespace GoCardless.Resources
         /// <summary>
         /// The type of notification the customer shall receive.
         /// One of:
+        ///
         /// <ul>
-        /// <li>`payment_created`</li>
-        /// <li>`payment_cancelled`</li>
-        /// <li>`mandate_created`</li>
-        /// <li>`mandate_blocked`</li>
-        /// <li>`subscription_created`</li>
-        /// <li>`subscription_cancelled`</li>
-        /// <li>`instalment_schedule_created`</li>
-        /// <li>`instalment_schedule_cancelled`</li>
+        /// <li><c>payment_created</c></li>
+        /// <li><c>payment_cancelled</c></li>
+        /// <li><c>mandate_created</c></li>
+        /// <li><c>mandate_blocked</c></li>
+        /// <li><c>subscription_created</c></li>
+        /// <li><c>subscription_cancelled</c></li>
+        /// <li><c>instalment_schedule_created</c></li>
+        /// <li><c>instalment_schedule_cancelled</c></li>
         /// </ul>
         /// </summary>
         [JsonProperty("type")]
@@ -81,9 +83,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// The action that was taken on the notification. Currently this can only be `handled`,
+    /// The action that was taken on the notification. Currently this can only be <c>handled</c>,
     /// which means the integrator sent the notification themselves.
-    ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum CustomerNotificationActionTaken
@@ -142,15 +143,16 @@ namespace GoCardless.Resources
     /// <summary>
     /// The type of notification the customer shall receive.
     /// One of:
+    ///
     /// <ul>
-    /// <li>`payment_created`</li>
-    /// <li>`payment_cancelled`</li>
-    /// <li>`mandate_created`</li>
-    /// <li>`mandate_blocked`</li>
-    /// <li>`subscription_created`</li>
-    /// <li>`subscription_cancelled`</li>
-    /// <li>`instalment_schedule_created`</li>
-    /// <li>`instalment_schedule_cancelled`</li>
+    /// <li><c>payment_created</c></li>
+    /// <li><c>payment_cancelled</c></li>
+    /// <li><c>mandate_created</c></li>
+    /// <li><c>mandate_blocked</c></li>
+    /// <li><c>subscription_created</c></li>
+    /// <li><c>subscription_cancelled</c></li>
+    /// <li><c>instalment_schedule_created</c></li>
+    /// <li><c>instalment_schedule_cancelled</c></li>
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]

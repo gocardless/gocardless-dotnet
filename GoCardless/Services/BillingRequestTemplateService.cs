@@ -45,8 +45,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your Billing Request Templates.
+        /// Returns a <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// list of your Billing Request Templates.
         /// </summary>
         /// <param name="request">An optional `BillingRequestTemplateListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -118,7 +119,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Fetches a Billing Request Template
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "BRT".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "BRT".
         /// <param name="request">An optional `BillingRequestTemplateGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request template resource</returns>
@@ -178,7 +179,7 @@ namespace GoCardless.Services
         /// Updates a Billing Request Template, which will affect all future
         /// Billing Requests created by this template.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "BRT".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "BRT".
         /// <param name="request">An optional `BillingRequestTemplateUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request template resource</returns>
@@ -210,8 +211,9 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// Billing Request Templates.
+    /// Returns a <a
+    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// list of your Billing Request Templates.
     /// </summary>
     public class BillingRequestTemplateListRequest
     {
@@ -235,12 +237,12 @@ namespace GoCardless.Services
 
         /// <summary>
         /// (Optional) A scheme used for Open Banking payments. Currently
-        /// `faster_payments` is supported in the UK (GBP) and
-        /// `sepa_credit_transfer` and `sepa_instant_credit_transfer` are
-        /// supported in supported Eurozone countries (EUR). For Eurozone
-        /// countries, `sepa_credit_transfer` is used as the default. Please be
-        /// aware that `sepa_instant_credit_transfer` may incur an additional
-        /// fee for your customer.
+        /// <c>faster_payments</c> is supported in the UK (GBP) and
+        /// <c>sepa_credit_transfer</c> and <c>sepa_instant_credit_transfer</c>
+        /// are supported in supported Eurozone countries (EUR). For Eurozone
+        /// countries, <c>sepa_credit_transfer</c> is used as the default.
+        /// Please be aware that <c>sepa_instant_credit_transfer</c> may incur
+        /// an additional fee for your customer.
         /// </summary>
         [JsonProperty("payment_request_scheme")]
         public string PaymentRequestScheme { get; set; }
@@ -268,8 +270,9 @@ namespace GoCardless.Services
         public class BillingRequestTemplateLinks
         {
             /// <summary>
-            /// ID of the associated [creditor](#core-endpoints-creditors). Only
-            /// required if your account manages multiple creditors.
+            /// ID of the associated <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+            /// Only required if your account manages multiple creditors.
             /// </summary>
             [JsonProperty("creditor")]
             public string Creditor { get; set; }
@@ -297,7 +300,6 @@ namespace GoCardless.Services
             /// will not have an end date. Keep in mind the end date must take
             /// into account how long it will
             /// take the user to set up this agreement via the Billing Request.
-            ///
             /// </summary>
             [JsonProperty("end_date")]
             public string EndDate { get; set; }
@@ -305,7 +307,7 @@ namespace GoCardless.Services
             /// <summary>
             /// The maximum amount that can be charged for a single payment in
             /// the lowest denomination for the currency (e.g. pence in GBP,
-            /// cents in EUR). _Note:_ Required for PayTo and VRP.
+            /// cents in EUR). Note: Required for PayTo and VRP.
             /// </summary>
             [JsonProperty("max_amount_per_payment")]
             public int? MaxAmountPerPayment { get; set; }
@@ -313,9 +315,8 @@ namespace GoCardless.Services
             /// <summary>
             /// A constraint where you can specify info (free text string) about
             /// how payments are calculated. For use when payments vary and
-            /// cannot be expressed as a fixed amount and frequency. _Note:_
-            /// This is only supported for ACH and PAD schemes.
-            ///
+            /// cannot be expressed as a fixed amount and frequency. Note: This
+            /// is only supported for ACH and PAD schemes.
             /// </summary>
             [JsonProperty("payment_method")]
             public string PaymentMethod { get; set; }
@@ -325,12 +326,11 @@ namespace GoCardless.Services
             /// collected within a
             /// repeating period (e.g. no more than a set amount per month), as
             /// opposed to
-            /// `max_amount_per_payment` which caps a single payment.
+            /// <c>max_amount_per_payment</c> which caps a single payment.
             ///
-            /// _Note:_ Required for VRP, where exactly one periodic limit must
-            /// be provided. Optional for
+            /// Note: Required for VRP, where exactly one periodic limit must be
+            /// provided. Optional for
             /// PayTo.
-            ///
             /// </summary>
             [JsonProperty("periodic_limits")]
             public BillingRequestTemplatePeriodicLimits[] PeriodicLimits { get; set; }
@@ -341,61 +341,64 @@ namespace GoCardless.Services
             public class BillingRequestTemplatePeriodicLimits
             {
                 /// <summary>
-                /// The alignment of the period. Defaults to `creation_date` if not
-                /// specified.
+                /// The alignment of the period. Defaults to <c>creation_date</c> if
+                /// not specified.
                 ///
-                /// `calendar` - the period follows fixed calendar boundaries, the
-                /// same for every mandate:
-                /// `week` runs Monday to Sunday, `month` runs from the 1st to the
-                /// last day of the calendar
-                /// month, and `year` runs from 1 January to 31 December. If the
-                /// mandate starts partway
+                /// <c>calendar</c> <ul>
+                /// <li>the period follows fixed calendar boundaries, the same for
+                /// every mandate:</li>
+                /// </ul>
+                /// <c>week</c> runs Monday to Sunday, <c>month</c> runs from the
+                /// 1st to the last day of the calendar
+                /// month, and <c>year</c> runs from 1 January to 31 December. If
+                /// the mandate starts partway
                 /// through a period, the limit for that first period is reduced
                 /// proportionally to the days
                 /// remaining (e.g. a monthly limit starting on the 15th gives
                 /// roughly half the limit for
                 /// that first month).
                 ///
-                /// `creation_date` - the period follows the mandate's own start
-                /// date rather than the
+                /// <c>creation_date</c> <ul>
+                /// <li>the period follows the mandate's own start date rather than
+                /// the
                 /// calendar. For example, if the mandate starts on the 15th, each
                 /// monthly period runs from
                 /// the 15th to the 14th of the following month. The first period is
                 /// a full period, not
-                /// reduced proportionally.
-                ///
-                /// _Note:_ Has no effect when period is `flexible`.
-                ///
+                /// reduced proportionally.</li>
+                /// </ul>
+                /// Note: Has no effect when period is <c>flexible</c>.
                 /// </summary>
                 [JsonProperty("alignment")]
                 public BillingRequestTemplateAlignment? Alignment { get; set; }
 
                 /// <summary>
-                /// The alignment of the period. Defaults to `creation_date` if not
+                /// The alignment of the period. Defaults to <c>creation_date</c> if not
                 /// specified.
                 ///
-                /// `calendar` - the period follows fixed calendar boundaries, the same
-                /// for every mandate:
-                /// `week` runs Monday to Sunday, `month` runs from the 1st to the last
-                /// day of the calendar
-                /// month, and `year` runs from 1 January to 31 December. If the mandate
-                /// starts partway
+                /// <c>calendar</c> <ul>
+                /// <li>the period follows fixed calendar boundaries, the same for every
+                /// mandate:</li>
+                /// </ul>
+                /// <c>week</c> runs Monday to Sunday, <c>month</c> runs from the 1st to
+                /// the last day of the calendar
+                /// month, and <c>year</c> runs from 1 January to 31 December. If the
+                /// mandate starts partway
                 /// through a period, the limit for that first period is reduced
                 /// proportionally to the days
                 /// remaining (e.g. a monthly limit starting on the 15th gives roughly
                 /// half the limit for
                 /// that first month).
                 ///
-                /// `creation_date` - the period follows the mandate's own start date
-                /// rather than the
+                /// <c>creation_date</c> <ul>
+                /// <li>the period follows the mandate's own start date rather than the
                 /// calendar. For example, if the mandate starts on the 15th, each
                 /// monthly period runs from
                 /// the 15th to the 14th of the following month. The first period is a
                 /// full period, not
-                /// reduced proportionally.
-                ///
-                /// _Note:_ Has no effect when period is `flexible`.
-                ///
+                /// reduced proportionally.</li>
+                /// </ul>
+                /// Note: Has no effect when period is <c>flexible</c>.
                 /// </summary>
                 [JsonConverter(typeof(StringEnumConverter))]
                 public enum BillingRequestTemplateAlignment
@@ -413,9 +416,7 @@ namespace GoCardless.Services
                 /// The maximum number of payments that can be collected in this
                 /// periodic limit.
                 ///
-                /// _Note:_ Only supported for the PayTo scheme, where it is
-                /// optional.
-                ///
+                /// Note: Only supported for the PayTo scheme, where it is optional.
                 /// </summary>
                 [JsonProperty("max_payments")]
                 public int? MaxPayments { get; set; }
@@ -426,9 +427,8 @@ namespace GoCardless.Services
                 /// in the lowest denomination for the currency (e.g. pence in GBP,
                 /// cents in EUR).
                 ///
-                /// _Note:_ Required for VRP. This is not permitted for the PayTo
+                /// Note: Required for VRP. This is not permitted for the PayTo
                 /// scheme.
-                ///
                 /// </summary>
                 [JsonProperty("max_total_amount")]
                 public int? MaxTotalAmount { get; set; }
@@ -439,7 +439,6 @@ namespace GoCardless.Services
                 /// (for both VRP and PayTo). If periodic_limits is omitted entirely
                 /// for PayTo, this
                 /// defaults to flexible.
-                ///
                 /// </summary>
                 [JsonProperty("period")]
                 public BillingRequestTemplatePeriod? Period { get; set; }
@@ -450,7 +449,6 @@ namespace GoCardless.Services
                 /// (for both VRP and PayTo). If periodic_limits is omitted entirely for
                 /// PayTo, this
                 /// defaults to flexible.
-                ///
                 /// </summary>
                 [JsonConverter(typeof(StringEnumConverter))]
                 public enum BillingRequestTemplatePeriod
@@ -483,15 +481,14 @@ namespace GoCardless.Services
             /// This is an optional field and if it is not supplied the start
             /// date will be set to the day
             /// authorisation happens.
-            ///
             /// </summary>
             [JsonProperty("start_date")]
             public string StartDate { get; set; }
         }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code.
         /// </summary>
         [JsonProperty("mandate_request_currency")]
         public string MandateRequestCurrency { get; set; }
@@ -499,7 +496,6 @@ namespace GoCardless.Services
         /// <summary>
         /// A human-readable description of the payment and/or mandate. This
         /// will be displayed to the payer when authorising the billing request.
-        ///
         /// </summary>
         [JsonProperty("mandate_request_description")]
         public string MandateRequestDescription { get; set; }
@@ -550,10 +546,10 @@ namespace GoCardless.Services
         public string PaymentRequestAmount { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. `GBP` and `EUR` supported; `GBP` with your customers
-        /// in the UK and for `EUR` with your customers in supported Eurozone
-        /// countries only.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. <c>GBP</c> and <c>EUR</c> supported;
+        /// <c>GBP</c> with your customers in the UK and for <c>EUR</c> with
+        /// your customers in supported Eurozone countries only.
         /// </summary>
         [JsonProperty("payment_request_currency")]
         public string PaymentRequestCurrency { get; set; }
@@ -561,7 +557,6 @@ namespace GoCardless.Services
         /// <summary>
         /// A human-readable description of the payment and/or mandate. This
         /// will be displayed to the payer when authorising the billing request.
-        ///
         /// </summary>
         [JsonProperty("payment_request_description")]
         public string PaymentRequestDescription { get; set; }
@@ -576,12 +571,12 @@ namespace GoCardless.Services
 
         /// <summary>
         /// (Optional) A scheme used for Open Banking payments. Currently
-        /// `faster_payments` is supported in the UK (GBP) and
-        /// `sepa_credit_transfer` and `sepa_instant_credit_transfer` are
-        /// supported in supported Eurozone countries (EUR). For Eurozone
-        /// countries, `sepa_credit_transfer` is used as the default. Please be
-        /// aware that `sepa_instant_credit_transfer` may incur an additional
-        /// fee for your customer.
+        /// <c>faster_payments</c> is supported in the UK (GBP) and
+        /// <c>sepa_credit_transfer</c> and <c>sepa_instant_credit_transfer</c>
+        /// are supported in supported Eurozone countries (EUR). For Eurozone
+        /// countries, <c>sepa_credit_transfer</c> is used as the default.
+        /// Please be aware that <c>sepa_instant_credit_transfer</c> may incur
+        /// an additional fee for your customer.
         /// </summary>
         [JsonProperty("payment_request_scheme")]
         public string PaymentRequestScheme { get; set; }
@@ -630,7 +625,6 @@ namespace GoCardless.Services
             /// will not have an end date. Keep in mind the end date must take
             /// into account how long it will
             /// take the user to set up this agreement via the Billing Request.
-            ///
             /// </summary>
             [JsonProperty("end_date")]
             public string EndDate { get; set; }
@@ -638,7 +632,7 @@ namespace GoCardless.Services
             /// <summary>
             /// The maximum amount that can be charged for a single payment in
             /// the lowest denomination for the currency (e.g. pence in GBP,
-            /// cents in EUR). _Note:_ Required for PayTo and VRP.
+            /// cents in EUR). Note: Required for PayTo and VRP.
             /// </summary>
             [JsonProperty("max_amount_per_payment")]
             public int? MaxAmountPerPayment { get; set; }
@@ -646,9 +640,8 @@ namespace GoCardless.Services
             /// <summary>
             /// A constraint where you can specify info (free text string) about
             /// how payments are calculated. For use when payments vary and
-            /// cannot be expressed as a fixed amount and frequency. _Note:_
-            /// This is only supported for ACH and PAD schemes.
-            ///
+            /// cannot be expressed as a fixed amount and frequency. Note: This
+            /// is only supported for ACH and PAD schemes.
             /// </summary>
             [JsonProperty("payment_method")]
             public string PaymentMethod { get; set; }
@@ -658,12 +651,11 @@ namespace GoCardless.Services
             /// collected within a
             /// repeating period (e.g. no more than a set amount per month), as
             /// opposed to
-            /// `max_amount_per_payment` which caps a single payment.
+            /// <c>max_amount_per_payment</c> which caps a single payment.
             ///
-            /// _Note:_ Required for VRP, where exactly one periodic limit must
-            /// be provided. Optional for
+            /// Note: Required for VRP, where exactly one periodic limit must be
+            /// provided. Optional for
             /// PayTo.
-            ///
             /// </summary>
             [JsonProperty("periodic_limits")]
             public BillingRequestTemplatePeriodicLimits[] PeriodicLimits { get; set; }
@@ -674,61 +666,64 @@ namespace GoCardless.Services
             public class BillingRequestTemplatePeriodicLimits
             {
                 /// <summary>
-                /// The alignment of the period. Defaults to `creation_date` if not
-                /// specified.
+                /// The alignment of the period. Defaults to <c>creation_date</c> if
+                /// not specified.
                 ///
-                /// `calendar` - the period follows fixed calendar boundaries, the
-                /// same for every mandate:
-                /// `week` runs Monday to Sunday, `month` runs from the 1st to the
-                /// last day of the calendar
-                /// month, and `year` runs from 1 January to 31 December. If the
-                /// mandate starts partway
+                /// <c>calendar</c> <ul>
+                /// <li>the period follows fixed calendar boundaries, the same for
+                /// every mandate:</li>
+                /// </ul>
+                /// <c>week</c> runs Monday to Sunday, <c>month</c> runs from the
+                /// 1st to the last day of the calendar
+                /// month, and <c>year</c> runs from 1 January to 31 December. If
+                /// the mandate starts partway
                 /// through a period, the limit for that first period is reduced
                 /// proportionally to the days
                 /// remaining (e.g. a monthly limit starting on the 15th gives
                 /// roughly half the limit for
                 /// that first month).
                 ///
-                /// `creation_date` - the period follows the mandate's own start
-                /// date rather than the
+                /// <c>creation_date</c> <ul>
+                /// <li>the period follows the mandate's own start date rather than
+                /// the
                 /// calendar. For example, if the mandate starts on the 15th, each
                 /// monthly period runs from
                 /// the 15th to the 14th of the following month. The first period is
                 /// a full period, not
-                /// reduced proportionally.
-                ///
-                /// _Note:_ Has no effect when period is `flexible`.
-                ///
+                /// reduced proportionally.</li>
+                /// </ul>
+                /// Note: Has no effect when period is <c>flexible</c>.
                 /// </summary>
                 [JsonProperty("alignment")]
                 public BillingRequestTemplateAlignment? Alignment { get; set; }
 
                 /// <summary>
-                /// The alignment of the period. Defaults to `creation_date` if not
+                /// The alignment of the period. Defaults to <c>creation_date</c> if not
                 /// specified.
                 ///
-                /// `calendar` - the period follows fixed calendar boundaries, the same
-                /// for every mandate:
-                /// `week` runs Monday to Sunday, `month` runs from the 1st to the last
-                /// day of the calendar
-                /// month, and `year` runs from 1 January to 31 December. If the mandate
-                /// starts partway
+                /// <c>calendar</c> <ul>
+                /// <li>the period follows fixed calendar boundaries, the same for every
+                /// mandate:</li>
+                /// </ul>
+                /// <c>week</c> runs Monday to Sunday, <c>month</c> runs from the 1st to
+                /// the last day of the calendar
+                /// month, and <c>year</c> runs from 1 January to 31 December. If the
+                /// mandate starts partway
                 /// through a period, the limit for that first period is reduced
                 /// proportionally to the days
                 /// remaining (e.g. a monthly limit starting on the 15th gives roughly
                 /// half the limit for
                 /// that first month).
                 ///
-                /// `creation_date` - the period follows the mandate's own start date
-                /// rather than the
+                /// <c>creation_date</c> <ul>
+                /// <li>the period follows the mandate's own start date rather than the
                 /// calendar. For example, if the mandate starts on the 15th, each
                 /// monthly period runs from
                 /// the 15th to the 14th of the following month. The first period is a
                 /// full period, not
-                /// reduced proportionally.
-                ///
-                /// _Note:_ Has no effect when period is `flexible`.
-                ///
+                /// reduced proportionally.</li>
+                /// </ul>
+                /// Note: Has no effect when period is <c>flexible</c>.
                 /// </summary>
                 [JsonConverter(typeof(StringEnumConverter))]
                 public enum BillingRequestTemplateAlignment
@@ -746,9 +741,7 @@ namespace GoCardless.Services
                 /// The maximum number of payments that can be collected in this
                 /// periodic limit.
                 ///
-                /// _Note:_ Only supported for the PayTo scheme, where it is
-                /// optional.
-                ///
+                /// Note: Only supported for the PayTo scheme, where it is optional.
                 /// </summary>
                 [JsonProperty("max_payments")]
                 public int? MaxPayments { get; set; }
@@ -759,9 +752,8 @@ namespace GoCardless.Services
                 /// in the lowest denomination for the currency (e.g. pence in GBP,
                 /// cents in EUR).
                 ///
-                /// _Note:_ Required for VRP. This is not permitted for the PayTo
+                /// Note: Required for VRP. This is not permitted for the PayTo
                 /// scheme.
-                ///
                 /// </summary>
                 [JsonProperty("max_total_amount")]
                 public int? MaxTotalAmount { get; set; }
@@ -772,7 +764,6 @@ namespace GoCardless.Services
                 /// (for both VRP and PayTo). If periodic_limits is omitted entirely
                 /// for PayTo, this
                 /// defaults to flexible.
-                ///
                 /// </summary>
                 [JsonProperty("period")]
                 public BillingRequestTemplatePeriod? Period { get; set; }
@@ -783,7 +774,6 @@ namespace GoCardless.Services
                 /// (for both VRP and PayTo). If periodic_limits is omitted entirely for
                 /// PayTo, this
                 /// defaults to flexible.
-                ///
                 /// </summary>
                 [JsonConverter(typeof(StringEnumConverter))]
                 public enum BillingRequestTemplatePeriod
@@ -816,15 +806,14 @@ namespace GoCardless.Services
             /// This is an optional field and if it is not supplied the start
             /// date will be set to the day
             /// authorisation happens.
-            ///
             /// </summary>
             [JsonProperty("start_date")]
             public string StartDate { get; set; }
         }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code.
         /// </summary>
         [JsonProperty("mandate_request_currency")]
         public string MandateRequestCurrency { get; set; }
@@ -832,7 +821,6 @@ namespace GoCardless.Services
         /// <summary>
         /// A human-readable description of the payment and/or mandate. This
         /// will be displayed to the payer when authorising the billing request.
-        ///
         /// </summary>
         [JsonProperty("mandate_request_description")]
         public string MandateRequestDescription { get; set; }
@@ -883,10 +871,10 @@ namespace GoCardless.Services
         public string PaymentRequestAmount { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. `GBP` and `EUR` supported; `GBP` with your customers
-        /// in the UK and for `EUR` with your customers in supported Eurozone
-        /// countries only.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. <c>GBP</c> and <c>EUR</c> supported;
+        /// <c>GBP</c> with your customers in the UK and for <c>EUR</c> with
+        /// your customers in supported Eurozone countries only.
         /// </summary>
         [JsonProperty("payment_request_currency")]
         public string PaymentRequestCurrency { get; set; }
@@ -894,7 +882,6 @@ namespace GoCardless.Services
         /// <summary>
         /// A human-readable description of the payment and/or mandate. This
         /// will be displayed to the payer when authorising the billing request.
-        ///
         /// </summary>
         [JsonProperty("payment_request_description")]
         public string PaymentRequestDescription { get; set; }
@@ -909,12 +896,12 @@ namespace GoCardless.Services
 
         /// <summary>
         /// (Optional) A scheme used for Open Banking payments. Currently
-        /// `faster_payments` is supported in the UK (GBP) and
-        /// `sepa_credit_transfer` and `sepa_instant_credit_transfer` are
-        /// supported in supported Eurozone countries (EUR). For Eurozone
-        /// countries, `sepa_credit_transfer` is used as the default. Please be
-        /// aware that `sepa_instant_credit_transfer` may incur an additional
-        /// fee for your customer.
+        /// <c>faster_payments</c> is supported in the UK (GBP) and
+        /// <c>sepa_credit_transfer</c> and <c>sepa_instant_credit_transfer</c>
+        /// are supported in supported Eurozone countries (EUR). For Eurozone
+        /// countries, <c>sepa_credit_transfer</c> is used as the default.
+        /// Please be aware that <c>sepa_instant_credit_transfer</c> may incur
+        /// an additional fee for your customer.
         /// </summary>
         [JsonProperty("payment_request_scheme")]
         public string PaymentRequestScheme { get; set; }

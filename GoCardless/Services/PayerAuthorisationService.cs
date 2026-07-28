@@ -16,13 +16,12 @@ namespace GoCardless.Services
     ///
     /// <p class="restricted-notice">
     ///   Don't use Payer Authorisations for new integrations.
-    ///   It is deprecated in favour of
+    /// It is deprecated in favour of
     ///   <a
     /// href="https://developer.gocardless.com/getting-started/billing-requests/overview/">
     ///   Billing Requests</a>. Use Billing Requests to build any future
     /// integrations.
     /// </p>
-    ///
     /// Payer Authorisation resource acts as a wrapper for creating customer,
     /// bank account and mandate details in a single request.
     /// PayerAuthorisation API enables the integrators to build their own custom
@@ -30,44 +29,48 @@ namespace GoCardless.Services
     ///
     /// The process to use the Payer Authorisation API is as follows:
     ///
-    ///   1. Create a Payer Authorisation, either empty or with already
-    /// available information
-    ///   2. Update the authorisation with additional information or fix any
-    /// mistakes
-    ///   3. Submit the authorisation, after the payer has reviewed their
-    /// information
-    ///   4. [coming soon] Redirect the payer to the verification mechanisms
-    /// from the response of the Submit request (this will be introduced as a
-    /// non-breaking change)
-    ///   5. Confirm the authorisation to indicate that the resources can be
-    /// created
-    ///
+    /// <ol>
+    /// <li>Create a Payer Authorisation, either empty or with already available
+    /// information</li>
+    /// <li>Update the authorisation with additional information or fix any
+    /// mistakes</li>
+    /// <li>Submit the authorisation, after the payer has reviewed their
+    /// information</li>
+    /// <li>[coming soon] Redirect the payer to the verification mechanisms from
+    /// the response of the Submit request (this will be introduced as a
+    /// non-breaking change)</li>
+    /// <li>Confirm the authorisation to indicate that the resources can be
+    /// created</li>
+    /// </ol>
     /// After the Payer Authorisation is confirmed, resources will eventually be
     /// created as it's an asynchronous process.
     ///
     /// To retrieve the status and ID of the linked resources you can do one of
     /// the following:
+    ///
     /// <ol>
     ///   <li> Listen to <code>  payer_authorisation_completed </code>  <a
-    /// href="#appendix-webhooks"> webhook</a> (recommended)</li>
+    /// href="https://developer.gocardless.com/api-reference/#appendix-webhooks">
+    /// webhook</a> (recommended)</li>
     ///   <li> Poll the GET <a
-    /// href="#payer-authorisations-get-a-single-payer-authorisation">
+    /// href="https://developer.gocardless.com/api-reference/#payer-authorisations-get-a-single-payer-authorisation">
     /// endpoint</a></li>
     ///   <li> Poll the GET events API
-    /// <code>https://api.gocardless.com/events?payer_authorisation={id}&action=completed</code>
+    /// <code>https://api.gocardless.com/events?payer_authorisation={id}&amp;action=completed</code>
     /// </li>
     /// </ol>
-    ///
     /// <p class="notice">
-    ///   Note that the `create` and `update` endpoints behave differently than
-    ///   other existing `create` and `update` endpoints. The Payer
-    /// Authorisation is still saved if incomplete data is provided.
-    ///   We return the list of incomplete data in the `incomplete_fields` along
-    /// with the resources in the body of the response.
-    ///   The bank account details(account_number, bank_code & branch_code) must
-    /// be sent together rather than splitting across different request for both
-    /// `create` and `update` endpoints.
-    ///   <br><br>
+    ///   Note that the <code>create</code> and <code>update</code> endpoints
+    /// behave differently than
+    /// other existing <code>create</code> and <code>update</code> endpoints.
+    /// The Payer Authorisation is still saved if incomplete data is provided.
+    /// We return the list of incomplete data in the
+    /// <code>incomplete_fields</code> along with the resources in the body of
+    /// the response.
+    /// The bank account details(account_number, bank_code &amp; branch_code)
+    /// must be sent together rather than splitting across different request for
+    /// both <code>create</code> and <code>update</code> endpoints.
+    ///   <br></br><br></br>
     ///   The API is designed to be flexible and allows you to collect
     /// information in multiple steps without storing any sensitive data in the
     /// browser or in your servers.
@@ -91,7 +94,7 @@ namespace GoCardless.Services
         /// Retrieves the details of a single existing Payer Authorisation. It
         /// can be used for polling the status of a Payer Authorisation.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PA".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "PA".
         /// <param name="request">An optional `PayerAuthorisationGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payer authorisation resource</returns>
@@ -161,11 +164,11 @@ namespace GoCardless.Services
         /// has been designed this way so you do not need to save any payer data
         /// on your servers or the browser while still being able to implement a
         /// progressive solution, such a multi-step form. <p class="notice">
-        /// Note that in order to update the `metadata` attribute values it must
-        /// be sent completely as it overrides the previously existing values.
-        /// </p>
+        /// Note that in order to update the <c>metadata</c> attribute values it
+        /// must be sent completely as it overrides the previously existing
+        /// values. </p>
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PA".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "PA".
         /// <param name="request">An optional `PayerAuthorisationUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payer authorisation resource</returns>
@@ -202,7 +205,7 @@ namespace GoCardless.Services
         /// errors. After it is successfully submitted, the Payer Authorisation
         /// can no longer be edited.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PA".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "PA".
         /// <param name="request">An optional `PayerAuthorisationSubmitRequest` representing the body for this submit request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payer authorisation resource</returns>
@@ -241,12 +244,12 @@ namespace GoCardless.Services
         /// <p class="notice">
         ///   The main use of the confirm endpoint is to enable integrators to
         /// acknowledge the end of the setup process.
-        ///   They might want to make the payers go through some other steps
-        /// after they go through our flow or make them go through the necessary
+        /// They might want to make the payers go through some other steps after
+        /// they go through our flow or make them go through the necessary
         /// verification mechanism (upcoming feature).
         /// </p>
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PA".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "PA".
         /// <param name="request">An optional `PayerAuthorisationConfirmRequest` representing the body for this confirm request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payer authorisation resource</returns>
@@ -295,14 +298,18 @@ namespace GoCardless.Services
     {
         /// <summary>
         /// All details required for the creation of a
-        /// [Customer Bank Account](#core-endpoints-customer-bank-accounts).
+        /// <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">Customer
+        /// Bank Account</a>.
         /// </summary>
         [JsonProperty("bank_account")]
         public PayerAuthorisationBankAccount BankAccount { get; set; }
 
         /// <summary>
         /// All details required for the creation of a
-        /// [Customer Bank Account](#core-endpoints-customer-bank-accounts).
+        /// <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">Customer
+        /// Bank Account</a>.
         /// </summary>
         public class PayerAuthorisationBankAccount
         {
@@ -311,16 +318,18 @@ namespace GoCardless.Services
             /// provided when the customer is created is stored and is available
             /// via the API, but is transliterated, upcased, and truncated to 18
             /// characters in bank submissions. This field is required unless
-            /// the request includes a [customer bank account
-            /// token](#javascript-flow-customer-bank-account-tokens).
+            /// the request includes a <a
+            /// href="https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+            /// bank account token</a>.
             /// </summary>
             [JsonProperty("account_holder_name")]
             public string AccountHolderName { get; set; }
 
             /// <summary>
-            /// Bank account number - see [local
-            /// details](#appendix-local-bank-details) for more information.
-            /// Alternatively you can provide an `iban`.
+            /// Bank account number - see <a
+            /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+            /// details</a> for more information. Alternatively you can provide
+            /// an <c>iban</c>.
             /// </summary>
             [JsonProperty("account_number")]
             public string AccountNumber { get; set; }
@@ -334,8 +343,9 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Account number suffix (only for bank accounts denominated in
-            /// NZD) - see [local details](#local-bank-details-new-zealand) for
-            /// more information.
+            /// NZD) - see <a
+            /// href="https://developer.gocardless.com/api-reference/#local-bank-details-new-zealand">local
+            /// details</a> for more information.
             /// </summary>
             [JsonProperty("account_number_suffix")]
             public string AccountNumberSuffix { get; set; }
@@ -343,16 +353,18 @@ namespace GoCardless.Services
             /// <summary>
             /// Bank account type. Required for USD-denominated bank accounts.
             /// Must not be provided for bank accounts in other currencies. See
-            /// [local details](#local-bank-details-united-states) for more
-            /// information.
+            /// <a
+            /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+            /// details</a> for more information.
             /// </summary>
             [JsonProperty("account_type")]
             public PayerAuthorisationAccountType? AccountType { get; set; }
 
             /// <summary>
             /// Bank account type. Required for USD-denominated bank accounts. Must
-            /// not be provided for bank accounts in other currencies. See [local
-            /// details](#local-bank-details-united-states) for more information.
+            /// not be provided for bank accounts in other currencies. See <a
+            /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+            /// details</a> for more information.
             /// </summary>
             [JsonConverter(typeof(StringEnumConverter))]
             public enum PayerAuthorisationAccountType
@@ -367,41 +379,49 @@ namespace GoCardless.Services
             }
 
             /// <summary>
-            /// Bank code - see [local details](#appendix-local-bank-details)
-            /// for more information. Alternatively you can provide an `iban`.
+            /// Bank code - see <a
+            /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+            /// details</a> for more information. Alternatively you can provide
+            /// an <c>iban</c>.
             /// </summary>
             [JsonProperty("bank_code")]
             public string BankCode { get; set; }
 
             /// <summary>
-            /// Branch code - see [local details](#appendix-local-bank-details)
-            /// for more information. Alternatively you can provide an `iban`.
+            /// Branch code - see <a
+            /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+            /// details</a> for more information. Alternatively you can provide
+            /// an <c>iban</c>.
             /// </summary>
             [JsonProperty("branch_code")]
             public string BranchCode { get; set; }
 
             /// <summary>
-            /// [ISO 3166-1 alpha-2
-            /// code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-            /// Defaults to the country code of the `iban` if supplied,
-            /// otherwise is required.
+            /// <a
+            /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+            /// 3166-1 alpha-2 code</a>. Defaults to the country code of the
+            /// <c>iban</c> if supplied, otherwise is required.
             /// </summary>
             [JsonProperty("country_code")]
             public string CountryCode { get; set; }
 
             /// <summary>
-            /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-            /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
-            /// "NZD", "SEK" and "USD" are supported.
+            /// <a
+            /// href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+            /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR",
+            /// "GBP", "NZD", "SEK" and "USD" are supported.
             /// </summary>
             [JsonProperty("currency")]
             public string Currency { get; set; }
 
             /// <summary>
             /// International Bank Account Number. Alternatively you can provide
-            /// [local details](#appendix-local-bank-details). IBANs are not
-            /// accepted for Swedish bank accounts denominated in SEK - you must
-            /// supply [local details](#local-bank-details-sweden).
+            /// <a
+            /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+            /// details</a>. IBANs are not accepted for Swedish bank accounts
+            /// denominated in SEK - you must supply <a
+            /// href="https://developer.gocardless.com/api-reference/#local-bank-details-sweden">local
+            /// details</a>.
             /// </summary>
             [JsonProperty("iban")]
             public string Iban { get; set; }
@@ -415,15 +435,15 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// All details required for the creation of a
-        /// [Customer](#core-endpoints-customers).
+        /// All details required for the creation of a <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">Customer</a>.
         /// </summary>
         [JsonProperty("customer")]
         public PayerAuthorisationCustomer Customer { get; set; }
 
         /// <summary>
-        /// All details required for the creation of a
-        /// [Customer](#core-endpoints-customers).
+        /// All details required for the creation of a <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">Customer</a>.
         /// </summary>
         public class PayerAuthorisationCustomer
         {
@@ -452,19 +472,20 @@ namespace GoCardless.Services
             public string City { get; set; }
 
             /// <summary>
-            /// Customer's company name. Required unless a `given_name` and
-            /// `family_name` are provided. For Canadian customers, the use of a
-            /// `company_name` value will mean that any mandate created from
-            /// this customer will be considered to be a "Business PAD"
-            /// (otherwise, any mandate will be considered to be a "Personal
-            /// PAD").
+            /// Customer's company name. Required unless a <c>given_name</c> and
+            /// <c>family_name</c> are provided. For Canadian customers, the use
+            /// of a <c>company_name</c> value will mean that any mandate
+            /// created from this customer will be considered to be a "Business
+            /// PAD" (otherwise, any mandate will be considered to be a
+            /// "Personal PAD").
             /// </summary>
             [JsonProperty("company_name")]
             public string CompanyName { get; set; }
 
             /// <summary>
-            /// [ISO 3166-1 alpha-2
-            /// code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+            /// <a
+            /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+            /// 3166-1 alpha-2 code.</a>
             /// </summary>
             [JsonProperty("country_code")]
             public string CountryCode { get; set; }
@@ -485,24 +506,23 @@ namespace GoCardless.Services
             public string Email { get; set; }
 
             /// <summary>
-            /// Customer's surname. Required unless a `company_name` is
+            /// Customer's surname. Required unless a <c>company_name</c> is
             /// provided.
             /// </summary>
             [JsonProperty("family_name")]
             public string FamilyName { get; set; }
 
             /// <summary>
-            /// Customer's first name. Required unless a `company_name` is
+            /// Customer's first name. Required unless a <c>company_name</c> is
             /// provided.
             /// </summary>
             [JsonProperty("given_name")]
             public string GivenName { get; set; }
 
             /// <summary>
-            /// An [IETF Language Tag](https://tools.ietf.org/html/rfc5646),
-            /// used for both language
+            /// An <a href="https://tools.ietf.org/html/rfc5646">IETF Language
+            /// Tag</a>, used for both language
             /// and regional variations of our product.
-            ///
             /// </summary>
             [JsonProperty("locale")]
             public string Locale { get; set; }
@@ -522,9 +542,9 @@ namespace GoCardless.Services
 
             /// <summary>
             /// The customer's address region, county or department. For US
-            /// customers a 2 letter
-            /// [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US)
-            /// state code is required (e.g. `CA` for California).
+            /// customers a 2 letter <a
+            /// href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO3166-2:US</a>
+            /// state code is required (e.g. <c>CA</c> for California).
             /// </summary>
             [JsonProperty("region")]
             public string Region { get; set; }
@@ -541,15 +561,15 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// All details required for the creation of a
-        /// [Mandate](#core-endpoints-mandates).
+        /// All details required for the creation of a <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">Mandate</a>.
         /// </summary>
         [JsonProperty("mandate")]
         public PayerAuthorisationMandate Mandate { get; set; }
 
         /// <summary>
-        /// All details required for the creation of a
-        /// [Mandate](#core-endpoints-mandates).
+        /// All details required for the creation of a <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">Mandate</a>.
         /// </summary>
         public class PayerAuthorisationMandate
         {
@@ -567,17 +587,17 @@ namespace GoCardless.Services
             /// flow in their browser).
             ///
             /// Not required for creating offline mandates where
-            /// `authorisation_source` is set to telephone or paper.
-            ///
+            /// <c>authorisation_source</c> is set to telephone or paper.
             /// </summary>
             [JsonProperty("payer_ip_address")]
             public string PayerIpAddress { get; set; }
 
             /// <summary>
-            /// Unique reference. Different schemes have different length and
-            /// [character set](#appendix-character-sets) requirements.
-            /// GoCardless will generate a unique reference satisfying the
-            /// different scheme requirements if this field is left blank.
+            /// Unique reference. Different schemes have different length and <a
+            /// href="https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+            /// set</a> requirements. GoCardless will generate a unique
+            /// reference satisfying the different scheme requirements if this
+            /// field is left blank.
             /// </summary>
             [JsonProperty("reference")]
             public string Reference { get; set; }
@@ -657,21 +677,25 @@ namespace GoCardless.Services
     /// been designed this way so you do not need to save any payer data on your
     /// servers or the browser while still being able to implement a progressive
     /// solution, such a multi-step form. <p class="notice"> Note that in order
-    /// to update the `metadata` attribute values it must be sent completely as
-    /// it overrides the previously existing values. </p>
+    /// to update the <c>metadata</c> attribute values it must be sent
+    /// completely as it overrides the previously existing values. </p>
     /// </summary>
     public class PayerAuthorisationUpdateRequest
     {
         /// <summary>
         /// All details required for the creation of a
-        /// [Customer Bank Account](#core-endpoints-customer-bank-accounts).
+        /// <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">Customer
+        /// Bank Account</a>.
         /// </summary>
         [JsonProperty("bank_account")]
         public PayerAuthorisationBankAccount BankAccount { get; set; }
 
         /// <summary>
         /// All details required for the creation of a
-        /// [Customer Bank Account](#core-endpoints-customer-bank-accounts).
+        /// <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">Customer
+        /// Bank Account</a>.
         /// </summary>
         public class PayerAuthorisationBankAccount
         {
@@ -680,16 +704,18 @@ namespace GoCardless.Services
             /// provided when the customer is created is stored and is available
             /// via the API, but is transliterated, upcased, and truncated to 18
             /// characters in bank submissions. This field is required unless
-            /// the request includes a [customer bank account
-            /// token](#javascript-flow-customer-bank-account-tokens).
+            /// the request includes a <a
+            /// href="https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+            /// bank account token</a>.
             /// </summary>
             [JsonProperty("account_holder_name")]
             public string AccountHolderName { get; set; }
 
             /// <summary>
-            /// Bank account number - see [local
-            /// details](#appendix-local-bank-details) for more information.
-            /// Alternatively you can provide an `iban`.
+            /// Bank account number - see <a
+            /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+            /// details</a> for more information. Alternatively you can provide
+            /// an <c>iban</c>.
             /// </summary>
             [JsonProperty("account_number")]
             public string AccountNumber { get; set; }
@@ -703,8 +729,9 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Account number suffix (only for bank accounts denominated in
-            /// NZD) - see [local details](#local-bank-details-new-zealand) for
-            /// more information.
+            /// NZD) - see <a
+            /// href="https://developer.gocardless.com/api-reference/#local-bank-details-new-zealand">local
+            /// details</a> for more information.
             /// </summary>
             [JsonProperty("account_number_suffix")]
             public string AccountNumberSuffix { get; set; }
@@ -712,16 +739,18 @@ namespace GoCardless.Services
             /// <summary>
             /// Bank account type. Required for USD-denominated bank accounts.
             /// Must not be provided for bank accounts in other currencies. See
-            /// [local details](#local-bank-details-united-states) for more
-            /// information.
+            /// <a
+            /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+            /// details</a> for more information.
             /// </summary>
             [JsonProperty("account_type")]
             public PayerAuthorisationAccountType? AccountType { get; set; }
 
             /// <summary>
             /// Bank account type. Required for USD-denominated bank accounts. Must
-            /// not be provided for bank accounts in other currencies. See [local
-            /// details](#local-bank-details-united-states) for more information.
+            /// not be provided for bank accounts in other currencies. See <a
+            /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+            /// details</a> for more information.
             /// </summary>
             [JsonConverter(typeof(StringEnumConverter))]
             public enum PayerAuthorisationAccountType
@@ -736,41 +765,49 @@ namespace GoCardless.Services
             }
 
             /// <summary>
-            /// Bank code - see [local details](#appendix-local-bank-details)
-            /// for more information. Alternatively you can provide an `iban`.
+            /// Bank code - see <a
+            /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+            /// details</a> for more information. Alternatively you can provide
+            /// an <c>iban</c>.
             /// </summary>
             [JsonProperty("bank_code")]
             public string BankCode { get; set; }
 
             /// <summary>
-            /// Branch code - see [local details](#appendix-local-bank-details)
-            /// for more information. Alternatively you can provide an `iban`.
+            /// Branch code - see <a
+            /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+            /// details</a> for more information. Alternatively you can provide
+            /// an <c>iban</c>.
             /// </summary>
             [JsonProperty("branch_code")]
             public string BranchCode { get; set; }
 
             /// <summary>
-            /// [ISO 3166-1 alpha-2
-            /// code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-            /// Defaults to the country code of the `iban` if supplied,
-            /// otherwise is required.
+            /// <a
+            /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+            /// 3166-1 alpha-2 code</a>. Defaults to the country code of the
+            /// <c>iban</c> if supplied, otherwise is required.
             /// </summary>
             [JsonProperty("country_code")]
             public string CountryCode { get; set; }
 
             /// <summary>
-            /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-            /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
-            /// "NZD", "SEK" and "USD" are supported.
+            /// <a
+            /// href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+            /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR",
+            /// "GBP", "NZD", "SEK" and "USD" are supported.
             /// </summary>
             [JsonProperty("currency")]
             public string Currency { get; set; }
 
             /// <summary>
             /// International Bank Account Number. Alternatively you can provide
-            /// [local details](#appendix-local-bank-details). IBANs are not
-            /// accepted for Swedish bank accounts denominated in SEK - you must
-            /// supply [local details](#local-bank-details-sweden).
+            /// <a
+            /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+            /// details</a>. IBANs are not accepted for Swedish bank accounts
+            /// denominated in SEK - you must supply <a
+            /// href="https://developer.gocardless.com/api-reference/#local-bank-details-sweden">local
+            /// details</a>.
             /// </summary>
             [JsonProperty("iban")]
             public string Iban { get; set; }
@@ -784,15 +821,15 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// All details required for the creation of a
-        /// [Customer](#core-endpoints-customers).
+        /// All details required for the creation of a <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">Customer</a>.
         /// </summary>
         [JsonProperty("customer")]
         public PayerAuthorisationCustomer Customer { get; set; }
 
         /// <summary>
-        /// All details required for the creation of a
-        /// [Customer](#core-endpoints-customers).
+        /// All details required for the creation of a <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">Customer</a>.
         /// </summary>
         public class PayerAuthorisationCustomer
         {
@@ -821,19 +858,20 @@ namespace GoCardless.Services
             public string City { get; set; }
 
             /// <summary>
-            /// Customer's company name. Required unless a `given_name` and
-            /// `family_name` are provided. For Canadian customers, the use of a
-            /// `company_name` value will mean that any mandate created from
-            /// this customer will be considered to be a "Business PAD"
-            /// (otherwise, any mandate will be considered to be a "Personal
-            /// PAD").
+            /// Customer's company name. Required unless a <c>given_name</c> and
+            /// <c>family_name</c> are provided. For Canadian customers, the use
+            /// of a <c>company_name</c> value will mean that any mandate
+            /// created from this customer will be considered to be a "Business
+            /// PAD" (otherwise, any mandate will be considered to be a
+            /// "Personal PAD").
             /// </summary>
             [JsonProperty("company_name")]
             public string CompanyName { get; set; }
 
             /// <summary>
-            /// [ISO 3166-1 alpha-2
-            /// code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+            /// <a
+            /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+            /// 3166-1 alpha-2 code.</a>
             /// </summary>
             [JsonProperty("country_code")]
             public string CountryCode { get; set; }
@@ -854,24 +892,23 @@ namespace GoCardless.Services
             public string Email { get; set; }
 
             /// <summary>
-            /// Customer's surname. Required unless a `company_name` is
+            /// Customer's surname. Required unless a <c>company_name</c> is
             /// provided.
             /// </summary>
             [JsonProperty("family_name")]
             public string FamilyName { get; set; }
 
             /// <summary>
-            /// Customer's first name. Required unless a `company_name` is
+            /// Customer's first name. Required unless a <c>company_name</c> is
             /// provided.
             /// </summary>
             [JsonProperty("given_name")]
             public string GivenName { get; set; }
 
             /// <summary>
-            /// An [IETF Language Tag](https://tools.ietf.org/html/rfc5646),
-            /// used for both language
+            /// An <a href="https://tools.ietf.org/html/rfc5646">IETF Language
+            /// Tag</a>, used for both language
             /// and regional variations of our product.
-            ///
             /// </summary>
             [JsonProperty("locale")]
             public string Locale { get; set; }
@@ -891,9 +928,9 @@ namespace GoCardless.Services
 
             /// <summary>
             /// The customer's address region, county or department. For US
-            /// customers a 2 letter
-            /// [ISO3166-2:US](https://en.wikipedia.org/wiki/ISO_3166-2:US)
-            /// state code is required (e.g. `CA` for California).
+            /// customers a 2 letter <a
+            /// href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO3166-2:US</a>
+            /// state code is required (e.g. <c>CA</c> for California).
             /// </summary>
             [JsonProperty("region")]
             public string Region { get; set; }
@@ -910,15 +947,15 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// All details required for the creation of a
-        /// [Mandate](#core-endpoints-mandates).
+        /// All details required for the creation of a <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">Mandate</a>.
         /// </summary>
         [JsonProperty("mandate")]
         public PayerAuthorisationMandate Mandate { get; set; }
 
         /// <summary>
-        /// All details required for the creation of a
-        /// [Mandate](#core-endpoints-mandates).
+        /// All details required for the creation of a <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">Mandate</a>.
         /// </summary>
         public class PayerAuthorisationMandate
         {
@@ -936,17 +973,17 @@ namespace GoCardless.Services
             /// flow in their browser).
             ///
             /// Not required for creating offline mandates where
-            /// `authorisation_source` is set to telephone or paper.
-            ///
+            /// <c>authorisation_source</c> is set to telephone or paper.
             /// </summary>
             [JsonProperty("payer_ip_address")]
             public string PayerIpAddress { get; set; }
 
             /// <summary>
-            /// Unique reference. Different schemes have different length and
-            /// [character set](#appendix-character-sets) requirements.
-            /// GoCardless will generate a unique reference satisfying the
-            /// different scheme requirements if this field is left blank.
+            /// Unique reference. Different schemes have different length and <a
+            /// href="https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+            /// set</a> requirements. GoCardless will generate a unique
+            /// reference satisfying the different scheme requirements if this
+            /// field is left blank.
             /// </summary>
             [JsonProperty("reference")]
             public string Reference { get; set; }
@@ -1028,7 +1065,7 @@ namespace GoCardless.Services
     /// <p class="notice">
     ///   The main use of the confirm endpoint is to enable integrators to
     /// acknowledge the end of the setup process.
-    ///   They might want to make the payers go through some other steps after
+    /// They might want to make the payers go through some other steps after
     /// they go through our flow or make them go through the necessary
     /// verification mechanism (upcoming feature).
     /// </p>

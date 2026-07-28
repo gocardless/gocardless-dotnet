@@ -37,9 +37,10 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// balances for a given creditor. This endpoint is rate limited to 60
-        /// requests per minute.
+        /// Returns a <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// list of balances for a given creditor. This endpoint is rate limited
+        /// to 60 requests per minute.
         /// </summary>
         /// <param name="request">An optional `BalanceListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -110,9 +111,10 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-    /// balances for a given creditor. This endpoint is rate limited to 60
-    /// requests per minute.
+    /// Returns a <a
+    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// list of balances for a given creditor. This endpoint is rate limited to
+    /// 60 requests per minute.
     /// </summary>
     public class BalanceListRequest
     {
@@ -129,7 +131,8 @@ namespace GoCardless.Services
         public string Before { get; set; }
 
         /// <summary>
-        /// ID of a [creditor](#core-endpoints-creditors).
+        /// ID of a <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }

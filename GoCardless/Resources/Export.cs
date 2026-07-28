@@ -15,8 +15,9 @@ namespace GoCardless.Resources
     public class Export
     {
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        /// Fixed <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }

@@ -10,40 +10,51 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a redirect flow resource.
     ///
-    /// <p class="deprecated-notice"><strong>Deprecated</strong>: Redirect Flows
-    /// are legacy APIs and cannot be used by new integrators.
-    ///     The [Billing Request flow](#billing-requests) API should be used for
-    /// your payment flows.</p>
-    ///
-    /// Redirect flows enable you to use GoCardless' [hosted payment
-    /// pages](https://pay-sandbox.gocardless.com/AL000000AKFPFF) to set up
-    /// mandates with your customers. These pages are fully compliant and have
-    /// been translated into Danish, Dutch, French, German, Italian, Norwegian,
-    /// Portuguese, Slovak, Spanish and Swedish.
+    /// <p class="deprecated-notice">Deprecated: Redirect Flows are legacy APIs
+    /// and cannot be used by new integrators.
+    /// The <a
+    /// href="https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">Billing
+    /// Request flow</a> API should be used for your payment flows.</p>
+    /// Redirect flows enable you to use GoCardless' <a
+    /// href="https://pay-sandbox.gocardless.com/AL000000AKFPFF">hosted payment
+    /// pages</a> to set up mandates with your customers. These pages are fully
+    /// compliant and have been translated into Danish, Dutch, French, German,
+    /// Italian, Norwegian, Portuguese, Slovak, Spanish and Swedish.
     ///
     /// The overall flow is:
     ///
-    /// 1. You [create](#redirect-flows-create-a-redirect-flow) a redirect flow
-    /// for your customer, and redirect them to the returned redirect url, e.g.
-    /// `https://pay.gocardless.com/flow/RE123`.
-    ///
-    /// 2. Your customer supplies their name, email, address, and bank account
+    /// <ol>
+    /// <li>
+    /// You <a
+    /// href="https://developer.gocardless.com/api-reference/#redirect-flows-create-a-redirect-flow">create</a>
+    /// a redirect flow for your customer, and redirect them to the returned
+    /// redirect url, e.g. <c>https://pay.gocardless.com/flow/RE123</c>.</li>
+    /// <li>
+    /// Your customer supplies their name, email, address, and bank account
     /// details, and submits the form. This securely stores their details, and
-    /// redirects them back to your `success_redirect_url` with
-    /// `redirect_flow_id=RE123` in the querystring.
-    ///
-    /// 3. You [complete](#redirect-flows-complete-a-redirect-flow) the redirect
-    /// flow, which creates a [customer](#core-endpoints-customers), [customer
-    /// bank account](#core-endpoints-customer-bank-accounts), and
-    /// [mandate](#core-endpoints-mandates), and returns the ID of the mandate.
-    /// You may wish to create a [subscription](#core-endpoints-subscriptions)
-    /// or [payment](#core-endpoints-payments) at this point.
-    ///
-    /// Once you have [completed](#redirect-flows-complete-a-redirect-flow) the
-    /// redirect flow via the API, you should display a confirmation page to
+    /// redirects them back to your <c>success_redirect_url</c> with
+    /// <c>redirect_flow_id=RE123</c> in the querystring.</li>
+    /// <li>
+    /// You <a
+    /// href="https://developer.gocardless.com/api-reference/#redirect-flows-complete-a-redirect-flow">complete</a>
+    /// the redirect flow, which creates a <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>,
+    /// <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+    /// bank account</a>, and <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>,
+    /// and returns the ID of the mandate. You may wish to create a <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-subscriptions">subscription</a>
+    /// or <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+    /// at this point.</li>
+    /// </ol>
+    /// Once you have <a
+    /// href="https://developer.gocardless.com/api-reference/#redirect-flows-complete-a-redirect-flow">completed</a>
+    /// the redirect flow via the API, you should display a confirmation page to
     /// your customer, confirming that their Direct Debit has been set up. You
     /// can build your own page, or redirect to the one we provide in the
-    /// `confirmation_url` attribute of the redirect flow.
+    /// <c>confirmation_url</c> attribute of the redirect flow.
     ///
     /// Redirect flows expire 30 minutes after they are first created. You
     /// cannot complete an expired redirect flow. For an integrator this is
@@ -56,18 +67,19 @@ namespace GoCardless.Resources
         /// the customer to rather than use your own page, that confirms in
         /// their chosen language that their Direct Debit has been set up
         /// successfully. Only returned once the customer has set up their
-        /// mandate via the payment pages and the redirect flow has been
-        /// [completed](#redirect-flows-complete-a-redirect-flow), and only
-        /// available for 15 minutes from when you complete the redirect flow.
-        /// The structure of this URL may change at any time, so you should read
-        /// it directly from the API response.
+        /// mandate via the payment pages and the redirect flow has been <a
+        /// href="https://developer.gocardless.com/api-reference/#redirect-flows-complete-a-redirect-flow">completed</a>,
+        /// and only available for 15 minutes from when you complete the
+        /// redirect flow. The structure of this URL may change at any time, so
+        /// you should read it directly from the API response.
         /// </summary>
         [JsonProperty("confirmation_url")]
         public string ConfirmationUrl { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        /// Fixed <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
@@ -100,7 +112,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters. _Note:_
+        /// names up to 50 characters and values up to 500 characters. Note:
         /// This should not be used for storing PII data.
         /// </summary>
         [JsonProperty("metadata")]
@@ -133,7 +145,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// The URL to redirect to upon successful mandate setup. You must use a
-        /// URL beginning `https` in the live environment.
+        /// URL beginning <c>https</c> in the live environment.
         /// </summary>
         [JsonProperty("success_redirect_url")]
         public string SuccessRedirectUrl { get; set; }
@@ -145,43 +157,49 @@ namespace GoCardless.Resources
     public class RedirectFlowLinks
     {
         /// <summary>
-        /// ID of [billing request](#billing-requests-billing-requests) that a
-        /// redirect flow can create.<br />**Note**: The redirect flow will only
-        /// create a billing request in the event the redirect flow is eligible
-        /// to send the payer down this new and improved flow
+        /// ID of <a
+        /// href="https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">billing
+        /// request</a> that a redirect flow can create.<br></br>Note: The
+        /// redirect flow will only create a billing request in the event the
+        /// redirect flow is eligible to send the payer down this new and
+        /// improved flow
         /// </summary>
         [JsonProperty("billing_request")]
         public string BillingRequest { get; set; }
 
         /// <summary>
-        /// The [creditor](#core-endpoints-creditors) for whom the mandate will
-        /// be created. The `name` of the creditor will be displayed on the
-        /// payment page.
+        /// The <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+        /// for whom the mandate will be created. The <c>name</c> of the
+        /// creditor will be displayed on the payment page.
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
 
         /// <summary>
-        /// ID of [customer](#core-endpoints-customers) created by this redirect
-        /// flow.<br/>**Note**: this property will not be present until the
-        /// redirect flow has been successfully completed.
+        /// ID of <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+        /// created by this redirect flow.<br></br>Note: this property will not
+        /// be present until the redirect flow has been successfully completed.
         /// </summary>
         [JsonProperty("customer")]
         public string Customer { get; set; }
 
         /// <summary>
-        /// ID of [customer bank
-        /// account](#core-endpoints-customer-bank-accounts) created by this
-        /// redirect flow.<br/>**Note**: this property will not be present until
-        /// the redirect flow has been successfully completed.
+        /// ID of <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+        /// bank account</a> created by this redirect flow.<br></br>Note: this
+        /// property will not be present until the redirect flow has been
+        /// successfully completed.
         /// </summary>
         [JsonProperty("customer_bank_account")]
         public string CustomerBankAccount { get; set; }
 
         /// <summary>
-        /// ID of [mandate](#core-endpoints-mandates) created by this redirect
-        /// flow.<br/>**Note**: this property will not be present until the
-        /// redirect flow has been successfully completed.
+        /// ID of <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+        /// created by this redirect flow.<br></br>Note: this property will not
+        /// be present until the redirect flow has been successfully completed.
         /// </summary>
         [JsonProperty("mandate")]
         public string Mandate { get; set; }

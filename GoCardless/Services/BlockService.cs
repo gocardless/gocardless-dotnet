@@ -35,10 +35,11 @@ namespace GoCardless.Services
     ///
     /// Please note:
     ///
-    ///   - Payments and subscriptions cannot be created against a mandate in
-    /// blocked state.
-    ///   - A mandate can never be transitioned out of the blocked state.
-    ///
+    /// <ul>
+    /// <li>Payments and subscriptions cannot be created against a mandate in
+    /// blocked state.</li>
+    /// <li>A mandate can never be transitioned out of the blocked state.</li>
+    /// </ul>
     /// The one exception to this is when blocking a 'bank_name'. This block
     /// will prevent bank
     /// accounts from being created for banks that match the given name. To
@@ -97,7 +98,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of an existing block.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "BLC".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "BLC".
         /// <param name="request">An optional `BlockGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single block resource</returns>
@@ -128,8 +129,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your blocks.
+        /// Returns a <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// list of your blocks.
         /// </summary>
         /// <param name="request">An optional `BlockListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -201,7 +203,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Disables a block so that it no longer will prevent mandate creation.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "BLC".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "BLC".
         /// <param name="request">An optional `BlockDisableRequest` representing the body for this disable request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single block resource</returns>
@@ -235,7 +237,7 @@ namespace GoCardless.Services
         /// Enables a previously disabled block so that it will prevent mandate
         /// creation
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "BLC".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "BLC".
         /// <param name="request">An optional `BlockEnableRequest` representing the body for this enable request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single block resource</returns>
@@ -424,8 +426,9 @@ namespace GoCardless.Services
     public class BlockGetRequest { }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// blocks.
+    /// Returns a <a
+    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// list of your blocks.
     /// </summary>
     public class BlockListRequest
     {
@@ -440,12 +443,6 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("before")]
         public string Before { get; set; }
-
-        /// <summary>
-        /// ID of a [Block](#core-endpoints-blocks).
-        /// </summary>
-        [JsonProperty("block")]
-        public string Block { get; set; }
 
         /// <summary>
         /// Type of entity we will seek to match against when blocking the
@@ -483,8 +480,7 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        /// Limit to records created within certain times.
         /// </summary>
         [JsonProperty("created_at")]
         public CreatedAtParam CreatedAt { get; set; }
@@ -563,13 +559,6 @@ namespace GoCardless.Services
             [EnumMember(Value = "other")]
             Other,
         }
-
-        /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was updated.
-        /// </summary>
-        [JsonProperty("updated_at")]
-        public string UpdatedAt { get; set; }
     }
 
     /// <summary>

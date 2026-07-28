@@ -14,12 +14,14 @@ namespace GoCardless.Resources
     /// single API call.
     ///
     /// The Workflow:
-    /// 1. Create the outbound payment import.
-    /// 2. Retrieve an authorisation link from the response.
-    /// 3. Redirect the user to the link to authorise the import.
-    /// 4. Once the user authorises the import, the individual outbound payments
-    /// are automatically submitted.
     ///
+    /// <ol>
+    /// <li>Create the outbound payment import.</li>
+    /// <li>Retrieve an authorisation link from the response.</li>
+    /// <li>Redirect the user to the link to authorise the import.</li>
+    /// <li>Once the user authorises the import, the individual outbound
+    /// payments are automatically submitted.</li>
+    /// </ol>
     /// Import entries are not processed as actual payments until they are
     /// reviewed and authorised in GoCardless Dashboard.
     /// Upon approval, a unique outbound payment is generated for every entry in
@@ -46,15 +48,16 @@ namespace GoCardless.Resources
         public string AuthorisationUrl { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        /// Fixed <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency. Currently only "GBP" is supported.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency. Currently only "GBP" is supported.
         /// </summary>
         [JsonProperty("currency")]
         public OutboundPaymentImportCurrency? Currency { get; set; }
@@ -76,17 +79,18 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// The status of the outbound payment import.
+        ///
         /// <ul>
-        /// <li>`created`: The initial state of a new import.</li>
-        /// <li>`validating`: Import validation in progress.</li>
-        /// <li>`invalid`: Import validation failed.</li>
-        /// <li>`valid`: Import validation succeeded.</li>
-        /// <li>`processing`: Authorisation received; payments are being
+        /// <li><c>created</c>: The initial state of a new import.</li>
+        /// <li><c>validating</c>: Import validation in progress.</li>
+        /// <li><c>invalid</c>: Import validation failed.</li>
+        /// <li><c>valid</c>: Import validation succeeded.</li>
+        /// <li><c>processing</c>: Authorisation received; payments are being
         /// generated.</li>
-        /// <li>`processed`: All entries have been successfully converted into
-        /// outbound payments.</li>
-        /// <li>`cancelled`: The import was cancelled by a user or automatically
-        /// expired by the system.</li>
+        /// <li><c>processed</c>: All entries have been successfully converted
+        /// into outbound payments.</li>
+        /// <li><c>cancelled</c>: The import was cancelled by a user or
+        /// automatically expired by the system.</li>
         /// </ul>
         /// </summary>
         [JsonProperty("status")]
@@ -94,8 +98,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency. Currently only
-    /// "GBP" is supported.
+    /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency.
+    /// Currently only "GBP" is supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum OutboundPaymentImportCurrency
@@ -194,14 +198,16 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// The status of the outbound payment import.
+    ///
     /// <ul>
-    /// <li>`created`: The initial state of a new import.</li>
-    /// <li>`validating`: Import validation in progress.</li>
-    /// <li>`invalid`: Import validation failed.</li>
-    /// <li>`valid`: Import validation succeeded.</li>
-    /// <li>`processing`: Authorisation received; payments are being generated.</li>
-    /// <li>`processed`: All entries have been successfully converted into outbound payments.</li>
-    /// <li>`cancelled`: The import was cancelled by a user or automatically expired by the
+    /// <li><c>created</c>: The initial state of a new import.</li>
+    /// <li><c>validating</c>: Import validation in progress.</li>
+    /// <li><c>invalid</c>: Import validation failed.</li>
+    /// <li><c>valid</c>: Import validation succeeded.</li>
+    /// <li><c>processing</c>: Authorisation received; payments are being generated.</li>
+    /// <li><c>processed</c>: All entries have been successfully converted into outbound
+    /// payments.</li>
+    /// <li><c>cancelled</c>: The import was cancelled by a user or automatically expired by the
     /// system.</li>
     /// </ul>
     /// </summary>

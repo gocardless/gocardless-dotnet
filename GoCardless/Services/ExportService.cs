@@ -33,7 +33,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns a single export.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "EX".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "EX".
         /// <param name="request">An optional `ExportGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single export resource</returns>

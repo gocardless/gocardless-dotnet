@@ -40,12 +40,14 @@ namespace GoCardless.Resources
         /// fractional currency;
         /// the lowest denomination for the currency (e.g. pence in GBP, cents
         /// in EUR), to one decimal place.
+        ///
         /// <p class="notice">For accuracy, we store some of our fees to greater
         /// precision than we can actually pay out (for example, a GoCardless
         /// fee we record might come to 0.5 pence, but it is not possible to
-        /// send a payout via bank transfer including a half penny).<br><br>To
-        /// calculate the final amount of the payout, we sum all of the items
-        /// and then round to the nearest currency unit.</p>
+        /// send a payout via bank transfer including a half
+        /// penny).<br></br><br></br>To calculate the final amount of the
+        /// payout, we sum all of the items and then round to the nearest
+        /// currency unit.</p>
         /// </summary>
         [JsonProperty("amount")]
         public string Amount { get; set; }
@@ -57,9 +59,9 @@ namespace GoCardless.Resources
         public PayoutItemLinks Links { get; set; }
 
         /// <summary>
-        /// An array of tax items <em>beta</em>
+        /// An array of tax items beta
         ///
-        /// _Note_: VAT applies to transaction and surcharge fees for merchants
+        /// Note: VAT applies to transaction and surcharge fees for merchants
         /// operating in the UK and France.
         /// </summary>
         [JsonProperty("taxes")]
@@ -68,36 +70,36 @@ namespace GoCardless.Resources
         /// <summary>
         /// The type of the credit (positive) or debit (negative) item in the
         /// payout (inclusive of VAT if applicable). One of:
+        ///
         /// <ul>
-        /// <li>`payment_paid_out` (credit)</li>
-        /// <li>`payment_failed` (debit): The payment failed to be
+        /// <li><c>payment_paid_out</c> (credit)</li>
+        /// <li><c>payment_failed</c> (debit): The payment failed to be
         /// processed.</li>
-        /// <li>`payment_charged_back` (debit): The payment has been charged
-        /// back.</li>
-        /// <li>`payment_refunded` (debit): The payment has been refunded to the
-        /// customer.</li>
-        /// <li>`refund` (debit): A refund sent to a customer, not linked to a
-        /// payment.</li>
-        /// <li>`refund_funds_returned` (credit): The refund could not be sent
-        /// to the customer, and the funds have been returned to you.</li>
-        /// <li>`gocardless_fee` (credit/debit): The fees that GoCardless
+        /// <li><c>payment_charged_back</c> (debit): The payment has been
+        /// charged back.</li>
+        /// <li><c>payment_refunded</c> (debit): The payment has been refunded
+        /// to the customer.</li>
+        /// <li><c>refund</c> (debit): A refund sent to a customer, not linked
+        /// to a payment.</li>
+        /// <li><c>refund_funds_returned</c> (credit): The refund could not be
+        /// sent to the customer, and the funds have been returned to you.</li>
+        /// <li><c>gocardless_fee</c> (credit/debit): The fees that GoCardless
         /// charged for a payment. In the case of a payment failure or
         /// chargeback, these will appear as credits. Will include taxes if
         /// applicable for merchants.</li>
-        /// <li>`app_fee` (credit/debit): The optional fees that a partner may
-        /// have taken for a payment. In the case of a payment failure or
+        /// <li><c>app_fee</c> (credit/debit): The optional fees that a partner
+        /// may have taken for a payment. In the case of a payment failure or
         /// chargeback, these will appear as credits.</li>
-        /// <li>`revenue_share` (credit/debit): A share of the fees that
+        /// <li><c>revenue_share</c> (credit/debit): A share of the fees that
         /// GoCardless collected which some partner integrations receive when
         /// their users take payments. Only shown in partner payouts. In the
         /// case of a payment failure or chargeback, these will appear as
         /// credits.</li>
-        /// <li>`surcharge_fee` (credit/debit): GoCardless deducted a surcharge
-        /// fee as the payment failed or was charged back, or refunded a
-        /// surcharge fee as the bank or customer cancelled the chargeback. Will
-        /// include taxes if applicable for merchants.</li>
+        /// <li><c>surcharge_fee</c> (credit/debit): GoCardless deducted a
+        /// surcharge fee as the payment failed or was charged back, or refunded
+        /// a surcharge fee as the bank or customer cancelled the chargeback.
+        /// Will include taxes if applicable for merchants.</li>
         /// </ul>
-        ///
         /// </summary>
         [JsonProperty("type")]
         public PayoutItemType? Type { get; set; }
@@ -111,8 +113,8 @@ namespace GoCardless.Resources
         /// <summary>
         /// Unique identifier, beginning with "MD". Note that this prefix may
         /// not apply to mandates created before 2016. Present only for the
-        /// items of type `payment_refunded`, `refund` and
-        /// `refund_funds_returned`.
+        /// items of type <c>payment_refunded</c>, <c>refund</c> and
+        /// <c>refund_funds_returned</c>.
         /// </summary>
         [JsonProperty("mandate")]
         public string Mandate { get; set; }
@@ -125,7 +127,8 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Unique identifier, beginning with "RF". Present only for the items
-        /// of type `payment_refunded`, `refund` and `refund_funds_returned`.
+        /// of type <c>payment_refunded</c>, <c>refund</c> and
+        /// <c>refund_funds_returned</c>.
         /// </summary>
         [JsonProperty("refund")]
         public string Refund { get; set; }
@@ -134,9 +137,9 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a payout item taxis resource.
     ///
-    /// An array of tax items <em>beta</em>
+    /// An array of tax items beta
     ///
-    /// _Note_: VAT applies to transaction and surcharge fees for merchants
+    /// Note: VAT applies to transaction and surcharge fees for merchants
     /// operating in the UK and France.
     /// </summary>
     public class PayoutItemTaxis
@@ -150,9 +153,9 @@ namespace GoCardless.Resources
         public string Amount { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+        /// "NZD", "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public PayoutItemTaxisCurrency? Currency { get; set; }
@@ -162,17 +165,18 @@ namespace GoCardless.Resources
         /// fractional currency; the lowest denomination for the currency (e.g.
         /// pence in GBP, cents in EUR), to one decimal place.
         ///
-        /// When `currency` and `destination_currency` don't match this will be
-        /// `null` until the `exchange_rate` has been finalised.
+        /// When <c>currency</c> and <c>destination_currency</c> don't match
+        /// this will be <c>null</c> until the <c>exchange_rate</c> has been
+        /// finalised.
         /// </summary>
         [JsonProperty("destination_amount")]
         public string DestinationAmount { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) code
-        /// for the currency in which tax is paid out to the tax authorities of
-        /// your tax jurisdiction. Currently “EUR” for French merchants and
-        /// “GBP” for British merchants.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> code for the currency in which tax is paid out to the tax
+        /// authorities of your tax jurisdiction. Currently “EUR” for French
+        /// merchants and “GBP” for British merchants.
         /// </summary>
         [JsonProperty("destination_currency")]
         public string DestinationCurrency { get; set; }
@@ -184,10 +188,10 @@ namespace GoCardless.Resources
         /// Present only if the currency and the destination currency don't
         /// match and the exchange rate has been finalised.
         ///
-        /// You can listen for the payout's [`tax_exchange_rates_confirmed`
-        /// webhook](https://developer.gocardless.com/api-reference/#event-types-payout)
-        /// to know when the exchange rate has been finalised for all fees in
-        /// the payout.
+        /// You can listen for the payout's <a
+        /// href="https://developer.gocardless.com/api-reference/#event-types-payout"><c>tax_exchange_rates_confirmed</c>
+        /// webhook</a> to know when the exchange rate has been finalised for
+        /// all fees in the payout.
         /// </summary>
         [JsonProperty("exchange_rate")]
         public string ExchangeRate { get; set; }
@@ -201,8 +205,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-    /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+    /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+    /// Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum PayoutItemTaxisCurrency
@@ -247,27 +251,27 @@ namespace GoCardless.Resources
     /// <summary>
     /// The type of the credit (positive) or debit (negative) item in the payout (inclusive of VAT
     /// if applicable). One of:
+    ///
     /// <ul>
-    /// <li>`payment_paid_out` (credit)</li>
-    /// <li>`payment_failed` (debit): The payment failed to be processed.</li>
-    /// <li>`payment_charged_back` (debit): The payment has been charged back.</li>
-    /// <li>`payment_refunded` (debit): The payment has been refunded to the customer.</li>
-    /// <li>`refund` (debit): A refund sent to a customer, not linked to a payment.</li>
-    /// <li>`refund_funds_returned` (credit): The refund could not be sent to the customer, and the
-    /// funds have been returned to you.</li>
-    /// <li>`gocardless_fee` (credit/debit): The fees that GoCardless charged for a payment. In the
-    /// case of a payment failure or chargeback, these will appear as credits. Will include taxes if
-    /// applicable for merchants.</li>
-    /// <li>`app_fee` (credit/debit): The optional fees that a partner may have taken for a payment.
-    /// In the case of a payment failure or chargeback, these will appear as credits.</li>
-    /// <li>`revenue_share` (credit/debit): A share of the fees that GoCardless collected which some
-    /// partner integrations receive when their users take payments. Only shown in partner payouts.
-    /// In the case of a payment failure or chargeback, these will appear as credits.</li>
-    /// <li>`surcharge_fee` (credit/debit): GoCardless deducted a surcharge fee as the payment
+    /// <li><c>payment_paid_out</c> (credit)</li>
+    /// <li><c>payment_failed</c> (debit): The payment failed to be processed.</li>
+    /// <li><c>payment_charged_back</c> (debit): The payment has been charged back.</li>
+    /// <li><c>payment_refunded</c> (debit): The payment has been refunded to the customer.</li>
+    /// <li><c>refund</c> (debit): A refund sent to a customer, not linked to a payment.</li>
+    /// <li><c>refund_funds_returned</c> (credit): The refund could not be sent to the customer, and
+    /// the funds have been returned to you.</li>
+    /// <li><c>gocardless_fee</c> (credit/debit): The fees that GoCardless charged for a payment. In
+    /// the case of a payment failure or chargeback, these will appear as credits. Will include
+    /// taxes if applicable for merchants.</li>
+    /// <li><c>app_fee</c> (credit/debit): The optional fees that a partner may have taken for a
+    /// payment. In the case of a payment failure or chargeback, these will appear as credits.</li>
+    /// <li><c>revenue_share</c> (credit/debit): A share of the fees that GoCardless collected which
+    /// some partner integrations receive when their users take payments. Only shown in partner
+    /// payouts. In the case of a payment failure or chargeback, these will appear as credits.</li>
+    /// <li><c>surcharge_fee</c> (credit/debit): GoCardless deducted a surcharge fee as the payment
     /// failed or was charged back, or refunded a surcharge fee as the bank or customer cancelled
     /// the chargeback. Will include taxes if applicable for merchants.</li>
     /// </ul>
-    ///
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum PayoutItemType

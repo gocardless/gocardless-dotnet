@@ -14,26 +14,28 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with subscription resources.
     ///
-    /// Subscriptions create [payments](#core-endpoints-payments) according to a
-    /// schedule.
+    /// Subscriptions create <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payments</a>
+    /// according to a schedule.
     ///
-    /// ### Recurrence Rules
-    ///
+    /// <h3>Recurrence Rules</h3>
     /// The following rules apply when specifying recurrence:
     ///
-    /// - If `day_of_month` and `start_date` are not provided `start_date` will
-    /// be the [mandate](#core-endpoints-mandates)'s `next_possible_charge_date`
-    /// and the subscription will then recur based on the `interval` &
-    /// `interval_unit`
-    /// - If `month` or `day_of_month` are present the following validations
-    /// apply:
-    ///
-    /// | __interval_unit__ | __month__                                      |
-    /// __day_of_month__                           |
+    /// <ul>
+    /// <li>If <c>day_of_month</c> and <c>start_date</c> are not provided
+    /// <c>start_date</c> will be the <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+    /// <c>next_possible_charge_date</c> and the subscription will then recur
+    /// based on the <c>interval</c> &amp; <c>interval_unit</c></li>
+    /// <li>If <c>month</c> or <c>day_of_month</c> are present the following
+    /// validations apply:</li>
+    /// </ul>
+    /// | interval_unit | month                                      |
+    /// day_of_month                           |
     /// | :---------------- | :--------------------------------------------- |
     /// :----------------------------------------- |
-    /// | yearly            | optional (required if `day_of_month` provided) |
-    /// optional (invalid if `month` not provided) |
+    /// | yearly            | optional (required if <c>day_of_month</c>
+    /// provided) | optional (invalid if <c>month</c> not provided) |
     /// | monthly           | invalid                                        |
     /// optional                                   |
     /// | weekly            | invalid                                        |
@@ -41,8 +43,8 @@ namespace GoCardless.Services
     ///
     /// Examples:
     ///
-    /// | __interval_unit__ | __interval__ | __month__ | __day_of_month__ |
-    /// valid?                                             |
+    /// | interval_unit | interval | month | day_of_month | valid?
+    ///                               |
     /// | :---------------- | :----------- | :-------- | :--------------- |
     /// :------------------------------------------------- |
     /// | yearly            | 1            | january   | -1               |
@@ -54,24 +56,25 @@ namespace GoCardless.Services
     /// | weekly            | 2            |           |                  |
     /// valid                                              |
     /// | yearly            | 1            | march     |                  |
-    /// invalid - missing `day_of_month`                   |
+    /// invalid - missing <c>day_of_month</c>                   |
     /// | yearly            | 1            |           | 2                |
-    /// invalid - missing `month`                          |
+    /// invalid - missing <c>month</c>                          |
     /// | monthly           | 6            | august    | 12               |
-    /// invalid - `month` must be blank                    |
+    /// invalid - <c>month</c> must be blank                    |
     /// | weekly            | 2            | october   | 10               |
-    /// invalid - `month` and `day_of_month` must be blank |
+    /// invalid - <c>month</c> and <c>day_of_month</c> must be blank |
     ///
-    /// ### Rolling dates
-    ///
+    /// <h3>Rolling dates</h3>
     /// When a charge date falls on a non-business day, one of two things will
     /// happen:
     ///
-    /// - if the recurrence rule specified `-1` as the `day_of_month`, the
-    /// charge date will be rolled __backwards__ to the previous business day
-    /// (i.e., the last working day of the month).
-    /// - otherwise the charge date will be rolled __forwards__ to the next
-    /// business day.
+    /// <ul>
+    /// <li>if the recurrence rule specified <c>-1</c> as the
+    /// <c>day_of_month</c>, the charge date will be rolled backwards to the
+    /// previous business day (i.e., the last working day of the month).</li>
+    /// <li>otherwise the charge date will be rolled forwards to the next
+    /// business day.</li>
+    /// </ul>
     /// </summary>
     public class SubscriptionService
     {
@@ -114,10 +117,11 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your subscriptions. Please note if the subscriptions are related to
-        /// customers who have been removed, they will not be shown in the
-        /// response.
+        /// Returns a <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// list of your subscriptions. Please note if the subscriptions are
+        /// related to customers who have been removed, they will not be shown
+        /// in the response.
         /// </summary>
         /// <param name="request">An optional `SubscriptionListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -189,7 +193,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of a single subscription.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "SB".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "SB".
         /// <param name="request">An optional `SubscriptionGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
@@ -224,31 +228,34 @@ namespace GoCardless.Services
         ///
         /// This fails with:
         ///
-        /// - `validation_failed` if invalid data is provided when attempting to
-        /// update a subscription.
-        ///
-        /// - `subscription_not_active` if the subscription is no longer active.
-        ///
-        /// - `subscription_already_ended` if the subscription has taken all
-        /// payments.
-        ///
-        /// - `mandate_payments_require_approval` if the amount is being changed
-        /// and the mandate requires approval.
-        ///
-        /// - `number_of_subscription_amendments_exceeded` error if the
-        /// subscription amount has already been changed 10 times.
-        ///
-        /// - `forbidden` if the amount is being changed, and the subscription
-        /// was created by an app and you are not authenticated as that app, or
-        /// if the subscription was not created by an app and you are
-        /// authenticated as an app
-        ///
-        /// - `resource_created_by_another_app` if the app fee is being changed,
-        /// and the subscription was created by an app other than the app you
-        /// are authenticated as
-        ///
+        /// <ul>
+        /// <li>
+        /// <c>validation_failed</c> if invalid data is provided when attempting
+        /// to update a subscription.</li>
+        /// <li>
+        /// <c>subscription_not_active</c> if the subscription is no longer
+        /// active.</li>
+        /// <li>
+        /// <c>subscription_already_ended</c> if the subscription has taken all
+        /// payments.</li>
+        /// <li>
+        /// <c>mandate_payments_require_approval</c> if the amount is being
+        /// changed and the mandate requires approval.</li>
+        /// <li>
+        /// <c>number_of_subscription_amendments_exceeded</c> error if the
+        /// subscription amount has already been changed 10 times.</li>
+        /// <li>
+        /// <c>forbidden</c> if the amount is being changed, and the
+        /// subscription was created by an app and you are not authenticated as
+        /// that app, or if the subscription was not created by an app and you
+        /// are authenticated as an app</li>
+        /// <li>
+        /// <c>resource_created_by_another_app</c> if the app fee is being
+        /// changed, and the subscription was created by an app other than the
+        /// app you are authenticated as</li>
+        /// </ul>
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "SB".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "SB".
         /// <param name="request">An optional `SubscriptionUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
@@ -283,47 +290,52 @@ namespace GoCardless.Services
         /// No payments will be created until it is resumed.
         ///
         /// This can only be used when a subscription is collecting a fixed
-        /// number of payments (created using `count`),
-        /// when they continue forever (created without `count` or `end_date`)
-        /// or
+        /// number of payments (created using <c>count</c>),
+        /// when they continue forever (created without <c>count</c> or
+        /// <c>end_date</c>) or
         /// the subscription is already paused for a number of cycles.
         ///
-        /// When `pause_cycles` is omitted the subscription is paused until the
-        /// [resume endpoint](#subscriptions-resume-a-subscription) is called.
+        /// When <c>pause_cycles</c> is omitted the subscription is paused until
+        /// the <a
+        /// href="https://developer.gocardless.com/api-reference/#subscriptions-resume-a-subscription">resume
+        /// endpoint</a> is called.
         /// If the subscription is collecting a fixed number of payments,
-        /// `end_date` will be set to `null`.
-        /// When paused indefinitely, `upcoming_payments` will be empty.
+        /// <c>end_date</c> will be set to <c>null</c>.
+        /// When paused indefinitely, <c>upcoming_payments</c> will be empty.
         ///
-        /// When `pause_cycles` is provided the subscription will be paused for
-        /// the number of cycles requested.
+        /// When <c>pause_cycles</c> is provided the subscription will be paused
+        /// for the number of cycles requested.
         /// If the subscription is collecting a fixed number of payments,
-        /// `end_date` will be set to a new value.
-        /// When paused for a number of cycles, `upcoming_payments` will still
-        /// contain the upcoming charge dates.
+        /// <c>end_date</c> will be set to a new value.
+        /// When paused for a number of cycles, <c>upcoming_payments</c> will
+        /// still contain the upcoming charge dates.
         ///
         /// This fails with:
         ///
-        /// - `forbidden` if the subscription was created by an app and you are
-        /// not authenticated as that app, or if the subscription was not
-        /// created by an app and you are authenticated as an app
-        ///
-        /// - `validation_failed` if invalid data is provided when attempting to
-        /// pause a subscription.
-        ///
-        /// - `subscription_paused_cannot_update_cycles` if the subscription is
-        /// already paused for a number of cycles and the request provides a
-        /// value for `pause_cycle`.
-        ///
-        /// - `subscription_cannot_be_paused` if the subscription cannot be
-        /// paused.
-        ///
-        /// - `subscription_already_ended` if the subscription has taken all
-        /// payments.
-        ///
-        /// - `pause_cycles_must_be_greater_than_or_equal_to` if the provided
-        /// value for `pause_cycles` cannot be satisfied.
+        /// <ul>
+        /// <li>
+        /// <c>forbidden</c> if the subscription was created by an app and you
+        /// are not authenticated as that app, or if the subscription was not
+        /// created by an app and you are authenticated as an app</li>
+        /// <li>
+        /// <c>validation_failed</c> if invalid data is provided when attempting
+        /// to pause a subscription.</li>
+        /// <li>
+        /// <c>subscription_paused_cannot_update_cycles</c> if the subscription
+        /// is already paused for a number of cycles and the request provides a
+        /// value for <c>pause_cycle</c>.</li>
+        /// <li>
+        /// <c>subscription_cannot_be_paused</c> if the subscription cannot be
+        /// paused.</li>
+        /// <li>
+        /// <c>subscription_already_ended</c> if the subscription has taken all
+        /// payments.</li>
+        /// <li>
+        /// <c>pause_cycles_must_be_greater_than_or_equal_to</c> if the provided
+        /// value for <c>pause_cycles</c> cannot be satisfied.</li>
+        /// </ul>
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "SB".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "SB".
         /// <param name="request">An optional `SubscriptionPauseRequest` representing the body for this pause request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
@@ -357,22 +369,25 @@ namespace GoCardless.Services
         /// Resume a subscription object.
         /// Payments will start to be created again based on the subscriptions
         /// recurrence rules.
-        /// The `charge_date` on the next payment will be the same as the
-        /// subscriptions `earliest_charge_date_after_resume`
+        /// The <c>charge_date</c> on the next payment will be the same as the
+        /// subscriptions <c>earliest_charge_date_after_resume</c>
         ///
         /// This fails with:
         ///
-        /// - `forbidden` if the subscription was created by an app and you are
-        /// not authenticated as that app, or if the subscription was not
-        /// created by an app and you are authenticated as an app
-        ///
-        /// - `validation_failed` if invalid data is provided when attempting to
-        /// resume a subscription.
-        ///
-        /// - `subscription_not_paused` if the subscription is not paused.
-        ///
+        /// <ul>
+        /// <li>
+        /// <c>forbidden</c> if the subscription was created by an app and you
+        /// are not authenticated as that app, or if the subscription was not
+        /// created by an app and you are authenticated as an app</li>
+        /// <li>
+        /// <c>validation_failed</c> if invalid data is provided when attempting
+        /// to resume a subscription.</li>
+        /// <li>
+        /// <c>subscription_not_paused</c> if the subscription is not
+        /// paused.</li>
+        /// </ul>
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "SB".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "SB".
         /// <param name="request">An optional `SubscriptionResumeRequest` representing the body for this resume request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
@@ -410,7 +425,7 @@ namespace GoCardless.Services
         /// This will fail with a cancellation_failed error if the subscription
         /// is already cancelled or finished.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "SB".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "SB".
         /// <param name="request">An optional `SubscriptionCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single subscription resource</returns>
@@ -470,51 +485,54 @@ namespace GoCardless.Services
         public int? Count { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+        /// "NZD", "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
 
         /// <summary>
         /// As per RFC 2445. The day of the month to charge customers on.
-        /// `1`-`28` or `-1` to indicate the last day of the month.
+        /// <c>1</c><ul>
+        /// <li></li>
+        /// </ul><c>28</c> or <c>-1</c> to indicate the last day of the month.
         /// </summary>
         [JsonProperty("day_of_month")]
         public int? DayOfMonth { get; set; }
 
         /// <summary>
         /// Date on or after which no further payments should be created.
-        /// <br />
-        /// If this field is blank and `count` is not specified, the
+        /// <br></br>
+        /// If this field is blank and <c>count</c> is not specified, the
         /// subscription will continue forever.
-        /// <br />
-        /// <p class="deprecated-notice"><strong>Deprecated</strong>: This field
-        /// will be removed in a future API version. Use `count` to specify a
-        /// number of payments instead.</p>
+        /// <br></br>
+        ///
+        /// <p class="deprecated-notice">Deprecated: This field will be removed
+        /// in a future API version. Use <code>count</code> to specify a number
+        /// of payments instead.</p>
         /// </summary>
         [JsonProperty("end_date")]
         public string EndDate { get; set; }
 
         /// <summary>
-        /// Number of `interval_units` between customer charge dates. Must be
-        /// greater than or equal to `1`. Must result in at least one charge
-        /// date per year. Defaults to `1`.
+        /// Number of <c>interval_units</c> between customer charge dates. Must
+        /// be greater than or equal to <c>1</c>. Must result in at least one
+        /// charge date per year. Defaults to <c>1</c>.
         /// </summary>
         [JsonProperty("interval")]
         public int? Interval { get; set; }
 
         /// <summary>
-        /// The unit of time between customer charge dates. One of `weekly`,
-        /// `monthly` or `yearly`.
+        /// The unit of time between customer charge dates. One of
+        /// <c>weekly</c>, <c>monthly</c> or <c>yearly</c>.
         /// </summary>
         [JsonProperty("interval_unit")]
         public SubscriptionIntervalUnit? IntervalUnit { get; set; }
 
         /// <summary>
-        /// The unit of time between customer charge dates. One of `weekly`,
-        /// `monthly` or `yearly`.
+        /// The unit of time between customer charge dates. One of
+        /// <c>weekly</c>, <c>monthly</c> or <c>yearly</c>.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum SubscriptionIntervalUnit
@@ -544,8 +562,9 @@ namespace GoCardless.Services
         public class SubscriptionLinks
         {
             /// <summary>
-            /// ID of the associated [mandate](#core-endpoints-mandates) which
-            /// the subscription will create payments against.
+            /// ID of the associated <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+            /// which the subscription will create payments against.
             /// </summary>
             [JsonProperty("mandate")]
             public string Mandate { get; set; }
@@ -561,8 +580,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Name of the month on which to charge a customer. Must be lowercase.
         /// Only applies
-        /// when the interval_unit is `yearly`.
-        ///
+        /// when the interval_unit is <c>yearly</c>.
         /// </summary>
         [JsonProperty("month")]
         public SubscriptionMonth? Month { get; set; }
@@ -570,8 +588,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Name of the month on which to charge a customer. Must be lowercase.
         /// Only applies
-        /// when the interval_unit is `yearly`.
-        ///
+        /// when the interval_unit is <c>yearly</c>.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum SubscriptionMonth
@@ -637,33 +654,37 @@ namespace GoCardless.Services
         /// each payment
         /// created and will appear on your customer's bank statement. See the
         /// documentation for
-        /// the [create payment endpoint](#payments-create-a-payment) for more
-        /// details.
-        /// <br />
-        /// <p class="restricted-notice"><strong>Restricted</strong>: You need
-        /// your own Service User Number to specify a payment reference for Bacs
-        /// payments.</p>
+        /// the <a
+        /// href="https://developer.gocardless.com/api-reference/#payments-create-a-payment">create
+        /// payment endpoint</a> for more details.
+        /// <br></br>
+        ///
+        /// <p class="restricted-notice">Restricted: You need your own Service
+        /// User Number to specify a payment reference for Bacs payments.</p>
         /// </summary>
         [JsonProperty("payment_reference")]
         public string PaymentReference { get; set; }
 
         /// <summary>
-        /// On failure, automatically retry payments using [intelligent
-        /// retries](/success-plus/overview). Default is `false`. <p
-        /// class="notice"><strong>Important</strong>: To be able to use
-        /// intelligent retries, Success+ needs to be enabled in [GoCardless
-        /// dashboard](https://manage.gocardless.com/success-plus). </p>
+        /// On failure, automatically retry payments using <a
+        /// href="https://developer.gocardless.com/success-plus/overview">intelligent
+        /// retries</a>. Default is <c>false</c>. <p class="notice">Important:
+        /// To be able to use intelligent retries, Success+ needs to be enabled
+        /// in <a href="https://manage.gocardless.com/success-plus">GoCardless
+        /// dashboard</a>. </p>
         /// </summary>
         [JsonProperty("retry_if_possible")]
         public bool? RetryIfPossible { get; set; }
 
         /// <summary>
         /// The date on which the first payment should be charged. Must be on or
-        /// after the [mandate](#core-endpoints-mandates)'s
-        /// `next_possible_charge_date`. When left blank and `month` or
-        /// `day_of_month` are provided, this will be set to the date of the
-        /// first payment. If created without `month` or `day_of_month` this
-        /// will be set as the mandate's `next_possible_charge_date`
+        /// after the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+        /// <c>next_possible_charge_date</c>. When left blank and <c>month</c>
+        /// or <c>day_of_month</c> are provided, this will be set to the date of
+        /// the first payment. If created without <c>month</c> or
+        /// <c>day_of_month</c> this will be set as the mandate's
+        /// <c>next_possible_charge_date</c>
         /// </summary>
         [JsonProperty("start_date")]
         public string StartDate { get; set; }
@@ -678,9 +699,11 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// subscriptions. Please note if the subscriptions are related to customers
-    /// who have been removed, they will not be shown in the response.
+    /// Returns a <a
+    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// list of your subscriptions. Please note if the subscriptions are related
+    /// to customers who have been removed, they will not be shown in the
+    /// response.
     /// </summary>
     public class SubscriptionListRequest
     {
@@ -753,13 +776,14 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Upto 5 of:
+        ///
         /// <ul>
-        /// <li>`pending_customer_approval`</li>
-        /// <li>`customer_approval_denied`</li>
-        /// <li>`active`</li>
-        /// <li>`finished`</li>
-        /// <li>`cancelled`</li>
-        /// <li>`paused`</li>
+        /// <li><c>pending_customer_approval</c></li>
+        /// <li><c>customer_approval_denied</c></li>
+        /// <li><c>active</c></li>
+        /// <li><c>finished</c></li>
+        /// <li><c>cancelled</c></li>
+        /// <li><c>paused</c></li>
         /// </ul>
         /// Omit entirely to include subscriptions in all states.
         /// </summary>
@@ -768,19 +792,20 @@ namespace GoCardless.Services
 
         /// <summary>
         /// One of:
+        ///
         /// <ul>
-        /// <li>`pending_customer_approval`: the subscription is waiting for
-        /// customer approval before becoming active</li>
-        /// <li>`customer_approval_denied`: the customer did not approve the
-        /// subscription</li>
-        /// <li>`active`: the subscription is currently active and will continue
-        /// to create payments</li>
-        /// <li>`finished`: all of the payments scheduled for creation under
-        /// this subscription have been created</li>
-        /// <li>`cancelled`: the subscription has been cancelled and will no
-        /// longer create payments</li>
-        /// <li>`paused`: the subscription has been paused and will not create
-        /// payments</li>
+        /// <li><c>pending_customer_approval</c>: the subscription is waiting
+        /// for customer approval before becoming active</li>
+        /// <li><c>customer_approval_denied</c>: the customer did not approve
+        /// the subscription</li>
+        /// <li><c>active</c>: the subscription is currently active and will
+        /// continue to create payments</li>
+        /// <li><c>finished</c>: all of the payments scheduled for creation
+        /// under this subscription have been created</li>
+        /// <li><c>cancelled</c>: the subscription has been cancelled and will
+        /// no longer create payments</li>
+        /// <li><c>paused</c>: the subscription has been paused and will not
+        /// create payments</li>
         /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -822,29 +847,32 @@ namespace GoCardless.Services
     ///
     /// This fails with:
     ///
-    /// - `validation_failed` if invalid data is provided when attempting to
-    /// update a subscription.
-    ///
-    /// - `subscription_not_active` if the subscription is no longer active.
-    ///
-    /// - `subscription_already_ended` if the subscription has taken all
-    /// payments.
-    ///
-    /// - `mandate_payments_require_approval` if the amount is being changed and
-    /// the mandate requires approval.
-    ///
-    /// - `number_of_subscription_amendments_exceeded` error if the subscription
-    /// amount has already been changed 10 times.
-    ///
-    /// - `forbidden` if the amount is being changed, and the subscription was
-    /// created by an app and you are not authenticated as that app, or if the
-    /// subscription was not created by an app and you are authenticated as an
-    /// app
-    ///
-    /// - `resource_created_by_another_app` if the app fee is being changed, and
-    /// the subscription was created by an app other than the app you are
-    /// authenticated as
-    ///
+    /// <ul>
+    /// <li>
+    /// <c>validation_failed</c> if invalid data is provided when attempting to
+    /// update a subscription.</li>
+    /// <li>
+    /// <c>subscription_not_active</c> if the subscription is no longer
+    /// active.</li>
+    /// <li>
+    /// <c>subscription_already_ended</c> if the subscription has taken all
+    /// payments.</li>
+    /// <li>
+    /// <c>mandate_payments_require_approval</c> if the amount is being changed
+    /// and the mandate requires approval.</li>
+    /// <li>
+    /// <c>number_of_subscription_amendments_exceeded</c> error if the
+    /// subscription amount has already been changed 10 times.</li>
+    /// <li>
+    /// <c>forbidden</c> if the amount is being changed, and the subscription
+    /// was created by an app and you are not authenticated as that app, or if
+    /// the subscription was not created by an app and you are authenticated as
+    /// an app</li>
+    /// <li>
+    /// <c>resource_created_by_another_app</c> if the app fee is being changed,
+    /// and the subscription was created by an app other than the app you are
+    /// authenticated as</li>
+    /// </ul>
     /// </summary>
     public class SubscriptionUpdateRequest
     {
@@ -883,22 +911,24 @@ namespace GoCardless.Services
         /// each payment
         /// created and will appear on your customer's bank statement. See the
         /// documentation for
-        /// the [create payment endpoint](#payments-create-a-payment) for more
-        /// details.
-        /// <br />
-        /// <p class="restricted-notice"><strong>Restricted</strong>: You need
-        /// your own Service User Number to specify a payment reference for Bacs
-        /// payments.</p>
+        /// the <a
+        /// href="https://developer.gocardless.com/api-reference/#payments-create-a-payment">create
+        /// payment endpoint</a> for more details.
+        /// <br></br>
+        ///
+        /// <p class="restricted-notice">Restricted: You need your own Service
+        /// User Number to specify a payment reference for Bacs payments.</p>
         /// </summary>
         [JsonProperty("payment_reference")]
         public string PaymentReference { get; set; }
 
         /// <summary>
-        /// On failure, automatically retry payments using [intelligent
-        /// retries](/success-plus/overview). Default is `false`. <p
-        /// class="notice"><strong>Important</strong>: To be able to use
-        /// intelligent retries, Success+ needs to be enabled in [GoCardless
-        /// dashboard](https://manage.gocardless.com/success-plus). </p>
+        /// On failure, automatically retry payments using <a
+        /// href="https://developer.gocardless.com/success-plus/overview">intelligent
+        /// retries</a>. Default is <c>false</c>. <p class="notice">Important:
+        /// To be able to use intelligent retries, Success+ needs to be enabled
+        /// in <a href="https://manage.gocardless.com/success-plus">GoCardless
+        /// dashboard</a>. </p>
         /// </summary>
         [JsonProperty("retry_if_possible")]
         public bool? RetryIfPossible { get; set; }
@@ -909,43 +939,50 @@ namespace GoCardless.Services
     /// No payments will be created until it is resumed.
     ///
     /// This can only be used when a subscription is collecting a fixed number
-    /// of payments (created using `count`),
-    /// when they continue forever (created without `count` or `end_date`) or
+    /// of payments (created using <c>count</c>),
+    /// when they continue forever (created without <c>count</c> or
+    /// <c>end_date</c>) or
     /// the subscription is already paused for a number of cycles.
     ///
-    /// When `pause_cycles` is omitted the subscription is paused until the
-    /// [resume endpoint](#subscriptions-resume-a-subscription) is called.
-    /// If the subscription is collecting a fixed number of payments, `end_date`
-    /// will be set to `null`.
-    /// When paused indefinitely, `upcoming_payments` will be empty.
+    /// When <c>pause_cycles</c> is omitted the subscription is paused until the
+    /// <a
+    /// href="https://developer.gocardless.com/api-reference/#subscriptions-resume-a-subscription">resume
+    /// endpoint</a> is called.
+    /// If the subscription is collecting a fixed number of payments,
+    /// <c>end_date</c> will be set to <c>null</c>.
+    /// When paused indefinitely, <c>upcoming_payments</c> will be empty.
     ///
-    /// When `pause_cycles` is provided the subscription will be paused for the
-    /// number of cycles requested.
-    /// If the subscription is collecting a fixed number of payments, `end_date`
-    /// will be set to a new value.
-    /// When paused for a number of cycles, `upcoming_payments` will still
+    /// When <c>pause_cycles</c> is provided the subscription will be paused for
+    /// the number of cycles requested.
+    /// If the subscription is collecting a fixed number of payments,
+    /// <c>end_date</c> will be set to a new value.
+    /// When paused for a number of cycles, <c>upcoming_payments</c> will still
     /// contain the upcoming charge dates.
     ///
     /// This fails with:
     ///
-    /// - `forbidden` if the subscription was created by an app and you are not
-    /// authenticated as that app, or if the subscription was not created by an
-    /// app and you are authenticated as an app
-    ///
-    /// - `validation_failed` if invalid data is provided when attempting to
-    /// pause a subscription.
-    ///
-    /// - `subscription_paused_cannot_update_cycles` if the subscription is
+    /// <ul>
+    /// <li>
+    /// <c>forbidden</c> if the subscription was created by an app and you are
+    /// not authenticated as that app, or if the subscription was not created by
+    /// an app and you are authenticated as an app</li>
+    /// <li>
+    /// <c>validation_failed</c> if invalid data is provided when attempting to
+    /// pause a subscription.</li>
+    /// <li>
+    /// <c>subscription_paused_cannot_update_cycles</c> if the subscription is
     /// already paused for a number of cycles and the request provides a value
-    /// for `pause_cycle`.
-    ///
-    /// - `subscription_cannot_be_paused` if the subscription cannot be paused.
-    ///
-    /// - `subscription_already_ended` if the subscription has taken all
-    /// payments.
-    ///
-    /// - `pause_cycles_must_be_greater_than_or_equal_to` if the provided value
-    /// for `pause_cycles` cannot be satisfied.
+    /// for <c>pause_cycle</c>.</li>
+    /// <li>
+    /// <c>subscription_cannot_be_paused</c> if the subscription cannot be
+    /// paused.</li>
+    /// <li>
+    /// <c>subscription_already_ended</c> if the subscription has taken all
+    /// payments.</li>
+    /// <li>
+    /// <c>pause_cycles_must_be_greater_than_or_equal_to</c> if the provided
+    /// value for <c>pause_cycles</c> cannot be satisfied.</li>
+    /// </ul>
     /// </summary>
     public class SubscriptionPauseRequest
     {
@@ -958,14 +995,16 @@ namespace GoCardless.Services
 
         /// <summary>
         /// The number of cycles to pause a subscription for. A cycle is one
-        /// duration of `interval` and `interval_unit`. This should be a non
-        /// zero positive value.
-        /// For AUD subscriptions with `interval_unit: weekly` the minimum value
-        /// varies between `3` & `4` because of the [mandatory minimum waiting
-        /// period](#subscriptions-resume-a-subscription).
-        /// For NZD subscriptions with `interval_unit: weekly` the minimum value
-        /// is `2` because of the [mandatory minimum waiting
-        /// period](#subscriptions-resume-a-subscription).
+        /// duration of <c>interval</c> and <c>interval_unit</c>. This should be
+        /// a non zero positive value.
+        /// For AUD subscriptions with <c>interval_unit: weekly</c> the minimum
+        /// value varies between <c>3</c> &amp; <c>4</c> because of the <a
+        /// href="https://developer.gocardless.com/api-reference/#subscriptions-resume-a-subscription">mandatory
+        /// minimum waiting period</a>.
+        /// For NZD subscriptions with <c>interval_unit: weekly</c> the minimum
+        /// value is <c>2</c> because of the <a
+        /// href="https://developer.gocardless.com/api-reference/#subscriptions-resume-a-subscription">mandatory
+        /// minimum waiting period</a>.
         /// </summary>
         [JsonProperty("pause_cycles")]
         public int? PauseCycles { get; set; }
@@ -975,20 +1014,22 @@ namespace GoCardless.Services
     /// Resume a subscription object.
     /// Payments will start to be created again based on the subscriptions
     /// recurrence rules.
-    /// The `charge_date` on the next payment will be the same as the
-    /// subscriptions `earliest_charge_date_after_resume`
+    /// The <c>charge_date</c> on the next payment will be the same as the
+    /// subscriptions <c>earliest_charge_date_after_resume</c>
     ///
     /// This fails with:
     ///
-    /// - `forbidden` if the subscription was created by an app and you are not
-    /// authenticated as that app, or if the subscription was not created by an
-    /// app and you are authenticated as an app
-    ///
-    /// - `validation_failed` if invalid data is provided when attempting to
-    /// resume a subscription.
-    ///
-    /// - `subscription_not_paused` if the subscription is not paused.
-    ///
+    /// <ul>
+    /// <li>
+    /// <c>forbidden</c> if the subscription was created by an app and you are
+    /// not authenticated as that app, or if the subscription was not created by
+    /// an app and you are authenticated as an app</li>
+    /// <li>
+    /// <c>validation_failed</c> if invalid data is provided when attempting to
+    /// resume a subscription.</li>
+    /// <li>
+    /// <c>subscription_not_paused</c> if the subscription is not paused.</li>
+    /// </ul>
     /// </summary>
     public class SubscriptionResumeRequest
     {

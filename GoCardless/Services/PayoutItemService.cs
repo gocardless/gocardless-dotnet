@@ -36,7 +36,6 @@ namespace GoCardless.Services
     /// created in the last 6 months. Requests for older payouts will return an
     /// HTTP status
     /// <code>410 Gone</code>.
-    ///
     /// </summary>
     public class PayoutItemService
     {
@@ -53,13 +52,13 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// items in the payout.
+        /// Returns a <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// list of items in the payout.
         ///
-        /// <strong>This endpoint only serves requests for payouts created in
-        /// the last 6 months. Requests for older payouts will return an HTTP
-        /// status <code>410 Gone</code>.</strong>
-        ///
+        /// This endpoint only serves requests for payouts created in the last 6
+        /// months. Requests for older payouts will return an HTTP status
+        /// <code>410 Gone</code>.
         /// </summary>
         /// <param name="request">An optional `PayoutItemListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -130,13 +129,13 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of items
-    /// in the payout.
+    /// Returns a <a
+    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// list of items in the payout.
     ///
-    /// <strong>This endpoint only serves requests for payouts created in the
-    /// last 6 months. Requests for older payouts will return an HTTP status
-    /// <code>410 Gone</code>.</strong>
-    ///
+    /// This endpoint only serves requests for payouts created in the last 6
+    /// months. Requests for older payouts will return an HTTP status <code>410
+    /// Gone</code>.
     /// </summary>
     public class PayoutItemListRequest
     {

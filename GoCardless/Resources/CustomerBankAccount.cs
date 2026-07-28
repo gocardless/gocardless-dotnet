@@ -10,22 +10,24 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a customer bank account resource.
     ///
-    /// Customer Bank Accounts hold the bank details of a
-    /// [customer](#core-endpoints-customers). They always belong to a
-    /// [customer](#core-endpoints-customers), and may be linked to several
-    /// Direct Debit [mandates](#core-endpoints-mandates).
+    /// Customer Bank Accounts hold the bank details of a <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+    /// They always belong to a <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>,
+    /// and may be linked to several Direct Debit <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandates</a>.
     ///
     /// Note that customer bank accounts must be unique, and so you will
-    /// encounter a `bank_account_exists` error if you try to create a duplicate
-    /// bank account. You may wish to handle this by updating the existing
-    /// record instead, the ID of which will be provided as
-    /// `links[customer_bank_account]` in the error response.
+    /// encounter a <c>bank_account_exists</c> error if you try to create a
+    /// duplicate bank account. You may wish to handle this by updating the
+    /// existing record instead, the ID of which will be provided as
+    /// <c>links[customer_bank_account]</c> in the error response.
     ///
-    /// _Note:_ To ensure the customer's bank accounts are valid, verify them
+    /// Note: To ensure the customer's bank accounts are valid, verify them
     /// first
     /// using
-    ///
-    /// [bank_details_lookups](#bank-details-lookups-perform-a-bank-details-lookup),
+    /// <a
+    /// href="https://developer.gocardless.com/api-reference/#bank-details-lookups-perform-a-bank-details-lookup">bank_details_lookups</a>,
     /// before proceeding with creating the accounts
     /// </summary>
     public class CustomerBankAccount
@@ -35,8 +37,9 @@ namespace GoCardless.Resources
         /// provided when the customer is created is stored and is available via
         /// the API, but is transliterated, upcased, and truncated to 18
         /// characters in bank submissions. This field is required unless the
-        /// request includes a [customer bank account
-        /// token](#javascript-flow-customer-bank-account-tokens).
+        /// request includes a <a
+        /// href="https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+        /// bank account token</a>.
         /// </summary>
         [JsonProperty("account_holder_name")]
         public string AccountHolderName { get; set; }
@@ -50,8 +53,9 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Bank account type. Required for USD-denominated bank accounts. Must
-        /// not be provided for bank accounts in other currencies. See [local
-        /// details](#local-bank-details-united-states) for more information.
+        /// not be provided for bank accounts in other currencies. See <a
+        /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+        /// details</a> for more information.
         /// </summary>
         [JsonProperty("account_type")]
         public CustomerBankAccountAccountType? AccountType { get; set; }
@@ -71,25 +75,26 @@ namespace GoCardless.Resources
         public string BankName { get; set; }
 
         /// <summary>
-        /// [ISO 3166-1 alpha-2
-        /// code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements).
-        /// Defaults to the country code of the `iban` if supplied, otherwise is
-        /// required.
+        /// <a
+        /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+        /// 3166-1 alpha-2 code</a>. Defaults to the country code of the
+        /// <c>iban</c> if supplied, otherwise is required.
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        /// Fixed <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+        /// "NZD", "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
@@ -124,15 +129,18 @@ namespace GoCardless.Resources
         /// The result of the payer name verification check performed when the
         /// bank account was created. Only present if a check was performed.
         ///
-        /// - `full`: The name provided matches the name held by the bank.
-        /// - `close`: The name provided is a close but not exact match to the
-        /// name held by the bank.
-        /// - `cannot_perform_verification`: A verification was attempted but
-        /// could not be completed. This can happen for a number of reasons,
+        /// <ul>
+        /// <li><c>full</c>: The name provided matches the name held by the
+        /// bank.</li>
+        /// <li><c>close</c>: The name provided is a close but not exact match
+        /// to the name held by the bank.</li>
+        /// <li><c>cannot_perform_verification</c>: A verification was attempted
+        /// but could not be completed. This can happen for a number of reasons,
         /// including the account holder's bank not participating in the
         /// verification scheme, the account not being eligible for verification
         /// (e.g. the account holder has opted out), or the bank details not
-        /// being resolvable, among others.
+        /// being resolvable, among others.</li>
+        /// </ul>
         /// </summary>
         [JsonProperty("payer_name_verification_result")]
         public CustomerBankAccountPayerNameVerificationResult? PayerNameVerificationResult { get; set; }
@@ -148,8 +156,9 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
-    /// accounts in other currencies. See [local details](#local-bank-details-united-states) for
-    /// more information.
+    /// accounts in other currencies. See <a
+    /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+    /// details</a> for more information.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum CustomerBankAccountAccountType
@@ -173,8 +182,9 @@ namespace GoCardless.Resources
     public class CustomerBankAccountLinks
     {
         /// <summary>
-        /// ID of the [customer](#core-endpoints-customers) that owns this bank
-        /// account.
+        /// ID of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+        /// that owns this bank account.
         /// </summary>
         [JsonProperty("customer")]
         public string Customer { get; set; }
@@ -184,13 +194,16 @@ namespace GoCardless.Resources
     /// The result of the payer name verification check performed when the bank account was created.
     /// Only present if a check was performed.
     ///
-    /// - `full`: The name provided matches the name held by the bank.
-    /// - `close`: The name provided is a close but not exact match to the name held by the bank.
-    /// - `cannot_perform_verification`: A verification was attempted but could not be completed.
-    /// This can happen for a number of reasons, including the account holder's bank not
+    /// <ul>
+    /// <li><c>full</c>: The name provided matches the name held by the bank.</li>
+    /// <li><c>close</c>: The name provided is a close but not exact match to the name held by the
+    /// bank.</li>
+    /// <li><c>cannot_perform_verification</c>: A verification was attempted but could not be
+    /// completed. This can happen for a number of reasons, including the account holder's bank not
     /// participating in the verification scheme, the account not being eligible for verification
     /// (e.g. the account holder has opted out), or the bank details not being resolvable, among
-    /// others.
+    /// others.</li>
+    /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum CustomerBankAccountPayerNameVerificationResult

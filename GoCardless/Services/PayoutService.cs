@@ -14,12 +14,13 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with payout resources.
     ///
-    /// Payouts represent transfers from GoCardless to a
-    /// [creditor](#core-endpoints-creditors). Each payout contains the funds
-    /// collected from one or many [payments](#core-endpoints-payments). All the
-    /// payments in a payout will have been collected in the same currency.
-    /// Payouts are created automatically after a payment has been successfully
-    /// collected.
+    /// Payouts represent transfers from GoCardless to a <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+    /// Each payout contains the funds collected from one or many <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payments</a>.
+    /// All the payments in a payout will have been collected in the same
+    /// currency. Payouts are created automatically after a payment has been
+    /// successfully collected.
     /// </summary>
     public class PayoutService
     {
@@ -36,8 +37,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your payouts.
+        /// Returns a <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// list of your payouts.
         /// </summary>
         /// <param name="request">An optional `PayoutListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -108,10 +110,11 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Retrieves the details of a single payout. For an example of how to
-        /// reconcile the transactions in a payout, see [this
-        /// guide](#events-reconciling-payouts-with-events).
+        /// reconcile the transactions in a payout, see <a
+        /// href="https://developer.gocardless.com/api-reference/#events-reconciling-payouts-with-events">this
+        /// guide</a>.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PO".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "PO".
         /// <param name="request">An optional `PayoutGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payout resource</returns>
@@ -144,7 +147,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Updates a payout object. This accepts only the metadata parameter.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "PO".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "PO".
         /// <param name="request">An optional `PayoutUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payout resource</returns>
@@ -176,8 +179,9 @@ namespace GoCardless.Services
     }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// payouts.
+    /// Returns a <a
+    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// list of your payouts.
     /// </summary>
     public class PayoutListRequest
     {
@@ -242,17 +246,17 @@ namespace GoCardless.Services
         public string CreditorBankAccount { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+        /// "NZD", "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public PayoutCurrency? Currency { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+        /// "NZD", "SEK" and "USD" are supported.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PayoutCurrency
@@ -298,7 +302,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters. _Note:_
+        /// names up to 50 characters and values up to 500 characters. Note:
         /// This should not be used for storing PII data.
         /// </summary>
         [JsonProperty("metadata")]
@@ -333,14 +337,15 @@ namespace GoCardless.Services
 
         /// <summary>
         /// One of:
+        ///
         /// <ul>
-        /// <li>`pending`: the payout has been created, but not yet sent to your
-        /// bank or it is in the process of being exchanged through our FX
+        /// <li><c>pending</c>: the payout has been created, but not yet sent to
+        /// your bank or it is in the process of being exchanged through our FX
         /// provider.</li>
-        /// <li>`paid`: the payout has been sent to the your bank. FX payouts
-        /// will become `paid` after we emit the `fx_rate_confirmed`
-        /// webhook.</li>
-        /// <li>`bounced`: the payout bounced when sent, the payout can be
+        /// <li><c>paid</c>: the payout has been sent to the your bank. FX
+        /// payouts will become <c>paid</c> after we emit the
+        /// <c>fx_rate_confirmed</c> webhook.</li>
+        /// <li><c>bounced</c>: the payout bounced when sent, the payout can be
         /// retried.</li>
         /// </ul>
         /// </summary>
@@ -349,14 +354,15 @@ namespace GoCardless.Services
 
         /// <summary>
         /// One of:
+        ///
         /// <ul>
-        /// <li>`pending`: the payout has been created, but not yet sent to your
-        /// bank or it is in the process of being exchanged through our FX
+        /// <li><c>pending</c>: the payout has been created, but not yet sent to
+        /// your bank or it is in the process of being exchanged through our FX
         /// provider.</li>
-        /// <li>`paid`: the payout has been sent to the your bank. FX payouts
-        /// will become `paid` after we emit the `fx_rate_confirmed`
-        /// webhook.</li>
-        /// <li>`bounced`: the payout bounced when sent, the payout can be
+        /// <li><c>paid</c>: the payout has been sent to the your bank. FX
+        /// payouts will become <c>paid</c> after we emit the
+        /// <c>fx_rate_confirmed</c> webhook.</li>
+        /// <li><c>bounced</c>: the payout bounced when sent, the payout can be
         /// retried.</li>
         /// </ul>
         /// </summary>
@@ -379,8 +385,9 @@ namespace GoCardless.Services
 
     /// <summary>
     /// Retrieves the details of a single payout. For an example of how to
-    /// reconcile the transactions in a payout, see [this
-    /// guide](#events-reconciling-payouts-with-events).
+    /// reconcile the transactions in a payout, see <a
+    /// href="https://developer.gocardless.com/api-reference/#events-reconciling-payouts-with-events">this
+    /// guide</a>.
     /// </summary>
     public class PayoutGetRequest { }
 

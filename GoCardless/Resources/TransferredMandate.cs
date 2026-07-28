@@ -16,8 +16,8 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// Encrypted customer bank account details, containing:
-        /// `iban`, `account_holder_name`, `swift_bank_code`,
-        /// `swift_branch_code`, `swift_account_number`
+        /// <c>iban</c>, <c>account_holder_name</c>, <c>swift_bank_code</c>,
+        /// <c>swift_branch_code</c>, <c>swift_account_number</c>
         /// </summary>
         [JsonProperty("encrypted_customer_bank_details")]
         public string EncryptedCustomerBankDetails { get; set; }
@@ -49,8 +49,8 @@ namespace GoCardless.Resources
     public class TransferredMandateLinks
     {
         /// <summary>
-        /// The ID of the updated
-        /// [customer_bank_account](#core-endpoints-customer-bank-accounts)
+        /// The ID of the updated <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer_bank_account</a>
         /// </summary>
         [JsonProperty("customer_bank_account")]
         public string CustomerBankAccount { get; set; }

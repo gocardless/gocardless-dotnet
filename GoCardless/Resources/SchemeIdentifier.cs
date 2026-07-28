@@ -48,15 +48,17 @@ namespace GoCardless.Resources
         public string City { get; set; }
 
         /// <summary>
-        /// [ISO 3166-1 alpha-2
-        /// code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+        /// <a
+        /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+        /// 3166-1 alpha-2 code.</a>
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        /// Fixed <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
@@ -85,8 +87,9 @@ namespace GoCardless.Resources
         /// using this scheme identifier.
         ///
         /// By default, GoCardless sends these notifications automatically.
-        /// Please see our [compliance
-        /// requirements](#appendix-compliance-requirements) for more details.
+        /// Please see our <a
+        /// href="https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+        /// requirements</a> for more details.
         /// </summary>
         [JsonProperty("minimum_advance_notice")]
         public int? MinimumAdvanceNotice { get; set; }
@@ -130,7 +133,7 @@ namespace GoCardless.Resources
         public SchemeIdentifierScheme? Scheme { get; set; }
 
         /// <summary>
-        /// The status of the scheme identifier. Only `active` scheme
+        /// The status of the scheme identifier. Only <c>active</c> scheme
         /// identifiers will be applied to a creditor and used against payments.
         /// </summary>
         [JsonProperty("status")]
@@ -240,8 +243,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// The status of the scheme identifier. Only `active` scheme identifiers will be applied to a
-    /// creditor and used against payments.
+    /// The status of the scheme identifier. Only <c>active</c> scheme identifiers will be applied
+    /// to a creditor and used against payments.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum SchemeIdentifierStatus

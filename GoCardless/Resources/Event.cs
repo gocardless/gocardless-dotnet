@@ -14,27 +14,31 @@ namespace GoCardless.Resources
     /// has been updated, for example a payment which has been collected, or a
     /// mandate which has been transferred. Event creation is an asynchronous
     /// process, so it can take some time between an action occurring and its
-    /// corresponding event getting included in API responses. See
-    /// [here](#event-types) for a complete list of event types.
-    /// <p class="notice"><strong>Important</strong>: Events older than 18
-    /// months will be archived and no longer accessible via the API or exports.
-    /// Archival will begin no sooner than 1 August 2026 in sandbox
-    /// environments, and no sooner than 1 October 2026 in live environments.
-    /// Events within the 18-month window are unaffected. If you need archived
-    /// data, contact GoCardless support.</p>
+    /// corresponding event getting included in API responses. See <a
+    /// href="https://developer.gocardless.com/api-reference/#event-types">here</a>
+    /// for a complete list of event types.
+    ///
+    /// <p class="notice">Important: Events older than 18 months will be
+    /// archived and no longer accessible via the API or exports. Archival will
+    /// begin no sooner than 1 August 2026 in sandbox environments, and no
+    /// sooner than 1 October 2026 in live environments. Events within the
+    /// 18-month window are unaffected. If you need archived data, contact
+    /// GoCardless support.</p>
     /// </summary>
     public class Event
     {
         /// <summary>
-        /// What has happened to the resource. See [Event Types](#event-types)
-        /// for the possible actions.
+        /// What has happened to the resource. See <a
+        /// href="https://developer.gocardless.com/api-reference/#event-types">Event
+        /// Types</a> for the possible actions.
         /// </summary>
         [JsonProperty("action")]
         public string Action { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        /// Fixed <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
@@ -42,10 +46,9 @@ namespace GoCardless.Resources
         /// <summary>
         /// Present only in webhooks when an integrator is authorised to send
         /// their own
-        /// notifications. See
-        /// [here](/getting-started/api/handling-customer-notifications/)
+        /// notifications. See <a
+        /// href="https://developer.gocardless.com/getting-started/api/handling-customer-notifications/">here</a>
         /// for further information.
-        ///
         /// </summary>
         [JsonProperty("customer_notifications")]
         public List<EventCustomerNotification> CustomerNotifications { get; set; }
@@ -70,9 +73,8 @@ namespace GoCardless.Resources
         /// triggered the event
         /// (for instance, cancelling a mandate).
         ///
-        /// This field will only be populated if the `details[origin]` field is
-        /// `api` otherwise it will be an empty object.
-        ///
+        /// This field will only be populated if the <c>details[origin]</c>
+        /// field is <c>api</c> otherwise it will be an empty object.
         /// </summary>
         [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; set; }
@@ -80,29 +82,29 @@ namespace GoCardless.Resources
         /// <summary>
         /// The metadata of the resource that the event is for. For example,
         /// this field will have the same
-        /// value of the `mandate[metadata]` field on the response you would
-        /// receive from performing a GET request on a mandate.
-        ///
+        /// value of the <c>mandate[metadata]</c> field on the response you
+        /// would receive from performing a GET request on a mandate.
         /// </summary>
         [JsonProperty("resource_metadata")]
         public IDictionary<string, string> ResourceMetadata { get; set; }
 
         /// <summary>
         /// The resource type for this event. One of:
+        ///
         /// <ul>
-        /// <li>`billing_requests`</li>
-        /// <li>`creditors`</li>
-        /// <li>`exports`</li>
-        /// <li>`instalment_schedules`</li>
-        /// <li>`mandates`</li>
-        /// <li>`payer_authorisations`</li>
-        /// <li>`payments`</li>
-        /// <li>`payouts`</li>
-        /// <li>`refunds`</li>
-        /// <li>`scheme_identifiers`</li>
-        /// <li>`subscriptions`</li>
-        /// <li>`outbound_payments`</li>
-        /// <li>`payment_account_transactions`</li>
+        /// <li><c>billing_requests</c></li>
+        /// <li><c>creditors</c></li>
+        /// <li><c>exports</c></li>
+        /// <li><c>instalment_schedules</c></li>
+        /// <li><c>mandates</c></li>
+        /// <li><c>payer_authorisations</c></li>
+        /// <li><c>payments</c></li>
+        /// <li><c>payouts</c></li>
+        /// <li><c>refunds</c></li>
+        /// <li><c>scheme_identifiers</c></li>
+        /// <li><c>subscriptions</c></li>
+        /// <li><c>outbound_payments</c></li>
+        /// <li><c>payment_account_transactions</c></li>
         /// </ul>
         /// </summary>
         [JsonProperty("resource_type")]
@@ -120,8 +122,8 @@ namespace GoCardless.Resources
     ///
     /// Present only in webhooks when an integrator is authorised to send their
     /// own
-    /// notifications. See
-    /// [here](/getting-started/api/handling-customer-notifications/)
+    /// notifications. See <a
+    /// href="https://developer.gocardless.com/getting-started/api/handling-customer-notifications/">here</a>
     /// for further information.
     /// </summary>
     public class EventCustomerNotification
@@ -145,8 +147,9 @@ namespace GoCardless.Resources
         public bool? Mandatory { get; set; }
 
         /// <summary>
-        /// See [here](#core-endpoints-customer-notifications) for a complete
-        /// list of customer notification types.
+        /// See <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-notifications">here</a>
+        /// for a complete list of customer notification types.
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; }
@@ -158,28 +161,28 @@ namespace GoCardless.Resources
     public class EventDetails
     {
         /// <summary>
-        /// When we send a creditor `new_payout_currency_added` webhook, we also
-        /// send the bank account id of the new account
+        /// When we send a creditor <c>new_payout_currency_added</c> webhook, we
+        /// also send the bank account id of the new account
         /// </summary>
         [JsonProperty("bank_account_id")]
         public string BankAccountId { get; set; }
 
         /// <summary>
-        /// What triggered the event. _Note:_ `cause` is our simplified and
+        /// What triggered the event. Note: <c>cause</c> is our simplified and
         /// predictable key indicating what triggered the event.
         /// </summary>
         [JsonProperty("cause")]
         public string Cause { get; set; }
 
         /// <summary>
-        /// When we send a creditor `new_payout_currency_added` webhook, we also
-        /// send the currency of the new account
+        /// When we send a creditor <c>new_payout_currency_added</c> webhook, we
+        /// also send the currency of the new account
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
 
         /// <summary>
-        /// Human readable description of the cause. _Note:_ Changes to event
+        /// Human readable description of the cause. Note: Changes to event
         /// descriptions are not considered breaking.
         /// </summary>
         [JsonProperty("description")]
@@ -194,13 +197,13 @@ namespace GoCardless.Resources
         /// <summary>
         /// When will_attempt_retry is set to false, this field will contain
         /// the reason the payment was not retried. This can be one of:
+        ///
         /// <ul>
-        /// <li>`failure_filter_applied`: The payment won't be intelligently
-        /// retried as
-        ///   there is a high likelihood of failure on retry.</li>
-        /// <li>`other`: The payment won't be intelligently retried due to any
-        /// other
-        ///   reason.</li>
+        /// <li><c>failure_filter_applied</c>: The payment won't be
+        /// intelligently retried as there is a high likelihood of failure on
+        /// retry.</li>
+        /// <li><c>other</c>: The payment won't be intelligently retried due to
+        /// any other reason.</li>
         /// </ul>
         /// </summary>
         [JsonProperty("not_retried_reason")]
@@ -208,33 +211,35 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Who initiated the event. One of:
+        ///
         /// <ul>
-        /// <li>`bank`: this event was triggered by a report from the banks</li>
-        /// <li>`gocardless`: this event was performed by GoCardless
+        /// <li><c>bank</c>: this event was triggered by a report from the
+        /// banks</li>
+        /// <li><c>gocardless</c>: this event was performed by GoCardless
         /// automatically</li>
-        /// <li>`api`: this event was triggered by an API endpoint</li>
-        /// <li>`customer`: this event was triggered by a Customer</li>
-        /// <li>`payer`: this event was triggered by a Payer</li>
+        /// <li><c>api</c>: this event was triggered by an API endpoint</li>
+        /// <li><c>customer</c>: this event was triggered by a Customer</li>
+        /// <li><c>payer</c>: this event was triggered by a Payer</li>
         /// </ul>
         /// </summary>
         [JsonProperty("origin")]
         public EventDetailsOrigin? Origin { get; set; }
 
         /// <summary>
-        /// When we send a creditor `creditor_updated` webhook, this tells you
-        /// which property on the creditor has been updated
+        /// When we send a creditor <c>creditor_updated</c> webhook, this tells
+        /// you which property on the creditor has been updated
         /// </summary>
         [JsonProperty("property")]
         public string Property { get; set; }
 
         /// <summary>
-        /// Set when a `bank` is the origin of the event. This is the reason
-        /// code received in the report from the customer's bank. See the
-        /// [GoCardless Direct Debit
-        /// guide](https://gocardless.com/direct-debit/receiving-messages) for
-        /// information on the meanings of different reason codes. _Note:_
-        /// `reason_code` is payment scheme-specific and can be inconsistent
-        /// between banks.
+        /// Set when a <c>bank</c> is the origin of the event. This is the
+        /// reason code received in the report from the customer's bank. See the
+        /// <a
+        /// href="https://gocardless.com/direct-debit/receiving-messages">GoCardless
+        /// Direct Debit guide</a> for information on the meanings of different
+        /// reason codes. Note: <c>reason_code</c> is payment scheme-specific
+        /// and can be inconsistent between banks.
         /// </summary>
         [JsonProperty("reason_code")]
         public string ReasonCode { get; set; }
@@ -255,12 +260,13 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// Who initiated the event. One of:
+    ///
     /// <ul>
-    /// <li>`bank`: this event was triggered by a report from the banks</li>
-    /// <li>`gocardless`: this event was performed by GoCardless automatically</li>
-    /// <li>`api`: this event was triggered by an API endpoint</li>
-    /// <li>`customer`: this event was triggered by a Customer</li>
-    /// <li>`payer`: this event was triggered by a Payer</li>
+    /// <li><c>bank</c>: this event was triggered by a report from the banks</li>
+    /// <li><c>gocardless</c>: this event was performed by GoCardless automatically</li>
+    /// <li><c>api</c>: this event was triggered by an API endpoint</li>
+    /// <li><c>customer</c>: this event was triggered by a Customer</li>
+    /// <li><c>payer</c>: this event was triggered by a Payer</li>
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
@@ -352,55 +358,65 @@ namespace GoCardless.Resources
     public class EventLinks
     {
         /// <summary>
-        /// ID of a [bank authorisation](#billing-requests-bank-authorisations).
+        /// ID of a <a
+        /// href="https://developer.gocardless.com/api-reference/#billing-requests-bank-authorisations">bank
+        /// authorisation</a>.
         /// </summary>
         [JsonProperty("bank_authorisation")]
         public string BankAuthorisation { get; set; }
 
         /// <summary>
-        /// ID of a [billing request](#billing-requests-billing-requests).
+        /// ID of a <a
+        /// href="https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">billing
+        /// request</a>.
         /// </summary>
         [JsonProperty("billing_request")]
         public string BillingRequest { get; set; }
 
         /// <summary>
-        /// ID of a [billing request
-        /// flow](#billing-requests-billing-request-flows).
+        /// ID of a <a
+        /// href="https://developer.gocardless.com/api-reference/#billing-requests-billing-request-flows">billing
+        /// request flow</a>.
         /// </summary>
         [JsonProperty("billing_request_flow")]
         public string BillingRequestFlow { get; set; }
 
         /// <summary>
-        /// If `resource_type` is `creditor`, this is the ID of the
-        /// [creditor](#core-endpoints-creditors) which has been updated.
+        /// If <c>resource_type</c> is <c>creditor</c>, this is the ID of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+        /// which has been updated.
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
 
         /// <summary>
-        /// ID of a [customer](#core-endpoints-customers).
+        /// ID of a <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
         /// </summary>
         [JsonProperty("customer")]
         public string Customer { get; set; }
 
         /// <summary>
-        /// ID of a [customer bank
-        /// account](#core-endpoints-customer-bank-accounts).
+        /// ID of a <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+        /// bank account</a>.
         /// </summary>
         [JsonProperty("customer_bank_account")]
         public string CustomerBankAccount { get; set; }
 
         /// <summary>
-        /// If `resource_type` is `instalment_schedule`, this is the ID of the
-        /// [instalment schedule](#core-endpoints-instalment-schedules) which
-        /// has been updated.
+        /// If <c>resource_type</c> is <c>instalment_schedule</c>, this is the
+        /// ID of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-instalment-schedules">instalment
+        /// schedule</a> which has been updated.
         /// </summary>
         [JsonProperty("instalment_schedule")]
         public string InstalmentSchedule { get; set; }
 
         /// <summary>
-        /// If `resource_type` is `mandates`, this is the ID of the
-        /// [mandate](#core-endpoints-mandates) which has been updated.
+        /// If <c>resource_type</c> is <c>mandates</c>, this is the ID of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+        /// which has been updated.
         /// </summary>
         [JsonProperty("mandate")]
         public string Mandate { get; set; }
@@ -412,40 +428,45 @@ namespace GoCardless.Resources
         public string MandateRequest { get; set; }
 
         /// <summary>
-        /// If `resource_type` is `billing_requests`, this is the ID of the
-        /// [mandate](#core-endpoints-mandates) which has been created.
+        /// If <c>resource_type</c> is <c>billing_requests</c>, this is the ID
+        /// of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+        /// which has been created.
         /// </summary>
         [JsonProperty("mandate_request_mandate")]
         public string MandateRequestMandate { get; set; }
 
         /// <summary>
         /// This is only included for mandate transfer events, when it is the ID
-        /// of the [customer bank
-        /// account](#core-endpoints-customer-bank-accounts) which the mandate
-        /// is being transferred to.
+        /// of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+        /// bank account</a> which the mandate is being transferred to.
         /// </summary>
         [JsonProperty("new_customer_bank_account")]
         public string NewCustomerBankAccount { get; set; }
 
         /// <summary>
         /// This is only included for mandate replaced events, when it is the ID
-        /// of the new [mandate](#core-endpoints-mandates) that replaces the
-        /// existing mandate.
+        /// of the new <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+        /// that replaces the existing mandate.
         /// </summary>
         [JsonProperty("new_mandate")]
         public string NewMandate { get; set; }
 
         /// <summary>
-        /// If the event is included in a [webhook](#webhooks-overview) to an
-        /// [OAuth app](#appendix-oauth), this is the ID of the account to which
-        /// it belongs.
+        /// If the event is included in a <a
+        /// href="https://developer.gocardless.com/api-reference/#webhooks-overview">webhook</a>
+        /// to an <a
+        /// href="https://developer.gocardless.com/api-reference/#appendix-oauth">OAuth
+        /// app</a>, this is the ID of the account to which it belongs.
         /// </summary>
         [JsonProperty("organisation")]
         public string Organisation { get; set; }
 
         /// <summary>
-        /// If `resource_type` is `outbound_payments`, this is the ID of the
-        /// outbound_payment which has been updated.
+        /// If <c>resource_type</c> is <c>outbound_payments</c>, this is the ID
+        /// of the outbound_payment which has been updated.
         /// </summary>
         [JsonProperty("outbound_payment")]
         public string OutboundPayment { get; set; }
@@ -461,68 +482,77 @@ namespace GoCardless.Resources
         public string ParentEvent { get; set; }
 
         /// <summary>
-        /// ID of a [payer authorisation](#core-endpoints-payer-authorisations).
+        /// ID of a <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payer-authorisations">payer
+        /// authorisation</a>.
         /// </summary>
         [JsonProperty("payer_authorisation")]
         public string PayerAuthorisation { get; set; }
 
         /// <summary>
-        /// If `resource_type` is `payments`, this is the ID of the
-        /// [payment](#core-endpoints-payments) which has been updated.
+        /// If <c>resource_type</c> is <c>payments</c>, this is the ID of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+        /// which has been updated.
         /// </summary>
         [JsonProperty("payment")]
         public string Payment { get; set; }
 
         /// <summary>
-        /// If `resource_type` is `payment_account_transaction`, this is the ID
-        /// of a transaction which has been recorded on the payment account.
+        /// If <c>resource_type</c> is <c>payment_account_transaction</c>, this
+        /// is the ID of a transaction which has been recorded on the payment
+        /// account.
         /// </summary>
         [JsonProperty("payment_account_transaction")]
         public string PaymentAccountTransaction { get; set; }
 
         /// <summary>
-        /// If `resource_type` is `billing_requests`, this is the ID of the
-        /// [payment](#core-endpoints-payments) which has been created for Pay
-        /// by Bank.
+        /// If <c>resource_type</c> is <c>billing_requests</c>, this is the ID
+        /// of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+        /// which has been created for Pay by Bank.
         /// </summary>
         [JsonProperty("payment_request_payment")]
         public string PaymentRequestPayment { get; set; }
 
         /// <summary>
-        /// If `resource_type` is `payouts`, this is the ID of the
-        /// [payout](#core-endpoints-payouts) which has been updated.
+        /// If <c>resource_type</c> is <c>payouts</c>, this is the ID of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a>
+        /// which has been updated.
         /// </summary>
         [JsonProperty("payout")]
         public string Payout { get; set; }
 
         /// <summary>
         /// This is only included for mandate transfer events, when it is the ID
-        /// of the [customer bank
-        /// account](#core-endpoints-customer-bank-accounts) which the mandate
-        /// is being transferred from.
+        /// of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+        /// bank account</a> which the mandate is being transferred from.
         /// </summary>
         [JsonProperty("previous_customer_bank_account")]
         public string PreviousCustomerBankAccount { get; set; }
 
         /// <summary>
-        /// If `resource_type` is `refunds`, this is the ID of the
-        /// [refund](#core-endpoints-refunds) which has been updated.
+        /// If <c>resource_type</c> is <c>refunds</c>, this is the ID of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-refunds">refund</a>
+        /// which has been updated.
         /// </summary>
         [JsonProperty("refund")]
         public string Refund { get; set; }
 
         /// <summary>
-        /// If `resource_type` is `scheme_identifiers`, this is the ID of the
-        /// [scheme_identifier](#core-endpoints-scheme-identifiers) which has
-        /// been updated.
+        /// If <c>resource_type</c> is <c>scheme_identifiers</c>, this is the ID
+        /// of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-scheme-identifiers">scheme_identifier</a>
+        /// which has been updated.
         /// </summary>
         [JsonProperty("scheme_identifier")]
         public string SchemeIdentifier { get; set; }
 
         /// <summary>
-        /// If `resource_type` is `subscription`, this is the ID of the
-        /// [subscription](#core-endpoints-subscriptions) which has been
-        /// updated.
+        /// If <c>resource_type</c> is <c>subscription</c>, this is the ID of
+        /// the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-subscriptions">subscription</a>
+        /// which has been updated.
         /// </summary>
         [JsonProperty("subscription")]
         public string Subscription { get; set; }
@@ -530,20 +560,21 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// The resource type for this event. One of:
+    ///
     /// <ul>
-    /// <li>`billing_requests`</li>
-    /// <li>`creditors`</li>
-    /// <li>`exports`</li>
-    /// <li>`instalment_schedules`</li>
-    /// <li>`mandates`</li>
-    /// <li>`payer_authorisations`</li>
-    /// <li>`payments`</li>
-    /// <li>`payouts`</li>
-    /// <li>`refunds`</li>
-    /// <li>`scheme_identifiers`</li>
-    /// <li>`subscriptions`</li>
-    /// <li>`outbound_payments`</li>
-    /// <li>`payment_account_transactions`</li>
+    /// <li><c>billing_requests</c></li>
+    /// <li><c>creditors</c></li>
+    /// <li><c>exports</c></li>
+    /// <li><c>instalment_schedules</c></li>
+    /// <li><c>mandates</c></li>
+    /// <li><c>payer_authorisations</c></li>
+    /// <li><c>payments</c></li>
+    /// <li><c>payouts</c></li>
+    /// <li><c>refunds</c></li>
+    /// <li><c>scheme_identifiers</c></li>
+    /// <li><c>subscriptions</c></li>
+    /// <li><c>outbound_payments</c></li>
+    /// <li><c>payment_account_transactions</c></li>
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]

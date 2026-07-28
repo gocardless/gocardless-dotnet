@@ -63,7 +63,7 @@ namespace GoCardless.Services
         /// used to power
         /// integrations that manipulate the flow.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "BRF".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "BRF".
         /// <param name="request">An optional `BillingRequestFlowInitialiseRequest` representing the body for this initialise request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request flow resource</returns>
@@ -123,8 +123,9 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Sets the default language of the Billing Request Flow and the
-        /// customer. [ISO
-        /// 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code.
+        /// customer. <a
+        /// href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO
+        /// 639-1</a> code.
         /// </summary>
         [JsonProperty("language")]
         public string Language { get; set; }
@@ -141,8 +142,9 @@ namespace GoCardless.Services
         public class BillingRequestFlowLinks
         {
             /// <summary>
-            /// ID of the [billing request](#billing-requests-billing-requests)
-            /// against which this flow was created.
+            /// ID of the <a
+            /// href="https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">billing
+            /// request</a> against which this flow was created.
             /// </summary>
             [JsonProperty("billing_request")]
             public string BillingRequest { get; set; }
@@ -155,7 +157,6 @@ namespace GoCardless.Services
         ///
         /// You can only lock bank account if these have already been completed
         /// as a part of the billing request.
-        ///
         /// </summary>
         [JsonProperty("lock_bank_account")]
         public bool? LockBankAccount { get; set; }
@@ -176,7 +177,6 @@ namespace GoCardless.Services
         ///
         /// You can only lock customer details if these have already been
         /// completed as a part of the billing request.
-        ///
         /// </summary>
         [JsonProperty("lock_customer_details")]
         public bool? LockCustomerDetails { get; set; }
@@ -200,17 +200,18 @@ namespace GoCardless.Services
         {
             /// <summary>
             /// Bank account type for USD-denominated bank accounts. Must not be
-            /// provided for bank accounts in other currencies. See [local
-            /// details](#local-bank-details-united-states) for more
-            /// information.
+            /// provided for bank accounts in other currencies. See <a
+            /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+            /// details</a> for more information.
             /// </summary>
             [JsonProperty("account_type")]
             public BillingRequestFlowAccountType? AccountType { get; set; }
 
             /// <summary>
             /// Bank account type for USD-denominated bank accounts. Must not be
-            /// provided for bank accounts in other currencies. See [local
-            /// details](#local-bank-details-united-states) for more information.
+            /// provided for bank accounts in other currencies. See <a
+            /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+            /// details</a> for more information.
             /// </summary>
             [JsonConverter(typeof(StringEnumConverter))]
             public enum BillingRequestFlowAccountType
@@ -268,14 +269,15 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Customer's company name. Company name should only be provided if
-            /// `given_name` and `family_name` are null.
+            /// <c>given_name</c> and <c>family_name</c> are null.
             /// </summary>
             [JsonProperty("company_name")]
             public string CompanyName { get; set; }
 
             /// <summary>
-            /// [ISO 3166-1 alpha-2
-            /// code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+            /// <a
+            /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+            /// 3166-1 alpha-2 code.</a>
             /// </summary>
             [JsonProperty("country_code")]
             public string CountryCode { get; set; }

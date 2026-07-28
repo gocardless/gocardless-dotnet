@@ -15,8 +15,9 @@ namespace GoCardless.Services
     /// Service class for working with logo resources.
     ///
     /// Logos are image uploads that, when associated with a creditor, are shown
-    /// on the [billing request flow](#billing-requests-billing-request-flows)
-    /// payment pages.
+    /// on the <a
+    /// href="https://developer.gocardless.com/api-reference/#billing-requests-billing-request-flows">billing
+    /// request flow</a> payment pages.
     /// </summary>
     public class LogoService
     {
@@ -41,7 +42,8 @@ namespace GoCardless.Services
         /// maximum of 300px by 40px. For more guidance on how to upload logos
         /// that will look
         /// great across your customer payment page and notification emails see
-        /// [here](https://developer.gocardless.com/gc-embed/setting-up-branding#tips_for_uploading_your_logo).
+        /// <a
+        /// href="https://developer.gocardless.com/gc-embed/setting-up-branding#tips_for_uploading_your_logo">here</a>.
         /// </summary>
         /// <param name="request">An optional `LogoCreateForCreditorRequest` representing the body for this create_for_creditor request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -73,8 +75,8 @@ namespace GoCardless.Services
     ///
     /// We support JPG and PNG formats. Your logo will be scaled to a maximum of
     /// 300px by 40px. For more guidance on how to upload logos that will look
-    /// great across your customer payment page and notification emails see
-    /// [here](https://developer.gocardless.com/gc-embed/setting-up-branding#tips_for_uploading_your_logo).
+    /// great across your customer payment page and notification emails see <a
+    /// href="https://developer.gocardless.com/gc-embed/setting-up-branding#tips_for_uploading_your_logo">here</a>.
     /// </summary>
     public class LogoCreateForCreditorRequest
     {

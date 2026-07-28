@@ -15,7 +15,9 @@ namespace GoCardless.Services
     /// Service class for working with payment account resources.
     ///
     /// Access the details of bank accounts provided for you by GoCardless that
-    /// are used to fund [Outbound Payments](#core-endpoints-outbound-payments).
+    /// are used to fund <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-outbound-payments">Outbound
+    /// Payments</a>.
     /// </summary>
     public class PaymentAccountService
     {
@@ -34,7 +36,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of an existing payment account.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "BA".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "BA".
         /// <param name="request">An optional `PaymentAccountGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment account resource</returns>
@@ -65,8 +67,9 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of
-        /// your payment accounts.
+        /// Returns a <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// list of your payment accounts.
         /// </summary>
         /// <param name="request">An optional `PaymentAccountListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -142,8 +145,9 @@ namespace GoCardless.Services
     public class PaymentAccountGetRequest { }
 
     /// <summary>
-    /// Returns a [cursor-paginated](#api-usage-cursor-pagination) list of your
-    /// payment accounts.
+    /// Returns a <a
+    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// list of your payment accounts.
     /// </summary>
     public class PaymentAccountListRequest
     {

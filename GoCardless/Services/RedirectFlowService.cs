@@ -14,40 +14,51 @@ namespace GoCardless.Services
     /// <summary>
     /// Service class for working with redirect flow resources.
     ///
-    /// <p class="deprecated-notice"><strong>Deprecated</strong>: Redirect Flows
-    /// are legacy APIs and cannot be used by new integrators.
-    ///     The [Billing Request flow](#billing-requests) API should be used for
-    /// your payment flows.</p>
-    ///
-    /// Redirect flows enable you to use GoCardless' [hosted payment
-    /// pages](https://pay-sandbox.gocardless.com/AL000000AKFPFF) to set up
-    /// mandates with your customers. These pages are fully compliant and have
-    /// been translated into Danish, Dutch, French, German, Italian, Norwegian,
-    /// Portuguese, Slovak, Spanish and Swedish.
+    /// <p class="deprecated-notice">Deprecated: Redirect Flows are legacy APIs
+    /// and cannot be used by new integrators.
+    /// The <a
+    /// href="https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">Billing
+    /// Request flow</a> API should be used for your payment flows.</p>
+    /// Redirect flows enable you to use GoCardless' <a
+    /// href="https://pay-sandbox.gocardless.com/AL000000AKFPFF">hosted payment
+    /// pages</a> to set up mandates with your customers. These pages are fully
+    /// compliant and have been translated into Danish, Dutch, French, German,
+    /// Italian, Norwegian, Portuguese, Slovak, Spanish and Swedish.
     ///
     /// The overall flow is:
     ///
-    /// 1. You [create](#redirect-flows-create-a-redirect-flow) a redirect flow
-    /// for your customer, and redirect them to the returned redirect url, e.g.
-    /// `https://pay.gocardless.com/flow/RE123`.
-    ///
-    /// 2. Your customer supplies their name, email, address, and bank account
+    /// <ol>
+    /// <li>
+    /// You <a
+    /// href="https://developer.gocardless.com/api-reference/#redirect-flows-create-a-redirect-flow">create</a>
+    /// a redirect flow for your customer, and redirect them to the returned
+    /// redirect url, e.g. <c>https://pay.gocardless.com/flow/RE123</c>.</li>
+    /// <li>
+    /// Your customer supplies their name, email, address, and bank account
     /// details, and submits the form. This securely stores their details, and
-    /// redirects them back to your `success_redirect_url` with
-    /// `redirect_flow_id=RE123` in the querystring.
-    ///
-    /// 3. You [complete](#redirect-flows-complete-a-redirect-flow) the redirect
-    /// flow, which creates a [customer](#core-endpoints-customers), [customer
-    /// bank account](#core-endpoints-customer-bank-accounts), and
-    /// [mandate](#core-endpoints-mandates), and returns the ID of the mandate.
-    /// You may wish to create a [subscription](#core-endpoints-subscriptions)
-    /// or [payment](#core-endpoints-payments) at this point.
-    ///
-    /// Once you have [completed](#redirect-flows-complete-a-redirect-flow) the
-    /// redirect flow via the API, you should display a confirmation page to
+    /// redirects them back to your <c>success_redirect_url</c> with
+    /// <c>redirect_flow_id=RE123</c> in the querystring.</li>
+    /// <li>
+    /// You <a
+    /// href="https://developer.gocardless.com/api-reference/#redirect-flows-complete-a-redirect-flow">complete</a>
+    /// the redirect flow, which creates a <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>,
+    /// <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+    /// bank account</a>, and <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>,
+    /// and returns the ID of the mandate. You may wish to create a <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-subscriptions">subscription</a>
+    /// or <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+    /// at this point.</li>
+    /// </ol>
+    /// Once you have <a
+    /// href="https://developer.gocardless.com/api-reference/#redirect-flows-complete-a-redirect-flow">completed</a>
+    /// the redirect flow via the API, you should display a confirmation page to
     /// your customer, confirming that their Direct Debit has been set up. You
     /// can build your own page, or redirect to the one we provide in the
-    /// `confirmation_url` attribute of the redirect flow.
+    /// <c>confirmation_url</c> attribute of the redirect flow.
     ///
     /// Redirect flows expire 30 minutes after they are first created. You
     /// cannot complete an expired redirect flow. For an integrator this is
@@ -97,7 +108,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns all details about a single redirect flow
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "RE".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "RE".
         /// <param name="request">An optional `RedirectFlowGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single redirect flow resource</returns>
@@ -128,19 +139,23 @@ namespace GoCardless.Services
         }
 
         /// <summary>
-        /// This creates a [customer](#core-endpoints-customers), [customer bank
-        /// account](#core-endpoints-customer-bank-accounts), and
-        /// [mandate](#core-endpoints-mandates) using the details supplied by
-        /// your customer and returns the ID of the created mandate.
+        /// This creates a <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>,
+        /// <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+        /// bank account</a>, and <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+        /// using the details supplied by your customer and returns the ID of
+        /// the created mandate.
         ///
-        /// This will return a `redirect_flow_incomplete` error if your customer
-        /// has not yet been redirected back to your site, and a
-        /// `redirect_flow_already_completed` error if your integration has
-        /// already completed this flow. It will return a `bad_request` error if
-        /// the `session_token` differs to the one supplied when the redirect
-        /// flow was created.
+        /// This will return a <c>redirect_flow_incomplete</c> error if your
+        /// customer has not yet been redirected back to your site, and a
+        /// <c>redirect_flow_already_completed</c> error if your integration has
+        /// already completed this flow. It will return a <c>bad_request</c>
+        /// error if the <c>session_token</c> differs to the one supplied when
+        /// the redirect flow was created.
         /// </summary>
-        /// <param name="identity">Unique identifier, beginning with "RE".</param>
+        /// <param name="identity"></param>Unique identifier, beginning with "RE".
         /// <param name="request">An optional `RedirectFlowCompleteRequest` representing the body for this complete request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single redirect flow resource</returns>
@@ -196,10 +211,11 @@ namespace GoCardless.Services
         public class RedirectFlowLinks
         {
             /// <summary>
-            /// The [creditor](#core-endpoints-creditors) for whom the mandate
-            /// will be created. The `name` of the creditor will be displayed on
-            /// the payment page. Required if your account manages multiple
-            /// creditors.
+            /// The <a
+            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+            /// for whom the mandate will be created. The <c>name</c> of the
+            /// creditor will be displayed on the payment page. Required if your
+            /// account manages multiple creditors.
             /// </summary>
             [JsonProperty("creditor")]
             public string Creditor { get; set; }
@@ -207,7 +223,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
-        /// names up to 50 characters and values up to 500 characters. _Note:_
+        /// names up to 50 characters and values up to 500 characters. Note:
         /// This should not be used for storing PII data.
         /// </summary>
         [JsonProperty("metadata")]
@@ -232,17 +248,18 @@ namespace GoCardless.Services
         {
             /// <summary>
             /// Bank account type for USD-denominated bank accounts. Must not be
-            /// provided for bank accounts in other currencies. See [local
-            /// details](#local-bank-details-united-states) for more
-            /// information.
+            /// provided for bank accounts in other currencies. See <a
+            /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+            /// details</a> for more information.
             /// </summary>
             [JsonProperty("account_type")]
             public RedirectFlowAccountType? AccountType { get; set; }
 
             /// <summary>
             /// Bank account type for USD-denominated bank accounts. Must not be
-            /// provided for bank accounts in other currencies. See [local
-            /// details](#local-bank-details-united-states) for more information.
+            /// provided for bank accounts in other currencies. See <a
+            /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+            /// details</a> for more information.
             /// </summary>
             [JsonConverter(typeof(StringEnumConverter))]
             public enum RedirectFlowAccountType
@@ -300,14 +317,15 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Customer's company name. Company name should only be provided if
-            /// `given_name` and `family_name` are null.
+            /// <c>given_name</c> and <c>family_name</c> are null.
             /// </summary>
             [JsonProperty("company_name")]
             public string CompanyName { get; set; }
 
             /// <summary>
-            /// [ISO 3166-1 alpha-2
-            /// code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+            /// <a
+            /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+            /// 3166-1 alpha-2 code.</a>
             /// </summary>
             [JsonProperty("country_code")]
             public string CountryCode { get; set; }
@@ -338,9 +356,9 @@ namespace GoCardless.Services
             public string GivenName { get; set; }
 
             /// <summary>
-            /// [ISO
-            /// 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-            /// code.
+            /// <a
+            /// href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO
+            /// 639-1</a> code.
             /// </summary>
             [JsonProperty("language")]
             public string Language { get; set; }
@@ -434,7 +452,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// The URL to redirect to upon successful mandate setup. You must use a
-        /// URL beginning `https` in the live environment.
+        /// URL beginning <c>https</c> in the live environment.
         /// </summary>
         [JsonProperty("success_redirect_url")]
         public string SuccessRedirectUrl { get; set; }
@@ -454,17 +472,21 @@ namespace GoCardless.Services
     public class RedirectFlowGetRequest { }
 
     /// <summary>
-    /// This creates a [customer](#core-endpoints-customers), [customer bank
-    /// account](#core-endpoints-customer-bank-accounts), and
-    /// [mandate](#core-endpoints-mandates) using the details supplied by your
-    /// customer and returns the ID of the created mandate.
+    /// This creates a <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>,
+    /// <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+    /// bank account</a>, and <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+    /// using the details supplied by your customer and returns the ID of the
+    /// created mandate.
     ///
-    /// This will return a `redirect_flow_incomplete` error if your customer has
-    /// not yet been redirected back to your site, and a
-    /// `redirect_flow_already_completed` error if your integration has already
-    /// completed this flow. It will return a `bad_request` error if the
-    /// `session_token` differs to the one supplied when the redirect flow was
-    /// created.
+    /// This will return a <c>redirect_flow_incomplete</c> error if your
+    /// customer has not yet been redirected back to your site, and a
+    /// <c>redirect_flow_already_completed</c> error if your integration has
+    /// already completed this flow. It will return a <c>bad_request</c> error
+    /// if the <c>session_token</c> differs to the one supplied when the
+    /// redirect flow was created.
     /// </summary>
     public class RedirectFlowCompleteRequest
     {

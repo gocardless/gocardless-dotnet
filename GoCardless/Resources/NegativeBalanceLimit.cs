@@ -24,16 +24,17 @@ namespace GoCardless.Resources
         public int? BalanceLimit { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// limit was created.
+        /// Fixed <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// recording when this limit was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
 
         /// <summary>
-        /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes)
-        /// currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD",
-        /// "SEK" and "USD" are supported.
+        /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
+        /// 4217</a> currency code. Currently "AUD", "CAD", "DKK", "EUR", "GBP",
+        /// "NZD", "SEK" and "USD" are supported.
         /// </summary>
         [JsonProperty("currency")]
         public NegativeBalanceLimitCurrency? Currency { get; set; }
@@ -52,8 +53,8 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) currency code. Currently
-    /// "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
+    /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO 4217</a> currency code.
+    /// Currently "AUD", "CAD", "DKK", "EUR", "GBP", "NZD", "SEK" and "USD" are supported.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum NegativeBalanceLimitCurrency
@@ -107,8 +108,9 @@ namespace GoCardless.Resources
         public string CreatorUser { get; set; }
 
         /// <summary>
-        /// ID of [creditor](#core-endpoints-creditors) which this limit relates
-        /// to
+        /// ID of <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+        /// which this limit relates to
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }

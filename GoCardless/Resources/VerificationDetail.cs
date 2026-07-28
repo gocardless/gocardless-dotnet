@@ -13,14 +13,13 @@ namespace GoCardless.Resources
     /// Verification details represent any information needed by GoCardless to
     /// verify a creditor.
     ///
-    /// <p class="restricted-notice"><strong>Restricted</strong>:
-    ///   These endpoints are restricted to customers who want to collect their
+    /// <p class="restricted-notice">Restricted:
+    /// These endpoints are restricted to customers who want to collect their
     /// merchant's
-    ///   verification details and pass them to GoCardless via our API. Please
-    /// [get in
-    ///   touch](mailto:help@gocardless.com) if you wish to enable this feature
-    /// on your
-    ///   account.</p>
+    /// verification details and pass them to GoCardless via our API. Please <a
+    /// href="mailto:help@gocardless.com">get in
+    /// touch</a> if you wish to enable this feature on your
+    /// account.</p>
     /// </summary>
     public class VerificationDetail
     {
@@ -111,8 +110,9 @@ namespace GoCardless.Resources
         public string City { get; set; }
 
         /// <summary>
-        /// [ISO 3166-1 alpha-2
-        /// code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
+        /// <a
+        /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+        /// 3166-1 alpha-2 code.</a>
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
@@ -154,7 +154,8 @@ namespace GoCardless.Resources
     public class VerificationDetailLinks
     {
         /// <summary>
-        /// ID of the [creditor](#core-endpoints-creditors)
+        /// ID of the <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }

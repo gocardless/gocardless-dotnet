@@ -10,26 +10,26 @@ namespace GoCardless.Resources
     /// <summary>
     /// Represents a mandate resource.
     ///
-    /// Mandates represent the Direct Debit mandate with a
-    /// [customer](#core-endpoints-customers).
+    /// Mandates represent the Direct Debit mandate with a <a
+    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
     ///
-    /// GoCardless will notify you via a [webhook](#appendix-webhooks) whenever
-    /// the status of a mandate changes.
+    /// GoCardless will notify you via a <a
+    /// href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a>
+    /// whenever the status of a mandate changes.
     /// </summary>
     public class Mandate
     {
         /// <summary>
-        /// This field is ACH specific, sometimes referred to as [SEC
-        /// code](https://www.moderntreasury.com/learn/sec-codes).
+        /// This field is ACH specific, sometimes referred to as <a
+        /// href="https://www.moderntreasury.com/learn/sec-codes">SEC code</a>.
         ///
         /// This is the way that the payer gives authorisation to the merchant.
-        ///   web: Authorisation is Internet Initiated or via Mobile Entry (maps
+        /// web: Authorisation is Internet Initiated or via Mobile Entry (maps
         /// to SEC code: WEB)
-        ///   telephone: Authorisation is provided orally over telephone (maps
-        /// to SEC code: TEL)
-        ///   paper: Authorisation is provided in writing and signed, or
-        /// similarly authenticated (maps to SEC code: PPD)
-        ///
+        /// telephone: Authorisation is provided orally over telephone (maps to
+        /// SEC code: TEL)
+        /// paper: Authorisation is provided in writing and signed, or similarly
+        /// authenticated (maps to SEC code: PPD)
         /// </summary>
         [JsonProperty("authorisation_source")]
         public MandateAuthorisationSource? AuthorisationSource { get; set; }
@@ -49,8 +49,9 @@ namespace GoCardless.Resources
         public string ConsentType { get; set; }
 
         /// <summary>
-        /// Fixed [timestamp](#api-usage-dates-and-times), recording when this
-        /// resource was created.
+        /// Fixed <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
         public DateTimeOffset? CreatedAt { get; set; }
@@ -59,12 +60,13 @@ namespace GoCardless.Resources
         /// This field will decide how GoCardless handles settlement of funds
         /// from the customer.
         ///
-        /// - `managed` will be moved through GoCardless' account, batched, and
-        /// payed out.
-        /// - `direct` will be a direct transfer from the payer's account to the
-        /// merchant where
-        ///   invoicing will be handled separately.
-        ///
+        /// <ul>
+        /// <li><c>managed</c> will be moved through GoCardless' account,
+        /// batched, and payed out.</li>
+        /// <li><c>direct</c> will be a direct transfer from the payer's account
+        /// to the merchant where
+        /// invoicing will be handled separately.</li>
+        /// </ul>
         /// </summary>
         [JsonProperty("funds_settlement")]
         public MandateFundsSettlement? FundsSettlement { get; set; }
@@ -96,8 +98,9 @@ namespace GoCardless.Resources
         public IDictionary<string, string> Metadata { get; set; }
 
         /// <summary>
-        /// The earliest date that can be used as a `charge_date` on any newly
-        /// created payment for this mandate. This value will change over time.
+        /// The earliest date that can be used as a <c>charge_date</c> on any
+        /// newly created payment for this mandate. This value will change over
+        /// time.
         /// </summary>
         [JsonProperty("next_possible_charge_date")]
         public string NextPossibleChargeDate { get; set; }
@@ -105,8 +108,8 @@ namespace GoCardless.Resources
         /// <summary>
         /// If this is an an ACH mandate, the earliest date that can be used as
         /// a
-        /// `charge_date` on any newly created payment to be charged through
-        /// standard
+        /// <c>charge_date</c> on any newly created payment to be charged
+        /// through standard
         /// ACH, rather than Faster ACH. This value will change over time.
         ///
         /// It is only present in the API response for ACH mandates.
@@ -123,10 +126,11 @@ namespace GoCardless.Resources
         public bool? PaymentsRequireApproval { get; set; }
 
         /// <summary>
-        /// Unique reference. Different schemes have different length and
-        /// [character set](#appendix-character-sets) requirements. GoCardless
-        /// will generate a unique reference satisfying the different scheme
-        /// requirements if this field is left blank.
+        /// Unique reference. Different schemes have different length and <a
+        /// href="https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+        /// set</a> requirements. GoCardless will generate a unique reference
+        /// satisfying the different scheme requirements if this field is left
+        /// blank.
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
@@ -141,48 +145,49 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// One of:
+        ///
         /// <ul>
-        /// <li>`pending_customer_approval`: the mandate has not yet been signed
-        /// by the second customer</li>
-        /// <li>`pending_submission`: the mandate has not yet been submitted to
-        /// the customer's bank</li>
-        /// <li>`submitted`: the mandate has been submitted to the customer's
-        /// bank but has not been processed yet</li>
-        /// <li>`active`: the mandate has been successfully set up by the
+        /// <li><c>pending_customer_approval</c>: the mandate has not yet been
+        /// signed by the second customer</li>
+        /// <li><c>pending_submission</c>: the mandate has not yet been
+        /// submitted to the customer's bank</li>
+        /// <li><c>submitted</c>: the mandate has been submitted to the
+        /// customer's bank but has not been processed yet</li>
+        /// <li><c>active</c>: the mandate has been successfully set up by the
         /// customer's bank</li>
-        /// <li>`suspended_by_payer`: the mandate has been suspended by
+        /// <li><c>suspended_by_payer</c>: the mandate has been suspended by
         /// payer</li>
-        /// <li>`failed`: the mandate could not be created</li>
-        /// <li>`cancelled`: the mandate has been cancelled</li>
-        /// <li>`expired`: the mandate has expired due to dormancy</li>
-        /// <li>`consumed`: the mandate has been consumed and cannot be reused
-        /// (note that this only applies to schemes that are per-payment
+        /// <li><c>failed</c>: the mandate could not be created</li>
+        /// <li><c>cancelled</c>: the mandate has been cancelled</li>
+        /// <li><c>expired</c>: the mandate has expired due to dormancy</li>
+        /// <li><c>consumed</c>: the mandate has been consumed and cannot be
+        /// reused (note that this only applies to schemes that are per-payment
         /// authorised)</li>
-        /// <li>`blocked`: the mandate has been blocked and payments cannot be
-        /// created</li>
+        /// <li><c>blocked</c>: the mandate has been blocked and payments cannot
+        /// be created</li>
         /// </ul>
         /// </summary>
         [JsonProperty("status")]
         public MandateStatus? Status { get; set; }
 
         /// <summary>
-        /// [Timestamp](#api-usage-dates-and-times) recording when this mandate
-        /// was verified.
+        /// <a
+        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">Timestamp</a>
+        /// recording when this mandate was verified.
         /// </summary>
         [JsonProperty("verified_at")]
         public string VerifiedAt { get; set; }
     }
 
     /// <summary>
-    /// This field is ACH specific, sometimes referred to as [SEC
-    /// code](https://www.moderntreasury.com/learn/sec-codes).
+    /// This field is ACH specific, sometimes referred to as <a
+    /// href="https://www.moderntreasury.com/learn/sec-codes">SEC code</a>.
     ///
     /// This is the way that the payer gives authorisation to the merchant.
-    ///   web: Authorisation is Internet Initiated or via Mobile Entry (maps to SEC code: WEB)
-    ///   telephone: Authorisation is provided orally over telephone (maps to SEC code: TEL)
-    ///   paper: Authorisation is provided in writing and signed, or similarly authenticated (maps
-    /// to SEC code: PPD)
-    ///
+    /// web: Authorisation is Internet Initiated or via Mobile Entry (maps to SEC code: WEB)
+    /// telephone: Authorisation is provided orally over telephone (maps to SEC code: TEL)
+    /// paper: Authorisation is provided in writing and signed, or similarly authenticated (maps to
+    /// SEC code: PPD)
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum MandateAuthorisationSource
@@ -316,10 +321,11 @@ namespace GoCardless.Resources
     /// <summary>
     /// This field will decide how GoCardless handles settlement of funds from the customer.
     ///
-    /// - `managed` will be moved through GoCardless' account, batched, and payed out.
-    /// - `direct` will be a direct transfer from the payer's account to the merchant where
-    ///   invoicing will be handled separately.
-    ///
+    /// <ul>
+    /// <li><c>managed</c> will be moved through GoCardless' account, batched, and payed out.</li>
+    /// <li><c>direct</c> will be a direct transfer from the payer's account to the merchant where
+    /// invoicing will be handled separately.</li>
+    /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum MandateFundsSettlement
@@ -343,21 +349,24 @@ namespace GoCardless.Resources
     public class MandateLinks
     {
         /// <summary>
-        /// ID of the associated [creditor](#core-endpoints-creditors).
+        /// ID of the associated <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
 
         /// <summary>
-        /// ID of the associated [customer](#core-endpoints-customers)
+        /// ID of the associated <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
         /// </summary>
         [JsonProperty("customer")]
         public string Customer { get; set; }
 
         /// <summary>
-        /// ID of the associated [customer bank
-        /// account](#core-endpoints-customer-bank-accounts) which the mandate
-        /// is created and submits payments against.
+        /// ID of the associated <a
+        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+        /// bank account</a> which the mandate is created and submits payments
+        /// against.
         /// </summary>
         [JsonProperty("customer_bank_account")]
         public string CustomerBankAccount { get; set; }
@@ -402,20 +411,22 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// One of:
+    ///
     /// <ul>
-    /// <li>`pending_customer_approval`: the mandate has not yet been signed by the second
+    /// <li><c>pending_customer_approval</c>: the mandate has not yet been signed by the second
     /// customer</li>
-    /// <li>`pending_submission`: the mandate has not yet been submitted to the customer's bank</li>
-    /// <li>`submitted`: the mandate has been submitted to the customer's bank but has not been
+    /// <li><c>pending_submission</c>: the mandate has not yet been submitted to the customer's
+    /// bank</li>
+    /// <li><c>submitted</c>: the mandate has been submitted to the customer's bank but has not been
     /// processed yet</li>
-    /// <li>`active`: the mandate has been successfully set up by the customer's bank</li>
-    /// <li>`suspended_by_payer`: the mandate has been suspended by payer</li>
-    /// <li>`failed`: the mandate could not be created</li>
-    /// <li>`cancelled`: the mandate has been cancelled</li>
-    /// <li>`expired`: the mandate has expired due to dormancy</li>
-    /// <li>`consumed`: the mandate has been consumed and cannot be reused (note that this only
+    /// <li><c>active</c>: the mandate has been successfully set up by the customer's bank</li>
+    /// <li><c>suspended_by_payer</c>: the mandate has been suspended by payer</li>
+    /// <li><c>failed</c>: the mandate could not be created</li>
+    /// <li><c>cancelled</c>: the mandate has been cancelled</li>
+    /// <li><c>expired</c>: the mandate has expired due to dormancy</li>
+    /// <li><c>consumed</c>: the mandate has been consumed and cannot be reused (note that this only
     /// applies to schemes that are per-payment authorised)</li>
-    /// <li>`blocked`: the mandate has been blocked and payments cannot be created</li>
+    /// <li><c>blocked</c>: the mandate has been blocked and payments cannot be created</li>
     /// </ul>
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
