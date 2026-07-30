@@ -158,9 +158,5 @@ namespace GoCardless.Resources
         /// <summary>`export_type` with a value of "outbound_payments_index"</summary>
         [EnumMember(Value = "outbound_payments_index")]
         OutboundPaymentsIndex,
-
-        /// <summary>`export_type` with a value of "payment_account_transactions"</summary>
-        [EnumMember(Value = "payment_account_transactions")]
-        PaymentAccountTransactions,
     }
 }
