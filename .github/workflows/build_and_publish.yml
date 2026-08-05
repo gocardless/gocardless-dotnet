@@ -33,6 +33,19 @@ jobs:
       with:
         path: "GoCardless/bin/Release/*.nupkg"
 
+  all-tests-passed:
+    name: All tests passed
+    runs-on: ubuntu-latest
+    needs: [build_and_test]
+    if: always()
+    steps:
+    - name: Check build_and_test job status
+      run: |
+        if [ "${{ needs.build_and_test.result }}" != "success" ]; then
+          echo "build_and_test job did not succeed"
+          exit 1
+        fi
+
   check_version:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
