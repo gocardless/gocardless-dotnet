@@ -69,6 +69,25 @@ jobs:
           echo "should_publish=true" >> $GITHUB_OUTPUT
         fi
 
+    - name: Extract changelog notes for this version
+      id: notes
+      if: steps.check.outputs.should_publish == 'true'
+      run: |
+        VERSION="${{ steps.check.outputs.version }}"
+        NOTES=""
+        if [ -f CHANGELOG.md ]; then
+          NOTES=$(awk -v ver="$VERSION" '
+            $0 ~ "^## " ver {p=1; next}
+            p && /^## / {exit}
+            p {print}
+          ' CHANGELOG.md)
+        fi
+        {
+          echo "notes<<EOF"
+          echo "$NOTES"
+          echo "EOF"
+        } >> "$GITHUB_OUTPUT"
+
   publish:
     if: github.ref == 'refs/heads/master' && needs.check_version.outputs.should_publish == 'true'
     runs-on: ubuntu-latest
@@ -102,6 +121,11 @@ jobs:
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git tag v${{ needs.check_version.outputs.version }}
         git push origin v${{ needs.check_version.outputs.version }}
-        gh release create v${{ needs.check_version.outputs.version }} --generate-notes
+        NOTES="${{ steps.notes.outputs.notes }}"
+        if [ -n "$(echo "$NOTES" | tr -d '[:space:]')" ]; then
+          gh release create v${{ steps.version.outputs.version }} --notes "$NOTES"
+        else
+          gh release create v${{ steps.version.outputs.version }} --generate-notes
+        fi
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
