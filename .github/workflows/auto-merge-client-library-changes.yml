@@ -1,14 +1,22 @@
 name: Auto-merge client-library changes
 
-on:
-  schedule:
-    - cron: "0 * * * *"
-  workflow_dispatch: {}
+on: pull_request_target
 
 permissions:
   pull-requests: write
 
 jobs:
-  run:
-    uses: gocardless/github-actions/.github/workflows/auto-merge-client-library-changes.yml@master
-    secrets: inherit
+  merge:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'gocardless-ci-robot[bot]' && github.event.pull_request.head.ref == 'template-changes' }}
+    steps:
+      - name: Approve PR
+        run: gh pr review --approve "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Enable auto-merge
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.GOCARDLESS_CI_ROBOT_TOKEN }}

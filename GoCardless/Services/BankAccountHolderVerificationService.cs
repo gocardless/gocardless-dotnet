@@ -32,9 +32,10 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Verify the account holder of the bank account. A complete
-        /// verification can be attached when creating an outbound payment. This
-        /// endpoint allows partner merchants to create Confirmation of Payee
-        /// checks on customer bank accounts before sending outbound payments.
+        /// verification can be attached when creating an outbound payment.
+        /// This endpoint allows partner merchants to create Confirmation of
+        /// Payee checks on customer bank accounts before sending outbound
+        /// payments.
         /// </summary>
         /// <param name="request">An optional `BankAccountHolderVerificationCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -96,9 +97,9 @@ namespace GoCardless.Services
 
     /// <summary>
     /// Verify the account holder of the bank account. A complete verification
-    /// can be attached when creating an outbound payment. This endpoint allows
-    /// partner merchants to create Confirmation of Payee checks on customer
-    /// bank accounts before sending outbound payments.
+    /// can be attached when creating an outbound payment.
+    /// This endpoint allows partner merchants to create Confirmation of Payee
+    /// checks on customer bank accounts before sending outbound payments.
     /// </summary>
     public class BankAccountHolderVerificationCreateRequest : IHasIdempotencyKey
     {
