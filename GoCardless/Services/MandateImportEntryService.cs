@@ -597,7 +597,7 @@ namespace GoCardless.Services
         /// One of:
         ///
         /// <ul>
-        /// <li><c>sucessfully_processed</c>: the entry has been imported and
+        /// <li><c>successfully_processed</c>: the entry has been imported and
         /// the associated records created.</li>
         /// <li><c>unsuccessfully_processed</c>: the entry could not be
         /// processed due to an error, see the 'processing_errors' value</li>
@@ -610,7 +610,7 @@ namespace GoCardless.Services
         /// One of:
         ///
         /// <ul>
-        /// <li><c>sucessfully_processed</c>: the entry has been imported and
+        /// <li><c>successfully_processed</c>: the entry has been imported and
         /// the associated records created.</li>
         /// <li><c>unsuccessfully_processed</c>: the entry could not be
         /// processed due to an error, see the 'processing_errors' value</li>
