@@ -139,6 +139,10 @@ namespace GoCardless.Resources
         [EnumMember(Value = "organisation_authorisations")]
         OrganisationAuthorisations,
 
+        /// <summary>`export_type` with a value of "app_connected_organisations"</summary>
+        [EnumMember(Value = "app_connected_organisations")]
+        AppConnectedOrganisations,
+
         /// <summary>`export_type` with a value of "gc_invalid_authorisation_requests"</summary>
         [EnumMember(Value = "gc_invalid_authorisation_requests")]
         GcInvalidAuthorisationRequests,
