@@ -106,8 +106,7 @@ namespace GoCardless.Resources
         public string NextPossibleChargeDate { get; set; }
 
         /// <summary>
-        /// If this is an an ACH mandate, the earliest date that can be used as
-        /// a
+        /// If this is an ACH mandate, the earliest date that can be used as a
         /// <c>charge_date</c> on any newly created payment to be charged
         /// through standard
         /// ACH, rather than Faster ACH. This value will change over time.
