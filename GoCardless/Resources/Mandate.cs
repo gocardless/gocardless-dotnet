@@ -248,6 +248,12 @@ namespace GoCardless.Resources
         public MandateConsentParametersPeriod? Period { get; set; }
 
         /// <summary>
+        /// The alignment of the payment period.
+        /// </summary>
+        [JsonProperty("period_alignment")]
+        public MandateConsentParametersPeriodAlignment? PeriodAlignment { get; set; }
+
+        /// <summary>
         /// The date from which payments can be taken
         /// </summary>
         [JsonProperty("start_date")]
@@ -283,6 +289,25 @@ namespace GoCardless.Resources
         /// <summary>`period` with a value of "flexible"</summary>
         [EnumMember(Value = "flexible")]
         Flexible,
+    }
+
+    /// <summary>
+    /// The alignment of the payment period.
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum MandateConsentParametersPeriodAlignment
+    {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`period_alignment` with a value of "calendar"</summary>
+        [EnumMember(Value = "calendar")]
+        Calendar,
+
+        /// <summary>`period_alignment` with a value of "consent"</summary>
+        [EnumMember(Value = "consent")]
+        Consent,
     }
 
     /// <summary>
