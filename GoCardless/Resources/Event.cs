@@ -350,6 +350,14 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "sepa_cor1"</summary>
         [EnumMember(Value = "sepa_cor1")]
         SepaCor1,
+
+        /// <summary>`scheme` with a value of "sepa_credit_transfer"</summary>
+        [EnumMember(Value = "sepa_credit_transfer")]
+        SepaCreditTransfer,
+
+        /// <summary>`scheme` with a value of "sepa_instant_credit_transfer"</summary>
+        [EnumMember(Value = "sepa_instant_credit_transfer")]
+        SepaInstantCreditTransfer,
     }
 
     /// <summary>
@@ -690,5 +698,21 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "access_token"</summary>
         [EnumMember(Value = "access_token")]
         AccessToken,
+
+        /// <summary>`type` with a value of "billing_request"</summary>
+        [EnumMember(Value = "billing_request")]
+        BillingRequest,
+
+        /// <summary>`type` with a value of "billing_request_flow"</summary>
+        [EnumMember(Value = "billing_request_flow")]
+        BillingRequestFlow,
+
+        /// <summary>`type` with a value of "dropin"</summary>
+        [EnumMember(Value = "dropin")]
+        Dropin,
+
+        /// <summary>`type` with a value of "hosted_payment_page"</summary>
+        [EnumMember(Value = "hosted_payment_page")]
+        HostedPaymentPage,
     }
 }
