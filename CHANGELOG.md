@@ -1,6 +1,12 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 10.0.1 (2026-09-14)
+
+### Fixes
+
+- Bump crank dependency to v7.2.0 for oneOf schema support
+
 ## 10.0.0 (2026-09-14)
 
 ### Breaking Changes
