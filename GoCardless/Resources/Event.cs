@@ -89,23 +89,7 @@ namespace GoCardless.Resources
         public IDictionary<string, string> ResourceMetadata { get; set; }
 
         /// <summary>
-        /// The resource type for this event. One of:
-        ///
-        /// <ul>
-        /// <li><c>billing_requests</c></li>
-        /// <li><c>creditors</c></li>
-        /// <li><c>exports</c></li>
-        /// <li><c>instalment_schedules</c></li>
-        /// <li><c>mandates</c></li>
-        /// <li><c>payer_authorisations</c></li>
-        /// <li><c>payments</c></li>
-        /// <li><c>payouts</c></li>
-        /// <li><c>refunds</c></li>
-        /// <li><c>scheme_identifiers</c></li>
-        /// <li><c>subscriptions</c></li>
-        /// <li><c>outbound_payments</c></li>
-        /// <li><c>payment_account_transactions</c></li>
-        /// </ul>
+        /// The resource type for this event.
         /// </summary>
         [JsonProperty("resource_type")]
         public EventResourceType? ResourceType { get; set; }
@@ -567,23 +551,7 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// The resource type for this event. One of:
-    ///
-    /// <ul>
-    /// <li><c>billing_requests</c></li>
-    /// <li><c>creditors</c></li>
-    /// <li><c>exports</c></li>
-    /// <li><c>instalment_schedules</c></li>
-    /// <li><c>mandates</c></li>
-    /// <li><c>payer_authorisations</c></li>
-    /// <li><c>payments</c></li>
-    /// <li><c>payouts</c></li>
-    /// <li><c>refunds</c></li>
-    /// <li><c>scheme_identifiers</c></li>
-    /// <li><c>subscriptions</c></li>
-    /// <li><c>outbound_payments</c></li>
-    /// <li><c>payment_account_transactions</c></li>
-    /// </ul>
+    /// The resource type for this event.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum EventResourceType
