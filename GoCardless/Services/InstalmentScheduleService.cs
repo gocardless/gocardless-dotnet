@@ -82,7 +82,7 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<InstalmentScheduleResponse>(
                 "POST",
-                "/instalment_schedules",
+                "/instalment_schedules/create_with_dates",
                 urlParams,
                 request,
                 id => GetAsync(id, null, customiseRequestMessage),
@@ -124,7 +124,7 @@ namespace GoCardless.Services
 
             return _goCardlessClient.ExecuteAsync<InstalmentScheduleResponse>(
                 "POST",
-                "/instalment_schedules",
+                "/instalment_schedules/create_with_schedule",
                 urlParams,
                 request,
                 id => GetAsync(id, null, customiseRequestMessage),

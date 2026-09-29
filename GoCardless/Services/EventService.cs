@@ -248,46 +248,14 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Includes linked resources in the response. Must be used with the
-        /// <c>resource_type</c> parameter specified. The include should be one
-        /// of:
-        ///
-        /// <ul>
-        /// <li><c>billing_request</c></li>
-        /// <li><c>creditor</c></li>
-        /// <li><c>instalment_schedule</c></li>
-        /// <li><c>mandate</c></li>
-        /// <li><c>payer_authorisation</c></li>
-        /// <li><c>payment</c></li>
-        /// <li><c>payout</c></li>
-        /// <li><c>refund</c></li>
-        /// <li><c>scheme_identifier</c></li>
-        /// <li><c>subscription</c></li>
-        /// <li><c>outbound_payment</c></li>
-        /// <li><c>payment_account_transaction</c></li>
-        /// </ul>
+        /// <c>resource_type</c> parameter specified.
         /// </summary>
         [JsonProperty("include")]
         public EventInclude? Include { get; set; }
 
         /// <summary>
         /// Includes linked resources in the response. Must be used with the
-        /// <c>resource_type</c> parameter specified. The include should be one
-        /// of:
-        ///
-        /// <ul>
-        /// <li><c>billing_request</c></li>
-        /// <li><c>creditor</c></li>
-        /// <li><c>instalment_schedule</c></li>
-        /// <li><c>mandate</c></li>
-        /// <li><c>payer_authorisation</c></li>
-        /// <li><c>payment</c></li>
-        /// <li><c>payout</c></li>
-        /// <li><c>refund</c></li>
-        /// <li><c>scheme_identifier</c></li>
-        /// <li><c>subscription</c></li>
-        /// <li><c>outbound_payment</c></li>
-        /// <li><c>payment_account_transaction</c></li>
-        /// </ul>
+        /// <c>resource_type</c> parameter specified.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum EventInclude
@@ -435,23 +403,6 @@ namespace GoCardless.Services
         /// <c>payout</c>, <c>refund</c>, <c>scheme_identifier</c>,
         /// <c>subscription</c>, <c>outbound_payment</c> or
         /// <c>payment_account_transaction</c> parameters.
-        /// The type can be one of:
-        ///
-        /// <ul>
-        /// <li><c>billing_requests</c></li>
-        /// <li><c>creditors</c></li>
-        /// <li><c>exports</c></li>
-        /// <li><c>instalment_schedules</c></li>
-        /// <li><c>mandates</c></li>
-        /// <li><c>payer_authorisations</c></li>
-        /// <li><c>payments</c></li>
-        /// <li><c>payouts</c></li>
-        /// <li><c>refunds</c></li>
-        /// <li><c>scheme_identifiers</c></li>
-        /// <li><c>subscriptions</c></li>
-        /// <li><c>outbound_payments</c></li>
-        /// <li><c>payment_account_transactions</c></li>
-        /// </ul>
         /// </summary>
         [JsonProperty("resource_type")]
         public EventResourceType? ResourceType { get; set; }
@@ -464,23 +415,6 @@ namespace GoCardless.Services
         /// <c>payout</c>, <c>refund</c>, <c>scheme_identifier</c>,
         /// <c>subscription</c>, <c>outbound_payment</c> or
         /// <c>payment_account_transaction</c> parameters.
-        /// The type can be one of:
-        ///
-        /// <ul>
-        /// <li><c>billing_requests</c></li>
-        /// <li><c>creditors</c></li>
-        /// <li><c>exports</c></li>
-        /// <li><c>instalment_schedules</c></li>
-        /// <li><c>mandates</c></li>
-        /// <li><c>payer_authorisations</c></li>
-        /// <li><c>payments</c></li>
-        /// <li><c>payouts</c></li>
-        /// <li><c>refunds</c></li>
-        /// <li><c>scheme_identifiers</c></li>
-        /// <li><c>subscriptions</c></li>
-        /// <li><c>outbound_payments</c></li>
-        /// <li><c>payment_account_transactions</c></li>
-        /// </ul>
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum EventResourceType

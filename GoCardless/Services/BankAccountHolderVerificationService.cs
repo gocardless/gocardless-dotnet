@@ -122,6 +122,13 @@ namespace GoCardless.Services
         }
 
         /// <summary>
+        /// An alphanumeric reference code used by some financial institutions
+        /// to identify an individual account.
+        /// </summary>
+        [JsonProperty("reference")]
+        public string Reference { get; set; }
+
+        /// <summary>
         /// Type of the verification that has been performed
         /// eg. <a
         /// href="https://www.wearepay.uk/what-we-do/overlay-services/confirmation-of-payee/">Confirmation

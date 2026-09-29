@@ -89,23 +89,7 @@ namespace GoCardless.Resources
         public IDictionary<string, string> ResourceMetadata { get; set; }
 
         /// <summary>
-        /// The resource type for this event. One of:
-        ///
-        /// <ul>
-        /// <li><c>billing_requests</c></li>
-        /// <li><c>creditors</c></li>
-        /// <li><c>exports</c></li>
-        /// <li><c>instalment_schedules</c></li>
-        /// <li><c>mandates</c></li>
-        /// <li><c>payer_authorisations</c></li>
-        /// <li><c>payments</c></li>
-        /// <li><c>payouts</c></li>
-        /// <li><c>refunds</c></li>
-        /// <li><c>scheme_identifiers</c></li>
-        /// <li><c>subscriptions</c></li>
-        /// <li><c>outbound_payments</c></li>
-        /// <li><c>payment_account_transactions</c></li>
-        /// </ul>
+        /// The resource type for this event.
         /// </summary>
         [JsonProperty("resource_type")]
         public EventResourceType? ResourceType { get; set; }
@@ -350,6 +334,14 @@ namespace GoCardless.Resources
         /// <summary>`scheme` with a value of "sepa_cor1"</summary>
         [EnumMember(Value = "sepa_cor1")]
         SepaCor1,
+
+        /// <summary>`scheme` with a value of "sepa_credit_transfer"</summary>
+        [EnumMember(Value = "sepa_credit_transfer")]
+        SepaCreditTransfer,
+
+        /// <summary>`scheme` with a value of "sepa_instant_credit_transfer"</summary>
+        [EnumMember(Value = "sepa_instant_credit_transfer")]
+        SepaInstantCreditTransfer,
     }
 
     /// <summary>
@@ -559,23 +551,7 @@ namespace GoCardless.Resources
     }
 
     /// <summary>
-    /// The resource type for this event. One of:
-    ///
-    /// <ul>
-    /// <li><c>billing_requests</c></li>
-    /// <li><c>creditors</c></li>
-    /// <li><c>exports</c></li>
-    /// <li><c>instalment_schedules</c></li>
-    /// <li><c>mandates</c></li>
-    /// <li><c>payer_authorisations</c></li>
-    /// <li><c>payments</c></li>
-    /// <li><c>payouts</c></li>
-    /// <li><c>refunds</c></li>
-    /// <li><c>scheme_identifiers</c></li>
-    /// <li><c>subscriptions</c></li>
-    /// <li><c>outbound_payments</c></li>
-    /// <li><c>payment_account_transactions</c></li>
-    /// </ul>
+    /// The resource type for this event.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum EventResourceType
@@ -690,5 +666,21 @@ namespace GoCardless.Resources
         /// <summary>`type` with a value of "access_token"</summary>
         [EnumMember(Value = "access_token")]
         AccessToken,
+
+        /// <summary>`type` with a value of "billing_request"</summary>
+        [EnumMember(Value = "billing_request")]
+        BillingRequest,
+
+        /// <summary>`type` with a value of "billing_request_flow"</summary>
+        [EnumMember(Value = "billing_request_flow")]
+        BillingRequestFlow,
+
+        /// <summary>`type` with a value of "dropin"</summary>
+        [EnumMember(Value = "dropin")]
+        Dropin,
+
+        /// <summary>`type` with a value of "hosted_payment_page"</summary>
+        [EnumMember(Value = "hosted_payment_page")]
+        HostedPaymentPage,
     }
 }

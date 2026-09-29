@@ -93,7 +93,7 @@ namespace GoCardless.Resources
         /// Verification preference for the mandate.
         /// </summary>
         [JsonProperty("mandate_request_verify")]
-        public string MandateRequestVerify { get; set; }
+        public BillingRequestTemplateMandateRequestVerify? MandateRequestVerify { get; set; }
 
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
@@ -378,5 +378,32 @@ namespace GoCardless.Resources
         /// <summary>`period` with a value of "flexible"</summary>
         [EnumMember(Value = "flexible")]
         Flexible,
+    }
+
+    /// <summary>
+    /// Verification preference for the mandate.
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestTemplateMandateRequestVerify
+    {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`mandate_request_verify` with a value of "minimum"</summary>
+        [EnumMember(Value = "minimum")]
+        Minimum,
+
+        /// <summary>`mandate_request_verify` with a value of "recommended"</summary>
+        [EnumMember(Value = "recommended")]
+        Recommended,
+
+        /// <summary>`mandate_request_verify` with a value of "when_available"</summary>
+        [EnumMember(Value = "when_available")]
+        WhenAvailable,
+
+        /// <summary>`mandate_request_verify` with a value of "always"</summary>
+        [EnumMember(Value = "always")]
+        Always,
     }
 }

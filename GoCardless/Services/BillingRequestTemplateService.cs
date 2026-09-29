@@ -525,6 +525,29 @@ namespace GoCardless.Services
         public string MandateRequestVerify { get; set; }
 
         /// <summary>
+        /// Verification preference for the mandate.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BillingRequestTemplateMandateRequestVerify
+        {
+            /// <summary>`mandate_request_verify` with a value of "minimum"</summary>
+            [EnumMember(Value = "minimum")]
+            Minimum,
+
+            /// <summary>`mandate_request_verify` with a value of "recommended"</summary>
+            [EnumMember(Value = "recommended")]
+            Recommended,
+
+            /// <summary>`mandate_request_verify` with a value of "when_available"</summary>
+            [EnumMember(Value = "when_available")]
+            WhenAvailable,
+
+            /// <summary>`mandate_request_verify` with a value of "always"</summary>
+            [EnumMember(Value = "always")]
+            Always,
+        }
+
+        /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key
         /// names up to 50 characters and values up to 500 characters.
         /// </summary>
@@ -848,6 +871,29 @@ namespace GoCardless.Services
         /// </summary>
         [JsonProperty("mandate_request_verify")]
         public string MandateRequestVerify { get; set; }
+
+        /// <summary>
+        /// Verification preference for the mandate.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum BillingRequestTemplateMandateRequestVerify
+        {
+            /// <summary>`mandate_request_verify` with a value of "minimum"</summary>
+            [EnumMember(Value = "minimum")]
+            Minimum,
+
+            /// <summary>`mandate_request_verify` with a value of "recommended"</summary>
+            [EnumMember(Value = "recommended")]
+            Recommended,
+
+            /// <summary>`mandate_request_verify` with a value of "when_available"</summary>
+            [EnumMember(Value = "when_available")]
+            WhenAvailable,
+
+            /// <summary>`mandate_request_verify` with a value of "always"</summary>
+            [EnumMember(Value = "always")]
+            Always,
+        }
 
         /// <summary>
         /// Key-value store of custom data. Up to 3 keys are permitted, with key

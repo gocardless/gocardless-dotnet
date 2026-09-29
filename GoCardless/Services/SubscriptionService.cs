@@ -775,7 +775,7 @@ namespace GoCardless.Services
         public string Mandate { get; set; }
 
         /// <summary>
-        /// Upto 5 of:
+        /// Up to 5 of:
         ///
         /// <ul>
         /// <li><c>pending_customer_approval</c></li>
