@@ -39,6 +39,29 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("bic")]
         public string Bic { get; set; }
+
+        /// <summary>
+        /// The result of the payer name verification check performed during the
+        /// lookup. <c>null</c> if no check was performed.
+        ///
+        /// <ul>
+        /// <li><c>full</c>: The name provided matches the name held by the
+        /// bank.</li>
+        /// <li><c>close</c>: The name provided is a close but not exact match
+        /// to the name held by the bank.</li>
+        /// <li><c>cannot_perform_verification</c>: A verification was attempted
+        /// but could not be completed. This can happen for a number of reasons,
+        /// including the account holder's bank not participating in the
+        /// verification scheme, the account not being eligible for verification
+        /// (e.g. the account holder has opted out), or the bank details not
+        /// being resolvable, among others.</li>
+        /// <li><c>null</c>: Verification was not triggered. Either PNV is not
+        /// supported for the scheme, or PNV feature is disabled for your
+        /// organisation.</li>
+        /// </ul>
+        /// </summary>
+        [JsonProperty("payer_name_verification_result")]
+        public BankDetailsLookupPayerNameVerificationResult? PayerNameVerificationResult { get; set; }
     }
 
     /// <summary>
@@ -90,5 +113,42 @@ namespace GoCardless.Resources
         /// <summary>`available_debit_scheme` with a value of "sepa_core"</summary>
         [EnumMember(Value = "sepa_core")]
         SepaCore,
+    }
+
+    /// <summary>
+    /// The result of the payer name verification check performed during the lookup. <c>null</c> if
+    /// no check was performed.
+    ///
+    /// <ul>
+    /// <li><c>full</c>: The name provided matches the name held by the bank.</li>
+    /// <li><c>close</c>: The name provided is a close but not exact match to the name held by the
+    /// bank.</li>
+    /// <li><c>cannot_perform_verification</c>: A verification was attempted but could not be
+    /// completed. This can happen for a number of reasons, including the account holder's bank not
+    /// participating in the verification scheme, the account not being eligible for verification
+    /// (e.g. the account holder has opted out), or the bank details not being resolvable, among
+    /// others.</li>
+    /// <li><c>null</c>: Verification was not triggered. Either PNV is not supported for the scheme,
+    /// or PNV feature is disabled for your organisation.</li>
+    /// </ul>
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BankDetailsLookupPayerNameVerificationResult
+    {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`payer_name_verification_result` with a value of "full"</summary>
+        [EnumMember(Value = "full")]
+        Full,
+
+        /// <summary>`payer_name_verification_result` with a value of "close"</summary>
+        [EnumMember(Value = "close")]
+        Close,
+
+        /// <summary>`payer_name_verification_result` with a value of "cannot_perform_verification"</summary>
+        [EnumMember(Value = "cannot_perform_verification")]
+        CannotPerformVerification,
     }
 }
