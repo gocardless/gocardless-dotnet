@@ -388,6 +388,12 @@ namespace GoCardless.Services
             public string BankCode { get; set; }
 
             /// <summary>
+            /// Name of bank, taken from the bank details.
+            /// </summary>
+            [JsonProperty("bank_name")]
+            public string BankName { get; set; }
+
+            /// <summary>
             /// Branch code - see <a
             /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
             /// details</a> for more information. Alternatively you can provide
@@ -772,6 +778,12 @@ namespace GoCardless.Services
             /// </summary>
             [JsonProperty("bank_code")]
             public string BankCode { get; set; }
+
+            /// <summary>
+            /// Name of bank, taken from the bank details.
+            /// </summary>
+            [JsonProperty("bank_name")]
+            public string BankName { get; set; }
 
             /// <summary>
             /// Branch code - see <a
