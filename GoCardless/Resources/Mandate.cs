@@ -216,11 +216,30 @@ namespace GoCardless.Resources
     public class MandateConsentParameters
     {
         /// <summary>
+        /// The currency for the consent parameters
+        /// </summary>
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
+
+        /// <summary>
         /// The latest date at which payments can be taken, must occur after
         /// start_date if present
         /// </summary>
         [JsonProperty("end_date")]
         public string EndDate { get; set; }
+
+        /// <summary>
+        /// The fixed amount for each payment, in the lowest denomination for
+        /// the currency
+        /// </summary>
+        [JsonProperty("fixed_amount_per_payment")]
+        public int? FixedAmountPerPayment { get; set; }
+
+        /// <summary>
+        /// Unique identifier for the consent parameters
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; set; }
 
         /// <summary>
         /// The maximum amount that can be charged for a single payment
@@ -252,6 +271,12 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("period_alignment")]
         public MandateConsentParametersPeriodAlignment? PeriodAlignment { get; set; }
+
+        /// <summary>
+        /// The scheme associated with the consent parameters
+        /// </summary>
+        [JsonProperty("scheme")]
+        public string Scheme { get; set; }
 
         /// <summary>
         /// The date from which payments can be taken
@@ -308,6 +333,10 @@ namespace GoCardless.Resources
         /// <summary>`period_alignment` with a value of "consent"</summary>
         [EnumMember(Value = "consent")]
         Consent,
+
+        /// <summary>`period_alignment` with a value of "creation_date"</summary>
+        [EnumMember(Value = "creation_date")]
+        CreationDate,
     }
 
     /// <summary>
