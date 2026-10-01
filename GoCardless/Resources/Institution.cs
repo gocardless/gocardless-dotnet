@@ -20,14 +20,6 @@ namespace GoCardless.Resources
     public class Institution
     {
         /// <summary>
-        /// Flag to show if selecting this institution in the select_institution
-        /// action can auto-complete the collect_bank_account action. The bank
-        /// can return the payer's bank account details to GoCardless.
-        /// </summary>
-        [JsonProperty("autocompletes_collect_bank_account")]
-        public bool? AutocompletesCollectBankAccount { get; set; }
-
-        /// <summary>
         /// <a
         /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
         /// 3166-1</a> alpha-2 code. The country code of the institution. If
@@ -73,12 +65,6 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("roles")]
         public List<string> Roles { get; set; }
-
-        /// <summary>
-        /// The status of the institution
-        /// </summary>
-        [JsonProperty("status")]
-        public string Status { get; set; }
     }
 
     /// <summary>
@@ -105,28 +91,5 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("single")]
         public IDictionary<string, string> Single { get; set; }
-    }
-
-    /// <summary>
-    /// The status of the institution
-    /// </summary>
-    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
-    public enum InstitutionStatus
-    {
-        /// <summary>Unknown status</summary>
-        [EnumMember(Value = "unknown")]
-        Unknown = 0,
-
-        /// <summary>`status` with a value of "enabled"</summary>
-        [EnumMember(Value = "enabled")]
-        Enabled,
-
-        /// <summary>`status` with a value of "disabled"</summary>
-        [EnumMember(Value = "disabled")]
-        Disabled,
-
-        /// <summary>`status` with a value of "temporarily_disabled"</summary>
-        [EnumMember(Value = "temporarily_disabled")]
-        TemporarilyDisabled,
     }
 }
