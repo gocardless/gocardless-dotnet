@@ -16,6 +16,10 @@ namespace GoCardless.Resources
     /// be notified
     /// are all identified in the <c>links</c> property.
     ///
+    /// Only <c>payment_created</c>, <c>mandate_created</c> and
+    /// <c>subscription_created</c> notifications are
+    /// supported.
+    ///
     /// Note that these are ephemeral records - once the notification has been
     /// actioned in some
     /// way, it is no longer visible using this API.
@@ -65,18 +69,15 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// The type of notification the customer shall receive.
-        /// One of:
         ///
-        /// <ul>
-        /// <li><c>payment_created</c></li>
-        /// <li><c>payment_cancelled</c></li>
-        /// <li><c>mandate_created</c></li>
-        /// <li><c>mandate_blocked</c></li>
-        /// <li><c>subscription_created</c></li>
-        /// <li><c>subscription_cancelled</c></li>
-        /// <li><c>instalment_schedule_created</c></li>
-        /// <li><c>instalment_schedule_cancelled</c></li>
-        /// </ul>
+        /// Note: today, only <c>payment_created</c>, <c>mandate_created</c> and
+        /// <c>subscription_created</c>
+        /// notifications are actually supported. The remaining values are
+        /// reserved for now.
+        ///
+        /// Making a request for an event of any other type will get a
+        /// <c>403</c> <c>customer_notifications_notification_type_forbidden</c>
+        /// error.
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; }
@@ -142,18 +143,13 @@ namespace GoCardless.Resources
 
     /// <summary>
     /// The type of notification the customer shall receive.
-    /// One of:
     ///
-    /// <ul>
-    /// <li><c>payment_created</c></li>
-    /// <li><c>payment_cancelled</c></li>
-    /// <li><c>mandate_created</c></li>
-    /// <li><c>mandate_blocked</c></li>
-    /// <li><c>subscription_created</c></li>
-    /// <li><c>subscription_cancelled</c></li>
-    /// <li><c>instalment_schedule_created</c></li>
-    /// <li><c>instalment_schedule_cancelled</c></li>
-    /// </ul>
+    /// Note: today, only <c>payment_created</c>, <c>mandate_created</c> and
+    /// <c>subscription_created</c>
+    /// notifications are actually supported. The remaining values are reserved for now.
+    ///
+    /// Making a request for an event of any other type will get a <c>403</c>
+    /// <c>customer_notifications_notification_type_forbidden</c> error.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
     public enum CustomerNotificationType
