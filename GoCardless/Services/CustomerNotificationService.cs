@@ -20,6 +20,10 @@ namespace GoCardless.Services
     /// be notified
     /// are all identified in the <c>links</c> property.
     ///
+    /// Only <c>payment_created</c>, <c>mandate_created</c> and
+    /// <c>subscription_created</c> notifications are
+    /// supported.
+    ///
     /// Note that these are ephemeral records - once the notification has been
     /// actioned in some
     /// way, it is no longer visible using this API.
