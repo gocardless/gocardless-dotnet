@@ -122,17 +122,26 @@ namespace GoCardless.Services
 
         /// <summary>
         /// The feature that institutions support. The available options include
-        /// <c>pis</c>, and <c>vrp_sweeping</c>. If nothing is provided,
-        /// institutions supporting 'pis' are returned by default.
+        /// <c>pis</c>, <c>vrp_sweeping</c>, and <c>vrp_commercial</c>. If
+        /// nothing is provided, institutions supporting 'pis' are returned by
+        /// default.
         /// </summary>
         [JsonProperty("feature")]
         public string Feature { get; set; }
 
         /// <summary>
+        /// Indicates whether to include temporarily disabled institutions in
+        /// the response. If not provided or set to false, only enabled
+        /// institutions will be returned.
+        /// </summary>
+        [JsonProperty("include_disabled")]
+        public bool? IncludeDisabled { get; set; }
+
+        /// <summary>
         /// The scheme that institutions support. The available options include
         /// <c>faster_payments</c>, <c>sepa_credit_transfer</c>, and
-        /// <c>sepa_instant_credit_transfer</c>. If nothing is provided,
-        /// institutions supporting 'faster_payments' are returned by default.
+        /// <c>sepa_instant_credit_transfer</c>. If nothing is provided, no
+        /// scheme filter is applied to the returned institutions.
         /// </summary>
         [JsonProperty("scheme")]
         public string Scheme { get; set; }
