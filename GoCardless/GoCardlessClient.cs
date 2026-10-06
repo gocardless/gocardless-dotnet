@@ -374,7 +374,7 @@ namespace GoCardless
             //insert url arguments into template
             foreach (var arg in urlParams)
             {
-                path = path.Replace(":" + arg.Key, Helpers.Stringify(arg.Value));
+                path = path.Replace(":" + arg.Key, Helpers.EscapeUrlParam(arg.Key, arg.Value));
             }
 
             //add querystring for GET requests
@@ -393,7 +393,10 @@ namespace GoCardless
 
             var httpMethod = new HttpMethod(method);
 
-            var requestMessage = new HttpRequestMessage(httpMethod, new Uri(_baseUrl, path));
+            var requestMessage = new HttpRequestMessage(
+                httpMethod,
+                Helpers.ResolveAgainstBaseUrl(_baseUrl, path)
+            );
             var OSRunningOn = "";
             var runtimeFrameworkInformation = "";
 
@@ -488,8 +491,74 @@ namespace GoCardless
             return requestMessage;
         }
 
-        class Helpers
+        // Internal rather than private so the URL handling below can be tested directly.
+        internal class Helpers
         {
+            /// <summary>
+            /// Resolves a path against the base URL, rejecting one that would leave its origin -
+            /// an absolute or scheme-relative path, which Uri otherwise follows like a browser
+            /// follows a link, replacing the origin while the auth header stays attached.
+            ///
+            /// Checked on the resolved Uri rather than the raw string, since Uri accepts
+            /// authority syntax (e.g. backslashes) a string check could miss. Dot segments are
+            /// left alone: they resolve against the base URL and can't leave its origin.
+            /// </summary>
+            internal static Uri ResolveAgainstBaseUrl(Uri baseUrl, string path)
+            {
+                Uri resolved;
+
+                if (!Uri.TryCreate(baseUrl, path, out resolved))
+                    throw new ArgumentException(
+                        $"Invalid request path '{path}': not a valid URL path"
+                    );
+
+                if (
+                    resolved.Scheme != baseUrl.Scheme
+                    || resolved.Host != baseUrl.Host
+                    || resolved.Port != baseUrl.Port
+                )
+                    throw new ArgumentException(
+                        $"Invalid request path '{path}': a path may not specify a scheme or a host, only a location relative to the configured base URL"
+                    );
+
+                return resolved;
+            }
+
+            /// <summary>
+            /// Escapes a value before it is interpolated into a request path. A URL parameter is
+            /// a single path segment, so values that could move the request to a different
+            /// endpoint - path separators, control characters, '.', '..' (escaping can't make
+            /// these safe - Uri strips them regardless), and empty values - are rejected instead.
+            /// </summary>
+            internal static string EscapeUrlParam(string key, object value)
+            {
+                var stringValue = value?.ToString();
+
+                if (String.IsNullOrEmpty(stringValue))
+                    throw new ArgumentException($"No value provided for URL parameter '{key}'");
+
+                if (stringValue == "." || stringValue == "..")
+                    throw new ArgumentException(
+                        $"Invalid value for URL parameter '{key}': '{stringValue}' would change which endpoint the request is sent to"
+                    );
+
+                if (stringValue.Any(IsForbiddenUrlParamChar))
+                    throw new ArgumentException(
+                        $"Invalid value for URL parameter '{key}': '{stringValue}' contains a character that is not allowed in a path segment"
+                    );
+
+                return WebUtility.UrlEncode(stringValue);
+            }
+
+            /// <summary>
+            /// Characters that may not appear in a URL parameter. Space is included since
+            /// UrlEncode turns it into a literal '+' rather than %20.
+            /// </summary>
+            private static bool IsForbiddenUrlParamChar(char c)
+            {
+                return c == '/' || c == '?' || c == '#' || c == ' ' || Char.IsControl(c);
+            }
+
             internal static string Stringify(object value)
             {
                 if (value is bool)
