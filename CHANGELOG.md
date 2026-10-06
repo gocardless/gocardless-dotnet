@@ -1,6 +1,19 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 10.10.1 (2026-10-06)
+
+### Fixes
+
+#### Compare webhook signatures in constant time
+
+The webhook parser compared the computed HMAC with the signature from the request
+header using string inequality, which returns at the first differing character. That
+leaks how many leading characters matched, making signature verification a
+per-character oracle for forging a signature.
+
+The comparison is now constant time, matching every other GoCardless client library.
+
 ## 10.10.0 (2026-10-06)
 
 ### Features
