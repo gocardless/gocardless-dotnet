@@ -29,5 +29,17 @@ namespace GoCardless.Tests
                 WebhookParser.Parse(body, key, "notatallcorrect")
             );
         }
+
+        [Test]
+        public void ShouldThrowWithEqualLengthInvalidSignature()
+        {
+            // Same length as a real HMAC-SHA256 hex digest (64 chars) but wrong, to
+            // exercise the constant-time byte comparison rather than the length check.
+            var wrongSignature = signature.Substring(0, 63) + (signature[63] == 'f' ? 'e' : 'f');
+
+            Assert.Throws<InvalidSignatureException>(() =>
+                WebhookParser.Parse(body, key, wrongSignature)
+            );
+        }
     }
 }

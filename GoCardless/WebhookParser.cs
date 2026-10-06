@@ -99,10 +99,42 @@ namespace GoCardless
             var computedSignature = hmac256.ComputeHash(Encoding.UTF8.GetBytes(_body));
             var result = BitConverter.ToString(computedSignature).Replace("-", "").ToLower();
 
-            if (result != _signatureHeader)
+            if (!ConstantTimeEquals(result, _signatureHeader))
             {
                 throw new InvalidSignatureException();
             }
+        }
+
+        // Constant-time comparison: a plain string comparison returns at the first
+        // differing character, turning signature verification into a timing oracle.
+        private static bool ConstantTimeEquals(string computed, string provided)
+        {
+            if (computed == null || provided == null)
+            {
+                return false;
+            }
+
+            var computedBytes = Encoding.UTF8.GetBytes(computed);
+            var providedBytes = Encoding.UTF8.GetBytes(provided);
+
+#if NETSTANDARD2_1 || NET5_0_OR_GREATER
+            // CryptographicOperations.FixedTimeEquals is unavailable on netstandard2.0
+            // and net461, hence the manual fallback below.
+            return CryptographicOperations.FixedTimeEquals(computedBytes, providedBytes);
+#else
+            if (computedBytes.Length != providedBytes.Length)
+            {
+                return false;
+            }
+
+            var difference = 0;
+            for (var i = 0; i < computedBytes.Length; i++)
+            {
+                difference |= computedBytes[i] ^ providedBytes[i];
+            }
+
+            return difference == 0;
+#endif
         }
     }
 }
