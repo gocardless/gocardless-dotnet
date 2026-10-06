@@ -354,6 +354,13 @@ namespace GoCardless.Resources
     public class BillingRequestWithActionBillingRequestAction
     {
         /// <summary>
+        /// List of country codes supported for collecting bank account details,
+        /// for the collect_bank_account action
+        /// </summary>
+        [JsonProperty("available_country_codes")]
+        public List<string> AvailableCountryCodes { get; set; }
+
+        /// <summary>
         /// List of currencies the current mandate supports
         /// </summary>
         [JsonProperty("available_currencies")]
@@ -1572,6 +1579,17 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("reference")]
         public string Reference { get; set; }
+
+        /// <summary>
+        /// On failure, automatically retry the payment using <a
+        /// href="https://developer.gocardless.com/success-plus/overview">intelligent
+        /// retries</a>. Default is <c>false</c>. <p class="notice">Important:
+        /// To be able to use intelligent retries, Success+ needs to be enabled
+        /// in <a href="https://manage.gocardless.com/success-plus">GoCardless
+        /// dashboard</a>. </p>
+        /// </summary>
+        [JsonProperty("retry_if_possible")]
+        public bool? RetryIfPossible { get; set; }
 
         /// <summary>
         /// (Optional) A scheme used for Open Banking payments. Currently
