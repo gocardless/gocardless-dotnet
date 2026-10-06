@@ -135,7 +135,24 @@ namespace GoCardless.Services
         /// institutions will be returned.
         /// </summary>
         [JsonProperty("include_disabled")]
-        public bool? IncludeDisabled { get; set; }
+        public string IncludeDisabled { get; set; }
+
+        /// <summary>
+        /// Indicates whether to include temporarily disabled institutions in
+        /// the response. If not provided or set to false, only enabled
+        /// institutions will be returned.
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum InstitutionIncludeDisabled
+        {
+            /// <summary>`include_disabled` with a value of "true"</summary>
+            [EnumMember(Value = "true")]
+            True,
+
+            /// <summary>`include_disabled` with a value of "false"</summary>
+            [EnumMember(Value = "false")]
+            False,
+        }
 
         /// <summary>
         /// The scheme that institutions support. The available options include
@@ -173,18 +190,16 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Indicates whether to include temporarily disabled institutions in
-        /// the response.
-        /// If not provided or set to false, only enabled institutions will be
-        /// returned.
+        /// the response. If not provided or set to false, only enabled
+        /// institutions will be returned.
         /// </summary>
         [JsonProperty("include_disabled")]
-        public bool? IncludeDisabled { get; set; }
+        public string IncludeDisabled { get; set; }
 
         /// <summary>
         /// Indicates whether to include temporarily disabled institutions in
-        /// the response.
-        /// If not provided or set to false, only enabled institutions will be
-        /// returned.
+        /// the response. If not provided or set to false, only enabled
+        /// institutions will be returned.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum InstitutionIncludeDisabled
