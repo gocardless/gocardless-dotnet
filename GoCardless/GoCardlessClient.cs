@@ -202,6 +202,16 @@ namespace GoCardless
 
             var cancellationTokenSource = new CancellationTokenSource();
 
+            // Resolved once per call, not per attempt - BuildHttpRequestMessage runs again on
+            // every retry below, so generating it there would give a retried request a new key.
+            // Not written back onto `requestParams` either: that's the caller's object, and
+            // writing to it would make a reused request object send the same key for every call.
+            var requestIdempotencyKey = requestParams as IHasIdempotencyKey;
+            string idempotencyKey =
+                requestIdempotencyKey == null
+                    ? null
+                    : requestIdempotencyKey.IdempotencyKey ?? Guid.NewGuid().ToString();
+
             Func<Task<T>> execute = async () =>
             {
                 try
@@ -213,7 +223,8 @@ namespace GoCardless
                             requestParams,
                             payloadKey,
                             requestSettings,
-                            cancellationTokenSource
+                            cancellationTokenSource,
+                            idempotencyKey
                         )
                         .ConfigureAwait(false);
                 }
@@ -262,7 +273,8 @@ namespace GoCardless
             object requestParams,
             string payloadKey,
             RequestSettings requestSettings,
-            CancellationTokenSource cancellationTokenSource
+            CancellationTokenSource cancellationTokenSource,
+            string idempotencyKey
         )
             where T : ApiResponse
         {
@@ -272,7 +284,8 @@ namespace GoCardless
                 urlParams,
                 requestParams,
                 payloadKey,
-                requestSettings
+                requestSettings,
+                idempotencyKey
             );
 
             var responseMessage = await _httpClient
@@ -367,7 +380,8 @@ namespace GoCardless
             List<KeyValuePair<string, object>> urlParams,
             object requestParams,
             string payloadKey,
-            RequestSettings requestSettings
+            RequestSettings requestSettings,
+            string idempotencyKey
         )
             where T : ApiResponse
         {
@@ -453,16 +467,9 @@ namespace GoCardless
                 }
             }
 
-            var hasIdempotencyKey = requestParams as IHasIdempotencyKey;
-
-            if (hasIdempotencyKey != null)
+            if (idempotencyKey != null)
             {
-                hasIdempotencyKey.IdempotencyKey =
-                    hasIdempotencyKey.IdempotencyKey ?? Guid.NewGuid().ToString();
-                requestMessage.Headers.TryAddWithoutValidation(
-                    "Idempotency-Key",
-                    hasIdempotencyKey.IdempotencyKey
-                );
+                requestMessage.Headers.TryAddWithoutValidation("Idempotency-Key", idempotencyKey);
             }
 
             if (requestSettings != null)
