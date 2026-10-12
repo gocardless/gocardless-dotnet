@@ -496,6 +496,14 @@ namespace GoCardless.Services
         public string CustomerBankAccount { get; set; }
 
         /// <summary>
+        /// Includes linked resources in the response. Use <c>customer</c> to
+        /// embed customer details, or <c>bank_account</c> to embed bank account
+        /// details.
+        /// </summary>
+        [JsonProperty("include")]
+        public string[] Include { get; set; }
+
+        /// <summary>
         /// Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
