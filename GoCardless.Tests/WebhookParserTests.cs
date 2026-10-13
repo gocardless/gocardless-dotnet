@@ -25,8 +25,8 @@ namespace GoCardless.Tests
         [Test]
         public void ShouldThrowWithInvalidSignature()
         {
-            Assert.Throws<InvalidSignatureException>(() =>
-                WebhookParser.Parse(body, key, "notatallcorrect")
+            Assert.Throws<InvalidSignatureException>(
+                (TestDelegate)(() => WebhookParser.Parse(body, key, "notatallcorrect"))
             );
         }
 
@@ -37,8 +37,8 @@ namespace GoCardless.Tests
             // exercise the constant-time byte comparison rather than the length check.
             var wrongSignature = signature.Substring(0, 63) + (signature[63] == 'f' ? 'e' : 'f');
 
-            Assert.Throws<InvalidSignatureException>(() =>
-                WebhookParser.Parse(body, key, wrongSignature)
+            Assert.Throws<InvalidSignatureException>(
+                (TestDelegate)(() => WebhookParser.Parse(body, key, wrongSignature))
             );
         }
     }
