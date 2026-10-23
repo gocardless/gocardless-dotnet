@@ -1,6 +1,12 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 10.13.2 (2026-10-23)
+
+### Fixes
+
+- Avoid potential error if idempotencyKey is not provided
+
 ## 10.13.1 (2026-10-23)
 
 ### Fixes
