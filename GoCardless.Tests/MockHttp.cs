@@ -22,6 +22,8 @@ namespace GoCardless.Tests
         private readonly Queue<Tuple<HttpRequestMessage, string>> _requests =
             new Queue<Tuple<HttpRequestMessage, string>>();
 
+        public int RequestsSent { get; private set; }
+
         public void EnqueueResponse(
             int statusCode,
             string pathToBodyDocument,
@@ -75,6 +77,7 @@ namespace GoCardless.Tests
             CancellationToken cancellationToken
         )
         {
+            RequestsSent++;
             string content =
                 request.Content is StringContent
                     ? (await request.Content.ReadAsStringAsync())

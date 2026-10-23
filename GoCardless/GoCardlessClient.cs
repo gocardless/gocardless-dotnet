@@ -211,6 +211,13 @@ namespace GoCardless
                 requestIdempotencyKey == null
                     ? null
                     : requestIdempotencyKey.IdempotencyKey ?? Guid.NewGuid().ToString();
+            if (idempotencyKey != null && idempotencyKey.Any(c => char.IsControl(c)))
+            {
+                throw new ArgumentException(
+                    "Idempotency-Key must not contain control characters.",
+                    nameof(requestIdempotencyKey.IdempotencyKey)
+                );
+            }
 
             Func<Task<T>> execute = async () =>
             {
@@ -467,9 +474,9 @@ namespace GoCardless
                 }
             }
 
-            if (idempotencyKey != null)
+            if (!String.IsNullOrEmpty(idempotencyKey))
             {
-                requestMessage.Headers.TryAddWithoutValidation("Idempotency-Key", idempotencyKey);
+                requestMessage.Headers.Add("Idempotency-Key", idempotencyKey);
             }
 
             if (requestSettings != null)
