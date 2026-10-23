@@ -474,7 +474,7 @@ namespace GoCardless
                 }
             }
 
-            if (idempotencyKey != null)
+            if (String.IsNullOrEmpty(idempotencyKey))
             {
                 requestMessage.Headers.Add("Idempotency-Key", idempotencyKey);
             }
