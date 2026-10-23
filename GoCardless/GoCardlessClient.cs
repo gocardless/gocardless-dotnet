@@ -214,8 +214,7 @@ namespace GoCardless
             if (idempotencyKey != null && idempotencyKey.Any(c => char.IsControl(c)))
             {
                 throw new ArgumentException(
-                    "Idempotency-Key must not contain control characters.",
-                    nameof(requestIdempotencyKey.IdempotencyKey)
+                     "Idempotency-Key must not contain control characters."
                 );
             }
 
