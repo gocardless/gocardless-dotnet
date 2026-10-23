@@ -1,6 +1,14 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 10.13.1 (2026-10-23)
+
+### Fixes
+
+#### Validate idempotency keys
+
+The client now rejects an `IdempotencyKey` containing control characters (including CR and LF) by throwing an `ArgumentException` before any request is sent. The `Idempotency-Key` header is now added with validation enabled, and is omitted when the key is empty.
+
 ## 10.13.0 (2026-10-12)
 
 ### Features
