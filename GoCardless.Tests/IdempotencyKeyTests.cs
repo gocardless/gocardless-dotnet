@@ -39,6 +39,24 @@ namespace GoCardless.Tests
         }
 
         [Test]
+        public async Task ShouldNotThrowWhenTheRequestKeyIsEmpty()
+        {
+            http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json");
+            var request = new MandateCreateRequest { IdempotencyKey = string.Empty };
+
+            await client.Mandates.CreateAsync(request);
+
+            Assert.That(http.RequestsSent, Is.EqualTo(1));
+            http.AssertRequestMade(
+                "POST",
+                "/mandates",
+                null,
+                req => Assert.That(req.Item1.Headers.Contains("Idempotency-Key"), Is.False)
+            );
+            Assert.That(request.IdempotencyKey, Is.Empty);
+        }
+
+        [Test]
         public async Task ShouldSendAFreshKeyWhenARequestObjectIsReused()
         {
             http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json");

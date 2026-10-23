@@ -213,10 +213,7 @@ namespace GoCardless
                     : requestIdempotencyKey.IdempotencyKey ?? Guid.NewGuid().ToString();
             if (idempotencyKey != null && idempotencyKey.Any(c => char.IsControl(c)))
             {
-                throw new ArgumentException(
-                    "Idempotency-Key must not contain control characters.",
-                    nameof(requestIdempotencyKey.IdempotencyKey)
-                );
+                throw new ArgumentException("Idempotency-Key must not contain control characters.");
             }
 
             Func<Task<T>> execute = async () =>
