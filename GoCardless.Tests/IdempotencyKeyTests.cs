@@ -89,6 +89,41 @@ namespace GoCardless.Tests
             Assert.That(request.IdempotencyKey, Is.EqualTo("key-set-by-the-caller"));
         }
 
+        [TestCase("key\r\nvalue")]
+        [TestCase("key\rvalue")]
+        [TestCase("key\nvalue")]
+        public void ShouldRejectControlCharactersBeforeSendingRequest(string idempotencyKey)
+        {
+            var request = new MandateCreateRequest { IdempotencyKey = idempotencyKey };
+            Func<Task> executeRequest = async () => await client.Mandates.CreateAsync(request);
+
+            Assert.ThrowsAsync<ArgumentException>(executeRequest);
+
+            Assert.That(http.RequestsSent, Is.Zero);
+        }
+
+        [TestCase("key123")]
+        [TestCase("550e8400-e29b-41d4-a716-446655440000")]
+        public async Task ShouldSendNormalExplicitKeys(string idempotencyKey)
+        {
+            http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json");
+            var request = new MandateCreateRequest { IdempotencyKey = idempotencyKey };
+
+            await client.Mandates.CreateAsync(request);
+
+            Assert.That(http.RequestsSent, Is.EqualTo(1));
+            http.AssertRequestMade(
+                "POST",
+                "/mandates",
+                null,
+                req =>
+                    Assert.That(
+                        req.Item1.Headers.GetValues("Idempotency-Key").Single(),
+                        Is.EqualTo(idempotencyKey)
+                    )
+            );
+        }
+
         [Test]
         public async Task ShouldReuseAnExplicitKeyAcrossCallsWithTheSameRequest()
         {
