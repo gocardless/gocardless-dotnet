@@ -209,6 +209,14 @@ automatically retrieve the existing record which was created using the same idem
 
 If a timeout occurs, and the request being made is idempotent, the library will automatically retry the request up to 2 more times.
 
+Unless you pass your own `HttpClient` to `GoCardlessClient.Create`, requests are made with the shared `GoCardlessClient.DefaultHttpClient`, which
+times out after 100 seconds (the `HttpClient` default). To use a different timeout, pass an `HttpClient` with its `Timeout` set:
+
+```csharp
+var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(30) };
+var client = GoCardlessClient.Create(accessToken, Environment.SANDBOX, httpClient);
+```
+
 ### Handling webhooks
 
 GoCardless supports webhooks, allowing you to receive real-time notifications when things happen in your account, so you can take automatic actions in response, for example:

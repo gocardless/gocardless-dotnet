@@ -29,6 +29,7 @@ namespace GoCardless
     {
         /// <summary>
         /// This is the singleton HttpClient used if none is passed in via the .Create factory methods.
+        /// Its Timeout is the HttpClient default of 100 seconds; to use a different timeout, pass in your own HttpClient.
         /// See https://msdn.microsoft.com/en-us/library/system.net.http.httpclient(v=vs.110).aspx#Anchor_5
         /// </summary>
         public static HttpClient DefaultHttpClient { get; set; } = new HttpClient();
