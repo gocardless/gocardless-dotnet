@@ -26,6 +26,21 @@ namespace GoCardless.Tests
         }
 
         [Test]
+        public void DefaultHttpClientHasAFiniteTimeout()
+        {
+            //Given no HttpClient is passed to the client, the shared default is used
+            //Then it times out after 100 seconds, rather than waiting indefinitely
+            ClassicAssert.AreEqual(
+                TimeSpan.FromSeconds(100),
+                GoCardlessClient.DefaultHttpClient.Timeout
+            );
+            ClassicAssert.AreNotEqual(
+                System.Threading.Timeout.InfiniteTimeSpan,
+                GoCardlessClient.DefaultHttpClient.Timeout
+            );
+        }
+
+        [Test]
         public async Task CanAccessResponseMessageContentAsync()
         {
             //Given a successful request has been made
