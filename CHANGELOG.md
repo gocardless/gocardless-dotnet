@@ -1,6 +1,21 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 10.13.3 (2026-10-26)
+
+### Fixes
+
+#### Document the default request timeout
+
+Requests made without your own `HttpClient` use `GoCardlessClient.DefaultHttpClient`, which times out after 100 seconds, the .NET `HttpClient` default. This was previously undocumented; the README and the property's documentation comment now describe it, and a test guards against it becoming unlimited. To use a different timeout, pass your own `HttpClient` to `GoCardlessClient.Create`:
+
+```csharp
+var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(30) };
+var client = GoCardlessClient.Create(accessToken, Environment.SANDBOX, httpClient);
+```
+
+Timed out requests that are idempotent are retried up to 2 more times before the error is raised.
+
 ## 10.13.2 (2026-10-23)
 
 ### Fixes
