@@ -496,7 +496,9 @@ namespace GoCardless.Services
         /// As per RFC 2445. The day of the month to charge customers on.
         /// <c>1</c><ul>
         /// <li></li>
-        /// </ul><c>28</c> or <c>-1</c> to indicate the last day of the month.
+        /// </ul><c>31</c> or <c>-1</c> to indicate the last day of the month.
+        /// If the chosen day does not exist in a given month (e.g. <c>31</c> in
+        /// April), the charge is made on the last day of that month.
         /// </summary>
         [JsonProperty("day_of_month")]
         public int? DayOfMonth { get; set; }

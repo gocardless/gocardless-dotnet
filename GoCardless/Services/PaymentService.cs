@@ -689,6 +689,28 @@ namespace GoCardless.Services
         public string Customer { get; set; }
 
         /// <summary>
+        /// Includes linked resources in the response. Use <c>customer</c> to
+        /// embed customer details, or <c>mandate</c> to embed mandate details.
+        /// </summary>
+        [JsonProperty("include")]
+        public PaymentInclude[] Include { get; set; }
+
+        /// <summary>
+        ///
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum PaymentInclude
+        {
+            /// <summary>`include` with a value of "customer"</summary>
+            [EnumMember(Value = "customer")]
+            Customer,
+
+            /// <summary>`include` with a value of "mandate"</summary>
+            [EnumMember(Value = "mandate")]
+            Mandate,
+        }
+
+        /// <summary>
         /// Number of records to return.
         /// </summary>
         [JsonProperty("limit")]
