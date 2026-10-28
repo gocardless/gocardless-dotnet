@@ -98,6 +98,9 @@ namespace GoCardless.Services
         /// <param name="request">An optional `PayerAuthorisationGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payer authorisation resource</returns>
+        [Obsolete(
+            "Payer Authorisation is legacy API and cannot be used by new integrators. The Billing Request (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for any new integrations."
+        )]
         public Task<PayerAuthorisationResponse> GetAsync(
             string identity,
             PayerAuthorisationGetRequest request = null,
@@ -136,6 +139,9 @@ namespace GoCardless.Services
         /// <param name="request">An optional `PayerAuthorisationCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payer authorisation resource</returns>
+        [Obsolete(
+            "Payer Authorisation is legacy API and cannot be used by new integrators. The Billing Request (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for any new integrations."
+        )]
         public Task<PayerAuthorisationResponse> CreateAsync(
             PayerAuthorisationCreateRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -172,6 +178,9 @@ namespace GoCardless.Services
         /// <param name="request">An optional `PayerAuthorisationUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payer authorisation resource</returns>
+        [Obsolete(
+            "Payer Authorisation is legacy API and cannot be used by new integrators. The Billing Request (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for any new integrations."
+        )]
         public Task<PayerAuthorisationResponse> UpdateAsync(
             string identity,
             PayerAuthorisationUpdateRequest request = null,
@@ -209,6 +218,9 @@ namespace GoCardless.Services
         /// <param name="request">An optional `PayerAuthorisationSubmitRequest` representing the body for this submit request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payer authorisation resource</returns>
+        [Obsolete(
+            "Payer Authorisation is legacy API and cannot be used by new integrators. The Billing Request (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for any new integrations."
+        )]
         public Task<PayerAuthorisationResponse> SubmitAsync(
             string identity,
             PayerAuthorisationSubmitRequest request = null,
@@ -253,6 +265,9 @@ namespace GoCardless.Services
         /// <param name="request">An optional `PayerAuthorisationConfirmRequest` representing the body for this confirm request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payer authorisation resource</returns>
+        [Obsolete(
+            "Payer Authorisation is legacy API and cannot be used by new integrators. The Billing Request (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for any new integrations."
+        )]
         public Task<PayerAuthorisationResponse> ConfirmAsync(
             string identity,
             PayerAuthorisationConfirmRequest request = null,
