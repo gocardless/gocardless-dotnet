@@ -85,6 +85,9 @@ namespace GoCardless.Services
         /// <param name="request">An optional `RedirectFlowCreateRequest` representing the body for this create request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single redirect flow resource</returns>
+        [Obsolete(
+            "Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing Request flow (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for your payment flows."
+        )]
         public Task<RedirectFlowResponse> CreateAsync(
             RedirectFlowCreateRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -112,6 +115,9 @@ namespace GoCardless.Services
         /// <param name="request">An optional `RedirectFlowGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single redirect flow resource</returns>
+        [Obsolete(
+            "Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing Request flow (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for your payment flows."
+        )]
         public Task<RedirectFlowResponse> GetAsync(
             string identity,
             RedirectFlowGetRequest request = null,
@@ -159,6 +165,9 @@ namespace GoCardless.Services
         /// <param name="request">An optional `RedirectFlowCompleteRequest` representing the body for this complete request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single redirect flow resource</returns>
+        [Obsolete(
+            "Redirect Flows are legacy APIs and cannot be used by new integrators. The Billing Request flow (https://developer.gocardless.com/api-reference/#billing-requests) API should be used for your payment flows."
+        )]
         public Task<RedirectFlowResponse> CompleteAsync(
             string identity,
             RedirectFlowCompleteRequest request = null,
