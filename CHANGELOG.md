@@ -1,6 +1,16 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 10.15.0 (2026-10-28)
+
+### Features
+
+#### Use Billing Requests instead of Redirect Flows and Payer Authorisations
+
+Redirect Flows and Payer Authorisations are legacy APIs and cannot be used by new integrators. If you use `RedirectFlowService` and `PayerAuthorisationService`, migrate to [Billing Requests](https://developer.gocardless.com/api-reference/#billing-requests), which cover the same flows (and more) through a single API. The [integration planner](https://docs.gocardless.com/docs/collect-payments/integration-planner) is a good place to start.
+
+The legacy methods are now marked as deprecated with `[Obsolete]` attributes. Behaviour is unchanged. The compiler will emit warning CS0618 on calls to these methods (an error for projects that treat warnings as errors).
+
 ## 10.14.0 (2026-10-27)
 
 ### Features
