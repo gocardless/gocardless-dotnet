@@ -11,11 +11,11 @@ namespace GoCardless.Resources
     /// Represents a customer bank account resource.
     ///
     /// Customer Bank Accounts hold the bank details of a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>.
     /// They always belong to a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>,
+    /// href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>,
     /// and may be linked to several Direct Debit <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandates</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandates</a>.
     ///
     /// Note that customer bank accounts must be unique, and so you will
     /// encounter a <c>bank_account_exists</c> error if you try to create a
@@ -27,7 +27,7 @@ namespace GoCardless.Resources
     /// first
     /// using
     /// <a
-    /// href="https://developer.gocardless.com/api-reference/#bank-details-lookups-perform-a-bank-details-lookup">bank_details_lookups</a>,
+    /// href="https://docs.gocardless.com/docs/api-reference/bank-details-lookup#perform-a-bank-details-lookup">bank_details_lookups</a>,
     /// before proceeding with creating the accounts
     /// </summary>
     public class CustomerBankAccount
@@ -38,7 +38,7 @@ namespace GoCardless.Resources
         /// the API, but is transliterated, upcased, and truncated to 18
         /// characters in bank submissions. This field is required unless the
         /// request includes a <a
-        /// href="https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+        /// href="https://docs.gocardless.com/docs/collect-payments/integration-types/javascript-drop-in-flow">customer
         /// bank account token</a>.
         /// </summary>
         [JsonProperty("account_holder_name")]
@@ -54,7 +54,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// Bank account type. Required for USD-denominated bank accounts. Must
         /// not be provided for bank accounts in other currencies. See <a
-        /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
         /// details</a> for more information.
         /// </summary>
         [JsonProperty("account_type")]
@@ -85,7 +85,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
         /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -157,7 +157,7 @@ namespace GoCardless.Resources
     /// <summary>
     /// Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
     /// accounts in other currencies. See <a
-    /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+    /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
     /// details</a> for more information.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
@@ -183,7 +183,7 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>
         /// that owns this bank account.
         /// </summary>
         [JsonProperty("customer")]

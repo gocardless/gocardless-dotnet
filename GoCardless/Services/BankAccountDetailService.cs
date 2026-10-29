@@ -36,7 +36,7 @@ namespace GoCardless.Services
         ///
         /// You must specify a <c>Gc-Key-Id</c> header when using this endpoint.
         /// See <a
-        /// href="https://developer.gocardless.com/gc-embed/bank-details-access#public_key_setup">Public
+        /// href="https://docs.gocardless.com/docs/gc-embed/bank-details-access#public-key-setup">Public
         /// Key Setup</a> for more details.
         /// </summary>
         /// <param name="identity"></param>Unique identifier, beginning with "BA".
@@ -76,7 +76,7 @@ namespace GoCardless.Services
     ///
     /// You must specify a <c>Gc-Key-Id</c> header when using this endpoint. See
     /// <a
-    /// href="https://developer.gocardless.com/gc-embed/bank-details-access#public_key_setup">Public
+    /// href="https://docs.gocardless.com/docs/gc-embed/bank-details-access#public-key-setup">Public
     /// Key Setup</a> for more details.
     /// </summary>
     public class BankAccountDetailGetRequest { }

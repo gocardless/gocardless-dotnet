@@ -13,7 +13,7 @@ namespace GoCardless.Resources
     /// Payment account transactions represent movements of funds on a given
     /// payment account. The payment account is provisioned by GoCardless and is
     /// used to fund <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-outbound-payments">outbound
+    /// href="https://docs.gocardless.com/docs/api-reference/outbound-payment">outbound
     /// payments</a>.
     /// </summary>
     public class PaymentAccountTransaction
@@ -127,7 +127,7 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-outbound-payments">outbound_payment</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/outbound-payment">outbound_payment</a>
         /// linked to the transaction
         /// </summary>
         [JsonProperty("outbound_payment")]
@@ -141,7 +141,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/payout">payout</a>
         /// linked to the transaction.
         /// </summary>
         [JsonProperty("payout")]

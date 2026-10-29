@@ -19,7 +19,7 @@ namespace GoCardless.Services
     /// mandate which has been transferred. Event creation is an asynchronous
     /// process, so it can take some time between an action occurring and its
     /// corresponding event getting included in API responses. See <a
-    /// href="https://developer.gocardless.com/api-reference/#event-types">here</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/events">here</a>
     /// for a complete list of event types.
     ///
     /// <p class="notice">Important: Events older than 18 months will be
@@ -45,7 +45,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
         /// list of your events.
         ///
         /// <p class="notice">Important: This endpoint will no longer return
@@ -157,7 +157,7 @@ namespace GoCardless.Services
 
     /// <summary>
     /// Returns a <a
-    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
     /// list of your events.
     ///
     /// <p class="notice">Important: This endpoint will no longer return events
@@ -187,7 +187,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of a <a
-        /// href="https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">billing
+        /// href="https://docs.gocardless.com/docs/api-reference/billing-request">billing
         /// request</a>. If specified, this endpoint will return all events for
         /// the given billing request.
         /// </summary>
@@ -232,7 +232,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of an <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
         /// If specified, this endpoint will return all events for the given
         /// creditor.
         /// </summary>
@@ -315,7 +315,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of an <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-instalment-schedules">instalment
+        /// href="https://docs.gocardless.com/docs/api-reference/instalment-schedule">instalment
         /// schedule</a>. If specified, this endpoint will return all events for
         /// the given instalment schedule.
         /// </summary>
@@ -330,7 +330,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of a <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>.
         /// If specified, this endpoint will return all events for the given
         /// mandate.
         /// </summary>
@@ -339,7 +339,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of an <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-outbound-payments">outbound_payment</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/outbound-payment">outbound_payment</a>.
         /// If specified, this endpoint will return all events for the given
         /// payment.
         /// </summary>
@@ -355,7 +355,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of a <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payer-authorisations">payer
+        /// href="https://docs.gocardless.com/docs/api-reference/payer-authorisation">payer
         /// authorisation</a>.
         /// </summary>
         [JsonProperty("payer_authorisation")]
@@ -363,7 +363,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of a <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/payment">payment</a>.
         /// If specified, this endpoint will return all events for the given
         /// payment.
         /// </summary>
@@ -379,7 +379,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of a <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/payout">payout</a>.
         /// If specified, this endpoint will return all events for the given
         /// payout.
         /// </summary>
@@ -388,7 +388,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of a <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-refunds">refund</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/refund">refund</a>.
         /// If specified, this endpoint will return all events for the given
         /// refund.
         /// </summary>
@@ -482,7 +482,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of a <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-scheme-identifiers">scheme
+        /// href="https://docs.gocardless.com/docs/api-reference/scheme-identifier">scheme
         /// identifier</a>. If specified, this endpoint will return all events
         /// for the given scheme identifier.
         /// </summary>
@@ -491,7 +491,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of a <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-subscriptions">subscription</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/subscription">subscription</a>.
         /// If specified, this endpoint will return all events for the given
         /// subscription.
         /// </summary>

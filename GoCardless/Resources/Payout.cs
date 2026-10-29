@@ -11,9 +11,9 @@ namespace GoCardless.Resources
     /// Represents a payout resource.
     ///
     /// Payouts represent transfers from GoCardless to a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
     /// Each payout contains the funds collected from one or many <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payments</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/payment">payments</a>.
     /// All the payments in a payout will have been collected in the same
     /// currency. Payouts are created automatically after a payment has been
     /// successfully collected.
@@ -41,7 +41,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
         /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -277,7 +277,7 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// ID of <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>
         /// who will receive this payout, i.e. the owner of the
         /// <c>creditor_bank_account</c>.
         /// </summary>
@@ -286,7 +286,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
         /// account</a> which this will be sent to.
         /// </summary>
         [JsonProperty("creditor_bank_account")]

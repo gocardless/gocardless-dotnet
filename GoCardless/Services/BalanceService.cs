@@ -38,7 +38,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
         /// list of balances for a given creditor. This endpoint is rate limited
         /// to 60 requests per minute.
         /// </summary>
@@ -112,7 +112,7 @@ namespace GoCardless.Services
 
     /// <summary>
     /// Returns a <a
-    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
     /// list of balances for a given creditor. This endpoint is rate limited to
     /// 60 requests per minute.
     /// </summary>
@@ -132,7 +132,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of a <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }

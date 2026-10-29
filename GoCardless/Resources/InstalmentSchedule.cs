@@ -31,7 +31,7 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
         /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -166,14 +166,14 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// ID of the associated <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>.
         /// </summary>
         [JsonProperty("customer")]
         public string Customer { get; set; }
 
         /// <summary>
         /// ID of the associated <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>
         /// which the instalment schedule will create payments against.
         /// </summary>
         [JsonProperty("mandate")]
@@ -181,7 +181,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Array of IDs of the associated <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payments</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/payment">payments</a>
         /// </summary>
         [JsonProperty("payments")]
         public List<string> Payments { get; set; }

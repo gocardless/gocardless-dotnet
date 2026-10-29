@@ -46,7 +46,7 @@ namespace GoCardless.Services
         /// "Account holder name does not match bank account details provided".
         ///
         /// If your request returns an <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-errors">error</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/responses-and-errors">error</a>
         /// or the <c>available_debit_schemes</c>
         /// attribute is an empty array, you will not be able to collect
         /// payments from the
@@ -55,7 +55,7 @@ namespace GoCardless.Services
         /// even if no <c>bic</c> is returned.
         ///
         /// Bank account details may be supplied using <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> or an IBAN.
         ///
         /// ACH scheme For compliance reasons, an extra validation step is done
@@ -113,7 +113,7 @@ namespace GoCardless.Services
     /// "Account holder name does not match bank account details provided".
     ///
     /// If your request returns an <a
-    /// href="https://developer.gocardless.com/api-reference/#api-usage-errors">error</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/responses-and-errors">error</a>
     /// or the <c>available_debit_schemes</c>
     /// attribute is an empty array, you will not be able to collect payments
     /// from the
@@ -122,7 +122,7 @@ namespace GoCardless.Services
     /// even if no <c>bic</c> is returned.
     ///
     /// Bank account details may be supplied using <a
-    /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+    /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
     /// details</a> or an IBAN.
     ///
     /// ACH scheme For compliance reasons, an extra validation step is done
@@ -151,7 +151,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Bank account number - see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> for more information. Alternatively you can provide an
         /// <c>iban</c>.
         /// </summary>
@@ -160,7 +160,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Bank code - see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> for more information. Alternatively you can provide an
         /// <c>iban</c>.
         /// </summary>
@@ -169,7 +169,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Branch code - see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> for more information. Alternatively you can provide an
         /// <c>iban</c>.
         /// </summary>
@@ -187,7 +187,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// International Bank Account Number. Alternatively you can provide <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a>.
         /// </summary>
         [JsonProperty("iban")]

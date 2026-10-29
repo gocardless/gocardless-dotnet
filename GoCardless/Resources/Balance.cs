@@ -61,7 +61,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Dynamic <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>
         /// recording when this resource was last updated.
         /// </summary>
         [JsonProperty("last_updated_at")]
@@ -162,7 +162,7 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// ID of the associated <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }

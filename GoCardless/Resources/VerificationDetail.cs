@@ -155,7 +155,7 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }

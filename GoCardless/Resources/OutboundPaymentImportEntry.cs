@@ -24,7 +24,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
         /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -51,7 +51,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
         /// recording when this entry was processed.
         /// </summary>
         [JsonProperty("processed_at")]

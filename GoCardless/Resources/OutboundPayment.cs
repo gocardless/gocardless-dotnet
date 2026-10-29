@@ -11,12 +11,12 @@ namespace GoCardless.Resources
     /// Represents a outbound payment resource.
     ///
     /// Outbound Payments represent payments sent from <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditors</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditors</a>.
     ///
     /// GoCardless will notify you via a <a
-    /// href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/webhooks">webhook</a>
     /// when the status of the outbound payment <a
-    /// href="https://developer.gocardless.com/api-reference/#event-types-outbound-payment">changes</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/events/outbound-payment">changes</a>.
     ///
     /// <h4>Rate limiting</h4>
     /// Two rate limits apply to the Outbound Payments APIs:
@@ -42,7 +42,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
         /// recording when the outbound payment was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -120,21 +120,21 @@ namespace GoCardless.Resources
         ///
         /// <ul>
         /// <li><c>verifying</c>: The payment has been <a
-        /// href="https://developer.gocardless.com/api-reference/#outbound-payments-create-an-outbound-payment">created</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/outbound-payment#create-an-outbound-payment">created</a>
         /// and the verification process has begun.</li>
         /// <li><c>pending_approval</c>: The payment is awaiting <a
-        /// href="https://developer.gocardless.com/api-reference/#outbound-payments-approve-an-outbound-payment">approval</a>.</li>
+        /// href="https://docs.gocardless.com/docs/api-reference/outbound-payment#approve-an-outbound-payment">approval</a>.</li>
         /// <li><c>scheduled</c>: The payment has passed verification &amp; <a
-        /// href="https://developer.gocardless.com/api-reference/#outbound-payments-approve-an-outbound-payment">approval</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/outbound-payment#approve-an-outbound-payment">approval</a>,
         /// but processing has not yet begun.</li>
         /// <li><c>executing</c>: The execution date has arrived and the payment
         /// has been placed in queue for processing.</li>
         /// <li><c>executed</c>: The payment has been accepted by the scheme and
         /// is now on its way to the recipient.</li>
         /// <li><c>cancelled</c>: The payment has been <a
-        /// href="https://developer.gocardless.com/api-reference/#outbound-payments-cancel-an-outbound-payment">cancelled</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/outbound-payment#cancel-an-outbound-payment">cancelled</a>
         /// or was not <a
-        /// href="https://developer.gocardless.com/api-reference/#outbound-payments-approve-an-outbound-payment">approved</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/outbound-payment#approve-an-outbound-payment">approved</a>
         /// on time.</li>
         /// <li><c>failed</c>: The payment was not sent, usually due to an error
         /// while or after executing.</li>
@@ -180,7 +180,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>
         /// that receives this outbound payment
         /// </summary>
         [JsonProperty("customer")]
@@ -221,21 +221,21 @@ namespace GoCardless.Resources
     ///
     /// <ul>
     /// <li><c>verifying</c>: The payment has been <a
-    /// href="https://developer.gocardless.com/api-reference/#outbound-payments-create-an-outbound-payment">created</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/outbound-payment#create-an-outbound-payment">created</a>
     /// and the verification process has begun.</li>
     /// <li><c>pending_approval</c>: The payment is awaiting <a
-    /// href="https://developer.gocardless.com/api-reference/#outbound-payments-approve-an-outbound-payment">approval</a>.</li>
+    /// href="https://docs.gocardless.com/docs/api-reference/outbound-payment#approve-an-outbound-payment">approval</a>.</li>
     /// <li><c>scheduled</c>: The payment has passed verification &amp; <a
-    /// href="https://developer.gocardless.com/api-reference/#outbound-payments-approve-an-outbound-payment">approval</a>,
+    /// href="https://docs.gocardless.com/docs/api-reference/outbound-payment#approve-an-outbound-payment">approval</a>,
     /// but processing has not yet begun.</li>
     /// <li><c>executing</c>: The execution date has arrived and the payment has been placed in
     /// queue for processing.</li>
     /// <li><c>executed</c>: The payment has been accepted by the scheme and is now on its way to
     /// the recipient.</li>
     /// <li><c>cancelled</c>: The payment has been <a
-    /// href="https://developer.gocardless.com/api-reference/#outbound-payments-cancel-an-outbound-payment">cancelled</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/outbound-payment#cancel-an-outbound-payment">cancelled</a>
     /// or was not <a
-    /// href="https://developer.gocardless.com/api-reference/#outbound-payments-approve-an-outbound-payment">approved</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/outbound-payment#approve-an-outbound-payment">approved</a>
     /// on time.</li>
     /// <li><c>failed</c>: The payment was not sent, usually due to an error while or after
     /// executing.</li>

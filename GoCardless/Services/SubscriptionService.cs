@@ -15,7 +15,7 @@ namespace GoCardless.Services
     /// Service class for working with subscription resources.
     ///
     /// Subscriptions create <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payments</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/payment">payments</a>
     /// according to a schedule.
     ///
     /// <h3>Recurrence Rules</h3>
@@ -24,7 +24,7 @@ namespace GoCardless.Services
     /// <ul>
     /// <li>If <c>day_of_month</c> and <c>start_date</c> are not provided
     /// <c>start_date</c> will be the <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+    /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>'s
     /// <c>next_possible_charge_date</c> and the subscription will then recur
     /// based on the <c>interval</c> &amp; <c>interval_unit</c></li>
     /// <li>If <c>month</c> or <c>day_of_month</c> are present the following
@@ -118,7 +118,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
         /// list of your subscriptions. Please note if the subscriptions are
         /// related to customers who have been removed, they will not be shown
         /// in the response.
@@ -297,7 +297,7 @@ namespace GoCardless.Services
         ///
         /// When <c>pause_cycles</c> is omitted the subscription is paused until
         /// the <a
-        /// href="https://developer.gocardless.com/api-reference/#subscriptions-resume-a-subscription">resume
+        /// href="https://docs.gocardless.com/docs/api-reference/subscription#resume-a-subscription">resume
         /// endpoint</a> is called.
         /// If the subscription is collecting a fixed number of payments,
         /// <c>end_date</c> will be set to <c>null</c>.
@@ -565,7 +565,7 @@ namespace GoCardless.Services
         {
             /// <summary>
             /// ID of the associated <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+            /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>
             /// which the subscription will create payments against.
             /// </summary>
             [JsonProperty("mandate")]
@@ -657,7 +657,7 @@ namespace GoCardless.Services
         /// created and will appear on your customer's bank statement. See the
         /// documentation for
         /// the <a
-        /// href="https://developer.gocardless.com/api-reference/#payments-create-a-payment">create
+        /// href="https://docs.gocardless.com/docs/api-reference/payment#create-a-payment">create
         /// payment endpoint</a> for more details.
         /// <br></br>
         ///
@@ -669,7 +669,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// On failure, automatically retry payments using <a
-        /// href="https://developer.gocardless.com/success-plus/overview">intelligent
+        /// href="https://docs.gocardless.com/docs/optimise/reduced-failed-payments-with-success-plus">intelligent
         /// retries</a>. Default is <c>false</c>. <p class="notice">Important:
         /// To be able to use intelligent retries, Success+ needs to be enabled
         /// in <a href="https://manage.gocardless.com/success-plus">GoCardless
@@ -681,7 +681,7 @@ namespace GoCardless.Services
         /// <summary>
         /// The date on which the first payment should be charged. Must be on or
         /// after the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+        /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>'s
         /// <c>next_possible_charge_date</c>. When left blank and <c>month</c>
         /// or <c>day_of_month</c> are provided, this will be set to the date of
         /// the first payment. If created without <c>month</c> or
@@ -702,7 +702,7 @@ namespace GoCardless.Services
 
     /// <summary>
     /// Returns a <a
-    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
     /// list of your subscriptions. Please note if the subscriptions are related
     /// to customers who have been removed, they will not be shown in the
     /// response.
@@ -914,7 +914,7 @@ namespace GoCardless.Services
         /// created and will appear on your customer's bank statement. See the
         /// documentation for
         /// the <a
-        /// href="https://developer.gocardless.com/api-reference/#payments-create-a-payment">create
+        /// href="https://docs.gocardless.com/docs/api-reference/payment#create-a-payment">create
         /// payment endpoint</a> for more details.
         /// <br></br>
         ///
@@ -926,7 +926,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// On failure, automatically retry payments using <a
-        /// href="https://developer.gocardless.com/success-plus/overview">intelligent
+        /// href="https://docs.gocardless.com/docs/optimise/reduced-failed-payments-with-success-plus">intelligent
         /// retries</a>. Default is <c>false</c>. <p class="notice">Important:
         /// To be able to use intelligent retries, Success+ needs to be enabled
         /// in <a href="https://manage.gocardless.com/success-plus">GoCardless
@@ -948,7 +948,7 @@ namespace GoCardless.Services
     ///
     /// When <c>pause_cycles</c> is omitted the subscription is paused until the
     /// <a
-    /// href="https://developer.gocardless.com/api-reference/#subscriptions-resume-a-subscription">resume
+    /// href="https://docs.gocardless.com/docs/api-reference/subscription#resume-a-subscription">resume
     /// endpoint</a> is called.
     /// If the subscription is collecting a fixed number of payments,
     /// <c>end_date</c> will be set to <c>null</c>.
@@ -1001,11 +1001,11 @@ namespace GoCardless.Services
         /// a non zero positive value.
         /// For AUD subscriptions with <c>interval_unit: weekly</c> the minimum
         /// value varies between <c>3</c> &amp; <c>4</c> because of the <a
-        /// href="https://developer.gocardless.com/api-reference/#subscriptions-resume-a-subscription">mandatory
+        /// href="https://docs.gocardless.com/docs/api-reference/subscription#resume-a-subscription">mandatory
         /// minimum waiting period</a>.
         /// For NZD subscriptions with <c>interval_unit: weekly</c> the minimum
         /// value is <c>2</c> because of the <a
-        /// href="https://developer.gocardless.com/api-reference/#subscriptions-resume-a-subscription">mandatory
+        /// href="https://docs.gocardless.com/docs/api-reference/subscription#resume-a-subscription">mandatory
         /// minimum waiting period</a>.
         /// </summary>
         [JsonProperty("pause_cycles")]

@@ -15,7 +15,7 @@ namespace GoCardless.Services
     /// Service class for working with mandate import entry resources.
     ///
     /// Mandate Import Entries are added to a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandate-imports">Mandate
+    /// href="https://docs.gocardless.com/docs/api-reference/mandate-import">Mandate
     /// Import</a>.
     /// Each entry corresponds to one mandate to be imported into GoCardless.
     ///
@@ -26,7 +26,7 @@ namespace GoCardless.Services
     /// address)</li>
     ///   <li>Bank account details, consisting of an account holder name and
     /// either an IBAN or <a
-    /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+    /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
     /// bank details</a></li>
     ///   <li>Amendment details (SEPA only)</li>
     /// </ol>
@@ -36,7 +36,7 @@ namespace GoCardless.Services
     /// created once the
     /// import has been processed by GoCardless. You can
     /// <a
-    /// href="https://developer.gocardless.com/api-reference/#mandate-import-entries-list-all-mandate-import-entries">list
+    /// href="https://docs.gocardless.com/docs/api-reference/mandate-import-entry#list-all-mandate-import-entries">list
     /// the mandate import entries</a>,
     /// match them up in your system using the <c>record_identifier</c>, and
     /// look at the <c>links</c>
@@ -64,7 +64,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// For an existing <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandate-imports">mandate
+        /// href="https://docs.gocardless.com/docs/api-reference/mandate-import">mandate
         /// import</a>, this endpoint can
         /// be used to add individual mandates to be imported into GoCardless.
         ///
@@ -175,7 +175,7 @@ namespace GoCardless.Services
 
     /// <summary>
     /// For an existing <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandate-imports">mandate
+    /// href="https://docs.gocardless.com/docs/api-reference/mandate-import">mandate
     /// import</a>, this endpoint can
     /// be used to add individual mandates to be imported into GoCardless.
     ///
@@ -230,7 +230,7 @@ namespace GoCardless.Services
             /// via the API, but is transliterated, upcased, and truncated to 18
             /// characters in bank submissions. This field is required unless
             /// the request includes a <a
-            /// href="https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+            /// href="https://docs.gocardless.com/docs/collect-payments/integration-types/javascript-drop-in-flow">customer
             /// bank account token</a>.
             /// </summary>
             [JsonProperty("account_holder_name")]
@@ -238,7 +238,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Bank account number - see <a
-            /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+            /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
             /// details</a> for more information. Alternatively you can provide
             /// an <c>iban</c>.
             /// </summary>
@@ -249,7 +249,7 @@ namespace GoCardless.Services
             /// Bank account type. Required for USD-denominated bank accounts.
             /// Must not be provided for bank accounts in other currencies. See
             /// <a
-            /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+            /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
             /// details</a> for more information.
             /// </summary>
             [JsonProperty("account_type")]
@@ -258,7 +258,7 @@ namespace GoCardless.Services
             /// <summary>
             /// Bank account type. Required for USD-denominated bank accounts. Must
             /// not be provided for bank accounts in other currencies. See <a
-            /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+            /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
             /// details</a> for more information.
             /// </summary>
             [JsonConverter(typeof(StringEnumConverter))]
@@ -275,7 +275,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Bank code - see <a
-            /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+            /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
             /// details</a> for more information. Alternatively you can provide
             /// an <c>iban</c>.
             /// </summary>
@@ -284,7 +284,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Branch code - see <a
-            /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+            /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
             /// details</a> for more information. Alternatively you can provide
             /// an <c>iban</c>.
             /// </summary>
@@ -303,10 +303,10 @@ namespace GoCardless.Services
             /// <summary>
             /// International Bank Account Number. Alternatively you can provide
             /// <a
-            /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+            /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
             /// details</a>. IBANs are not accepted for Swedish bank accounts
             /// denominated in SEK - you must supply <a
-            /// href="https://developer.gocardless.com/api-reference/#local-bank-details-sweden">local
+            /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#sweden">local
             /// details</a>.
             /// </summary>
             [JsonProperty("iban")]
@@ -407,7 +407,7 @@ namespace GoCardless.Services
             /// 639-1</a> code. Used as the language for notification emails
             /// sent by GoCardless if your organisation does not send its own
             /// (see <a
-            /// href="https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+            /// href="https://docs.gocardless.com/docs/api-reference/compliance-requirements">compliance
             /// requirements</a>). Currently only "en", "fr", "de", "pt", "es",
             /// "it", "nl", "da", "nb", "sl", "sv" are supported. If this is not
             /// provided, the language will be chosen based on the
@@ -537,7 +537,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Unique reference. Different schemes have different length and <a
-            /// href="https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+            /// href="https://docs.gocardless.com/docs/api-reference/character-sets">character
             /// set</a> requirements. GoCardless will generate a unique
             /// reference satisfying the different scheme requirements if this
             /// field is left blank.

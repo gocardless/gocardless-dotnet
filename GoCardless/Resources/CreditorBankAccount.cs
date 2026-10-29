@@ -11,9 +11,9 @@ namespace GoCardless.Resources
     /// Represents a creditor bank account resource.
     ///
     /// Creditor Bank Accounts hold the bank details of a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
     /// These are the bank accounts which your <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payouts</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/payout">payouts</a>
     /// will be sent to.
     ///
     /// Note that creditor bank accounts must be unique, and so you will
@@ -30,7 +30,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// Name of the account holder, as known by the bank. Usually this is
         /// the same as the name stored with the linked <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
         /// This field will be transliterated, upcased and truncated to 18
         /// characters.
         /// </summary>
@@ -47,7 +47,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// Bank account type. Required for USD-denominated bank accounts. Must
         /// not be provided for bank accounts in other currencies. See <a
-        /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
         /// details</a> for more information.
         /// </summary>
         [JsonProperty("account_type")]
@@ -70,7 +70,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
         /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -121,7 +121,7 @@ namespace GoCardless.Resources
     /// <summary>
     /// Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
     /// accounts in other currencies. See <a
-    /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+    /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
     /// details</a> for more information.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
@@ -147,7 +147,7 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>
         /// that owns this bank account.
         /// </summary>
         [JsonProperty("creditor")]

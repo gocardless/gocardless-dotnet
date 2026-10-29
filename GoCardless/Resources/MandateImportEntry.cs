@@ -11,7 +11,7 @@ namespace GoCardless.Resources
     /// Represents a mandate import entry resource.
     ///
     /// Mandate Import Entries are added to a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandate-imports">Mandate
+    /// href="https://docs.gocardless.com/docs/api-reference/mandate-import">Mandate
     /// Import</a>.
     /// Each entry corresponds to one mandate to be imported into GoCardless.
     ///
@@ -22,7 +22,7 @@ namespace GoCardless.Resources
     /// address)</li>
     ///   <li>Bank account details, consisting of an account holder name and
     /// either an IBAN or <a
-    /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+    /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
     /// bank details</a></li>
     ///   <li>Amendment details (SEPA only)</li>
     /// </ol>
@@ -32,7 +32,7 @@ namespace GoCardless.Resources
     /// created once the
     /// import has been processed by GoCardless. You can
     /// <a
-    /// href="https://developer.gocardless.com/api-reference/#mandate-import-entries-list-all-mandate-import-entries">list
+    /// href="https://docs.gocardless.com/docs/api-reference/mandate-import-entry#list-all-mandate-import-entries">list
     /// the mandate import entries</a>,
     /// match them up in your system using the <c>record_identifier</c>, and
     /// look at the <c>links</c>
@@ -48,7 +48,7 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
         /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -109,7 +109,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// The ID of the mandate import. This is returned when you
         /// <a
-        /// href="https://developer.gocardless.com/api-reference/#mandate-imports-create-a-new-mandate-import">create
+        /// href="https://docs.gocardless.com/docs/api-reference/mandate-import#create-a-new-mandate-import">create
         /// a Mandate Import</a>.
         /// </summary>
         [JsonProperty("mandate_import")]

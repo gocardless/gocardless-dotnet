@@ -15,12 +15,12 @@ namespace GoCardless.Services
     /// Service class for working with refund resources.
     ///
     /// Refund objects represent (partial) refunds of a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/payment">payment</a>
     /// back to the <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>.
     ///
     /// GoCardless will notify you via a <a
-    /// href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/webhooks">webhook</a>
     /// whenever a refund is created, and will update the <c>amount_refunded</c>
     /// property of the payment.
     /// </summary>
@@ -82,7 +82,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
         /// list of your refunds.
         /// </summary>
         /// <param name="request">An optional `RefundListRequest` representing the query parameters for this list request.</param>
@@ -259,7 +259,7 @@ namespace GoCardless.Services
         {
             /// <summary>
             /// ID of the <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+            /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>
             /// against which the refund is being made. <br></br> <p
             /// class="restricted-notice">Restricted: You must request access to
             /// Mandate Refunds by contacting <a
@@ -270,7 +270,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// ID of the <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+            /// href="https://docs.gocardless.com/docs/api-reference/payment">payment</a>
             /// against which the refund is being made.
             /// </summary>
             [JsonProperty("payment")]
@@ -347,7 +347,7 @@ namespace GoCardless.Services
 
     /// <summary>
     /// Returns a <a
-    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
     /// list of your refunds.
     /// </summary>
     public class RefundListRequest
