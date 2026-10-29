@@ -547,6 +547,40 @@ namespace GoCardless.Services
     /// </summary>
     public class BillingRequestCreateRequest : IHasIdempotencyKey
     {
+        [JsonProperty("account_information_request")]
+        public BillingRequestAccountInformationRequest AccountInformationRequest { get; set; }
+
+        /// <summary>
+        ///
+        /// </summary>
+        public class BillingRequestAccountInformationRequest
+        {
+            /// <summary>
+            /// <a
+            /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+            /// 3166-1 alpha-2 code.</a>
+            /// </summary>
+            [JsonProperty("country_code")]
+            public string CountryCode { get; set; }
+
+            /// <summary>
+            /// List of scopes for the account information request
+            /// </summary>
+            [JsonProperty("scopes")]
+            public string[] Scopes { get; set; }
+
+            /// <summary>
+            ///
+            /// </summary>
+            [JsonConverter(typeof(StringEnumConverter))]
+            public enum BillingRequestScopes
+            {
+                /// <summary>`scopes` with a value of "account_verification"</summary>
+                [EnumMember(Value = "account_verification")]
+                AccountVerification,
+            }
+        }
+
         /// <summary>
         /// (Optional) If true, this billing request can fallback from instant
         /// payment to direct debit.

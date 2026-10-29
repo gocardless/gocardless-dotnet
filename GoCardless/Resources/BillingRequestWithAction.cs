@@ -208,6 +208,12 @@ namespace GoCardless.Resources
     public class BillingRequestWithActionBillingRequests
     {
         /// <summary>
+        /// Request for account information
+        /// </summary>
+        [JsonProperty("account_information_request")]
+        public BillingRequestWithActionBillingRequestsAccountInformationRequest AccountInformationRequest { get; set; }
+
+        /// <summary>
         /// List of actions that can be performed before this billing request
         /// can be fulfilled.
         /// </summary>
@@ -342,6 +348,44 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("subscription_request")]
         public BillingRequestWithActionBillingRequestsSubscriptionRequest SubscriptionRequest { get; set; }
+    }
+
+    /// <summary>
+    /// Represents a billing request with action billing requests account
+    /// information request resource.
+    ///
+    /// Request for account information
+    /// </summary>
+    public class BillingRequestWithActionBillingRequestsAccountInformationRequest
+    {
+        /// <summary>
+        /// <a
+        /// href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements">ISO
+        /// 3166-1 alpha-2 code.</a>
+        /// </summary>
+        [JsonProperty("country_code")]
+        public string CountryCode { get; set; }
+
+        /// <summary>
+        /// List of scopes for the account information request
+        /// </summary>
+        [JsonProperty("scopes")]
+        public List<BillingRequestWithActionBillingRequestsAccountInformationRequestScope?> Scopes { get; set; }
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
+    public enum BillingRequestWithActionBillingRequestsAccountInformationRequestScope
+    {
+        /// <summary>Unknown status</summary>
+        [EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        /// <summary>`scope` with a value of "account_verification"</summary>
+        [EnumMember(Value = "account_verification")]
+        AccountVerification,
     }
 
     /// <summary>
@@ -882,6 +926,12 @@ namespace GoCardless.Resources
     /// </summary>
     public class BillingRequestWithActionBillingRequestsLinks
     {
+        /// <summary>
+        /// (Optional) ID of associated account information request
+        /// </summary>
+        [JsonProperty("account_information_request")]
+        public string AccountInformationRequest { get; set; }
+
         /// <summary>
         /// (Optional) ID of the <a
         /// href="https://docs.gocardless.com/docs/api-reference/bank-authorisation">bank
