@@ -20,7 +20,7 @@ namespace GoCardless.Services
     /// a payment using their mobile banking app.
     ///
     /// See <a
-    /// href="https://developer.gocardless.com/getting-started/billing-requests/overview/">Billing
+    /// href="https://docs.gocardless.com/docs/collect-payments/setting-up-mandates">Billing
     /// Requests: Overview</a> for how-to's, explanations and tutorials. <p
     /// class="notice">Important: All properties associated with
     /// <c>subscription_request</c> and <c>instalment_schedule_request</c> are
@@ -151,7 +151,7 @@ namespace GoCardless.Services
         /// account_holder_name:
         /// "Account holder name does not match bank account details provided".
         /// Testing instructions are <a
-        /// href="https://developer.gocardless.com/developer-tools/scenario-simulators/#payer_name_verification">here</a>
+        /// href="https://docs.gocardless.com/docs/developer-resources/scenario-simulators#payer-name-verification">here</a>
         /// </summary>
         /// <param name="identity"></param>Unique identifier, beginning with "BRQ".
         /// <param name="request">An optional `BillingRequestCollectBankAccountRequest` representing the body for this collect_bank_account request.</param>
@@ -291,7 +291,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
         /// list of your billing requests.
         /// </summary>
         /// <param name="request">An optional `BillingRequestListRequest` representing the query parameters for this list request.</param>
@@ -554,7 +554,7 @@ namespace GoCardless.Services
         /// used.
         ///
         /// See <a
-        /// href="https://developer.gocardless.com/billing-requests/retain-customers-with-fallbacks/">Billing
+        /// href="https://docs.gocardless.com/docs/optimise/retain-customers-with-fallbacks">Billing
         /// Requests: Retain customers with Fallbacks</a>
         /// for more information.
         /// </summary>
@@ -589,7 +589,7 @@ namespace GoCardless.Services
             /// <summary>
             /// An explicit array of instalment payments, each specifying at
             /// least an <c>amount</c> and <c>charge_date</c>. See <a
-            /// href="https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates">create
+            /// href="https://docs.gocardless.com/docs/api-reference/instalment-schedule#create-with-schedule">create
             /// (with dates)</a>
             /// </summary>
             [JsonProperty("instalments_with_dates")]
@@ -621,7 +621,7 @@ namespace GoCardless.Services
                 /// date
                 /// is before the next_possible_charge_date on the
                 /// <a
-                /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>,
+                /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>,
                 /// it will be automatically rolled
                 /// forwards to that date.
                 /// </summary>
@@ -633,7 +633,7 @@ namespace GoCardless.Services
                 /// included in the notification email GoCardless sends to your
                 /// customer if your organisation does not send its own
                 /// notifications (see <a
-                /// href="https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+                /// href="https://docs.gocardless.com/docs/api-reference/compliance-requirements">compliance
                 /// requirements</a>).
                 /// </summary>
                 [JsonProperty("description")]
@@ -646,7 +646,7 @@ namespace GoCardless.Services
             /// amounts to be collected, with a specified start date for the
             /// first payment.
             /// See <a
-            /// href="https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule">create
+            /// href="https://docs.gocardless.com/docs/api-reference/instalment-schedule#create-with-schedule">create
             /// (with schedule)</a>
             /// </summary>
             [JsonProperty("instalments_with_schedule")]
@@ -658,7 +658,7 @@ namespace GoCardless.Services
             /// amounts to be collected, with a specified start date for the first
             /// payment.
             /// See <a
-            /// href="https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule">create
+            /// href="https://docs.gocardless.com/docs/api-reference/instalment-schedule#create-with-schedule">create
             /// (with schedule)</a>
             /// </summary>
             public class BillingRequestInstalmentsWithSchedule
@@ -709,7 +709,7 @@ namespace GoCardless.Services
                 /// <summary>
                 /// The date on which the first payment should be charged. Must be
                 /// on or after the <a
-                /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+                /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>'s
                 /// <c>next_possible_charge_date</c>. When left blank and
                 /// <c>month</c> or <c>day_of_month</c> are provided, this will be
                 /// set to the date of the first payment. If created without
@@ -742,7 +742,7 @@ namespace GoCardless.Services
             /// created and will appear on your customer's bank statement. See
             /// the documentation for
             /// the <a
-            /// href="https://developer.gocardless.com/api-reference/#payments-create-a-payment">create
+            /// href="https://docs.gocardless.com/docs/api-reference/payment#create-a-payment">create
             /// payment endpoint</a> for more details.
             /// <br></br>
             /// </summary>
@@ -751,7 +751,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// On failure, automatically retry payments using <a
-            /// href="https://developer.gocardless.com/success-plus/overview">intelligent
+            /// href="https://docs.gocardless.com/docs/optimise/reduced-failed-payments-with-success-plus">intelligent
             /// retries</a>. Default is <c>false</c>. <p
             /// class="notice">Important: To be able to use intelligent retries,
             /// Success+ needs to be enabled in <a
@@ -787,7 +787,7 @@ namespace GoCardless.Services
         {
             /// <summary>
             /// ID of the associated <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+            /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
             /// Only required if your account manages multiple creditors.
             /// </summary>
             [JsonProperty("creditor")]
@@ -795,7 +795,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// ID of the <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+            /// href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>
             /// against which this request should be made.
             /// </summary>
             [JsonProperty("customer")]
@@ -803,7 +803,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// (Optional) ID of the <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer_bank_account</a>
+            /// href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer_bank_account</a>
             /// against which this request should be made.
             /// </summary>
             [JsonProperty("customer_bank_account")]
@@ -1145,7 +1145,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// Unique reference. Different schemes have different length and <a
-            /// href="https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+            /// href="https://docs.gocardless.com/docs/api-reference/character-sets">character
             /// set</a> requirements. GoCardless will generate a unique
             /// reference satisfying the different scheme requirements if this
             /// field is left blank.
@@ -1199,7 +1199,7 @@ namespace GoCardless.Services
             /// please use the <c>minimum</c> verification preference.
             ///
             /// See <a
-            /// href="https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/">Billing
+            /// href="https://docs.gocardless.com/docs/collect-payments/setting-up-mandates/verified-mandates">Billing
             /// Requests: Creating Verified Mandates</a>
             /// for more information.
             /// </summary>
@@ -1232,7 +1232,7 @@ namespace GoCardless.Services
             /// the <c>minimum</c> verification preference.
             ///
             /// See <a
-            /// href="https://developer.gocardless.com/getting-started/billing-requests/verified-mandates/">Billing
+            /// href="https://docs.gocardless.com/docs/collect-payments/setting-up-mandates/verified-mandates">Billing
             /// Requests: Creating Verified Mandates</a>
             /// for more information.
             /// </summary>
@@ -1314,7 +1314,7 @@ namespace GoCardless.Services
         /// specific reason or type of service/goods the payment relates to,
         /// improving straight-through processing and compliance.
         /// See <a
-        /// href="https://developer.gocardless.com/vrp-commercial-payment-purpose-codes/">VRP
+        /// href="https://docs.gocardless.com/docs/collect-payments/scheme-guidance/vrp-purpose-codes">VRP
         /// Commercial Payment Purpose Codes</a> for the complete list of valid
         /// codes.
         /// </summary>
@@ -1418,7 +1418,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// On failure, automatically retry payments using <a
-            /// href="https://developer.gocardless.com/success-plus/overview">intelligent
+            /// href="https://docs.gocardless.com/docs/optimise/reduced-failed-payments-with-success-plus">intelligent
             /// retries</a>. Default is <c>false</c>. <p
             /// class="notice">Important: To be able to use intelligent retries,
             /// Success+ needs to be enabled in <a
@@ -1449,7 +1449,7 @@ namespace GoCardless.Services
         /// the nature and reason for the payment to facilitate processing and
         /// compliance.
         /// See <a
-        /// href="https://developer.gocardless.com/billing-request-purpose-codes/">Billing
+        /// href="https://docs.gocardless.com/docs/collect-payments/scheme-guidance/billing-request-purpose-codes">Billing
         /// Request Purpose Codes</a> for the complete list of valid codes.
         /// </summary>
         [JsonProperty("purpose_code")]
@@ -1461,7 +1461,7 @@ namespace GoCardless.Services
         /// the nature and reason for the payment to facilitate processing and
         /// compliance.
         /// See <a
-        /// href="https://developer.gocardless.com/billing-request-purpose-codes/">Billing
+        /// href="https://docs.gocardless.com/docs/collect-payments/scheme-guidance/billing-request-purpose-codes">Billing
         /// Request Purpose Codes</a> for the complete list of valid codes.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -1861,7 +1861,7 @@ namespace GoCardless.Services
             /// created and will appear on your customer's bank statement. See
             /// the documentation for
             /// the <a
-            /// href="https://developer.gocardless.com/api-reference/#payments-create-a-payment">create
+            /// href="https://docs.gocardless.com/docs/api-reference/payment#create-a-payment">create
             /// payment endpoint</a> for more details.
             /// <br></br>
             /// </summary>
@@ -1870,7 +1870,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// On failure, automatically retry payments using <a
-            /// href="https://developer.gocardless.com/success-plus/overview">intelligent
+            /// href="https://docs.gocardless.com/docs/optimise/reduced-failed-payments-with-success-plus">intelligent
             /// retries</a>. Default is <c>false</c>. <p
             /// class="notice">Important: To be able to use intelligent retries,
             /// Success+ needs to be enabled in <a
@@ -1963,7 +1963,7 @@ namespace GoCardless.Services
             /// 639-1</a> code. Used as the language for notification emails
             /// sent by GoCardless if your organisation does not send its own
             /// (see <a
-            /// href="https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+            /// href="https://docs.gocardless.com/docs/api-reference/compliance-requirements">compliance
             /// requirements</a>). Currently only "en", "fr", "de", "pt", "es",
             /// "it", "nl", "da", "nb", "sl", "sv" are supported. If this is not
             /// provided and a customer was linked during billing request
@@ -2106,7 +2106,7 @@ namespace GoCardless.Services
     /// endpoint will return a 422 - validation error on account_holder_name:
     /// "Account holder name does not match bank account details provided".
     /// Testing instructions are <a
-    /// href="https://developer.gocardless.com/developer-tools/scenario-simulators/#payer_name_verification">here</a>
+    /// href="https://docs.gocardless.com/docs/developer-resources/scenario-simulators#payer-name-verification">here</a>
     /// </summary>
     public class BillingRequestCollectBankAccountRequest
     {
@@ -2116,7 +2116,7 @@ namespace GoCardless.Services
         /// the API, but is transliterated, upcased, and truncated to 18
         /// characters in bank submissions. This field is required unless the
         /// request includes a <a
-        /// href="https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+        /// href="https://docs.gocardless.com/docs/collect-payments/integration-types/javascript-drop-in-flow">customer
         /// bank account token</a>.
         /// </summary>
         [JsonProperty("account_holder_name")]
@@ -2124,7 +2124,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Bank account number - see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> for more information. Alternatively you can provide an
         /// <c>iban</c>.
         /// </summary>
@@ -2134,7 +2134,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Account number suffix (only for bank accounts denominated in NZD) -
         /// see <a
-        /// href="https://developer.gocardless.com/api-reference/#local-bank-details-new-zealand">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#new-zealand">local
         /// details</a> for more information.
         /// </summary>
         [JsonProperty("account_number_suffix")]
@@ -2143,7 +2143,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Bank account type. Required for USD-denominated bank accounts. Must
         /// not be provided for bank accounts in other currencies. See <a
-        /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
         /// details</a> for more information.
         /// </summary>
         [JsonProperty("account_type")]
@@ -2152,7 +2152,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Bank account type. Required for USD-denominated bank accounts. Must
         /// not be provided for bank accounts in other currencies. See <a
-        /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
         /// details</a> for more information.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -2169,7 +2169,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Bank code - see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> for more information. Alternatively you can provide an
         /// <c>iban</c>.
         /// </summary>
@@ -2178,7 +2178,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Branch code - see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> for more information. Alternatively you can provide an
         /// <c>iban</c>.
         /// </summary>
@@ -2204,10 +2204,10 @@ namespace GoCardless.Services
 
         /// <summary>
         /// International Bank Account Number. Alternatively you can provide <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a>. IBANs are not accepted for Swedish bank accounts
         /// denominated in SEK - you must supply <a
-        /// href="https://developer.gocardless.com/api-reference/#local-bank-details-sweden">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#sweden">local
         /// details</a>.
         /// </summary>
         [JsonProperty("iban")]
@@ -2286,7 +2286,7 @@ namespace GoCardless.Services
 
     /// <summary>
     /// Returns a <a
-    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
     /// list of your billing requests.
     /// </summary>
     public class BillingRequestListRequest
@@ -2305,7 +2305,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of a <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>.
         /// If specified, this endpoint will return all requests for the given
         /// customer.
         /// </summary>

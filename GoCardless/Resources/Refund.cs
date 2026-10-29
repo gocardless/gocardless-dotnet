@@ -11,12 +11,12 @@ namespace GoCardless.Resources
     /// Represents a refund resource.
     ///
     /// Refund objects represent (partial) refunds of a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/payment">payment</a>
     /// back to the <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>.
     ///
     /// GoCardless will notify you via a <a
-    /// href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/webhooks">webhook</a>
     /// whenever a refund is created, and will update the <c>amount_refunded</c>
     /// property of the payment.
     /// </summary>
@@ -30,7 +30,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
         /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -40,7 +40,7 @@ namespace GoCardless.Resources
         /// <a href="https://en.wikipedia.org/wiki/ISO_4217#Active_codes">ISO
         /// 4217</a> currency code. This is set to the currency of the refund's
         /// <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/payment">payment</a>.
         /// </summary>
         [JsonProperty("currency")]
         public string Currency { get; set; }
@@ -112,7 +112,7 @@ namespace GoCardless.Resources
         /// <li><c>submitted</c>: the refund has been submitted to the
         /// banks</li>
         /// <li><c>paid</c>:  the refund has been included in a <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a></li>
+        /// href="https://docs.gocardless.com/docs/api-reference/payout">payout</a></li>
         /// <li><c>cancelled</c>: the refund has been cancelled</li>
         /// <li><c>bounced</c>: the refund has failed to be paid</li>
         /// <li><c>funds_returned</c>: the refund has had its funds
@@ -220,7 +220,7 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>
         /// against which the refund is being made.
         /// </summary>
         [JsonProperty("mandate")]
@@ -228,7 +228,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/payment">payment</a>
         /// against which the refund is being made.
         /// </summary>
         [JsonProperty("payment")]
@@ -244,7 +244,7 @@ namespace GoCardless.Resources
     /// banks</li>
     /// <li><c>submitted</c>: the refund has been submitted to the banks</li>
     /// <li><c>paid</c>:  the refund has been included in a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a></li>
+    /// href="https://docs.gocardless.com/docs/api-reference/payout">payout</a></li>
     /// <li><c>cancelled</c>: the refund has been cancelled</li>
     /// <li><c>bounced</c>: the refund has failed to be paid</li>
     /// <li><c>funds_returned</c>: the refund has had its funds returned</li>

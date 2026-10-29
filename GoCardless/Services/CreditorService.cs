@@ -15,7 +15,7 @@ namespace GoCardless.Services
     /// Service class for working with creditor resources.
     ///
     /// Each <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/payment">payment</a>
     /// taken through the API is linked to a "creditor", to whom the payment is
     /// then paid out. In most cases your organisation will have a single
     /// "creditor", but the API also supports collecting payments on behalf of
@@ -66,7 +66,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
         /// list of your creditors.
         /// </summary>
         /// <param name="request">An optional `CreditorListRequest` representing the query parameters for this list request.</param>
@@ -289,7 +289,7 @@ namespace GoCardless.Services
 
     /// <summary>
     /// Returns a <a
-    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
     /// list of your creditors.
     /// </summary>
     public class CreditorListRequest
@@ -417,7 +417,7 @@ namespace GoCardless.Services
         {
             /// <summary>
             /// ID of the <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+            /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
             /// account</a> which is set up to receive payouts in AUD.
             /// </summary>
             [JsonProperty("default_aud_payout_account")]
@@ -425,7 +425,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// ID of the <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+            /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
             /// account</a> which is set up to receive payouts in CAD.
             /// </summary>
             [JsonProperty("default_cad_payout_account")]
@@ -433,7 +433,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// ID of the <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+            /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
             /// account</a> which is set up to receive payouts in DKK.
             /// </summary>
             [JsonProperty("default_dkk_payout_account")]
@@ -441,7 +441,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// ID of the <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+            /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
             /// account</a> which is set up to receive payouts in EUR.
             /// </summary>
             [JsonProperty("default_eur_payout_account")]
@@ -449,7 +449,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// ID of the <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+            /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
             /// account</a> which is set up to receive payouts in GBP.
             /// </summary>
             [JsonProperty("default_gbp_payout_account")]
@@ -457,7 +457,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// ID of the <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+            /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
             /// account</a> which is set up to receive payouts in NZD.
             /// </summary>
             [JsonProperty("default_nzd_payout_account")]
@@ -465,7 +465,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// ID of the <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+            /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
             /// account</a> which is set up to receive payouts in SEK.
             /// </summary>
             [JsonProperty("default_sek_payout_account")]
@@ -473,7 +473,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// ID of the <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+            /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
             /// account</a> which is set up to receive payouts in USD.
             /// </summary>
             [JsonProperty("default_usd_payout_account")]

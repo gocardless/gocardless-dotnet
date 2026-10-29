@@ -15,7 +15,7 @@ namespace GoCardless.Services
     /// Service class for working with mandate pdf resources.
     ///
     /// Mandate PDFs allow you to easily display <a
-    /// href="https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">scheme-rules
+    /// href="https://docs.gocardless.com/docs/api-reference/compliance-requirements">scheme-rules
     /// compliant</a> Direct Debit mandates to your customers.
     /// </summary>
     public class MandatePdfService
@@ -38,7 +38,7 @@ namespace GoCardless.Services
         /// Customer and bank account details can be left blank (for a blank
         /// mandate), provided manually, or inferred from the ID of an existing
         /// <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>.
         ///
         /// By default, we'll generate PDF mandates in English.
         ///
@@ -109,7 +109,7 @@ namespace GoCardless.Services
     ///
     /// Customer and bank account details can be left blank (for a blank
     /// mandate), provided manually, or inferred from the ID of an existing <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>.
     ///
     /// By default, we'll generate PDF mandates in English.
     ///
@@ -156,7 +156,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Name of the account holder, as known by the bank. Usually this
         /// matches the name of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>.
         /// This field cannot exceed 18 characters.
         /// </summary>
         [JsonProperty("account_holder_name")]
@@ -164,7 +164,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Bank account number - see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> for more information. Alternatively you can provide an
         /// <c>iban</c>.
         /// </summary>
@@ -174,7 +174,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Bank account type. Required for USD-denominated bank accounts. Must
         /// not be provided for bank accounts in other currencies. See <a
-        /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
         /// details</a> for more information.
         /// </summary>
         [JsonProperty("account_type")]
@@ -183,7 +183,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Bank account type. Required for USD-denominated bank accounts. Must
         /// not be provided for bank accounts in other currencies. See <a
-        /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
         /// details</a> for more information.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -218,7 +218,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Bank code - see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> for more information. Alternatively you can provide an
         /// <c>iban</c>.
         /// </summary>
@@ -228,7 +228,7 @@ namespace GoCardless.Services
         /// <summary>
         /// SWIFT BIC. Will be derived automatically if a valid <c>iban</c> or
         /// <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> are provided.
         /// </summary>
         [JsonProperty("bic")]
@@ -236,7 +236,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Branch code - see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> for more information. Alternatively you can provide an
         /// <c>iban</c>.
         /// </summary>
@@ -289,7 +289,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// International Bank Account Number. Alternatively you can provide <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a>. IBANs cannot be provided for Autogiro mandates.
         /// </summary>
         [JsonProperty("iban")]
@@ -308,7 +308,7 @@ namespace GoCardless.Services
         {
             /// <summary>
             /// ID of an existing <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+            /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
             /// Only required if your account manages multiple creditors.
             /// </summary>
             [JsonProperty("creditor")]
@@ -316,7 +316,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// ID of an existing <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+            /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>
             /// to build the PDF from. The customer's bank details will be
             /// censored in the generated PDF. No other parameters may be
             /// provided alongside this.
@@ -366,7 +366,7 @@ namespace GoCardless.Services
         /// Direct Debit scheme. Can be supplied or automatically detected from
         /// the bank account details provided. If you do not provide a scheme,
         /// you must provide either a mandate, an <c>iban</c>, or <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> including a <c>country_code</c>.
         /// </summary>
         [JsonProperty("scheme")]

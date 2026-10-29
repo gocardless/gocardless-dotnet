@@ -11,10 +11,10 @@ namespace GoCardless.Resources
     /// Represents a mandate resource.
     ///
     /// Mandates represent the Direct Debit mandate with a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>.
     ///
     /// GoCardless will notify you via a <a
-    /// href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/webhooks">webhook</a>
     /// whenever the status of a mandate changes.
     /// </summary>
     public class Mandate
@@ -50,7 +50,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
         /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -126,7 +126,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Unique reference. Different schemes have different length and <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+        /// href="https://docs.gocardless.com/docs/api-reference/character-sets">character
         /// set</a> requirements. GoCardless will generate a unique reference
         /// satisfying the different scheme requirements if this field is left
         /// blank.
@@ -171,7 +171,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">Timestamp</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">Timestamp</a>
         /// recording when this mandate was verified.
         /// </summary>
         [JsonProperty("verified_at")]
@@ -403,21 +403,21 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// ID of the associated <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
         /// </summary>
         [JsonProperty("creditor")]
         public string Creditor { get; set; }
 
         /// <summary>
         /// ID of the associated <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>
         /// </summary>
         [JsonProperty("customer")]
         public string Customer { get; set; }
 
         /// <summary>
         /// ID of the associated <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+        /// href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer
         /// bank account</a> which the mandate is created and submits payments
         /// against.
         /// </summary>

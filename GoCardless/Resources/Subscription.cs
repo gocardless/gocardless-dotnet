@@ -11,7 +11,7 @@ namespace GoCardless.Resources
     /// Represents a subscription resource.
     ///
     /// Subscriptions create <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payments</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/payment">payments</a>
     /// according to a schedule.
     ///
     /// <h3>Recurrence Rules</h3>
@@ -20,7 +20,7 @@ namespace GoCardless.Resources
     /// <ul>
     /// <li>If <c>day_of_month</c> and <c>start_date</c> are not provided
     /// <c>start_date</c> will be the <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+    /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>'s
     /// <c>next_possible_charge_date</c> and the subscription will then recur
     /// based on the <c>interval</c> &amp; <c>interval_unit</c></li>
     /// <li>If <c>month</c> or <c>day_of_month</c> are present the following
@@ -99,7 +99,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
         /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -209,7 +209,7 @@ namespace GoCardless.Resources
         /// created and will appear on your customer's bank statement. See the
         /// documentation for
         /// the <a
-        /// href="https://developer.gocardless.com/api-reference/#payments-create-a-payment">create
+        /// href="https://docs.gocardless.com/docs/api-reference/payment#create-a-payment">create
         /// payment endpoint</a> for more details.
         /// <br></br>
         ///
@@ -221,7 +221,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// On failure, automatically retry payments using <a
-        /// href="https://developer.gocardless.com/success-plus/overview">intelligent
+        /// href="https://docs.gocardless.com/docs/optimise/reduced-failed-payments-with-success-plus">intelligent
         /// retries</a>. Default is <c>false</c>. <p class="notice">Important:
         /// To be able to use intelligent retries, Success+ needs to be enabled
         /// in <a href="https://manage.gocardless.com/success-plus">GoCardless
@@ -233,7 +233,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// The date on which the first payment should be charged. Must be on or
         /// after the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+        /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>'s
         /// <c>next_possible_charge_date</c>. When left blank and <c>month</c>
         /// or <c>day_of_month</c> are provided, this will be set to the date of
         /// the first payment. If created without <c>month</c> or
@@ -302,7 +302,7 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// ID of the associated <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>
         /// which the subscription will create payments against.
         /// </summary>
         [JsonProperty("mandate")]

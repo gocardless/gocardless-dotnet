@@ -189,7 +189,7 @@ namespace GoCardless.Resources
         /// match and the exchange rate has been finalised.
         ///
         /// You can listen for the payout's <a
-        /// href="https://developer.gocardless.com/api-reference/#event-types-payout"><c>tax_exchange_rates_confirmed</c>
+        /// href="https://docs.gocardless.com/docs/api-reference/events/payout"><c>tax_exchange_rates_confirmed</c>
         /// webhook</a> to know when the exchange rate has been finalised for
         /// all fees in the payout.
         /// </summary>

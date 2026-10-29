@@ -15,9 +15,9 @@ namespace GoCardless.Services
     /// Service class for working with creditor bank account resources.
     ///
     /// Creditor Bank Accounts hold the bank details of a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
     /// These are the bank accounts which your <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payouts</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/payout">payouts</a>
     /// will be sent to.
     ///
     /// Note that creditor bank accounts must be unique, and so you will
@@ -71,7 +71,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
         /// list of your creditor bank accounts.
         /// </summary>
         /// <param name="request">An optional `CreditorBankAccountListRequest` representing the query parameters for this list request.</param>
@@ -223,7 +223,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Name of the account holder, as known by the bank. Usually this is
         /// the same as the name stored with the linked <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
         /// This field will be transliterated, upcased and truncated to 18
         /// characters.
         /// </summary>
@@ -232,7 +232,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Bank account number - see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> for more information. Alternatively you can provide an
         /// <c>iban</c>.
         /// </summary>
@@ -242,7 +242,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Bank account type. Required for USD-denominated bank accounts. Must
         /// not be provided for bank accounts in other currencies. See <a
-        /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
         /// details</a> for more information.
         /// </summary>
         [JsonProperty("account_type")]
@@ -251,7 +251,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Bank account type. Required for USD-denominated bank accounts. Must
         /// not be provided for bank accounts in other currencies. See <a
-        /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
         /// details</a> for more information.
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
@@ -268,7 +268,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Bank code - see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> for more information. Alternatively you can provide an
         /// <c>iban</c>.
         /// </summary>
@@ -277,7 +277,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Branch code - see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> for more information. Alternatively you can provide an
         /// <c>iban</c>.
         /// </summary>
@@ -303,10 +303,10 @@ namespace GoCardless.Services
 
         /// <summary>
         /// International Bank Account Number. Alternatively you can provide <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a>. IBANs are not accepted for Swedish bank accounts
         /// denominated in SEK - you must supply <a
-        /// href="https://developer.gocardless.com/api-reference/#local-bank-details-sweden">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#sweden">local
         /// details</a>.
         /// </summary>
         [JsonProperty("iban")]
@@ -325,7 +325,7 @@ namespace GoCardless.Services
         {
             /// <summary>
             /// ID of the <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+            /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>
             /// that owns this bank account.
             /// </summary>
             [JsonProperty("creditor")]
@@ -358,7 +358,7 @@ namespace GoCardless.Services
 
     /// <summary>
     /// Returns a <a
-    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
     /// list of your creditor bank accounts.
     /// </summary>
     public class CreditorBankAccountListRequest

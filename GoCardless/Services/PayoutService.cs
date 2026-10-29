@@ -15,9 +15,9 @@ namespace GoCardless.Services
     /// Service class for working with payout resources.
     ///
     /// Payouts represent transfers from GoCardless to a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
     /// Each payout contains the funds collected from one or many <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payments</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/payment">payments</a>.
     /// All the payments in a payout will have been collected in the same
     /// currency. Payouts are created automatically after a payment has been
     /// successfully collected.
@@ -38,7 +38,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
         /// list of your payouts.
         /// </summary>
         /// <param name="request">An optional `PayoutListRequest` representing the query parameters for this list request.</param>
@@ -111,7 +111,7 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of a single payout. For an example of how to
         /// reconcile the transactions in a payout, see <a
-        /// href="https://developer.gocardless.com/api-reference/#events-reconciling-payouts-with-events">this
+        /// href="https://docs.gocardless.com/docs/collect-payments/managing-payments/reconciling-payouts">this
         /// guide</a>.
         /// </summary>
         /// <param name="identity"></param>Unique identifier, beginning with "PO".
@@ -180,7 +180,7 @@ namespace GoCardless.Services
 
     /// <summary>
     /// Returns a <a
-    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
     /// list of your payouts.
     /// </summary>
     public class PayoutListRequest
@@ -386,7 +386,7 @@ namespace GoCardless.Services
     /// <summary>
     /// Retrieves the details of a single payout. For an example of how to
     /// reconcile the transactions in a payout, see <a
-    /// href="https://developer.gocardless.com/api-reference/#events-reconciling-payouts-with-events">this
+    /// href="https://docs.gocardless.com/docs/collect-payments/managing-payments/reconciling-payouts">this
     /// guide</a>.
     /// </summary>
     public class PayoutGetRequest { }

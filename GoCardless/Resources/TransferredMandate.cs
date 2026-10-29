@@ -50,7 +50,7 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// The ID of the updated <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer_bank_account</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer_bank_account</a>
         /// </summary>
         [JsonProperty("customer_bank_account")]
         public string CustomerBankAccount { get; set; }

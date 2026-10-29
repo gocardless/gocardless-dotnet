@@ -11,14 +11,14 @@ namespace GoCardless.Resources
     /// Represents a payment resource.
     ///
     /// Payment objects represent payments from a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>
     /// to a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>,
+    /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>,
     /// taken against a Direct Debit <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>.
     ///
     /// GoCardless will notify you via a <a
-    /// href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/webhooks">webhook</a>
     /// whenever the state of a payment changes.
     /// </summary>
     public class Payment
@@ -41,7 +41,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Amount <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-refunds">refunded</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/refund">refunded</a>,
         /// in the lowest denomination for the currency (e.g. pence in GBP,
         /// cents in EUR).
         /// </summary>
@@ -62,7 +62,7 @@ namespace GoCardless.Resources
         /// A future date on which the payment should be collected. If not
         /// specified, the payment will be collected as soon as possible. If the
         /// value is before the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+        /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>'s
         /// <c>next_possible_charge_date</c> creation will fail. If the value is
         /// not a working day it will be rolled forwards to the next available
         /// one.
@@ -72,7 +72,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
         /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -90,7 +90,7 @@ namespace GoCardless.Resources
         /// A human-readable description of the payment. This will be included
         /// in the notification email GoCardless sends to your customer if your
         /// organisation does not send its own notifications (see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+        /// href="https://docs.gocardless.com/docs/api-reference/compliance-requirements">compliance
         /// requirements</a>).
         /// </summary>
         [JsonProperty("description")]
@@ -165,7 +165,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// On failure, automatically retry the payment using <a
-        /// href="https://developer.gocardless.com/success-plus/overview">intelligent
+        /// href="https://docs.gocardless.com/docs/optimise/reduced-failed-payments-with-success-plus">intelligent
         /// retries</a>. Default is <c>false</c>. <p class="notice">Important:
         /// To be able to use intelligent retries, Success+ needs to be enabled
         /// in <a href="https://manage.gocardless.com/success-plus">GoCardless
@@ -196,7 +196,7 @@ namespace GoCardless.Resources
         /// <li><c>confirmed</c>: the payment has been confirmed as
         /// collected</li>
         /// <li><c>paid_out</c>: the payment has been included in a <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a></li>
+        /// href="https://docs.gocardless.com/docs/api-reference/payout">payout</a></li>
         /// <li><c>cancelled</c>: the payment has been cancelled</li>
         /// <li><c>customer_approval_denied</c>: the customer has denied
         /// approval for the payment. You should contact the customer
@@ -352,7 +352,7 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// ID of <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>
         /// to which the collected payment will be sent.
         /// </summary>
         [JsonProperty("creditor")]
@@ -360,7 +360,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-instalment-schedules">instalment_schedule</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/instalment-schedule">instalment_schedule</a>
         /// from which this payment was created.<br></br>Note: this property
         /// will only be present if this payment is part of an instalment
         /// schedule.
@@ -370,7 +370,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>
         /// against which this payment should be collected.
         /// </summary>
         [JsonProperty("mandate")]
@@ -378,7 +378,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/payout">payout</a>
         /// which contains the funds from this payment.<br></br>Note: this
         /// property will not be present until the payment has been successfully
         /// collected.
@@ -388,7 +388,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-subscriptions">subscription</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/subscription">subscription</a>
         /// from which this payment was created.<br></br>Note: this property
         /// will only be present if this payment is part of a subscription.
         /// </summary>
@@ -407,7 +407,7 @@ namespace GoCardless.Resources
     /// <li><c>submitted</c>: the payment has been submitted to the banks</li>
     /// <li><c>confirmed</c>: the payment has been confirmed as collected</li>
     /// <li><c>paid_out</c>: the payment has been included in a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payouts">payout</a></li>
+    /// href="https://docs.gocardless.com/docs/api-reference/payout">payout</a></li>
     /// <li><c>cancelled</c>: the payment has been cancelled</li>
     /// <li><c>customer_approval_denied</c>: the customer has denied approval for the payment. You
     /// should contact the customer directly</li>

@@ -51,7 +51,7 @@ namespace GoCardless.Services
         /// API is recommended if you know the specific dates you wish to
         /// charge. Otherwise,
         /// please check out the <a
-        /// href="https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule">scheduling
+        /// href="https://docs.gocardless.com/docs/api-reference/instalment-schedule#create-with-schedule">scheduling
         /// version</a>.
         ///
         /// The <c>instalments</c> property is an array of payment properties
@@ -97,7 +97,7 @@ namespace GoCardless.Services
         /// API is recommended if you wish to use the GoCardless scheduling
         /// logic. For finer
         /// control over the individual dates, please check out the <a
-        /// href="https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates">alternative
+        /// href="https://docs.gocardless.com/docs/api-reference/instalment-schedule#create-with-schedule">alternative
         /// version</a>.
         ///
         /// It can take quite a while to create the associated payments, so the
@@ -135,7 +135,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
         /// list of your instalment schedules.
         /// </summary>
         /// <param name="request">An optional `InstalmentScheduleListRequest` representing the query parameters for this list request.</param>
@@ -316,7 +316,7 @@ namespace GoCardless.Services
     /// API is recommended if you know the specific dates you wish to charge.
     /// Otherwise,
     /// please check out the <a
-    /// href="https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule">scheduling
+    /// href="https://docs.gocardless.com/docs/api-reference/instalment-schedule#create-with-schedule">scheduling
     /// version</a>.
     ///
     /// The <c>instalments</c> property is an array of payment properties
@@ -396,7 +396,7 @@ namespace GoCardless.Services
         /// <summary>
         /// An explicit array of instalment payments, each specifying at least
         /// an <c>amount</c> and <c>charge_date</c>. See <a
-        /// href="https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates">create
+        /// href="https://docs.gocardless.com/docs/api-reference/instalment-schedule#create-with-schedule">create
         /// (with dates)</a>
         /// </summary>
         [JsonProperty("instalments")]
@@ -428,7 +428,7 @@ namespace GoCardless.Services
             /// date
             /// is before the next_possible_charge_date on the
             /// <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>,
+            /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>,
             /// it will be automatically rolled
             /// forwards to that date.
             /// </summary>
@@ -440,7 +440,7 @@ namespace GoCardless.Services
             /// included in the notification email GoCardless sends to your
             /// customer if your organisation does not send its own
             /// notifications (see <a
-            /// href="https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+            /// href="https://docs.gocardless.com/docs/api-reference/compliance-requirements">compliance
             /// requirements</a>).
             /// </summary>
             [JsonProperty("description")]
@@ -460,7 +460,7 @@ namespace GoCardless.Services
         {
             /// <summary>
             /// ID of the associated <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+            /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>
             /// which the instalment schedule will create payments against.
             /// </summary>
             [JsonProperty("mandate")]
@@ -520,7 +520,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// On failure, automatically retry payments using <a
-        /// href="https://developer.gocardless.com/success-plus/overview">intelligent
+        /// href="https://docs.gocardless.com/docs/optimise/reduced-failed-payments-with-success-plus">intelligent
         /// retries</a>. Default is <c>false</c>. <p class="notice">Important:
         /// To be able to use intelligent retries, Success+ needs to be enabled
         /// in <a href="https://manage.gocardless.com/success-plus">GoCardless
@@ -556,7 +556,7 @@ namespace GoCardless.Services
     /// API is recommended if you wish to use the GoCardless scheduling logic.
     /// For finer
     /// control over the individual dates, please check out the <a
-    /// href="https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-dates">alternative
+    /// href="https://docs.gocardless.com/docs/api-reference/instalment-schedule#create-with-schedule">alternative
     /// version</a>.
     ///
     /// It can take quite a while to create the associated payments, so the API
@@ -635,7 +635,7 @@ namespace GoCardless.Services
         /// amounts to be collected, with a specified start date for the first
         /// payment.
         /// See <a
-        /// href="https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule">create
+        /// href="https://docs.gocardless.com/docs/api-reference/instalment-schedule#create-with-schedule">create
         /// (with schedule)</a>
         /// </summary>
         [JsonProperty("instalments")]
@@ -647,7 +647,7 @@ namespace GoCardless.Services
         /// amounts to be collected, with a specified start date for the first
         /// payment.
         /// See <a
-        /// href="https://developer.gocardless.com/api-reference/#instalment-schedules-create-with-schedule">create
+        /// href="https://docs.gocardless.com/docs/api-reference/instalment-schedule#create-with-schedule">create
         /// (with schedule)</a>
         /// </summary>
         public class InstalmentScheduleInstalments
@@ -698,7 +698,7 @@ namespace GoCardless.Services
             /// <summary>
             /// The date on which the first payment should be charged. Must be
             /// on or after the <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>'s
+            /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>'s
             /// <c>next_possible_charge_date</c>. When left blank and
             /// <c>month</c> or <c>day_of_month</c> are provided, this will be
             /// set to the date of the first payment. If created without
@@ -722,7 +722,7 @@ namespace GoCardless.Services
         {
             /// <summary>
             /// ID of the associated <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+            /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>
             /// which the instalment schedule will create payments against.
             /// </summary>
             [JsonProperty("mandate")]
@@ -782,7 +782,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// On failure, automatically retry payments using <a
-        /// href="https://developer.gocardless.com/success-plus/overview">intelligent
+        /// href="https://docs.gocardless.com/docs/optimise/reduced-failed-payments-with-success-plus">intelligent
         /// retries</a>. Default is <c>false</c>. <p class="notice">Important:
         /// To be able to use intelligent retries, Success+ needs to be enabled
         /// in <a href="https://manage.gocardless.com/success-plus">GoCardless
@@ -814,7 +814,7 @@ namespace GoCardless.Services
 
     /// <summary>
     /// Returns a <a
-    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
     /// list of your instalment schedules.
     /// </summary>
     public class InstalmentScheduleListRequest
@@ -869,7 +869,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of the associated <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>.
         /// </summary>
         [JsonProperty("customer")]
         public string Customer { get; set; }
@@ -882,7 +882,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of the associated <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandate</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandate</a>
         /// which the instalment schedule will create payments against.
         /// </summary>
         [JsonProperty("mandate")]

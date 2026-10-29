@@ -16,9 +16,9 @@ namespace GoCardless.Services
     ///
     /// Customer objects hold the contact details for a customer. A customer can
     /// have several <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+    /// href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer
     /// bank accounts</a>, which in turn can have several Direct Debit <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">mandates</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/mandate">mandates</a>.
     /// </summary>
     public class CustomerService
     {
@@ -62,7 +62,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
         /// list of your customers.
         /// </summary>
         /// <param name="request">An optional `CustomerListRequest` representing the query parameters for this list request.</param>
@@ -320,7 +320,7 @@ namespace GoCardless.Services
         /// <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO
         /// 639-1</a> code. Used as the language for notification emails sent by
         /// GoCardless if your organisation does not send its own (see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+        /// href="https://docs.gocardless.com/docs/api-reference/compliance-requirements">compliance
         /// requirements</a>). Currently only "en", "fr", "de", "pt", "es",
         /// "it", "nl", "da", "nb", "sl", "sv" are supported. If this is not
         /// provided, the language will be chosen based on the
@@ -378,7 +378,7 @@ namespace GoCardless.Services
 
     /// <summary>
     /// Returns a <a
-    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
     /// list of your customers.
     /// </summary>
     public class CustomerListRequest
@@ -666,7 +666,7 @@ namespace GoCardless.Services
         /// <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO
         /// 639-1</a> code. Used as the language for notification emails sent by
         /// GoCardless if your organisation does not send its own (see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+        /// href="https://docs.gocardless.com/docs/api-reference/compliance-requirements">compliance
         /// requirements</a>). Currently only "en", "fr", "de", "pt", "es",
         /// "it", "nl", "da", "nb", "sl", "sv" are supported. If this is not
         /// provided, the language will be chosen based on the

@@ -17,7 +17,7 @@ namespace GoCardless.Services
     /// Tax rates from tax authority.
     ///
     /// We also maintain a <a
-    /// href="https://developer.gocardless.com/api-reference/#appendix-tax-rates">static
+    /// href="https://docs.gocardless.com/docs/api-reference/tax-rates">static
     /// list of the tax rates for each jurisdiction</a>.
     /// </summary>
     public class TaxRateService
@@ -36,7 +36,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
         /// list of all tax rates.
         /// </summary>
         /// <param name="request">An optional `TaxRateListRequest` representing the query parameters for this list request.</param>
@@ -143,7 +143,7 @@ namespace GoCardless.Services
 
     /// <summary>
     /// Returns a <a
-    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
     /// list of all tax rates.
     /// </summary>
     public class TaxRateListRequest

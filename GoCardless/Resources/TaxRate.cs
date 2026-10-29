@@ -13,7 +13,7 @@ namespace GoCardless.Resources
     /// Tax rates from tax authority.
     ///
     /// We also maintain a <a
-    /// href="https://developer.gocardless.com/api-reference/#appendix-tax-rates">static
+    /// href="https://docs.gocardless.com/docs/api-reference/tax-rates">static
     /// list of the tax rates for each jurisdiction</a>.
     /// </summary>
     public class TaxRate

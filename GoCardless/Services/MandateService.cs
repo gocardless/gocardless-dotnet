@@ -15,10 +15,10 @@ namespace GoCardless.Services
     /// Service class for working with mandate resources.
     ///
     /// Mandates represent the Direct Debit mandate with a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>.
     ///
     /// GoCardless will notify you via a <a
-    /// href="https://developer.gocardless.com/api-reference/#appendix-webhooks">webhook</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/webhooks">webhook</a>
     /// whenever the status of a mandate changes.
     /// </summary>
     public class MandateService
@@ -63,7 +63,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
         /// list of your mandates.
         /// </summary>
         /// <param name="request">An optional `MandateListRequest` representing the query parameters for this list request.</param>
@@ -348,7 +348,7 @@ namespace GoCardless.Services
         {
             /// <summary>
             /// ID of the associated <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+            /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
             /// Only required if your account manages multiple creditors.
             /// </summary>
             [JsonProperty("creditor")]
@@ -356,7 +356,7 @@ namespace GoCardless.Services
 
             /// <summary>
             /// ID of the associated <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+            /// href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer
             /// bank account</a> which the mandate is created and submits
             /// payments against.
             /// </summary>
@@ -385,7 +385,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Unique reference. Different schemes have different length and <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+        /// href="https://docs.gocardless.com/docs/api-reference/character-sets">character
         /// set</a> requirements. GoCardless will generate a unique reference
         /// satisfying the different scheme requirements if this field is left
         /// blank.
@@ -412,7 +412,7 @@ namespace GoCardless.Services
 
     /// <summary>
     /// Returns a <a
-    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
     /// list of your mandates.
     /// </summary>
     public class MandateListRequest
@@ -467,7 +467,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of a <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
         /// If specified, this endpoint will return all mandates for the given
         /// creditor. Cannot be used in conjunction with <c>customer</c> or
         /// <c>customer_bank_account</c>
@@ -477,7 +477,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of a <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">customer</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/customer">customer</a>.
         /// If specified, this endpoint will return all mandates for the given
         /// customer. Cannot be used in conjunction with
         /// <c>customer_bank_account</c> or <c>creditor</c>
@@ -487,7 +487,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// ID of a <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">customer
+        /// href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">customer
         /// bank account</a>. If specified, this endpoint will return all
         /// mandates for the given bank account. Cannot be used in conjunction
         /// with <c>customer</c> or <c>creditor</c>
@@ -544,7 +544,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Unique reference. Different schemes have different length and <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+        /// href="https://docs.gocardless.com/docs/api-reference/character-sets">character
         /// set</a> requirements. GoCardless will generate a unique reference
         /// satisfying the different scheme requirements if this field is left
         /// blank.

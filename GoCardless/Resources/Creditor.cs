@@ -11,7 +11,7 @@ namespace GoCardless.Resources
     /// Represents a creditor resource.
     ///
     /// Each <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-payments">payment</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/payment">payment</a>
     /// taken through the API is linked to a "creditor", to whom the payment is
     /// then paid out. In most cases your organisation will have a single
     /// "creditor", but the API also supports collecting payments on behalf of
@@ -75,7 +75,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
         /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -128,7 +128,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Boolean value indicating whether creditor has the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandate-imports">Mandate
+        /// href="https://docs.gocardless.com/docs/api-reference/mandate-import">Mandate
         /// Imports</a> functionality enabled.
         /// </summary>
         [JsonProperty("mandate_imports_enabled")]
@@ -138,7 +138,7 @@ namespace GoCardless.Resources
         /// Boolean value indicating whether the organisation is responsible for
         /// sending all customer notifications (note this is separate from the
         /// functionality described <a
-        /// href="https://developer.gocardless.com/getting-started/api/handling-customer-notifications/">here</a>).
+        /// href="https://docs.gocardless.com/docs/tutorials/handling-customer-notifications">here</a>).
         /// If you are a partner app, and this value is true, you should not
         /// send notifications on behalf of this organisation.
         /// </summary>
@@ -170,7 +170,7 @@ namespace GoCardless.Resources
         /// The support address, <c>phone_number</c> and <c>email</c> fields are
         /// for customers to contact the merchant for support purposes. They
         /// must be displayed on the payment page, please see our <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+        /// href="https://docs.gocardless.com/docs/api-reference/compliance-requirements">compliance
         /// requirements</a> for more details.
         /// </summary>
         [JsonProperty("scheme_identifiers")]
@@ -180,7 +180,7 @@ namespace GoCardless.Resources
         /// The creditor's verification status, indicating whether they can yet
         /// receive payouts. For more details on handling verification as a
         /// partner, see our <a
-        /// href="https://developer.gocardless.com/getting-started/partners/helping-your-users-get-verified/">"Helping
+        /// href="https://docs.gocardless.com/docs/partner-integrations/getting-your-users-verified">"Helping
         /// your users get verified" guide</a>. One of:
         ///
         /// <ul>
@@ -287,7 +287,7 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
         /// account</a> which is set up to receive payouts in AUD.
         /// </summary>
         [JsonProperty("default_aud_payout_account")]
@@ -295,7 +295,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
         /// account</a> which is set up to receive payouts in CAD.
         /// </summary>
         [JsonProperty("default_cad_payout_account")]
@@ -303,7 +303,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
         /// account</a> which is set up to receive payouts in DKK.
         /// </summary>
         [JsonProperty("default_dkk_payout_account")]
@@ -311,7 +311,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
         /// account</a> which is set up to receive payouts in EUR.
         /// </summary>
         [JsonProperty("default_eur_payout_account")]
@@ -319,7 +319,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
         /// account</a> which is set up to receive payouts in GBP.
         /// </summary>
         [JsonProperty("default_gbp_payout_account")]
@@ -327,7 +327,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
         /// account</a> which is set up to receive payouts in NZD.
         /// </summary>
         [JsonProperty("default_nzd_payout_account")]
@@ -335,7 +335,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
         /// account</a> which is set up to receive payouts in SEK.
         /// </summary>
         [JsonProperty("default_sek_payout_account")]
@@ -343,7 +343,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
         /// account</a> which is set up to receive payouts in USD.
         /// </summary>
         [JsonProperty("default_usd_payout_account")]
@@ -359,7 +359,7 @@ namespace GoCardless.Resources
     /// The support address, <c>phone_number</c> and <c>email</c> fields are for
     /// customers to contact the merchant for support purposes. They must be
     /// displayed on the payment page, please see our <a
-    /// href="https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+    /// href="https://docs.gocardless.com/docs/api-reference/compliance-requirements">compliance
     /// requirements</a> for more details.
     /// </summary>
     public class CreditorSchemeIdentifier
@@ -405,7 +405,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
         /// recording when this resource was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -436,7 +436,7 @@ namespace GoCardless.Resources
         ///
         /// By default, GoCardless sends these notifications automatically.
         /// Please see our <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-compliance-requirements">compliance
+        /// href="https://docs.gocardless.com/docs/api-reference/compliance-requirements">compliance
         /// requirements</a> for more details.
         /// </summary>
         [JsonProperty("minimum_advance_notice")]
@@ -613,7 +613,7 @@ namespace GoCardless.Resources
     /// <summary>
     /// The creditor's verification status, indicating whether they can yet receive payouts. For
     /// more details on handling verification as a partner, see our <a
-    /// href="https://developer.gocardless.com/getting-started/partners/helping-your-users-get-verified/">"Helping
+    /// href="https://docs.gocardless.com/docs/partner-integrations/getting-your-users-verified">"Helping
     /// your users get verified" guide</a>. One of:
     ///
     /// <ul>

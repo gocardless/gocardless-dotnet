@@ -179,7 +179,7 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">billing
+        /// href="https://docs.gocardless.com/docs/api-reference/billing-request">billing
         /// request</a> against which this flow was created.
         /// </summary>
         [JsonProperty("billing_request")]
@@ -199,7 +199,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// Bank account type for USD-denominated bank accounts. Must not be
         /// provided for bank accounts in other currencies. See <a
-        /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
         /// details</a> for more information.
         /// </summary>
         [JsonProperty("account_type")]
@@ -209,7 +209,7 @@ namespace GoCardless.Resources
     /// <summary>
     /// Bank account type for USD-denominated bank accounts. Must not be provided for bank accounts
     /// in other currencies. See <a
-    /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+    /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
     /// details</a> for more information.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]

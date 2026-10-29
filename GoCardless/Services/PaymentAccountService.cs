@@ -16,7 +16,7 @@ namespace GoCardless.Services
     ///
     /// Access the details of bank accounts provided for you by GoCardless that
     /// are used to fund <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-outbound-payments">Outbound
+    /// href="https://docs.gocardless.com/docs/api-reference/outbound-payment">Outbound
     /// Payments</a>.
     /// </summary>
     public class PaymentAccountService
@@ -68,7 +68,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
         /// list of your payment accounts.
         /// </summary>
         /// <param name="request">An optional `PaymentAccountListRequest` representing the query parameters for this list request.</param>
@@ -146,7 +146,7 @@ namespace GoCardless.Services
 
     /// <summary>
     /// Returns a <a
-    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
     /// list of your payment accounts.
     /// </summary>
     public class PaymentAccountListRequest

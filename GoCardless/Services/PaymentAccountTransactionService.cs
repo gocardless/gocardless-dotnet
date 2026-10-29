@@ -17,7 +17,7 @@ namespace GoCardless.Services
     /// Payment account transactions represent movements of funds on a given
     /// payment account. The payment account is provisioned by GoCardless and is
     /// used to fund <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-outbound-payments">outbound
+    /// href="https://docs.gocardless.com/docs/api-reference/outbound-payment">outbound
     /// payments</a>.
     /// </summary>
     public class PaymentAccountTransactionService
@@ -38,7 +38,7 @@ namespace GoCardless.Services
         /// Retrieves the details of an existing payment account transaction.
         /// </summary>
         /// <param name="identity"></param>The unique ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
         /// account</a> which happens to be the payment account.
         /// <param name="request">An optional `PaymentAccountTransactionGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -73,7 +73,7 @@ namespace GoCardless.Services
         /// List transactions for a given payment account.
         /// </summary>
         /// <param name="identity"></param>The unique ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
         /// account</a> which happens to be the payment account.
         /// <param name="request">An optional `PaymentAccountTransactionListRequest` representing the query parameters for this list request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
@@ -109,7 +109,7 @@ namespace GoCardless.Services
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
         /// <param name="identity"></param>The unique ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
         /// account</a> which happens to be the payment account.
         public IEnumerable<PaymentAccountTransaction> All(
             string identity,
@@ -140,7 +140,7 @@ namespace GoCardless.Services
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
         /// <param name="identity"></param>The unique ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditor-bank-accounts">bank
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor-bank-account">bank
         /// account</a> which happens to be the payment account.
         public IEnumerable<Task<IReadOnlyList<PaymentAccountTransaction>>> AllAsync(
             string identity,

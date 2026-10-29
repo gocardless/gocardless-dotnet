@@ -110,7 +110,7 @@ namespace GoCardless.Services
 
         /// <summary>
         /// Returns a <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
         /// list of your scheme identifiers.
         /// </summary>
         /// <param name="request">An optional `SchemeIdentifierListRequest` representing the query parameters for this list request.</param>
@@ -282,7 +282,7 @@ namespace GoCardless.Services
         {
             /// <summary>
             /// required ID of the associated <a
-            /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>.
+            /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>.
             /// </summary>
             [JsonProperty("creditor")]
             public string Creditor { get; set; }
@@ -367,7 +367,7 @@ namespace GoCardless.Services
 
     /// <summary>
     /// Returns a <a
-    /// href="https://developer.gocardless.com/api-reference/#api-usage-cursor-pagination">cursor-paginated</a>
+    /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#cursor-pagination">cursor-paginated</a>
     /// list of your scheme identifiers.
     /// </summary>
     public class SchemeIdentifierListRequest

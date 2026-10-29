@@ -32,7 +32,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
         /// recording when the user has been authorised.
         /// </summary>
         [JsonProperty("authorised_at")]
@@ -59,7 +59,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
         /// recording when the authorisation URL has been visited.
         /// </summary>
         [JsonProperty("last_visited_at")]
@@ -96,11 +96,11 @@ namespace GoCardless.Resources
         /// <c>outcome=success</c> on the <c>redirect_uri</c>. It is therefore
         /// recommended to wait for the relevant bank authorisation event, such
         /// as <a
-        /// href="https://developer.gocardless.com/api-reference/#billing-request-bankauthorisationauthorised"><c>BANK_AUTHORISATION_AUTHORISED</c></a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/events/billing-request"><c>BANK_AUTHORISATION_AUTHORISED</c></a>,
         /// <a
-        /// href="https://developer.gocardless.com/api-reference/#billing-request-bankauthorisationdenied"><c>BANK_AUTHORISATION_DENIED</c></a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/events/billing-request"><c>BANK_AUTHORISATION_DENIED</c></a>,
         /// or <a
-        /// href="https://developer.gocardless.com/api-reference/#billing-request-bankauthorisationfailed"><c>BANK_AUTHORISATION_FAILED</c></a>
+        /// href="https://docs.gocardless.com/docs/api-reference/events/billing-request"><c>BANK_AUTHORISATION_FAILED</c></a>
         /// in order to show the correct outcome to the user.
         ///
         /// The BillingRequestFlow ID will also be appended to the
@@ -146,7 +146,7 @@ namespace GoCardless.Resources
     {
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#billing-requests-billing-requests">billing
+        /// href="https://docs.gocardless.com/docs/api-reference/billing-request">billing
         /// request</a> against which this authorisation was created.
         /// </summary>
         [JsonProperty("billing_request")]
@@ -154,7 +154,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of the <a
-        /// href="https://developer.gocardless.com/api-reference/#billing-requests-institutions">institution</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/institution">institution</a>
         /// against which this authorisation was created.
         /// </summary>
         [JsonProperty("institution")]

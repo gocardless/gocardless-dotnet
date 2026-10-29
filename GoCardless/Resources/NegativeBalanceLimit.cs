@@ -25,7 +25,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Fixed <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">timestamp</a>,
         /// recording when this limit was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -109,7 +109,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// ID of <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-creditors">creditor</a>
+        /// href="https://docs.gocardless.com/docs/api-reference/creditor">creditor</a>
         /// which this limit relates to
         /// </summary>
         [JsonProperty("creditor")]

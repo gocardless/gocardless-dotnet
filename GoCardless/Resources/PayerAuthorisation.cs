@@ -14,7 +14,7 @@ namespace GoCardless.Resources
     ///   Don't use Payer Authorisations for new integrations.
     /// It is deprecated in favour of
     ///   <a
-    /// href="https://developer.gocardless.com/getting-started/billing-requests/overview/">
+    /// href="https://docs.gocardless.com/docs/collect-payments/setting-up-mandates">
     ///   Billing Requests</a>. Use Billing Requests to build any future
     /// integrations.
     /// </p>
@@ -46,10 +46,10 @@ namespace GoCardless.Resources
     ///
     /// <ol>
     ///   <li> Listen to <code>  payer_authorisation_completed </code>  <a
-    /// href="https://developer.gocardless.com/api-reference/#appendix-webhooks">
+    /// href="https://docs.gocardless.com/docs/api-reference/webhooks">
     /// webhook</a> (recommended)</li>
     ///   <li> Poll the GET <a
-    /// href="https://developer.gocardless.com/api-reference/#payer-authorisations-get-a-single-payer-authorisation">
+    /// href="https://docs.gocardless.com/docs/api-reference/payer-authorisation#get-a-single-payer-authorisation">
     /// endpoint</a></li>
     ///   <li> Poll the GET events API
     /// <code>https://api.gocardless.com/events?payer_authorisation={id}&amp;action=completed</code>
@@ -77,7 +77,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// All details required for the creation of a
         /// <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">Customer
+        /// href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">Customer
         /// Bank Account</a>.
         /// </summary>
         [JsonProperty("bank_account")]
@@ -85,7 +85,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// <a
-        /// href="https://developer.gocardless.com/api-reference/#api-usage-dates-and-times">Timestamp</a>,
+        /// href="https://docs.gocardless.com/docs/api-reference/data-conventions#dates-and-times">Timestamp</a>,
         /// recording when this Payer Authorisation was created.
         /// </summary>
         [JsonProperty("created_at")]
@@ -93,7 +93,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// All details required for the creation of a <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">Customer</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/customer">Customer</a>.
         /// </summary>
         [JsonProperty("customer")]
         public PayerAuthorisationCustomer Customer { get; set; }
@@ -119,7 +119,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// All details required for the creation of a <a
-        /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">Mandate</a>.
+        /// href="https://docs.gocardless.com/docs/api-reference/mandate">Mandate</a>.
         /// </summary>
         [JsonProperty("mandate")]
         public PayerAuthorisationMandate Mandate { get; set; }
@@ -148,7 +148,7 @@ namespace GoCardless.Resources
     ///
     /// All details required for the creation of a
     /// <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customer-bank-accounts">Customer
+    /// href="https://docs.gocardless.com/docs/api-reference/customer-bank-account">Customer
     /// Bank Account</a>.
     /// </summary>
     public class PayerAuthorisationBankAccount
@@ -159,7 +159,7 @@ namespace GoCardless.Resources
         /// the API, but is transliterated, upcased, and truncated to 18
         /// characters in bank submissions. This field is required unless the
         /// request includes a <a
-        /// href="https://developer.gocardless.com/api-reference/#javascript-flow-customer-bank-account-tokens">customer
+        /// href="https://docs.gocardless.com/docs/collect-payments/integration-types/javascript-drop-in-flow">customer
         /// bank account token</a>.
         /// </summary>
         [JsonProperty("account_holder_name")]
@@ -167,7 +167,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Bank account number - see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> for more information. Alternatively you can provide an
         /// <c>iban</c>.
         /// </summary>
@@ -184,7 +184,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// Account number suffix (only for bank accounts denominated in NZD) -
         /// see <a
-        /// href="https://developer.gocardless.com/api-reference/#local-bank-details-new-zealand">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#new-zealand">local
         /// details</a> for more information.
         /// </summary>
         [JsonProperty("account_number_suffix")]
@@ -193,7 +193,7 @@ namespace GoCardless.Resources
         /// <summary>
         /// Bank account type. Required for USD-denominated bank accounts. Must
         /// not be provided for bank accounts in other currencies. See <a
-        /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
         /// details</a> for more information.
         /// </summary>
         [JsonProperty("account_type")]
@@ -201,7 +201,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Bank code - see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> for more information. Alternatively you can provide an
         /// <c>iban</c>.
         /// </summary>
@@ -216,7 +216,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Branch code - see <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a> for more information. Alternatively you can provide an
         /// <c>iban</c>.
         /// </summary>
@@ -242,10 +242,10 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// International Bank Account Number. Alternatively you can provide <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-local-bank-details">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details">local
         /// details</a>. IBANs are not accepted for Swedish bank accounts
         /// denominated in SEK - you must supply <a
-        /// href="https://developer.gocardless.com/api-reference/#local-bank-details-sweden">local
+        /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#sweden">local
         /// details</a>.
         /// </summary>
         [JsonProperty("iban")]
@@ -262,7 +262,7 @@ namespace GoCardless.Resources
     /// <summary>
     /// Bank account type. Required for USD-denominated bank accounts. Must not be provided for bank
     /// accounts in other currencies. See <a
-    /// href="https://developer.gocardless.com/api-reference/#local-bank-details-united-states">local
+    /// href="https://docs.gocardless.com/docs/api-reference/local-bank-details#united-states">local
     /// details</a> for more information.
     /// </summary>
     [JsonConverter(typeof(GcStringEnumConverter), (int)Unknown)]
@@ -285,7 +285,7 @@ namespace GoCardless.Resources
     /// Represents a payer authorisation customer resource.
     ///
     /// All details required for the creation of a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-customers">Customer</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/customer">Customer</a>.
     /// </summary>
     public class PayerAuthorisationCustomer
     {
@@ -459,7 +459,7 @@ namespace GoCardless.Resources
     /// Represents a payer authorisation mandate resource.
     ///
     /// All details required for the creation of a <a
-    /// href="https://developer.gocardless.com/api-reference/#core-endpoints-mandates">Mandate</a>.
+    /// href="https://docs.gocardless.com/docs/api-reference/mandate">Mandate</a>.
     /// </summary>
     public class PayerAuthorisationMandate
     {
@@ -484,7 +484,7 @@ namespace GoCardless.Resources
 
         /// <summary>
         /// Unique reference. Different schemes have different length and <a
-        /// href="https://developer.gocardless.com/api-reference/#appendix-character-sets">character
+        /// href="https://docs.gocardless.com/docs/api-reference/character-sets">character
         /// set</a> requirements. GoCardless will generate a unique reference
         /// satisfying the different scheme requirements if this field is left
         /// blank.
