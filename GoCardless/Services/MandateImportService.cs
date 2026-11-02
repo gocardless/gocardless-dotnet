@@ -114,7 +114,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns a single mandate import.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "IM".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "IM".
+        /// </param>
         /// <param name="request">An optional `MandateImportGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate import resource</returns>
@@ -159,7 +161,9 @@ namespace GoCardless.Services
         /// confirm the
         /// processing has begun.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "IM".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "IM".
+        /// </param>
         /// <param name="request">An optional `MandateImportSubmitRequest` representing the body for this submit request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate import resource</returns>
@@ -198,7 +202,9 @@ namespace GoCardless.Services
         /// submitted or processed
         /// cannot be cancelled.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "IM".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "IM".
+        /// </param>
         /// <param name="request">An optional `MandateImportCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate import resource</returns>

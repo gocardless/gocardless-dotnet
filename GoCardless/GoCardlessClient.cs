@@ -253,14 +253,14 @@ namespace GoCardless
                 {
                     return await execute().ConfigureAwait(false);
                 }
-                catch (TaskCanceledException exception)
+                catch (TaskCanceledException)
                     when (!cancellationTokenSource.Token.IsCancellationRequested)
                 {
                     // This case represents a timeout, which we want to retry - see
                     // https://stackoverflow.com/questions/10547895/how-can-i-tell-when-httpclient-has-timed-out/32230327
                     await Task.Delay(waitBetweenRetries);
                 }
-                catch (HttpRequestException exception)
+                catch (HttpRequestException)
                 {
                     // An HttpRequestException is raised when "[t]he request failed due to
                     // an underlying issue such as network connectivity, DNS failure,

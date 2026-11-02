@@ -36,7 +36,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of an existing payment account.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BA".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BA".
+        /// </param>
         /// <param name="request">An optional `PaymentAccountGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment account resource</returns>
@@ -98,6 +100,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of payment accounts.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `PaymentAccountListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<PaymentAccount> All(
             PaymentAccountListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -123,6 +127,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of payment accounts.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `PaymentAccountListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<PaymentAccount>>> AllAsync(
             PaymentAccountListRequest request = null,
             RequestSettings customiseRequestMessage = null

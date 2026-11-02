@@ -103,6 +103,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of payments.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `PaymentListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Payment> All(
             PaymentListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -128,6 +130,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of payments.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `PaymentListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<Payment>>> AllAsync(
             PaymentListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -146,7 +150,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of a single existing payment.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "PM".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "PM".
+        /// </param>
         /// <param name="request">An optional `PaymentGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment resource</returns>
@@ -179,7 +185,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Updates a payment object. This accepts only the metadata parameter.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "PM".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "PM".
+        /// </param>
         /// <param name="request">An optional `PaymentUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment resource</returns>
@@ -217,7 +225,9 @@ namespace GoCardless.Services
         /// This will fail with a <c>cancellation_failed</c> error unless the
         /// payment's status is <c>pending_submission</c>.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "PM".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "PM".
+        /// </param>
         /// <param name="request">An optional `PaymentCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment resource</returns>
@@ -262,7 +272,9 @@ namespace GoCardless.Services
         ///
         /// Payments can be retried up to 3 times.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "PM".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "PM".
+        /// </param>
         /// <param name="request">An optional `PaymentRetryRequest` representing the body for this retry request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payment resource</returns>

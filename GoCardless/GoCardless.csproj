@@ -6,10 +6,11 @@
     <Description>Client for the GoCardless API - a powerful, simple solution for the collection of recurring bank-to-bank payments</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/gocardless/gocardless-dotnet</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/gocardless/gocardless-dotnet/master/nuget_package_icon.png</PackageIconUrl>
+    <PackageIcon>nuget_package_icon.png</PackageIcon>
     <Copyright>GoCardless Ltd</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>gocardless payments rest api direct debit</PackageTags>
-    <PackageLicenseUrl>https://github.com/gocardless/gocardless-dotnet/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReleaseNotes>https://github.com/gocardless/gocardless-dotnet/releases/tag/v11.0.0</PackageReleaseNotes>
     <TargetFrameworks>netstandard2.0;netstandard2.1;net461;net8.0</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -23,6 +24,11 @@
     </ItemGroup>
     <Copy SourceFiles="@(DocFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="false" />
   </Target>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\nuget_package_icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">

@@ -78,7 +78,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Returns a single outbound payment import.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "IM".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "IM".
+        /// </param>
         /// <param name="request">An optional `OutboundPaymentImportGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single outbound payment import resource</returns>
@@ -140,6 +142,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of outbound payment imports.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `OutboundPaymentImportListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<OutboundPaymentImport> All(
             OutboundPaymentImportListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -165,6 +169,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of outbound payment imports.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `OutboundPaymentImportListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<OutboundPaymentImport>>> AllAsync(
             OutboundPaymentImportListRequest request = null,
             RequestSettings customiseRequestMessage = null

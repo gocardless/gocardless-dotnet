@@ -69,6 +69,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of balances.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `BalanceListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Balance> All(
             BalanceListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -94,6 +96,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of balances.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `BalanceListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<Balance>>> AllAsync(
             BalanceListRequest request = null,
             RequestSettings customiseRequestMessage = null

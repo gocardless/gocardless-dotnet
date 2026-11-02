@@ -37,8 +37,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Runs the specific scenario simulator against the specific resource
         /// </summary>
-        /// <param name="identity"></param>The unique identifier of the simulator, used to initiate
-        /// simulations. One of:
+        /// <param name="identity">
+        /// The unique identifier of the simulator, used to initiate simulations. One of:
+        ///
         /// <ul>
         /// <li><c>creditor_verification_status_action_required</c>: Sets a creditor's
         /// <c>verification status</c> to <c>action required</c>, meaning that the creditor must
@@ -156,6 +157,7 @@ namespace GoCardless.Services
         /// <c>bank_authorisation</c>. Only billing requests with a <c>payment_request</c> are
         /// supported.</li>
         /// </ul>
+        /// </param>
         /// <param name="request">An optional `ScenarioSimulatorRunRequest` representing the body for this run request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single scenario simulator resource</returns>

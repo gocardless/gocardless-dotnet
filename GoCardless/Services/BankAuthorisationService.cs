@@ -69,7 +69,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Get a single bank authorisation.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BAU".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BAU".
+        /// </param>
         /// <param name="request">An optional `BankAuthorisationGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single bank authorisation resource</returns>

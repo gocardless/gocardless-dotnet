@@ -39,7 +39,9 @@ namespace GoCardless.Services
         /// href="https://docs.gocardless.com/docs/gc-embed/bank-details-access#public-key-setup">Public
         /// Key Setup</a> for more details.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BA".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BA".
+        /// </param>
         /// <param name="request">An optional `BankAccountDetailGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single bank account detail resource</returns>

@@ -109,7 +109,9 @@ namespace GoCardless.Services
         /// Once an outbound payment is <c>executing</c>, the money moving
         /// process has begun and cannot be reversed.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier of the outbound payment.
+        /// <param name="identity">
+        /// Unique identifier of the outbound payment.
+        /// </param>
         /// <param name="request">An optional `OutboundPaymentCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single outbound payment resource</returns>
@@ -143,7 +145,9 @@ namespace GoCardless.Services
         /// Approves an outbound payment. Only outbound payments with the
         /// "pending_approval" status can be approved.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier of the outbound payment.
+        /// <param name="identity">
+        /// Unique identifier of the outbound payment.
+        /// </param>
         /// <param name="request">An optional `OutboundPaymentApproveRequest` representing the body for this approve request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single outbound payment resource</returns>
@@ -176,7 +180,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Fetches an outbound_payment by ID
         /// </summary>
-        /// <param name="identity"></param>Unique identifier of the outbound payment.
+        /// <param name="identity">
+        /// Unique identifier of the outbound payment.
+        /// </param>
         /// <param name="request">An optional `OutboundPaymentGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single outbound payment resource</returns>
@@ -238,6 +244,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of outbound payments.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `OutboundPaymentListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<OutboundPayment> All(
             OutboundPaymentListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -263,6 +271,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of outbound payments.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `OutboundPaymentListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<OutboundPayment>>> AllAsync(
             OutboundPaymentListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -282,7 +292,9 @@ namespace GoCardless.Services
         /// Updates an outbound payment object. This accepts only the metadata
         /// parameter.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier of the outbound payment.
+        /// <param name="identity">
+        /// Unique identifier of the outbound payment.
+        /// </param>
         /// <param name="request">An optional `OutboundPaymentUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single outbound payment resource</returns>

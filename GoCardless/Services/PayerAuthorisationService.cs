@@ -94,7 +94,9 @@ namespace GoCardless.Services
         /// Retrieves the details of a single existing Payer Authorisation. It
         /// can be used for polling the status of a Payer Authorisation.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "PA".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "PA".
+        /// </param>
         /// <param name="request">An optional `PayerAuthorisationGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payer authorisation resource</returns>
@@ -174,7 +176,9 @@ namespace GoCardless.Services
         /// must be sent completely as it overrides the previously existing
         /// values. </p>
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "PA".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "PA".
+        /// </param>
         /// <param name="request">An optional `PayerAuthorisationUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payer authorisation resource</returns>
@@ -214,7 +218,9 @@ namespace GoCardless.Services
         /// errors. After it is successfully submitted, the Payer Authorisation
         /// can no longer be edited.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "PA".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "PA".
+        /// </param>
         /// <param name="request">An optional `PayerAuthorisationSubmitRequest` representing the body for this submit request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payer authorisation resource</returns>
@@ -261,7 +267,9 @@ namespace GoCardless.Services
         /// verification mechanism (upcoming feature).
         /// </p>
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "PA".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "PA".
+        /// </param>
         /// <param name="request">An optional `PayerAuthorisationConfirmRequest` representing the body for this confirm request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single payer authorisation resource</returns>
