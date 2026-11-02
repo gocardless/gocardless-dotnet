@@ -1,6 +1,14 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 11.0.1 (2026-11-02)
+
+### Fixes
+
+#### Include README in the NuGet package and replace deprecated metadata
+
+The NuGet package now ships with the repository README, so nuget.org no longer warns that the package is missing a README. The deprecated `PackageLicenseUrl` and `PackageIconUrl` properties are replaced with `PackageLicenseExpression` (MIT) and an embedded `PackageIcon`, clearing the NU5125 and NU5048 pack warnings.
+
 ## 11.0.0 (2026-11-02)
 
 ### Breaking Changes
