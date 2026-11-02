@@ -1,6 +1,26 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 11.0.0 (2026-11-02)
+
+### Breaking Changes
+
+#### Type `BillingRequestPaymentRequest.Amount` as `int?` in responses
+
+The `Amount` property on the `BillingRequestPaymentRequest` class returned as part of a `BillingRequest` was typed as `string` in earlier versions. The API always returns this value as an integer in minor units (e.g. `19269` for 192.69 in GBP), so it is now typed as `int?`, consistent with other amount properties.
+
+This is a breaking change: code that reads `BillingRequest.PaymentRequest.Amount` as a string needs to be updated to use the integer value.
+
+Creating a billing request is unaffected: `BillingRequestCreateRequest.PaymentRequest.Amount` was already `int?`.
+
+#### Type enum properties as enums instead of strings
+
+Some properties that the API schema defines as enums were typed as `string` in earlier versions, to avoid breaking backwards compatibility when a bug in v1 typing was fixed. These special cases have been removed, so these properties now use their generated enum types (for example `BillingRequest.Status`, `Subscription.Status`, `Block.BlockType`, `Mandate.ConsentType`).
+
+This is a breaking change: code that compares these properties to string literals, or assigns strings to them, needs to be updated to use the enum values instead.
+
+Affected properties: `BankAuthorisation.AuthorisationType`, `BillingRequest.Status`, `BillingRequestAction` (`InstitutionGuessStatus`, `Status`, `Type`), `BillingRequestActionBankAuthorisation` (`Adapter`, `AuthorisationType`), `Block` (`BlockType`, `ReasonType`), `CustomerNotification` (`ActionTaken`, `Type`), `Institution.Status`, `Mandate.ConsentType`, `MandateImportEntry.RecordType`, `Subscription.Status`, and the equivalent properties on the `BillingRequestWithAction*` types.
+
 ## 10.16.0 (2026-10-29)
 
 ### Features
