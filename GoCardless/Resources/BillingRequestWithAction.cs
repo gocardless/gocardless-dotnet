@@ -57,7 +57,7 @@ namespace GoCardless.Resources
         /// Type of authorisation, can be either 'mandate' or 'payment'.
         /// </summary>
         [JsonProperty("authorisation_type")]
-        public string AuthorisationType { get; set; }
+        public BillingRequestWithActionBankAuthorisationsAuthorisationType? AuthorisationType { get; set; }
 
         /// <summary>
         /// Fixed <a
@@ -341,7 +341,7 @@ namespace GoCardless.Resources
         /// </ul>
         /// </summary>
         [JsonProperty("status")]
-        public string Status { get; set; }
+        public BillingRequestWithActionBillingRequestsStatus? Status { get; set; }
 
         /// <summary>
         /// Request for a subscription
@@ -446,7 +446,7 @@ namespace GoCardless.Resources
         /// </ul>
         /// </summary>
         [JsonProperty("institution_guess_status")]
-        public string InstitutionGuessStatus { get; set; }
+        public BillingRequestWithActionBillingRequestActionInstitutionGuessStatus? InstitutionGuessStatus { get; set; }
 
         /// <summary>
         /// Informs you whether the action is required to fulfil the billing
@@ -466,13 +466,13 @@ namespace GoCardless.Resources
         /// Status of the action
         /// </summary>
         [JsonProperty("status")]
-        public string Status { get; set; }
+        public BillingRequestWithActionBillingRequestActionStatus? Status { get; set; }
 
         /// <summary>
         /// Unique identifier for the action.
         /// </summary>
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public BillingRequestWithActionBillingRequestActionType? Type { get; set; }
     }
 
     /// <summary>
@@ -489,14 +489,14 @@ namespace GoCardless.Resources
         /// authorisations (GoCardless internal use only)
         /// </summary>
         [JsonProperty("adapter")]
-        public string Adapter { get; set; }
+        public BillingRequestWithActionBillingRequestActionBankAuthorisationAdapter? Adapter { get; set; }
 
         /// <summary>
         /// What type of bank authorisations are supported on this billing
         /// request
         /// </summary>
         [JsonProperty("authorisation_type")]
-        public string AuthorisationType { get; set; }
+        public BillingRequestWithActionBillingRequestActionBankAuthorisationAuthorisationType? AuthorisationType { get; set; }
     }
 
     /// <summary>

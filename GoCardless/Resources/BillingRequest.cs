@@ -158,7 +158,7 @@ namespace GoCardless.Resources
         /// </ul>
         /// </summary>
         [JsonProperty("status")]
-        public string Status { get; set; }
+        public BillingRequestStatus? Status { get; set; }
 
         /// <summary>
         /// Request for a subscription
@@ -261,7 +261,7 @@ namespace GoCardless.Resources
         /// </ul>
         /// </summary>
         [JsonProperty("institution_guess_status")]
-        public string InstitutionGuessStatus { get; set; }
+        public BillingRequestActionInstitutionGuessStatus? InstitutionGuessStatus { get; set; }
 
         /// <summary>
         /// Informs you whether the action is required to fulfil the billing
@@ -281,13 +281,13 @@ namespace GoCardless.Resources
         /// Status of the action
         /// </summary>
         [JsonProperty("status")]
-        public string Status { get; set; }
+        public BillingRequestActionStatus? Status { get; set; }
 
         /// <summary>
         /// Unique identifier for the action.
         /// </summary>
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public BillingRequestActionType? Type { get; set; }
     }
 
     /// <summary>
@@ -303,14 +303,14 @@ namespace GoCardless.Resources
         /// authorisations (GoCardless internal use only)
         /// </summary>
         [JsonProperty("adapter")]
-        public string Adapter { get; set; }
+        public BillingRequestActionBankAuthorisationAdapter? Adapter { get; set; }
 
         /// <summary>
         /// What type of bank authorisations are supported on this billing
         /// request
         /// </summary>
         [JsonProperty("authorisation_type")]
-        public string AuthorisationType { get; set; }
+        public BillingRequestActionBankAuthorisationAuthorisationType? AuthorisationType { get; set; }
     }
 
     /// <summary>
@@ -1371,7 +1371,7 @@ namespace GoCardless.Resources
         /// Amount in minor unit (e.g. pence in GBP, cents in EUR).
         /// </summary>
         [JsonProperty("amount")]
-        public string Amount { get; set; }
+        public int? Amount { get; set; }
 
         /// <summary>
         /// The amount to be deducted from the payment as an app fee, to be paid

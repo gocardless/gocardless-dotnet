@@ -262,7 +262,7 @@ namespace GoCardless.Resources
         /// </ul>
         /// </summary>
         [JsonProperty("status")]
-        public string Status { get; set; }
+        public SubscriptionStatus? Status { get; set; }
 
         /// <summary>
         /// Up to 10 upcoming payments with their amounts and charge dates.
