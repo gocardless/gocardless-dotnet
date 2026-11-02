@@ -68,7 +68,7 @@ namespace GoCardless.Resources
         /// 'bank_name'.
         /// </summary>
         [JsonProperty("block_type")]
-        public string BlockType { get; set; }
+        public BlockBlockType? BlockType { get; set; }
 
         /// <summary>
         /// Fixed <a
@@ -106,7 +106,7 @@ namespace GoCardless.Resources
         /// description.
         /// </summary>
         [JsonProperty("reason_type")]
-        public string ReasonType { get; set; }
+        public BlockReasonType? ReasonType { get; set; }
 
         /// <summary>
         /// This field is a reference to the value you wish to block. This may

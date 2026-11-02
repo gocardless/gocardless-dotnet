@@ -28,7 +28,7 @@ namespace GoCardless.Resources
         /// Type of authorisation, can be either 'mandate' or 'payment'.
         /// </summary>
         [JsonProperty("authorisation_type")]
-        public string AuthorisationType { get; set; }
+        public BankAuthorisationAuthorisationType? AuthorisationType { get; set; }
 
         /// <summary>
         /// Fixed <a

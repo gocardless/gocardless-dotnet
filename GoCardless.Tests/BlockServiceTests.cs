@@ -35,8 +35,8 @@ namespace GoCardless.Tests
 
             GoCardless.Resources.Block block = resp.Block;
             ClassicAssert.AreEqual(block.Id, "BLC456");
-            ClassicAssert.AreEqual(block.BlockType, "email");
-            ClassicAssert.AreEqual(block.ReasonType, "no_intent_to_pay");
+            ClassicAssert.AreEqual(block.BlockType, BlockBlockType.Email);
+            ClassicAssert.AreEqual(block.ReasonType, BlockReasonType.NoIntentToPay);
             ClassicAssert.AreEqual(block.ResourceReference, "example@example.com");
             ClassicAssert.AreEqual(block.Active, true);
             ClassicAssert.AreEqual(
@@ -66,12 +66,12 @@ namespace GoCardless.Tests
 
             IReadOnlyList<GoCardless.Resources.Block> blocks = resp.Blocks;
             ClassicAssert.AreEqual(blocks[0].Id, "BLC123");
-            ClassicAssert.AreEqual(blocks[0].BlockType, "email");
-            ClassicAssert.AreEqual(blocks[0].ReasonType, "no_intent_to_pay");
+            ClassicAssert.AreEqual(blocks[0].BlockType, BlockBlockType.Email);
+            ClassicAssert.AreEqual(blocks[0].ReasonType, BlockReasonType.NoIntentToPay);
             ClassicAssert.AreEqual(blocks[0].ResourceReference, "example@example.com");
             ClassicAssert.AreEqual(blocks[1].Id, "BLC456");
-            ClassicAssert.AreEqual(blocks[1].BlockType, "bank_account");
-            ClassicAssert.AreEqual(blocks[1].ReasonType, "no_intent_to_pay");
+            ClassicAssert.AreEqual(blocks[1].BlockType, BlockBlockType.BankAccount);
+            ClassicAssert.AreEqual(blocks[1].ReasonType, BlockReasonType.NoIntentToPay);
             ClassicAssert.AreEqual(blocks[1].ResourceReference, "BA123");
         }
     }

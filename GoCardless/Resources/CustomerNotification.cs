@@ -37,7 +37,7 @@ namespace GoCardless.Resources
         /// which means the integrator sent the notification themselves.
         /// </summary>
         [JsonProperty("action_taken")]
-        public string ActionTaken { get; set; }
+        public CustomerNotificationActionTaken? ActionTaken { get; set; }
 
         /// <summary>
         /// Fixed <a
@@ -80,7 +80,7 @@ namespace GoCardless.Resources
         /// error.
         /// </summary>
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public CustomerNotificationType? Type { get; set; }
     }
 
     /// <summary>

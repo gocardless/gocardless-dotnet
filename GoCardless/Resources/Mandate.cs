@@ -46,7 +46,7 @@ namespace GoCardless.Resources
         /// for ACH, or single, recurring and sporadic for PAD.
         /// </summary>
         [JsonProperty("consent_type")]
-        public string ConsentType { get; set; }
+        public MandateConsentType? ConsentType { get; set; }
 
         /// <summary>
         /// Fixed <a
