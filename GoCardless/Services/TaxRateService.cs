@@ -66,6 +66,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of tax rates.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `TaxRateListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<TaxRate> All(
             TaxRateListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -91,6 +93,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of tax rates.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `TaxRateListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<TaxRate>>> AllAsync(
             TaxRateListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -109,8 +113,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of a tax rate.
         /// </summary>
-        /// <param name="identity"></param>The unique identifier created by the jurisdiction, tax
-        /// type and version
+        /// <param name="identity">
+        /// The unique identifier created by the jurisdiction, tax type and version
+        /// </param>
         /// <param name="request">An optional `TaxRateGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single tax rate resource</returns>

@@ -81,6 +81,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of events.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `EventListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Event> All(
             EventListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -106,6 +108,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of events.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `EventListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<Event>>> AllAsync(
             EventListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -124,7 +128,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of a single event.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "EV".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "EV".
+        /// </param>
         /// <param name="request">An optional `EventGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single event resource</returns>

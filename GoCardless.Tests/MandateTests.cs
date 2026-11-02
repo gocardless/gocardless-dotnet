@@ -247,7 +247,7 @@ namespace GoCardless.Tests
         public void GetAsyncShouldRejectInvalidIdentity(string identity)
         {
             Assert.ThrowsAsync<ArgumentException>(
-                (AsyncTestDelegate)(() => client.Mandates.GetAsync(identity))
+                (Func<Task>)(() => client.Mandates.GetAsync(identity))
             );
         }
 

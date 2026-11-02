@@ -112,6 +112,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of refunds.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `RefundListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Refund> All(
             RefundListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -137,6 +139,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of refunds.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `RefundListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<Refund>>> AllAsync(
             RefundListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -155,7 +159,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves all details for a single refund
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "RF".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "RF".
+        /// </param>
         /// <param name="request">An optional `RefundGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single refund resource</returns>
@@ -188,7 +194,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Updates a refund object.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "RF".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "RF".
+        /// </param>
         /// <param name="request">An optional `RefundUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single refund resource</returns>

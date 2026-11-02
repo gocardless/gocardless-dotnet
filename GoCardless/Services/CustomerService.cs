@@ -92,6 +92,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of customers.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `CustomerListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Customer> All(
             CustomerListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -117,6 +119,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of customers.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `CustomerListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<Customer>>> AllAsync(
             CustomerListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -135,7 +139,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of an existing customer.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "CU".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "CU".
+        /// </param>
         /// <param name="request">An optional `CustomerGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer resource</returns>
@@ -169,7 +175,9 @@ namespace GoCardless.Services
         /// Updates a customer object. Supports all of the fields supported when
         /// creating a customer.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "CU".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "CU".
+        /// </param>
         /// <param name="request">An optional `CustomerUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer resource</returns>
@@ -209,7 +217,9 @@ namespace GoCardless.Services
         /// <p class="restricted-notice">The action of removing a customer
         /// cannot be reversed, so please use with care.</p>
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "CU".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "CU".
+        /// </param>
         /// <param name="request">An optional `CustomerRemoveRequest` representing the body for this remove request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single customer resource</returns>

@@ -165,6 +165,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of instalment schedules.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `InstalmentScheduleListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<InstalmentSchedule> All(
             InstalmentScheduleListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -190,6 +192,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of instalment schedules.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `InstalmentScheduleListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<InstalmentSchedule>>> AllAsync(
             InstalmentScheduleListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -208,7 +212,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of an existing instalment schedule.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "IS".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "IS".
+        /// </param>
         /// <param name="request">An optional `InstalmentScheduleGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single instalment schedule resource</returns>
@@ -242,7 +248,9 @@ namespace GoCardless.Services
         /// Updates an instalment schedule. This accepts only the metadata
         /// parameter.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "IS".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "IS".
+        /// </param>
         /// <param name="request">An optional `InstalmentScheduleUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single instalment schedule resource</returns>
@@ -279,7 +287,9 @@ namespace GoCardless.Services
         /// This will fail with a <c>cancellation_failed</c> error if the
         /// instalment schedule is already cancelled or has completed.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "IS".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "IS".
+        /// </param>
         /// <param name="request">An optional `InstalmentScheduleCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single instalment schedule resource</returns>

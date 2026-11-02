@@ -76,6 +76,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of billing request templates.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `BillingRequestTemplateListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<BillingRequestTemplate> All(
             BillingRequestTemplateListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -101,6 +103,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of billing request templates.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `BillingRequestTemplateListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<BillingRequestTemplate>>> AllAsync(
             BillingRequestTemplateListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -119,7 +123,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Fetches a Billing Request Template
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BRT".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BRT".
+        /// </param>
         /// <param name="request">An optional `BillingRequestTemplateGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request template resource</returns>
@@ -179,7 +185,9 @@ namespace GoCardless.Services
         /// Updates a Billing Request Template, which will affect all future
         /// Billing Requests created by this template.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BRT".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BRT".
+        /// </param>
         /// <param name="request">An optional `BillingRequestTemplateUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request template resource</returns>

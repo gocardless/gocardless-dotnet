@@ -62,6 +62,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of webhooks.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `WebhookListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Webhook> All(
             WebhookListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -87,6 +89,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of webhooks.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `WebhookListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<Webhook>>> AllAsync(
             WebhookListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -105,7 +109,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of an existing webhook.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "WB".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "WB".
+        /// </param>
         /// <param name="request">An optional `WebhookGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single webhook resource</returns>
@@ -138,7 +144,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Requests for a previous webhook to be sent again
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "WB".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "WB".
+        /// </param>
         /// <param name="request">An optional `WebhookRetryRequest` representing the body for this retry request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single webhook resource</returns>

@@ -66,7 +66,9 @@ namespace GoCardless.Services
         ///
         /// This endpoint is currently supported only for FasterPayments.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BRQ".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BRQ".
+        /// </param>
         /// <param name="request">An optional `InstitutionListForBillingRequestRequest` representing the query parameters for this list_for_billing_request request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A set of institution resources</returns>

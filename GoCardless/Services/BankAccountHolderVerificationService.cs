@@ -63,8 +63,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Fetches a bank account holder verification by ID.
         /// </summary>
-        /// <param name="identity"></param>The unique identifier for the bank account holder
-        /// verification resource, e.g. "BAHV123".
+        /// <param name="identity">
+        /// The unique identifier for the bank account holder verification resource, e.g. "BAHV123".
+        /// </param>
         /// <param name="request">An optional `BankAccountHolderVerificationGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single bank account holder verification resource</returns>

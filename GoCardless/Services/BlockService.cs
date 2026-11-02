@@ -98,7 +98,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of an existing block.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BLC".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BLC".
+        /// </param>
         /// <param name="request">An optional `BlockGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single block resource</returns>
@@ -160,6 +162,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of blocks.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `BlockListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Block> All(
             BlockListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -185,6 +189,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of blocks.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `BlockListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<Block>>> AllAsync(
             BlockListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -203,7 +209,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Disables a block so that it no longer will prevent mandate creation.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BLC".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BLC".
+        /// </param>
         /// <param name="request">An optional `BlockDisableRequest` representing the body for this disable request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single block resource</returns>
@@ -237,7 +245,9 @@ namespace GoCardless.Services
         /// Enables a previously disabled block so that it will prevent mandate
         /// creation
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BLC".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BLC".
+        /// </param>
         /// <param name="request">An optional `BlockEnableRequest` representing the body for this enable request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single block resource</returns>

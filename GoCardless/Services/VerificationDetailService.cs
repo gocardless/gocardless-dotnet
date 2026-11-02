@@ -95,6 +95,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of verification details.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `VerificationDetailListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<VerificationDetail> All(
             VerificationDetailListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -120,6 +122,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of verification details.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `VerificationDetailListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<VerificationDetail>>> AllAsync(
             VerificationDetailListRequest request = null,
             RequestSettings customiseRequestMessage = null

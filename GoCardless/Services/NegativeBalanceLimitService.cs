@@ -65,6 +65,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of negative balance limits.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `NegativeBalanceLimitListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<NegativeBalanceLimit> All(
             NegativeBalanceLimitListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -90,6 +92,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of negative balance limits.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `NegativeBalanceLimitListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<NegativeBalanceLimit>>> AllAsync(
             NegativeBalanceLimitListRequest request = null,
             RequestSettings customiseRequestMessage = null

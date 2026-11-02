@@ -93,6 +93,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of mandates.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `MandateListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Mandate> All(
             MandateListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -118,6 +120,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of mandates.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `MandateListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<Mandate>>> AllAsync(
             MandateListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -136,8 +140,10 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of an existing mandate.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "MD". Note that this
-        /// prefix may not apply to mandates created before 2016.
+        /// <param name="identity">
+        /// Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates
+        /// created before 2016.
+        /// </param>
         /// <param name="request">An optional `MandateGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
@@ -170,8 +176,10 @@ namespace GoCardless.Services
         /// <summary>
         /// Updates a mandate object. This accepts only the metadata parameter.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "MD". Note that this
-        /// prefix may not apply to mandates created before 2016.
+        /// <param name="identity">
+        /// Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates
+        /// created before 2016.
+        /// </param>
         /// <param name="request">An optional `MandateUpdateRequest` representing the body for this update request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
@@ -209,8 +217,10 @@ namespace GoCardless.Services
         /// This will fail with a <c>cancellation_failed</c> error if the
         /// mandate is already cancelled.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "MD". Note that this
-        /// prefix may not apply to mandates created before 2016.
+        /// <param name="identity">
+        /// Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates
+        /// created before 2016.
+        /// </param>
         /// <param name="request">An optional `MandateCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>
@@ -255,8 +265,10 @@ namespace GoCardless.Services
         ///
         /// Mandates can be resubmitted up to 10 times.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "MD". Note that this
-        /// prefix may not apply to mandates created before 2016.
+        /// <param name="identity">
+        /// Unique identifier, beginning with "MD". Note that this prefix may not apply to mandates
+        /// created before 2016.
+        /// </param>
         /// <param name="request">An optional `MandateReinstateRequest` representing the body for this reinstate request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single mandate resource</returns>

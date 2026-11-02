@@ -140,6 +140,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of scheme identifiers.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `SchemeIdentifierListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<SchemeIdentifier> All(
             SchemeIdentifierListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -165,6 +167,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of scheme identifiers.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `SchemeIdentifierListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<SchemeIdentifier>>> AllAsync(
             SchemeIdentifierListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -183,7 +187,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Retrieves the details of an existing scheme identifier.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, usually beginning with "SU".
+        /// <param name="identity">
+        /// Unique identifier, usually beginning with "SU".
+        /// </param>
         /// <param name="request">An optional `SchemeIdentifierGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single scheme identifier resource</returns>

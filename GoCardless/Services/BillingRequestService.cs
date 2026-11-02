@@ -85,7 +85,9 @@ namespace GoCardless.Services
         /// customer, and will take effect immediately after the request is
         /// successful.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BRQ".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BRQ".
+        /// </param>
         /// <param name="request">An optional `BillingRequestCollectCustomerDetailsRequest` representing the body for this collect_customer_details request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -153,7 +155,9 @@ namespace GoCardless.Services
         /// Testing instructions are <a
         /// href="https://docs.gocardless.com/docs/developer-resources/scenario-simulators#payer-name-verification">here</a>
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BRQ".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BRQ".
+        /// </param>
         /// <param name="request">An optional `BillingRequestCollectBankAccountRequest` representing the body for this collect_bank_account request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -189,7 +193,9 @@ namespace GoCardless.Services
         /// allow the payer to crosscheck the details entered by them and
         /// confirm it.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BRQ".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BRQ".
+        /// </param>
         /// <param name="request">An optional `BillingRequestConfirmPayerDetailsRequest` representing the body for this confirm_payer_details request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -224,7 +230,9 @@ namespace GoCardless.Services
         /// cause
         /// it to fulfil, executing the payment.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BRQ".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BRQ".
+        /// </param>
         /// <param name="request">An optional `BillingRequestFulfilRequest` representing the body for this fulfil request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -259,7 +267,9 @@ namespace GoCardless.Services
         /// flows
         /// to expire.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BRQ".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BRQ".
+        /// </param>
         /// <param name="request">An optional `BillingRequestCancelRequest` representing the body for this cancel request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -321,6 +331,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of billing requests.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `BillingRequestListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<BillingRequest> All(
             BillingRequestListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -346,6 +358,8 @@ namespace GoCardless.Services
         /// Get a lazily enumerated list of billing requests.
         /// This acts like the #list method, but paginates for you automatically.
         /// </summary>
+        /// <param name="request">An optional `BillingRequestListRequest` representing the query parameters for this list request.</param>
+        /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         public IEnumerable<Task<IReadOnlyList<BillingRequest>>> AllAsync(
             BillingRequestListRequest request = null,
             RequestSettings customiseRequestMessage = null
@@ -364,7 +378,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Fetches a billing request
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BRQ".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BRQ".
+        /// </param>
         /// <param name="request">An optional `BillingRequestGetRequest` representing the query parameters for this get request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -402,7 +418,9 @@ namespace GoCardless.Services
         /// This endpoint is currently supported only for Pay by Bank Billing
         /// Requests.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BRQ".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BRQ".
+        /// </param>
         /// <param name="request">An optional `BillingRequestNotifyRequest` representing the body for this notify request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -436,7 +454,9 @@ namespace GoCardless.Services
         /// Triggers a fallback from the open-banking flow to direct debit.
         /// Note, the billing request must have fallback enabled.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BRQ".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BRQ".
+        /// </param>
         /// <param name="request">An optional `BillingRequestFallbackRequest` representing the body for this fallback request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -475,7 +495,9 @@ namespace GoCardless.Services
         /// Request Flow. It
         /// will also not support any request which has a payments request.
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BRQ".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BRQ".
+        /// </param>
         /// <param name="request">An optional `BillingRequestChooseCurrencyRequest` representing the body for this choose_currency request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
@@ -508,7 +530,9 @@ namespace GoCardless.Services
         /// <summary>
         /// Creates an Institution object and attaches it to the Billing Request
         /// </summary>
-        /// <param name="identity"></param>Unique identifier, beginning with "BRQ".
+        /// <param name="identity">
+        /// Unique identifier, beginning with "BRQ".
+        /// </param>
         /// <param name="request">An optional `BillingRequestSelectInstitutionRequest` representing the body for this select_institution request.</param>
         /// <param name="customiseRequestMessage">An optional `RequestSettings` allowing you to configure the request</param>
         /// <returns>A single billing request resource</returns>
