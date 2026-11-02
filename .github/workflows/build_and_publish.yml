@@ -1,3 +1,5 @@
+# The name of this file is specified in the nuget Trusted Publishing settings,
+# so if you rename this file, you will need to update it there too.
 name: build_and_publish
 on:
   push:
@@ -106,8 +108,13 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
+    - name: NuGet login (Trusted Publishing)
+      id: nuget_login
+      uses: NuGet/login@v1
+      with:
+        user: ${{ vars.NUGET_USER }}
     - name: Publish the library
-      run: dotnet nuget push artifact/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} -n --skip-duplicate
+      run: dotnet nuget push artifact/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ steps.nuget_login.outputs.NUGET_API_KEY }} -n --skip-duplicate
 
   create_release:
     if: github.ref == 'refs/heads/master' && needs.check_version.outputs.should_publish == 'true'
