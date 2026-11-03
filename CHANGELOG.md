@@ -1,6 +1,12 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 11.0.2 (2026-11-03)
+
+### Fixes
+
+- Document that `currency` must be `EUR` to use a GB IBAN for SEPA Core when creating a customer bank account
+
 ## 11.0.1 (2026-11-02)
 
 ### Fixes
