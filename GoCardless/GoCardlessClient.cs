@@ -434,11 +434,11 @@ namespace GoCardless
 #endif
 
             var userAgentInformation =
-                $" gocardless-dotnet/11.0.1 {runtimeFrameworkInformation} {Helpers.CleanupOSDescriptionString(OSRunningOn)}";
+                $" gocardless-dotnet/11.0.2 {runtimeFrameworkInformation} {Helpers.CleanupOSDescriptionString(OSRunningOn)}";
 
             requestMessage.Headers.Add("User-Agent", userAgentInformation);
             requestMessage.Headers.Add("GoCardless-Version", "2015-07-06");
-            requestMessage.Headers.Add("GoCardless-Client-Version", "11.0.1");
+            requestMessage.Headers.Add("GoCardless-Client-Version", "11.0.2");
             requestMessage.Headers.Add("GoCardless-Client-Library", "gocardless-dotnet");
             requestMessage.Headers.Authorization =
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _accessToken);
