@@ -78,9 +78,18 @@ namespace GoCardless.Resources
         /// the <c>pending_submission</c> state.</li>
         /// <li><c>mandate_activated</c>: Transitions a mandate through to
         /// <c>activated</c>, having been submitted to the banks and set up
-        /// successfully. It must start in the <c>pending_submission</c> state.
-        /// Not compatible with ACH, BECS, BECS_NZ and SEPA mandates, which are
-        /// submitted and activated with their first payment.</li>
+        /// successfully. It must start in the <c>pending_submission</c> or
+        /// <c>submitted</c> state. Not compatible with ACH, BECS, BECS_NZ and
+        /// SEPA mandates, which are submitted and activated with their first
+        /// payment.</li>
+        /// <li><c>mandate_submitted</c>: Transitions a mandate to
+        /// <c>submitted</c>, as if it had been sent to the banks, without
+        /// proceeding any further. It must start in the
+        /// <c>pending_submission</c> state. Only compatible with Bacs, Autogiro
+        /// and Betalingsservice mandates; ACH, BECS, BECS_NZ and SEPA mandates
+        /// are submitted and activated with their first payment. Use
+        /// <c>mandate_activated</c> or <c>mandate_failed</c> to move the
+        /// mandate on afterwards.</li>
         /// <li><c>mandate_customer_approval_granted</c>: Transitions a mandate
         /// through to <c>pending_submission</c>, as if the customer approved
         /// the mandate creation. It must start in the
