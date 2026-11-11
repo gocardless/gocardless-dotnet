@@ -1755,6 +1755,12 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("customer_billing_detail")]
         public BillingRequestResourcesCustomerBillingDetail CustomerBillingDetail { get; set; }
+
+        /// <summary>
+        /// Embedded mandate, only once the mandate request has been fulfilled
+        /// </summary>
+        [JsonProperty("mandate")]
+        public BillingRequestResourcesMandate Mandate { get; set; }
     }
 
     /// <summary>
@@ -2131,6 +2137,31 @@ namespace GoCardless.Resources
         /// </summary>
         [JsonProperty("swedish_identity_number")]
         public string SwedishIdentityNumber { get; set; }
+    }
+
+    /// <summary>
+    /// Represents a billing request resources mandate resource.
+    ///
+    /// Embedded mandate, only once the mandate request has been fulfilled
+    /// </summary>
+    public class BillingRequestResourcesMandate
+    {
+        /// <summary>
+        /// Unique identifier, beginning with "MD". Note that this prefix may
+        /// not apply to mandates created before 2016.
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        /// <summary>
+        /// Unique reference. Different schemes have different length and <a
+        /// href="https://docs.gocardless.com/docs/api-reference/character-sets">character
+        /// set</a> requirements. GoCardless will generate a unique reference
+        /// satisfying the different scheme requirements if this field is left
+        /// blank.
+        /// </summary>
+        [JsonProperty("reference")]
+        public string Reference { get; set; }
     }
 
     /// <summary>
