@@ -196,10 +196,10 @@ namespace GoCardless
         )
             where T : ApiResponse
         {
-            var numberOfRetries =
-                requestSettings?.NumberOfRetriesOnTimeout ?? DefaultNumberOfRetriesOnTimeout;
-            var waitBetweenRetries =
-                requestSettings?.WaitBetweenRetries ?? DefaultWaitBetweenRetries;
+            var numberOfRetries = requestSettings?.NumberOfRetriesOnTimeout
+                ?? DefaultNumberOfRetriesOnTimeout;
+            var waitBetweenRetries = requestSettings?.WaitBetweenRetries
+                ?? DefaultWaitBetweenRetries;
 
             var cancellationTokenSource = new CancellationTokenSource();
 

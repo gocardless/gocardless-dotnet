@@ -43,27 +43,20 @@ namespace GoCardless.Tests
             mockHttp.EnqueueResponse(200, responseFixture);
             var resp = await client.OutboundPayments.GetAsync("OUT123");
 
-            mockHttp.AssertRequestMade(
-                "GET",
-                "/outbound_payments/OUT123",
-                null,
-                r =>
-                {
-                    var request = r.Item1;
-                    ClassicAssert.AreEqual(
-                        @"sig-1=(""@method"" ""@authority"" ""@request-target"");keyid=""PublicKeyId"";created=123;nonce=""nonce""",
-                        request.Headers.GetValues("Gc-Signature-Input").FirstOrDefault()
-                    );
-                    ClassicAssert.True(request.Headers.Contains("Gc-Signature"));
-                    ClassicAssert.True(
-                        request.Headers.GetValues("Gc-Signature").First().StartsWith("sig-1=:")
-                    );
-                    ClassicAssert.True(
-                        request.Headers.GetValues("Gc-Signature").First().EndsWith(":")
-                    );
-                    ClassicAssert.False(request.Headers.Contains("Content-Digest"));
-                }
-            );
+            mockHttp.AssertRequestMade("GET", "/outbound_payments/OUT123", null, r =>
+            {
+                var request = r.Item1;
+                ClassicAssert.AreEqual(
+                    @"sig-1=(""@method"" ""@authority"" ""@request-target"");keyid=""PublicKeyId"";created=123;nonce=""nonce""",
+                    request.Headers.GetValues("Gc-Signature-Input").FirstOrDefault()
+                );
+                ClassicAssert.True(request.Headers.Contains("Gc-Signature"));
+                ClassicAssert.True(
+                    request.Headers.GetValues("Gc-Signature").First().StartsWith("sig-1=:")
+                );
+                ClassicAssert.True(request.Headers.GetValues("Gc-Signature").First().EndsWith(":"));
+                ClassicAssert.False(request.Headers.Contains("Content-Digest"));
+            });
             TestHelpers.AssertResponseCanSerializeBackToFixture(resp, responseFixture);
         }
 
@@ -162,33 +155,26 @@ namespace GoCardless.Tests
                 }
             );
 
-            mockHttp.AssertRequestMade(
-                "POST",
-                "/outbound_payments",
-                null,
-                r =>
-                {
-                    var request = r.Item1;
-                    ClassicAssert.AreEqual(
-                        @"sig-1=(""@method"" ""@authority"" ""@request-target"" ""content-digest"" ""content-type"" ""content-length"");keyid=""PublicKeyId"";created=123;nonce=""nonce""",
-                        request.Headers.GetValues("Gc-Signature-Input").FirstOrDefault()
-                    );
-                    ClassicAssert.True(request.Headers.Contains("Gc-Signature"));
-                    ClassicAssert.True(
-                        request.Headers.GetValues("Gc-Signature").First().StartsWith("sig-1=:")
-                    );
-                    ClassicAssert.True(
-                        request.Headers.GetValues("Gc-Signature").First().EndsWith(":")
-                    );
-                    ClassicAssert.True(request.Headers.Contains("Content-Digest"));
-                    ClassicAssert.True(
-                        request.Headers.GetValues("Content-Digest").First().StartsWith("sha256=:")
-                    );
-                    ClassicAssert.True(
-                        request.Headers.GetValues("Content-Digest").First().EndsWith(":")
-                    );
-                }
-            );
+            mockHttp.AssertRequestMade("POST", "/outbound_payments", null, r =>
+            {
+                var request = r.Item1;
+                ClassicAssert.AreEqual(
+                    @"sig-1=(""@method"" ""@authority"" ""@request-target"" ""content-digest"" ""content-type"" ""content-length"");keyid=""PublicKeyId"";created=123;nonce=""nonce""",
+                    request.Headers.GetValues("Gc-Signature-Input").FirstOrDefault()
+                );
+                ClassicAssert.True(request.Headers.Contains("Gc-Signature"));
+                ClassicAssert.True(
+                    request.Headers.GetValues("Gc-Signature").First().StartsWith("sig-1=:")
+                );
+                ClassicAssert.True(request.Headers.GetValues("Gc-Signature").First().EndsWith(":"));
+                ClassicAssert.True(request.Headers.Contains("Content-Digest"));
+                ClassicAssert.True(
+                    request.Headers.GetValues("Content-Digest").First().StartsWith("sha256=:")
+                );
+                ClassicAssert.True(
+                    request.Headers.GetValues("Content-Digest").First().EndsWith(":")
+                );
+            });
             TestHelpers.AssertResponseCanSerializeBackToFixture(resp, responseFixture);
         }
 

@@ -255,10 +255,8 @@ namespace GoCardless.Tests
         public async Task ShouldCreateAMandate()
         {
             var responseFixture = "fixtures/client/create_a_mandate_response.json";
-            mockHttp.EnqueueResponse(
-                201,
-                responseFixture,
-                resp => resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
+            mockHttp.EnqueueResponse(201, responseFixture, resp =>
+                resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
             );
             MandateResponse mandateResponse = await client.Mandates.CreateAsync(
                 TestHelpers.CreateMandateCreateRequest()

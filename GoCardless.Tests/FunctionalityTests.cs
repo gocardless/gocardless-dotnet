@@ -60,59 +60,45 @@ namespace GoCardless.Tests
         [Test]
         public async Task Headers()
         {
-            http.EnqueueResponse(
-                201,
-                "fixtures/client/create_a_mandate_response.json",
-                resp => resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
+            http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json", resp =>
+                resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
             );
             var mandateResponse = await client.Mandates.CreateAsync(new MandateCreateRequest());
 
             var mandate = mandateResponse.Mandate;
-            http.AssertRequestMade(
-                "POST",
-                "/mandates",
-                null,
-                req =>
-                {
-                    ClassicAssert.AreEqual(
-                        "Bearer access-token",
-                        req.Item1.Headers.GetValues("Authorization").Single()
-                    );
-                    ClassicAssert.AreEqual(
-                        "2015-07-06",
-                        req.Item1.Headers.GetValues("GoCardless-Version").Single()
-                    );
-                    ClassicAssert.AreEqual(
-                        "gocardless-dotnet",
-                        req.Item1.Headers.GetValues("GoCardless-Client-Library").Single()
-                    );
-                }
-            );
+            http.AssertRequestMade("POST", "/mandates", null, req =>
+            {
+                ClassicAssert.AreEqual(
+                    "Bearer access-token",
+                    req.Item1.Headers.GetValues("Authorization").Single()
+                );
+                ClassicAssert.AreEqual(
+                    "2015-07-06",
+                    req.Item1.Headers.GetValues("GoCardless-Version").Single()
+                );
+                ClassicAssert.AreEqual(
+                    "gocardless-dotnet",
+                    req.Item1.Headers.GetValues("GoCardless-Client-Library").Single()
+                );
+            });
         }
 
         [Test]
         public async Task IdempotencyKeyIsGeneratedWhenNoneIsSet()
         {
             //When a request has been made to an endpoint requiring an idemopotency key without one being set
-            http.EnqueueResponse(
-                201,
-                "fixtures/client/create_a_mandate_response.json",
-                resp => resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
+            http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json", resp =>
+                resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
             );
             await client.Mandates.CreateAsync(new MandateCreateRequest());
 
             Guid? idempotencyKey = null;
-            http.AssertRequestMade(
-                "POST",
-                "/mandates",
-                null,
-                req =>
-                {
-                    idempotencyKey = Guid.Parse(
-                        req.Item1.Headers.GetValues("Idempotency-Key").Single()
-                    );
-                }
-            );
+            http.AssertRequestMade("POST", "/mandates", null, req =>
+            {
+                idempotencyKey = Guid.Parse(
+                    req.Item1.Headers.GetValues("Idempotency-Key").Single()
+                );
+            });
 
             //Then an idempotency key should have been set automatically by the client library
             ClassicAssert.NotNull(idempotencyKey);
@@ -129,26 +115,19 @@ namespace GoCardless.Tests
             };
 
             //When the request is made using the customisation
-            http.EnqueueResponse(
-                201,
-                "fixtures/client/create_a_mandate_response.json",
-                resp => resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
+            http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json", resp =>
+                resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
             );
 
             await client.Mandates.CreateAsync(new MandateCreateRequest(), requestSettings);
 
             Guid? customHeader = null;
-            http.AssertRequestMade(
-                "POST",
-                "/mandates",
-                null,
-                req =>
-                {
-                    customHeader = Guid.Parse(
-                        req.Item1.Headers.GetValues("SomeModifiedHeader").Single()
-                    );
-                }
-            );
+            http.AssertRequestMade("POST", "/mandates", null, req =>
+            {
+                customHeader = Guid.Parse(
+                    req.Item1.Headers.GetValues("SomeModifiedHeader").Single()
+                );
+            });
 
             //Then the modification should have been applied to the request
             ClassicAssert.NotNull(customHeader);
@@ -167,34 +146,27 @@ namespace GoCardless.Tests
             };
 
             //When the request is made using the customisation
-            http.EnqueueResponse(
-                201,
-                "fixtures/client/create_a_mandate_response.json",
-                resp => resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
+            http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json", resp =>
+                resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
             );
 
             await client.Mandates.CreateAsync(new MandateCreateRequest(), requestSettings);
 
-            http.AssertRequestMade(
-                "POST",
-                "/mandates",
-                null,
-                req =>
-                {
-                    //The brand new header we've set should be there
-                    ClassicAssert.AreEqual(
-                        req.Item1.Headers.GetValues("Accept-Language").Single(),
-                        "fr"
-                    );
-                    //We should still get the default headers set by the client
-                    ClassicAssert.NotNull(req.Item1.Headers.GetValues("Authorization").Single());
-                    //Headers we set should override the client's default headers
-                    ClassicAssert.AreEqual(
-                        req.Item1.Headers.GetValues("User-Agent").Single(),
-                        "Skynet"
-                    );
-                }
-            );
+            http.AssertRequestMade("POST", "/mandates", null, req =>
+            {
+                //The brand new header we've set should be there
+                ClassicAssert.AreEqual(
+                    req.Item1.Headers.GetValues("Accept-Language").Single(),
+                    "fr"
+                );
+                //We should still get the default headers set by the client
+                ClassicAssert.NotNull(req.Item1.Headers.GetValues("Authorization").Single());
+                //Headers we set should override the client's default headers
+                ClassicAssert.AreEqual(
+                    req.Item1.Headers.GetValues("User-Agent").Single(),
+                    "Skynet"
+                );
+            });
         }
 
         [Test]
@@ -210,10 +182,8 @@ namespace GoCardless.Tests
             //Given a request is going to time out {numberOfFailures} times before succeeding
             for (var i = 0; i < numberOfFailures; i++)
             {
-                http.EnqueueResponse(
-                    201,
-                    "fixtures/client/create_a_mandate_response.json",
-                    resp => throw new TaskCanceledException()
+                http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json", resp =>
+                    throw new TaskCanceledException()
                 );
             }
             http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json");
@@ -264,10 +234,8 @@ namespace GoCardless.Tests
             //Given a request is going to time out {numberOfFailures} times before succeeding
             for (var i = 0; i < numberOfFailures; i++)
             {
-                http.EnqueueResponse(
-                    201,
-                    "fixtures/client/create_a_mandate_response.json",
-                    resp => throw new HttpRequestException()
+                http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json", resp =>
+                    throw new HttpRequestException()
                 );
             }
             http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json");
@@ -317,10 +285,8 @@ namespace GoCardless.Tests
             //When a request is going to time out {numberOfFailures} times before succeeding
             for (var i = 0; i < numberOfFailures; i++)
             {
-                http.EnqueueResponse(
-                    201,
-                    "fixtures/client/create_a_mandate_response.json",
-                    resp => throw new TaskCanceledException()
+                http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json", resp =>
+                    throw new TaskCanceledException()
                 );
             }
             http.EnqueueResponse(201, "fixtures/client/create_a_mandate_response.json");
