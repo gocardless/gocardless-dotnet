@@ -81,8 +81,8 @@ namespace GoCardless.Internals
                 contentDigest = HashWithSHA256(content);
             }
 
-            var requestUri =
-                request.RequestUri ?? throw new InvalidOperationException("Request URI is null");
+            var requestUri = request.RequestUri
+                ?? throw new InvalidOperationException("Request URI is null");
 
             var signatureHelper = new RequestSigningHelper(
                 privateKeyPem: privateKeyPem,

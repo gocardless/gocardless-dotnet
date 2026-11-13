@@ -27,10 +27,8 @@ namespace GoCardless.Tests
         public async Task InsufficentPermissions()
         {
             var responseFixture = "fixtures/insufficient_permissions.json";
-            mockHttp.EnqueueResponse(
-                403,
-                responseFixture,
-                resp => resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
+            mockHttp.EnqueueResponse(403, responseFixture, resp =>
+                resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
             );
             try
             {
@@ -61,10 +59,8 @@ namespace GoCardless.Tests
         public async Task ValidationErrors()
         {
             var responseFixture = "fixtures/validation_failed.json";
-            mockHttp.EnqueueResponse(
-                422,
-                responseFixture,
-                resp => resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
+            mockHttp.EnqueueResponse(422, responseFixture, resp =>
+                resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
             );
             try
             {
@@ -193,10 +189,8 @@ namespace GoCardless.Tests
 
             //Arrange
             var responseFixture = "fixtures/authentication_failure.json";
-            mockHttp.EnqueueResponse(
-                401,
-                responseFixture,
-                resp => resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
+            mockHttp.EnqueueResponse(401, responseFixture, resp =>
+                resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
             );
 
             //Act
@@ -233,10 +227,8 @@ namespace GoCardless.Tests
             //Rate Limit being reached errors should throw a specific more contextual type rather than generic
             //Arrange
             var responseFixture = "fixtures/rate_limit_reached.json";
-            mockHttp.EnqueueResponse(
-                429,
-                responseFixture,
-                resp => resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
+            mockHttp.EnqueueResponse(429, responseFixture, resp =>
+                resp.Headers.Location = new Uri("/mandates/MD000126", UriKind.Relative)
             );
 
             //Act

@@ -47,11 +47,8 @@ namespace GoCardless.Tests
             await client.Mandates.CreateAsync(request);
 
             Assert.That(http.RequestsSent, Is.EqualTo(1));
-            http.AssertRequestMade(
-                "POST",
-                "/mandates",
-                null,
-                req => Assert.That(req.Item1.Headers.Contains("Idempotency-Key"), Is.False)
+            http.AssertRequestMade("POST", "/mandates", null, req =>
+                Assert.That(req.Item1.Headers.Contains("Idempotency-Key"), Is.False)
             );
             Assert.That(request.IdempotencyKey, Is.Empty);
         }
@@ -68,17 +65,11 @@ namespace GoCardless.Tests
 
             string first = null;
             string second = null;
-            http.AssertRequestMade(
-                "POST",
-                "/mandates",
-                null,
-                req => first = req.Item1.Headers.GetValues("Idempotency-Key").Single()
+            http.AssertRequestMade("POST", "/mandates", null, req =>
+                first = req.Item1.Headers.GetValues("Idempotency-Key").Single()
             );
-            http.AssertRequestMade(
-                "POST",
-                "/mandates",
-                null,
-                req => second = req.Item1.Headers.GetValues("Idempotency-Key").Single()
+            http.AssertRequestMade("POST", "/mandates", null, req =>
+                second = req.Item1.Headers.GetValues("Idempotency-Key").Single()
             );
 
             Assert.That(first, Is.Not.Null);
@@ -94,15 +85,11 @@ namespace GoCardless.Tests
 
             await client.Mandates.CreateAsync(request);
 
-            http.AssertRequestMade(
-                "POST",
-                "/mandates",
-                null,
-                req =>
-                    Assert.That(
-                        req.Item1.Headers.GetValues("Idempotency-Key").Single(),
-                        Is.EqualTo("key-set-by-the-caller")
-                    )
+            http.AssertRequestMade("POST", "/mandates", null, req =>
+                Assert.That(
+                    req.Item1.Headers.GetValues("Idempotency-Key").Single(),
+                    Is.EqualTo("key-set-by-the-caller")
+                )
             );
             Assert.That(request.IdempotencyKey, Is.EqualTo("key-set-by-the-caller"));
         }
@@ -130,15 +117,11 @@ namespace GoCardless.Tests
             await client.Mandates.CreateAsync(request);
 
             Assert.That(http.RequestsSent, Is.EqualTo(1));
-            http.AssertRequestMade(
-                "POST",
-                "/mandates",
-                null,
-                req =>
-                    Assert.That(
-                        req.Item1.Headers.GetValues("Idempotency-Key").Single(),
-                        Is.EqualTo(idempotencyKey)
-                    )
+            http.AssertRequestMade("POST", "/mandates", null, req =>
+                Assert.That(
+                    req.Item1.Headers.GetValues("Idempotency-Key").Single(),
+                    Is.EqualTo(idempotencyKey)
+                )
             );
         }
 
@@ -156,15 +139,11 @@ namespace GoCardless.Tests
 
             foreach (var unused in new[] { 1, 2 })
             {
-                http.AssertRequestMade(
-                    "POST",
-                    "/mandates",
-                    null,
-                    req =>
-                        Assert.That(
-                            req.Item1.Headers.GetValues("Idempotency-Key").Single(),
-                            Is.EqualTo("key-set-by-the-caller")
-                        )
+                http.AssertRequestMade("POST", "/mandates", null, req =>
+                    Assert.That(
+                        req.Item1.Headers.GetValues("Idempotency-Key").Single(),
+                        Is.EqualTo("key-set-by-the-caller")
+                    )
                 );
             }
         }
