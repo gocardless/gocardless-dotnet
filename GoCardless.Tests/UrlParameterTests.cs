@@ -22,39 +22,39 @@ namespace GoCardless.Tests
         [Test]
         public void ShouldRejectASlash()
         {
-            Assert.Throws<ArgumentException>((TestDelegate)(() => Escape("../mandates")));
+            Assert.Throws<ArgumentException>((Action)(() => Escape("../mandates")));
         }
 
         [Test]
         public void ShouldRejectAQuestionMark()
         {
-            Assert.Throws<ArgumentException>((TestDelegate)(() => Escape("?limit=500")));
+            Assert.Throws<ArgumentException>((Action)(() => Escape("?limit=500")));
         }
 
         [Test]
         public void ShouldRejectAFragmentMarker()
         {
-            Assert.Throws<ArgumentException>((TestDelegate)(() => Escape("CU123#x")));
+            Assert.Throws<ArgumentException>((Action)(() => Escape("CU123#x")));
         }
 
         [Test]
         public void ShouldRejectAControlCharacter()
         {
-            Assert.Throws<ArgumentException>((TestDelegate)(() => Escape("CU123\n")));
+            Assert.Throws<ArgumentException>((Action)(() => Escape("CU123\n")));
         }
 
         [Test]
         public void ShouldRejectADotSegment()
         {
-            Assert.Throws<ArgumentException>((TestDelegate)(() => Escape(".")));
-            Assert.Throws<ArgumentException>((TestDelegate)(() => Escape("..")));
+            Assert.Throws<ArgumentException>((Action)(() => Escape(".")));
+            Assert.Throws<ArgumentException>((Action)(() => Escape("..")));
         }
 
         [Test]
         public void ShouldRejectAnEmptyOrMissingValue()
         {
-            Assert.Throws<ArgumentException>((TestDelegate)(() => Escape("")));
-            Assert.Throws<ArgumentException>((TestDelegate)(() => Escape(null)));
+            Assert.Throws<ArgumentException>((Action)(() => Escape("")));
+            Assert.Throws<ArgumentException>((Action)(() => Escape(null)));
         }
     }
 }
