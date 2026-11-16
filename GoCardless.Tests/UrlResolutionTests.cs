@@ -46,7 +46,7 @@ namespace GoCardless.Tests
         public void ShouldRejectAbsoluteUrl()
         {
             Assert.Throws<ArgumentException>(
-                (TestDelegate)(() => Resolve("https://elsewhere.example.com/capture"))
+                (Action)(() => Resolve("https://elsewhere.example.com/capture"))
             );
         }
 
@@ -54,7 +54,7 @@ namespace GoCardless.Tests
         public void ShouldRejectAbsoluteUrlWithADifferentScheme()
         {
             Assert.Throws<ArgumentException>(
-                (TestDelegate)(() => Resolve("http://api.gocardless.com/capture"))
+                (Action)(() => Resolve("http://api.gocardless.com/capture"))
             );
         }
 
@@ -62,7 +62,7 @@ namespace GoCardless.Tests
         public void ShouldRejectSchemeRelativeUrl()
         {
             Assert.Throws<ArgumentException>(
-                (TestDelegate)(() => Resolve("//elsewhere.example.com/capture"))
+                (Action)(() => Resolve("//elsewhere.example.com/capture"))
             );
         }
 
@@ -70,7 +70,7 @@ namespace GoCardless.Tests
         public void ShouldRejectAbsoluteUrlOnADifferentPortOfTheSameHost()
         {
             Assert.Throws<ArgumentException>(
-                (TestDelegate)(() => Resolve("https://api.gocardless.com:8443/capture"))
+                (Action)(() => Resolve("https://api.gocardless.com:8443/capture"))
             );
         }
 
