@@ -112,6 +112,14 @@ namespace GoCardless.Resources
         /// the <c>pending_submission</c> or <c>submitted</c> states. Not
         /// compatible with SEPA mandates, which are submitted with their first
         /// payment.</li>
+        /// <li><c>mandate_cancelled</c>: Transitions a mandate through to
+        /// <c>cancelled</c>, as if a bank had cancelled it (for example because
+        /// the customer asked their bank to cancel the Direct Debit
+        /// instruction). It must start in the <c>pending_submission</c>,
+        /// <c>submitted</c> or <c>activated</c> state. Compatible with ACH,
+        /// Autogiro, Bacs, BECS, Betalingsservice, PAD and SEPA mandates. The
+        /// mandate's pending payments, subscriptions and instalment schedules
+        /// are cancelled along with it, a few seconds later.</li>
         /// <li><c>mandate_expired</c>: Transitions a mandate through to
         /// <c>expired</c>, having been submitted to the banks, set up
         /// successfully and then expired because no collection attempts were
