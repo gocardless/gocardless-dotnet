@@ -270,6 +270,10 @@ namespace GoCardless.Services
                 /// <summary>`scheme` with a value of "faster_payments"</summary>
                 [EnumMember(Value = "faster_payments")]
                 FasterPayments,
+
+                /// <summary>`scheme` with a value of "bacs"</summary>
+                [EnumMember(Value = "bacs")]
+                Bacs,
             }
         }
 
