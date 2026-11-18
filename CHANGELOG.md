@@ -1,6 +1,12 @@
 <!-- This file is generated, please add to it using `knope document-change` in the client-library-templates repo -->
 # Changelog
 
+## 11.5.0 (2026-11-18)
+
+### Features
+
+- Add `Bacs` in the Outbound Payment scheme enum
+
 ## 11.4.0 (2026-11-17)
 
 ### Features
